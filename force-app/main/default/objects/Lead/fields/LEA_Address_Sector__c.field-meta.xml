@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Address_Sector__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>reemplazo de LEA_Sector</description>
+    <label>Sector</label>
+    <lookupFilter>
+        <active>true</active>
+        <filterItems>
+            <field>Datos_Maestros__c.DM_Distrito__c</field>
+            <operation>equals</operation>
+            <valueField>$Source.LEA_Distrito__c</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Datos_Maestros__c</referenceTo>
+    <relationshipLabel>Leads (Sector)</relationshipLabel>
+    <relationshipName>Leads</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Correo_Electronico3</fullName>
+    <active>true</active>
+    <description>Validación formato de correo</description>
+    <errorConditionFormula>AND(
+OR(
+ISPICKVAL(LEA_Via_de_Contacto3__c, &apos;CORREO ELECTRÓNICO&apos;),
+ISPICKVAL(LEA_Via_de_Contacto3__c, &apos;CORREO LABORAL&apos;)
+),
+NOT(CONTAINS(LEA_Numero_Correo3__c, &apos;@&apos;))
+)</errorConditionFormula>
+    <errorDisplayField>LEA_Numero_Correo3__c</errorDisplayField>
+    <errorMessage>La información no es de formato correo electrónico</errorMessage>
+</ValidationRule>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_NumOficina__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(Owner:User.USE_Oficina__c,
+&apos;1&apos;,$Label.Oficina_1,
+&apos;2&apos;,$Label.Oficina_2,
+&apos;3&apos;,$Label.Oficina_3,
+&apos;4&apos;,$Label.Oficina_4,
+&apos;5&apos;,$Label.Oficina_5,
+&apos;6&apos;,$Label.Oficina_6,
+&apos;7&apos;,$Label.Oficina_7,
+&apos;8&apos;,$Label.Oficina_8,
+&apos;9&apos;,$Label.Oficina_9,
+&apos;10&apos;,$Label.Oficina_10,
+&apos;11&apos;,$Label.Oficina_11,
+&apos;12&apos;,$Label.Oficina_12,
+&apos;&apos;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Oficina</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

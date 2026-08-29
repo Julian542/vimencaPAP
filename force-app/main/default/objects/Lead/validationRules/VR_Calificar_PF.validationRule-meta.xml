@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Calificar_PF</fullName>
+    <active>true</active>
+    <description>Validación para calificar prospecto</description>
+    <errorConditionFormula>AND (
+ISPICKVAL(Status, &apos;Calificado&apos;),
+RecordType.DeveloperName=&apos;Candidato_Persona_Natural&apos;,
+ISBLANK( LEA_PersonBirthdate__c )
+)</errorConditionFormula>
+    <errorMessage>Para &apos;Calificar&apos; el prospecto debe informar la Fecha de Nacimiento y Validar PEP. Para esto puede usar el botón &apos;Calificar Prospecto&apos;</errorMessage>
+</ValidationRule>

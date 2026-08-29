@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_SubEstado__c</fullName>
+    <description>Migrado del Account</description>
+    <label>Sub-estado</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>DESVINCULADO POR CLIENTE</fullName>
+                <default>false</default>
+                <label>DESVINCULADO POR CLIENTE</label>
+            </value>
+            <value>
+                <fullName>ACEPTADO</fullName>
+                <default>false</default>
+                <label>ACEPTADO</label>
+            </value>
+            <value>
+                <fullName>DESVINCULADO POR VIMENCA</fullName>
+                <default>false</default>
+                <label>DESVINCULADO POR VIMENCA</label>
+            </value>
+            <value>
+                <fullName>EN REVISIÓN</fullName>
+                <default>false</default>
+                <label>EN REVISIÓN</label>
+            </value>
+            <value>
+                <fullName>RECHAZADO</fullName>
+                <default>false</default>
+                <label>RECHAZADO</label>
+            </value>
+            <value>
+                <fullName>FALLECIDO</fullName>
+                <default>false</default>
+                <label>FALLECIDO</label>
+            </value>
+            <value>
+                <fullName>EN VALIDACION POR LEGAL</fullName>
+                <default>false</default>
+                <label>EN VALIDACIÓN POR LEGAL</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Participantes_PJ</fullName>
+    <active>false</active>
+    <description>Validación que comprueba los participantes esten Aprobados</description>
+    <errorConditionFormula>AND (
+ISPICKVAL(Status, &apos;Convertido&apos;),
+RecordType.DeveloperName=&apos;Candidato_Persona_Juridica&apos;,
+LEA_N_Participantes__c &gt; 0
+)</errorConditionFormula>
+    <errorMessage>Revise que todos los participantes esten debidamente validados.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Conversion_Cliente_PJ</fullName>
+    <active>true</active>
+    <description>Regla de validacion para la conversion de prospectos a cliente PJ.</description>
+    <errorConditionFormula>AND(
+ISPICKVAL(Status,&apos;Convertido&apos;),
+RecordType.DeveloperName=&apos;Candidato_Persona_Juridica&apos;,
+OR
+(
+ISBLANK(LEA_Nombre_Corto_Comercial__c),
+ISBLANK(LEA_RNC__c),
+ISBLANK(LEA_Fecha_Cierre_Fiscal__c),
+ISPICKVAL(LEA_Tipo_Cliente_PJ__c,&apos;&apos;),
+ISBLANK(LEA_Actividad_Economica__c),
+ISPICKVAL(LEA_Tipo_Actividad__c,&apos;&apos;),
+ISPICKVAL(LEA_Tipo_Sector__c,&apos;&apos;),
+ISPICKVAL(LEA_Clasificacion_Empresa__c,&apos;&apos;),
+ISPICKVAL(LEA_Nacionalidad__c,&apos;&apos;),
+ISBLANK(LEA_Fecha_Fundacion__c),
+ISPICKVAL(ACC_Tipo_Persona_PJ__c,&apos;&apos;)
+)
+)</errorConditionFormula>
+    <errorMessage>Se validan que los siguientes campos este informados:
+Nombre Comercial
+RNC
+Fecha de Cierre Fiscal
+Tipo de Cliente
+Actividad Economica SIB
+Tipo de Actividad
+Tipo de Sector
+Clasificacion de Empresa
+Nacionalidad
+Fecha de Fundacion
+Tipo de Persona</errorMessage>
+</ValidationRule>

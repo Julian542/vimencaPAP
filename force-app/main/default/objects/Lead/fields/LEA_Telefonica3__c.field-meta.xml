@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Telefonica3__c</fullName>
+    <description>Migrado de Vias_de_Contacto__c</description>
+    <label>Telefónica 3</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>GP_Telefonica</valueSetName>
+    </valueSet>
+</CustomField>

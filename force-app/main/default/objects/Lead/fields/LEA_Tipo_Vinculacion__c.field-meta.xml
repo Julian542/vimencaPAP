@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Tipo_Vinculacion__c</fullName>
+    <description>Migrado del Account</description>
+    <label>Tipo de vinculación</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>DEUDOR O EMISOR NO VINCULADO</fullName>
+                <default>false</default>
+                <label>DEUDOR O EMISOR NO VINCULADO</label>
+            </value>
+            <value>
+                <fullName>PART GRUPO ECONOMICO COLIGADO</fullName>
+                <default>false</default>
+                <label>PART GRUPO ECONOMICO COLIGADO</label>
+            </value>
+            <value>
+                <fullName>PART GRUPO FINANCIERO COLIGADO</fullName>
+                <default>false</default>
+                <label>PART GRUPO FINANCIERO COLIGADO</label>
+            </value>
+            <value>
+                <fullName>PROP. A TRAVÉS DE UN GRUPO</fullName>
+                <default>false</default>
+                <label>PROP. A TRAVÉS DE UN GRUPO</label>
+            </value>
+            <value>
+                <fullName>PROPIEDAD DE PERSONA FÍSICA</fullName>
+                <default>false</default>
+                <label>PROPIEDAD DE PERSONA FÍSICA</label>
+            </value>
+            <value>
+                <fullName>PROPIEDAD DE PERSONA JURÍDICA</fullName>
+                <default>false</default>
+                <label>PROPIEDAD DE PERSONA JURÍDICA</label>
+            </value>
+            <value>
+                <fullName>VINC CONSANGUINIDAD Y AFINIDAD</fullName>
+                <default>false</default>
+                <label>VINC CONSANGUINIDAD Y AFINIDAD</label>
+            </value>
+            <value>
+                <fullName>VINC POR GESTION (FUNCIONARIO)</fullName>
+                <default>false</default>
+                <label>VINC POR GESTION (FUNCIONARIO)</label>
+            </value>
+            <value>
+                <fullName>VINC. POR GESTIÓN (EMPLEADO)</fullName>
+                <default>false</default>
+                <label>VINC. POR GESTIÓN (EMPLEADO)</label>
+            </value>
+            <value>
+                <fullName>VINCULACION POR PRESUNCION</fullName>
+                <default>false</default>
+                <label>VINCULACION POR PRESUNCION</label>
+            </value>
+            <value>
+                <fullName>SIN DEFINIR</fullName>
+                <default>false</default>
+                <label>SIN DEFINIR</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

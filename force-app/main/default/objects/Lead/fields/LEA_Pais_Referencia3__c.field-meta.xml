@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Pais_Referencia3__c</fullName>
+    <description>Migrado de Referencia__c</description>
+    <label>País de referencia</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>GP_Pais</valueSetName>
+    </valueSet>
+</CustomField>

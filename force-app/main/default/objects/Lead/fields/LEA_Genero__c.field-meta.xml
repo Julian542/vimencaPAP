@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Genero__c</fullName>
+    <description>Migrado del Account</description>
+    <label>Género *</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>FEMENINO</fullName>
+                <default>false</default>
+                <label>FEMENINO</label>
+            </value>
+            <value>
+                <fullName>MASCULINO</fullName>
+                <default>false</default>
+                <label>MASCULINO</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

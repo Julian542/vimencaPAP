@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Via_de_contacto_en_Cliente</fullName>
+    <active>false</active>
+    <description>Validación que comprueba que al menos haya una vía de contacto con TIPO = Telefono o movil para convertir a cliente</description>
+    <errorConditionFormula>AND(
+ISPICKVAL(Status,&apos;Convertido&apos;)
+)</errorConditionFormula>
+    <errorMessage>Para convertir el prospecto es necesario tener al menos una vía de contacto de tipo teléfono como principal</errorMessage>
+</ValidationRule>

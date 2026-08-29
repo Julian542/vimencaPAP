@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Validacion_Referencias__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+  AND(
+    ISBLANK(TEXT(LEA_Tipo_Referencia1__c)),
+    ISBLANK(LEA_Nombre_Referencia1__c),
+    ISBLANK(LEA_Telefono_Referencia1__c),
+    ISBLANK(LEA_Direccion_Referencia1__c),
+    ISBLANK(TEXT(LEA_Tipo_Referencia2__c)),
+    ISBLANK(LEA_Nombre_Referencia2__c),
+    ISBLANK(LEA_Telefono_Referencia2__c),
+    ISBLANK(LEA_Direccion_Referencia2__c)
+  ),
+  &quot;&quot;,
+  IF(
+    AND(
+      NOT(ISBLANK(TEXT(LEA_Tipo_Referencia1__c))),
+      NOT(ISBLANK(LEA_Nombre_Referencia1__c)),
+      NOT(ISBLANK(LEA_Telefono_Referencia1__c)),
+      NOT(ISBLANK(LEA_Direccion_Referencia1__c)),
+      NOT(ISBLANK(TEXT(LEA_Tipo_Referencia2__c))),
+      NOT(ISBLANK(LEA_Nombre_Referencia2__c)),
+      NOT(ISBLANK(LEA_Telefono_Referencia2__c)),
+      NOT(ISBLANK(LEA_Direccion_Referencia2__c))
+    ),
+    &quot;true&quot;,
+    &quot;false&quot;
+  )
+)</formula>
+    <label>LEA_Validacion_Referencias</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

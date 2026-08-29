@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Precalificacion</fullName>
+    <active>true</active>
+    <description>Cuando se vaya a cambiar el estado del prospecto a CONVERTIR, se debe validar que el campo “Calificación del cliente” esté informado</description>
+    <errorConditionFormula>IF(
+AND(ISPICKVAL(Status, &quot;Convertido&quot;),
+Text(LEA_Calificacion_de_cliente__c) == &apos;&apos;),true, false)</errorConditionFormula>
+    <errorMessage>No se puede convertir el prospecto, antes debe estar informada la Precalificación</errorMessage>
+</ValidationRule>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Tipo_Sector__c</fullName>
+    <description>Migrado del Account</description>
+    <label>Tipo de sector</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>PRIVADO</fullName>
+                <default>false</default>
+                <label>PRIVADO</label>
+            </value>
+            <value>
+                <fullName>PÚBLICO</fullName>
+                <default>false</default>
+                <label>PÚBLICO</label>
+            </value>
+            <value>
+                <fullName>NO DISPONIBLE</fullName>
+                <default>false</default>
+                <label>NO DISPONIBLE</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

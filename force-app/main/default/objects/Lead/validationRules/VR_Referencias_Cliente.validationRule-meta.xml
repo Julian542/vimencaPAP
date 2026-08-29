@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Referencias_Cliente</fullName>
+    <active>true</active>
+    <description>Validación para comprobar que el cliente tiene al menos 2 referencias añadidas.</description>
+    <errorConditionFormula>AND (
+ISPICKVAL(Status, &apos;Convertido&apos;),
+OR(
+ISPICKVAL(LEA_Tipo_Referencia1__c, &apos;&apos;),
+ISPICKVAL(LEA_Tipo_Referencia2__c, &apos;&apos;),
+ISBLANK(LEA_Nombre_Referencia1__c),
+ISBLANK(LEA_Nombre_Referencia2__c),
+ISBLANK(LEA_Telefono_Referencia1__c),
+ISBLANK(LEA_Telefono_Referencia2__c),
+ISBLANK(LEA_Direccion_Referencia1__c),
+ISBLANK(LEA_Direccion_Referencia2__c)
+)
+)</errorConditionFormula>
+    <errorMessage>Para convertir el prospecto es necesario tener al menos 2 referencias añadidas</errorMessage>
+</ValidationRule>

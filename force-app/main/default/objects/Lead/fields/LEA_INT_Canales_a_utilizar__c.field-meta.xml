@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_INT_Canales_a_utilizar__c</fullName>
+    <description>No se diligencia, se sincroniza automáticamente con el campo &quot;LEA_Canales_a_utilizar__c&quot; para efectos de integración</description>
+    <label>Canales a utilizar(Trama)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>GP_Codigo_canal_a_utilizar</valueSetName>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

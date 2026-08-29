@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_INT_Tipo_de_identificacion__c</fullName>
+    <description>No se diligencia, se sincroniza automáticamente con el campo &quot;LEA_Tipo_de_identificacion&quot; para efectos de integración</description>
+    <label>Tipo de identificación(Trama)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>GP_INT_Tipo_de_identificacion</valueSetName>
+    </valueSet>
+</CustomField>

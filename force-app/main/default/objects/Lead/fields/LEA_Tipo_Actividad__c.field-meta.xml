@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Tipo_Actividad__c</fullName>
+    <description>Migrado del Account</description>
+    <label>Tipo de actividad</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ABOGADO</fullName>
+                <default>false</default>
+                <label>ABOGADO</label>
+            </value>
+            <value>
+                <fullName>AGRICULTURA</fullName>
+                <default>false</default>
+                <label>AGRICULTURA</label>
+            </value>
+            <value>
+                <fullName>AGUA</fullName>
+                <default>false</default>
+                <label>AGUA</label>
+            </value>
+            <value>
+                <fullName>ALMACENAMIENTO</fullName>
+                <default>false</default>
+                <label>ALMACENAMIENTO</label>
+            </value>
+            <value>
+                <fullName>AMA DE CASA</fullName>
+                <default>false</default>
+                <label>AMA DE CASA</label>
+            </value>
+            <value>
+                <fullName>ARQUITECTO</fullName>
+                <default>false</default>
+                <label>ARQUITECTO</label>
+            </value>
+            <value>
+                <fullName>ASOCIACION DE FONDOS DE PENSIONES AFP</fullName>
+                <default>false</default>
+                <label>ASOCIACION DE FONDOS DE PENSIONES AFP</label>
+            </value>
+            <value>
+                <fullName>BIENES INMUEBLES Y SERVICIOS PRESTADOS</fullName>
+                <default>false</default>
+                <label>BIENES INMUEBLES Y SERVICIOS PRESTADOS</label>
+            </value>
+            <value>
+                <fullName>CHOFER</fullName>
+                <default>false</default>
+                <label>CHOFER</label>
+            </value>
+            <value>
+                <fullName>COMERCIO AL POR MAYOR</fullName>
+                <default>false</default>
+                <label>COMERCIO AL POR MAYOR</label>
+            </value>
+            <value>
+                <fullName>COMERCIO AL POR MENOR</fullName>
+                <default>false</default>
+                <label>COMERCIO AL POR MENOR</label>
+            </value>
+            <value>
+                <fullName>COMUNICACIONES</fullName>
+                <default>false</default>
+                <label>COMUNICACIONES</label>
+            </value>
+            <value>
+                <fullName>CONSTRUCCION</fullName>
+                <default>false</default>
+                <label>CONSTRUCCION</label>
+            </value>
+            <value>
+                <fullName>ELECTRICIDAD</fullName>
+                <default>false</default>
+                <label>ELECTRICIDAD</label>
+            </value>
+            <value>
+                <fullName>EMPLEADO BANCARIO</fullName>
+                <default>false</default>
+                <label>EMPLEADO BANCARIO</label>
+            </value>
+            <value>
+                <fullName>EMPLEADO PRIVADO</fullName>
+                <default>false</default>
+                <label>EMPLEADO PRIVADO</label>
+            </value>
+            <value>
+                <fullName>EMPLEADO PUBLICO</fullName>
+                <default>false</default>
+                <label>EMPLEADO PUBLICO</label>
+            </value>
+            <value>
+                <fullName>EMPRESARIO</fullName>
+                <default>false</default>
+                <label>EMPRESARIO</label>
+            </value>
+            <value>
+                <fullName>ESTABLECIMIENTOS FINANCIEROS</fullName>
+                <default>false</default>
+                <label>ESTABLECIMIENTOS FINANCIEROS</label>
+            </value>
+            <value>
+                <fullName>ESTUDIANTE</fullName>
+                <default>false</default>
+                <label>ESTUDIANTE</label>
+            </value>
+            <value>
+                <fullName>EXPLOTACION MINAS Y CANTERAS</fullName>
+                <default>false</default>
+                <label>EXPLOTACION MINAS Y CANTERAS</label>
+            </value>
+            <value>
+                <fullName>GANADERIA</fullName>
+                <default>false</default>
+                <label>GANADERIA</label>
+            </value>
+            <value>
+                <fullName>GAS</fullName>
+                <default>false</default>
+                <label>GAS</label>
+            </value>
+            <value>
+                <fullName>HOTELES</fullName>
+                <default>false</default>
+                <label>HOTELES</label>
+            </value>
+            <value>
+                <fullName>INDUSTRIA MANUFACTURERA</fullName>
+                <default>false</default>
+                <label>INDUSTRIA MANUFACTURERA</label>
+            </value>
+            <value>
+                <fullName>INGENIERO AGRONOMO</fullName>
+                <default>false</default>
+                <label>INGENIERO AGRONOMO</label>
+            </value>
+            <value>
+                <fullName>INGENIERO CIVIL</fullName>
+                <default>false</default>
+                <label>INGENIERO CIVIL</label>
+            </value>
+            <value>
+                <fullName>INGENIERO DE SISTEMAS</fullName>
+                <default>false</default>
+                <label>INGENIERO DE SISTEMAS</label>
+            </value>
+            <value>
+                <fullName>LIC. EN ADMINISTRACION</fullName>
+                <default>false</default>
+                <label>LIC. EN ADMINISTRACION</label>
+            </value>
+            <value>
+                <fullName>LIC. EN CONTABILIDAD</fullName>
+                <default>false</default>
+                <label>LIC. EN CONTABILIDAD</label>
+            </value>
+            <value>
+                <fullName>LIC. EN ECONOMIA</fullName>
+                <default>false</default>
+                <label>LIC. EN ECONOMIA</label>
+            </value>
+            <value>
+                <fullName>LIC. EN MERCADEO</fullName>
+                <default>false</default>
+                <label>LIC. EN MERCADEO</label>
+            </value>
+            <value>
+                <fullName>MEDICO</fullName>
+                <default>false</default>
+                <label>MEDICO</label>
+            </value>
+            <value>
+                <fullName>OFICINISTA</fullName>
+                <default>false</default>
+                <label>OFICINISTA</label>
+            </value>
+            <value>
+                <fullName>OTRAS</fullName>
+                <default>false</default>
+                <label>OTRAS</label>
+            </value>
+            <value>
+                <fullName>PERIODISTA</fullName>
+                <default>false</default>
+                <label>PERIODISTA</label>
+            </value>
+            <value>
+                <fullName>PESCA</fullName>
+                <default>false</default>
+                <label>PESCA</label>
+            </value>
+            <value>
+                <fullName>PROFESOR</fullName>
+                <default>false</default>
+                <label>PROFESOR</label>
+            </value>
+            <value>
+                <fullName>RESTAURANTES</fullName>
+                <default>false</default>
+                <label>RESTAURANTES</label>
+            </value>
+            <value>
+                <fullName>SEGUROS</fullName>
+                <default>false</default>
+                <label>SEGUROS</label>
+            </value>
+            <value>
+                <fullName>SERVICIOS COMUNALES, SOCIALES Y PERSONAL</fullName>
+                <default>false</default>
+                <label>SERVICIOS COMUNALES, SOCIALES Y PERSONAL</label>
+            </value>
+            <value>
+                <fullName>SILVICULTURA</fullName>
+                <default>false</default>
+                <label>SILVICULTURA</label>
+            </value>
+            <value>
+                <fullName>TRANSPORTE</fullName>
+                <default>false</default>
+                <label>TRANSPORTE</label>
+            </value>
+            <value>
+                <fullName>MAESTRO</fullName>
+                <default>false</default>
+                <label>MAESTRO</label>
+            </value>
+            <value>
+                <fullName>SECRETARIA</fullName>
+                <default>false</default>
+                <label>SECRETARIA</label>
+            </value>
+            <value>
+                <fullName>ODONTOLOGO</fullName>
+                <default>false</default>
+                <label>ODONTOLOGO</label>
+            </value>
+            <value>
+                <fullName>ASISTENTE</fullName>
+                <default>false</default>
+                <label>ASISTENTE</label>
+            </value>
+            <value>
+                <fullName>INDEPENDIENTE</fullName>
+                <default>false</default>
+                <label>INDEPENDIENTE</label>
+            </value>
+            <value>
+                <fullName>TOPOGRAFO</fullName>
+                <default>false</default>
+                <label>TOPOGRAFO</label>
+            </value>
+            <value>
+                <fullName>ENCARGADO DE ALMACEN</fullName>
+                <default>false</default>
+                <label>ENCARGADO DE ALMACEN</label>
+            </value>
+            <value>
+                <fullName>AUXILIAR</fullName>
+                <default>false</default>
+                <label>AUXILIAR</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

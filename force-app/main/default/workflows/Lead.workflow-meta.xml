@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Envio_Email_Aprobacion</fullName>
+        <description>Envio Email Aprobacion</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>larias@vimenca.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>srramirez@bv.com.do</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>all/Plantilla_de_Aprobacion</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Actualizar_Estado</fullName>
+        <field>Status</field>
+        <literalValue>Aprobado</literalValue>
+        <name>Actualizar Estado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualizar_Estado_2</fullName>
+        <field>Status</field>
+        <literalValue>Aprobado</literalValue>
+        <name>Actualizar Estado_2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualizar_Estado_3</fullName>
+        <field>LEA_SubEstado__c</field>
+        <literalValue>ACEPTADO</literalValue>
+        <name>Actualizar Estado_3</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualizar_Estado_4</fullName>
+        <field>LEA_SubEstado__c</field>
+        <literalValue>ACEPTADO</literalValue>
+        <name>Actualizar Estado_4</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Estado</fullName>
+        <field>Status</field>
+        <literalValue>Aprobado</literalValue>
+        <name>Update Estado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Estado2</fullName>
+        <field>Status</field>
+        <literalValue>Validado</literalValue>
+        <name>Update_Estado2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Fecha</fullName>
+        <field>LEA_Fecha_Aprobacion__c</field>
+        <formula>NOW()</formula>
+        <name>Update Fecha</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Resultado_Valida</fullName>
+        <field>LEA_Resultado_Validacion__c</field>
+        <formula>&quot;RECHAZADO&quot;</formula>
+        <name>Update_Resultado_Valida</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Resultado_Valida2</fullName>
+        <field>LEA_Resultado_Validacion__c</field>
+        <formula>&quot;Aprobado&quot;</formula>
+        <name>Update_Resultado_Valida2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_SubEstado</fullName>
+        <field>LEA_SubEstado__c</field>
+        <literalValue>RECHAZADO</literalValue>
+        <name>Update SubEstado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Subestado1</fullName>
+        <field>LEA_SubEstado__c</field>
+        <name>Update Subestado1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Validado</fullName>
+        <field>LEA_Aprobado_Por__c</field>
+        <formula>$User.LastName +&quot; &quot;+ $User.FirstName</formula>
+        <name>Update_Validado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+</Workflow>

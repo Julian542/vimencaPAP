@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_CONVERTIR_BIRTHDAY_PF</fullName>
+    <active>true</active>
+    <description>Validacón de datos para convertir al cliente</description>
+    <errorConditionFormula>AND (
+ISPICKVAL(Status, &apos;Convertido&apos;),
+RecordType.DeveloperName=&apos;Candidato_Persona_Natural&apos;,
+OR(
+ISBLANK(LEA_PersonBirthdate__c),
+TEXT(LEA_Tipo_de_vivienda__c) = null
+)
+)</errorConditionFormula>
+    <errorMessage>Para &apos;Convertir&apos; el prospecto debe informar Fecha de Nacimiento y Tipo de Vivienda.</errorMessage>
+</ValidationRule>

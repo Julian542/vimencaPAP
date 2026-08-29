@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Informacion_PEP</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND (
+RecordType.DeveloperName=&apos;Candidato_Persona_Natural&apos;,
+ISPICKVAL( LEA_Persona_PEP__c ,&apos;SI&apos;),
+OR (
+ISPICKVAL( Status, &apos;Convertido&apos;),
+ISPICKVAL( Status, &apos;Calificado&apos;)
+),
+OR(
+ISBLANK(LEA_Direccion_Trabajo_PEP__c ),
+ISBLANK(LEA_Fecha_Decreto_PEP__c),
+ISPICKVAL(LEA_Institucion_Trabajo_PEP__c,&apos;&apos;),
+ISPICKVAL(LEA_Nacionalidad_PEP__c,&apos;&apos;),
+ISBLANK(LEA_N_Decreto_PEP__c),
+ISBLANK( LEA_N_Identificacion_PEP__c),
+ISPICKVAL(LEA_Ocupacion_PEP__c,&apos;&apos;),
+ISBLANK( LEA_Primer_Apellido_PEP__c),
+ISBLANK( LEA_Primer_Nombre_PEP__c),
+ISBLANK(LEA_Puesto_Cargo_PEP__c),
+ISBLANK(LEA_Segundo_Apellido_PEP__c),
+ISBLANK(LEA_Segundo_Nombre_PEP__c),
+ISPICKVAL(LEA_Tipo_Identif_PEP__c,&apos;&apos;)
+)
+)</errorConditionFormula>
+    <errorMessage>Revise la información de la sección PEP para ver la información que falta rellenar para convertir el prospecto</errorMessage>
+</ValidationRule>

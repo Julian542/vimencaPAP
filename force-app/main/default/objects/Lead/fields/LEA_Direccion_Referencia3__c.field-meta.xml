@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Direccion_Referencia3__c</fullName>
+    <description>Migrado de Referencia__c</description>
+    <encryptionScheme>None</encryptionScheme>
+    <label>Dirección de referencia</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>TextArea</type>
+</CustomField>

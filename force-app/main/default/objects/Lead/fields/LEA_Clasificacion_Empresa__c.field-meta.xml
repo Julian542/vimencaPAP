@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Clasificacion_Empresa__c</fullName>
+    <description>Migrado del Account</description>
+    <label>Clasificación de la empresa</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Corporativa</fullName>
+                <default>false</default>
+                <label>Corporativa</label>
+            </value>
+            <value>
+                <fullName>Mediana</fullName>
+                <default>false</default>
+                <label>Mediana</label>
+            </value>
+            <value>
+                <fullName>Pequeña</fullName>
+                <default>false</default>
+                <label>Pequeña</label>
+            </value>
+            <value>
+                <fullName>Micro</fullName>
+                <default>false</default>
+                <label>Micro</label>
+            </value>
+            <value>
+                <fullName>Instituciones del Sector Público No Financiero</fullName>
+                <default>false</default>
+                <label>Instituciones del Sector Público No Financiero</label>
+            </value>
+            <value>
+                <fullName>Instituciones del Sector Público Financiero</fullName>
+                <default>false</default>
+                <label>Instituciones del Sector Público Financiero</label>
+            </value>
+            <value>
+                <fullName>Instituciones sin fines de lucro</fullName>
+                <default>false</default>
+                <label>Instituciones sin fines de lucro</label>
+            </value>
+            <value>
+                <fullName>Fideicomisos</fullName>
+                <default>false</default>
+                <label>Fideicomisos</label>
+            </value>
+            <value>
+                <fullName>No informado en SIEBEL</fullName>
+                <default>false</default>
+                <label>No informado en SIEBEL</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

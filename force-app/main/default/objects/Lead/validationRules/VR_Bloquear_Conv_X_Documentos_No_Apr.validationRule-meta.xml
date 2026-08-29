@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Bloquear_Conv_X_Documentos_No_Apr</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    IsConverted = TRUE,
+    LEA_Doc_Legal_No_Aprobada__c &gt; 0
+)</errorConditionFormula>
+    <errorMessage>No se puede convertir el candidato porque existen documentos legales pendientes de aprobación.</errorMessage>
+</ValidationRule>

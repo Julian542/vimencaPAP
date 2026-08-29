@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Bloquear_Aprobacion_Legal_Sin_Validar</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISCHANGED(LEA_SubEstado__c),
+    ISPICKVAL(LEA_SubEstado__c, &quot;APROBADO POR LEGAL&quot;),
+    LEA_Es_Participante__c = TRUE,
+    NOT(
+        OR(
+            ISPICKVAL(Status, &quot;Validado&quot;),
+            ISPICKVAL(Status, &quot;Aprobado&quot;)
+        )
+    )
+)</errorConditionFormula>
+    <errorMessage>No se puede aprobar legalmente este candidato porque el candidato debe estar al menos en estado Validado.</errorMessage>
+</ValidationRule>

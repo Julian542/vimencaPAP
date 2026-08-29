@@ -1,0 +1,19 @@
+global class INT015TestMock  implements HttpCalloutMock {
+
+    String pf_pj;
+     
+    global INT015TestMock(String pf_pj){
+        this.pf_pj = pf_pj;
+    }
+    global HttpResponse respond(HttpRequest req) {
+        HttpResponse res = new HttpResponse();
+        res.setHeader('Content-Type', 'application/json');
+        res.setStatusCode(200);
+        if(this.pf_pj.equals('PF'))
+        	res.setBody('<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"> <soap:Header> <wsa:Action>http://crmintegration.local/ConsultaDebitoResponse</wsa:Action> <wsa:MessageID>urn:uuid:49bceb00-0e88-40ca-a1bc-db23603cfb19</wsa:MessageID> <wsa:RelatesTo>urn:uuid:4cce15d5-0440-4bed-ae44-0679f84654b0</wsa:RelatesTo> <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To> <wsse:Security> <wsu:Timestamp wsu:Id="Timestamp-ef7343c9-e08e-4548-af65-fc7b6c01dffa"> <wsu:Created>2018-02-23T15:45:11Z</wsu:Created> <wsu:Expires>2018-02-23T15:50:11Z</wsu:Expires> </wsu:Timestamp> </wsse:Security> </soap:Header> <soap:Body> <ListOfBREAIFuncionGeneral xmlns="http://www.siebel.com/xml/BR%20EAI%20Debito%20Response%20IO"> <Result> <ErrorCode>000</ErrorCode> <ErrorText>TRANSACCION PROCESADA</ErrorText> <Debito> <Estado>NORMAL</Estado> <FechaCancelacion/> <FechaUltimaTransaccion/> <FechaVencimiento>04/30/2007</FechaVencimiento> <FechaVinculacion/> <LimiteConsumoPOS>0.00</LimiteConsumoPOS> <LimiteRetiroATM>0.00</LimiteRetiroATM> <MotivoCancelacion/> <NombrePlastico>YSABEL M. CASTILLO M.</NombrePlastico> <NumTarjeta>********82</NumTarjeta> <Producto>VISA ELECTRONICA</Producto> <IdTarjeta>********82</IdTarjeta> </Debito> <Debito> …………………….. </Debito> </Result> </ListOfBREAIFuncionGeneral> </soap:Body> </soap:Envelope>');
+        else if (this.pf_pj.equals('PJ'))
+        	res.setBody('<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"> <soap:Header> <wsa:Action>http://crmintegration.local/ConsultaDebitoResponse</wsa:Action> <wsa:MessageID>urn:uuid:49bceb00-0e88-40ca-a1bc-db23603cfb19</wsa:MessageID> <wsa:RelatesTo>urn:uuid:4cce15d5-0440-4bed-ae44-0679f84654b0</wsa:RelatesTo> <wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To> <wsse:Security> <wsu:Timestamp wsu:Id="Timestamp-ef7343c9-e08e-4548-af65-fc7b6c01dffa"> <wsu:Created>2018-02-23T15:45:11Z</wsu:Created> <wsu:Expires>2018-02-23T15:50:11Z</wsu:Expires> </wsu:Timestamp> </wsse:Security> </soap:Header> <soap:Body> <ListOfBREAIFuncionGeneral xmlns="http://www.siebel.com/xml/BR%20EAI%20Debito%20Response%20IO"> <Result> <ErrorCode>000</ErrorCode> <ErrorText>TRANSACCION PROCESADA</ErrorText> <Debito> <Estado>NORMAL</Estado> <FechaCancelacion/> <FechaUltimaTransaccion/> <FechaVencimiento>04/30/2007</FechaVencimiento> <FechaVinculacion/> <LimiteConsumoPOS>0.00</LimiteConsumoPOS> <LimiteRetiroATM>0.00</LimiteRetiroATM> <MotivoCancelacion/> <NombrePlastico>YSABEL M. CASTILLO M.</NombrePlastico> <NumTarjeta>********82</NumTarjeta> <Producto>VISA ELECTRONICA</Producto> <IdTarjeta>********82</IdTarjeta> </Debito> <Debito> …………………….. </Debito> </Result> </ListOfBREAIFuncionGeneral> </soap:Body> </soap:Envelope>');
+        return res; 
+    }
+    
+}

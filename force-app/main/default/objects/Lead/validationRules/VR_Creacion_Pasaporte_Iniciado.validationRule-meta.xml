@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Creacion_Pasaporte_Iniciado</fullName>
+    <active>true</active>
+    <description>Validación para comprobar que se completaa: Nombre, apellidos, tipo identificación y nº identificación cuando es cliente con pasaporte</description>
+    <errorConditionFormula>AND (
+ISPICKVAL(Status, &apos;Convertido&apos;),
+RecordType.DeveloperName=&apos;Candidato_Persona_Natural&apos;,
+ISPICKVAL(LEA_TipoIdentificacion__c , &apos;Pasaporte&apos;),
+OR(
+ISBLANK( FirstName ),
+ISBLANK(LastName),
+ISPICKVAL(LEA_TipoIdentificacion__c , &apos;&apos;),
+ISBLANK(LEA_NumIdentificacion__c ),
+ISPICKVAL(LEA_Nacionalidad__c , &apos;&apos;),
+ISBLANK(LEA_PersonBirthdate__c),
+ISBLANK(TEXT(LEA_Estado_Civil__c))
+)
+)</errorConditionFormula>
+    <errorMessage>Por ser un registro con pasaporte, debe especificar tambien: Nacionalidad, Fecha de nacimiento y estado Civil</errorMessage>
+</ValidationRule>

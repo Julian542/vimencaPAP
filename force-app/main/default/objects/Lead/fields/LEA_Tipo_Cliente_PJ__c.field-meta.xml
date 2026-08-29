@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Tipo_Cliente_PJ__c</fullName>
+    <label>Tipo de cliente</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>LEA_Clasificacion_Empresa__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>141</fullName>
+                <default>false</default>
+                <label>Corporativo zona francas</label>
+            </value>
+            <value>
+                <fullName>142</fullName>
+                <default>false</default>
+                <label>Corporativo exportadores</label>
+            </value>
+            <value>
+                <fullName>143</fullName>
+                <default>false</default>
+                <label>Corporativo otros generadores de divisas</label>
+            </value>
+            <value>
+                <fullName>151</fullName>
+                <default>false</default>
+                <label>Corporativo importadores</label>
+            </value>
+            <value>
+                <fullName>171</fullName>
+                <default>false</default>
+                <label>Otros clientes corporativos</label>
+            </value>
+            <value>
+                <fullName>241</fullName>
+                <default>false</default>
+                <label>Mediana empresa zona francas</label>
+            </value>
+            <value>
+                <fullName>242</fullName>
+                <default>false</default>
+                <label>Mediana empresa exportadores</label>
+            </value>
+            <value>
+                <fullName>243</fullName>
+                <default>false</default>
+                <label>Mediana empresa otros generadores de divisas</label>
+            </value>
+            <value>
+                <fullName>251</fullName>
+                <default>false</default>
+                <label>Mediana empresa importadores</label>
+            </value>
+            <value>
+                <fullName>271</fullName>
+                <default>false</default>
+                <label>Otros clientes mediana empresa</label>
+            </value>
+            <value>
+                <fullName>341</fullName>
+                <default>false</default>
+                <label>Pequeña empresa zona francas</label>
+            </value>
+            <value>
+                <fullName>342</fullName>
+                <default>false</default>
+                <label>Pequeña empresa exportadores</label>
+            </value>
+            <value>
+                <fullName>343</fullName>
+                <default>false</default>
+                <label>Pequeña empresa otros generadores de divisas</label>
+            </value>
+            <value>
+                <fullName>351</fullName>
+                <default>false</default>
+                <label>Pequeña empresa importadores</label>
+            </value>
+            <value>
+                <fullName>371</fullName>
+                <default>false</default>
+                <label>Otros clientes pequeña empresa</label>
+            </value>
+            <value>
+                <fullName>401</fullName>
+                <default>false</default>
+                <label>Microempresa constituida en Sociedad</label>
+            </value>
+            <value>
+                <fullName>701</fullName>
+                <default>false</default>
+                <label>Gobierno central</label>
+            </value>
+            <value>
+                <fullName>702</fullName>
+                <default>false</default>
+                <label>Instituciones públicas descentralizadas o autónomas</label>
+            </value>
+            <value>
+                <fullName>703</fullName>
+                <default>false</default>
+                <label>Instituciones de seguridad social</label>
+            </value>
+            <value>
+                <fullName>704</fullName>
+                <default>false</default>
+                <label>Gobiernos locales</label>
+            </value>
+            <value>
+                <fullName>705</fullName>
+                <default>false</default>
+                <label>Empresas públicas no financieras</label>
+            </value>
+            <value>
+                <fullName>706</fullName>
+                <default>false</default>
+                <label>Instituciones públicas financieras monetarias</label>
+            </value>
+            <value>
+                <fullName>707</fullName>
+                <default>false</default>
+                <label>Instituciones públicas financieras no monetarias</label>
+            </value>
+            <value>
+                <fullName>801</fullName>
+                <default>false</default>
+                <label>Int.s/f/lucro cultura y recreación</label>
+            </value>
+            <value>
+                <fullName>802</fullName>
+                <default>false</default>
+                <label>Int.s/f/lucro enseñanza e investigación</label>
+            </value>
+            <value>
+                <fullName>803</fullName>
+                <default>false</default>
+                <label>Int.s/f/lucro hospitales y rehabilitación</label>
+            </value>
+            <value>
+                <fullName>804</fullName>
+                <default>false</default>
+                <label>Int.s/f/lucro servicios sociales</label>
+            </value>
+            <value>
+                <fullName>805</fullName>
+                <default>false</default>
+                <label>Int.s/f/lucro medio ambiente</label>
+            </value>
+            <value>
+                <fullName>806</fullName>
+                <default>false</default>
+                <label>Int.s/f/lucro desarrollo y vivienda</label>
+            </value>
+            <value>
+                <fullName>807</fullName>
+                <default>false</default>
+                <label>Int.s/f/lucro derecho, promoción y política</label>
+            </value>
+            <value>
+                <fullName>808</fullName>
+                <default>false</default>
+                <label>Int.s/f/lucro intermediación filantrópica y promoción del voluntariado</label>
+            </value>
+            <value>
+                <fullName>809</fullName>
+                <default>false</default>
+                <label>Int.s/f/lucro internacional</label>
+            </value>
+            <value>
+                <fullName>810</fullName>
+                <default>false</default>
+                <label>Int.s/f/lucro religión</label>
+            </value>
+            <value>
+                <fullName>811</fullName>
+                <default>false</default>
+                <label>Int.s/f/lucro asociaciones empresariales y profesionales, sindicatos</label>
+            </value>
+            <value>
+                <fullName>812</fullName>
+                <default>false</default>
+                <label>Int.s/f/lucro no contempladas anteriormente</label>
+            </value>
+            <value>
+                <fullName>901</fullName>
+                <default>false</default>
+                <label>Fideicomiso de planificación sucesoral</label>
+            </value>
+            <value>
+                <fullName>902</fullName>
+                <default>false</default>
+                <label>Fideicomiso cultural, filantrópico y educativo</label>
+            </value>
+            <value>
+                <fullName>903</fullName>
+                <default>false</default>
+                <label>Fideicomiso de inversión</label>
+            </value>
+            <value>
+                <fullName>904</fullName>
+                <default>false</default>
+                <label>Fideicomiso de oferta pública de valores y productos</label>
+            </value>
+            <value>
+                <fullName>905</fullName>
+                <default>false</default>
+                <label>Fideicomiso en garantía</label>
+            </value>
+            <value>
+                <fullName>906</fullName>
+                <default>false</default>
+                <label>Fideicomiso de inversión inmobiliarioa y desarrollo inmobiliario</label>
+            </value>
+            <value>
+                <fullName>907</fullName>
+                <default>false</default>
+                <label>Fideicomiso público</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Corporativa</controllingFieldValue>
+            <valueName>141</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Corporativa</controllingFieldValue>
+            <valueName>142</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Corporativa</controllingFieldValue>
+            <valueName>143</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Corporativa</controllingFieldValue>
+            <valueName>151</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Corporativa</controllingFieldValue>
+            <valueName>171</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mediana</controllingFieldValue>
+            <valueName>241</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mediana</controllingFieldValue>
+            <valueName>242</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mediana</controllingFieldValue>
+            <valueName>243</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mediana</controllingFieldValue>
+            <valueName>251</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mediana</controllingFieldValue>
+            <valueName>271</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pequeña</controllingFieldValue>
+            <valueName>341</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pequeña</controllingFieldValue>
+            <valueName>342</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pequeña</controllingFieldValue>
+            <valueName>343</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pequeña</controllingFieldValue>
+            <valueName>351</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pequeña</controllingFieldValue>
+            <valueName>371</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Micro</controllingFieldValue>
+            <valueName>401</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Instituciones del Sector Público No Financiero</controllingFieldValue>
+            <valueName>701</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Instituciones del Sector Público No Financiero</controllingFieldValue>
+            <valueName>702</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Instituciones del Sector Público No Financiero</controllingFieldValue>
+            <valueName>703</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Instituciones del Sector Público No Financiero</controllingFieldValue>
+            <valueName>704</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Instituciones del Sector Público No Financiero</controllingFieldValue>
+            <valueName>705</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

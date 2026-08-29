@@ -1,0 +1,29 @@
+@isTest
+global class wsConsultaProdFinPFPJMock_Error implements HttpCalloutMock {
+    
+    String pf_pj;
+    
+    global wsConsultaProdFinPFPJMock_Error(String pf_pj){
+        this.pf_pj = pf_pj;
+    }
+    
+	global HttpResponse respond(HttpRequest req) {
+        HttpResponse res = new HttpResponse();
+        res.setHeader('Content-Type', 'application/json');
+        res.setStatusCode(200);
+        
+        if(this.pf_pj.equals('PF'))
+       		res.setBody('<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><soap:Header><wsa:Action>http://crmintegration.local/ConsultaProdFinPFResponse</wsa:Action><wsa:MessageID>urn:uuid:9a548c3d-4e37-49cb-a6ce-6eacb5bb8fa9</wsa:MessageID><wsa:RelatesTo>urn:uuid:b20b53e1-822e-4ef1-b08d-8fdb21c41be9</wsa:RelatesTo><wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To><wsse:Security><wsu:Timestamp wsu:Id="Timestamp-391b0b7e-9714-4865-8d0b-613546836230"><wsu:Created>2019-12-05T10:45:01Z</wsu:Created><wsu:Expires>2019-12-05T10:50:01Z</wsu:Expires></wsu:Timestamp></wsse:Security></soap:Header><soap:Body><ListOfBREAIFuncionGeneral xmlns="http://www.siebel.com/xml/BR%20EAI%20Consulta%20Productos%20PF%20VBC%20Response%20IO"><Result xmlns="http://www.siebel.com/xml/BR%20EAI%20Consulta%20Productos%20PF%20VBC%20Response%20IO"><ErrorCode xmlns="http://www.siebel.com/xml/BR%20EAI%20Consulta%20Productos%20PF%20VBC%20Response%20IO">9709</ErrorCode><ErrorText xmlns="http://www.siebel.com/xml/BR%20EAI%20Consulta%20Productos%20PF%20VBC%20Response%20IO">CUSTOMER NOT FOUND OR DO NOT HAVE ANY PRODUCT</ErrorText></Result></ListOfBREAIFuncionGeneral></soap:Body></soap:Envelope>');
+        else if(this.pf_pj.equals('PJ'))
+            res.setBody('<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><soap:Header><wsa:Action>http://crmintegration.local/ConsultaProdFinPJResponse</wsa:Action><wsa:MessageID>urn:uuid:e274acc4-1158-4279-9b0b-effcababdf14</wsa:MessageID><wsa:RelatesTo>urn:uuid:aa34c7e0-a359-4392-b480-f8235b39e169</wsa:RelatesTo><wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To><wsse:Security><wsu:Timestamp wsu:Id="Timestamp-8c9fdd87-8665-4317-bab1-9960ecbda6ed"><wsu:Created>2019-12-05T10:47:09Z</wsu:Created><wsu:Expires>2019-12-05T10:52:09Z</wsu:Expires></wsu:Timestamp></wsse:Security></soap:Header><soap:Body><ListOfBREAIFuncionGeneral xmlns="http://www.siebel.com/xml/BR%20EAI%20Consulta%20Productos%20PJ%20Response%20IO"><Result xmlns="http://www.siebel.com/xml/BR%20EAI%20Consulta%20Productos%20PJ%20Response%20IO"><ErrorCode xmlns="http://www.siebel.com/xml/BR%20EAI%20Consulta%20Productos%20PJ%20Response%20IO">9709</ErrorCode><ErrorText xmlns="http://www.siebel.com/xml/BR%20EAI%20Consulta%20Productos%20PJ%20Response%20IO">CUSTOMER NOT FOUND OR DO NOT HAVE ANY PRODUCT</ErrorText></Result></ListOfBREAIFuncionGeneral></soap:Body></soap:Envelope>');
+        else if(this.pf_pj.equals('ERROR'))
+            res.setBody('<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><soap:Header><wsa:Action>http://crmintegration.local/ConsultaProdFinPJResponse</wsa:Action><wsa:MessageID>urn:uuid:e274acc4-1158-4279-9b0b-effcababdf14</wsa:MessageID><wsa:RelatesTo>urn:uuid:aa34c7e0-a359-4392-b480-f8235b39e169</wsa:RelatesTo><wsa:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:To><wsse:Security><wsu:Timestamp wsu:Id="Timestamp-8c9fdd87-8665-4317-bab1-9960ecbda6ed"><wsu:Created>2019-12-05T10:47:09Z</wsu:Created><wsu:Expires>2019-12-05T10:52:09Z</wsu:Expires></wsu:Timestamp></wsse:Security></soap:Header><soap:Body><ListOfBREAIFuncionGeneral xmlns="http://www.siebel.com/xml/BR%20EAI%20Consulta%20Productos%20PJ%20Response%20IO"><Resultado xmlns="http://www.siebel.com/xml/BR%20EAI%20Consulta%20Productos%20PJ%20Response%20IO"><ErrorCode xmlns="http://www.siebel.com/xml/BR%20EAI%20Consulta%20Productos%20PJ%20Response%20IO">9709</ErrorCode><ErrorText xmlns="http://www.siebel.com/xml/BR%20EAI%20Consulta%20Productos%20PJ%20Response%20IO">CUSTOMER NOT FOUND OR DO NOT HAVE ANY PRODUCT</ErrorText></Resultado></ListOfBREAIFuncionGeneral></soap:Body></soap:Envelope>');
+        else if(this.pf_pj.equals('ERRCODE')){
+            res.setStatusCode(500);
+            res.setBody('<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><soap:Header></soap:Header><soap:Body></soap:Body></soap:Envelope>');
+        }
+        
+        return res; 
+    }
+    
+}

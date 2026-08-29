@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Tipo_Relacion_PEP__c</fullName>
+    <description>Migrado del Account</description>
+    <label>Tipo de relación</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Abuelos</fullName>
+                <default>false</default>
+                <label>Abuelos</label>
+            </value>
+            <value>
+                <fullName>Cuñados</fullName>
+                <default>false</default>
+                <label>Cuñados</label>
+            </value>
+            <value>
+                <fullName>Pareja o Cónyuge</fullName>
+                <default>false</default>
+                <label>Pareja o Cónyuge</label>
+            </value>
+            <value>
+                <fullName>Hermanos</fullName>
+                <default>false</default>
+                <label>Hermanos</label>
+            </value>
+            <value>
+                <fullName>Hijo/s</fullName>
+                <default>false</default>
+                <label>Hijo/s</label>
+            </value>
+            <value>
+                <fullName>Nieto/a</fullName>
+                <default>false</default>
+                <label>Nieto/a</label>
+            </value>
+            <value>
+                <fullName>Nueras</fullName>
+                <default>false</default>
+                <label>Nueras</label>
+            </value>
+            <value>
+                <fullName>Padres</fullName>
+                <default>false</default>
+                <label>Padres</label>
+            </value>
+            <value>
+                <fullName>Suegro/a</fullName>
+                <default>false</default>
+                <label>Suegro/a</label>
+            </value>
+            <value>
+                <fullName>Yernos</fullName>
+                <default>false</default>
+                <label>Yernos</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

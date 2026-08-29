@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Validacion_Direcciones__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+  AND(
+    ISBLANK(LEA_Calle__c),
+    ISBLANK(LEA_Numero__c)
+  ),
+  &quot;&quot;,
+  IF(
+    AND(
+      NOT(ISBLANK(LEA_Calle__c)),
+      NOT(ISBLANK(LEA_Numero__c))
+    ),
+    &quot;true&quot;,
+    &quot;false&quot;
+  )
+)</formula>
+    <label>LEA_Validacion_Direcciones</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

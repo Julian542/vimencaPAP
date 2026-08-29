@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_informacion_financiera</fullName>
+    <active>true</active>
+    <description>Validación para validar que la fecha de información, total activos, Moneda y ventas o ingresos anuales están completos</description>
+    <errorConditionFormula>AND (
+ISPICKVAL(Status, &apos;Convertido&apos;),
+RecordType.DeveloperName=&apos;Candidato_Persona_Natural&apos;,
+OR(
+ISBLANK(LEA_Fecha_Informacion__c ),
+ISBLANK(LEA_Total_Activos__c ),
+ISPICKVAL(LEA_Moneda__c ,&apos;&apos;),
+ISBLANK(LEA_Ventas_Ingresos_Anuales__c ),
+ISBLANK(LEA_Patrimonio_Num__c)
+)
+)</errorConditionFormula>
+    <errorMessage>Revise la información financiera y verifique que la fecha de información, total activos, patrimonio, Moneda y ventas o ingresos anuales están completos</errorMessage>
+</ValidationRule>

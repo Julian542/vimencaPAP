@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Listas_control</fullName>
+    <active>true</active>
+    <description>Validación que comprueba que el cliente se valido contra listas de control y que fue Aprobado.</description>
+    <errorConditionFormula>AND(
+ISPICKVAL(Status,&apos;Convertido&apos;),
+OR
+(
+LEA_Resultado_Validacion__c == &apos;En revisión&apos;,
+LEA_Resultado_Validacion__c == &apos;Rechazado&apos;
+)
+)</errorConditionFormula>
+    <errorMessage>Para convertir el prospecto es necesario que el Resultado de la Validación sea Aprobada.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Genero_Identificaci_n__c</fullName>
+    <label>Genero - Identificación</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Cédula Femenino</fullName>
+                <default>false</default>
+                <label>Cédula Femenino</label>
+            </value>
+            <value>
+                <fullName>Cédula Masculino</fullName>
+                <default>false</default>
+                <label>Cédula Masculino</label>
+            </value>
+            <value>
+                <fullName>Pasaporte Femenino</fullName>
+                <default>false</default>
+                <label>Pasaporte Femenino</label>
+            </value>
+            <value>
+                <fullName>Pasaporte Masculino</fullName>
+                <default>false</default>
+                <label>Pasaporte Masculino</label>
+            </value>
+            <value>
+                <fullName>Menor de edad Masculino</fullName>
+                <default>false</default>
+                <label>Menor de edad Masculino</label>
+            </value>
+            <value>
+                <fullName>Menor de edad Femenino</fullName>
+                <default>false</default>
+                <label>Menor de edad Femenino</label>
+            </value>
+            <value>
+                <fullName>Licencia de conducir Masculino</fullName>
+                <default>false</default>
+                <label>Licencia de conducir Masculino</label>
+            </value>
+            <value>
+                <fullName>Licencia de conducir Femenino</fullName>
+                <default>false</default>
+                <label>Licencia de conducir Femenino</label>
+            </value>
+            <value>
+                <fullName>Acta de nacimiento MASCULINO</fullName>
+                <default>false</default>
+                <label>Acta de nacimiento MASCULINO</label>
+            </value>
+            <value>
+                <fullName>Acta de nacimiento Femenino</fullName>
+                <default>false</default>
+                <label>Acta de nacimiento Femenino</label>
+            </value>
+            <value>
+                <fullName>Otros MASCULINO</fullName>
+                <default>false</default>
+                <label>Otros MASCULINO</label>
+            </value>
+            <value>
+                <fullName>Otros Femenino</fullName>
+                <default>false</default>
+                <label>Otros Femenino</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

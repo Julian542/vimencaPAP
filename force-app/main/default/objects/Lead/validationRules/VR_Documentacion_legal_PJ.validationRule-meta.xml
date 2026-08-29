@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Documentacion_legal_PJ</fullName>
+    <active>false</active>
+    <description>Validacion que comprueba que no haya documentos legales que no esten aprobados,no aplica/validado por legal.</description>
+    <errorConditionFormula>AND (
+ISPICKVAL(Status, &apos;Convertido&apos;),
+RecordType.DeveloperName=&apos;Candidato_Persona_Juridica&apos;,
+LEA_N_Documentos__c &gt; 0
+)</errorConditionFormula>
+    <errorMessage>Revise la documentación legal del cliente</errorMessage>
+</ValidationRule>

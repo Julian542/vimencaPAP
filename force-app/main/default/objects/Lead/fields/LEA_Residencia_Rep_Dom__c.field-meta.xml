@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Residencia_Rep_Dom__c</fullName>
+    <label>Residencia en Rep. Dom.</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>NO RESIDENTE</fullName>
+                <default>false</default>
+                <label>NO RESIDENTE</label>
+            </value>
+            <value>
+                <fullName>PERMANENTE</fullName>
+                <default>false</default>
+                <label>PERMANENTE</label>
+            </value>
+            <value>
+                <fullName>TEMPORAL</fullName>
+                <default>false</default>
+                <label>TEMPORAL</label>
+            </value>
+            <value>
+                <fullName>NO DISPONIBLE</fullName>
+                <default>false</default>
+                <label>NO DISPONIBLE</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Direccion_en_Cliente_PJ</fullName>
+    <active>true</active>
+    <description>Validación que comprueba que al menos haya una dirección con TIPO = EMPRESARIAL para convertir a cliente</description>
+    <errorConditionFormula>AND(
+RecordType.DeveloperName=&apos;Candidato_Persona_Juridica&apos;,
+ISPICKVAL(Status,&apos;Convertido&apos;),
+OR(
+ISBLANK(LEA_Calle__c),
+ISBLANK(LEA_Numero__c),
+ISPICKVAL(LEA_Pais__c, &apos;&apos;),
+ISPICKVAL(LEA_Provincia__c, &apos;&apos;),
+ISPICKVAL(LEA_Municipio__c, &apos;&apos;))
+)</errorConditionFormula>
+    <errorMessage>Para convertir el prospecto es necesario tener al menos un dirección de tipo Empresarial como principal</errorMessage>
+</ValidationRule>

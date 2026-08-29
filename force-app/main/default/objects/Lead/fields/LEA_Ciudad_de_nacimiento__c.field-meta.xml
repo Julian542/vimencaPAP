@@ -1,0 +1,1403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Ciudad_de_nacimiento__c</fullName>
+    <label>Ciudad de nacimiento</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>LEA_Provincia_Nacimiento__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ALTAMIRA</fullName>
+                <default>false</default>
+                <label>ALTAMIRA</label>
+            </value>
+            <value>
+                <fullName>ARENOSO</fullName>
+                <default>false</default>
+                <label>ARENOSO</label>
+            </value>
+            <value>
+                <fullName>AZUA</fullName>
+                <default>false</default>
+                <label>AZUA</label>
+            </value>
+            <value>
+                <fullName>BAJOS DE HAINA</fullName>
+                <default>false</default>
+                <label>BAJOS DE HAINA</label>
+            </value>
+            <value>
+                <fullName>BANÍ</fullName>
+                <default>false</default>
+                <label>BANÍ</label>
+            </value>
+            <value>
+                <fullName>BARAHONA</fullName>
+                <default>false</default>
+                <label>BARAHONA</label>
+            </value>
+            <value>
+                <fullName>BAYAGUANA</fullName>
+                <default>false</default>
+                <label>BAYAGUANA</label>
+            </value>
+            <value>
+                <fullName>BISONÓ</fullName>
+                <default>false</default>
+                <label>BISONÓ</label>
+            </value>
+            <value>
+                <fullName>BOCA CHICA</fullName>
+                <default>false</default>
+                <label>BOCA CHICA</label>
+            </value>
+            <value>
+                <fullName>BOHECHÍO</fullName>
+                <default>false</default>
+                <label>BOHECHÍO</label>
+            </value>
+            <value>
+                <fullName>BONAO</fullName>
+                <default>false</default>
+                <label>BONAO</label>
+            </value>
+            <value>
+                <fullName>BÁNICA</fullName>
+                <default>false</default>
+                <label>BÁNICA</label>
+            </value>
+            <value>
+                <fullName>CABRAL</fullName>
+                <default>false</default>
+                <label>CABRAL</label>
+            </value>
+            <value>
+                <fullName>CABRERA</fullName>
+                <default>false</default>
+                <label>CABRERA</label>
+            </value>
+            <value>
+                <fullName>CAMBITA GARABITOS</fullName>
+                <default>false</default>
+                <label>CAMBITA GARABITOS</label>
+            </value>
+            <value>
+                <fullName>CASTAÑUELAS</fullName>
+                <default>false</default>
+                <label>CASTAÑUELAS</label>
+            </value>
+            <value>
+                <fullName>CASTILLO</fullName>
+                <default>false</default>
+                <label>CASTILLO</label>
+            </value>
+            <value>
+                <fullName>CAYETANO GERMOSÉN</fullName>
+                <default>false</default>
+                <label>CAYETANO GERMOSÉN</label>
+            </value>
+            <value>
+                <fullName>CEVICOS</fullName>
+                <default>false</default>
+                <label>CEVICOS</label>
+            </value>
+            <value>
+                <fullName>COMENDADOR</fullName>
+                <default>false</default>
+                <label>COMENDADOR</label>
+            </value>
+            <value>
+                <fullName>CONSTANZA</fullName>
+                <default>false</default>
+                <label>CONSTANZA</label>
+            </value>
+            <value>
+                <fullName>CONSUELO</fullName>
+                <default>false</default>
+                <label>CONSUELO</label>
+            </value>
+            <value>
+                <fullName>COTUÍ</fullName>
+                <default>false</default>
+                <label>COTUÍ</label>
+            </value>
+            <value>
+                <fullName>CRISTÓBAL</fullName>
+                <default>false</default>
+                <label>CRISTÓBAL</label>
+            </value>
+            <value>
+                <fullName>DAJABÓN</fullName>
+                <default>false</default>
+                <label>DAJABÓN</label>
+            </value>
+            <value>
+                <fullName>DUVERGÉ</fullName>
+                <default>false</default>
+                <label>DUVERGÉ</label>
+            </value>
+            <value>
+                <fullName>EL CERCADO</fullName>
+                <default>false</default>
+                <label>EL CERCADO</label>
+            </value>
+            <value>
+                <fullName>EL FACTOR</fullName>
+                <default>false</default>
+                <label>EL FACTOR</label>
+            </value>
+            <value>
+                <fullName>EL LLANO</fullName>
+                <default>false</default>
+                <label>EL LLANO</label>
+            </value>
+            <value>
+                <fullName>EL PEÑÓN</fullName>
+                <default>false</default>
+                <label>EL PEÑÓN</label>
+            </value>
+            <value>
+                <fullName>EL PINO</fullName>
+                <default>false</default>
+                <label>EL PINO</label>
+            </value>
+            <value>
+                <fullName>EL SEIBO</fullName>
+                <default>false</default>
+                <label>EL SEIBO</label>
+            </value>
+            <value>
+                <fullName>EL VALLE</fullName>
+                <default>false</default>
+                <label>EL VALLE</label>
+            </value>
+            <value>
+                <fullName>ENRIQUILLO</fullName>
+                <default>false</default>
+                <label>ENRIQUILLO</label>
+            </value>
+            <value>
+                <fullName>ESPERANZA</fullName>
+                <default>false</default>
+                <label>ESPERANZA</label>
+            </value>
+            <value>
+                <fullName>ESTEBANÍA</fullName>
+                <default>false</default>
+                <label>ESTEBANÍA</label>
+            </value>
+            <value>
+                <fullName>EUGENIO MARÍA DE HOSTOS</fullName>
+                <default>false</default>
+                <label>EUGENIO MARÍA DE HOSTOS</label>
+            </value>
+            <value>
+                <fullName>FANTINO</fullName>
+                <default>false</default>
+                <label>FANTINO</label>
+            </value>
+            <value>
+                <fullName>FUNDACIÓN</fullName>
+                <default>false</default>
+                <label>FUNDACIÓN</label>
+            </value>
+            <value>
+                <fullName>GALVÁN</fullName>
+                <default>false</default>
+                <label>GALVÁN</label>
+            </value>
+            <value>
+                <fullName>GASPAR HERNÁNDEZ</fullName>
+                <default>false</default>
+                <label>GASPAR HERNÁNDEZ</label>
+            </value>
+            <value>
+                <fullName>GUANANICO</fullName>
+                <default>false</default>
+                <label>GUANANICO</label>
+            </value>
+            <value>
+                <fullName>GUAYABAL</fullName>
+                <default>false</default>
+                <label>GUAYABAL</label>
+            </value>
+            <value>
+                <fullName>GUAYACANES</fullName>
+                <default>false</default>
+                <label>GUAYACANES</label>
+            </value>
+            <value>
+                <fullName>GUAYMATE</fullName>
+                <default>false</default>
+                <label>GUAYMATE</label>
+            </value>
+            <value>
+                <fullName>GUAYUBÍN</fullName>
+                <default>false</default>
+                <label>GUAYUBÍN</label>
+            </value>
+            <value>
+                <fullName>HATO MAYOR</fullName>
+                <default>false</default>
+                <label>HATO MAYOR</label>
+            </value>
+            <value>
+                <fullName>HIGÜEY</fullName>
+                <default>false</default>
+                <label>HIGÜEY</label>
+            </value>
+            <value>
+                <fullName>HONDO VALLE</fullName>
+                <default>false</default>
+                <label>HONDO VALLE</label>
+            </value>
+            <value>
+                <fullName>IMBERT</fullName>
+                <default>false</default>
+                <label>IMBERT</label>
+            </value>
+            <value>
+                <fullName>JAMAO AL NORTE</fullName>
+                <default>false</default>
+                <label>JAMAO AL NORTE</label>
+            </value>
+            <value>
+                <fullName>JAQUIMEYES</fullName>
+                <default>false</default>
+                <label>JAQUIMEYES</label>
+            </value>
+            <value>
+                <fullName>JARABACOA</fullName>
+                <default>false</default>
+                <label>JARABACOA</label>
+            </value>
+            <value>
+                <fullName>JIMA ABAJO</fullName>
+                <default>false</default>
+                <label>JIMA ABAJO</label>
+            </value>
+            <value>
+                <fullName>JIMANÍ</fullName>
+                <default>false</default>
+                <label>JIMANÍ</label>
+            </value>
+            <value>
+                <fullName>JUAN DE HERRERA</fullName>
+                <default>false</default>
+                <label>JUAN DE HERRERA</label>
+            </value>
+            <value>
+                <fullName>JUAN SANTIAGO</fullName>
+                <default>false</default>
+                <label>JUAN SANTIAGO</label>
+            </value>
+            <value>
+                <fullName>JÁNICO</fullName>
+                <default>false</default>
+                <label>JÁNICO</label>
+            </value>
+            <value>
+                <fullName>LA CIÉNAGA</fullName>
+                <default>false</default>
+                <label>LA CIÉNAGA</label>
+            </value>
+            <value>
+                <fullName>LA DESCUBIERTA</fullName>
+                <default>false</default>
+                <label>LA DESCUBIERTA</label>
+            </value>
+            <value>
+                <fullName>LA MATA</fullName>
+                <default>false</default>
+                <label>LA MATA</label>
+            </value>
+            <value>
+                <fullName>LA ROMANA</fullName>
+                <default>false</default>
+                <label>LA ROMANA</label>
+            </value>
+            <value>
+                <fullName>LA VEGA</fullName>
+                <default>false</default>
+                <label>LA VEGA</label>
+            </value>
+            <value>
+                <fullName>LAGUNA SALADA</fullName>
+                <default>false</default>
+                <label>LAGUNA SALADA</label>
+            </value>
+            <value>
+                <fullName>LAS CHARCAS</fullName>
+                <default>false</default>
+                <label>LAS CHARCAS</label>
+            </value>
+            <value>
+                <fullName>LAS GUÁRANAS</fullName>
+                <default>false</default>
+                <label>LAS GUÁRANAS</label>
+            </value>
+            <value>
+                <fullName>LAS MATAS DE FARFÁN</fullName>
+                <default>false</default>
+                <label>LAS MATAS DE FARFÁN</label>
+            </value>
+            <value>
+                <fullName>LAS MATAS DE SANTA CRUZ</fullName>
+                <default>false</default>
+                <label>LAS MATAS DE SANTA CRUZ</label>
+            </value>
+            <value>
+                <fullName>LAS SALINA</fullName>
+                <default>false</default>
+                <label>LAS SALINA</label>
+            </value>
+            <value>
+                <fullName>LAS TERRENAS</fullName>
+                <default>false</default>
+                <label>LAS TERRENAS</label>
+            </value>
+            <value>
+                <fullName>LAS YAYAS DE VIAJAMA</fullName>
+                <default>false</default>
+                <label>LAS YAYAS DE VIAJAMA</label>
+            </value>
+            <value>
+                <fullName>LICEY AL MEDIO</fullName>
+                <default>false</default>
+                <label>LICEY AL MEDIO</label>
+            </value>
+            <value>
+                <fullName>LOMA DE CABRERA</fullName>
+                <default>false</default>
+                <label>LOMA DE CABRERA</label>
+            </value>
+            <value>
+                <fullName>LOS ALCARRIZOS</fullName>
+                <default>false</default>
+                <label>LOS ALCARRIZOS</label>
+            </value>
+            <value>
+                <fullName>LOS CACAOS</fullName>
+                <default>false</default>
+                <label>LOS CACAOS</label>
+            </value>
+            <value>
+                <fullName>LOS HIDALGOS</fullName>
+                <default>false</default>
+                <label>LOS HIDALGOS</label>
+            </value>
+            <value>
+                <fullName>LOS LLANOS</fullName>
+                <default>false</default>
+                <label>LOS LLANOS</label>
+            </value>
+            <value>
+                <fullName>LOS RÍOS</fullName>
+                <default>false</default>
+                <label>LOS RÍOS</label>
+            </value>
+            <value>
+                <fullName>LUPERÓN</fullName>
+                <default>false</default>
+                <label>LUPERÓN</label>
+            </value>
+            <value>
+                <fullName>MAIMÓN</fullName>
+                <default>false</default>
+                <label>MAIMÓN</label>
+            </value>
+            <value>
+                <fullName>MAO</fullName>
+                <default>false</default>
+                <label>MAO</label>
+            </value>
+            <value>
+                <fullName>MELLA</fullName>
+                <default>false</default>
+                <label>MELLA</label>
+            </value>
+            <value>
+                <fullName>MICHES</fullName>
+                <default>false</default>
+                <label>MICHES</label>
+            </value>
+            <value>
+                <fullName>MOCA</fullName>
+                <default>false</default>
+                <label>MOCA</label>
+            </value>
+            <value>
+                <fullName>MONCIÓN</fullName>
+                <default>false</default>
+                <label>MONCIÓN</label>
+            </value>
+            <value>
+                <fullName>MONTE CRISTI</fullName>
+                <default>false</default>
+                <label>MONTE CRISTI</label>
+            </value>
+            <value>
+                <fullName>MONTE PLATA</fullName>
+                <default>false</default>
+                <label>MONTE PLATA</label>
+            </value>
+            <value>
+                <fullName>NAGUA</fullName>
+                <default>false</default>
+                <label>NAGUA</label>
+            </value>
+            <value>
+                <fullName>NEIBA</fullName>
+                <default>false</default>
+                <label>NEIBA</label>
+            </value>
+            <value>
+                <fullName>NIZAO</fullName>
+                <default>false</default>
+                <label>NIZAO</label>
+            </value>
+            <value>
+                <fullName>OVIEDO</fullName>
+                <default>false</default>
+                <label>OVIEDO</label>
+            </value>
+            <value>
+                <fullName>PADRE LAS CASAS</fullName>
+                <default>false</default>
+                <label>PADRE LAS CASAS</label>
+            </value>
+            <value>
+                <fullName>PARAÍSO</fullName>
+                <default>false</default>
+                <label>PARAÍSO</label>
+            </value>
+            <value>
+                <fullName>PARTIDO</fullName>
+                <default>false</default>
+                <label>PARTIDO</label>
+            </value>
+            <value>
+                <fullName>PEDERNALES</fullName>
+                <default>false</default>
+                <label>PEDERNALES</label>
+            </value>
+            <value>
+                <fullName>PEDRO BRAND</fullName>
+                <default>false</default>
+                <label>PEDRO BRAND</label>
+            </value>
+            <value>
+                <fullName>PEDRO SANTANA</fullName>
+                <default>false</default>
+                <label>PEDRO SANTANA</label>
+            </value>
+            <value>
+                <fullName>PEPILLO SALCEDO</fullName>
+                <default>false</default>
+                <label>PEPILLO SALCEDO</label>
+            </value>
+            <value>
+                <fullName>PERALTA</fullName>
+                <default>false</default>
+                <label>PERALTA</label>
+            </value>
+            <value>
+                <fullName>PERALVILLO</fullName>
+                <default>false</default>
+                <label>PERALVILLO</label>
+            </value>
+            <value>
+                <fullName>PIEDRA BLANCA</fullName>
+                <default>false</default>
+                <label>PIEDRA BLANCA</label>
+            </value>
+            <value>
+                <fullName>PIMENTEL</fullName>
+                <default>false</default>
+                <label>PIMENTEL</label>
+            </value>
+            <value>
+                <fullName>POLO</fullName>
+                <default>false</default>
+                <label>POLO</label>
+            </value>
+            <value>
+                <fullName>POSTRER RÍO</fullName>
+                <default>false</default>
+                <label>POSTRER RÍO</label>
+            </value>
+            <value>
+                <fullName>PUEBLO VIEJO</fullName>
+                <default>false</default>
+                <label>PUEBLO VIEJO</label>
+            </value>
+            <value>
+                <fullName>PUERTO PLATA</fullName>
+                <default>false</default>
+                <label>PUERTO PLATA</label>
+            </value>
+            <value>
+                <fullName>PUÑAL</fullName>
+                <default>false</default>
+                <label>PUÑAL</label>
+            </value>
+            <value>
+                <fullName>QUISQUEYA</fullName>
+                <default>false</default>
+                <label>QUISQUEYA</label>
+            </value>
+            <value>
+                <fullName>RAMÓN SANTANA</fullName>
+                <default>false</default>
+                <label>RAMÓN SANTANA</label>
+            </value>
+            <value>
+                <fullName>RANCHO ARRIBA</fullName>
+                <default>false</default>
+                <label>RANCHO ARRIBA</label>
+            </value>
+            <value>
+                <fullName>RESTAURACIÓN</fullName>
+                <default>false</default>
+                <label>RESTAURACIÓN</label>
+            </value>
+            <value>
+                <fullName>RÍO SAN JUAN</fullName>
+                <default>false</default>
+                <label>RÍO SAN JUAN</label>
+            </value>
+            <value>
+                <fullName>SABANA DE LA MAR</fullName>
+                <default>false</default>
+                <label>SABANA DE LA MAR</label>
+            </value>
+            <value>
+                <fullName>SABANA GRANDE DE BOYÁ</fullName>
+                <default>false</default>
+                <label>SABANA GRANDE DE BOYÁ</label>
+            </value>
+            <value>
+                <fullName>SABANA GRANDE DE PALENQUE</fullName>
+                <default>false</default>
+                <label>SABANA GRANDE DE PALENQUE</label>
+            </value>
+            <value>
+                <fullName>SABANA IGLESIA</fullName>
+                <default>false</default>
+                <label>SABANA IGLESIA</label>
+            </value>
+            <value>
+                <fullName>SABANA LARGA</fullName>
+                <default>false</default>
+                <label>SABANA LARGA</label>
+            </value>
+            <value>
+                <fullName>SABANA YEGUA</fullName>
+                <default>false</default>
+                <label>SABANA YEGUA</label>
+            </value>
+            <value>
+                <fullName>SALCEDO</fullName>
+                <default>false</default>
+                <label>SALCEDO</label>
+            </value>
+            <value>
+                <fullName>SAMANÁ</fullName>
+                <default>false</default>
+                <label>SAMANÁ</label>
+            </value>
+            <value>
+                <fullName>SAN ANTONIO DE GUERRA</fullName>
+                <default>false</default>
+                <label>SAN ANTONIO DE GUERRA</label>
+            </value>
+            <value>
+                <fullName>SAN CRISTÓBAL</fullName>
+                <default>false</default>
+                <label>SAN CRISTÓBAL</label>
+            </value>
+            <value>
+                <fullName>SAN FRANCISCO DE MACORÍS</fullName>
+                <default>false</default>
+                <label>SAN FRANCISCO DE MACORÍS</label>
+            </value>
+            <value>
+                <fullName>SAN GREGORIO DE NIGUA</fullName>
+                <default>false</default>
+                <label>SAN GREGORIO DE NIGUA</label>
+            </value>
+            <value>
+                <fullName>SAN IGNACIO DE SABANETA</fullName>
+                <default>false</default>
+                <label>SAN IGNACIO DE SABANETA</label>
+            </value>
+            <value>
+                <fullName>SAN JOSÉ DE LAS MATAS</fullName>
+                <default>false</default>
+                <label>SAN JOSÉ DE LAS MATAS</label>
+            </value>
+            <value>
+                <fullName>SAN JOSÉ DE OCOA</fullName>
+                <default>false</default>
+                <label>SAN JOSÉ DE OCOA</label>
+            </value>
+            <value>
+                <fullName>SAN JUAN</fullName>
+                <default>false</default>
+                <label>SAN JUAN</label>
+            </value>
+            <value>
+                <fullName>SAN PEDRO DE MACORÍS</fullName>
+                <default>false</default>
+                <label>SAN PEDRO DE MACORÍS</label>
+            </value>
+            <value>
+                <fullName>SAN RAFAEL DEL YUMA</fullName>
+                <default>false</default>
+                <label>SAN RAFAEL DEL YUMA</label>
+            </value>
+            <value>
+                <fullName>SANTIAGO</fullName>
+                <default>false</default>
+                <label>SANTIAGO</label>
+            </value>
+            <value>
+                <fullName>SANTO DOMINGO DE GUZMÁN</fullName>
+                <default>false</default>
+                <label>SANTO DOMINGO DE GUZMÁN</label>
+            </value>
+            <value>
+                <fullName>SANTO DOMINGO ESTE</fullName>
+                <default>false</default>
+                <label>SANTO DOMINGO ESTE</label>
+            </value>
+            <value>
+                <fullName>SANTO DOMINGO NORTE</fullName>
+                <default>false</default>
+                <label>SANTO DOMINGO NORTE</label>
+            </value>
+            <value>
+                <fullName>SANTO DOMINGO OESTE</fullName>
+                <default>false</default>
+                <label>SANTO DOMINGO OESTE</label>
+            </value>
+            <value>
+                <fullName>SOSÚA</fullName>
+                <default>false</default>
+                <label>SOSÚA</label>
+            </value>
+            <value>
+                <fullName>SÁNCHEZ</fullName>
+                <default>false</default>
+                <label>SÁNCHEZ</label>
+            </value>
+            <value>
+                <fullName>TAMAYO</fullName>
+                <default>false</default>
+                <label>TAMAYO</label>
+            </value>
+            <value>
+                <fullName>TAMBORIL</fullName>
+                <default>false</default>
+                <label>TAMBORIL</label>
+            </value>
+            <value>
+                <fullName>TENARES</fullName>
+                <default>false</default>
+                <label>TENARES</label>
+            </value>
+            <value>
+                <fullName>TÁBARA ARRIBA</fullName>
+                <default>false</default>
+                <label>TÁBARA ARRIBA</label>
+            </value>
+            <value>
+                <fullName>VALLEJUELO</fullName>
+                <default>false</default>
+                <label>VALLEJUELO</label>
+            </value>
+            <value>
+                <fullName>VICENTE NOBLE</fullName>
+                <default>false</default>
+                <label>VICENTE NOBLE</label>
+            </value>
+            <value>
+                <fullName>VILLA ALTAGRACIA</fullName>
+                <default>false</default>
+                <label>VILLA ALTAGRACIA</label>
+            </value>
+            <value>
+                <fullName>VILLA GONZÁLEZ</fullName>
+                <default>false</default>
+                <label>VILLA GONZÁLEZ</label>
+            </value>
+            <value>
+                <fullName>VILLA HERMOSA</fullName>
+                <default>false</default>
+                <label>VILLA HERMOSA</label>
+            </value>
+            <value>
+                <fullName>VILLA ISABELA</fullName>
+                <default>false</default>
+                <label>VILLA ISABELA</label>
+            </value>
+            <value>
+                <fullName>VILLA JARAGUA</fullName>
+                <default>false</default>
+                <label>VILLA JARAGUA</label>
+            </value>
+            <value>
+                <fullName>VILLA LOS ALMÁCIGOS</fullName>
+                <default>false</default>
+                <label>VILLA LOS ALMÁCIGOS</label>
+            </value>
+            <value>
+                <fullName>VILLA MONTELLANO</fullName>
+                <default>false</default>
+                <label>VILLA MONTELLANO</label>
+            </value>
+            <value>
+                <fullName>VILLA RIVA</fullName>
+                <default>false</default>
+                <label>VILLA RIVA</label>
+            </value>
+            <value>
+                <fullName>VILLA TAPIA</fullName>
+                <default>false</default>
+                <label>VILLA TAPIA</label>
+            </value>
+            <value>
+                <fullName>VILLA VÁSQUEZ</fullName>
+                <default>false</default>
+                <label>VILLA VÁSQUEZ</label>
+            </value>
+            <value>
+                <fullName>YAGUATE</fullName>
+                <default>false</default>
+                <label>YAGUATE</label>
+            </value>
+            <value>
+                <fullName>YAMASÁ</fullName>
+                <default>false</default>
+                <label>YAMASÁ</label>
+            </value>
+            <value>
+                <fullName>NO DISPONIBLE</fullName>
+                <default>false</default>
+                <label>NO DISPONIBLE</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>18</controllingFieldValue>
+            <valueName>ALTAMIRA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>18</controllingFieldValue>
+            <valueName>GUANANICO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>18</controllingFieldValue>
+            <valueName>IMBERT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>18</controllingFieldValue>
+            <valueName>LOS HIDALGOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>18</controllingFieldValue>
+            <valueName>LUPERÓN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>18</controllingFieldValue>
+            <valueName>PUERTO PLATA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>18</controllingFieldValue>
+            <valueName>SOSÚA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>18</controllingFieldValue>
+            <valueName>VILLA ISABELA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>18</controllingFieldValue>
+            <valueName>VILLA MONTELLANO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>20</controllingFieldValue>
+            <valueName>LAS TERRENAS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>20</controllingFieldValue>
+            <valueName>SAMANÁ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>20</controllingFieldValue>
+            <valueName>SÁNCHEZ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>21</controllingFieldValue>
+            <valueName>BAJOS DE HAINA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>21</controllingFieldValue>
+            <valueName>CAMBITA GARABITOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>21</controllingFieldValue>
+            <valueName>LOS CACAOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>21</controllingFieldValue>
+            <valueName>SABANA GRANDE DE PALENQUE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>21</controllingFieldValue>
+            <valueName>SAN CRISTÓBAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>21</controllingFieldValue>
+            <valueName>SAN GREGORIO DE NIGUA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>21</controllingFieldValue>
+            <valueName>VILLA ALTAGRACIA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>21</controllingFieldValue>
+            <valueName>YAGUATE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>31</controllingFieldValue>
+            <valueName>RANCHO ARRIBA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>31</controllingFieldValue>
+            <valueName>SABANA LARGA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>31</controllingFieldValue>
+            <valueName>SAN JOSÉ DE OCOA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>22</controllingFieldValue>
+            <valueName>BOHECHÍO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>22</controllingFieldValue>
+            <valueName>EL CERCADO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>22</controllingFieldValue>
+            <valueName>JUAN DE HERRERA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>22</controllingFieldValue>
+            <valueName>LAS MATAS DE FARFÁN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>22</controllingFieldValue>
+            <valueName>SAN JUAN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>22</controllingFieldValue>
+            <valueName>VALLEJUELO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>23</controllingFieldValue>
+            <valueName>CONSUELO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>23</controllingFieldValue>
+            <valueName>GUAYACANES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>23</controllingFieldValue>
+            <valueName>LOS LLANOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>23</controllingFieldValue>
+            <valueName>QUISQUEYA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>23</controllingFieldValue>
+            <valueName>RAMÓN SANTANA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>23</controllingFieldValue>
+            <valueName>SAN PEDRO DE MACORÍS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>25</controllingFieldValue>
+            <valueName>BISONÓ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>25</controllingFieldValue>
+            <valueName>JÁNICO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>25</controllingFieldValue>
+            <valueName>LICEY AL MEDIO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>25</controllingFieldValue>
+            <valueName>PUÑAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>25</controllingFieldValue>
+            <valueName>SABANA IGLESIA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>25</controllingFieldValue>
+            <valueName>SAN JOSÉ DE LAS MATAS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>25</controllingFieldValue>
+            <valueName>SANTIAGO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>25</controllingFieldValue>
+            <valueName>TAMBORIL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>25</controllingFieldValue>
+            <valueName>VILLA GONZÁLEZ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>26</controllingFieldValue>
+            <valueName>MONCIÓN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>26</controllingFieldValue>
+            <valueName>SAN IGNACIO DE SABANETA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>26</controllingFieldValue>
+            <valueName>VILLA LOS ALMÁCIGOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>32</controllingFieldValue>
+            <valueName>BOCA CHICA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>32</controllingFieldValue>
+            <valueName>LOS ALCARRIZOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>32</controllingFieldValue>
+            <valueName>PEDRO BRAND</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>32</controllingFieldValue>
+            <valueName>SAN ANTONIO DE GUERRA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>32</controllingFieldValue>
+            <valueName>SANTO DOMINGO ESTE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>32</controllingFieldValue>
+            <valueName>SANTO DOMINGO NORTE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>32</controllingFieldValue>
+            <valueName>SANTO DOMINGO OESTE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>24</controllingFieldValue>
+            <valueName>CEVICOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>24</controllingFieldValue>
+            <valueName>COTUÍ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>24</controllingFieldValue>
+            <valueName>FANTINO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>24</controllingFieldValue>
+            <valueName>LA MATA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>30</controllingFieldValue>
+            <valueName>EL VALLE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>30</controllingFieldValue>
+            <valueName>HATO MAYOR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>30</controllingFieldValue>
+            <valueName>SABANA DE LA MAR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>27</controllingFieldValue>
+            <valueName>ESPERANZA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>27</controllingFieldValue>
+            <valueName>LAGUNA SALADA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>27</controllingFieldValue>
+            <valueName>MAO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>19</controllingFieldValue>
+            <valueName>SALCEDO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>19</controllingFieldValue>
+            <controllingFieldValue>29</controllingFieldValue>
+            <valueName>TENARES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>19</controllingFieldValue>
+            <valueName>VILLA TAPIA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>10</controllingFieldValue>
+            <valueName>CRISTÓBAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>10</controllingFieldValue>
+            <valueName>DUVERGÉ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>10</controllingFieldValue>
+            <valueName>JIMANÍ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>10</controllingFieldValue>
+            <valueName>LA DESCUBIERTA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>10</controllingFieldValue>
+            <valueName>MELLA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>10</controllingFieldValue>
+            <valueName>POSTRER RÍO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>11</controllingFieldValue>
+            <valueName>HIGÜEY</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>11</controllingFieldValue>
+            <valueName>SAN RAFAEL DEL YUMA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>12</controllingFieldValue>
+            <valueName>GUAYMATE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>12</controllingFieldValue>
+            <valueName>LA ROMANA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>12</controllingFieldValue>
+            <valueName>VILLA HERMOSA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>13</controllingFieldValue>
+            <valueName>CONSTANZA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>13</controllingFieldValue>
+            <valueName>JARABACOA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>13</controllingFieldValue>
+            <valueName>JIMA ABAJO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>13</controllingFieldValue>
+            <valueName>LA VEGA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>14</controllingFieldValue>
+            <valueName>CABRERA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>14</controllingFieldValue>
+            <valueName>EL FACTOR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>14</controllingFieldValue>
+            <valueName>NAGUA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>14</controllingFieldValue>
+            <valueName>RÍO SAN JUAN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>28</controllingFieldValue>
+            <valueName>BONAO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>28</controllingFieldValue>
+            <valueName>MAIMÓN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>28</controllingFieldValue>
+            <valueName>PIEDRA BLANCA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>15</controllingFieldValue>
+            <valueName>CASTAÑUELAS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>15</controllingFieldValue>
+            <valueName>GUAYUBÍN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>15</controllingFieldValue>
+            <valueName>LAS MATAS DE SANTA CRUZ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>15</controllingFieldValue>
+            <valueName>MONTE CRISTI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>15</controllingFieldValue>
+            <valueName>PEPILLO SALCEDO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>15</controllingFieldValue>
+            <valueName>VILLA VÁSQUEZ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>29</controllingFieldValue>
+            <valueName>BAYAGUANA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>29</controllingFieldValue>
+            <valueName>MONTE PLATA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>29</controllingFieldValue>
+            <valueName>PERALVILLO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>29</controllingFieldValue>
+            <valueName>SABANA GRANDE DE BOYÁ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>29</controllingFieldValue>
+            <valueName>YAMASÁ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>02</controllingFieldValue>
+            <valueName>AZUA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>02</controllingFieldValue>
+            <valueName>ESTEBANÍA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>02</controllingFieldValue>
+            <valueName>GUAYABAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>02</controllingFieldValue>
+            <valueName>LAS CHARCAS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>02</controllingFieldValue>
+            <valueName>LAS YAYAS DE VIAJAMA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>02</controllingFieldValue>
+            <valueName>PADRE LAS CASAS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>02</controllingFieldValue>
+            <valueName>PERALTA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>02</controllingFieldValue>
+            <valueName>PUEBLO VIEJO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>02</controllingFieldValue>
+            <valueName>SABANA YEGUA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>02</controllingFieldValue>
+            <valueName>TÁBARA ARRIBA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>03</controllingFieldValue>
+            <valueName>GALVÁN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>03</controllingFieldValue>
+            <valueName>LOS RÍOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>03</controllingFieldValue>
+            <valueName>NEIBA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>03</controllingFieldValue>
+            <valueName>TAMAYO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>03</controllingFieldValue>
+            <valueName>VILLA JARAGUA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>04</controllingFieldValue>
+            <valueName>BARAHONA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>04</controllingFieldValue>
+            <valueName>CABRAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>04</controllingFieldValue>
+            <valueName>EL PEÑÓN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>04</controllingFieldValue>
+            <valueName>ENRIQUILLO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>04</controllingFieldValue>
+            <valueName>FUNDACIÓN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>04</controllingFieldValue>
+            <valueName>LA CIÉNAGA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>04</controllingFieldValue>
+            <valueName>PARAÍSO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>04</controllingFieldValue>
+            <valueName>VICENTE NOBLE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>05</controllingFieldValue>
+            <valueName>DAJABÓN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>05</controllingFieldValue>
+            <valueName>EL PINO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>05</controllingFieldValue>
+            <valueName>LOMA DE CABRERA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>05</controllingFieldValue>
+            <valueName>PARTIDO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>05</controllingFieldValue>
+            <valueName>RESTAURACIÓN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>01</controllingFieldValue>
+            <valueName>SANTO DOMINGO DE GUZMÁN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>06</controllingFieldValue>
+            <valueName>ARENOSO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>06</controllingFieldValue>
+            <valueName>CASTILLO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>06</controllingFieldValue>
+            <valueName>EUGENIO MARÍA DE HOSTOS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>06</controllingFieldValue>
+            <valueName>LAS GUÁRANAS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>06</controllingFieldValue>
+            <valueName>PIMENTEL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>06</controllingFieldValue>
+            <valueName>SAN FRANCISCO DE MACORÍS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>06</controllingFieldValue>
+            <valueName>VILLA RIVA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>08</controllingFieldValue>
+            <valueName>EL SEIBO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>08</controllingFieldValue>
+            <valueName>MICHES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>07</controllingFieldValue>
+            <valueName>BÁNICA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>07</controllingFieldValue>
+            <valueName>COMENDADOR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>07</controllingFieldValue>
+            <valueName>EL LLANO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>07</controllingFieldValue>
+            <valueName>HONDO VALLE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>07</controllingFieldValue>
+            <valueName>JUAN SANTIAGO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>07</controllingFieldValue>
+            <valueName>PEDRO SANTANA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>09</controllingFieldValue>
+            <valueName>CAYETANO GERMOSÉN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>09</controllingFieldValue>
+            <valueName>GASPAR HERNÁNDEZ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>09</controllingFieldValue>
+            <valueName>JAMAO AL NORTE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>09</controllingFieldValue>
+            <valueName>MOCA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>16</controllingFieldValue>
+            <valueName>OVIEDO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>16</controllingFieldValue>
+            <valueName>PEDERNALES</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>17</controllingFieldValue>
+            <valueName>BANÍ</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>17</controllingFieldValue>
+            <valueName>NIZAO</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

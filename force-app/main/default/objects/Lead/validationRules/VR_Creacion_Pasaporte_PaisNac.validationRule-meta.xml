@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Creacion_Pasaporte_PaisNac</fullName>
+    <active>true</active>
+    <description>Validación para comprobar que se completaa:- País de nacimiento</description>
+    <errorConditionFormula>AND (
+ISPICKVAL(Status, &apos;Validado&apos;),
+RecordType.DeveloperName=&apos;Candidato_Persona_Natural&apos;,
+ISPICKVAL(LEA_TipoIdentificacion__c , &apos;Pasaporte&apos;),
+OR(
+ISBLANK(TEXT(LEA_Pais_Nacimiento__c))
+)
+)</errorConditionFormula>
+    <errorMessage>Debe informar el campo &apos;País de nacimiento&apos;</errorMessage>
+</ValidationRule>

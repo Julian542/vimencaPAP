@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Validacion_PEP__c</fullName>
+    <description>Validación de PEP</description>
+    <externalId>false</externalId>
+    <formula>IF(
+  ISBLANK(TEXT(LEA_Persona_PEP__c)),
+  &quot;&quot;,
+  IF(
+    TEXT(LEA_Persona_PEP__c) = &quot;NO&quot;,
+    &quot;true&quot;,
+    IF(
+      AND(
+        NOT(ISBLANK(LEA_N_Identificacion_PEP__c)),
+        NOT(ISBLANK(TEXT(LEA_Tipo_Identif_PEP__c))),
+        NOT(ISBLANK(LEA_Direccion_Trabajo_PEP__c)),
+        NOT(ISBLANK(LEA_Fecha_Decreto_PEP__c)),
+        NOT(ISBLANK(TEXT(LEA_Institucion_Trabajo_PEP__c))),
+        NOT(ISBLANK(TEXT(LEA_Nacionalidad_PEP__c))),
+        NOT(ISBLANK(LEA_N_Decreto_PEP__c)),
+        NOT(ISBLANK(TEXT(LEA_Ocupacion_PEP__c))),
+        NOT(ISBLANK(LEA_Primer_Apellido_PEP__c)),
+        NOT(ISBLANK(LEA_Segundo_Apellido_PEP__c)),
+        NOT(ISBLANK(LEA_Primer_Nombre_PEP__c)),
+        NOT(ISBLANK(LEA_Segundo_Nombre_PEP__c)),
+        NOT(ISBLANK(LEA_Puesto_Cargo_PEP__c)),
+        NOT(ISBLANK(TEXT(LEA_Tipo_Relacion_PEP__c)))
+      ),
+      &quot;true&quot;,
+      &quot;false&quot;
+    )
+  )
+)</formula>
+    <label>LEA_Validacion_PEP</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

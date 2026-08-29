@@ -1,0 +1,1560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Institucion_Trabajo_PEP__c</fullName>
+    <description>Migrado del Account</description>
+    <label>Institución de trabajo</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ACUARIO NACIONAL (ACUARIO)</fullName>
+                <default>false</default>
+                <label>ACUARIO NACIONAL (ACUARIO)</label>
+            </value>
+            <value>
+                <fullName>ARCHIVO GENERAL DE LA NACIÓN (AGN)</fullName>
+                <default>false</default>
+                <label>ARCHIVO GENERAL DE LA NACIÓN (AGN)</label>
+            </value>
+            <value>
+                <fullName>AUTORIDAD METROPOLITANA DE TRANSPORTE DE</fullName>
+                <default>false</default>
+                <label>AUTORIDAD METROPOLITANA DE TRANSPORTE DE</label>
+            </value>
+            <value>
+                <fullName>AUTORIDAD METROPOLITANA DE TRANSPORTE (A</fullName>
+                <default>false</default>
+                <label>AUTORIDAD METROPOLITANA DE TRANSPORTE (A</label>
+            </value>
+            <value>
+                <fullName>AUTORIDAD PORTUARIA DOMINICANA (APORDOM)</fullName>
+                <default>false</default>
+                <label>AUTORIDAD PORTUARIA DOMINICANA (APORDOM)</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE ALTAMIRA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE ALTAMIRA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE ARENOSO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE ARENOSO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE AZUA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE AZUA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE BAJOS DE HAINA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE BAJOS DE HAINA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE BANICA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE BANICA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE BANÍ</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE BANÍ</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE BAYAGUANA, MONTE PLATA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE BAYAGUANA, MONTE PLATA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE BOCA CHICA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE BOCA CHICA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE BOHECHÍO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE BOHECHÍO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE BONAO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE BONAO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE CABRAL</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE CABRAL</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE CABRERA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE CABRERA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE CAMBITA GARABITOS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE CAMBITA GARABITOS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE CASTAÑUELA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE CASTAÑUELA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE CASTILLO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE CASTILLO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE CAYETANO GERMOSEN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE CAYETANO GERMOSEN</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE CEVICOS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE CEVICOS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE COMENDADOR</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE COMENDADOR</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE CONCEPCIÓN DE LA VEGA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE CONCEPCIÓN DE LA VEGA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE CONSTANZA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE CONSTANZA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE CONSUELO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE CONSUELO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE COTUÍ</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE COTUÍ</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE CRISTÓBAL</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE CRISTÓBAL</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE DAJABÓN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE DAJABÓN</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE DE GUAYUBIN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE DE GUAYUBIN</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE DUVERGÉ</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE DUVERGÉ</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE EL CERCADO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE EL CERCADO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE EL COMENDADOR</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE EL COMENDADOR</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE EL FACTOR</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE EL FACTOR</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE EL LLANO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE EL LLANO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE EL PEÑÓN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE EL PEÑÓN</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE EL PINO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE EL PINO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE EL VALLE</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE EL VALLE</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE ENRIQUILLO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE ENRIQUILLO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE ESPERANZA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE ESPERANZA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE ESTEBANÍA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE ESTEBANÍA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE EUGENIO MARÍA DE HOSTOS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE EUGENIO MARÍA DE HOSTOS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE FANTINO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE FANTINO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE FUNDACIÓN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE FUNDACIÓN</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE GALVÁN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE GALVÁN</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE GASPAR HERNÁNDEZ</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE GASPAR HERNÁNDEZ</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE GUANANICO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE GUANANICO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE GUAYABAL</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE GUAYABAL</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE GUAYACANES</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE GUAYACANES</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE GUAYMATE</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE GUAYMATE</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE GUAYUBÍN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE GUAYUBÍN</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE GUERRA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE GUERRA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE HATO MAYOR DEL REY</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE HATO MAYOR DEL REY</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE HONDO VALLE</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE HONDO VALLE</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE IMBERT</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE IMBERT</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE JAIBA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE JAIBA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE JAMAO AL NORTE</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE JAMAO AL NORTE</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE JAQUIMEYES</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE JAQUIMEYES</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE JARABACOA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE JARABACOA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE JIMA ABAJO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE JIMA ABAJO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE JIMANÍ</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE JIMANÍ</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE JUAN DE HERRERA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE JUAN DE HERRERA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE JUAN SANTIAGO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE JUAN SANTIAGO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE JÁNICO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE JÁNICO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LA CIÉNAGA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LA CIÉNAGA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LA DESCUBIERTA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LA DESCUBIERTA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LA ROMANA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LA ROMANA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LAGUNA SALADA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LAGUNA SALADA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LAS CHARCAS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LAS CHARCAS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LAS GUÁRANAS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LAS GUÁRANAS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LAS MATAS DE FARFÁN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LAS MATAS DE FARFÁN</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LAS MATAS DE SANTA CRUZ</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LAS MATAS DE SANTA CRUZ</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LAS SALINAS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LAS SALINAS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LAS TERRENAS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LAS TERRENAS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LAS YAYAS DE VIAJAMA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LAS YAYAS DE VIAJAMA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LICEY AL MEDIO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LICEY AL MEDIO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LOMA DE CABRERA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LOMA DE CABRERA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LOS ALCARRIZOS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LOS ALCARRIZOS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LOS CACAOS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LOS CACAOS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LOS HIDALGOS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LOS HIDALGOS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LOS LLANOS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LOS LLANOS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LOS RÍOS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LOS RÍOS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE LUPERÓN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE LUPERÓN</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE MAIMÓN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE MAIMÓN</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE MAO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE MAO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE MATAS DE FARFÁN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE MATAS DE FARFÁN</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE MELLA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE MELLA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE MICHES</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE MICHES</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE MOCA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE MOCA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE MONCIÓN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE MONCIÓN</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE MONSEÑOR NOUEL (BONAO)</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE MONSEÑOR NOUEL (BONAO)</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE MONTE PLATA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE MONTE PLATA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE NAGUA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE NAGUA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE NEIBA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE NEIBA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE NIZAO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE NIZAO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE OVIEDO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE OVIEDO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE PADRE LAS CASAS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE PADRE LAS CASAS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE PARAÍSO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE PARAÍSO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE PARTIDO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE PARTIDO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE PEDERNALES</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE PEDERNALES</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE PEDRO BRAND</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE PEDRO BRAND</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE PEDRO SANTANA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE PEDRO SANTANA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE PEPILLO SALCEDO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE PEPILLO SALCEDO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE PERALTA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE PERALTA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE PERALVILLO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE PERALVILLO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE PIEDRA BLANCA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE PIEDRA BLANCA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE PIMENTEL</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE PIMENTEL</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE POLO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE POLO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE POSTRER RÍO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE POSTRER RÍO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE PUEBLO VIEJO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE PUEBLO VIEJO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE PUÑAL</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE PUÑAL</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE QUISQUEYA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE QUISQUEYA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE RAMÓN SANTANA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE RAMÓN SANTANA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE RANCHO ARRIBA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE RANCHO ARRIBA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE RESTAURACIÓN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE RESTAURACIÓN</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE RÍO SAN JUAN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE RÍO SAN JUAN</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SABANA DE LA MAR</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SABANA DE LA MAR</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SABANA GRANDE DE BOYÁ</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SABANA GRANDE DE BOYÁ</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SABANA GRANDE DE PALENQUE</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SABANA GRANDE DE PALENQUE</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SABANA IGLESIA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SABANA IGLESIA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SABANA LARGA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SABANA LARGA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SABANA YEGUA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SABANA YEGUA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SALCEDO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SALCEDO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SALINAS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SALINAS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SALVALEÓN DE HIGÜEY</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SALVALEÓN DE HIGÜEY</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAMANÁ</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAMANÁ</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN CRISTÓBAL</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN CRISTÓBAL</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN FELIPE DE PUERTO PLATA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN FELIPE DE PUERTO PLATA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN FERNANDO DE MONTECRISTI</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN FERNANDO DE MONTECRISTI</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN FRANCISCO DE BÁNICA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN FRANCISCO DE BÁNICA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN FRANCISCO DE MACORÍS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN FRANCISCO DE MACORÍS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN GREGORIO DE NIGUA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN GREGORIO DE NIGUA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN GREGORIO DE YAGUATE</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN GREGORIO DE YAGUATE</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN IGNACIO DE SABANETA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN IGNACIO DE SABANETA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN JOSÉ DE LAS MATAS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN JOSÉ DE LAS MATAS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN JOSÉ DE LOS LLANOS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN JOSÉ DE LOS LLANOS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN JOSÉ DE OCOA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN JOSÉ DE OCOA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN JUAN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN JUAN</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN JUAN DE LA MAGUANA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN JUAN DE LA MAGUANA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN LUIS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN LUIS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN PEDRO DE MACORÍS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN PEDRO DE MACORÍS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN PEDRO MACORÍS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN PEDRO MACORÍS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SAN RAFAEL DEL YUMA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SAN RAFAEL DEL YUMA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SANTA BÁRBARA DE SAMANÁ</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SANTA BÁRBARA DE SAMANÁ</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SANTA CRUZ DE BARAHONA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SANTA CRUZ DE BARAHONA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SANTA CRUZ DE EL SEIBO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SANTA CRUZ DE EL SEIBO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SANTA CRUZ DE MAO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SANTA CRUZ DE MAO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SANTIAGO DE LOS CABALLEROS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SANTIAGO DE LOS CABALLEROS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SANTIAGO DE LOS TREINTA CABALLEROS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SANTIAGO DE LOS TREINTA CABALLEROS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SANTO DOMINGO DE GUZMÁN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SANTO DOMINGO DE GUZMÁN</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SANTO DOMINGO ESTE</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SANTO DOMINGO ESTE</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SANTO DOMINGO NORTE</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SANTO DOMINGO NORTE</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SANTO DOMINGO OESTE</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SANTO DOMINGO OESTE</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SOSÚA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SOSÚA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE SÁNCHEZ</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE SÁNCHEZ</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE TAMAYO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE TAMAYO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE TAMBORÍL</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE TAMBORÍL</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE TENARES</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE TENARES</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE TÁBARA ARRIBA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE TÁBARA ARRIBA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE TÁVARA ARRIBA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE TÁVARA ARRIBA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE VALLEJUELO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE VALLEJUELO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE VICENTE NOBLE</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE VICENTE NOBLE</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE VILLA ALTAGRACIA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE VILLA ALTAGRACIA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE VILLA BISONÓ</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE VILLA BISONÓ</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE VILLA GONZÁLEZ</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE VILLA GONZÁLEZ</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE VILLA HERMOSA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE VILLA HERMOSA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE VILLA ISABELA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE VILLA ISABELA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE VILLA JARAGUA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE VILLA JARAGUA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE VILLA LA MATA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE VILLA LA MATA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE VILLA LOS ALMÁCIGOS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE VILLA LOS ALMÁCIGOS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE VILLA MONTE LLANO</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE VILLA MONTE LLANO</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE VILLA RIVA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE VILLA RIVA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE VILLA TAPIA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE VILLA TAPIA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE VILLA VÁSQUEZ</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE VILLA VÁSQUEZ</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DE YAMASA</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DE YAMASA</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO DEL DISTRITO NACIONAL (ADN)</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO DEL DISTRITO NACIONAL (ADN)</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO ELÍAS PIÑAS</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO ELÍAS PIÑAS</label>
+            </value>
+            <value>
+                <fullName>AYUNTAMIENTO LAS MATAS DE FARFÁN</fullName>
+                <default>false</default>
+                <label>AYUNTAMIENTO LAS MATAS DE FARFÁN</label>
+            </value>
+            <value>
+                <fullName>BANCO CENTRAL DE LA REPÚBLICA DOMINICANA</fullName>
+                <default>false</default>
+                <label>BANCO CENTRAL DE LA REPÚBLICA DOMINICANA</label>
+            </value>
+            <value>
+                <fullName>BANCO DE RESERVAS DE LA REPÚBLICA DOMIN</fullName>
+                <default>false</default>
+                <label>BANCO DE RESERVAS DE LA REPÚBLICA DOMIN</label>
+            </value>
+            <value>
+                <fullName>BIBLIOTECA DE LA REPÚBLICA DOMINICANA</fullName>
+                <default>false</default>
+                <label>BIBLIOTECA DE LA REPÚBLICA DOMINICANA</label>
+            </value>
+            <value>
+                <fullName>CAJA DE AHORROS PARA OBREROS Y MONTE DE</fullName>
+                <default>false</default>
+                <label>CAJA DE AHORROS PARA OBREROS Y MONTE DE</label>
+            </value>
+            <value>
+                <fullName>CAMARA DE CUENTA DE LA REPÚBLICA DOMINIC</fullName>
+                <default>false</default>
+                <label>CAMARA DE CUENTA DE LA REPÚBLICA DOMINIC</label>
+            </value>
+            <value>
+                <fullName>CAMARA DE DIPUTADOS</fullName>
+                <default>false</default>
+                <label>CAMARA DE DIPUTADOS</label>
+            </value>
+            <value>
+                <fullName>CAMARA DE SENADORES</fullName>
+                <default>false</default>
+                <label>CAMARA DE SENADORES</label>
+            </value>
+            <value>
+                <fullName>CENTRO DE INFORMACIÓN GUBERNAMENTAL (CIG</fullName>
+                <default>false</default>
+                <label>CENTRO DE INFORMACIÓN GUBERNAMENTAL (CIG</label>
+            </value>
+            <value>
+                <fullName>COMITÉ CENTRAL DEL PARTIDO DE LA LIBERAC</fullName>
+                <default>false</default>
+                <label>COMITÉ CENTRAL DEL PARTIDO DE LA LIBERAC</label>
+            </value>
+            <value>
+                <fullName>CONSULADO DOMINICANO DE ARGENTINA</fullName>
+                <default>false</default>
+                <label>CONSULADO DOMINICANO DE ARGENTINA</label>
+            </value>
+            <value>
+                <fullName>CONSULADO DOMINICANO DE PANAMA</fullName>
+                <default>false</default>
+                <label>CONSULADO DOMINICANO DE PANAMA</label>
+            </value>
+            <value>
+                <fullName>CONSULADO DOMINICANO EN CHILE</fullName>
+                <default>false</default>
+                <label>CONSULADO DOMINICANO EN CHILE</label>
+            </value>
+            <value>
+                <fullName>CONSULADO DOMINICANO EN COLOMBIA</fullName>
+                <default>false</default>
+                <label>CONSULADO DOMINICANO EN COLOMBIA</label>
+            </value>
+            <value>
+                <fullName>CONSULADO DOMINICANO EN COREA DEL SUR</fullName>
+                <default>false</default>
+                <label>CONSULADO DOMINICANO EN COREA DEL SUR</label>
+            </value>
+            <value>
+                <fullName>CONSULADO DOMINICANO EN EE. UU.</fullName>
+                <default>false</default>
+                <label>CONSULADO DOMINICANO EN EE. UU.</label>
+            </value>
+            <value>
+                <fullName>CONSULADO DOMINICANO EN FRANCIA</fullName>
+                <default>false</default>
+                <label>CONSULADO DOMINICANO EN FRANCIA</label>
+            </value>
+            <value>
+                <fullName>CONSULADO DOMINICANO EN ITALIA</fullName>
+                <default>false</default>
+                <label>CONSULADO DOMINICANO EN ITALIA</label>
+            </value>
+            <value>
+                <fullName>CONSULADO DOMINICANO EN MONTREAL, CANADA</fullName>
+                <default>false</default>
+                <label>CONSULADO DOMINICANO EN MONTREAL, CANADA</label>
+            </value>
+            <value>
+                <fullName>CONSULADO DOMINICANO EN MÉXICO</fullName>
+                <default>false</default>
+                <label>CONSULADO DOMINICANO EN MÉXICO</label>
+            </value>
+            <value>
+                <fullName>CONSULADO DOMINICANO EN PUERTO PRINCIPE</fullName>
+                <default>false</default>
+                <label>CONSULADO DOMINICANO EN PUERTO PRINCIPE</label>
+            </value>
+            <value>
+                <fullName>CONSULADO DOMINICANO EN TORONTO, CANADA</fullName>
+                <default>false</default>
+                <label>CONSULADO DOMINICANO EN TORONTO, CANADA</label>
+            </value>
+            <value>
+                <fullName>CONSULADO DOMINICANO EN VANCOUVER, CANADA</fullName>
+                <default>false</default>
+                <label>CONSULADO DOMINICANO EN VANCOUVER, CANADA</label>
+            </value>
+            <value>
+                <fullName>CONSULADO DOMINICANO EN ZURICH, SUIZA</fullName>
+                <default>false</default>
+                <label>CONSULADO DOMINICANO EN ZURICH, SUIZA</label>
+            </value>
+            <value>
+                <fullName>CONSULTORÍA JURÍDICA DEL PODER EJECUTIVO</fullName>
+                <default>false</default>
+                <label>CONSULTORÍA JURÍDICA DEL PODER EJECUTIVO</label>
+            </value>
+            <value>
+                <fullName>CONTRALORÍA GENERAL DE LA REPÚBLICA (CGR</fullName>
+                <default>false</default>
+                <label>CONTRALORÍA GENERAL DE LA REPÚBLICA (CGR</label>
+            </value>
+            <value>
+                <fullName>CORPORACIÓN DE ACUEDUCTO Y ALCANTARILLAD</fullName>
+                <default>false</default>
+                <label>CORPORACIÓN DE ACUEDUCTO Y ALCANTARILLAD</label>
+            </value>
+            <value>
+                <fullName>CORPORACIÓN DOMINICANA DE EMPRESAS ELECT</fullName>
+                <default>false</default>
+                <label>CORPORACIÓN DOMINICANA DE EMPRESAS ELECT</label>
+            </value>
+            <value>
+                <fullName>CORPORACIÓN ESTATAL DE RADIO Y TELEVISIO</fullName>
+                <default>false</default>
+                <label>CORPORACIÓN ESTATAL DE RADIO Y TELEVISIO</label>
+            </value>
+            <value>
+                <fullName>CRUZ ROJA DOMINICANA (CRD)</fullName>
+                <default>false</default>
+                <label>CRUZ ROJA DOMINICANA (CRD)</label>
+            </value>
+            <value>
+                <fullName>DESPACHO DE LA PRIMERA DAMA DE LA REPÚBL</fullName>
+                <default>false</default>
+                <label>DESPACHO DE LA PRIMERA DAMA DE LA REPÚBL</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN DE FOMENTO Y DESARROLLO DE LA</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN DE FOMENTO Y DESARROLLO DE LA</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN DE INFORMACIÓN Y DEFENSA DE LO</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN DE INFORMACIÓN Y DEFENSA DE LO</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN DE INFORMACIÓN, ANÁLISIS Y PRO</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN DE INFORMACIÓN, ANÁLISIS Y PRO</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE ADUANAS (DGA)</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE ADUANAS (DGA)</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE BELLAS ARTES</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE BELLAS ARTES</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE BIENES NACIONALES</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE BIENES NACIONALES</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE CATASTRO NACIONAL</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE CATASTRO NACIONAL</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE CONTABILIDAD GUBERN</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE CONTABILIDAD GUBERN</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE CONTRATACIONES PÚBL</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE CONTRATACIONES PÚBL</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE CONTROL, MANTENIMIE</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE CONTROL, MANTENIMIE</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE GANADERÍA (DGG)</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE GANADERÍA (DGG)</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE IMPUESTOS INTERNOS</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE IMPUESTOS INTERNOS</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE INFORMACIÓN, PÚBLIC</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE INFORMACIÓN, PÚBLIC</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE JUBILACIONES Y PENS</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE JUBILACIONES Y PENS</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE MIGRACIÓN (DGM)</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE MIGRACIÓN (DGM)</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE MINERÍA (DGM)</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE MINERÍA (DGM)</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE MUSEOS</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE MUSEOS</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE NORMAS Y SISTEMAS D</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE NORMAS Y SISTEMAS D</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE PASAPORTES (DGP)</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE PASAPORTES (DGP)</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE PLANIFICACIÓN Y PRO</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE PLANIFICACIÓN Y PRO</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE PLANIFICACIÓN Y DES</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE PLANIFICACIÓN Y DES</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE PRESUPUESTO (DIGEPR</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE PRESUPUESTO (DIGEPR</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN GENERAL DE PRISIONES (DIGEPRI)</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN GENERAL DE PRISIONES (DIGEPRI)</label>
+            </value>
+            <value>
+                <fullName>DIRECCIÓN NACIONAL DE CONTROL DE DROGAS</fullName>
+                <default>false</default>
+                <label>DIRECCIÓN NACIONAL DE CONTROL DE DROGAS</label>
+            </value>
+            <value>
+                <fullName>FUERZA AÉREA DOMINICANA</fullName>
+                <default>false</default>
+                <label>FUERZA AÉREA DOMINICANA</label>
+            </value>
+            <value>
+                <fullName>GOBERNACIÓN DE LA PROVINCIA SANTO DOMING</fullName>
+                <default>false</default>
+                <label>GOBERNACIÓN DE LA PROVINCIA SANTO DOMING</label>
+            </value>
+            <value>
+                <fullName>HOSPITAL CENTRAL DE LAS FUERZAS ARMADAS</fullName>
+                <default>false</default>
+                <label>HOSPITAL CENTRAL DE LAS FUERZAS ARMADAS</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO AGRARIO DOMINICANO (IAD)</fullName>
+                <default>false</default>
+                <label>INSTITUTO AGRARIO DOMINICANO (IAD)</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO AZUCARERO DOMINICANO (INAZUCAR</fullName>
+                <default>false</default>
+                <label>INSTITUTO AZUCARERO DOMINICANO (INAZUCAR</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO CARTOGROFICO MILITAR (ICM)</fullName>
+                <default>false</default>
+                <label>INSTITUTO CARTOGROFICO MILITAR (ICM)</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO DE AUXILIOS Y VIVIENDAS (INAVI</fullName>
+                <default>false</default>
+                <label>INSTITUTO DE AUXILIOS Y VIVIENDAS (INAVI</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO DE FORMACIÓN TÉCNICO PROFESION</fullName>
+                <default>false</default>
+                <label>INSTITUTO DE FORMACIÓN TÉCNICO PROFESION</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO DE INNOVACIÓN EN BIOTECNOLOGÍA</fullName>
+                <default>false</default>
+                <label>INSTITUTO DE INNOVACIÓN EN BIOTECNOLOGÍA</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO DEL TABACO DE LA REPÚBLICA DOM</fullName>
+                <default>false</default>
+                <label>INSTITUTO DEL TABACO DE LA REPÚBLICA DOM</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO DOMINICANO DE AVIACIÓN CIVIL</fullName>
+                <default>false</default>
+                <label>INSTITUTO DOMINICANO DE AVIACIÓN CIVIL</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO DOMINICANO DE INVESTIGACIONES</fullName>
+                <default>false</default>
+                <label>INSTITUTO DOMINICANO DE INVESTIGACIONES</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO DOMINICANO DE SEGUROS SOCIALES</fullName>
+                <default>false</default>
+                <label>INSTITUTO DOMINICANO DE SEGUROS SOCIALES</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO DOMINICANO DE TELECOMUNICACIÓN</fullName>
+                <default>false</default>
+                <label>INSTITUTO DOMINICANO DE TELECOMUNICACIÓN</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO NACIONAL DE ADMINISTRACIÓN PUB</fullName>
+                <default>false</default>
+                <label>INSTITUTO NACIONAL DE ADMINISTRACIÓN PUB</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO NACIONAL DE AGUAS POTABLES Y A</fullName>
+                <default>false</default>
+                <label>INSTITUTO NACIONAL DE AGUAS POTABLES Y A</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO NACIONAL DE ESTABILIZACIÓN DE</fullName>
+                <default>false</default>
+                <label>INSTITUTO NACIONAL DE ESTABILIZACIÓN DE</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO NACIONAL DE LA VIVIENDA (INVI)</fullName>
+                <default>false</default>
+                <label>INSTITUTO NACIONAL DE LA VIVIENDA (INVI)</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO NACIONAL DE PROTECCIÓN DE LOS</fullName>
+                <default>false</default>
+                <label>INSTITUTO NACIONAL DE PROTECCIÓN DE LOS</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO NACIONAL DE RECURSOS HIDRÁULIC</fullName>
+                <default>false</default>
+                <label>INSTITUTO NACIONAL DE RECURSOS HIDRÁULIC</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO POSTAL DOMINICANO (INPOSDOM)</fullName>
+                <default>false</default>
+                <label>INSTITUTO POSTAL DOMINICANO (INPOSDOM)</label>
+            </value>
+            <value>
+                <fullName>INSTITUTO TECNOLÓGICO DE LAS AMÉRICAS (I</fullName>
+                <default>false</default>
+                <label>INSTITUTO TECNOLÓGICO DE LAS AMÉRICAS (I</label>
+            </value>
+            <value>
+                <fullName>JARDÍN BOTÁNICO NACIONAL</fullName>
+                <default>false</default>
+                <label>JARDÍN BOTÁNICO NACIONAL</label>
+            </value>
+            <value>
+                <fullName>JUNTA CENTRAL ELECTORAL</fullName>
+                <default>false</default>
+                <label>JUNTA CENTRAL ELECTORAL</label>
+            </value>
+            <value>
+                <fullName>LOTERIA NACIONAL</fullName>
+                <default>false</default>
+                <label>LOTERIA NACIONAL</label>
+            </value>
+            <value>
+                <fullName>MARINA DE DE GUERRA</fullName>
+                <default>false</default>
+                <label>MARINA DE DE GUERRA</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE ADMINISTRACIÓN PÚBLICA (MA</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE ADMINISTRACIÓN PÚBLICA (MA</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE AGRICULTURA ((ANTIGUO SEA)</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE AGRICULTURA ((ANTIGUO SEA)</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE CULTURA ((ANTIGUO SEC))</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE CULTURA ((ANTIGUO SEC))</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE DEPORTES Y RECREACION ((AN</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE DEPORTES Y RECREACION ((AN</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE ECONOMÍA, PLANIFICACIÓN Y</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE ECONOMÍA, PLANIFICACIÓN Y</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE EDUCACIÓN ((ANTIGUO SEE))</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE EDUCACIÓN ((ANTIGUO SEE))</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE EDUCACIÓN SUPERIOR, CIENCI</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE EDUCACIÓN SUPERIOR, CIENCI</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE HACIENDA ((ANTIGUO SEH))</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE HACIENDA ((ANTIGUO SEH))</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE INDUSTRIA Y COMERCIO ((ANT</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE INDUSTRIA Y COMERCIO ((ANT</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE INTERIOR Y POLICÍA ((ANTIG</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE INTERIOR Y POLICÍA ((ANTIG</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE LA JUVENTUD ((ANTIGUO SEJ)</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE LA JUVENTUD ((ANTIGUO SEJ)</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE LA MUJER ((ANTIGUO SEM))</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE LA MUJER ((ANTIGUO SEM))</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE LA PRESIDENCIA ((ANTIGUO S</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE LA PRESIDENCIA ((ANTIGUO S</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE LAS FUERZAS ARMADAS</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE LAS FUERZAS ARMADAS</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE MEDIO AMBIENTE Y RECURSOS</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE MEDIO AMBIENTE Y RECURSOS</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE OBRAS PÚBLICAS Y COMUNICAC</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE OBRAS PÚBLICAS Y COMUNICAC</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE RELACIONES EXTERIORES ((AN</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE RELACIONES EXTERIORES ((AN</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE SALUD PÚBLICA Y ASISTENCIA</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE SALUD PÚBLICA Y ASISTENCIA</label>
+            </value>
+            <value>
+                <fullName>MINISTERIO DE TURISMO ((ANTIGUO SETUR))</fullName>
+                <default>false</default>
+                <label>MINISTERIO DE TURISMO ((ANTIGUO SETUR))</label>
+            </value>
+            <value>
+                <fullName>MUSEO NACIONAL DE HISTORIA NATURAL (MNHN</fullName>
+                <default>false</default>
+                <label>MUSEO NACIONAL DE HISTORIA NATURAL (MNHN</label>
+            </value>
+            <value>
+                <fullName>NO DEFINIDO</fullName>
+                <default>false</default>
+                <label>NO DEFINIDO</label>
+            </value>
+            <value>
+                <fullName>OFICINA DE INGENIEROS SUPERVISORES DE OB</fullName>
+                <default>false</default>
+                <label>OFICINA DE INGENIEROS SUPERVISORES DE OB</label>
+            </value>
+            <value>
+                <fullName>OFICINA DE LA DEFENSA CIVIL (ODC)</fullName>
+                <default>false</default>
+                <label>OFICINA DE LA DEFENSA CIVIL (ODC)</label>
+            </value>
+            <value>
+                <fullName>OFICINA DEL JEFE DE ESTADO MAYOR EJÉRCIT</fullName>
+                <default>false</default>
+                <label>OFICINA DEL JEFE DE ESTADO MAYOR EJÉRCIT</label>
+            </value>
+            <value>
+                <fullName>OFICINA DEL ORDENADOR NACIONAL PARA LOS</fullName>
+                <default>false</default>
+                <label>OFICINA DEL ORDENADOR NACIONAL PARA LOS</label>
+            </value>
+            <value>
+                <fullName>OFICINA METROPOLITANA DE SERVICIOS DE AU</fullName>
+                <default>false</default>
+                <label>OFICINA METROPOLITANA DE SERVICIOS DE AU</label>
+            </value>
+            <value>
+                <fullName>OFICINA NACIONAL DE DERECHO DE AUTOR (ON</fullName>
+                <default>false</default>
+                <label>OFICINA NACIONAL DE DERECHO DE AUTOR (ON</label>
+            </value>
+            <value>
+                <fullName>OFICINA NACIONAL DE ESTADÍSTICA (ONE)</fullName>
+                <default>false</default>
+                <label>OFICINA NACIONAL DE ESTADÍSTICA (ONE)</label>
+            </value>
+            <value>
+                <fullName>OFICINA NACIONAL DE EVALUACIÓN SÍSMICA Y</fullName>
+                <default>false</default>
+                <label>OFICINA NACIONAL DE EVALUACIÓN SÍSMICA Y</label>
+            </value>
+            <value>
+                <fullName>OFICINA NACIONAL DE LA PROPIEDAD INDUSTR</fullName>
+                <default>false</default>
+                <label>OFICINA NACIONAL DE LA PROPIEDAD INDUSTR</label>
+            </value>
+            <value>
+                <fullName>OFICINA PARA EL REORDENAMIENTO DEL TRANS</fullName>
+                <default>false</default>
+                <label>OFICINA PARA EL REORDENAMIENTO DEL TRANS</label>
+            </value>
+            <value>
+                <fullName>OFICINA PRESIDENCIAL DE TECNOLOGÍAS DE L</fullName>
+                <default>false</default>
+                <label>OFICINA PRESIDENCIAL DE TECNOLOGÍAS DE L</label>
+            </value>
+            <value>
+                <fullName>OFICINA TÉCNICA DE TRANSPORTE TERRESTRE</fullName>
+                <default>false</default>
+                <label>OFICINA TÉCNICA DE TRANSPORTE TERRESTRE</label>
+            </value>
+            <value>
+                <fullName>PARTIDO ALIANZA POR LA DEMOCRACIA</fullName>
+                <default>false</default>
+                <label>PARTIDO ALIANZA POR LA DEMOCRACIA</label>
+            </value>
+            <value>
+                <fullName>PARTIDO BLOQUE INSTITUCIONAL SOCIAL DEM</fullName>
+                <default>false</default>
+                <label>PARTIDO BLOQUE INSTITUCIONAL SOCIAL DEM</label>
+            </value>
+            <value>
+                <fullName>PARTIDO DE LA LIBERACIÓN DOMINICANA(PLD)</fullName>
+                <default>false</default>
+                <label>PARTIDO DE LA LIBERACIÓN DOMINICANA(PLD)</label>
+            </value>
+            <value>
+                <fullName>PARTIDO QUISQUEYANO DEMOCRATA (PQD)</fullName>
+                <default>false</default>
+                <label>PARTIDO QUISQUEYANO DEMOCRATA (PQD)</label>
+            </value>
+            <value>
+                <fullName>PARTIDO REFORMISTA SOCIAL CRISTIANO</fullName>
+                <default>false</default>
+                <label>PARTIDO REFORMISTA SOCIAL CRISTIANO</label>
+            </value>
+            <value>
+                <fullName>PARTIDO REVOLUCIONARIO DOMINICANO (PRD)</fullName>
+                <default>false</default>
+                <label>PARTIDO REVOLUCIONARIO DOMINICANO (PRD)</label>
+            </value>
+            <value>
+                <fullName>POLICÍA NACIONAL</fullName>
+                <default>false</default>
+                <label>POLICÍA NACIONAL</label>
+            </value>
+            <value>
+                <fullName>PONTIFICIA UNIVERSIDAD CATÓLICA MADRE Y</fullName>
+                <default>false</default>
+                <label>PONTIFICIA UNIVERSIDAD CATÓLICA MADRE Y</label>
+            </value>
+            <value>
+                <fullName>PRESIDENCIA DE LA REPÚBLICA DOMINICANA</fullName>
+                <default>false</default>
+                <label>PRESIDENCIA DE LA REPÚBLICA DOMINICANA</label>
+            </value>
+            <value>
+                <fullName>PROCURADURIA GENERAL DE LA REPÚBLICA (PG</fullName>
+                <default>false</default>
+                <label>PROCURADURIA GENERAL DE LA REPÚBLICA (PG</label>
+            </value>
+            <value>
+                <fullName>SECRETARIADO ADMINISTRATIVO DE LA PRESID</fullName>
+                <default>false</default>
+                <label>SECRETARIADO ADMINISTRATIVO DE LA PRESID</label>
+            </value>
+            <value>
+                <fullName>SUPERINTENDENCIA DE BANCOS</fullName>
+                <default>false</default>
+                <label>SUPERINTENDENCIA DE BANCOS</label>
+            </value>
+            <value>
+                <fullName>SUPERINTENDENCIA DE SALUD Y RIESGO LABOR</fullName>
+                <default>false</default>
+                <label>SUPERINTENDENCIA DE SALUD Y RIESGO LABOR</label>
+            </value>
+            <value>
+                <fullName>SUPERINTENDENCIA DE SEGUROS</fullName>
+                <default>false</default>
+                <label>SUPERINTENDENCIA DE SEGUROS</label>
+            </value>
+            <value>
+                <fullName>SUPERINTENDENCIA DE VALORES</fullName>
+                <default>false</default>
+                <label>SUPERINTENDENCIA DE VALORES</label>
+            </value>
+            <value>
+                <fullName>SUPREMA CORTE DE JUSTICIA</fullName>
+                <default>false</default>
+                <label>SUPREMA CORTE DE JUSTICIA</label>
+            </value>
+            <value>
+                <fullName>TESORERÍA NACIONAL DE LA REPÚBLICA DOMIN</fullName>
+                <default>false</default>
+                <label>TESORERÍA NACIONAL DE LA REPÚBLICA DOMIN</label>
+            </value>
+            <value>
+                <fullName>UNIVERSIDAD AUTÓNOMA DE SANTO DOMINGO</fullName>
+                <default>false</default>
+                <label>UNIVERSIDAD AUTÓNOMA DE SANTO DOMINGO</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

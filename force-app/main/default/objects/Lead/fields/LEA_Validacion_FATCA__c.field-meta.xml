@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Validacion_FATCA__c</fullName>
+    <description>Validación del formulario FATCA</description>
+    <formula>AND(
+  NOT(ISBLANK(TEXT(LEA_Nacionalidad__c))),
+  OR(
+    TEXT(LEA_Nacionalidad__c) &lt;&gt; &apos;ESTADOS UNIDOS&apos;,
+    AND(
+      NOT(ISBLANK(LEA_Nombre_FATCA__c)),
+      NOT(ISBLANK(LEA_Apellido_FATCA__c)),
+      NOT(ISBLANK(LEA_N_Pasaporte_FATCA__c)),
+      NOT(ISBLANK(LEA_Fecha_Expiracion_FATCA__c)),
+      NOT(ISBLANK(LEA_SSN_FATCA__c)),
+      NOT(ISBLANK(LEA_TIN_FATCA__c)),
+      NOT(ISBLANK(TEXT(LEA_Nacionalidad_FATCA__c))),
+      NOT(ISBLANK(LEA_Direccion_FATCA__c)),
+      NOT(ISBLANK(LEA_Estado_FATCA__c)),
+      NOT(ISBLANK(LEA_Codigo_Postal_FATCA__c)),
+      NOT(ISBLANK(LEA_Telefono_FATCA__c))
+    )
+  )
+)</formula>
+    <label>LEA_Validacion_FATCA</label>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_INT_Tipo_Estructura_Juridica__c</fullName>
+    <description>No se diligencia, se sincroniza automáticamente con el campo &quot;LEA_Tipo_Estructura_Juridica__c&quot; para efectos de integración</description>
+    <label>Tipo Estructura Juridica(Trama)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>GP_Tipo_de_estructura_juridica</valueSetName>
+    </valueSet>
+</CustomField>

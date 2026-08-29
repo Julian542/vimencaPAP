@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Validacion_Vias_de_Contacto__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+  AND(
+    ISBLANK(TEXT(LEA_Via_de_Contacto1__c)),
+    ISBLANK(LEA_Numero_Correo1__c),
+    ISBLANK(TEXT(LEA_Telefonica1__c)),
+    NOT(LEA_Envio_SMS1__c),
+    NOT(LEA_Principal1__c),
+    ISBLANK(TEXT(LEA_Via_de_Contacto2__c)),
+    ISBLANK(LEA_Numero_Correo2__c),
+    ISBLANK(TEXT(LEA_Telefonica2__c)),
+    NOT(LEA_Envio_SMS2__c),
+    NOT(LEA_Principal2__c),
+    ISBLANK(TEXT(LEA_Via_de_Contacto3__c)),
+    ISBLANK(LEA_Numero_Correo3__c),
+    ISBLANK(TEXT(LEA_Telefonica3__c)),
+    NOT(LEA_Envio_SMS3__c),
+    NOT(LEA_Principal3__c)
+  ),
+  &quot;&quot;,
+  IF(
+    OR(
+      AND(
+        LEA_Principal1__c,
+        TEXT(LEA_Via_de_Contacto1__c) &lt;&gt; &quot;CORREO ELECTRÓNICO&quot;,
+        TEXT(LEA_Via_de_Contacto1__c) &lt;&gt; &quot;SITIO/PÁGINA WEB&quot;
+      ),
+      AND(
+        LEA_Principal2__c,
+        TEXT(LEA_Via_de_Contacto2__c) &lt;&gt; &quot;CORREO ELECTRÓNICO&quot;,
+        TEXT(LEA_Via_de_Contacto2__c) &lt;&gt; &quot;SITIO/PÁGINA WEB&quot;
+      ),
+      AND(
+        LEA_Principal3__c,
+        TEXT(LEA_Via_de_Contacto3__c) &lt;&gt; &quot;CORREO ELECTRÓNICO&quot;,
+        TEXT(LEA_Via_de_Contacto3__c) &lt;&gt; &quot;SITIO/PÁGINA WEB&quot;
+      )
+    ),
+    &quot;true&quot;,
+    &quot;false&quot;
+  )
+)</formula>
+    <label>LEA_Validacion_Vias_de_Contacto</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Fecha_de_ingreso__c</fullName>
+    <description>Migrado de Historial Laboral</description>
+    <encryptionScheme>None</encryptionScheme>
+    <label>Fecha de ingreso</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Date</type>
+</CustomField>

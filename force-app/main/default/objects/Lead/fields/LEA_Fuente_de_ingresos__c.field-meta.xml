@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Fuente_de_ingresos__c</fullName>
+    <description>Migrado de Información Financiera</description>
+    <label>Fuente de ingresos</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Herencia</fullName>
+                <default>false</default>
+                <label>Herencia</label>
+            </value>
+            <value>
+                <fullName>Premios</fullName>
+                <default>false</default>
+                <label>Premios</label>
+            </value>
+            <value>
+                <fullName>Pensión</fullName>
+                <default>false</default>
+                <label>Pensión</label>
+            </value>
+            <value>
+                <fullName>NO DISPONIBLE</fullName>
+                <default>false</default>
+                <label>NO DISPONIBLE</label>
+            </value>
+            <value>
+                <fullName>Casos ganados por demandas</fullName>
+                <default>false</default>
+                <label>Casos ganados por demandas</label>
+            </value>
+            <value>
+                <fullName>Remesas</fullName>
+                <default>false</default>
+                <label>Remesas</label>
+            </value>
+            <value>
+                <fullName>Rentas o Alquileres</fullName>
+                <default>false</default>
+                <label>Rentas o Alquileres</label>
+            </value>
+            <value>
+                <fullName>Venta de Bien Mueble</fullName>
+                <default>false</default>
+                <label>Venta de Bien Mueble</label>
+            </value>
+            <value>
+                <fullName>Venta de Bien Inmueble</fullName>
+                <default>false</default>
+                <label>Venta de Bien Inmueble</label>
+            </value>
+            <value>
+                <fullName>Ahorros</fullName>
+                <default>false</default>
+                <label>Ahorros</label>
+            </value>
+            <value>
+                <fullName>Asalariado (regular/bonificaciones/regalias)</fullName>
+                <default>false</default>
+                <label>Asalariado (regular/bonificaciones/regalias)</label>
+            </value>
+            <value>
+                <fullName>Ingresos Familiares</fullName>
+                <default>false</default>
+                <label>Ingresos Familiares</label>
+            </value>
+            <value>
+                <fullName>Trabajo Independiente</fullName>
+                <default>false</default>
+                <label>Trabajo Independiente</label>
+            </value>
+            <value>
+                <fullName>Acuerdos de Divorcio</fullName>
+                <default>false</default>
+                <label>Acuerdos de Divorcio</label>
+            </value>
+            <value>
+                <fullName>Aportes en Naturaleza (Entidades Cambiarias y Fiduciarias)</fullName>
+                <default>false</default>
+                <label>Aportes en Naturaleza (Entidades Cambiarias y Fiduciarias)</label>
+            </value>
+            <value>
+                <fullName>Beneficios de Fideicomisos</fullName>
+                <default>false</default>
+                <label>Beneficios de Fideicomisos</label>
+            </value>
+            <value>
+                <fullName>Bienes recibidos por extinción de Fideicomisos</fullName>
+                <default>false</default>
+                <label>Bienes recibidos por extinción de Fideicomisos</label>
+            </value>
+            <value>
+                <fullName>Beneficios por participaciones en Sociedades Comerciales</fullName>
+                <default>false</default>
+                <label>Beneficios por participaciones en Sociedades Comerciales</label>
+            </value>
+            <value>
+                <fullName>Cancelación de Certificado de Depósito en EIF</fullName>
+                <default>false</default>
+                <label>Cancelación de Certificado de Depósito en EIF</label>
+            </value>
+            <value>
+                <fullName>Donaciones</fullName>
+                <default>false</default>
+                <label>Donaciones</label>
+            </value>
+            <value>
+                <fullName>Facilidades Crediticias</fullName>
+                <default>false</default>
+                <label>Facilidades Crediticias</label>
+            </value>
+            <value>
+                <fullName>Financiamientos que no sean de EIF</fullName>
+                <default>false</default>
+                <label>Financiamientos que no sean de EIF</label>
+            </value>
+            <value>
+                <fullName>Juegos de azar, sorteos o concursos</fullName>
+                <default>false</default>
+                <label>Juegos de azar, sorteos o concursos</label>
+            </value>
+            <value>
+                <fullName>Rendimiento de Inversiones</fullName>
+                <default>false</default>
+                <label>Rendimiento de Inversiones</label>
+            </value>
+            <value>
+                <fullName>Venta de Acciones</fullName>
+                <default>false</default>
+                <label>Venta de Acciones</label>
+            </value>
+            <value>
+                <fullName>Venta de sociedades Comerciales</fullName>
+                <default>false</default>
+                <label>Venta de sociedades Comerciales</label>
+            </value>
+            <value>
+                <fullName>Venta de valores representativos de deuda</fullName>
+                <default>false</default>
+                <label>Venta de valores representativos de deuda</label>
+            </value>
+            <value>
+                <fullName>Transferencias de Fondos Internacionales</fullName>
+                <default>false</default>
+                <label>Transferencias de Fondos Internacionales</label>
+            </value>
+            <value>
+                <fullName>Transferencias de Fondos Nacionales</fullName>
+                <default>false</default>
+                <label>Transferencias de Fondos Nacionales</label>
+            </value>
+            <value>
+                <fullName>Ingresos: Empresa Comercial (Dividendos)</fullName>
+                <default>false</default>
+                <label>Ingresos: Empresa Comercial (Dividendos)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

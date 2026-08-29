@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_INT_Pais_Residencia_Legal__c</fullName>
+    <description>No se diligencia, se sincroniza automáticamente con el campo &quot;LEA_Pais_Residencia_Legal&quot; para efectos de integración</description>
+    <label>País de residencia legal(Trama)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>GP_NacionalidadTrama</valueSetName>
+    </valueSet>
+</CustomField>

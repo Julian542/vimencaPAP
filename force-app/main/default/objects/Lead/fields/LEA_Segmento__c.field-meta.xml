@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Segmento__c</fullName>
+    <label>Segmento</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1</fullName>
+                <default>false</default>
+                <label>1 - GENERAL- CATEGORIA E (Menores a RD$15 mil)</label>
+            </value>
+            <value>
+                <fullName>3</fullName>
+                <default>false</default>
+                <label>3 - ELITE - CATEGORIA A (Superiores a RD$450 mil)</label>
+            </value>
+            <value>
+                <fullName>4</fullName>
+                <default>false</default>
+                <label>4 - PREMIUM - CATEGORIA B (Entre RD$135 mil y RD$450 mil)</label>
+            </value>
+            <value>
+                <fullName>6</fullName>
+                <default>false</default>
+                <label>6 - VIP - CATEGORIA C (Entre RD$50 mil y RD$135 mil)</label>
+            </value>
+            <value>
+                <fullName>7</fullName>
+                <default>false</default>
+                <label>7 - PREFERENCIAL - CATEGORIA D (Entre RD$15 mil y RD$50 mil)</label>
+            </value>
+            <value>
+                <fullName>8</fullName>
+                <default>false</default>
+                <label>8 - MICROEMPRESA (Menores a RD$6MM Anuales)</label>
+            </value>
+            <value>
+                <fullName>9</fullName>
+                <default>false</default>
+                <label>9 - PEQUEÑA EMPRESA (Entre RD$6MM y RD$40MM)</label>
+            </value>
+            <value>
+                <fullName>10</fullName>
+                <default>false</default>
+                <label>10 - MEDIANA EMPRESA (Entre RD$40 MM y RD$ 150 MM Anuales)</label>
+            </value>
+            <value>
+                <fullName>11</fullName>
+                <default>false</default>
+                <label>11 - CORPORATIVO (Superiores a RD$ 150 MM Anuales)</label>
+            </value>
+            <value>
+                <fullName>12</fullName>
+                <default>false</default>
+                <label>12 - INSTITUCIONES PUBLICAS (Que sea del gobierno)</label>
+            </value>
+            <value>
+                <fullName>13</fullName>
+                <default>false</default>
+                <label>13 - INSTITUC. SIN FINES DE LUCRO (Que sea ONG)</label>
+            </value>
+            <value>
+                <fullName>14</fullName>
+                <default>false</default>
+                <label>14 - FIDEICOMISOS (Fideicomisos)</label>
+            </value>
+            <value>
+                <fullName>15</fullName>
+                <default>false</default>
+                <label>15 - Negocios Personales con Cédula (Clientes que manejan sus empresas a título personal)</label>
+            </value>
+            <value>
+                <fullName>99</fullName>
+                <default>false</default>
+                <label>99 - Clientes Nuevos (Para prospectos)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

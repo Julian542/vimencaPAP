@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_INT_Tipo_Relacion_PEP__c</fullName>
+    <description>No se diligencia, se sincroniza automáticamente con el campo &quot;LEA_Tipo_Relacion_PEP__c&quot; para efectos de integración</description>
+    <label>Tipo de relación PEP(Trama)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>GP_Tipo_de_relacion_colaborador_PEP</valueSetName>
+    </valueSet>
+</CustomField>

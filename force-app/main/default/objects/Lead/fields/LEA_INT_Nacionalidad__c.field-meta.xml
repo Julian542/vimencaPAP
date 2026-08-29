@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_INT_Nacionalidad__c</fullName>
+    <description>No se diligencia, se sincroniza automáticamente con el campo &quot;LEA_Nacionalidad__c&quot; para efectos de integración</description>
+    <label>Nacionalidad/Constitución(Trama)</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>GP_NacionalidadTrama</valueSetName>
+    </valueSet>
+</CustomField>

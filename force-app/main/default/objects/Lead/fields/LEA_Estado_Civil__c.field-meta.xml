@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Estado_Civil__c</fullName>
+    <description>Migrado del Account</description>
+    <label>Estado civil *</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CASADO/A</fullName>
+                <default>false</default>
+                <label>CASADO/A</label>
+            </value>
+            <value>
+                <fullName>DIVORCIADO/A</fullName>
+                <default>false</default>
+                <label>DIVORCIADO/A</label>
+            </value>
+            <value>
+                <fullName>SOLTERO/A</fullName>
+                <default>false</default>
+                <label>SOLTERO/A</label>
+            </value>
+            <value>
+                <fullName>UNION LIBRE</fullName>
+                <default>false</default>
+                <label>UNION LIBRE</label>
+            </value>
+            <value>
+                <fullName>VIUDO/A</fullName>
+                <default>false</default>
+                <label>VIUDO/A</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

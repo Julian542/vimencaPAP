@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Datos_Financieros_Cliente</fullName>
+    <active>true</active>
+    <description>Validación para comprobar que el cliente tiene datos financieros mínimos cargados en sistema</description>
+    <errorConditionFormula>AND (
+ISPICKVAL( Status, &apos;Convertido&apos;),
+RecordType.DeveloperName=&apos;Candidato_Persona_Natural&apos;,
+OR(
+ISPICKVAL(LEA_Fuente_de_ingresos__c, &apos;&apos;),
+ISPICKVAL(LEA_Periodo__c, &apos;&apos; ),
+ISPICKVAL(LEA_Ingresos__c ,&apos;&apos;)
+)
+)</errorConditionFormula>
+    <errorMessage>Para convertir el prospecto es necesario tener datos financieros mínimos añadidos</errorMessage>
+</ValidationRule>

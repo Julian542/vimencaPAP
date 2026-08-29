@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Tipo_Persona_PF__c</fullName>
+    <description>Migrado del Account</description>
+    <label>Tipo de persona</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>LEA_Genero_Identificaci_n__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>P5</fullName>
+                <default>false</default>
+                <label>P5</label>
+            </value>
+            <value>
+                <fullName>P6</fullName>
+                <default>false</default>
+                <label>P6</label>
+            </value>
+            <value>
+                <fullName>P3</fullName>
+                <default>false</default>
+                <label>P3</label>
+            </value>
+            <value>
+                <fullName>P4</fullName>
+                <default>false</default>
+                <label>P4</label>
+            </value>
+            <value>
+                <fullName>P5M</fullName>
+                <default>false</default>
+                <label>P5M</label>
+            </value>
+            <value>
+                <fullName>P8M</fullName>
+                <default>false</default>
+                <label>P8M</label>
+            </value>
+            <value>
+                <fullName>P3M</fullName>
+                <default>false</default>
+                <label>P3M</label>
+            </value>
+            <value>
+                <fullName>P7M</fullName>
+                <default>false</default>
+                <label>P7M</label>
+            </value>
+            <value>
+                <fullName>P8</fullName>
+                <default>false</default>
+                <label>P8</label>
+            </value>
+            <value>
+                <fullName>P7</fullName>
+                <default>false</default>
+                <label>P7</label>
+            </value>
+            <value>
+                <fullName>P11</fullName>
+                <default>false</default>
+                <label>P11</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Cédula Femenino</controllingFieldValue>
+            <valueName>P5</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cédula Femenino</controllingFieldValue>
+            <controllingFieldValue>Pasaporte Femenino</controllingFieldValue>
+            <valueName>P6</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cédula Femenino</controllingFieldValue>
+            <valueName>P5M</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cédula Femenino</controllingFieldValue>
+            <controllingFieldValue>Cédula Masculino</controllingFieldValue>
+            <controllingFieldValue>Pasaporte Femenino</controllingFieldValue>
+            <controllingFieldValue>Pasaporte Masculino</controllingFieldValue>
+            <valueName>P11</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cédula Masculino</controllingFieldValue>
+            <valueName>P3</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cédula Masculino</controllingFieldValue>
+            <controllingFieldValue>Pasaporte Masculino</controllingFieldValue>
+            <valueName>P4</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cédula Masculino</controllingFieldValue>
+            <valueName>P3M</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pasaporte Femenino</controllingFieldValue>
+            <valueName>P8M</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pasaporte Femenino</controllingFieldValue>
+            <valueName>P8</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pasaporte Masculino</controllingFieldValue>
+            <valueName>P7M</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pasaporte Masculino</controllingFieldValue>
+            <valueName>P7</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

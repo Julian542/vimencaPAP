@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Via_de_contacto_en_Prospecto</fullName>
+    <active>true</active>
+    <description>Validación que comprueba que al menos haya una vía de contacto con TIPO = Telefono o movil para convertir a cliente</description>
+    <errorConditionFormula>AND(
+  ISPICKVAL(Status, &quot;Convertido&quot;),
+  /* Si NO existe ningún medio válido =&gt; ERROR */
+  NOT(
+    OR(
+      /* Medio 1 válido */
+      AND(
+        LEA_Principal1__c = TRUE,
+        OR(
+          ISPICKVAL(LEA_Via_de_Contacto1__c, &quot;TELÉFONO FIJO&quot;),
+          ISPICKVAL(LEA_Via_de_Contacto1__c, &quot;TELÉFONO MÓVIL&quot;),
+          ISPICKVAL(LEA_Via_de_Contacto1__c, &quot;TELÉFONO TRABAJO&quot;),
+          ISPICKVAL(LEA_Via_de_Contacto1__c, &quot;MÓVIL EN EL EXTERIOR&quot;)
+        ),
+        NOT(ISBLANK(LEA_Numero_Correo1__c))
+      ),
+
+      /* Medio 2 válido */
+      AND(
+        LEA_Principal2__c = TRUE,
+        OR(
+          ISPICKVAL(LEA_Via_de_Contacto2__c, &quot;TELÉFONO FIJO&quot;),
+          ISPICKVAL(LEA_Via_de_Contacto2__c, &quot;TELÉFONO MÓVIL&quot;),
+          ISPICKVAL(LEA_Via_de_Contacto2__c, &quot;TELÉFONO TRABAJO&quot;),
+          ISPICKVAL(LEA_Via_de_Contacto2__c, &quot;MÓVIL EN EL EXTERIOR&quot;)
+        ),
+        NOT(ISBLANK(LEA_Numero_Correo2__c))
+      ),
+
+      /* Medio 3 válido */
+      AND(
+        LEA_Principal3__c = TRUE,
+        OR(
+          ISPICKVAL(LEA_Via_de_Contacto3__c, &quot;TELÉFONO FIJO&quot;),
+          ISPICKVAL(LEA_Via_de_Contacto3__c, &quot;TELÉFONO MÓVIL&quot;),
+          ISPICKVAL(LEA_Via_de_Contacto3__c, &quot;TELÉFONO TRABAJO&quot;),
+          ISPICKVAL(LEA_Via_de_Contacto3__c, &quot;MÓVIL EN EL EXTERIOR&quot;)
+        ),
+        NOT(ISBLANK(LEA_Numero_Correo3__c))
+      )
+    )
+  )
+)</errorConditionFormula>
+    <errorMessage>Para convertir el prospecto es necesario tener al menos una vía de contacto de tipo teléfono como principal</errorMessage>
+</ValidationRule>

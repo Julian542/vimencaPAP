@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Informacion_financiera_PJ</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND (
+RecordType.DeveloperName=&apos;Candidato_Persona_Juridica&apos;,
+OR (
+ISPICKVAL( Status, &apos;Calificado&apos;),
+ISPICKVAL( Status, &apos;Convertido&apos;)
+),
+OR(
+ISPICKVAL( LEA_Nacionalidad__c,&apos;PUERTO RICO&apos;),
+ISPICKVAL( LEA_Nacionalidad__c,&apos;SAMOA/ISLAS SAMOA&apos;),
+ISPICKVAL( LEA_Nacionalidad__c,&apos;SAMOA/OCCIDENTAL&apos;),
+ISPICKVAL( LEA_Nacionalidad__c,&apos;GUAM&apos;),
+ISPICKVAL( LEA_Nacionalidad__c,&apos;MARIANAS DEL NORTE/ISLAS&apos;),
+ISPICKVAL( LEA_Nacionalidad__c,&apos;ISLAS VÍRGENES (U.S)&apos;),
+ISPICKVAL( LEA_Nacionalidad__c,&apos;ESTADOS UNIDOS&apos;),
+ISPICKVAL( LEA_Nacionalidad__c,&apos;PUERTO RICO&apos;),
+ISPICKVAL( LEA_Nacionalidad__c,&apos;SAMOA/ISLAS SAMOA&apos;),
+ISPICKVAL( LEA_Nacionalidad__c,&apos;SAMOA/OCCIDENTAL&apos;),
+ISPICKVAL( LEA_Nacionalidad__c,&apos;GUAM&apos;),
+ISPICKVAL( LEA_Nacionalidad__c,&apos;MARIANAS DEL NORTE/ISLAS&apos;),
+ISPICKVAL( LEA_Nacionalidad__c,&apos;ISLAS VÍRGENES (U.S)&apos;),
+ISPICKVAL( LEA_Nacionalidad__c,&apos;ESTADOS UNIDOS&apos;)
+),
+OR(
+ISBLANK(LEA_Apellido_FATCA__c),
+ISBLANK(LEA_Ciudad_FATCA__c),
+ISBLANK(LEA_Codigo_Postal_FATCA__c),
+ISBLANK(LEA_Direccion_FATCA__c),
+ISBLANK(LEA_Estado_FATCA__c),
+ISBLANK(LEA_Fecha_Expiracion_FATCA__c),
+ISBLANK(LEA_Nombre_FATCA__c),
+ISBLANK(LEA_N_Pasaporte_FATCA__c),
+ISBLANK(LEA_SSN_FATCA__c),
+ISBLANK(LEA_TIN_FATCA__c),
+ISBLANK(LEA_Telefono_FATCA__c),
+ISPICKVAL(LEA_Nacionalidad_FATCA__c,&apos;&apos;)
+)
+)</errorConditionFormula>
+    <errorMessage>Revise la información de la sección FATCA para ver la información que falta por rellenar</errorMessage>
+</ValidationRule>

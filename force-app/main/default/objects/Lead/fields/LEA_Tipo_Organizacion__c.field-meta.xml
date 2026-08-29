@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LEA_Tipo_Organizacion__c</fullName>
+    <description>Migrado del Account</description>
+    <label>Tipo de organización</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA (E.I.R.L.)</fullName>
+                <default>false</default>
+                <label>EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA (E.I.R.L.)</label>
+            </value>
+            <value>
+                <fullName>SOCIEDAD DE RESPONSABILIDAD LIMITADA (S.R.L.)</fullName>
+                <default>false</default>
+                <label>SOCIEDAD DE RESPONSABILIDAD LIMITADA (S.R.L.)</label>
+            </value>
+            <value>
+                <fullName>SOCIEDADES ANÓNIMAS SIMPLIFICADAS (S.A.S.)</fullName>
+                <default>false</default>
+                <label>SOCIEDADES ANÓNIMAS SIMPLIFICADAS (S.A.S.)</label>
+            </value>
+            <value>
+                <fullName>SOCIEDADES EXTRANJERAS</fullName>
+                <default>false</default>
+                <label>SOCIEDADES EXTRANJERAS</label>
+            </value>
+            <value>
+                <fullName>CONSORCIOS</fullName>
+                <default>false</default>
+                <label>CONSORCIOS</label>
+            </value>
+            <value>
+                <fullName>FIDEICOMISOS</fullName>
+                <default>false</default>
+                <label>FIDEICOMISOS</label>
+            </value>
+            <value>
+                <fullName>SOCIEDADES ACCIDENTALES O EN PARTICIPACIÓN</fullName>
+                <default>false</default>
+                <label>SOCIEDADES ACCIDENTALES O EN PARTICIPACIÓN</label>
+            </value>
+            <value>
+                <fullName>ASOCIACIONES SIN FINES DE LUCRO</fullName>
+                <default>false</default>
+                <label>ASOCIACIONES SIN FINES DE LUCRO</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVAS</fullName>
+                <default>false</default>
+                <label>COOPERATIVAS</label>
+            </value>
+            <value>
+                <fullName>SINDICATOS EMPRESARIALES</fullName>
+                <default>false</default>
+                <label>SINDICATOS EMPRESARIALES</label>
+            </value>
+            <value>
+                <fullName>CONDOMINIOS</fullName>
+                <default>false</default>
+                <label>CONDOMINIOS</label>
+            </value>
+            <value>
+                <fullName>PARTIDOS POLITICOS</fullName>
+                <default>false</default>
+                <label>PARTIDOS POLITICOS</label>
+            </value>
+            <value>
+                <fullName>EMBAJADAS Y/O DELEGACIONES DIPLOMÁTICAS</fullName>
+                <default>false</default>
+                <label>EMBAJADAS Y/O DELEGACIONES DIPLOMÁTICAS</label>
+            </value>
+            <value>
+                <fullName>ASOCIACIONES RELIGIOSAS DE LA IGLESIA CATÓLICA</fullName>
+                <default>false</default>
+                <label>ASOCIACIONES RELIGIOSAS DE LA IGLESIA CATÓLICA</label>
+            </value>
+            <value>
+                <fullName>MUNICIPIOS Y DISTRITOS MUNICIPALES</fullName>
+                <default>false</default>
+                <label>MUNICIPIOS Y DISTRITOS MUNICIPALES</label>
+            </value>
+            <value>
+                <fullName>INSTITUCIONES DEL SECTOR PÚBLICO NO FINANCIERO</fullName>
+                <default>false</default>
+                <label>INSTITUCIONES DEL SECTOR PÚBLICO NO FINANCIERO</label>
+            </value>
+            <value>
+                <fullName>INSTITUCIONES DEL SECTOR PÚBLICO FINANCIERO: BNV Y BANCO AGRICOLA</fullName>
+                <default>false</default>
+                <label>INSTITUCIONES DEL SECTOR PÚBLICO FINANCIERO: BNV Y BANCO AGRICOLA</label>
+            </value>
+            <value>
+                <fullName>INSTITUCIONES SIN FINES DE LUCRO EXTRANJERAS</fullName>
+                <default>false</default>
+                <label>INSTITUCIONES SIN FINES DE LUCRO EXTRANJERAS</label>
+            </value>
+            <value>
+                <fullName>SOCIEDADES ANÓNIMAS (S.A.)</fullName>
+                <default>false</default>
+                <label>SOCIEDADES ANÓNIMAS (S.A.)</label>
+            </value>
+            <value>
+                <fullName>FONDOS DE INVERSION</fullName>
+                <default>false</default>
+                <label>FONDOS DE INVERSION</label>
+            </value>
+            <value>
+                <fullName>ONG EXTRANJERA PRIVADA</fullName>
+                <default>false</default>
+                <label>ONG EXTRANJERA PRIVADA</label>
+            </value>
+            <value>
+                <fullName>ONG EXTRANJERA PÚBLICA</fullName>
+                <default>false</default>
+                <label>ONG EXTRANJERA PÚBLICA</label>
+            </value>
+            <value>
+                <fullName>NO DISPONIBLE</fullName>
+                <default>false</default>
+                <label>NO DISPONIBLE</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
