@@ -16,6 +16,8 @@ public class VFS_ResumenConvenioUnicoController {
     public Account cuenta { get; set; }
     public Direccion__c direccion { get; set; }
     public String direccionFormateada { get; set; }
+    public String provinciaDireccion { get; set; }
+    public String correoElectronico { get; set; }
     public Vias_de_Contacto__c via { get; set; }
     public Participante__c representanteLegal { get; set; }
     public String diaActual { get; set; }
@@ -68,8 +70,31 @@ public class VFS_ResumenConvenioUnicoController {
         if(!direcciones.isEmpty()){
             direccionFormateada = getDireccionJuridicaFormateada(direcciones);
             direccion = direcciones[0];
+            provinciaDireccion = direccion.DIR_Provincia_texto__c;
         }else{
             direccion = new Direccion__c();
+
+            // FSC almacena las direcciones vigentes en ContactPointAddress.
+            List<ContactPointAddress> direccionesFsc = [
+                SELECT Street, City, State, PostalCode, Country, IsPrimary
+                FROM ContactPointAddress
+                WHERE ParentId = :idCuentaParaDireccion
+                ORDER BY IsPrimary DESC, CreatedDate DESC
+                LIMIT 1
+            ];
+            if (!direccionesFsc.isEmpty()) {
+                ContactPointAddress direccionFsc = direccionesFsc[0];
+                List<String> partes = new List<String>();
+                if (String.isNotBlank(direccionFsc.Street)) partes.add(direccionFsc.Street);
+                if (String.isNotBlank(direccionFsc.City)) partes.add(direccionFsc.City);
+                if (String.isNotBlank(direccionFsc.State)) partes.add(direccionFsc.State);
+                if (String.isNotBlank(direccionFsc.PostalCode)) partes.add(direccionFsc.PostalCode);
+                if (String.isNotBlank(direccionFsc.Country)) partes.add(direccionFsc.Country);
+                direccionFormateada = String.join(partes, ', ');
+                provinciaDireccion = String.isNotBlank(direccionFsc.City)
+                    ? direccionFsc.City
+                    : direccionFsc.State;
+            }
         }
         System.debug('Direccion Convenio unico'+ direccion);
         
@@ -81,8 +106,22 @@ public class VFS_ResumenConvenioUnicoController {
         ];
         if(!Vias.isEmpty()){
             via = Vias[0];
+            correoElectronico = via.VIA_Numero_Correo__c;
         }else{
             via = new Vias_de_Contacto__c();
+
+            // FSC almacena los correos vigentes en ContactPointEmail.
+            List<ContactPointEmail> correosFsc = [
+                SELECT EmailAddress, IsPrimary
+                FROM ContactPointEmail
+                WHERE ParentId = :idCuentaParaDireccion
+                  AND EmailAddress != null
+                ORDER BY IsPrimary DESC, CreatedDate DESC
+                LIMIT 1
+            ];
+            if (!correosFsc.isEmpty()) {
+                correoElectronico = correosFsc[0].EmailAddress;
+            }
         }
         System.debug('via Convenio unico'+ direccion);
        

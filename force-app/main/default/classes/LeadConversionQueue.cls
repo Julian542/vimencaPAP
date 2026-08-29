@@ -359,12 +359,18 @@ public without sharing class LeadConversionQueue implements Queueable {
             ' | '
           );
 
+          Schema.DescribeSObjectResult leadDescribe = Lead.SObjectType.getDescribe();
+          String city = getPicklistLabel(leadDescribe, 'LEA_Municipio__c', safeStr(l.get('LEA_Municipio__c')));
+          String state = getPicklistLabel(leadDescribe, 'LEA_Provincia__c', safeStr(l.get('LEA_Provincia__c')));
+          String country = getPicklistLabel(leadDescribe, 'LEA_Pais__c', safeStr(l.get('LEA_Pais__c')));
+
           setIfFieldExists(cpa, dCPA, 'AddressType', isPF(l) ? 'RESIDENCIA' : 'EMPRESARIAL');
           setIfFieldExists(cpa, dCPA, 'Street', joinNotBlank(new List<String>{ street1, street2 }, '\n'));
+          setIfFieldExists(cpa, dCPA, 'City', city);
           setIfFieldExists(cpa, dCPA, 'CPA_Municipio__c', safeStr(l.get('LEA_Municipio__c')));
-          setIfFieldExists(cpa, dCPA, 'State', safeStr(l.get('LEA_Provincia__c')));
+          setIfFieldExists(cpa, dCPA, 'State', state);
           setIfFieldExists(cpa, dCPA, 'PostalCode', safeStr(l.get('LEA_Apartado_postal__c')));
-          setIfFieldExists(cpa, dCPA, 'Country', safeStr(l.get('LEA_Pais__c')));
+          setIfFieldExists(cpa, dCPA, 'Country', country);
           setIfFieldExists(cpa, dCPA, 'CPA_Distrito__c', safeStr(l.get('LEA_Distrito__c')));
           setIfFieldExists(cpa, dCPA, 'CPA_Sector__c', safeStr(l.get('LEA_Address_Sector__c')));
           setIfFieldExists(cpa, dCPA, 'CPA_Referencia_Ubicacion__c', safeStr(l.get('LEA_Referencia_Ubicacion__c')));
@@ -552,7 +558,10 @@ public without sharing class LeadConversionQueue implements Queueable {
                 setIfFieldExists(dci, dDCI, 'Status', docStatus);
               }
 
-              if (!String.isBlank(docStatus) && docStatus.equalsIgnoreCase('PENDIENTE')) {
+              if (
+                !String.isBlank(docStatus) &&
+                (docStatus.equalsIgnoreCase('PENDIENTE') || docStatus.equalsIgnoreCase('POSPUESTO'))
+              ) {
                 accountsWithPendingDocs.add(accountId);
 
                 if (!pendingDocNamesByAccount.containsKey(accountId)) {
@@ -713,6 +722,7 @@ public without sharing class LeadConversionQueue implements Queueable {
   private class LeadConversionDebugException extends Exception {
   }
 
+  @TestVisible
   private class RefBundle {
     public Contact refContact;
     public SObject relation;
@@ -725,6 +735,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     }
   }
 
+  @TestVisible
   private static String normalizePicklistValue(Schema.DescribeSObjectResult describeResult, String fieldApiName, String inputValue) {
     System.debug('LeadConversionQueue.normalizePicklistValue() fieldApiName=' + fieldApiName + ', inputValue=' + inputValue);
 
@@ -782,6 +793,33 @@ public without sharing class LeadConversionQueue implements Queueable {
     }
   }
 
+  @TestVisible
+  private static String getPicklistLabel(Schema.DescribeSObjectResult describeResult, String fieldApiName, String inputValue) {
+    if (describeResult == null || String.isBlank(fieldApiName) || String.isBlank(inputValue)) {
+      return inputValue;
+    }
+
+    try {
+      Map<String, Schema.SObjectField> fieldsMap = describeResult.fields.getMap();
+      if (fieldsMap == null || !fieldsMap.containsKey(fieldApiName)) {
+        return inputValue;
+      }
+
+      for (Schema.PicklistEntry entry : fieldsMap.get(fieldApiName).getDescribe().getPicklistValues()) {
+        if (entry != null && entry.isActive() && entry.getValue() == inputValue) {
+          return entry.getLabel();
+        }
+      }
+    } catch (Exception e) {
+      System.debug(LoggingLevel.WARN,
+        'LeadConversionQueue.getPicklistLabel() ERROR field=' + fieldApiName +
+        ', inputValue=' + inputValue + ', msg=' + e.getMessage());
+    }
+
+    return inputValue;
+  }
+
+  @TestVisible
   private static String normalizeForCompare(String value) {
     if (String.isBlank(value)) {
       return null;
@@ -804,6 +842,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     return normalized;
   }
 
+  @TestVisible
   private static void mapLeadDetailsToAccount(Account acc, Schema.DescribeSObjectResult dACC, Lead l) {
     if (acc == null || dACC == null || l == null)
       return;
@@ -925,6 +964,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     mapPrimaryContactPointFieldsToAccount(acc, dACC, l);
   }
 
+  @TestVisible
   private static void mapPrimaryContactPointFieldsToAccount(Account acc, Schema.DescribeSObjectResult dACC, Lead l) {
     System.debug('LeadConversionQueue.mapPrimaryContactPointFieldsToAccount() leadId=' + (l == null ? null : l.Id));
 
@@ -942,20 +982,24 @@ public without sharing class LeadConversionQueue implements Queueable {
     if (!String.isBlank(primaryEmail)) {
       setIfAccountFieldExistsAndUpdateable(acc, dACC, 'Correo_Electronico_Cliente__c', primaryEmail);
       setIfAccountFieldExistsAndUpdateable(acc, dACC, 'ACC_Correo_Electronico_Cliente__c', primaryEmail);
-      setIfAccountFieldExistsAndUpdateable(acc, dACC, 'PersonEmail', primaryEmail);
+      if (isPF(l)) {
+        setIfAccountFieldExistsAndUpdateable(acc, dACC, 'PersonEmail', primaryEmail);
+      }
     }
 
     if (!String.isBlank(billingStreet)) {
+      Schema.DescribeSObjectResult leadDescribe = Lead.SObjectType.getDescribe();
       setIfAccountFieldExistsAndUpdateable(acc, dACC, 'BillingStreet', billingStreet);
-      setIfAccountFieldExistsAndUpdateable(acc, dACC, 'BillingCity', safeStr(l.get('LEA_Municipio__c')));
-      setIfAccountFieldExistsAndUpdateable(acc, dACC, 'BillingState', safeStr(l.get('LEA_Provincia__c')));
+      setIfAccountFieldExistsAndUpdateable(acc, dACC, 'BillingCity', getPicklistLabel(leadDescribe, 'LEA_Municipio__c', safeStr(l.get('LEA_Municipio__c'))));
+      setIfAccountFieldExistsAndUpdateable(acc, dACC, 'BillingState', getPicklistLabel(leadDescribe, 'LEA_Provincia__c', safeStr(l.get('LEA_Provincia__c'))));
       setIfAccountFieldExistsAndUpdateable(acc, dACC, 'BillingPostalCode', safeStr(l.get('LEA_Apartado_postal__c')));
-      setIfAccountFieldExistsAndUpdateable(acc, dACC, 'BillingCountry', safeStr(l.get('LEA_Pais__c')));
+      setIfAccountFieldExistsAndUpdateable(acc, dACC, 'BillingCountry', getPicklistLabel(leadDescribe, 'LEA_Pais__c', safeStr(l.get('LEA_Pais__c'))));
     }
 
     System.debug('LeadConversionQueue.mapPrimaryContactPointFieldsToAccount() primaryPhone=' + primaryPhone + ', primaryEmail=' + primaryEmail + ', billingStreet=' + billingStreet);
   }
 
+  @TestVisible
   private static String getPrimaryPhoneFromLead(Lead l) {
     if (l == null)
       return null;
@@ -976,6 +1020,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     return null;
   }
 
+  @TestVisible
   private static String getPrimaryEmailFromLead(Lead l) {
     if (l == null)
       return null;
@@ -996,6 +1041,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     return null;
   }
 
+  @TestVisible
   private static String getPrimaryBillingStreetFromLead(Lead l) {
     if (l == null)
       return null;
@@ -1019,6 +1065,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     return joinNotBlank(new List<String>{ street1, street2 }, '\n');
   }
 
+  @TestVisible
   private static void addReferenceBundle(
     List<RefBundle> bundles,
     Schema.DescribeSObjectResult dCCR,
@@ -1077,6 +1124,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     bundles.add(new RefBundle(c, link, dCCR));
   }
 
+  @TestVisible
   private static void buildContactPointsFromSlot(
     Schema.DescribeSObjectResult dCPP,
     Schema.DescribeSObjectResult dCPE,
@@ -1147,6 +1195,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     }
   }
 
+  @TestVisible
   private static void buildActionPlansForPendingDocs(Schema.DescribeSObjectResult dAP, Set<Id> accountsWithPendingDocs, List<SObject> actionPlans) {
     System.debug('LeadConversionQueue.buildActionPlansForPendingDocs() accountsWithPendingDocs size: ' + (accountsWithPendingDocs == null ? 0 : accountsWithPendingDocs.size()));
 
@@ -1222,6 +1271,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     System.debug('LeadConversionQueue.buildActionPlansForPendingDocs() actionPlans prepared size: ' + actionPlans.size());
   }
 
+  @TestVisible
   private static Id getActionPlanTemplateVersionIdByTemplateName(String templateName) {
     System.debug('LeadConversionQueue.getActionPlanTemplateVersionIdByTemplateName() templateName=' + templateName);
 
@@ -1267,6 +1317,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     return templateVersionId;
   }
 
+  @TestVisible
   private static List<Task> buildTasksForPendingDocuments(Map<Id, List<String>> pendingDocNamesByAccount) {
     System.debug('LeadConversionQueue.buildTasksForPendingDocuments() accounts size: ' + (pendingDocNamesByAccount == null ? 0 : pendingDocNamesByAccount.size()));
 
@@ -1530,6 +1581,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     }
   }
 
+  @TestVisible
   private static Schema.DescribeSObjectResult safeDescribe(String apiName) {
     try {
       Map<String, Schema.SObjectType> gd = Schema.getGlobalDescribe();
@@ -1546,6 +1598,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     }
   }
 
+  @TestVisible
   private static void setIfFieldExists(SObject sob, Schema.DescribeSObjectResult d, String fieldApi, Object value) {
     try {
       if (sob == null || d == null || String.isBlank(fieldApi))
@@ -1561,6 +1614,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     }
   }
 
+  @TestVisible
   private static void setIfAccountFieldExistsAndUpdateable(SObject sob, Schema.DescribeSObjectResult d, String fieldApi, Object value) {
     try {
       if (sob == null || d == null || String.isBlank(fieldApi))
@@ -1576,6 +1630,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     }
   }
 
+  @TestVisible
   private static void setIfContactFieldExists(Contact c, String fieldApi, Object value) {
     try {
       if (c == null || String.isBlank(fieldApi))
@@ -1591,10 +1646,12 @@ public without sharing class LeadConversionQueue implements Queueable {
     }
   }
 
+  @TestVisible
   private static String safeStr(Object o) {
     return (o == null) ? null : String.valueOf(o).trim();
   }
 
+  @TestVisible
   private static String joinNotBlank(List<String> parts, String sep) {
     if (parts == null || parts.isEmpty())
       return null;
@@ -1609,6 +1666,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     return out.isEmpty() ? null : String.join(out, sep);
   }
 
+  @TestVisible
   private static Boolean looksLikePhone(String v) {
     if (String.isBlank(v))
       return false;
@@ -1621,6 +1679,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     return Pattern.matches('^[0-9]+$', s);
   }
 
+  @TestVisible
   private static Boolean toBool(Object value) {
     if (value == null)
       return null;
@@ -1628,6 +1687,7 @@ public without sharing class LeadConversionQueue implements Queueable {
     return String.isNotBlank(String.valueOf(value).trim());
   }
 
+  @TestVisible
   private static Boolean isPF(Lead l) {
     if (l == null || l.RecordType == null)
       return false;

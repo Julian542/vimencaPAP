@@ -107,6 +107,9 @@ public with sharing class VFS_nAperturaCuentasController {
                 SELECT Id,
                        Name,
                        PersonContactId,
+                       PersonBirthdate,
+                       ACC_Nacionalidad__c,
+                       ACC_Genero__c,
                        ACC_NumIdentificacion__c,
                        ACC_TipoIdentificacion__c,
                        ACC_NumOficina__c
@@ -168,12 +171,16 @@ public with sharing class VFS_nAperturaCuentasController {
         Set<String> lstNumerosDocumentos = new Set<String>();
         Set<String> nombresCompletos = new Set<String>();
         Set<String> numerosDocumentosAutorizados = new Set<String>();
+        Set<String> documentosNoPrincipales = new Set<String>();
+        List<Map<String, String>> vinculadosNoPrincipalesCore = new List<Map<String, String>>();
 
         tipoFirma = null;
         lstAccountFirmaConjunta.clear();
         lstFirmantesAutorizados.clear();
 
         Map<String, String> documentoToVinculo = new Map<String, String>();
+        Boolean tieneApoderado = false;
+        String firmaConjuntaDetectada;
 
         for (Map<String, Object> vinculado : resp.responseList) {
             String vinculo = String.valueOf(vinculado.get('Vinculo'));
@@ -182,6 +189,22 @@ public with sharing class VFS_nAperturaCuentasController {
 
             if (!String.isBlank(numeroDocumento)) {
                 documentoToVinculo.put(numeroDocumento, vinculo);
+            }
+
+            if (!String.isBlank(numeroDocumento) && !vinculo.equalsIgnoreCase('PRINCIPAL') &&
+                (accountTitular == null || numeroDocumento != accountTitular.ACC_NumIdentificacion__c)) {
+                documentosNoPrincipales.add(numeroDocumento);
+            }
+            if (!vinculo.equalsIgnoreCase('PRINCIPAL') && !String.isBlank(nombreCompleto)) {
+                nombresCompletos.add(nombreCompleto.trim());
+            }
+            if (!vinculo.equalsIgnoreCase('PRINCIPAL')) {
+                vinculadosNoPrincipalesCore.add(new Map<String, String>{
+                    'nombre' => nombreCompleto,
+                    'documento' => numeroDocumento,
+                    'tipoDocumento' => String.valueOf(vinculado.get('TipoDocumento')),
+                    'vinculo' => vinculo
+                });
             }
 
             if (vinculo.equalsIgnoreCase('AUTORIZADO')) {
@@ -193,49 +216,82 @@ public with sharing class VFS_nAperturaCuentasController {
                 }
             }
 
-            if (String.valueOf(vinculado.get('DarGarantia')).equalsIgnoreCase('Y')) {
-                tipoFirma = 'Conjunta Y';
+            String tipoPoder = String.valueOf(vinculado.get('TipoPoder'));
+            if (vinculo.equalsIgnoreCase('APODERADO')) {
+                tieneApoderado = true;
+            } else if (!vinculo.equalsIgnoreCase('PRINCIPAL') && tipoPoder.equalsIgnoreCase('Y')) {
+                firmaConjuntaDetectada = 'Conjunta Y';
                 if (!String.isBlank(numeroDocumento)) {
                     if (accountTitular == null || accountTitular.ACC_NumIdentificacion__c != numeroDocumento) {
                         lstNumerosDocumentos.add(numeroDocumento);
                     }
                 }
-            }
-
-            if (vinculo.equalsIgnoreCase('APODERADO')) {
-                tipoFirma = 'Por poder';
-            }
-        }
-
-        if (!nombresCompletos.isEmpty() || !numerosDocumentosAutorizados.isEmpty()) {
-            List<String> whereConditions = new List<String>();
-
-            if (!nombresCompletos.isEmpty()) {
-                whereConditions.add('Name IN :nombresCompletos');
-            }
-            if (!numerosDocumentosAutorizados.isEmpty()) {
-                whereConditions.add('ACC_NumIdentificacion__c IN :numerosDocumentosAutorizados');
-            }
-
-            String query =
-                'SELECT Id, Name, PersonContactId, PersonBirthdate, ACC_Nacionalidad__c, ACC_Genero__c, ACC_NumIdentificacion__c, ACC_TipoIdentificacion__c ' +
-                'FROM Account WHERE (' + String.join(whereConditions, ' OR ') + ')';
-
-            List<Account> allAuthorizedAccounts = Database.query(query);
-
-            for (Account acc : allAuthorizedAccounts) {
-                if (accountTitular != null && acc.Id != accountTitular.Id) {
-                    if (!String.isBlank(acc.ACC_NumIdentificacion__c) && documentoToVinculo.containsKey(acc.ACC_NumIdentificacion__c)) {
-                        String vinculo = documentoToVinculo.get(acc.ACC_NumIdentificacion__c);
-                        acc.ACC_Ejecutivo__c = vinculo.equalsIgnoreCase('AUTORIZADO') ? 'Autorizado' : vinculo;
-                    }
-                    lstAccountFirmaConjunta.add(acc);
-                }
+            } else if (!vinculo.equalsIgnoreCase('PRINCIPAL') && tipoPoder.equalsIgnoreCase('O') &&
+                       firmaConjuntaDetectada != 'Conjunta Y') {
+                firmaConjuntaDetectada = 'Conjunta O';
             }
         }
 
-        if (String.isBlank(tipoFirma)) {
-            tipoFirma = 'Titular unico';
+        tipoFirma = tieneApoderado
+            ? 'Por poder'
+            : (String.isNotBlank(firmaConjuntaDetectada) ? firmaConjuntaDetectada : 'Titular unico');
+
+        if (!documentosNoPrincipales.isEmpty() || !nombresCompletos.isEmpty()) {
+            List<String> condiciones = new List<String>();
+            Id titularId = accountTitular != null ? accountTitular.Id : null;
+            if (!documentosNoPrincipales.isEmpty()) condiciones.add('ACC_NumIdentificacion__c IN :documentosNoPrincipales');
+            if (!nombresCompletos.isEmpty()) condiciones.add('Name IN :nombresCompletos');
+            List<Account> vinculados = Database.query(
+                'SELECT Id, Name, PersonContactId, PersonBirthdate, ACC_Nacionalidad__c, ACC_Genero__c, ' +
+                'ACC_NumIdentificacion__c, ACC_TipoIdentificacion__c FROM Account WHERE (' +
+                String.join(condiciones, ' OR ') + ') AND Id != :titularId'
+            );
+            Map<String, List<Account>> porVinculo = new Map<String, List<Account>>{
+                'SECUNDARIO' => new List<Account>(), 'AUTORIZADO' => new List<Account>(),
+                'APODERADO' => new List<Account>(), 'OTRO' => new List<Account>()
+            };
+            for (Account acc : vinculados) {
+                String vinculo = documentoToVinculo.get(acc.ACC_NumIdentificacion__c);
+                if (String.isBlank(vinculo)) vinculo = 'OTRO';
+                acc.ACC_Ejecutivo__c = vinculo;
+                String grupo = porVinculo.containsKey(vinculo != null ? vinculo.toUpperCase() : '')
+                    ? vinculo.toUpperCase() : 'OTRO';
+                porVinculo.get(grupo).add(acc);
+            }
+            List<Account> ordenados = new List<Account>();
+            ordenados.addAll(porVinculo.get('SECUNDARIO'));
+            ordenados.addAll(porVinculo.get('AUTORIZADO'));
+            ordenados.addAll(porVinculo.get('APODERADO'));
+            ordenados.addAll(porVinculo.get('OTRO'));
+            lstAccountFirmaConjunta.addAll(ordenados);
+        }
+
+        Set<String> documentosResueltos = new Set<String>();
+        Set<String> nombresResueltos = new Set<String>();
+        for (Account resuelto : lstAccountFirmaConjunta) {
+            if (String.isNotBlank(resuelto.ACC_NumIdentificacion__c)) documentosResueltos.add(resuelto.ACC_NumIdentificacion__c);
+            if (String.isNotBlank(resuelto.Name)) nombresResueltos.add(resuelto.Name.toUpperCase());
+        }
+        for (Map<String, String> datosCore : vinculadosNoPrincipalesCore) {
+            if (lstAccountFirmaConjunta.size() >= 2) break;
+            String documento = datosCore.get('documento');
+            String nombre = datosCore.get('nombre');
+            Boolean yaResuelto = (String.isNotBlank(documento) && documentosResueltos.contains(documento)) ||
+                (String.isNotBlank(nombre) && nombresResueltos.contains(nombre.toUpperCase()));
+            if (yaResuelto) continue;
+
+            Account vinculadoCore = new Account();
+            vinculadoCore.Name = String.isBlank(nombre) ? 'Vinculado' : nombre;
+            vinculadoCore.ACC_NumIdentificacion__c = documento;
+            String tipoDocumento = datosCore.get('tipoDocumento');
+            if (String.isNotBlank(tipoDocumento) && tipoDocumento.toUpperCase().contains('CED')) tipoDocumento = 'Cédula';
+            if (String.isNotBlank(tipoDocumento) && tipoDocumento.toUpperCase().contains('PAS')) tipoDocumento = 'Pasaporte';
+            vinculadoCore.ACC_TipoIdentificacion__c = tipoDocumento;
+            vinculadoCore.ACC_Ejecutivo__c = datosCore.get('vinculo');
+            lstAccountFirmaConjunta.add(vinculadoCore);
+        }
+        while (lstAccountFirmaConjunta.size() > 2) {
+            lstAccountFirmaConjunta.remove(lstAccountFirmaConjunta.size() - 1);
         }
 
         if (!lstNumerosDocumentos.isEmpty()) {
@@ -277,24 +333,18 @@ public with sharing class VFS_nAperturaCuentasController {
         firmante.Phone = telefonoPrincipal;
     }
 
-    private Direccion__c obtenerDireccion(Account acc, String tipoDireccion) {
-        if (acc == null) {
+    private ContactPointAddress obtenerDireccion(Account acc, String tipoDireccion) {
+        if (acc == null || acc.Id == null) {
             return null;
         }
 
-        List<Direccion__c> direcciones = [
-            SELECT DIR_Tipo_Direccion__c,
-                   DIR_Account__c,
-                   DIR_Calle__c,
-                   DIR_Numero__c,
-                   DIR_Edificio__c,
-                   DIR_N_Apartamento__c,
-                   DIR_Sector__c,
-                   DIR_Sector__r.Name,
-                   DIR_Provincia_texto__c
-            FROM Direccion__c
-            WHERE DIR_Account__c = :acc.Id
-              AND DIR_Tipo_Direccion__c = :tipoDireccion
+        Set<Id> parentIds = getParentIds(acc);
+        List<ContactPointAddress> direcciones = [
+            SELECT Address, Street, City, State, PostalCode, Country, AddressType, IsPrimary
+            FROM ContactPointAddress
+            WHERE ParentId IN :parentIds
+              AND AddressType = :tipoDireccion
+            ORDER BY IsPrimary DESC, CreatedDate DESC
             LIMIT 1
         ];
 
@@ -302,8 +352,18 @@ public with sharing class VFS_nAperturaCuentasController {
     }
 
     public String getDireccionesTitular() {
-        Direccion__c dir = obtenerDireccion(accountTitular, 'RESIDENCIA');
+        ContactPointAddress dir = obtenerDireccion(accountTitular, 'RESIDENCIA');
         return formatearDireccion(dir);
+    }
+
+    public String getDireccionesTrabajoTitular() {
+        ContactPointAddress dir = obtenerDireccion(accountTitular, 'LABORAL');
+        if (dir != null) return formatearDireccion(dir);
+
+        FinServ__Employment__c empleo = cargarHistorialLaboral(accountTitular);
+        return empleo != null && empleo.get('FinServ__EmployerAddress__c') != null
+            ? String.valueOf(empleo.get('FinServ__EmployerAddress__c'))
+            : '';
     }
 
     public String getDireccionesFirmaConjunta() {
@@ -314,44 +374,41 @@ public with sharing class VFS_nAperturaCuentasController {
         if (lstAccountFirmaConjunta == null || lstAccountFirmaConjunta.size() <= index || index < 0) {
             return '';
         }
-        Direccion__c dir = obtenerDireccion(lstAccountFirmaConjunta[index], 'LABORAL');
+        ContactPointAddress dir = obtenerDireccion(lstAccountFirmaConjunta[index], 'RESIDENCIA');
         return formatearDireccion(dir);
+    }
+
+    public String getDireccionesTrabajoFirmaConjunta() {
+        return getDireccionesTrabajoFirmaConjunta(0);
+    }
+
+    public String getDireccionesTrabajoFirmaConjunta(Integer index) {
+        if (lstAccountFirmaConjunta == null || lstAccountFirmaConjunta.size() <= index || index < 0) return '';
+        ContactPointAddress dir = obtenerDireccion(lstAccountFirmaConjunta[index], 'LABORAL');
+        if (dir != null) return formatearDireccion(dir);
+        FinServ__Employment__c empleo = cargarHistorialLaboral(lstAccountFirmaConjunta[index]);
+        return empleo != null && empleo.get('FinServ__EmployerAddress__c') != null
+            ? String.valueOf(empleo.get('FinServ__EmployerAddress__c'))
+            : '';
     }
 
     public String getDireccionesJuridica() {
-        Direccion__c dir = obtenerDireccion(accountTitular, 'EMPRESARIAL');
+        ContactPointAddress dir = obtenerDireccion(accountTitular, 'EMPRESARIAL');
         return formatearDireccion(dir);
     }
 
-    public String formatearDireccion(Direccion__c dir) {
+    public String formatearDireccion(ContactPointAddress dir) {
         if (dir == null) {
             return '';
         }
 
         List<String> partes = new List<String>();
 
-        if (!String.isBlank(dir.DIR_Calle__c)) {
-            String calle = 'Calle ' + dir.DIR_Calle__c;
-            if (!String.isBlank(dir.DIR_Numero__c)) {
-                calle += ' No. ' + dir.DIR_Numero__c;
-            }
-            partes.add(calle);
-        } else if (!String.isBlank(dir.DIR_Numero__c)) {
-            partes.add('No. ' + dir.DIR_Numero__c);
-        }
-
-        if (!String.isBlank(dir.DIR_Edificio__c)) {
-            partes.add('Edif. ' + dir.DIR_Edificio__c);
-        }
-        if (!String.isBlank(dir.DIR_N_Apartamento__c)) {
-            partes.add('Apt. ' + dir.DIR_N_Apartamento__c);
-        }
-        if (dir.DIR_Sector__r != null && !String.isBlank(dir.DIR_Sector__r.Name)) {
-            partes.add(dir.DIR_Sector__r.Name);
-        }
-        if (!String.isBlank(dir.DIR_Provincia_texto__c)) {
-            partes.add(dir.DIR_Provincia_texto__c);
-        }
+        if (!String.isBlank(dir.Street)) partes.add(dir.Street);
+        if (!String.isBlank(dir.City)) partes.add(dir.City);
+        if (!String.isBlank(dir.State)) partes.add(dir.State);
+        if (!String.isBlank(dir.PostalCode)) partes.add(dir.PostalCode);
+        if (!String.isBlank(dir.Country)) partes.add(dir.Country);
 
         return String.join(partes, ', ');
     }
@@ -371,18 +428,18 @@ public with sharing class VFS_nAperturaCuentasController {
         return cargarViasDeContacto(lstAccountFirmaConjunta[index]);
     }
 
-    public Historial_laboral__c getHistorialLaboralFirmaConjunta() {
+    public FinServ__Employment__c getHistorialLaboralFirmaConjunta() {
         return getHistorialLaboralFirmaConjunta(0);
     }
 
-    public Historial_laboral__c getHistorialLaboralFirmaConjunta(Integer index) {
+    public FinServ__Employment__c getHistorialLaboralFirmaConjunta(Integer index) {
         if (lstAccountFirmaConjunta == null || lstAccountFirmaConjunta.size() <= index || index < 0) {
             return null;
         }
         return cargarHistorialLaboral(lstAccountFirmaConjunta[index]);
     }
 
-    public Historial_laboral__c getHistorialLaboralTitular() {
+    public FinServ__Employment__c getHistorialLaboralTitular() {
         return cargarHistorialLaboral(accountTitular);
     }
 
@@ -404,7 +461,7 @@ public with sharing class VFS_nAperturaCuentasController {
         return getViasOrdenadasFirmaConjunta(1);
     }
 
-    public Historial_laboral__c getHistorialLaboralSegundaFirmaConjunta() {
+    public FinServ__Employment__c getHistorialLaboralSegundaFirmaConjunta() {
         return getHistorialLaboralFirmaConjunta(1);
     }
 
@@ -412,12 +469,20 @@ public with sharing class VFS_nAperturaCuentasController {
         return getDireccionesFirmaConjunta(1);
     }
 
-    public List<Referencia__c> getLstReferenciasBancarias() {
+    public String getDireccionesTrabajoSegundaFirmaConjunta() {
+        return getDireccionesTrabajoFirmaConjunta(1);
+    }
+
+    public List<FinServ__ContactContactRelation__c> getLstReferenciasBancarias() {
         return cargarReferencias(accountTitular, 'Bancaria');
     }
 
-    public List<Referencia__c> getLstReferenciasComerciales() {
+    public List<FinServ__ContactContactRelation__c> getLstReferenciasComerciales() {
         return cargarReferencias(accountTitular, 'Comercial');
+    }
+
+    public List<FinServ__ContactContactRelation__c> getLstReferenciasPersonales() {
+        return cargarReferencias(accountTitular, 'Personal');
     }
 
     private List<String> cargarViasDeContacto(Account acc) {
@@ -492,49 +557,56 @@ public with sharing class VFS_nAperturaCuentasController {
         return viasOrdenadas;
     }
 
-    private Historial_laboral__c cargarHistorialLaboral(Account acc) {
-        List<Historial_laboral__c> historial = new List<Historial_laboral__c>();
-        if (acc != null) {
-            historial = [
-                SELECT HIS_Empresa__c, Tiempo_de_empresa__c
-                FROM Historial_laboral__c
-                WHERE HIS_Empleo__c = 'Actual'
-                  AND HIS_Cuenta__c = :acc.Id
-                LIMIT 1
-            ];
-            if (historial != null && !historial.isEmpty()) {
-                return historial[0];
-            }
-        }
-        return null;
+    private FinServ__Employment__c cargarHistorialLaboral(Account acc) {
+        if (acc == null || acc.Id == null) return null;
+        Set<Id> parentIds = getParentIds(acc);
+        List<FinServ__Employment__c> historial = [
+            SELECT EMP_Empresa__c, EMP_YearsInEmployment__c, FinServ__EmployerAddress__c,
+                   EMP_Principal__c, EMP_Empleo__c
+            FROM FinServ__Employment__c
+            WHERE (Cliente__c = :acc.Id OR FinServ__Contact__c IN :parentIds)
+              AND (EMP_Principal__c = true OR EMP_Empleo__c = 'Actual')
+            ORDER BY EMP_Principal__c DESC, CreatedDate DESC
+            LIMIT 1
+        ];
+        return historial.isEmpty() ? null : historial[0];
     }
 
-    private List<Referencia__c> cargarReferencias(Account acc, String tipo) {
-        List<Referencia__c> referencias = new List<Referencia__c>();
-        if (acc != null) {
-            List<Referencia__c> refList = [
-                SELECT Id, REF_Tipo__c, Tipo_de_cuenta__c, Name, Banco__c, N_de_cuenta__c, REF_Telefono__c, REF_Nombre__c
-                FROM Referencia__c
-                WHERE Account__c = :acc.Id
-                  AND REF_Tipo__c = :tipo
+    private List<FinServ__ContactContactRelation__c> cargarReferencias(Account acc, String tipo) {
+        List<FinServ__ContactContactRelation__c> referencias = new List<FinServ__ContactContactRelation__c>();
+        if (acc != null && acc.PersonContactId != null) {
+            String tipoNormalizado = tipo.toUpperCase();
+            referencias.addAll([
+                SELECT CCR_Tipo__c, CCR_Tipo_de_cuenta__c, CCR_Banco__c, CCR_N_de_cuenta__c,
+                       FinServ__RelatedContact__r.Name, FinServ__RelatedContact__r.Phone,
+                       FinServ__RelatedContact__r.MailingStreet,
+                       FinServ__RelatedContact__r.MailingCity,
+                       FinServ__RelatedContact__r.MailingState,
+                       FinServ__RelatedContact__r.MailingCountry
+                FROM FinServ__ContactContactRelation__c
+                WHERE FinServ__Contact__c = :acc.PersonContactId
+                  AND CCR_Tipo__c = :tipoNormalizado
                 LIMIT 3
-            ];
-            referencias.addAll(refList);
-            while (referencias.size() < 3) {
-                referencias.add(new Referencia__c());
-            }
-        } else {
-            for (Integer i = 0; i < 3; i++) {
-                referencias.add(new Referencia__c());
-            }
+            ]);
+        }
+        while (referencias.size() < 3) {
+            referencias.add(new FinServ__ContactContactRelation__c());
         }
         return referencias;
+    }
+
+    public Boolean getTienePrimeraFirmaConjunta() {
+        return getPrimeraFirmaConjunta() != null;
+    }
+
+    public Boolean getTieneSegundaFirmaConjunta() {
+        return getSegundaFirmaConjunta() != null;
     }
 
     private Set<Id> getParentIds(Account acc) {
         Set<Id> parentIds = new Set<Id>();
         if (acc != null) {
-            parentIds.add(acc.Id);
+            if (acc.Id != null) parentIds.add(acc.Id);
             if (acc.PersonContactId != null) {
                 parentIds.add(acc.PersonContactId);
             }

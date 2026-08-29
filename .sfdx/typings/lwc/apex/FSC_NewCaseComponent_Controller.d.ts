@@ -1,6 +1,9 @@
 declare module "@salesforce/apex/FSC_NewCaseComponent_Controller.getPrimaryEmail" {
   export default function getPrimaryEmail(param: {accountId: any}): Promise<any>;
 }
+declare module "@salesforce/apex/FSC_NewCaseComponent_Controller.hasFinancialAccountTransactions" {
+  export default function hasFinancialAccountTransactions(param: {financialAccountId: any}): Promise<any>;
+}
 declare module "@salesforce/apex/FSC_NewCaseComponent_Controller.getAccountInfo" {
   export default function getAccountInfo(param: {accountId: any}): Promise<any>;
 }

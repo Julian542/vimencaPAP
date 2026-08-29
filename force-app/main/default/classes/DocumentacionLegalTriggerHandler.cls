@@ -6,7 +6,10 @@
  **/
 public with sharing class DocumentacionLegalTriggerHandler {
 
-    private static final String ESTADO_APROBADO = 'APROBADO';
+    private static final Set<String> ESTADOS_QUE_PERMITEN_CONVERSION = new Set<String>{
+        'APROBADO',
+        'POSPUESTO'
+    };
 
     public static void afterInsert(List<Documentacion_Legal__c> newList) {
         System.debug('DocumentacionLegalTriggerHandler.afterInsert() newList size=' + (newList == null ? 0 : newList.size()));
@@ -53,7 +56,9 @@ public with sharing class DocumentacionLegalTriggerHandler {
                         ', newEstado=' + newDoc.DOC_Estado__c
                     );
 
-                    if (candidatoCambio || estadoCambio) {
+                    Boolean documentoYaAprobado = ESTADOS_QUE_PERMITEN_CONVERSION.contains(newDoc.DOC_Estado__c);
+
+                    if (candidatoCambio || estadoCambio || documentoYaAprobado) {
                         if (newDoc.DOC_Candidato__c != null) {
                             leadIds.add(newDoc.DOC_Candidato__c);
                         }
@@ -68,11 +73,125 @@ public with sharing class DocumentacionLegalTriggerHandler {
             System.debug('DocumentacionLegalTriggerHandler.afterUpdate() leadIds=' + leadIds);
 
             recalcularDocumentosNoAprobados(leadIds);
+            avanzarAprobacionLegalSiCompleta(leadIds);
 
         } catch (Exception e) {
             System.debug('ERROR DocumentacionLegalTriggerHandler.afterUpdate: ' + e.getMessage());
             System.debug(e.getStackTraceString());
             throw e;
+        }
+    }
+
+    private static void avanzarAprobacionLegalSiCompleta(Set<Id> leadIds) {
+        if (leadIds == null || leadIds.isEmpty()) {
+            return;
+        }
+
+        Map<Id, Group> approvalQueuesById = new Map<Id, Group>([
+            SELECT Id, DeveloperName
+            FROM Group
+            WHERE Type = 'Queue'
+            AND DeveloperName IN ('FSC_PLA', 'FSC_Legal')
+        ]);
+
+        Set<Id> approvalQueueIds = approvalQueuesById.keySet();
+        Set<Id> eligibleQueueIds = new Set<Id>();
+
+        Profile currentProfile = [
+            SELECT PermissionsModifyAllData
+            FROM Profile
+            WHERE Id = :UserInfo.getProfileId()
+            LIMIT 1
+        ];
+
+        if (currentProfile.PermissionsModifyAllData) {
+            eligibleQueueIds.addAll(approvalQueueIds);
+        } else {
+            for (GroupMember membership : [
+                SELECT GroupId
+                FROM GroupMember
+                WHERE GroupId IN :approvalQueueIds
+                AND UserOrGroupId = :UserInfo.getUserId()
+            ]) {
+                eligibleQueueIds.add(membership.GroupId);
+            }
+        }
+
+        if (eligibleQueueIds.isEmpty()) {
+            return;
+        }
+
+        Set<Id> candidatosCompletos = new Set<Id>();
+        candidatosCompletos.addAll(leadIds);
+
+        for (AggregateResult result : [
+            SELECT DOC_Candidato__c candidatoId, COUNT(Id) total
+            FROM Documentacion_Legal__c
+            WHERE DOC_Candidato__c IN :leadIds
+            AND (
+                DOC_Estado__c = null
+                OR DOC_Estado__c NOT IN :ESTADOS_QUE_PERMITEN_CONVERSION
+            )
+            GROUP BY DOC_Candidato__c
+        ]) {
+            candidatosCompletos.remove((Id) result.get('candidatoId'));
+        }
+
+        if (candidatosCompletos.isEmpty()) {
+            return;
+        }
+
+        Set<Id> candidatosConDocumentosIncompletos = new Set<Id>();
+        for (Id candidatoId : candidatosCompletos) {
+            if (!LeadDocumentsController.hasAllRequiredDocumentsUploaded(candidatoId)) {
+                candidatosConDocumentosIncompletos.add(candidatoId);
+            }
+        }
+        candidatosCompletos.removeAll(candidatosConDocumentosIncompletos);
+
+        if (candidatosCompletos.isEmpty()) {
+            return;
+        }
+
+        ProcessDefinition legalProcess = [
+            SELECT Id
+            FROM ProcessDefinition
+            WHERE DeveloperName = 'Aprobacion_de_Candidatos_por_Legal'
+            AND State = 'Active'
+            LIMIT 1
+        ];
+
+        Set<Id> processInstanceIds = new Set<Id>();
+        for (ProcessInstance instance : [
+            SELECT Id
+            FROM ProcessInstance
+            WHERE TargetObjectId IN :candidatosCompletos
+            AND Status = 'Pending'
+            AND ProcessDefinitionId = :legalProcess.Id
+        ]) {
+            processInstanceIds.add(instance.Id);
+        }
+
+        if (processInstanceIds.isEmpty()) {
+            return;
+        }
+
+        for (ProcessInstanceWorkitem workitem : [
+            SELECT Id, ActorId
+            FROM ProcessInstanceWorkitem
+            WHERE ActorId IN :eligibleQueueIds
+            AND ProcessInstanceId IN :processInstanceIds
+        ]) {
+            Approval.ProcessWorkitemRequest request = new Approval.ProcessWorkitemRequest();
+            request.setWorkitemId(workitem.Id);
+            request.setAction('Approve');
+            String queueDeveloperName = approvalQueuesById.get(workitem.ActorId).DeveloperName;
+            request.setComments(
+                queueDeveloperName == 'FSC_PLA'
+                    ? 'Documentacion requerida revisada y completa. Derivado automaticamente de PLA a Legal.'
+                    : 'Revision legal completada. Candidato aprobado automaticamente por Legal.'
+            );
+            Approval.process(request);
         }
     }
 
@@ -194,7 +313,7 @@ public with sharing class DocumentacionLegalTriggerHandler {
                 WHERE DOC_Candidato__c IN :leadIds
                 AND (
                     DOC_Estado__c = null
-                    OR DOC_Estado__c != :ESTADO_APROBADO
+                    OR DOC_Estado__c NOT IN :ESTADOS_QUE_PERMITEN_CONVERSION
                 )
                 GROUP BY DOC_Candidato__c
             ]) {
@@ -211,7 +330,27 @@ public with sharing class DocumentacionLegalTriggerHandler {
 
             List<Lead> leadsToUpdate = new List<Lead>();
 
+            Set<Id> leadsEnAprobacion = new Set<Id>();
+            for (ProcessInstance instance : [
+                SELECT TargetObjectId
+                FROM ProcessInstance
+                WHERE TargetObjectId IN :leadIds
+                AND Status = 'Pending'
+            ]) {
+                leadsEnAprobacion.add(instance.TargetObjectId);
+            }
+
             for (Id leadId : leadIds) {
+                // El proceso de aprobacion bloquea el candidato. El documento debe
+                // poder ser revisado por Legal aunque el padre siga bloqueado.
+                if (leadsEnAprobacion.contains(leadId)) {
+                    System.debug(
+                        'DocumentacionLegalTriggerHandler.recalcularDocumentosNoAprobados() ' +
+                        'se omite Lead bloqueado por aprobacion. leadId=' + leadId
+                    );
+                    continue;
+                }
+
                 Integer totalDocumentos = totalDocumentosPorLead.containsKey(leadId)
                     ? totalDocumentosPorLead.get(leadId)
                     : 0;

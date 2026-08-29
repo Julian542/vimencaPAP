@@ -233,6 +233,87 @@ public with sharing class LeadDocumentsController {
         return out;
     }
 
+    /**
+     * Retorna true solamente cuando cada documento requerido en el catÃ¡logo
+     * tiene un registro de Documentacion_Legal__c y al menos un archivo enlazado.
+     */
+    public static Boolean hasAllRequiredDocumentsUploaded(Id leadId) {
+        if (leadId == null) {
+            return false;
+        }
+
+        Lead candidate = [
+            SELECT Id, RecordType.DeveloperName, LEA_Clasificacion_Empresa__c,
+                   LEA_TipoIdentificacion__c
+            FROM Lead
+            WHERE Id = :leadId
+            LIMIT 1
+        ];
+
+        String recordTypeDeveloperName = candidate.RecordType == null
+            ? null
+            : candidate.RecordType.DeveloperName;
+        Boolean isPF = isPFByRecordType(recordTypeDeveloperName);
+        String entityType = isPF ? 'Persona Física' : 'Persona Jurídica';
+        String documentType = isPF
+            ? candidate.LEA_TipoIdentificacion__c
+            : candidate.LEA_Clasificacion_Empresa__c;
+
+        if (String.isBlank(documentType)) {
+            return false;
+        }
+
+        Set<String> requiredDocumentNames = new Set<String>();
+        for (Admin_Doc_Requerida__c catalogDocument : [
+            SELECT Id, Name, ADR_Nombre_de_documento__c
+            FROM Admin_Doc_Requerida__c
+            WHERE ADR_Entidad__c = :entityType
+            AND ADR_Tipo__c = :documentType
+            AND ADR_Requerido__c = true
+        ]) {
+            String documentName = !String.isBlank(catalogDocument.ADR_Nombre_de_documento__c)
+                ? catalogDocument.ADR_Nombre_de_documento__c
+                : catalogDocument.Name;
+            requiredDocumentNames.add(normalizeDocumentName(documentName));
+        }
+
+        if (requiredDocumentNames.isEmpty()) {
+            return false;
+        }
+
+        Map<Id, String> documentNameByRecordId = new Map<Id, String>();
+        for (Documentacion_Legal__c documentRecord : [
+            SELECT Id,
+                   DOC_Documento_PF__r.ADR_Nombre_de_documento__c,
+                   DOC_Documento_PF__r.Name,
+                   DOC_Documento_PJ__r.ADR_Nombre_de_documento__c,
+                   DOC_Documento_PJ__r.Name
+            FROM Documentacion_Legal__c
+            WHERE DOC_Candidato__c = :leadId
+        ]) {
+            String documentName = getDocumentNameFromDocumentacionLegal(documentRecord, isPF);
+            if (!String.isBlank(documentName)) {
+                documentNameByRecordId.put(documentRecord.Id, normalizeDocumentName(documentName));
+            }
+        }
+
+        if (documentNameByRecordId.isEmpty()) {
+            return false;
+        }
+
+        Set<String> uploadedDocumentNames = new Set<String>();
+        Set<Id> documentRecordIds = documentNameByRecordId.keySet();
+        for (ContentDocumentLink fileLink : [
+            SELECT LinkedEntityId
+            FROM ContentDocumentLink
+            WHERE LinkedEntityId IN :documentRecordIds
+        ]) {
+            uploadedDocumentNames.add(documentNameByRecordId.get(fileLink.LinkedEntityId));
+        }
+
+        return uploadedDocumentNames.containsAll(requiredDocumentNames);
+    }
+
     @AuraEnabled(cacheable=true)
     public static List<FieldInfo> getDocumentModalFields() {
         List<FieldInfo> out = new List<FieldInfo>();
@@ -351,6 +432,7 @@ public with sharing class LeadDocumentsController {
             }
 
             relinkSingleFileToDocument(doc.Id, leadId, contentDocumentId);
+            AccountLookupController.submitLegalApprovalForParticipantLeadIfRequired(leadId);
 
             return doc.Id;
 
@@ -403,6 +485,9 @@ public with sharing class LeadDocumentsController {
             update doc;
 
             relinkSingleFileToDocument(documentacionLegalId, existingDoc.DOC_Candidato__c, contentDocumentId);
+            AccountLookupController.submitLegalApprovalForParticipantLeadIfRequired(
+                existingDoc.DOC_Candidato__c
+            );
 
         } catch (Exception e) {
             System.debug('ERROR LeadDocumentsController.updateDocumentAfterUpload: ' + e.getMessage());
@@ -413,6 +498,7 @@ public with sharing class LeadDocumentsController {
 
     @AuraEnabled
     public static void updateDocumentFieldsOnly(Id documentacionLegalId, String fieldsJson) {
+        validateLegalDocumentManagementAccess();
         System.debug('LeadDocumentsController.updateDocumentFieldsOnly() documentacionLegalId=' + documentacionLegalId);
 
         if (documentacionLegalId == null) {
@@ -439,6 +525,7 @@ public with sharing class LeadDocumentsController {
 
     @AuraEnabled
     public static void approveDocuments(List<Id> documentacionLegalIds) {
+        validateLegalDocumentManagementAccess();
         System.debug('LeadDocumentsController.approveDocuments() documentacionLegalIds=' + documentacionLegalIds);
 
         if (documentacionLegalIds == null || documentacionLegalIds.isEmpty()) {
@@ -452,6 +539,7 @@ public with sharing class LeadDocumentsController {
             List<Documentacion_Legal__c> docs = [
                 SELECT Id,
                     Name,
+                    DOC_Candidato__c,
                     DOC_Estado__c,
                     DOC_Recibido__c,
                     DOC_Aprobado_Por__c,
@@ -466,6 +554,8 @@ public with sharing class LeadDocumentsController {
                 FROM Documentacion_Legal__c
                 WHERE Id IN :docIds
             ];
+
+            validateCompleteLegalSelection(docs, docIds);
 
             Set<Id> docIdsConArchivo = new Set<Id>();
 
@@ -541,6 +631,7 @@ public with sharing class LeadDocumentsController {
 
     @AuraEnabled
     public static void deleteDocumentWithFiles(Id documentacionLegalId) {
+        validateLegalDocumentManagementAccess();
         System.debug('LeadDocumentsController.deleteDocumentWithFiles() documentacionLegalId=' + documentacionLegalId);
 
         if (documentacionLegalId == null) {
@@ -770,6 +861,7 @@ public with sharing class LeadDocumentsController {
         return docs.isEmpty() ? null : docs[0].Id;
     }
 
+    @TestVisible
     private static String getDocumentNameFromDocumentacionLegal(Documentacion_Legal__c doc, Boolean isPF) {
         if (doc == null) {
             return null;
@@ -800,6 +892,7 @@ public with sharing class LeadDocumentsController {
         return docName;
     }
 
+    @TestVisible
     private static Boolean isOtroDocumentName(String documentName) {
         if (String.isBlank(documentName)) {
             return false;
@@ -810,6 +903,7 @@ public with sharing class LeadDocumentsController {
         return normalizedName == 'OTRO' || normalizedName.startsWith('OTRO ');
     }
 
+    @TestVisible
     private static String normalizeDocumentName(String documentName) {
         if (String.isBlank(documentName)) {
             return null;
@@ -867,6 +961,7 @@ public with sharing class LeadDocumentsController {
         }
     }
 
+    @TestVisible
     private static void validateRequiredDates(Documentacion_Legal__c doc) {
         if (doc == null) {
             return;
@@ -877,6 +972,7 @@ public with sharing class LeadDocumentsController {
         }
     }
 
+    @TestVisible
     private static void setApprovalDataIfApproved(Documentacion_Legal__c doc) {
         System.debug('LeadDocumentsController.setApprovalDataIfApproved() inicio');
 
@@ -917,6 +1013,7 @@ public with sharing class LeadDocumentsController {
         }
     }
 
+    @TestVisible
     private static void applyFieldsToDocument(Documentacion_Legal__c doc, String fieldsJson) {
         if (doc == null || String.isBlank(fieldsJson)) {
             return;
@@ -997,6 +1094,77 @@ public with sharing class LeadDocumentsController {
         }
     }
 
+    @TestVisible
+    private static void validateCompleteLegalSelection(
+        List<Documentacion_Legal__c> selectedDocuments,
+        Set<Id> selectedDocumentIds
+    ) {
+        Set<Id> candidateIds = new Set<Id>();
+        for (Documentacion_Legal__c document : selectedDocuments) {
+            if (document.DOC_Candidato__c != null) {
+                candidateIds.add(document.DOC_Candidato__c);
+            }
+        }
+
+        if (candidateIds.isEmpty()) {
+            return;
+        }
+
+        List<Group> legalQueues = [
+            SELECT Id
+            FROM Group
+            WHERE Type = 'Queue'
+            AND DeveloperName = 'FSC_Legal'
+            LIMIT 1
+        ];
+        if (legalQueues.isEmpty()) {
+            return;
+        }
+        Id legalQueueId = legalQueues[0].Id;
+
+        Integer pendingLegalWorkItems = [
+            SELECT COUNT()
+            FROM ProcessInstanceWorkitem
+            WHERE ActorId = :legalQueueId
+            AND ProcessInstance.TargetObjectId IN :candidateIds
+            AND ProcessInstance.Status = 'Pending'
+        ];
+        if (pendingLegalWorkItems == 0) {
+            return;
+        }
+
+        Set<Id> allCandidateDocumentIds = new Map<Id, Documentacion_Legal__c>([
+            SELECT Id
+            FROM Documentacion_Legal__c
+            WHERE DOC_Candidato__c IN :candidateIds
+        ]).keySet();
+
+        if (!selectedDocumentIds.containsAll(allCandidateDocumentIds)) {
+            throw new AuraHandledException(
+                'Legal debe seleccionar todos los documentos del candidato antes de completar la aprobación final.'
+            );
+        }
+    }
+
+    @TestVisible
+    private static void validateLegalDocumentManagementAccess() {
+        if (FeatureManagement.checkPermission('FSC_VIMENCA_GESTION_DOCUMENTOS_LEGAL')) {
+            return;
+        }
+
+        Profile currentProfile = [
+            SELECT PermissionsModifyAllData
+            FROM Profile
+            WHERE Id = :UserInfo.getProfileId()
+            LIMIT 1
+        ];
+
+        if (!currentProfile.PermissionsModifyAllData) {
+            throw new AuraHandledException('No tienes permisos para editar, eliminar o aprobar documentos legales.');
+        }
+    }
+
+    @TestVisible
     private static Boolean isPFByRecordType(String developerName) {
         if (String.isBlank(developerName)) {
             return false;

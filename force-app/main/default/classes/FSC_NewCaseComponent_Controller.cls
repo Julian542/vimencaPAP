@@ -34,6 +34,19 @@ public class FSC_NewCaseComponent_Controller {
         return null;
     }
 
+    @AuraEnabled(cacheable=true)
+    public static Boolean hasFinancialAccountTransactions(Id financialAccountId) {
+        if (financialAccountId == null) {
+            return false;
+        }
+
+        return [
+            SELECT COUNT()
+            FROM FinServ__FinancialAccountTransaction__c
+            WHERE FinServ__FinancialAccount__c = :financialAccountId
+        ] > 0;
+    }
+
     @AuraEnabled
     public static Account getAccountInfo(Id accountId) {
 
@@ -210,6 +223,7 @@ public class FSC_NewCaseComponent_Controller {
         return nuevoLead.Id;
     }
 
+    @TestVisible
     private static void validateLeadField(String fieldApiName) {
 
         Map<String, Schema.SObjectField> leadFields =
@@ -222,6 +236,7 @@ public class FSC_NewCaseComponent_Controller {
         }
     }
 
+    @TestVisible
     private static Id getLeadRecordTypeId(String developerName) {
 
         Map<String, Schema.RecordTypeInfo> recordTypesByDeveloperName =
@@ -236,6 +251,7 @@ public class FSC_NewCaseComponent_Controller {
         return recordTypesByDeveloperName.get(developerName).getRecordTypeId();
     }
 
+    @TestVisible
     private static String getDefaultLeadStatus() {
 
         List<LeadStatus> statuses = [
@@ -258,6 +274,12 @@ public class FSC_NewCaseComponent_Controller {
         String oficina = UserInfo.getUserId() != null
             ? [SELECT USE_Oficina__c FROM User WHERE Id = :UserInfo.getUserId()].USE_Oficina__c
             : null;
+
+        return formatOficinaLabel(oficina);
+    }
+
+    @TestVisible
+    private static String formatOficinaLabel(String oficina) {
 
         if (String.isBlank(oficina)) {
             return '';
@@ -314,6 +336,7 @@ public class FSC_NewCaseComponent_Controller {
                 FinServ__CloseDate__c,
                 FinServ__PaymentDueDate__c,
                 FinServ__TotalCreditLimit__c,
+                FIN_Limite_Credito_USD__c,
                 FinServ__PrincipalBalance__c
             FROM FinServ__FinancialAccount__c
             WHERE Id = :accountId

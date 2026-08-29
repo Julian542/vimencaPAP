@@ -22,11 +22,35 @@ public with sharing class VFS_SubirComprobanteCasoEsignQueueable implements Queu
                 return;
             }
 
-            VFS_FirmarDocumentoUtility.sendEnvelope(
+            VFS_EsignSendingEnvelope.EnvelopeResult envelopeResult =
+                VFS_FirmarDocumentoUtility.sendEnvelope(
                 uploadResult.fileId,
                 'VFS_FirmarComprobanteCaso',
                 String.valueOf(caseId)
             );
+
+            if (envelopeResult == null || !envelopeResult.success || String.isBlank(envelopeResult.envelopeId)) {
+                System.debug(LoggingLevel.ERROR,
+                    'No se obtuvo EnvelopeId para el comprobante. CaseId=' + caseId
+                );
+                return;
+            }
+
+            List<ContentVersion> versions = [
+                SELECT Id
+                FROM ContentVersion
+                WHERE ContentDocumentId = :contentDocumentId
+                AND IsLatest = true
+                LIMIT 1
+            ];
+
+            if (!versions.isEmpty()) {
+                versions[0].FSC_EnvelopeId__c = envelopeResult.envelopeId;
+                versions[0].FSC_EnviarDocumento__c = true;
+                versions[0].FSC_FechaEnvioFirma__c = System.now();
+                versions[0].FSC_Firmado__c = false;
+                update versions[0];
+            }
 
         } catch (Exception e) {
             System.debug(LoggingLevel.ERROR,

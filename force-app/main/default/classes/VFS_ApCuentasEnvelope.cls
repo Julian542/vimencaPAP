@@ -101,7 +101,11 @@ public with sharing class VFS_ApCuentasEnvelope {
                 //throw new VFS_ApCuentasEnvelopeException('No se encontraron firmantes autorizados para la cuenta de persona física. Se requiere al menos un firmante autorizado para procesar la solicitud de firma.');
             }
             
-            Integer yPosition = 260;
+            // La sección de referencias personales incrementó la altura de la primera
+            // parte del formulario. En la página 2, Y=260 dejaba el campo electrónico
+            // debajo del registro de firmas. Y=330 lo mantiene dentro del espacio
+            // reservado sobre las líneas del solicitante y los firmantes conjuntos.
+            Integer yPosition = 330;
             
             actions.add(buildSignActionHelper(correo, account.FirstName, account.LastName, 
                 'firstSigner', 'sig_account', 1, 2, 64, yPosition, SIGNATURE_WIDTH, SIGNATURE_HEIGHT_LARGE));

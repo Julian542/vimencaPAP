@@ -160,19 +160,15 @@ public with sharing class VFS_nKYCFisica_Controller {
 
         // Carga de datos base del cliente (Account).
         cuenta = [
-            SELECT Id, RecordType.DeveloperName, PersonContactId, MiddleName, Name,
+            SELECT Id, IsPersonAccount, RecordType.DeveloperName, PersonContactId, MiddleName, Name,
                    ACC_NumOficina__c, ACC_CIF__c, OwnerId, Owner.Name,
                    VFS_ActividadEconomica__c, VFS_EspecifiqueOtro__c
             FROM Account
             WHERE Id = :accountId
         ];
 
-        // Determina si la cuenta es física o jurídica según el RecordType.
-        if (cuenta.RecordType.DeveloperName == 'Individual') {
-            isFisica = true;
-        } else {
-            isFisica = false;
-        }
+        // Person Account = persona física; Business Account = persona jurídica.
+        isFisica = cuenta.IsPersonAccount;
 
         // Inicializa el "contacto relacionado" (para jurídico).
         contactorel = new Account();
@@ -566,6 +562,7 @@ public with sharing class VFS_nKYCFisica_Controller {
         // Clientes principales (máximo 3; completa placeholders).
         List<FinServ__AccountAccountRelation__c> principalClients = [
             SELECT Id, FinServ__RelatedAccount__c, FinServ__RelatedAccount__r.Name,
+                   FinServ__RelatedAccount__r.ACC_RNC__c,
                    AAR_Tipo__c
             FROM FinServ__AccountAccountRelation__c
             WHERE FinServ__RelatedAccount__c = :accountId
@@ -584,6 +581,7 @@ public with sharing class VFS_nKYCFisica_Controller {
         // Proveedores principales (máximo 3; completa placeholders).
         List<FinServ__AccountAccountRelation__c> proveedoresRel = [
             SELECT Id, FinServ__RelatedAccount__c, FinServ__RelatedAccount__r.Name,
+                   FinServ__RelatedAccount__r.ACC_RNC__c,
                    AAR_Tipo__c
             FROM FinServ__AccountAccountRelation__c
             WHERE FinServ__RelatedAccount__c = :accountId
@@ -644,7 +642,7 @@ public with sharing class VFS_nKYCFisica_Controller {
                    FinServ__RelatedAccount__r.Name,
                    FinServ__RelatedAccount__r.ACC_NumIdentificacion__c,
                    FinServ__RelatedAccount__r.Lugar_de_nacimiento_Padron_Electoral__c,
-                   AAR_Tipo__c
+                   AAR_Tipo__c, AAR_Cargo__c
             FROM FinServ__AccountAccountRelation__c
             WHERE FinServ__RelatedAccount__c = :accId
               AND AAR_Tipo__c = 'Miembro'
@@ -811,6 +809,7 @@ public with sharing class VFS_nKYCFisica_Controller {
     }
 
     // Consulta dinámica de Employment (solo campos que existan), filtrando principal si aplica.
+    @TestVisible
     private static List<FinServ__Employment__c> queryEmployment(Id contactId) {
         if (contactId == null) return new List<FinServ__Employment__c>();
 
@@ -820,6 +819,7 @@ public with sharing class VFS_nKYCFisica_Controller {
         if (t != null && t.getDescribe().fields.getMap().containsKey('FinServ__Contact__c')) fields.add('FinServ__Contact__c');
         if (t != null && t.getDescribe().fields.getMap().containsKey('FinServ__AnnualIncome__c')) fields.add('FinServ__AnnualIncome__c');
         if (t != null && t.getDescribe().fields.getMap().containsKey('FinServ__EmployerPhoneNumber__c')) fields.add('FinServ__EmployerPhoneNumber__c');
+        if (t != null && t.getDescribe().fields.getMap().containsKey('FinServ__EmployerAddress__c')) fields.add('FinServ__EmployerAddress__c');
         if (t != null && t.getDescribe().fields.getMap().containsKey('FinServ__Occupation__c')) fields.add('FinServ__Occupation__c');
         if (t != null && t.getDescribe().fields.getMap().containsKey('EMP_Tipo_de_empleado__c')) fields.add('EMP_Tipo_de_empleado__c');
         if (t != null && t.getDescribe().fields.getMap().containsKey('FinServ__LengthOfEmployment__c')) fields.add('FinServ__LengthOfEmployment__c');
