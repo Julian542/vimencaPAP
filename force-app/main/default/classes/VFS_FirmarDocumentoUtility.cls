@@ -119,6 +119,7 @@ public with sharing class VFS_FirmarDocumentoUtility {
             if (Test.isRunningTest()) {
                 result = new VFS_EsignSendingEnvelope.EnvelopeResult();
                 result.success = true;
+                result.envelopeId = 'test-envelope-id';
                 result.message = 'Test';
             } else {
                 try {

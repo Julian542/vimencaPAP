@@ -1,0 +1,1003 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Ocupacion__c</fullName>
+    <label>Ocupacion</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ABOGADO</fullName>
+                <default>false</default>
+                <label>ABOGADO</label>
+            </value>
+            <value>
+                <fullName>ADMINISTRACION HOTELERA</fullName>
+                <default>false</default>
+                <label>ADMINISTRACION HOTELERA</label>
+            </value>
+            <value>
+                <fullName>ADMINISTRADOR DE EMPRESAS</fullName>
+                <default>false</default>
+                <label>ADMINISTRADOR DE EMPRESAS</label>
+            </value>
+            <value>
+                <fullName>AGENTE</fullName>
+                <default>false</default>
+                <label>AGENTE</label>
+            </value>
+            <value>
+                <fullName>AGENTE DE VIAJE</fullName>
+                <default>false</default>
+                <label>AGENTE DE VIAJE</label>
+            </value>
+            <value>
+                <fullName>AGRICULTOR</fullName>
+                <default>false</default>
+                <label>AGRICULTOR</label>
+            </value>
+            <value>
+                <fullName>AGRIMENSOR</fullName>
+                <default>false</default>
+                <label>AGRIMENSOR</label>
+            </value>
+            <value>
+                <fullName>ALBANIL</fullName>
+                <default>false</default>
+                <label>ALBANIL</label>
+            </value>
+            <value>
+                <fullName>ALGUACIL</fullName>
+                <default>false</default>
+                <label>ALGUACIL</label>
+            </value>
+            <value>
+                <fullName>AMA DE CASA</fullName>
+                <default>false</default>
+                <label>AMA DE CASA</label>
+            </value>
+            <value>
+                <fullName>ARQUITECTO</fullName>
+                <default>false</default>
+                <label>ARQUITECTO</label>
+            </value>
+            <value>
+                <fullName>ARTESANO</fullName>
+                <default>false</default>
+                <label>ARTESANO</label>
+            </value>
+            <value>
+                <fullName>ARTISTA</fullName>
+                <default>false</default>
+                <label>ARTISTA</label>
+            </value>
+            <value>
+                <fullName>ASESOR</fullName>
+                <default>false</default>
+                <label>ASESOR</label>
+            </value>
+            <value>
+                <fullName>ASISTENTE</fullName>
+                <default>false</default>
+                <label>ASISTENTE</label>
+            </value>
+            <value>
+                <fullName>AUDITOR</fullName>
+                <default>false</default>
+                <label>AUDITOR</label>
+            </value>
+            <value>
+                <fullName>AUXILIAR</fullName>
+                <default>false</default>
+                <label>AUXILIAR</label>
+            </value>
+            <value>
+                <fullName>AUXILIAR DE COMPUTOS</fullName>
+                <default>false</default>
+                <label>AUXILIAR DE COMPUTOS</label>
+            </value>
+            <value>
+                <fullName>AUXILIAR DE CONTABILIDAD</fullName>
+                <default>false</default>
+                <label>AUXILIAR DE CONTABILIDAD</label>
+            </value>
+            <value>
+                <fullName>AUXILIAR DE COSTOS</fullName>
+                <default>false</default>
+                <label>AUXILIAR DE COSTOS</label>
+            </value>
+            <value>
+                <fullName>AVICULTOR</fullName>
+                <default>false</default>
+                <label>AVICULTOR</label>
+            </value>
+            <value>
+                <fullName>AYUDANTE</fullName>
+                <default>false</default>
+                <label>AYUDANTE</label>
+            </value>
+            <value>
+                <fullName>BANQUERO</fullName>
+                <default>false</default>
+                <label>BANQUERO</label>
+            </value>
+            <value>
+                <fullName>BIOANALISTA</fullName>
+                <default>false</default>
+                <label>BIOANALISTA</label>
+            </value>
+            <value>
+                <fullName>CAJERO (A)</fullName>
+                <default>false</default>
+                <label>CAJERO (A)</label>
+            </value>
+            <value>
+                <fullName>CAMARERO</fullName>
+                <default>false</default>
+                <label>CAMARERO</label>
+            </value>
+            <value>
+                <fullName>CARNICERO</fullName>
+                <default>false</default>
+                <label>CARNICERO</label>
+            </value>
+            <value>
+                <fullName>CARPINTERO</fullName>
+                <default>false</default>
+                <label>CARPINTERO</label>
+            </value>
+            <value>
+                <fullName>CHEF</fullName>
+                <default>false</default>
+                <label>CHEF</label>
+            </value>
+            <value>
+                <fullName>CHOFER</fullName>
+                <default>false</default>
+                <label>CHOFER</label>
+            </value>
+            <value>
+                <fullName>CIENCIAS NAVALES</fullName>
+                <default>false</default>
+                <label>CIENCIAS NAVALES</label>
+            </value>
+            <value>
+                <fullName>CIRUJANO</fullName>
+                <default>false</default>
+                <label>CIRUJANO</label>
+            </value>
+            <value>
+                <fullName>COBRADOR</fullName>
+                <default>false</default>
+                <label>COBRADOR</label>
+            </value>
+            <value>
+                <fullName>COMERCIANTE</fullName>
+                <default>false</default>
+                <label>COMERCIANTE</label>
+            </value>
+            <value>
+                <fullName>COMUNICADOR</fullName>
+                <default>false</default>
+                <label>COMUNICADOR</label>
+            </value>
+            <value>
+                <fullName>CONTADOR PUBLICO AUTORIZADO</fullName>
+                <default>false</default>
+                <label>CONTADOR PUBLICO AUTORIZADO</label>
+            </value>
+            <value>
+                <fullName>CONTRALOR</fullName>
+                <default>false</default>
+                <label>CONTRALOR</label>
+            </value>
+            <value>
+                <fullName>CONTRATISTA</fullName>
+                <default>false</default>
+                <label>CONTRATISTA</label>
+            </value>
+            <value>
+                <fullName>CORREDOR DE SEGUROS</fullName>
+                <default>false</default>
+                <label>CORREDOR DE SEGUROS</label>
+            </value>
+            <value>
+                <fullName>COSMETOLOGA</fullName>
+                <default>false</default>
+                <label>COSMETOLOGA</label>
+            </value>
+            <value>
+                <fullName>DECORADOR (A)</fullName>
+                <default>false</default>
+                <label>DECORADOR (A)</label>
+            </value>
+            <value>
+                <fullName>DENTISTA</fullName>
+                <default>false</default>
+                <label>DENTISTA</label>
+            </value>
+            <value>
+                <fullName>DESABOLLADOR</fullName>
+                <default>false</default>
+                <label>DESABOLLADOR</label>
+            </value>
+            <value>
+                <fullName>DIBUJANTE</fullName>
+                <default>false</default>
+                <label>DIBUJANTE</label>
+            </value>
+            <value>
+                <fullName>DIGITADOR</fullName>
+                <default>false</default>
+                <label>DIGITADOR</label>
+            </value>
+            <value>
+                <fullName>DIPUTADO</fullName>
+                <default>false</default>
+                <label>DIPUTADO</label>
+            </value>
+            <value>
+                <fullName>DISENADOR (A)</fullName>
+                <default>false</default>
+                <label>DISENADOR (A)</label>
+            </value>
+            <value>
+                <fullName>DOCTOR EN MEDICINA</fullName>
+                <default>false</default>
+                <label>DOCTOR EN MEDICINA</label>
+            </value>
+            <value>
+                <fullName>EBANISTA</fullName>
+                <default>false</default>
+                <label>EBANISTA</label>
+            </value>
+            <value>
+                <fullName>ECONOMISTA</fullName>
+                <default>false</default>
+                <label>ECONOMISTA</label>
+            </value>
+            <value>
+                <fullName>EJECUTIVO(A) DE CUENTAS</fullName>
+                <default>false</default>
+                <label>EJECUTIVO(A) DE CUENTAS</label>
+            </value>
+            <value>
+                <fullName>ELECTRICISTA</fullName>
+                <default>false</default>
+                <label>ELECTRICISTA</label>
+            </value>
+            <value>
+                <fullName>EMPLEADO (A) DOMESTICA</fullName>
+                <default>false</default>
+                <label>EMPLEADO (A) DOMESTICA</label>
+            </value>
+            <value>
+                <fullName>EMPLEADO PRIVADO</fullName>
+                <default>false</default>
+                <label>EMPLEADO PRIVADO</label>
+            </value>
+            <value>
+                <fullName>EMPLEADO PUBLICO</fullName>
+                <default>false</default>
+                <label>EMPLEADO PUBLICO</label>
+            </value>
+            <value>
+                <fullName>EMPRESARIO</fullName>
+                <default>false</default>
+                <label>EMPRESARIO</label>
+            </value>
+            <value>
+                <fullName>ENCARGADA REPUESTOS</fullName>
+                <default>false</default>
+                <label>ENCARGADA REPUESTOS</label>
+            </value>
+            <value>
+                <fullName>ENCARGADO DE ALMACEN</fullName>
+                <default>false</default>
+                <label>ENCARGADO DE ALMACEN</label>
+            </value>
+            <value>
+                <fullName>ENCARGADO DE LAVANDERIA</fullName>
+                <default>false</default>
+                <label>ENCARGADO DE LAVANDERIA</label>
+            </value>
+            <value>
+                <fullName>ENCARGADO DE LINEA (ZONA FRANC</fullName>
+                <default>false</default>
+                <label>ENCARGADO DE LINEA (ZONA FRANC</label>
+            </value>
+            <value>
+                <fullName>ENDOCRINOLOGA</fullName>
+                <default>false</default>
+                <label>ENDOCRINOLOGA</label>
+            </value>
+            <value>
+                <fullName>ENFERMERA (O)</fullName>
+                <default>false</default>
+                <label>ENFERMERA (O)</label>
+            </value>
+            <value>
+                <fullName>ENMARCADO Y LAMINA</fullName>
+                <default>false</default>
+                <label>ENMARCADO Y LAMINA</label>
+            </value>
+            <value>
+                <fullName>ESTILISTA</fullName>
+                <default>false</default>
+                <label>ESTILISTA</label>
+            </value>
+            <value>
+                <fullName>ESTOMATOLOGO</fullName>
+                <default>false</default>
+                <label>ESTOMATOLOGO</label>
+            </value>
+            <value>
+                <fullName>ESTUDIANTE</fullName>
+                <default>false</default>
+                <label>ESTUDIANTE</label>
+            </value>
+            <value>
+                <fullName>EXPORTADOR</fullName>
+                <default>false</default>
+                <label>EXPORTADOR</label>
+            </value>
+            <value>
+                <fullName>FARMACEUTICO</fullName>
+                <default>false</default>
+                <label>FARMACEUTICO</label>
+            </value>
+            <value>
+                <fullName>FISIOTERAPEUTA</fullName>
+                <default>false</default>
+                <label>FISIOTERAPEUTA</label>
+            </value>
+            <value>
+                <fullName>FOTOGRAFO</fullName>
+                <default>false</default>
+                <label>FOTOGRAFO</label>
+            </value>
+            <value>
+                <fullName>GANADERO</fullName>
+                <default>false</default>
+                <label>GANADERO</label>
+            </value>
+            <value>
+                <fullName>GEOGRAFO</fullName>
+                <default>false</default>
+                <label>GEOGRAFO</label>
+            </value>
+            <value>
+                <fullName>GERENTE</fullName>
+                <default>false</default>
+                <label>GERENTE</label>
+            </value>
+            <value>
+                <fullName>GERENTE DE VENTAS</fullName>
+                <default>false</default>
+                <label>GERENTE DE VENTAS</label>
+            </value>
+            <value>
+                <fullName>HACENDADO</fullName>
+                <default>false</default>
+                <label>HACENDADO</label>
+            </value>
+            <value>
+                <fullName>HERRERO</fullName>
+                <default>false</default>
+                <label>HERRERO</label>
+            </value>
+            <value>
+                <fullName>INDEPENDIENTE</fullName>
+                <default>false</default>
+                <label>INDEPENDIENTE</label>
+            </value>
+            <value>
+                <fullName>INGENIERO</fullName>
+                <default>false</default>
+                <label>INGENIERO</label>
+            </value>
+            <value>
+                <fullName>INGENIERO AGRONOMO</fullName>
+                <default>false</default>
+                <label>INGENIERO AGRONOMO</label>
+            </value>
+            <value>
+                <fullName>INGENIERO CIVIL</fullName>
+                <default>false</default>
+                <label>INGENIERO CIVIL</label>
+            </value>
+            <value>
+                <fullName>INGENIERO DE MINAS</fullName>
+                <default>false</default>
+                <label>INGENIERO DE MINAS</label>
+            </value>
+            <value>
+                <fullName>INGENIERO ELECTROMECANICO</fullName>
+                <default>false</default>
+                <label>INGENIERO ELECTROMECANICO</label>
+            </value>
+            <value>
+                <fullName>INGENIERO ELECTRONICO</fullName>
+                <default>false</default>
+                <label>INGENIERO ELECTRONICO</label>
+            </value>
+            <value>
+                <fullName>INGENIERO EN GEOLOGIA Y MINAS</fullName>
+                <default>false</default>
+                <label>INGENIERO EN GEOLOGIA Y MINAS</label>
+            </value>
+            <value>
+                <fullName>INGENIERO EN SISTEMAS Y COMPUT</fullName>
+                <default>false</default>
+                <label>INGENIERO EN SISTEMAS Y COMPUT</label>
+            </value>
+            <value>
+                <fullName>INGENIERO INDUSTRIAL</fullName>
+                <default>false</default>
+                <label>INGENIERO INDUSTRIAL</label>
+            </value>
+            <value>
+                <fullName>INGENIERO MECANICO</fullName>
+                <default>false</default>
+                <label>INGENIERO MECANICO</label>
+            </value>
+            <value>
+                <fullName>INGENIERO QUIMICO</fullName>
+                <default>false</default>
+                <label>INGENIERO QUIMICO</label>
+            </value>
+            <value>
+                <fullName>INGENIERO TELECOMUNICACION</fullName>
+                <default>false</default>
+                <label>INGENIERO TELECOMUNICACION</label>
+            </value>
+            <value>
+                <fullName>INGENIERO TELEMATICO</fullName>
+                <default>false</default>
+                <label>INGENIERO TELEMATICO</label>
+            </value>
+            <value>
+                <fullName>INSPECTOR</fullName>
+                <default>false</default>
+                <label>INSPECTOR</label>
+            </value>
+            <value>
+                <fullName>INVERSIONISTA</fullName>
+                <default>false</default>
+                <label>INVERSIONISTA</label>
+            </value>
+            <value>
+                <fullName>JARDINERO</fullName>
+                <default>false</default>
+                <label>JARDINERO</label>
+            </value>
+            <value>
+                <fullName>JEFE SUPERVISORES</fullName>
+                <default>false</default>
+                <label>JEFE SUPERVISORES</label>
+            </value>
+            <value>
+                <fullName>JOYERIA</fullName>
+                <default>false</default>
+                <label>JOYERIA</label>
+            </value>
+            <value>
+                <fullName>JUEGOS DE AZAR</fullName>
+                <default>false</default>
+                <label>JUEGOS DE AZAR</label>
+            </value>
+            <value>
+                <fullName>LICENCIADO EN IDIOMAS</fullName>
+                <default>false</default>
+                <label>LICENCIADO EN IDIOMAS</label>
+            </value>
+            <value>
+                <fullName>LICENCIATURA BANCARIA</fullName>
+                <default>false</default>
+                <label>LICENCIATURA BANCARIA</label>
+            </value>
+            <value>
+                <fullName>LICENCIATURA BIOANALISIS</fullName>
+                <default>false</default>
+                <label>LICENCIATURA BIOANALISIS</label>
+            </value>
+            <value>
+                <fullName>LICENCIATURA EN  ARTES</fullName>
+                <default>false</default>
+                <label>LICENCIATURA EN  ARTES</label>
+            </value>
+            <value>
+                <fullName>LICENCIATURA EN ADMINISTRACION</fullName>
+                <default>false</default>
+                <label>LICENCIATURA EN ADMINISTRACION</label>
+            </value>
+            <value>
+                <fullName>LICENCIATURA EN CONTABILIDAD</fullName>
+                <default>false</default>
+                <label>LICENCIATURA EN CONTABILIDAD</label>
+            </value>
+            <value>
+                <fullName>LICENCIATURA EN ECONOMIA</fullName>
+                <default>false</default>
+                <label>LICENCIATURA EN ECONOMIA</label>
+            </value>
+            <value>
+                <fullName>LICENCIATURA EN EDUCACION</fullName>
+                <default>false</default>
+                <label>LICENCIATURA EN EDUCACION</label>
+            </value>
+            <value>
+                <fullName>LICENCIATURA EN ENFERMERIA</fullName>
+                <default>false</default>
+                <label>LICENCIATURA EN ENFERMERIA</label>
+            </value>
+            <value>
+                <fullName>LICENCIATURA EN FINANZAS</fullName>
+                <default>false</default>
+                <label>LICENCIATURA EN FINANZAS</label>
+            </value>
+            <value>
+                <fullName>LICENCIATURA EN MERCADEO</fullName>
+                <default>false</default>
+                <label>LICENCIATURA EN MERCADEO</label>
+            </value>
+            <value>
+                <fullName>LICENCIATURA EN QUIMICO</fullName>
+                <default>false</default>
+                <label>LICENCIATURA EN QUIMICO</label>
+            </value>
+            <value>
+                <fullName>LICENCIATURA EN SOCIOLOGIA</fullName>
+                <default>false</default>
+                <label>LICENCIATURA EN SOCIOLOGIA</label>
+            </value>
+            <value>
+                <fullName>LITOGRAFO</fullName>
+                <default>false</default>
+                <label>LITOGRAFO</label>
+            </value>
+            <value>
+                <fullName>LOCUTOR</fullName>
+                <default>false</default>
+                <label>LOCUTOR</label>
+            </value>
+            <value>
+                <fullName>MAESTRO</fullName>
+                <default>false</default>
+                <label>MAESTRO</label>
+            </value>
+            <value>
+                <fullName>MAESTRO CONSTRUCTOR</fullName>
+                <default>false</default>
+                <label>MAESTRO CONSTRUCTOR</label>
+            </value>
+            <value>
+                <fullName>MASAJISTA</fullName>
+                <default>false</default>
+                <label>MASAJISTA</label>
+            </value>
+            <value>
+                <fullName>MECANICO</fullName>
+                <default>false</default>
+                <label>MECANICO</label>
+            </value>
+            <value>
+                <fullName>MECANOGRAFO</fullName>
+                <default>false</default>
+                <label>MECANOGRAFO</label>
+            </value>
+            <value>
+                <fullName>MENSAJERO</fullName>
+                <default>false</default>
+                <label>MENSAJERO</label>
+            </value>
+            <value>
+                <fullName>MILITAR</fullName>
+                <default>false</default>
+                <label>MILITAR</label>
+            </value>
+            <value>
+                <fullName>MINISTRO EVANGELICO</fullName>
+                <default>false</default>
+                <label>MINISTRO EVANGELICO</label>
+            </value>
+            <value>
+                <fullName>MODISTA</fullName>
+                <default>false</default>
+                <label>MODISTA</label>
+            </value>
+            <value>
+                <fullName>MONJA</fullName>
+                <default>false</default>
+                <label>MONJA</label>
+            </value>
+            <value>
+                <fullName>MUSICO</fullName>
+                <default>false</default>
+                <label>MUSICO</label>
+            </value>
+            <value>
+                <fullName>OBRERO</fullName>
+                <default>false</default>
+                <label>OBRERO</label>
+            </value>
+            <value>
+                <fullName>ODONTOLOGO</fullName>
+                <default>false</default>
+                <label>ODONTOLOGO</label>
+            </value>
+            <value>
+                <fullName>OPERADOR</fullName>
+                <default>false</default>
+                <label>OPERADOR</label>
+            </value>
+            <value>
+                <fullName>ORTODONCISTA</fullName>
+                <default>false</default>
+                <label>ORTODONCISTA</label>
+            </value>
+            <value>
+                <fullName>ORTOPEDA</fullName>
+                <default>false</default>
+                <label>ORTOPEDA</label>
+            </value>
+            <value>
+                <fullName>PASTOR</fullName>
+                <default>false</default>
+                <label>PASTOR</label>
+            </value>
+            <value>
+                <fullName>PELOTERO</fullName>
+                <default>false</default>
+                <label>PELOTERO</label>
+            </value>
+            <value>
+                <fullName>PENSIONADO</fullName>
+                <default>false</default>
+                <label>PENSIONADO</label>
+            </value>
+            <value>
+                <fullName>PERIODISTA</fullName>
+                <default>false</default>
+                <label>PERIODISTA</label>
+            </value>
+            <value>
+                <fullName>PESCADERIA</fullName>
+                <default>false</default>
+                <label>PESCADERIA</label>
+            </value>
+            <value>
+                <fullName>PIANISTA</fullName>
+                <default>false</default>
+                <label>PIANISTA</label>
+            </value>
+            <value>
+                <fullName>PILOTO</fullName>
+                <default>false</default>
+                <label>PILOTO</label>
+            </value>
+            <value>
+                <fullName>PINTOR</fullName>
+                <default>false</default>
+                <label>PINTOR</label>
+            </value>
+            <value>
+                <fullName>PLOMERO</fullName>
+                <default>false</default>
+                <label>PLOMERO</label>
+            </value>
+            <value>
+                <fullName>PRENSISTA</fullName>
+                <default>false</default>
+                <label>PRENSISTA</label>
+            </value>
+            <value>
+                <fullName>PRESIDENTE</fullName>
+                <default>false</default>
+                <label>PRESIDENTE</label>
+            </value>
+            <value>
+                <fullName>PROCESADORA DE FRUTAS Y VEGETA</fullName>
+                <default>false</default>
+                <label>PROCESADORA DE FRUTAS Y VEGETA</label>
+            </value>
+            <value>
+                <fullName>PRODUCTOR DE TELEVISION</fullName>
+                <default>false</default>
+                <label>PRODUCTOR DE TELEVISION</label>
+            </value>
+            <value>
+                <fullName>PROFESOR</fullName>
+                <default>false</default>
+                <label>PROFESOR</label>
+            </value>
+            <value>
+                <fullName>PROGRAMADOR</fullName>
+                <default>false</default>
+                <label>PROGRAMADOR</label>
+            </value>
+            <value>
+                <fullName>PROMOTOR ARTISTICO</fullName>
+                <default>false</default>
+                <label>PROMOTOR ARTISTICO</label>
+            </value>
+            <value>
+                <fullName>PROMOTOR(A)</fullName>
+                <default>false</default>
+                <label>PROMOTOR(A)</label>
+            </value>
+            <value>
+                <fullName>PROPIETARIO</fullName>
+                <default>false</default>
+                <label>PROPIETARIO</label>
+            </value>
+            <value>
+                <fullName>PUBLICISTA</fullName>
+                <default>false</default>
+                <label>PUBLICISTA</label>
+            </value>
+            <value>
+                <fullName>RADIOLOGA</fullName>
+                <default>false</default>
+                <label>RADIOLOGA</label>
+            </value>
+            <value>
+                <fullName>RECEPCIONISTA</fullName>
+                <default>false</default>
+                <label>RECEPCIONISTA</label>
+            </value>
+            <value>
+                <fullName>REPOSTERA (O)</fullName>
+                <default>false</default>
+                <label>REPOSTERA (O)</label>
+            </value>
+            <value>
+                <fullName>REPRESENTANTE DE VENTAS</fullName>
+                <default>false</default>
+                <label>REPRESENTANTE DE VENTAS</label>
+            </value>
+            <value>
+                <fullName>RETIRADO</fullName>
+                <default>false</default>
+                <label>RETIRADO</label>
+            </value>
+            <value>
+                <fullName>SACERDOTE</fullName>
+                <default>false</default>
+                <label>SACERDOTE</label>
+            </value>
+            <value>
+                <fullName>SASTRE</fullName>
+                <default>false</default>
+                <label>SASTRE</label>
+            </value>
+            <value>
+                <fullName>SECRETARIA</fullName>
+                <default>false</default>
+                <label>SECRETARIA</label>
+            </value>
+            <value>
+                <fullName>SECRETARIA EJECUTIVA</fullName>
+                <default>false</default>
+                <label>SECRETARIA EJECUTIVA</label>
+            </value>
+            <value>
+                <fullName>SENADOR</fullName>
+                <default>false</default>
+                <label>SENADOR</label>
+            </value>
+            <value>
+                <fullName>SERIGRAFO</fullName>
+                <default>false</default>
+                <label>SERIGRAFO</label>
+            </value>
+            <value>
+                <fullName>SICOLOGO (A)</fullName>
+                <default>false</default>
+                <label>SICOLOGO (A)</label>
+            </value>
+            <value>
+                <fullName>SOLDADOR</fullName>
+                <default>false</default>
+                <label>SOLDADOR</label>
+            </value>
+            <value>
+                <fullName>SUB-ADMINISTRADOR</fullName>
+                <default>false</default>
+                <label>SUB-ADMINISTRADOR</label>
+            </value>
+            <value>
+                <fullName>SUB-GERENTE</fullName>
+                <default>false</default>
+                <label>SUB-GERENTE</label>
+            </value>
+            <value>
+                <fullName>SUPERVISOR</fullName>
+                <default>false</default>
+                <label>SUPERVISOR</label>
+            </value>
+            <value>
+                <fullName>TABAQUERO</fullName>
+                <default>false</default>
+                <label>TABAQUERO</label>
+            </value>
+            <value>
+                <fullName>TAXISTA</fullName>
+                <default>false</default>
+                <label>TAXISTA</label>
+            </value>
+            <value>
+                <fullName>TECNICO</fullName>
+                <default>false</default>
+                <label>TECNICO</label>
+            </value>
+            <value>
+                <fullName>TECNICO AVIACION</fullName>
+                <default>false</default>
+                <label>TECNICO AVIACION</label>
+            </value>
+            <value>
+                <fullName>TECNICO ELECTRONICA</fullName>
+                <default>false</default>
+                <label>TECNICO ELECTRONICA</label>
+            </value>
+            <value>
+                <fullName>TECNICO EN  ADMINISTRACION DE</fullName>
+                <default>false</default>
+                <label>TECNICO EN  ADMINISTRACION DE</label>
+            </value>
+            <value>
+                <fullName>TECNICO EN CONTABILIDAD</fullName>
+                <default>false</default>
+                <label>TECNICO EN CONTABILIDAD</label>
+            </value>
+            <value>
+                <fullName>TECNICO INGENIERIA ELECTRICA</fullName>
+                <default>false</default>
+                <label>TECNICO INGENIERIA ELECTRICA</label>
+            </value>
+            <value>
+                <fullName>TECNICO INGENIERIA EN SISTEMAS</fullName>
+                <default>false</default>
+                <label>TECNICO INGENIERIA EN SISTEMAS</label>
+            </value>
+            <value>
+                <fullName>TECNICO INGENIERIA INDUSTRIAL</fullName>
+                <default>false</default>
+                <label>TECNICO INGENIERIA INDUSTRIAL</label>
+            </value>
+            <value>
+                <fullName>TECNICO INGENIERIA MECANICA</fullName>
+                <default>false</default>
+                <label>TECNICO INGENIERIA MECANICA</label>
+            </value>
+            <value>
+                <fullName>TECNICO MEDICO</fullName>
+                <default>false</default>
+                <label>TECNICO MEDICO</label>
+            </value>
+            <value>
+                <fullName>TECNOLOGO EN SISTEMAS</fullName>
+                <default>false</default>
+                <label>TECNOLOGO EN SISTEMAS</label>
+            </value>
+            <value>
+                <fullName>TOPOGRAFO</fullName>
+                <default>false</default>
+                <label>TOPOGRAFO</label>
+            </value>
+            <value>
+                <fullName>TRABAJADOR SOCIAL</fullName>
+                <default>false</default>
+                <label>TRABAJADOR SOCIAL</label>
+            </value>
+            <value>
+                <fullName>TROQUELADOR</fullName>
+                <default>false</default>
+                <label>TROQUELADOR</label>
+            </value>
+            <value>
+                <fullName>VENDEDOR</fullName>
+                <default>false</default>
+                <label>VENDEDOR</label>
+            </value>
+            <value>
+                <fullName>VETERINARIO</fullName>
+                <default>false</default>
+                <label>VETERINARIO</label>
+            </value>
+            <value>
+                <fullName>VIGILANTE</fullName>
+                <default>false</default>
+                <label>VIGILANTE</label>
+            </value>
+            <value>
+                <fullName>VISITADOR A MEDICO</fullName>
+                <default>false</default>
+                <label>VISITADOR A MEDICO</label>
+            </value>
+            <value>
+                <fullName>ZAPATERO</fullName>
+                <default>false</default>
+                <label>ZAPATERO</label>
+            </value>
+            <value>
+                <fullName>ANFITRIONA BANCARIA</fullName>
+                <default>false</default>
+                <label>ANFITRIONA BANCARIA</label>
+            </value>
+            <value>
+                <fullName>MISIONERO</fullName>
+                <default>false</default>
+                <label>MISIONERO</label>
+            </value>
+            <value>
+                <fullName>CONTADOR</fullName>
+                <default>false</default>
+                <label>CONTADOR</label>
+            </value>
+            <value>
+                <fullName>OFICIAL</fullName>
+                <default>false</default>
+                <label>OFICIAL</label>
+            </value>
+            <value>
+                <fullName>SEGURIDAD</fullName>
+                <default>false</default>
+                <label>SEGURIDAD</label>
+            </value>
+            <value>
+                <fullName>Facilitador</fullName>
+                <default>false</default>
+                <label>Facilitador</label>
+            </value>
+            <value>
+                <fullName>DIRECTOR</fullName>
+                <default>false</default>
+                <label>DIRECTOR</label>
+            </value>
+            <value>
+                <fullName>Director de Negocios</fullName>
+                <default>false</default>
+                <label>Director de Negocios</label>
+            </value>
+            <value>
+                <fullName>ENCARGADO</fullName>
+                <default>false</default>
+                <label>ENCARGADO</label>
+            </value>
+            <value>
+                <fullName>Ejecutivo de Negocios</fullName>
+                <default>false</default>
+                <label>Ejecutivo de Negocios</label>
+            </value>
+            <value>
+                <fullName>Sub-Gerente de Negocios</fullName>
+                <default>false</default>
+                <label>Sub-Gerente de Negocios</label>
+            </value>
+            <value>
+                <fullName>Presidente Ejecutivo</fullName>
+                <default>false</default>
+                <label>Presidente Ejecutivo</label>
+            </value>
+            <value>
+                <fullName>Vice-Presidente Ejecutivo</fullName>
+                <default>false</default>
+                <label>Vice-Presidente Ejecutivo</label>
+            </value>
+            <value>
+                <fullName>MEDICO</fullName>
+                <default>false</default>
+                <label>MEDICO</label>
+            </value>
+            <value>
+                <fullName>DIABETOLOGO</fullName>
+                <default>false</default>
+                <label>DIABETOLOGO</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

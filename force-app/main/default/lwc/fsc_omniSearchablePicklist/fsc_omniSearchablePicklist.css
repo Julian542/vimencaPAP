@@ -1,0 +1,7 @@
+.c-searchable-picklist__dropdown {
+	margin-block-start: calc(var(--slds-g-spacing-1, 0.25rem) / 2);
+}
+
+.c-searchable-picklist__option {
+	text-align: start;
+}

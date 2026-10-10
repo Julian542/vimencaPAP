@@ -1,0 +1,636 @@
+<apex:page standardController="ResidentialLoanApplication"
+	extensions="FSC_ContratoHipFideicomisoNormalCtrl"
+	applyBodyTag="false"
+	applyHtmlTag="false"
+	showHeader="false"
+	sidebar="false"
+	standardStylesheets="false"
+	cache="false"
+	language="es"
+	renderAs="pdf">
+	<html>
+		<head>
+			<meta
+				http-equiv="Content-Type"
+				content="text/html; charset=UTF-8" />
+			<style type="text/css">
+				@page {
+					size: letter;
+					margin: 20.64mm 31.75mm 15.01mm 31.75mm;
+					@bottom-center {
+						content: counter(page);
+						font-family: 'Arial Narrow', Arial, sans-serif;
+						font-size: 9pt;
+					}
+				}
+				body {
+					margin: 0;
+					padding: 0;
+					color: #000;
+					font-family: 'Arial Narrow', Arial, sans-serif;
+					font-size: 10.5pt;
+					line-height: 1.2;
+				}
+				.title {
+					margin: 0 0 1.2em;
+					text-align: center;
+					font-weight: 700;
+				}
+				.paragraph {
+					margin: 0 0 1.2em;
+					text-align: justify;
+					orphans: 3;
+					widows: 3;
+				}
+				.signature-section,
+				.notary-block {
+					margin-top: 8mm;
+					page-break-inside: avoid;
+				}
+				.signature-table {
+					width: 100%;
+					border-collapse: collapse;
+					margin-top: 8mm;
+					page-break-inside: avoid;
+				}
+				.signature-cell {
+					width: 50%;
+					padding: 0 6mm;
+					vertical-align: top;
+				}
+				.signature-line {
+					border-top: 1px solid #000;
+					height: 3mm;
+				}
+				.signature-name,
+				.signature-role {
+					text-align: center;
+				}
+				.signature-heading {
+					margin-top: 6mm;
+					font-weight: 700;
+				}
+				.notary-signature {
+					width: 45%;
+					margin: 10mm auto 0;
+				}
+			</style>
+		</head>
+		<body>
+			<p class="title">CONTRATO DE PRÉSTAMO CON GARANTÍA HIPOTECARIA Y COMPRA DE INMUEBLE CON FIDUCIARIA</p>
+			<p class="paragraph">
+				ENTRE: BANCO MÚLTIPLE VIMENCA, S. A., entidad de intermediación financiera organizada de conformidad con las leyes de la República
+				Dominicana, RNC No. 1-01-02141-1, Registro Mercantil No. 10019SD, con domicilio social en la Avenida Abraham Lincoln No. 306, Sector
+				La Julia, Santo Domingo, Distrito Nacional, debidamente representada por su {!datos.bancoRepresentante1.cargo},
+				{!datos.bancoRepresentante1.tratamiento} {!datos.bancoRepresentante1.nombreCompleto}, {!datos.bancoRepresentante1.nacionalidad}, mayor
+				de edad, estado civil {!datos.bancoRepresentante1.estadoCivil}, identificación No. {!datos.bancoRepresentante1.identificacion},
+				domiciliado(a) en {!datos.bancoRepresentante1.domicilio}, y por su {!datos.bancoRepresentante2.cargo},
+				{!datos.bancoRepresentante2.tratamiento} {!datos.bancoRepresentante2.nombreCompleto}, {!datos.bancoRepresentante2.nacionalidad}, mayor
+				de edad, estado civil {!datos.bancoRepresentante2.estadoCivil}, identificación No. {!datos.bancoRepresentante2.identificacion},
+				domiciliado(a) en {!datos.bancoRepresentante2.domicilio}, entidad que en lo adelante se denominará EL BANCO;
+			</p>
+			<p class="paragraph">{!hipotecario.prestatariosGenerales}, quien(es) para los fines del presente contrato se denominará(n) EL CLIENTE;</p>
+			<apex:outputPanel rendered="{!hipotecario.tieneGaranteReal}" layout="none"><p class="paragraph">{!hipotecario.garantesGenerales}, quien(es) para los fines del presente contrato se denominará(n) LOS COMPRADORES - GARANTES REALES;</p></apex:outputPanel>
+			<apex:outputPanel rendered="{!hipotecario.tieneConyugeInterviniente}" layout="none"><p class="paragraph">{!hipotecario.conyugeGenerales}, quien para los fines del presente contrato se denominará LA CÓNYUGE - INTERVINIENTE;</p></apex:outputPanel>
+			<p class="paragraph">
+				{!hipotecario.fideicomisoNombre}, RNC No. {!hipotecario.fideicomisoRnc}, Registro Mercantil No. {!hipotecario.fideicomisoRegistro},
+				patrimonio autónomo administrado por {!hipotecario.fiduciariaNombre}, RNC No. {!hipotecario.fiduciariaRnc}, Registro Mercantil No.
+				{!hipotecario.fiduciariaRegistro}, con domicilio en {!hipotecario.fiduciariaDomicilio}, representada por
+				{!hipotecario.fiduciariaRepresentantes}, facultados conforme a {!hipotecario.fiduciariaAutorizacion}, quien para los fines del
+				presente contrato se denominará EL VENDEDOR.
+			</p>
+			<p class="paragraph">
+				{!hipotecario.promotoresGenerales}, quienes para los fines del presente contrato se denominarán LOS FIDEICOMITENTES-PROMOTORES.
+			</p>
+			<p class="paragraph">
+				POR CUANTO: EL CLIENTE ha solicitado a EL BANCO un Préstamo con Garantía Hipotecaria para adquisición de vivienda por un monto de
+				{!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}).
+			</p>
+			<p class="paragraph">
+				POR CUANTO: Para seguridad del pago de la suma solicitada por EL CLIENTE, éstos ofrecen en garantía el inmueble que se describe a
+				continuación:
+			</p>
+			<p class="paragraph">"{!datos.garantiaDescripcion}"</p>
+			<p class="paragraph">
+				POR CUANTO: EL BANCO consintió en otorgar el Préstamo con Garantía Hipotecaria solicitado por EL CLIENTE bajo los términos convenidos
+				en el presente contrato.
+			</p>
+			<p class="paragraph">
+				POR CUANTO: Las personas que comparecen en representación de la parte vendedora se encuentran facultadas para suscribir el presente
+				contrato conforme a {!hipotecario.fiduciariaAutorizacion}.
+			</p>
+			<p class="paragraph">
+				POR CUANTO: Las personas que comparecen en representación de la parte vendedora se encuentran facultadas para suscribir el presente
+				contrato conforme a {!hipotecario.fiduciariaAutorizacion}.
+			</p>
+			<p class="paragraph">
+				POR CUANTO: Las personas que comparecen en representación de la parte vendedora se encuentran facultadas para suscribir el presente
+				contrato conforme a {!hipotecario.fiduciariaAutorizacion}.
+			</p>
+			<p class="paragraph">
+				POR CUANTO: Toda vez que sean mencionados EL BANCO, EL CLIENTE<apex:outputPanel layout="none" rendered="{!hipotecario.tieneGaranteReal}">, LOS COMPRADORES-GARANTES REALES</apex:outputPanel><apex:outputPanel layout="none" rendered="{!hipotecario.tieneConyugeInterviniente}">, LA CÓNYUGE INTERVINIENTE</apex:outputPanel>, EL VENDEDOR Y LOS FIDEICOMITENTES PROMOTORES se denominarán LAS
+				PARTES.
+			</p>
+			<p class="paragraph">
+				POR TANTO y en el entendido de que los anteriores POR CUANTOS forman parte integral del presente contrato, LAS PARTES,
+			</p>
+			<p class="paragraph">HAN CONVENIDO Y PACTADO LO SIGUIENTE:</p>
+			<p class="paragraph">
+				ARTÍCULO 1. MONTO. EL BANCO concede a EL CLIENTE, quien acepta, un préstamo por la suma de {!datos.montoLetras}
+				({!datos.simboloMoneda}{!datos.montoNumero}), para ser destinado a adquisición de vivienda, suma que EL CLIENTE declara haber recibido
+				a su entera satisfacción.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: La tabla de amortización del préstamo deberá ser entregada por EL BANCO a la firma del presente contrato y formará parte
+				integral del mismo.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: EL CLIENTE se comprometen a suministrar a EL BANCO, de manera oportuna y durante la vigencia del préstamo, todas las
+				informaciones que, según las normas vigentes se requieran a los fines de poder mantener actualizado el expediente de crédito.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO 2. PAGARÉ. EL CLIENTE se compromete a suscribir conjuntamente con el presente contrato un pagaré a favor de EL BANCO por la
+				suma de {!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}). En dicho pagaré se consignarán las condiciones financieras
+				particulares del desembolso realizado.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO 3. INTERESES. EL CLIENTE pagará intereses sobre saldos insolutos de capital a razón de {!datos.tasaLetras} por ciento
+				({!datos.tasaNumero}%) anual, sobre la base de un año de trescientos sesenta (360) días. La tasa será fija durante los primeros
+				{!hipotecario.periodoTasaFijaLetras} ({!hipotecario.periodoTasaFijaNumero}) meses.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO 4. VARIACIÓN DE LA TASA DE INTERÉS.- VARIACIÓN DE LA TASA DE INTERÉS. LAS PARTES convienen que en caso de operarse durante la
+				vigencia de este contrato una variación de los intereses en el Mercado Bancario, dicha variación será aplicada al saldo insoluto del
+				préstamo, previa notificación a EL CLIENTE antes de su aplicación, con treinta (30) días calendario de anticipación. Igualmente, es
+				entendido y acordado entre LAS PARTES que en caso de producirse una reclasificación de EL CLIENTE, producto de sus indicadores
+				financieros, a una categoría distinta a la que le había sido asignada, de acuerdo con los criterios que establezca la Superintendencia
+				de Bancos de la República Dominicana, y que esto implique un mayor riesgo para EL BANCO, se podrán tomar las medidas siguientes, a
+				opción de EL BANCO: a) solicitar a EL CLIENTE el saldo total de los valores adeudados de capital, intereses y demás accesorios, en un
+				plazo no mayor de treinta (30) días calendario posteriores a su notificación; o b) realizar un aumento de la tasa aplicable a los
+				intereses del préstamo, acorde a la nueva calificación en el sistema financiero, previa notificación a EL CLIENTE antes de su
+				aplicación, con treinta (30) días calendario de anticipación. Las notificaciones a las que se refiere este Artículo se realizarán y se
+				considerarán válidamente recibidas si se realizan a través de uno de los medios siguientes a opción de EL BANCO: a) mediante
+				comunicación física por escrito; b) al correo electrónico suministrado por EL CLIENTE a EL BANCO, o; c) cualquier otro medio
+				fehaciente de conformidad con el Derecho común dominicano.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: Con cada variación de la tasa de interés, EL BANCO deberá entregar a EL CLIENTE una tabla que contenga la forma de
+				amortización del préstamo ajustada conforme la nueva tasa.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO: Si producto de las variaciones de tasa de interés o de cualquier otra modificación unilateral de las condiciones del contrato
+				realizadas por EL BANCO, EL CLIENTE optan por terminar la relación contractual, EL CLIENTE no incurrirá en ningún tipo de
+				responsabilidad y EL BANCO no podrá cobrarle penalidad alguna por este motivo, esto así, siempre y cuando EL CLIENTE notifiquen la
+				terminación y salde totalmente los valores adeudados de capital, intereses y demás accesorios, antes de la entrada en vigencia de la
+				modificación realizada que genera la solicitud de terminación.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO 5. VENCIMIENTO Y FORMA DE PAGO. EL CLIENTE se obliga a pagar esta deuda en el término de {!datos.plazoLetras}
+				({!datos.plazoNumero}) meses, mediante {!datos.plazoLetras} ({!datos.plazoNumero}) cuotas mensuales, iguales y consecutivas,
+				contentivas de capital e intereses, por la suma de {!datos.cuotaLetras} ({!datos.simboloMoneda}{!datos.cuotaNumero}), con vencimiento
+				el {!datos.fechaVencimiento}.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: Es entendido y acordado por las partes que EL CLIENTE pagarán a EL BANCO intereses mensuales sobre saldo insoluto de
+				capital de conformidad con lo establecido en el artículo tercero del presente contrato, debiendo saldar el total del capital adeudado
+				más los intereses y accesorios pendientes de pago al momento del vencimiento del término de vigencia del Préstamo. Los pagos deberán
+				ser realizados por el cliente en cualquiera de las sucursales o puntos autorizados por EL BANCO, en efectivo, cheque o transferencia
+				electrónica de conformidad a las normas que rigen cada uno de estos medios de pagos. EL BANCO podrá poner a disposición del cliente
+				otros medios de pagos que le serán informados a éste de manera oportuna.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: Los pagos realizados por EL CLIENTE serán aplicados por EL BANCO a la deuda que surja del presente contrato en el
+				siguiente orden: primero al pago de honorarios, impuestos, comisiones, primas de pólizas de seguros y gastos pendientes de pago así
+				como sumas avanzadas por EL BANCO con la finalidad de proteger o mantener las garantías otorgadas por EL CLIENTE o de manera general
+				sumas pagadas por EL BANCO por cuenta de EL CLIENTE, previa autorización de estos; segundo al pago de mora; tercero a los intereses
+				ordinarios devengados; y por último al capital adeudado.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO III: Los pagos realizados mediante cheques por EL CLIENTE a EL BANCO, se considerarán efectivos el día en que los fondos
+				correspondientes a los mismos estén disponibles y se hagan efectivos los pagos correspondientes.
+			</p>
+			<c:FSC_ArticuloPagosMonedaNacional mostrar="{!esDolares}" />
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 7, 6)}. SALDOS ANTICIPADOS. EL CLIENTE podrán realizar abonos o cancelaciones anticipadas al balance de
+				capital, siempre que la facilidad crediticia se encuentre al día en el pago de sus cuotas mensuales, para lo cual, EL BANCO estará en
+				pleno derecho de cobrar una penalidad, si dicho abono o cancelación anticipada, se realiza dentro de los primeros treinta y seis (36)
+				meses de amortización del crédito, contados a partir de la fecha del desembolso, según lo establecido en el Tarifario de Productos y
+				Servicios que esté vigente al momento de realizar la transacción.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 8, 7)}. MORA. EL CLIENTE se comprometen, en caso de no cumplir a su vencimiento, con una cualquiera de sus
+				obligaciones de pago, a pagar por concepto de mora, a título de cláusula penal, el cinco por ciento (5%) mensual o fracción de mes,
+				sobre el monto vencido, sin formalidad judicial, ni extrajudicial alguna.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 9, 8)}. VENTA.- EL VENDEDOR, en virtud del presente acto, vende, cede y transfiere, desde hoy y para siempre,
+				con las garantías de derecho sobre evicción, libre de cargas y gravámenes, a EL CLIENTE, el inmueble que se describe a continuación:
+			</p>
+			<p class="paragraph">"{!datos.garantiaDescripcion}"</p>
+			<p class="paragraph">
+				PÁRRAFO I: EL VENDEDOR justifica su derecho de propiedad sobre el inmueble mediante el Certificado de Título Matrícula No.
+				{!datos.garantiaNumeroTitulo}, emitido por {!datos.garantiaRegistroTitulos}, en fecha {!datos.garantiaFechaTitulo}.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 10, 9)}. PRECIO DE LA VENTA. El precio de venta se estipula en {!hipotecario.precioVentaLetras}
+				({!datos.simboloMoneda}{!hipotecario.precioVentaNumero}). La parte vendedora declara haber recibido de EL CLIENTE
+				{!hipotecario.aporteInicialLetras} ({!datos.simboloMoneda}{!hipotecario.aporteInicialNumero}), mediante
+				{!hipotecario.medioPagoInicial}, según comprobante de fecha {!hipotecario.fechaPagoInicial}; y por otra parte la suma de
+				{!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}), pagadera mediante {!hipotecario.medioPagoFinanciado} con fondos del
+				financiamiento otorgado por EL BANCO.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 11, 10)}. GARANTÍA DEL PRÉSTAMO. - Para seguridad del pago de la suma prestada, así como de los intereses y
+				demás obligaciones a cargo de {!hipotecario.denominacionPropietariosGarantia}, éstos otorgan una hipoteca en PRIMER RANGO a favor de EL BANCO sobre el inmueble que se
+				describe a continuación:
+			</p>
+			<p class="paragraph">"{!datos.garantiaDescripcion}"</p>
+			<p class="paragraph">
+				PÁRRAFO I: BIENES AFECTADOS POR LA HIPOTECA.- {!hipotecario.denominacionPropietariosGarantia}, en su calidad de propietarios del bien afectado, declaran por este acto, que
+				la hipoteca que se consiente sobre el inmueble anteriormente descrito, afectará no solamente las mejoras existentes a la fecha de la
+				suscripción de este contrato, sino también las que puedan existir en el futuro, así como los bienes que para tales fines se consideren
+				inmuebles por naturaleza o por su destino, en especial, aunque no exclusivamente, las edificaciones, estructuras, plantas físicas,
+				anexidades y dependencias, así como los demás bienes que, por estar destinados al uso de los inmuebles, se consideren inmuebles por
+				destinación. Asimismo, es entendido que las hipotecas gravan todo lo enclavado, plantado, adherido al suelo, muros, techos,
+				anexidades, mejoras, no solamente de las construcciones y mejoras actualmente existentes, sino también de las que se construyen, hagan
+				o edifiquen en dichos inmuebles y constituyan inmuebles por destinación.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: {!hipotecario.denominacionPropietariosGarantia} autorizan a EL BANCO o a la persona en quien ésta delegue, a retirar del Registro de Títulos el Duplicado del
+				Dueño, luego de haberse inscrito la hipoteca, y una vez en las oficinas de EL BANCO, el Duplicado del Dueño será entregado a su
+				titular.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO III: {!hipotecario.denominacionPropietariosGarantia} se comprometen formalmente a lo siguiente: a) pagar todos los impuestos que les corresponde pagar, incluyendo
+				los impuestos que recaen sobre los inmuebles otorgados en garantía, dentro de los periodos establecidos por la Ley; b) dar aviso
+				inmediato por correo certificado o carta con acuse de recibo a EL BANCO sobre cualquier daño material que sufra el inmueble otorgado
+				en garantía; c) cuidar dicho inmueble como lo haría un buen padre de familia y mantenerlo en buen estado de conservación y reparación.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO V: {!hipotecario.denominacionPropietariosGarantia} reconocen que no podrá transferir a terceros este contrato, ni constituir nuevas hipotecas o afectar con
+				cualquier otro gravamen el inmueble dado en garantía, sin contar con la autorización previa, expresa y por escrito de EL BANCO. La
+				falta de autorización de EL BANCO para constituir nuevas hipotecas será una causa de incumplimiento y en consecuencia {!hipotecario.denominacionPropietariosGarantia}
+				perderán el beneficio del término y de las facilidades de pago bajo este contrato, haciéndose ejecutable la garantía hipotecaria
+				otorgada, atendiendo a las formalidades de ley.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO VI: {!hipotecario.denominacionPropietariosGarantia} declaran y reconocen que en caso de que la totalidad o parte de los inmuebles dados en garantía hipotecaria
+				mediante este contrato, sean expropiados por el Estado Dominicano o por cualquier organismo competente, el precio que se pague como
+				resultado de la expropiación será entregado a EL BANCO para aplicarlo al pago de las sumas adeudadas bajo el presente contrato. En
+				consecuencia, en caso de que ocurra tal eventualidad, {!hipotecario.denominacionPropietariosGarantia} autorizan expresa e irrevocablemente al expropiante o adquiriente a
+				entregar directamente a EL BANCO los valores resultantes de la expropiación, para aplicarlos al pago de las sumas adeudadas, debiendo
+				EL BANCO entregar a {!hipotecario.denominacionPropietariosGarantia} el excedente, en caso de que el pago del precio de la expropiación exceda el monto adeudado.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO VI: {!hipotecario.denominacionPropietariosGarantia} declaran y reconocen que la hipoteca otorgada cubre cualquier valor adeudado en virtud del presente contrato y
+				que en caso de EL BANCO tenga que ejecutar la hipoteca por falta de pago o incumplimiento del presente contrato, la extinción de dicha
+				garantía no extingue la acreencia sino hasta la concurrencia del precio de adjudicación del inmueble. Es decir que, si el monto
+				adeudado llegare a ser mayor que el valor de adjudicación, EL BANCO podrá perseguir el pago de la deuda restante.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO VII: En los casos donde la normativa vigente exija a las entidades de intermediación financiera mantener una tasación
+				actualizada de las garantías, {!hipotecario.denominacionPropietariosGarantia} se obligan a proporcionarla a su solo costo. En caso de que {!hipotecario.denominacionPropietariosGarantia} no cumplan con esta
+				obligación, EL BANCO tendrá el derecho, más no la obligación, de avanzar estos gastos con fondos propios y reclamar su pago directo a
+				{!hipotecario.denominacionPropietariosGarantia} o cargar dicha erogación al préstamo, cuando éstos no obtemperen al requerimiento de pago que al efecto realice EL BANCO.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 12, 11)}. SEGURO DE PROPIEDAD. EL CLIENTE ha decidido contratar un seguro de protección a la propiedad, del
+				cual EL BANCO es beneficiario irrevocable, conforme a la póliza No. {!datos.seguroPoliza}, expedida por {!datos.seguroAseguradora},
+				ubicada en {!datos.seguroDireccion}, por un monto asegurado de {!datos.seguroMontoLetras}
+				({!datos.simboloMoneda}{!datos.seguroMontoNumero}), y se obliga a mantenerla vigente.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: La póliza de seguro que EL CLIENTE suscriban a tales fines, podrá ser aumentada por EL BANCO si en cualquier momento
+				durante la vigencia de la póliza de seguros contratada, la compañía aseguradora decide aumentar la prima de seguro por cualquier causa
+				justificada, previa notificación por escrito o por cualquier medio fehaciente a EL CLIENTE antes de su aplicación, con treinta (30)
+				días calendario de anticipación.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: EL CLIENTE mientras sea deudores de EL BANCO se obligan a mantener la póliza de seguro vigente por renovaciones sucesivas,
+				en el entendido de que si dejaren de hacerlo EL BANCO estará Autorizado, sin estar obligado, a hacer dicha renovación por cuenta de EL
+				CLIENTE, en cuyo caso notificará a los mismos sobre la renovación realizada, debiendo EL CLIENTE cancelar los avances en que incurra
+				EL BANCO por dicho concepto, antes del próximo vencimiento de los intereses convencionales establecidos en el presente contrato. Las
+				sumas que EL BANCO avance por tal concepto, estarán avaladas por la garantía descrita en este acto, acordando que las sumas que por
+				este concepto avance EL BANCO devengarán intereses de acuerdo con la tasa vigente en el mercado, los cuales serán exigibles a opción
+				de EL BANCO.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO III: En caso de que se produjera un siniestro EL CLIENTE deberán comunicarlo inmediatamente por escrito a EL BANCO dentro de
+				las veinticuatro (24) horas subsiguientes; evaluados los daños reales, el importe será pagado directamente a EL BANCO y se destinará
+				en primer lugar a la cancelación del préstamo, entendiéndose, asimismo, que en caso de insuficiencia del valor percibido para cancelar
+				la totalidad del crédito, EL BANCO podrá perseguir el pago del saldo vencido y exigible a su elección.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO IV: En caso de presentarse, durante el curso del préstamo, una situación ajena a EL BANCO y a EL CLIENTE que afecte la póliza
+				de seguro contratada, por lo cual EL BANCO tenga que contratar los servicios de otra compañía de seguros, EL BANCO y EL CLIENTE
+				evaluarán y contratarán la póliza de la compañía aseguradora más conveniente dentro del mercado.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 13, 12)}. SEGURO DE VIDA. EL CLIENTE ha decidido contratar un seguro de vida del cual EL BANCO es
+				beneficiario irrevocable, conforme a la póliza No. {!datos.seguroPoliza}, expedida por {!datos.seguroAseguradora}, ubicada en
+				{!datos.seguroDireccion}, por un monto de {!datos.seguroVidaMontoLetras} ({!datos.simboloMoneda}{!datos.seguroVidaMontoNumero}), y se
+				compromete a mantenerlo vigente durante el término del presente contrato.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: La póliza de seguro será pagada por EL CLIENTE mediante {!datos.plazoLetras} ({!datos.plazoNumero}) cuotas mensuales,
+				iguales y consecutivas, y en caso de incumplimiento de esta obligación EL CLIENTE perderán el beneficio de los plazos acordados y, en
+				consecuencia, toda la porción del capital adeudado y de los intereses, serán inmediatamente exigibles. La póliza de seguro que EL
+				CLIENTE suscriban a tales fines podrá ser aumentada por EL BANCO si en cualquier momento durante la vigencia de la póliza de seguros
+				contratada, la compañía aseguradora decide aumentar la prima de seguros por cualquier causa justificada, previa notificación por
+				escrito o por cualquier medio fehaciente a EL CLIENTE antes de su aplicación, con treinta (30) días calendario de anticipación.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: EL CLIENTE mientras sea deudores de EL BANCO se obligan a pagar los valores correspondientes a las renovaciones de la
+				póliza de seguros, en el entendido de que si dejare de hacerlo EL BANCO estará autorizado, sin estar obligado, a hacer dicha
+				renovación por cuenta de EL CLIENTE, en cuyo caso notificará al mismo sobre la renovación realizada, debiendo EL CLIENTE cancelar los
+				avances en que incurra EL BANCO por dicho concepto, antes del próximo vencimiento de los intereses convencionales establecidos en el
+				presente contrato. Las sumas que EL BANCO avance por tal concepto, devengarán intereses de acuerdo con la tasa vigente en el mercado,
+				los cuales serán exigibles a opción de EL BANCO.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO III: En caso de presentarse, durante el curso del préstamo, una situación ajena a EL BANCO y EL CLIENTE que afecte la póliza
+				de seguro contratada, por lo cual EL BANCO tenga que contratar los servicios de otra compañía de seguros, EL BANCO y EL CLIENTE
+				evaluarán y contratarán la póliza de la compañía aseguradora más conveniente dentro del mercado, quedando EL BANCO obligado a entregar
+				a EL CLIENTE los documentos relativos a la contratación de la póliza y su cobertura.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 14, 13)}. OPCIÓN DE COBROS. Queda convenido que a su vencimiento EL BANCO podrá exigir a su opción, el pago
+				de la deuda a EL CLIENTE mediante la ejecución del pagaré antes mencionado, o por todas las vías de derecho, sin que tal cosa implique
+				renuncia de parte de EL BANCO a ningún otro de los derechos que le corresponden en su condición de acreedor.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 15, 14)}. COMPENSACIÓN DE DEUDA. Asimismo, EL CLIENTE autorizan y facultan a EL BANCO, a su única opción, a
+				que en cualquier momento pueda compensar la deuda mediante la apropiación de cualquier suma de dinero de su propiedad que se encuentre
+				en manos de EL BANCO, para cubrir el pago de capital, intereses y accesorios o de derechos vencidos originados por el presente
+				contrato. En caso de aplicar una compensación de deuda EL BANCO deberá notificarlo a EL CLIENTE indicando el monto compensado, la
+				cuenta afectada y la forma en que fueron aplicados los valores a la deuda. Dicha notificación podrá hacerse por uno de los medios
+				siguientes a opción de EL BANCO: a) mediante comunicación física por escrito; b) al correo electrónico suministrado por EL CLIENTE a
+				EL BANCO, o; c) cualquier otro medio fehaciente de conformidad con el derecho común dominicano.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 16, 15)}. CADUCIDAD y TERMINACIÓN. La falta de pago de dos (2) cuotas de capital e intereses, o el
+				incumplimiento de cualquier obligación a cargo de EL CLIENTE producirán el vencimiento del término del presente contrato a opción de
+				EL BANCO, haciéndose exigible la totalidad de la deuda, y ejecutable la garantía, atendiendo a las formalidades legales establecidas,
+				sin que haya plazo para que EL BANCO ejerza este derecho.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: Sin perjuicio de otras causas de caducidad del término que resultan de la legislación vigente y de las que se consignen en
+				otras partes del presente documento, este contrato podrá terminarse por las razones siguientes:
+			</p>
+			<p class="paragraph">1.Por la llegada del término;</p>
+			<p class="paragraph">2.Por mutuo acuerdo entre las partes contratantes (previo saldo del total adeudado);</p>
+			<p class="paragraph">
+				3.Igualmente, EL BANCO podrá, a su única opción, dar término al presente contrato en cualquier momento antes del término estipulado,
+				haciéndose exigible la totalidad de la deuda y suspendiendo cualquier desembolso pendiente, sin comprometer su responsabilidad y sin
+				necesidad alguna de formalidad judicial o extrajudicial, si ocurre alguna de las situaciones siguientes: a) EL CLIENTE utilizaren los
+				fondos desembolsados para fines contrarios al propósito del préstamo consignado en este documento; b) ante la ocurrencia de cualquier
+				evento que, en el criterio razonable de EL BANCO, ponga en riesgo el crédito, afecte la capacidad financiera o disminuya el valor del
+				patrimonio de EL CLIENTE, para cumplir satisfactoriamente con las obligaciones asumidas en el presente contrato; c) si EL CLIENTE son
+				demandados o se produce el secuestro, embargo conservatorio, retentivo o ejecutorio contra cualquiera de sus bienes; d) en caso de
+				incumplimiento por parte de EL CLIENTE de una cualquiera de las obligaciones resultantes del presente contrato; e) si EL BANCO
+				descubre que hubo falsificación, manipulación o inexactitud de la documentación financiera, legal o de cualquier naturaleza
+				suministrada a EL BANCO por parte de EL CLIENTE para el otorgamiento del préstamo; f) si se demuestra que EL CLIENTE hubieren ocultado
+				u omitido alguna información o dato razonable y objetivamente relevante para el otorgamiento del crédito y que de haber sido sabido
+				por EL BANCO, no se hubiera aprobado la facilidad crediticia.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: En los casos de terminación anticipada previstos en este contrato, EL BANCO deberá notificar la ruptura del contrato a EL
+				CLIENTE, por escrito o por cualquier medio fehaciente, con treinta (30) días calendario de antelación a dicha terminación, salvo que
+				se identifiquen elementos de alto riesgo relacionados a actos ilícitos cometidos por EL CLIENTE, sus administradores y/o accionistas
+				con participación significativa, en cuyo caso EL BANCO deberá notificar la terminación a EL CLIENTE en un plazo no mayor a cinco (5)
+				días posteriores a la terminación.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 17, 16)}. SOBRE LA REESTRUCTURACIÓN Y LIQUIDACIÓN DE EMPRESAS Y PERSONAS FÍSICAS COMERCIANTES. EL CLIENTE
+				comerciante, por medio del presente contrato declaran que no han sido sometido ni ha sido iniciado un proceso de reestructuración, de
+				liquidación o de acuerdo previo de plan, del cual formen parte, de conformidad con las disposiciones de la Ley No. 141-15 de fecha 7
+				de agosto de 2015, sobre Reestructuración y Liquidación de Empresas y Personas Físicas Comerciantes EL CLIENTE reconocen que dicha
+				declaración es un elemento esencial tomado en cuenta por EL BANCO para la firma del presente contrato.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: En caso de EL CLIENTE o alguno de sus acreedores se acoja a la Ley 141-15, su Reglamento de aplicación y sus
+				modificaciones, o aquella que la sustituya, EL CLIENTE se comprometen a: a) notificar a EL BANCO en un plazo no mayor de dos (2) días
+				laborables, previo al sometimiento al tribunal el Acuerdo Previo de Plan que será sometido; b) notificar a EL BANCO con treinta (30)
+				días laborables de antelación al sometimiento por parte de EL CLIENTE de la solicitud de reestructuración al tribunal u órganos
+				correspondientes, adjuntando a dicha notificación las razones que fundamentan la solicitud y el posible plan de reestructuración; c)
+				notificar a EL BANCO cuando se trate de una solicitud de Reestructuración iniciada por uno o más acreedores de EL CLIENTE a más tardar
+				el día siguiente de recibida la solicitud de reestructuración; d) informar a EL BANCO cuando se encuentre en al menos una de las
+				condiciones que fundamentan la solicitud de reestructuración de conformidad con la referida ley; y e) a incluir en toda solicitud de
+				reestructuración de deuda a EL BANCO como acreedor de este en la relación de todos sus acreedores, siempre que existan créditos
+				pendientes de pago a EL BANCO.
+			</p>
+			<p class="paragraph">DE LA FIDUCIARIA Y EL FIDEICOMISO:</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 18, 17)}. EL CLIENTE acepta y reconoce que el proyecto se desarrolló bajo el régimen de fideicomiso y que
+				{!hipotecario.fiduciariaNombre} es la fiduciaria y administradora de {!hipotecario.fideicomisoNombre}, cuyo objeto comprende el
+				desarrollo y ejecución de {!hipotecario.proyectoNombre}.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: EL CLIENTE reconoce que los fideicomitentes-promotores, {!hipotecario.promotoresGenerales}, son responsables de la
+				construcción, promoción, supervisión, calidad y desarrollo de {!hipotecario.proyectoNombre}.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: EL CLIENTE aceptan y reconocen que cualquier reclamación en este sentido deberá ser dirigida contra LA CONSTRUCTORA DEL
+				PROYECTO FIDEICOMITIDO.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO III: EL CLIENTE declara, acepta y reconoce que fue informado por FIDUCIARIA {!hipotecario.fiduciariaNombre}, se asimila a la
+				de un gestor profesional, la cual es una obligación de medio y no de resultado.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 19, 18)}. RESPONSABILIDAD DE LA FIDUCIARIA: El presente contrato juntamente con sus anexos, constituye el
+				conjunto de términos, condiciones y obligaciones del acuerdo arribado por EL BANCO, EL VENDEDOR, LOS FIDEICOMITENTES PROMOTORES y EL
+				CLIENTE, obligándoles a lo expresamente pactado y a todas las consecuencias que se deriven de la buena fe, la equidad, el uso y la
+				ley. LAS PARTES declaran y reconocen, de manera conjunta, que todo convenio, acto, acuerdo o contrato, verbal o por escrito, realizado
+				entre, LOS FIDEICOMITENTES PROMOTORES y EL CLIENTE, o cualquier otro tercero, en relación con el inmueble, su unidad de parqueo y el
+				Fideicomiso, y sin el consentimiento expreso y por escrito de EL VENDEDOR, no surtirá efectos jurídicos para esta entidad. Por lo
+				tanto, LOS FIDEICOMITENTES PROMOTORES, se compromete a mantener indemne y libre de responsabilidad civil, penal, laboral, o de
+				cualquier otra naturaleza a EL VENDEDOR y ésta no será responsable por las obligaciones, derechos y responsabilidades expresamente
+				establecidas en dichos acuerdos. LOS FIDEICOMITENTES PROMOTORES deberá responder por EL VENDEDOR en caso de cualquier trámite,
+				reclamación, demanda, judicial o extrajudicial, que sea interpuesto en su contra o que le sea notificado en ocasión a los referidos
+				acuerdos suscritos por LOS FIDEICOMITENTES PROMOTORES y EL CLIENTE, sin la autorización expresa y por escrita de EL VENDEDOR.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: FIDUCIARIA {!hipotecario.fiduciariaNombre}, actúa única y exclusivamente como administradora del Fideicomiso de referencia,
+				por lo que no compromete su responsabilidad ni su propio patrimonio bajo ninguna circunstancia, salvo en los casos establecidos en la
+				Ley de Fideicomiso.
+			</p>
+			<p class="paragraph">
+				PARRAFO II: De igual forma EL CLIENTE aceptan y reconocen que la gestión de FIDUCIARIA {!hipotecario.fiduciariaNombre}, se asimila a
+				la de un gestor profesional, por tanto, la tramitación ante la Dirección General de Impuestos Internos (DGII) de la solicitud de
+				compensación del Impuesto a la Transferencia de Bienes Industrializados y Servicios (ITBIS) de conformidad con las disposiciones de la
+				Ley 189-11, en beneficio de los compradores que califiquen, es una obligación de medio y no de resultado.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 20, 19)}. EL REGLAMENTO DE CONDOMINIO. EL CLIENTE declara y reconoce que la compra del Inmueble y sus
+				unidades de parqueos, implica adhesión a la Declaración de Condominio y Reglamento de Copropiedad y Administración del Proyecto, la
+				cual regulará los derechos y obligaciones de los copropietarios, así como las resoluciones, reglas y normas dictadas por los
+				organismos competentes en virtud del referido reglamento, así como de la Ley 5038, sobre Régimen de Condominios, copia del cual ha
+				sido entregado a EL CLIENTE por LOS FIDEICOMITENTES PROMOTORES. Dicho Reglamento forma parte de este Contrato y el mismo,
+				conjuntamente con cualquier modificación futura, es adoptado desde ahora y para siempre por EL CLIENTE quienes se obligan a su
+				cumplimiento.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 21, 20)}. SUMINISTRO DE INFORMACIÓN. En virtud de las disposiciones de la Ley Orgánica sobre Protección de
+				Datos de Carácter Personal No. 172-13, del trece (13) de diciembre del año dos mil trece (2013). EL CLIENTE autorizan a EL BANCO a
+				consultarlo en la base de datos de las Sociedades de Información Crediticia (SIC) a los fines de evaluación de crédito, así como para
+				cualquier uso adicional que EL BANCO considere pertinente con el objetivo de brindar sus servicios a EL CLIENTE; así como para dar
+				cumplimiento a las disposiciones legales vigentes, especialmente, y sin que ello sea limitativo, a las disposiciones sobre prevención
+				de lavado de activos y financiamiento del terrorismo. EL CLIENTE declaran, reconocen y aceptan el uso y conservación de la información
+				de carácter personal y crediticia otorgada a EL BANCO, facultándolo a mantener dichas informaciones en su base de datos. De igual
+				forma, EL CLIENTE autorizan a EL BANCO a transmitir a las Sociedades de Información Crediticia (SIC) la información requerida conforme
+				los parámetros de ley y necesaria para los fines de evaluación del crédito por parte de otras instituciones suscriptores de dichas
+				Sociedades de Información, reconociendo y garantizando que la revelación de dichas informaciones por parte de EL BANCO y/o por las
+				Sociedades de Información Crediticia y/o por sus respectivos empleados, funcionarios y accionistas no conllevara violación de secreto
+				profesional a los efectos del artículo 377 del Código Penal, violación al secreto bancario a los efectos del literal b) de la Ley
+				Monetaria y Financiera No. 183-02, ni generarán responsabilidades bajo los artículos 1382 y siguiente del Código Civil, ni bajo ningún
+				otro texto legal. De igual forma, EL CLIENTE consienten y autorizan a EL BANCO a ceder las informaciones otorgadas, incluyendo
+				informaciones biográficas, a sus gestores de cobro y a las sociedades con las que mantenga acuerdos de referimiento o relaciones
+				comerciales para dar cumplimiento a los fines directamente relacionados con el interés legítimo de EL BANCO y EL CLIENTE, manteniendo
+				éste la facultad de rectificar y/o suprimir los datos que demuestre sean incorrectos, incompletos, desactualizados o cuyo registro
+				esté prohibido.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: Asimismo, EL CLIENTE autorizan expresamente a EL BANCO a consultar sus datos en el Maestro de Cedulados que mantiene la
+				Junta Central Electoral (JCE), conforme las disposiciones del Reglamento que establece el Procedimiento para Acceder al Maestro de
+				Cedulados y Fija las tasas por los Servicios de Acceso de fecha veintitrés (23) de julio del año dos mil trece (2013), descargando a
+				EL BANCO de cualquier responsabilidad relativa a la consulta realizada en el referido Maestro, en el entendido de que dichos datos
+				deberán ser manejados con la debida confidencialidad y no podrán ser divulgados sin el consentimiento de EL CLIENTE.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: EL CLIENTE de nacionalidad extranjera, en los casos que aplique, autorizan a EL BANCO, a realizar las revisiones
+				correspondientes de su historial crediticio en el buró de crédito internacional que corresponda.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 22, 21)}. PREVENCIÓN LAVADO DE ACTIVOS. EL CLIENTE declaran, reconocen y aceptan haber sido informados por EL
+				BANCO de las disposiciones contenidas en la Ley No. 155-17 de fecha 1º de junio de 2017, contra el lavado de activos y financiamiento
+				del terrorismo, admitiendo que se constituyen en sujetos obligados a los fines de dicha ley y a las regulaciones emanadas de las
+				autoridades monetarias y financieras.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO: EL CLIENTE quedan obligados a ofrecer a EL BANCO las informaciones que le sean solicitadas, en forma veraz y sin demora,
+				quedando comprometidos a colaborar para lograr una eficiente prevención en el lavado de activos, en caso contrario, significará un
+				incumplimiento del presente contrato, y esta situación generará la opción a favor de EL BANCO de terminación inmediata del mismo, sin
+				que implique responsabilidad para EL BANCO.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 23, 22)}. DERECHOS DE EL CLIENTE. Quedan entendido entre las partes que EL CLIENTE tendrán derecho a una
+				contratación justa, a reclamar, a que exista equilibrio entre la protección del usuario y la provisión de servicios financieros a
+				costos accesibles, a la libre elección, a la publicidad y difusión, a las reglas de interpretación, a la transparencia, al trato
+				equitativo, no discriminatorio o abusivo, y al trato igualitario para los usuarios discapacitados.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 24, 23)}. IMPUESTOS, GASTOS Y HONORARIOS. EL CLIENTE se obligan a pagar todos los impuestos, gastos y
+				honorarios que origine este contrato, así como cualquier suma de dinero que EL BANCO tuviere que pagar por concepto de gastos y
+				honorarios, como consecuencia de cualquier actuación judicial o extrajudicial que realice en relación con el mismo.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: EL CLIENTE podrán solicitar a EL BANCO, y este deberá obtemperar al requerimiento, todos los comprobantes de aquellos
+				impuestos y gastos en que se incurra respecto del presente contrato de préstamo. Asimismo, EL CLIENTE declaran que ha recibido y
+				evaluado el documento contentivo del desglose de impuestos, gastos, honorarios y comisiones que deberá pagar en ocasión de la
+				suscripción del presente contrato, sin perjuicio de aquellos montos que surjan de manera imprevisible los cuales al momento de
+				presentarse deberán ser notificados a EL CLIENTE con la justificación correspondiente.
+			</p>
+			<p class="paragraph">
+				Párrafo II: EL CLIENTE se comprometen a pagar conjuntamente con la cancelación del préstamo otorgado en virtud del presente contrato,
+				la suma aplicable por la expedición de la cancelación de hipoteca (acto de radiación), de conformidad a lo indicado en el tarifario
+				vigente al momento de la cancelación.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO III: El tarifario de servicios formará parte integral del presente contrato, así como cualquier modificación posterior al
+				mismo.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 25, 24)}. CESIÓN DE CRÉDITO. Queda expresamente convenido entre las partes que EL BANCO podrá ceder el
+				crédito emergente de la Línea de Crédito otorgada en virtud del presente contrato, así como sus accesorios. En ese caso, EL BANCO
+				deberá notificar por cualquier medio escrito la cesión a EL CLIENTE, consintiendo éstos últimos por medio del presente contrato a la
+				cesión y obligándose a no oponer objeción o traba alguna al respecto. De igual manera, EL BANCO podrá proporcionar al cesionario las
+				informaciones personales y crediticias de EL CLIENTE, sin que ello implique violación alguna a la Ley Orgánica sobre Protección de
+				Datos de Carácter Personal No. 172-13, o de derechos de EL CLIENTE.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 26, 25)}. NO RENUNCIA. EL retraso o no ejercicio por EL BANCO de cualquier acción, derecho o privilegio
+				otorgado por medio del presente contrato, no debe interpretarse como una renuncia a ejercer dicha acción, derecho o privilegio en el
+				futuro.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 27, 26)}. MODIFICACIONES. Sin perjuicio de lo previsto en otra parte del presente documento, este contrato
+				podrá ser modificado: a) por el mutuo acuerdo entre las partes; b) en virtud de cualquier disposición legal que se dicte en el futuro
+				en relación con el objeto de este contrato; y c) por modificaciones a la tasa, cargos, comisiones, fechas y lugares de pago. En este
+				último caso, EL BANCO comunicará tales cambios a EL CLIENTE, con treinta (30) días de anticipación a la fecha efectiva, por los medios
+				que se establecen en el presente contrato o cualquier otro medio fehaciente.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 28, 27)}. ELECCIÓN DE DOMICILIO Y NOTIFICACIONES. Para el cumplimiento y ejecución del presente contrato, las
+				partes hacen elección de domicilio en las direcciones indicadas al principio de este contrato.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO: Todas las comunicaciones, avisos o cartas que deban ser enviadas por una parte a la otra en cumplimiento de las disposiciones
+				de este contrato, serán consideradas debidamente recibidas, si son enviados por escrito por medio de correo u otro medio de
+				comunicación admisible como correo electrónico, carta, fax o a las direcciones que se indican en este contrato. Es responsabilidad de
+				EL CLIENTE notificaran a EL BANCO cualquier cambio en la dirección y los datos de contacto suministrados. A falta de esta
+				notificación, los avisos y demás correspondencia se considerarán dados válidamente, cuando hayan sido remitidos a la última dirección
+				que aparezca registrada en EL BANCO.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO {!IF(esDolares, 29, 28)}. LEY APLICABLE. Para lo no previsto en el presente contrato las partes se someten a las
+				disposiciones de la Ley Monetaria y Financiera No. 183-02, de las normas dictadas por la Autoridad Monetaria y Financiera de la
+				República Dominicana, y las disposiciones de derecho común, siendo competencia exclusiva de los tribunales de la República Dominicana
+				el conocimiento de las acciones judiciales derivadas de la ejecución del presente acuerdo.
+			</p>
+			<p class="paragraph">
+				HECHO Y FIRMADO DE BUENA FE, en tantos originales como partes contratantes, en {!datos.lugarFirma}, a los
+				{!datos.fechaContratoDiaLetras} ({!datos.fechaContratoDiaNumero}) días del mes de {!datos.fechaContratoMes} del año
+				{!datos.fechaContratoAnoLetras} ({!datos.fechaContratoAnoNumero}).
+			</p>
+			<div class="signature-section">
+				<div class="signature-heading">POR EL CLIENTE:</div>
+				<table class="signature-table">
+					<apex:repeat value="{!hipotecario.prestatarios}" var="firmante"><tr><td class="signature-cell"><div class="signature-line"></div><div class="signature-name">{!firmante.nombre}</div></td><td class="signature-cell"></td></tr></apex:repeat>
+				</table>
+				<apex:outputPanel rendered="{!hipotecario.tieneGaranteReal}" layout="block"><div class="signature-heading">POR LOS COMPRADORES - GARANTES REALES:</div><table class="signature-table"><apex:repeat value="{!hipotecario.garantesReales}" var="garante"><tr><td class="signature-cell"><div class="signature-line"></div><div class="signature-name">{!garante.nombre}</div></td><td class="signature-cell"></td></tr></apex:repeat></table></apex:outputPanel>
+				<apex:outputPanel rendered="{!hipotecario.tieneConyugeInterviniente}" layout="block"><div class="signature-heading">POR LA CÓNYUGE - INTERVINIENTE:</div><table class="signature-table"><tr><td class="signature-cell"><div class="signature-line"></div><div class="signature-name">{!hipotecario.conyuge.nombre}</div></td><td class="signature-cell"></td></tr></table></apex:outputPanel>
+				<div class="signature-heading">POR LA PARTE VENDEDORA:</div>
+				<table class="signature-table">
+					<tr>
+						<td class="signature-cell">
+							<div class="signature-line"></div>
+							<div class="signature-name">
+								<apex:outputText value="{!IF(hipotecario.esPersonaFisica,hipotecario.vendedorNombre,IF(hipotecario.esEmpresa,hipotecario.vendedorRepresentanteNombre,hipotecario.fiduciariaFirmantes))}" />
+							</div>
+						</td>
+						<td class="signature-cell"></td>
+					</tr>
+				</table>
+				<div class="signature-heading">POR EL BANCO:</div>
+				<table class="signature-table">
+					<tr>
+						<td class="signature-cell">
+							<div class="signature-line"></div>
+							<div class="signature-name">{!datos.bancoRepresentante1.nombreCompleto}</div>
+							<div class="signature-role">{!datos.bancoRepresentante1.cargo}</div>
+						</td>
+						<td class="signature-cell">
+							<div class="signature-line"></div>
+							<div class="signature-name">{!datos.bancoRepresentante2.nombreCompleto}</div>
+							<div class="signature-role">{!datos.bancoRepresentante2.cargo}</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="notary-block">
+				<p class="paragraph">
+					YO, {!datos.notario.tratamiento} {!datos.notario.nombreCompleto}, Notario Público de los del Número para
+					{!datos.notario.jurisdiccionNotario}, Matrícula No. {!datos.notario.matriculaNotario}, CERTIFICO Y DOY FE de que por ante mí
+					fueron puestas las firmas de {!hipotecario.nombresFirmantesNotario}, quienes manifestaron que son las firmas que acostumbran usar. En
+					{!datos.lugarFirma}, a los {!datos.fechaContratoDiaLetras} ({!datos.fechaContratoDiaNumero}) días del mes de
+					{!datos.fechaContratoMes} del año {!datos.fechaContratoAnoLetras} ({!datos.fechaContratoAnoNumero}).
+				</p>
+				<div class="notary-signature">
+					<div class="signature-line"></div>
+					<div class="signature-name">{!datos.notario.nombreCompleto}</div>
+					<div class="signature-role">Notario Público</div>
+				</div>
+			</div>
+		</body>
+	</html></apex:page>

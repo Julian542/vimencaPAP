@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_PlazoMaximoPermitido__c</fullName>
+    <description>Plazo máximo vigente segun el tipo de crédito y el vehículo más antiguo. Cero indica una configuración inválida o ausencia de un vehículo con antigüedad admitida.</description>
+    <externalId>false</externalId>
+    <formula>IF(
+    RecordType.DeveloperName = &quot;FSC_Solicitud_Credito_Consumo&quot;,
+    IF(AND($CustomMetadata.FSC_PlazoCredito__mdt.Consumo.FSC_PlazoMaximo__c &gt;= 1, $CustomMetadata.FSC_PlazoCredito__mdt.Consumo.FSC_PlazoMaximo__c &lt;= 999), $CustomMetadata.FSC_PlazoCredito__mdt.Consumo.FSC_PlazoMaximo__c, 0),
+    IF(
+        RecordType.DeveloperName = &quot;FSC_Solicitud_Credito_Vehiculo&quot;,
+        IF(
+            AND(
+                FSC_AnioVehiculoMasAntiguo__c &gt; 0,
+                NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioDesde__c)),
+                NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioDesde__c)),
+                NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioDesde__c)),
+                NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioHasta__c)),
+                NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioHasta__c)),
+                NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioHasta__c)),
+                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioDesde__c = 0,
+                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioHasta__c &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioDesde__c,
+                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioHasta__c &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioDesde__c,
+                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioHasta__c &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioDesde__c,
+                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioDesde__c = $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioHasta__c + 1,
+                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioDesde__c = $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioHasta__c + 1,
+                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioHasta__c &lt;= 99,
+                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_PlazoMaximo__c &lt;= 999,
+                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_PlazoMaximo__c &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_PlazoMaximo__c,
+                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_PlazoMaximo__c &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_PlazoMaximo__c,
+                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_PlazoMaximo__c &gt;= 1,
+                (YEAR(TODAY()) - FSC_AnioVehiculoMasAntiguo__c) &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioDesde__c,
+                (YEAR(TODAY()) - FSC_AnioVehiculoMasAntiguo__c) &lt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioHasta__c
+            ),
+            IF((YEAR(TODAY()) - FSC_AnioVehiculoMasAntiguo__c) &lt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioHasta__c, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_PlazoMaximo__c, IF((YEAR(TODAY()) - FSC_AnioVehiculoMasAntiguo__c) &lt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioHasta__c, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_PlazoMaximo__c, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_PlazoMaximo__c)),
+            0
+        ),
+        999
+    )
+)</formula>
+    <inlineHelpText>Valor calculado desde Plazos de crédito. Para vehículos, revise el año de las garantías. Cero significa que no hay un plazo habilitado.</inlineHelpText>
+    <label>Plazo máximo permitido</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,884 @@
+<template>
+	<div class="slds-m-around_large">
+		<div class="slds-box slds-theme_default">
+			<div class="slds-text-heading_small slds-m-bottom_medium">Informacion de los Solicitantes</div>
+			<div class="slds-box slds-theme_default">
+				<div class="slds-grid slds-wrap slds-grid_align-spread slds-m-bottom_medium">
+					<div class="slds-text-heading_small">Listado de Solicitantes</div>
+					<lightning-button
+						label="Agregar"
+						variant="brand-outline"
+						onclick={handleAddApplicant}></lightning-button>
+				</div>
+
+				<template if:true={hasApplicants}>
+					<lightning-datatable
+						key-field="FSC_NumIdentificacion__c"
+						data={applicants}
+						columns={columns}
+						onrowaction={handleRowAction}
+						hide-checkbox-column>
+					</lightning-datatable>
+				</template>
+
+				<template if:false={hasApplicants}>
+					<div class="slds-text-body_small slds-text-color_weak">No hay solicitantes registrados.</div>
+				</template>
+
+				<template if:true={showRequiredDeudorError}>
+					<div class="slds-text-color_error slds-m-top_small">{requiredDeudorMessage}</div>
+				</template>
+
+				<template if:true={showRequiredDeudorReferencesError}>
+					<div class="slds-text-color_error slds-m-top_small">{requiredDeudorReferencesMessage}</div>
+				</template>
+
+				<template if:true={showRequiredLaborDataError}>
+					<div class="slds-text-color_error slds-m-top_small">{requiredLaborDataMessage}</div>
+				</template>
+
+				<template lwc:if={mostrarErrorLimiteFacilidadesOtrasInstituciones}>
+					<div
+						class="slds-text-color_error slds-m-top_small"
+						role="alert">
+						{mensajeLimiteFacilidadesOtrasInstituciones}
+					</div>
+				</template>
+			</div>
+		</div>
+
+		<template if:true={showModal}>
+			<section
+				role="dialog"
+				tabindex="-1"
+				aria-labelledby="applicant-modal-heading"
+				aria-modal="true"
+				class="slds-modal slds-fade-in-open">
+				<div class="slds-modal__container loan-applicant-modal__container">
+					<header class="slds-modal__header">
+						<button
+							class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+							title="Cerrar"
+							onclick={closeModal}>
+							<lightning-icon
+								icon-name="utility:close"
+								alternative-text="cerrar"
+								size="small"></lightning-icon>
+						</button>
+						<h2
+							id="applicant-modal-heading"
+							class="slds-text-heading_medium">
+							{modalTitle}
+						</h2>
+					</header>
+
+					<div
+						class="slds-modal__content slds-p-around_medium slds-scrollable_y"
+						style="max-height: 70vh">
+						<template if:false={isEdit}>
+							<div class="slds-box slds-theme_default slds-m-bottom_medium">
+								<lightning-progress-indicator
+									current-step={currentStep}
+									type="base"
+									variant="base">
+									<lightning-progress-step
+										label="Identificacion"
+										value="1"></lightning-progress-step>
+									<lightning-progress-step
+										label="Detalles"
+										value="2"></lightning-progress-step>
+								</lightning-progress-indicator>
+							</div>
+						</template>
+
+						<template if:true={isStep1}>
+							<div class="slds-box slds-theme_default">
+								<div class="slds-text-heading_small slds-m-bottom_medium">Identificacion del solicitante</div>
+								<template if:true={isLoadingApplicant}>
+									<div
+										class="slds-is-relative"
+										style="min-height: 10rem">
+										<lightning-spinner
+											alternative-text="Buscando solicitante"
+											size="medium"></lightning-spinner>
+									</div>
+								</template>
+								<template if:false={isLoadingApplicant}>
+									<div class="slds-grid slds-wrap slds-gutters">
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-combobox
+												label="Tipo de Identificacion"
+												value={tipoIdentificacion}
+												options={tipoIdentificacionOptions}
+												required
+												data-step1-input
+												data-step1-field="tipoIdentificacion"
+												onchange={handleTipoIdentificacionChange}>
+											</lightning-combobox>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												label="Numero de Identificacion"
+												value={numIdentificacion}
+												maxlength={numIdentificacionMaxLength}
+												pattern={numIdentificacionPattern}
+												message-when-pattern-mismatch="Para cedula, ingrese solo numeros y guiones."
+												required
+												data-step1-input
+												data-step1-field="numIdentificacion"
+												onchange={handleNumIdentificacionChange}>
+											</lightning-input>
+										</div>
+									</div>
+								</template>
+							</div>
+						</template>
+
+						<template if:true={isStep2}>
+							<template if:true={isLoadingApplicant}>
+								<div class="slds-box slds-theme_default">
+									<lightning-spinner
+										alternative-text="Cargando datos del solicitante"
+										size="medium"></lightning-spinner>
+								</div>
+							</template>
+
+							<template if:false={isLoadingApplicant}>
+								<div class="slds-box slds-theme_default slds-m-bottom_medium">
+									<div class="slds-text-heading_small slds-m-bottom_medium">Datos del Solicitante</div>
+									<div class="slds-grid slds-wrap slds-gutters">
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-combobox
+												label="Tipo de Solicitante"
+												value={tipoSolicitante}
+												options={tipoSolicitanteOptions}
+												onchange={handleTipoSolicitanteChange}
+												disabled={isPrimaryAccountTipoSolicitanteDisabled}
+												required>
+											</lightning-combobox>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												label="Tipo de Identificacion"
+												value={tipoIdentificacion}
+												readonly></lightning-input>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												label="Numero de Identificacion"
+												value={numIdentificacion}
+												readonly></lightning-input>
+										</div>
+									</div>
+								</div>
+
+								<div class="slds-box slds-theme_default slds-m-bottom_medium">
+									<div class="slds-text-heading_small slds-m-bottom_medium">Datos Personales</div>
+									<div class="slds-grid slds-wrap slds-gutters">
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												label="Nombre"
+												value={nombre}
+												onchange={handleNombreChange}
+												readonly={isPrimaryAccountNombreReadonly}
+												data-personal-input
+												required></lightning-input>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-combobox
+												label="Estado Vivienda"
+												value={tipoVivienda}
+												options={tipoViviendaOptions}
+												onchange={handleTipoViviendaChange}
+												data-personal-input
+												required></lightning-combobox>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												label="Primer Apellido"
+												value={primerApellido}
+												onchange={handlePrimerApellidoChange}
+												readonly={isPrimaryAccountPrimerApellidoReadonly}
+												data-personal-input
+												required></lightning-input>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												label="Tiempo en Vivienda"
+												type="date"
+												value={tiempoVivienda}
+												max={fechaActual}
+												message-when-range-overflow="La fecha no puede ser mayor a hoy."
+												onchange={handleTiempoViviendaChange}
+												data-personal-input
+												required></lightning-input>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<!-- El segundo apellido es opcional para todos los solicitantes. -->
+											<lightning-input
+												label="Segundo Apellido"
+												value={segundoApellido}
+												onchange={handleSegundoApellidoChange}
+												readonly={isPrimaryAccountSegundoApellidoReadonly}
+												data-personal-input></lightning-input>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-combobox
+												label="Estado Civil"
+												value={estadoCivil}
+												options={estadoCivilOptions}
+												onchange={handleEstadoCivilChange}
+												data-personal-input
+												required></lightning-combobox>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-combobox
+												label="Nacionalidad"
+												value={nacionalidad}
+												options={nacionalidadOptions}
+												onchange={handleNacionalidadChange}
+												disabled={isPrimaryAccountNacionalidadDisabled}
+												data-personal-input
+												required></lightning-combobox>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												label="Numero de Dependientes"
+												inputmode="numeric"
+												pattern="[0-9]*"
+												message-when-pattern-mismatch="Ingrese solo numeros."
+												value={numeroDependientes}
+												data-numeric-input="numeroDependientes"
+												onkeydown={handleNumericInputKeyDown}
+												oninput={handleNumeroDependientesInput}
+												onpaste={handleNumericInputPaste}
+												onchange={handleNumeroDependientesChange}
+												data-personal-input
+												required></lightning-input>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												name="fechaNacimiento"
+												label="Fecha de Nacimiento"
+												type="date"
+												value={fechaNacimiento}
+												max={fechaNacimientoMaxima}
+												message-when-range-overflow="La fecha de nacimiento debe corresponder a una persona mayor de 18 anos."
+												onchange={handleFechaNacimientoChange}
+												data-personal-input
+												required></lightning-input>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-combobox
+												label="Clasificacion SIB"
+												value={clasificacionSIB}
+												options={clasificacionSIBOptions}
+												onchange={handleClasificacionSIBChange}
+												data-personal-input
+												required></lightning-combobox>
+										</div>
+									</div>
+								</div>
+
+								<div class="slds-box slds-theme_default slds-m-bottom_medium">
+									<div class="slds-grid slds-wrap slds-grid_align-spread slds-m-bottom_medium">
+										<div class="slds-text-heading_small">Direcciones</div>
+										<lightning-button
+											label="Agregar direccion"
+											onclick={handleAddDireccion}></lightning-button>
+									</div>
+
+									<template if:true={hasDirecciones}>
+										<lightning-datatable
+											key-field="_key"
+											data={direcciones}
+											columns={direccionColumns}
+											onrowaction={handleDireccionRowAction}
+											hide-checkbox-column>
+										</lightning-datatable>
+									</template>
+
+									<template if:false={hasDirecciones}>
+										<div class="slds-text-body_small slds-text-color_weak">No hay direcciones agregadas.</div>
+									</template>
+
+									<template if:true={showDireccionEditor}>
+										<div class="slds-border_top slds-m-top_medium slds-p-top_medium">
+											<div class="slds-text-title_bold slds-m-bottom_small">{direccionEditorTitle}</div>
+											<div class="slds-grid slds-wrap slds-gutters">
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-input
+														name="Name"
+														label="Nombre de la Direccion"
+														value={direccionDraft.Name}
+														onchange={handleDireccionDraftChange}></lightning-input>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-input
+														name="Street"
+														label="Calle"
+														value={direccionDraft.Street}
+														onchange={handleDireccionDraftChange}></lightning-input>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-input
+														name="City"
+														label="Ciudad"
+														value={direccionDraft.City}
+														onchange={handleDireccionDraftChange}></lightning-input>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-input
+														name="State"
+														label="Estado"
+														value={direccionDraft.State}
+														onchange={handleDireccionDraftChange}></lightning-input>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-input
+														name="PostalCode"
+														label="Codigo Postal"
+														value={direccionDraft.PostalCode}
+														onchange={handleDireccionDraftChange}></lightning-input>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-combobox
+														name="Country"
+														label="Pais"
+														value={direccionDraft.Country}
+														options={nacionalidadOptions}
+														onchange={handleDireccionDraftChange}></lightning-combobox>
+												</div>
+											</div>
+											<div class="slds-text-align_right slds-m-top_medium">
+												<lightning-button
+													label="Cancelar"
+													onclick={closeDireccionEditor}></lightning-button>
+												<lightning-button
+													class="slds-m-left_small"
+													label="Guardar"
+													variant="brand"
+													onclick={saveDireccion}></lightning-button>
+											</div>
+										</div>
+									</template>
+								</div>
+
+								<div class="slds-box slds-theme_default slds-m-bottom_medium">
+									<div class="slds-grid slds-wrap slds-grid_align-spread slds-m-bottom_medium">
+										<div class="slds-text-heading_small">Telefonos</div>
+										<lightning-button
+											label="Agregar telefono"
+											onclick={handleAddTelefono}></lightning-button>
+									</div>
+
+									<template if:true={hasTelefonos}>
+										<lightning-datatable
+											key-field="_key"
+											data={telefonos}
+											columns={telefonoColumns}
+											onrowaction={handleTelefonoRowAction}
+											hide-checkbox-column>
+										</lightning-datatable>
+									</template>
+
+									<template if:false={hasTelefonos}>
+										<div class="slds-text-body_small slds-text-color_weak">No hay telefonos agregados.</div>
+									</template>
+
+									<template if:true={showTelefonoEditor}>
+										<div class="slds-border_top slds-m-top_medium slds-p-top_medium">
+											<div class="slds-text-title_bold slds-m-bottom_small">{telefonoEditorTitle}</div>
+											<div class="slds-grid slds-wrap slds-gutters">
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-combobox
+														name="FSC_TipoContacto__c"
+														label="Tipo de Contacto"
+														value={telefonoDraft.FSC_TipoContacto__c}
+														options={tipoContactoOptions}
+														onchange={handleTelefonoDraftChange}>
+													</lightning-combobox>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-input
+														name="TelephoneNumber"
+														inputmode="numeric"
+														label="Numero de Telefono"
+														value={telefonoDraft.TelephoneNumber}
+														pattern="[0-9]+"
+														message-when-pattern-mismatch="Ingrese solo números."
+														required
+														data-telefono-input
+														onkeydown={handleNumericInputKeyDown}
+														oninput={handleTelefonoInput}
+														onkeyup={handleTelefonoInput}
+														onpaste={handleTelefonoPaste}
+														onchange={handleTelefonoDraftChange}>
+													</lightning-input>
+												</div>
+											</div>
+											<div class="slds-text-align_right slds-m-top_medium">
+												<lightning-button
+													label="Cancelar"
+													onclick={closeTelefonoEditor}></lightning-button>
+												<lightning-button
+													class="slds-m-left_small"
+													label="Guardar"
+													variant="brand"
+													onclick={saveTelefono}></lightning-button>
+											</div>
+										</div>
+									</template>
+								</div>
+
+								<div class="slds-box slds-theme_default slds-m-bottom_medium">
+									<div class="slds-grid slds-wrap slds-grid_align-spread slds-m-bottom_medium">
+										<div class="slds-text-heading_small">Direcciones Electronicas</div>
+										<lightning-button
+											label="Agregar correo"
+											onclick={handleAddDireccionElectronica}></lightning-button>
+									</div>
+
+									<template if:true={hasDireccionesElectronicas}>
+										<lightning-datatable
+											key-field="_key"
+											data={direccionesElectronicas}
+											columns={direccionElectronicaColumns}
+											onrowaction={handleDireccionElectronicaRowAction}
+											hide-checkbox-column>
+										</lightning-datatable>
+									</template>
+
+									<template if:false={hasDireccionesElectronicas}>
+										<div class="slds-text-body_small slds-text-color_weak">No hay direcciones electronicas agregadas.</div>
+									</template>
+
+									<template if:true={showDireccionElectronicaEditor}>
+										<div class="slds-border_top slds-m-top_medium slds-p-top_medium">
+											<div class="slds-text-title_bold slds-m-bottom_small">{direccionElectronicaEditorTitle}</div>
+											<div class="slds-grid slds-wrap slds-gutters">
+												<div class="slds-col slds-size_1-of-1">
+													<lightning-input
+														name="EmailAddress"
+														type="email"
+														label="Email"
+														value={direccionElectronicaDraft.EmailAddress}
+														pattern="[A-Za-z0-9]+(?:[._+-][A-Za-z0-9]+)*@(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+(?:[A-Za-z]{2,63}|xn--[A-Za-z0-9-]{2,59})"
+														message-when-pattern-mismatch="Ingrese un correo valido sin espacios ni caracteres especiales no permitidos."
+														message-when-type-mismatch="Ingrese una direccion de correo valida."
+														required
+														data-direccion-electronica-input
+														onblur={handleDireccionElectronicaEmailBlur}
+														onchange={handleDireccionElectronicaDraftChange}>
+													</lightning-input>
+												</div>
+											</div>
+											<div class="slds-text-align_right slds-m-top_medium">
+												<lightning-button
+													label="Cancelar"
+													onclick={closeDireccionElectronicaEditor}></lightning-button>
+												<lightning-button
+													class="slds-m-left_small"
+													label="Guardar"
+													variant="brand"
+													onclick={saveDireccionElectronica}></lightning-button>
+											</div>
+										</div>
+									</template>
+								</div>
+
+								<div class="slds-box slds-theme_default slds-m-bottom_medium">
+									<div class="slds-grid slds-wrap slds-grid_align-spread slds-m-bottom_medium">
+										<div class="slds-text-heading_small">Referencias</div>
+										<lightning-button
+											label="Agregar referencia"
+											onclick={handleAddReferencia}></lightning-button>
+									</div>
+
+									<template if:true={hasReferencias}>
+										<lightning-datatable
+											key-field="_key"
+											data={referencias}
+											columns={referenciaColumns}
+											onrowaction={handleReferenciaRowAction}
+											hide-checkbox-column>
+										</lightning-datatable>
+									</template>
+
+									<template if:false={hasReferencias}>
+										<div class="slds-text-body_small slds-text-color_weak">No hay referencias agregadas.</div>
+									</template>
+
+									<template if:true={showReferenciaEditor}>
+										<div class="slds-border_top slds-m-top_medium slds-p-top_medium">
+											<div class="slds-text-title_bold slds-m-bottom_small">{referenciaEditorTitle}</div>
+											<div class="slds-grid slds-wrap slds-gutters">
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-input
+														name="FSC_FirstName__c"
+														label="Nombres"
+														value={referenciaDraft.FSC_FirstName__c}
+														required
+														data-referencia-input
+														onchange={handleReferenciaDraftChange}>
+													</lightning-input>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-input
+														name="FSC_LastName__c"
+														label="Apellidos"
+														value={referenciaDraft.FSC_LastName__c}
+														required
+														data-referencia-input
+														onchange={handleReferenciaDraftChange}>
+													</lightning-input>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-combobox
+														name="FSC_TipoIdentificacion__c"
+														label="Tipo de Identificacion"
+														value={referenciaDraft.FSC_TipoIdentificacion__c}
+														options={referenciaTipoIdentificacionOptions}
+														required={isReferenciaTipoIdentificacionRequired}
+														message-when-value-missing="Seleccione el tipo de identificacion para la identificacion ingresada."
+														data-referencia-input
+														onchange={handleReferenciaDraftChange}>
+													</lightning-combobox>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-input
+														name="FSC_Identificacion__c"
+														label="Identificacion"
+														value={referenciaDraft.FSC_Identificacion__c}
+														required={isReferenciaIdentificacionRequired}
+														message-when-value-missing="Ingrese la identificacion para el tipo de identificacion seleccionado."
+														maxlength={referenciaIdentificacionMaxLength}
+														pattern={referenciaIdentificacionPattern}
+														message-when-pattern-mismatch={referenciaIdentificacionPatternMessage}
+														data-referencia-input
+														onkeydown={handleReferenciaIdentificacionKeyDown}
+														oninput={handleReferenciaIdentificacionInput}
+														onchange={handleReferenciaDraftChange}>
+													</lightning-input>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-input
+														name="FSC_Direccion__c"
+														label="Direccion"
+														value={referenciaDraft.FSC_Direccion__c}
+														onchange={handleReferenciaDraftChange}>
+													</lightning-input>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-input
+														name="FSC_Email__c"
+														type="email"
+														label="Email"
+														value={referenciaDraft.FSC_Email__c}
+														pattern="[A-Za-z0-9]+(?:[._+-][A-Za-z0-9]+)*@(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+(?:[A-Za-z]{2,63}|xn--[A-Za-z0-9-]{2,59})"
+														message-when-pattern-mismatch="Ingrese un correo valido sin espacios ni caracteres especiales no permitidos."
+														message-when-type-mismatch="Ingrese una direccion de correo valida."
+														data-referencia-email-input
+														onblur={handleReferenciaEmailBlur}
+														onchange={handleReferenciaDraftChange}>
+													</lightning-input>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-input
+														name="FSC_Telefono__c"
+														type="tel"
+														inputmode="numeric"
+														label="Telefono"
+														value={referenciaDraft.FSC_Telefono__c}
+														pattern="[0-9]*"
+														message-when-pattern-mismatch="Ingrese solo numeros."
+														required
+														data-referencia-input
+														onkeydown={handleNumericInputKeyDown}
+														oninput={handleReferenciaTelefonoInput}
+														onchange={handleReferenciaDraftChange}>
+													</lightning-input>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-combobox
+														name="FSC_Parentesco__c"
+														label="Parentesco"
+														value={referenciaDraft.FSC_Parentesco__c}
+														options={referenciaParentescoOptions}
+														required
+														data-referencia-input
+														onchange={handleReferenciaDraftChange}>
+													</lightning-combobox>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-input
+														name="FSC_LugarTrabajo__c"
+														label="Lugar de trabajo"
+														value={referenciaDraft.FSC_LugarTrabajo__c}
+														onchange={handleReferenciaDraftChange}>
+													</lightning-input>
+												</div>
+											</div>
+											<div class="slds-text-align_right slds-m-top_medium">
+												<lightning-button
+													label="Cancelar"
+													onclick={closeReferenciaEditor}></lightning-button>
+												<lightning-button
+													class="slds-m-left_small"
+													label="Guardar"
+													variant="brand"
+													onclick={saveReferencia}></lightning-button>
+											</div>
+										</div>
+									</template>
+								</div>
+
+								<div class="slds-box slds-theme_default slds-m-bottom_medium">
+									<div class="slds-text-heading_small slds-m-bottom_medium">Datos Laborales</div>
+									<div class="slds-grid slds-wrap slds-gutters">
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-combobox
+												label="Ocupacion"
+												value={ocupacion}
+												options={ocupacionOptions}
+												onchange={handleOcupacionChange}
+												data-laboral-input
+												required></lightning-combobox>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-combobox
+												label="Fuente de Ingreso"
+												value={fuenteIngreso}
+												options={fuenteIngresoOptions}
+												onchange={handleFuenteIngresoChange}
+												data-laboral-input
+												required></lightning-combobox>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												label="Lugar donde Labora"
+												value={lugarLabora}
+												onchange={handleLugarLaboraChange}></lightning-input>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												label="Tiempo Laborando"
+												type="date"
+												value={tiempoLaborando}
+												max={fechaActual}
+												message-when-range-overflow="La fecha no puede ser mayor a hoy."
+												onchange={handleTiempoLaborandoChange}
+												data-laboral-input
+												required></lightning-input>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												label="Tipo de Negocio"
+												value={tipoNegocio}
+												onchange={handleTipoNegocioChange}
+												data-laboral-input
+												required></lightning-input>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												label="Empresa Anterior"
+												value={empresaAnterior}
+												onchange={handleEmpresaAnteriorChange}></lightning-input>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												label="Ingresos Mensuales"
+												inputmode="decimal"
+												pattern="[0-9]{1,10}(?:\.[0-9]{1,2})?"
+												message-when-pattern-mismatch="Ingrese un monto de hasta 10 digitos enteros y 2 decimales."
+												value={ingresosMensuales}
+												data-numeric-input="ingresosMensuales"
+												onkeydown={handleAmountKeyDown}
+												onchange={handleAmountInput}
+												onpaste={handleAmountPaste}
+												onblur={handleAmountBlur}
+												data-laboral-input
+												required></lightning-input>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												label="Otros Ingresos"
+												type="number"
+												value={otrosIngresos}
+												onchange={handleOtrosIngresosChange}></lightning-input>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												label="Descripcion Otros Ingresos"
+												value={descripcionOtrosIngresos}
+												onchange={handleDescripcionOtrosIngresosChange}></lightning-input>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												label="Total Ingresos"
+												type="number"
+												value={totalIngresos}
+												readonly></lightning-input>
+										</div>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												label="Monto Prestaciones Laborales"
+												inputmode="decimal"
+												pattern="[0-9]{1,10}(?:\.[0-9]{1,2})?"
+												message-when-pattern-mismatch="Ingrese un monto de hasta 10 digitos enteros y 2 decimales."
+												value={montoPrestaciones}
+												data-numeric-input="montoPrestaciones"
+												onkeydown={handleAmountKeyDown}
+												onchange={handleAmountInput}
+												onpaste={handleAmountPaste}
+												onblur={handleAmountBlur}
+												data-laboral-input></lightning-input>
+										</div>
+									</div>
+								</div>
+
+								<div class="slds-box slds-theme_default">
+									<div class="slds-grid slds-wrap slds-grid_align-spread slds-m-bottom_medium">
+										<div class="slds-text-heading_small">Facilidades en Otras Instituciones</div>
+										<lightning-button
+											label="Agregar facilidad"
+											disabled={alcanzoLimiteFacilidadesOtrasInstituciones}
+											onclick={handleAddFacilidadOtraInstitucion}></lightning-button>
+									</div>
+
+									<template if:true={hasFacilidadesOtrasInstituciones}>
+										<lightning-datatable
+											key-field="_key"
+											data={facilidadesOtrasInstituciones}
+											columns={facilidadOtraInstitucionColumns}
+											onrowaction={handleFacilidadOtraInstitucionRowAction}
+											hide-checkbox-column>
+										</lightning-datatable>
+									</template>
+
+									<template if:false={hasFacilidadesOtrasInstituciones}>
+										<div class="slds-text-body_small slds-text-color_weak">
+											No hay facilidades registradas fuera de Banco Vimenca.
+										</div>
+									</template>
+
+									<template if:true={showFacilidadOtraInstitucionEditor}>
+										<div class="slds-border_top slds-m-top_medium slds-p-top_medium">
+											<div class="slds-text-title_bold slds-m-bottom_small">{facilidadOtraInstitucionEditorTitle}</div>
+											<div class="slds-grid slds-wrap slds-gutters">
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-combobox
+														name="FSC_EntidadFinanciera__c"
+														label="Entidad Financiera"
+														value={facilidadOtraInstitucionDraft.FSC_EntidadFinanciera__c}
+														data-facilidad-otra-institucion-input
+														options={entidadFinancieraOptions}
+														onchange={handleFacilidadOtraInstitucionDraftChange}
+														required>
+													</lightning-combobox>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-combobox
+														name="FSC_TipoFacilidad__c"
+														label="Tipo de Facilidad"
+														value={facilidadOtraInstitucionDraft.FSC_TipoFacilidad__c}
+														data-facilidad-otra-institucion-input
+														options={tipoFacilidadOptions}
+														onchange={handleFacilidadOtraInstitucionDraftChange}
+														required>
+													</lightning-combobox>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-combobox
+														name="FSC_Facilidad__c"
+														label="Facilidad"
+														value={facilidadOtraInstitucionDraft.FSC_Facilidad__c}
+														data-facilidad-otra-institucion-input
+														options={facilidadOptions}
+														onchange={handleFacilidadOtraInstitucionDraftChange}
+														required>
+													</lightning-combobox>
+												</div>
+												<div class="slds-col slds-size_1-of-1">
+													<lightning-textarea
+														name="FSC_DescripcionFacilidad__c"
+														label="Descripcion Facilidad"
+														value={facilidadOtraInstitucionDraft.FSC_DescripcionFacilidad__c}
+														data-facilidad-otra-institucion-input
+														onchange={handleFacilidadOtraInstitucionDraftChange}
+														required>
+													</lightning-textarea>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-input
+														name="FSC_Balance__c"
+														type="number"
+														label="Balance"
+														value={facilidadOtraInstitucionDraft.FSC_Balance__c}
+														data-facilidad-otra-institucion-input
+														onchange={handleFacilidadOtraInstitucionDraftChange}
+														required>
+													</lightning-input>
+												</div>
+												<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+													<lightning-combobox
+														name="FSC_Moneda__c"
+														label="Moneda"
+														value={facilidadOtraInstitucionDraft.FSC_Moneda__c}
+														data-facilidad-otra-institucion-input
+														options={facilidadMonedaOptions}
+														onchange={handleFacilidadOtraInstitucionDraftChange}
+														required>
+													</lightning-combobox>
+												</div>
+											</div>
+											<div class="slds-text-align_right slds-m-top_medium">
+												<lightning-button
+													label="Cancelar"
+													onclick={closeFacilidadOtraInstitucionEditor}></lightning-button>
+												<lightning-button
+													class="slds-m-left_small"
+													label="Guardar"
+													variant="brand"
+													onclick={saveFacilidadOtraInstitucion}></lightning-button>
+											</div>
+										</div>
+									</template>
+								</div>
+							</template>
+						</template>
+					</div>
+
+					<footer class="slds-modal__footer">
+						<lightning-button
+							label="Cancelar"
+							onclick={closeModal}></lightning-button>
+						<template if:true={isStep1}>
+							<lightning-button
+								class="slds-m-left_small"
+								label="Siguiente"
+								variant="brand"
+								onclick={nextStep}
+								disabled={isLoadingApplicant}></lightning-button>
+						</template>
+						<template if:true={isStep2}>
+							<template if:false={isEdit}>
+								<lightning-button
+									class="slds-m-left_small"
+									label="Volver"
+									onclick={previousStep}></lightning-button>
+							</template>
+							<lightning-button
+								class="slds-m-left_small"
+								label={actionButtonLabel}
+								variant="brand"
+								onclick={saveApplicant}
+								disabled={isSavingApplicant}></lightning-button>
+						</template>
+					</footer>
+				</div>
+			</section>
+			<div class="slds-backdrop slds-backdrop_open"></div>
+		</template>
+	</div>
+</template>

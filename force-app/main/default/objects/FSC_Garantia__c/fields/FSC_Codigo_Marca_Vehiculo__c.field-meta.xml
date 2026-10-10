@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Codigo_Marca_Vehiculo__c</fullName>
+    <description>Codigo de la marca en el core. Lo completa el trigger desde FSC_CatalogoGarantia__c.</description>
+    <externalId>false</externalId>
+    <label>Codigo marca vehiculo</label>
+    <precision>9</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

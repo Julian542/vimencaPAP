@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>DOCTOR PASTOR ARTURO ORTÍZ PIMENTEL</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_Cedula__c</field>
+        <value xsi:type="xsd:double">1.01258234E8</value>
+    </values>
+    <values>
+        <field>FSC_Direccion__c</field>
+        <value xsi:type="xsd:string">calle Arzobispo Portes número seis, cero, dos (602), Ciudad Nueva, de esta ciudad de Santo Domingo, Distrito Nacional, capital de la República Dominicana</value>
+    </values>
+    <values>
+        <field>FSC_Nombre__c</field>
+        <value xsi:type="xsd:string">DOCTOR PASTOR ARTURO ORTÍZ PIMENTEL</value>
+    </values>
+    <values>
+        <field>FSC_NumeroElectoral__c</field>
+        <value xsi:type="xsd:string">2678</value>
+    </values>
+</CustomMetadata>

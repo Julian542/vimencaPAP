@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>FSC_EmailSolicitudCreditoRequiereInformacion</name>
+    <relatedEntityType>ResidentialLoanApplication</relatedEntityType>
+    <style>none</style>
+    <subject>Solicitud de crédito requiere mas información</subject>
+    <textOnly>Hola {{{ResidentialLoanApplication.FSC_CreatedBy_Name__c}}},
+
+Para continuar con la evaluación de la solicitud {{{ResidentialLoanApplication.Name}}}, requerimos que nos suministres lo solicitado en el registro de crédito:
+
+{{{ResidentialLoanApplication.FSC_URLDeRegistro__c}}}
+
+Al recibir esta información dentro de las próximas 24 horas, continúa el proceso de aprobación. De lo contrario, el caso será cerrado.
+
+¡Feliz día!</textOnly>
+    <type>custom</type>
+    <uiType>SFX</uiType>
+</EmailTemplate>

@@ -32,8 +32,10 @@ public with sharing class FSC_LoanDecisionAPI {
 	private static final String ERROR_LOG_SEPARATOR = '\n--------------------\n';
 	private static final String ERROR_LOG_TIMESTAMP_FORMAT = 'yyyy-MM-dd HH:mm:ss';
 	private static final Integer ERROR_LOG_BODY_MAX_LENGTH = 255;
-	@TestVisible
-	private static Map<String, String> testConfigValues;
+	private static final Integer INTEGRATION_LOG_BODY_MAX_LENGTH = 131072;
+	private static final Integer INTEGRATION_LOG_TEXT_MAX_LENGTH = 255;
+	private static final String LOG_INTEGRATION_NAME = 'FSC_LoanDecisionAPI';
+	private static final String LOG_FUNCTION_NAME = 'callAPI';
 
 	public static void callAPI(List<Id> rlaIds) {
 		if (rlaIds == null || rlaIds.isEmpty()) {
@@ -59,6 +61,7 @@ public with sharing class FSC_LoanDecisionAPI {
 				FSC_Plazo_meses__c,
 				FSC_TasaInteres__c,
 				FSC_Origen_de_los_Ingresos__c,
+				FSC_Moneda__c,
 				FSC_Valor_de_la_Garantia__c,
 				FSC_productoBanco__c,
 				FSC_Resultado_Buro__c,
@@ -69,13 +72,23 @@ public with sharing class FSC_LoanDecisionAPI {
 				Status
 			FROM ResidentialLoanApplication
 			WHERE Id IN :rlaIds
+			WITH USER_MODE
 		];
 
 		if (rlas.isEmpty()) {
 			return;
 		}
 
-		if (allValuesBlank(endpointsByRecordType)) {
+		Boolean requiereCallout = false;
+		for (ResidentialLoanApplication rla : rlas) {
+			String recordTypeDeveloperName = getSupportedRecordTypeDeveloperName(rla);
+			if (FSC_BuroConfigService.isMotorEncendido(recordTypeDeveloperName)) {
+				requiereCallout = true;
+				break;
+			}
+		}
+
+		if (requiereCallout && allValuesBlank(endpointsByRecordType)) {
 			throw new CalloutException('Configuración faltante: no se encontró ConfigLoanDecisionAPI__mdt.URL o Value__c está vacío.');
 		}
 
@@ -97,6 +110,7 @@ public with sharing class FSC_LoanDecisionAPI {
 					SELECT Id, ACC_NumIdentificacion__c, ACC_TipoIdentificacion__c
 					FROM Account
 					WHERE Id IN :accountIds
+					WITH USER_MODE
 				]
 			);
 		}
@@ -108,18 +122,21 @@ public with sharing class FSC_LoanDecisionAPI {
 					SELECT Id, OPP_VehValue__c, OPP_VehPrice__c, OPP_VehType__c, OPP_VehTime__c
 					FROM Opportunity
 					WHERE Id IN :opportunityIds
+					WITH USER_MODE
 				]
 			);
 		}
 
 		Map<Id, FinServ__Employment__c> historialByAccountId = new Map<Id, FinServ__Employment__c>();
 		if (!accountIds.isEmpty()) {
-			for (FinServ__Employment__c historial : [
+			List<FinServ__Employment__c> historiales = [
 				SELECT Cliente__c, EMP_Tipo_de_empleado__c
 				FROM FinServ__Employment__c
 				WHERE Cliente__c IN :accountIds
+				WITH USER_MODE
 				ORDER BY CreatedDate DESC
-			]) {
+			];
+			for (FinServ__Employment__c historial : historiales) {
 				if (!historialByAccountId.containsKey(historial.Cliente__c)) {
 					historialByAccountId.put(historial.Cliente__c, historial);
 				}
@@ -133,7 +150,7 @@ public with sharing class FSC_LoanDecisionAPI {
 
 		Map<Id, LoanApplicant> debtorApplicantByRlaId = new Map<Id, LoanApplicant>();
 		Map<Id, LoanApplicant> coDebtorApplicantByRlaId = new Map<Id, LoanApplicant>();
-		for (LoanApplicant applicant : [
+		List<LoanApplicant> applicants = [
 			SELECT
 				LoanApplicationId,
 				FSC_ClasificacionSIB__c,
@@ -145,8 +162,10 @@ public with sharing class FSC_LoanDecisionAPI {
 				FSC_TotalIngresos__c
 			FROM LoanApplicant
 			WHERE LoanApplicationId IN :rlaIdSet AND FSC_TipoSolicitante__c IN ('Deudor', 'Co-Deudor')
+			WITH USER_MODE
 			ORDER BY CreatedDate DESC, Id DESC
-		]) {
+		];
+		for (LoanApplicant applicant : applicants) {
 			if (applicant.FSC_TipoSolicitante__c == 'Co-Deudor') {
 				if (!coDebtorApplicantByRlaId.containsKey(applicant.LoanApplicationId)) {
 					coDebtorApplicantByRlaId.put(applicant.LoanApplicationId, applicant);
@@ -157,17 +176,14 @@ public with sharing class FSC_LoanDecisionAPI {
 		}
 
 		Map<Id, FSC_Garantia__c> guaranteeByRlaId = new Map<Id, FSC_Garantia__c>();
-		for (FSC_Garantia__c guarantee : [
-			SELECT
-				FSC_Residential_Loan_Application__c,
-				FSC_Precio_de_Venta__c,
-				FSC_Tipo_de_Garantia__c,
-				FSC_Valor_Inmueble__c,
-				FSC_Valor_Tasado__c
+		List<FSC_Garantia__c> guarantees = [
+			SELECT FSC_Residential_Loan_Application__c, FSC_Precio_de_Venta__c, FSC_Tipo_de_Garantia__c, FSC_Valor_Inmueble__c, FSC_Valor_Tasado__c
 			FROM FSC_Garantia__c
 			WHERE FSC_Residential_Loan_Application__c IN :rlaIdSet
+			WITH USER_MODE
 			ORDER BY CreatedDate
-		]) {
+		];
+		for (FSC_Garantia__c guarantee : guarantees) {
 			Id rlaId = guarantee.FSC_Residential_Loan_Application__c;
 			if (!guaranteeByRlaId.containsKey(rlaId)) {
 				guaranteeByRlaId.put(rlaId, guarantee);
@@ -176,6 +192,8 @@ public with sharing class FSC_LoanDecisionAPI {
 
 		Http http = new Http();
 		List<ResidentialLoanApplication> updates = new List<ResidentialLoanApplication>();
+		List<INTLogger.INTLoggerCalloutData> calloutLogs = new List<INTLogger.INTLoggerCalloutData>();
+		List<HttpRequest> requestsWithoutResponse = new List<HttpRequest>();
 
 		for (ResidentialLoanApplication rla : rlas) {
 			Account acc = accountsById.get(rla.AccountId);
@@ -186,8 +204,17 @@ public with sharing class FSC_LoanDecisionAPI {
 			FSC_Garantia__c guarantee = guaranteeByRlaId.get(rla.Id);
 
 			ResidentialLoanApplication upd = new ResidentialLoanApplication(Id = rla.Id);
+			HttpRequest request;
+			Boolean calloutLogAdded = false;
 
 			try {
+				String recordTypeDeveloperName = getSupportedRecordTypeDeveloperName(rla);
+				if (!FSC_BuroConfigService.isMotorEncendido(recordTypeDeveloperName)) {
+					FSC_BuroConfigService.aplicarMotorApagado(upd);
+					updates.add(upd);
+					continue;
+				}
+
 				if (acc == null) {
 					upd.FSC_LogErrores__c = appendErrorLog(
 						rla.FSC_LogErrores__c,
@@ -197,7 +224,6 @@ public with sharing class FSC_LoanDecisionAPI {
 					continue;
 				}
 
-				String recordTypeDeveloperName = getSupportedRecordTypeDeveloperName(rla);
 				String endpoint = getEndpointForRecordType(recordTypeDeveloperName, endpointsByRecordType);
 				if (String.isBlank(endpoint)) {
 					throw new CalloutException(
@@ -210,33 +236,36 @@ public with sharing class FSC_LoanDecisionAPI {
 					new RequestContext(rla, acc, historial, opportunity, debtorApplicant, coDebtorApplicant, guarantee)
 				);
 
-				HttpRequest req = new HttpRequest();
-				req.setEndpoint(endpoint);
-				req.setMethod('POST');
-				req.setHeader('Content-Type', 'application/json');
+				request = new HttpRequest();
+				request.setEndpoint(endpoint);
+				request.setMethod('POST');
+				request.setHeader('Content-Type', 'application/json');
 				if (!String.isBlank(authorizationHeader)) {
-					req.setHeader('Authorization', authorizationHeader);
+					request.setHeader('Authorization', authorizationHeader);
 				}
-				req.setTimeout(120000);
-				req.setBody(requestBody);
-				System.debug('requestBody: ' + requestBody);
+				request.setTimeout(120000);
+				request.setBody(requestBody);
 
-				HttpResponse res = http.send(req);
+				HttpResponse response = http.send(request);
+				calloutLogs.add(INTLogger.logCalloutNoInsert(LOG_INTEGRATION_NAME, LOG_FUNCTION_NAME, request, response));
+				calloutLogAdded = true;
 
-				if (res.getStatusCode() >= 200 && res.getStatusCode() < 300) {
-					LoanDecisionResult result = parseResponse(res.getBody(), recordTypeDeveloperName);
-					System.debug('result: ' + result);
+				if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
+					LoanDecisionResult result = parseResponse(response.getBody(), recordTypeDeveloperName);
 					applyResultToRla(upd, result);
 				} else {
 					upd.FSC_LogErrores__c = appendErrorLog(
 						rla.FSC_LogErrores__c,
 						buildErrorLogEntry(
-							'Error HTTP al consultar Buro: statusCode=' + res.getStatusCode() + ', statusLine=' + res.getStatus(),
-							res.getBody()
+							'Error HTTP al consultar Buro: statusCode=' + response.getStatusCode() + ', statusLine=' + response.getStatus(),
+							response.getBody()
 						)
 					);
 				}
 			} catch (Exception e) {
+				if (request != null && !calloutLogAdded) {
+					requestsWithoutResponse.add(request);
+				}
 				upd.FSC_LogErrores__c = appendErrorLog(
 					rla.FSC_LogErrores__c,
 					buildErrorLogEntry('Excepcion al consultar Buro: ' + trimForLog(e.getMessage(), ERROR_LOG_BODY_MAX_LENGTH), null)
@@ -246,9 +275,126 @@ public with sharing class FSC_LoanDecisionAPI {
 			updates.add(upd);
 		}
 
-		if (!updates.isEmpty()) {
-			update updates;
+		INTLogger.INTLoggerResult loggingResult = persistIntegrationLogs(calloutLogs, requestsWithoutResponse);
+		if (!loggingResult.success) {
+			for (Integer index = 0; index < updates.size(); index++) {
+				ResidentialLoanApplication updateRecord = updates[index];
+				String currentErrorLog = String.isBlank(updateRecord.FSC_LogErrores__c)
+					? rlas[index].FSC_LogErrores__c
+					: updateRecord.FSC_LogErrores__c;
+				updateRecord.FSC_LogErrores__c = appendErrorLog(
+					currentErrorLog,
+					buildErrorLogEntry(
+						'No se pudo guardar el log INT de la consulta al Buro: ' + trimForLog(loggingResult.message, ERROR_LOG_BODY_MAX_LENGTH),
+						null
+					)
+				);
+			}
 		}
+
+		if (!updates.isEmpty()) {
+			Database.update(updates, AccessLevel.USER_MODE);
+		}
+	}
+
+	@SuppressWarnings('PMD.ApexCRUDViolation')
+	private static INTLogger.INTLoggerResult persistIntegrationLogs(
+		List<INTLogger.INTLoggerCalloutData> calloutLogs,
+		List<HttpRequest> requestsWithoutResponse
+	) {
+		INTLogger.INTLoggerResult result = new INTLogger.INTLoggerResult();
+		result.success = false;
+
+		List<INT_Request__c> requests = new List<INT_Request__c>();
+		List<Map<String, Object>> responseDataByRequest = new List<Map<String, Object>>();
+		addCompletedCalloutLogs(calloutLogs, requests, responseDataByRequest);
+		addRequestsWithoutResponse(requestsWithoutResponse, requests, responseDataByRequest);
+
+		if (requests.isEmpty()) {
+			result.success = true;
+			return result;
+		}
+
+		Savepoint loggingSavepoint;
+		try {
+			loggingSavepoint = Database.setSavepoint();
+			insert requests;
+			List<INT_Response__c> responses = buildResponseLogs(requests, responseDataByRequest);
+			if (!responses.isEmpty()) {
+				insert responses;
+			}
+			result.success = true;
+		} catch (DmlException exceptionRecord) {
+			if (loggingSavepoint != null) {
+				Database.rollback(loggingSavepoint);
+			}
+			result.message = exceptionRecord.getMessage();
+		}
+
+		return result;
+	}
+
+	private static void addCompletedCalloutLogs(
+		List<INTLogger.INTLoggerCalloutData> calloutLogs,
+		List<INT_Request__c> requests,
+		List<Map<String, Object>> responseDataByRequest
+	) {
+		for (INTLogger.INTLoggerCalloutData calloutLog : calloutLogs) {
+			Map<String, Object> requestData = (Map<String, Object>) calloutLog.req;
+			requests.add(buildRequestLog(requestData));
+			responseDataByRequest.add((Map<String, Object>) calloutLog.res);
+		}
+	}
+
+	private static void addRequestsWithoutResponse(
+		List<HttpRequest> requestsWithoutResponse,
+		List<INT_Request__c> requests,
+		List<Map<String, Object>> responseDataByRequest
+	) {
+		for (HttpRequest request : requestsWithoutResponse) {
+			requests.add(
+				new INT_Request__c(
+					Trama_de_env_o__c = truncateForIntegrationLog(request.getBody(), INTEGRATION_LOG_BODY_MAX_LENGTH),
+					Integraci_n__c = LOG_INTEGRATION_NAME,
+					Funci_n__c = LOG_FUNCTION_NAME
+				)
+			);
+			responseDataByRequest.add(null);
+		}
+	}
+
+	private static INT_Request__c buildRequestLog(Map<String, Object> requestData) {
+		return new INT_Request__c(
+			Trama_de_env_o__c = truncateForIntegrationLog((String) requestData.get('Trama_de_env_o__c'), INTEGRATION_LOG_BODY_MAX_LENGTH),
+			Integraci_n__c = truncateForIntegrationLog((String) requestData.get('Integraci_n__c'), INTEGRATION_LOG_TEXT_MAX_LENGTH),
+			Funci_n__c = truncateForIntegrationLog((String) requestData.get('Funci_n__c'), INTEGRATION_LOG_TEXT_MAX_LENGTH)
+		);
+	}
+
+	private static List<INT_Response__c> buildResponseLogs(List<INT_Request__c> requests, List<Map<String, Object>> responseDataByRequest) {
+		List<INT_Response__c> responses = new List<INT_Response__c>();
+		for (Integer index = 0; index < requests.size(); index++) {
+			Map<String, Object> responseData = responseDataByRequest[index];
+			if (responseData == null) {
+				continue;
+			}
+			responses.add(
+				new INT_Response__c(
+					Trama_de_respuesta__c = truncateForIntegrationLog(
+						(String) responseData.get('Trama_de_respuesta__c'),
+						INTEGRATION_LOG_BODY_MAX_LENGTH
+					),
+					INT_Request__c = requests[index].Id,
+					Http_Status_Code__c = (Integer) responseData.get('Http_Status_Code__c'),
+					Status__c = truncateForIntegrationLog((String) responseData.get('Status__c'), INTEGRATION_LOG_TEXT_MAX_LENGTH)
+				)
+			);
+		}
+		return responses;
+	}
+
+	private static String truncateForIntegrationLog(String value, Integer maxLength) {
+		return value == null || value.length() <= maxLength ? value : value.substring(0, maxLength);
 	}
 
 	private static String buildRequestBody(String recordTypeDeveloperName, RequestContext ctx) {
@@ -283,6 +429,8 @@ public with sharing class FSC_LoanDecisionAPI {
 
 	private static Map<String, Object> buildHipotecarioPersonalInfo(RequestContext ctx) {
 		Map<String, Object> info = basePersonalInfo(ctx);
+		info.put('producto', '1');
+		info.put('tipoGarantia', ctx.rla.FSC_Moneda__c == '2' ? '2' : '1');
 		info.put('asalariado', ctx.historial == null ? null : ctx.historial.EMP_Tipo_de_empleado__c);
 		info.put('ingresos', getIngresos(ctx));
 		putLoanInfo(info, ctx, 'tiempolaborando', 'clasificacionSIB', 'montoprestamo', 'plazoprestamo', 'tasaprestamo');
@@ -339,19 +487,29 @@ public with sharing class FSC_LoanDecisionAPI {
 
 	private static Map<String, Object> emptySecondaryPersonalInfo() {
 		Map<String, Object> info = new Map<String, Object>();
-		for (String fieldName : new List<String>{
-			'id', 'type', 'ingresos', 'producto', 'tipoGarantia', 'valorInmueble', 'precioVenta',
-			'clasificacionSIB', 'asalariado', 'montoPrestamo', 'plazoPrestamo', 'tasaprestamo', 'tiempolaborando'
-		}) {
+		for (
+			String fieldName : new List<String>{
+				'id',
+				'type',
+				'ingresos',
+				'producto',
+				'tipoGarantia',
+				'valorInmueble',
+				'precioVenta',
+				'clasificacionSIB',
+				'asalariado',
+				'montoPrestamo',
+				'plazoPrestamo',
+				'tasaprestamo',
+				'tiempolaborando'
+			}
+		) {
 			info.put(fieldName, '');
 		}
 		return info;
 	}
 
-	private static String serializePersonalInformation(
-		Map<String, Object> personalInformation,
-		Map<String, Object> secondaryPersonalInformation
-	) {
+	private static String serializePersonalInformation(Map<String, Object> personalInformation, Map<String, Object> secondaryPersonalInformation) {
 		return JSON.serialize(
 			new Map<String, Object>{
 				'applicants' => new Map<String, Object>{
@@ -420,7 +578,8 @@ public with sharing class FSC_LoanDecisionAPI {
 	}
 
 	private static String getTiempoLaborandoMeses(LoanApplicant applicant) {
-		return applicant == null || applicant.FSC_TiempoLaborando__c == null
+		return applicant == null ||
+			applicant.FSC_TiempoLaborando__c == null
 			? null
 			: decimalToString(applicant.FSC_TiempoLaborando__c.monthsBetween(Date.today()));
 	}
@@ -433,9 +592,7 @@ public with sharing class FSC_LoanDecisionAPI {
 			'empleado público' => '2'
 		};
 		String normalizedValue = normalize(fuenteIngreso);
-		return employeeTypeByIncomeSource.containsKey(normalizedValue)
-			? employeeTypeByIncomeSource.get(normalizedValue)
-			: fuenteIngreso;
+		return employeeTypeByIncomeSource.containsKey(normalizedValue) ? employeeTypeByIncomeSource.get(normalizedValue) : fuenteIngreso;
 	}
 
 	private static String getMontoPrestamo(RequestContext ctx) {
@@ -569,14 +726,189 @@ public with sharing class FSC_LoanDecisionAPI {
 			result.xcore = objectToDecimal(findFirstValueByKey(filtro, 'Xcore'));
 		}
 
-		if (result.xcore == null && interconnectResponse != null) {
-			Map<String, Object> xcoreNode = objectToMap(interconnectResponse.get('Xcore_PD12M_ALL_PC_NC_Global'));
-			if (xcoreNode != null) {
+		Map<String, Object> xcoreNode = interconnectResponse == null
+			? null
+			: objectToMap(interconnectResponse.get('Xcore_PD12M_ALL_PC_NC_Global'));
+		if (xcoreNode != null) {
+			if (result.xcore == null) {
 				result.xcore = objectToDecimal(xcoreNode.get('Xcore'));
+			}
+			result.categoriaRiesgo = objectToString(xcoreNode.get('Categoria_de_Riesgo'));
+			Map<String, Object> odds = objectToMap(xcoreNode.get('Odds'));
+			result.probabilidadIncumplimiento = odds == null
+				? null
+				: objectToDecimal(odds.get('PorcientoDeudorIncumplimiento'));
+			if (result.probabilidadIncumplimiento == null) {
+				result.probabilidadIncumplimiento = objectToDecimal(xcoreNode.get('Probabilidad_de_incumplimiento'));
 			}
 		}
 
+		cargarMorasDesdeDesglose(interconnectResponse, result);
+		cargarFacilidadesVigentesDesdeDesglose(interconnectResponse, result);
+
 		return result;
+	}
+
+	private static void cargarMorasDesdeDesglose(Map<String, Object> interconnectResponse, LoanDecisionResult result) {
+		Map<String, Object> desglose = interconnectResponse == null
+			? null
+			: objectToMap(interconnectResponse.get('DesgloseCreditos'));
+		if (desglose == null) {
+			return;
+		}
+
+		for (Object productoItem : objectToListFlexible(desglose.get('Producto'))) {
+			Map<String, Object> producto = objectToMap(productoItem);
+			String codigo = producto == null ? null : objectToString(producto.get('Cod'));
+			if (String.isBlank(codigo)) {
+				continue;
+			}
+
+			codigo = codigo.trim().toUpperCase();
+			if (codigo != 'TCR' && codigo != 'PRE') {
+				continue;
+			}
+
+			inicializarMoras(result, codigo);
+			for (Object cuentaItem : objectToListFlexible(producto.get('Cuenta'))) {
+				Map<String, Object> cuenta = objectToMap(cuentaItem);
+				if (cuenta == null) {
+					continue;
+				}
+				agregarMora(result, codigo, 30, objectToDecimal(cuenta.get('VecesAtraso30')));
+				agregarMora(result, codigo, 60, objectToDecimal(cuenta.get('VecesAtraso60')));
+				agregarMora(result, codigo, 90, objectToDecimal(cuenta.get('VecesAtraso90')));
+			}
+		}
+	}
+
+	private static void inicializarMoras(LoanDecisionResult result, String codigo) {
+		if (codigo == 'TCR' && result.moraTc30 == null) {
+			result.moraTc30 = 0;
+			result.moraTc60 = 0;
+			result.moraTc90 = 0;
+		} else if (codigo == 'PRE' && result.moraPrestamo30 == null) {
+			result.moraPrestamo30 = 0;
+			result.moraPrestamo60 = 0;
+			result.moraPrestamo90 = 0;
+		}
+	}
+
+	private static void agregarMora(LoanDecisionResult result, String codigo, Integer dias, Decimal cantidad) {
+		if (cantidad == null) {
+			return;
+		}
+		if (codigo == 'TCR') {
+			if (dias == 30) result.moraTc30 += cantidad;
+			if (dias == 60) result.moraTc60 += cantidad;
+			if (dias == 90) result.moraTc90 += cantidad;
+		} else if (codigo == 'PRE') {
+			if (dias == 30) result.moraPrestamo30 += cantidad;
+			if (dias == 60) result.moraPrestamo60 += cantidad;
+			if (dias == 90) result.moraPrestamo90 += cantidad;
+		}
+	}
+
+	private static void cargarFacilidadesVigentesDesdeDesglose(
+		Map<String, Object> interconnectResponse,
+		LoanDecisionResult result
+	) {
+		Map<String, Object> desglose = interconnectResponse == null
+			? null
+			: objectToMap(interconnectResponse.get('DesgloseCreditosAbiertos'));
+		Boolean filtrarCuentasAbiertas = false;
+		if (desglose == null && interconnectResponse != null) {
+			desglose = objectToMap(interconnectResponse.get('DesgloseCreditos'));
+			filtrarCuentasAbiertas = true;
+		}
+		if (desglose == null) {
+			return;
+		}
+
+		inicializarFacilidades(result);
+		for (Object productoItem : objectToListFlexible(desglose.get('Producto'))) {
+			Map<String, Object> producto = objectToMap(productoItem);
+			String codigoProducto = producto == null ? null : objectToString(producto.get('Cod'));
+			if (String.isBlank(codigoProducto)) {
+				continue;
+			}
+			codigoProducto = codigoProducto.trim().toUpperCase();
+			if (codigoProducto != 'TCR' && codigoProducto != 'PRE') {
+				continue;
+			}
+
+			for (Object cuentaItem : objectToListFlexible(producto.get('Cuenta'))) {
+				Map<String, Object> cuenta = objectToMap(cuentaItem);
+				if (cuenta == null || (filtrarCuentasAbiertas && !esCuentaAbierta(cuenta))) {
+					continue;
+				}
+				agregarFacilidadVigente(result, codigoProducto, resolverMonedaBuro(cuenta), cuenta);
+			}
+		}
+	}
+
+	private static void inicializarFacilidades(LoanDecisionResult result) {
+		result.deudaTcDop = 0;
+		result.deudaTcUsd = 0;
+		result.deudaPrestamoDop = 0;
+		result.deudaPrestamoUsd = 0;
+		result.cuotaTcDop = 0;
+		result.cuotaTcUsd = 0;
+		result.cuotaPrestamoDop = 0;
+		result.cuotaPrestamoUsd = 0;
+	}
+
+	private static void agregarFacilidadVigente(
+		LoanDecisionResult result,
+		String producto,
+		String moneda,
+		Map<String, Object> cuenta
+	) {
+		if (String.isBlank(moneda)) {
+			return;
+		}
+		Decimal deuda = objectToDecimal(cuenta.get('TotalAdeudado')) ?? 0;
+		Decimal cuota = objectToDecimal(cuenta.get('Cuota')) ?? 0;
+		if (producto == 'TCR' && moneda == 'DOP') {
+			result.deudaTcDop += deuda;
+			result.cuotaTcDop += cuota;
+		} else if (producto == 'TCR' && moneda == 'USD') {
+			result.deudaTcUsd += deuda;
+			result.cuotaTcUsd += cuota;
+		} else if (producto == 'PRE' && moneda == 'DOP') {
+			result.deudaPrestamoDop += deuda;
+			result.cuotaPrestamoDop += cuota;
+		} else if (producto == 'PRE' && moneda == 'USD') {
+			result.deudaPrestamoUsd += deuda;
+			result.cuotaPrestamoUsd += cuota;
+		}
+	}
+
+	private static String resolverMonedaBuro(Map<String, Object> cuenta) {
+		Map<String, Object> moneda = objectToMap(cuenta.get('Moneda'));
+		String codigo = moneda == null
+			? objectToString(cuenta.get('Moneda'))
+			: firstNonBlank(
+				new List<String>{ objectToString(moneda.get('content')), objectToString(moneda.get('Des_Moneda')) }
+			);
+		if (String.isBlank(codigo)) {
+			return null;
+		}
+		codigo = codigo.trim().toUpperCase();
+		if (codigo == 'RD' || codigo == 'DO' || codigo == 'DOP' || codigo.contains('R.D')) {
+			return 'DOP';
+		}
+		return codigo == 'US' || codigo == 'USD' || codigo.contains('U.S') ? 'USD' : null;
+	}
+
+	private static Boolean esCuentaAbierta(Map<String, Object> cuenta) {
+		Map<String, Object> estatus = objectToMap(cuenta.get('Estatus'));
+		if (estatus == null) {
+			return false;
+		}
+		Decimal codigo = objectToDecimal(estatus.get('content'));
+		String descripcion = normalize(objectToString(estatus.get('Des_Estatus')));
+		return codigo == 1 || descripcion == 'activo' || descripcion == 'abierto';
 	}
 
 	private static Map<String, Object> getDecisionFilterNode(
@@ -654,6 +986,22 @@ public with sharing class FSC_LoanDecisionAPI {
 		upd.FSC_Resultado_Buro__c = result.dictamen;
 		upd.FSC_XCore_Buro__c = result.xcore;
 		upd.FSC_Mensajes_Buro__c = result.mensajes;
+		upd.FSC_MoraTC30Dias__c = result.moraTc30;
+		upd.FSC_MoraTC60Dias__c = result.moraTc60;
+		upd.FSC_MoraTC90Dias__c = result.moraTc90;
+		upd.FSC_MoraPrestamo30Dias__c = result.moraPrestamo30;
+		upd.FSC_MoraPrestamo60Dias__c = result.moraPrestamo60;
+		upd.FSC_MoraPrestamo90Dias__c = result.moraPrestamo90;
+		upd.FSC_ProbabilidadIncumplimientoBuro__c = result.probabilidadIncumplimiento;
+		upd.FSC_CategoriaRiesgoBuro__c = result.categoriaRiesgo;
+		upd.FSC_DeudaTCBuroDOP__c = result.deudaTcDop;
+		upd.FSC_DeudaTCBuroUSD__c = result.deudaTcUsd;
+		upd.FSC_DeudaPrestamoBuroDOP__c = result.deudaPrestamoDop;
+		upd.FSC_DeudaPrestamoBuroUSD__c = result.deudaPrestamoUsd;
+		upd.FSC_CuotaTCBuroDOP__c = result.cuotaTcDop;
+		upd.FSC_CuotaTCBuroUSD__c = result.cuotaTcUsd;
+		upd.FSC_CuotaPrestamoBuroDOP__c = result.cuotaPrestamoDop;
+		upd.FSC_CuotaPrestamoBuroUSD__c = result.cuotaPrestamoUsd;
 
 		String dictamenNormalized = normalize(result.dictamen);
 
@@ -809,6 +1157,14 @@ public with sharing class FSC_LoanDecisionAPI {
 		return (List<Object>) value;
 	}
 
+	private static List<Object> objectToListFlexible(Object value) {
+		List<Object> values = objectToList(value);
+		if (values != null) {
+			return values;
+		}
+		return objectToMap(value) == null ? new List<Object>() : new List<Object>{ value };
+	}
+
 	private static void addResponseSummaryPart(List<String> parts, String label, Object value) {
 		String textValue = objectToString(value);
 		if (!String.isBlank(textValue)) {
@@ -825,10 +1181,6 @@ public with sharing class FSC_LoanDecisionAPI {
 	}
 
 	private static String getConfigValue(String developerName) {
-		if (Test.isRunningTest() && testConfigValues != null && testConfigValues.containsKey(developerName)) {
-			return testConfigValues.get(developerName);
-		}
-
 		ConfigLoanDecisionAPI__mdt configRecord = ConfigLoanDecisionAPI__mdt.getInstance(developerName);
 		return configRecord == null ? null : configRecord.Value__c;
 	}
@@ -923,5 +1275,21 @@ public with sharing class FSC_LoanDecisionAPI {
 		public String dictamen;
 		public Decimal xcore;
 		public String mensajes;
+		public Decimal moraTc30;
+		public Decimal moraTc60;
+		public Decimal moraTc90;
+		public Decimal moraPrestamo30;
+		public Decimal moraPrestamo60;
+		public Decimal moraPrestamo90;
+		public Decimal probabilidadIncumplimiento;
+		public String categoriaRiesgo;
+		public Decimal deudaTcDop;
+		public Decimal deudaTcUsd;
+		public Decimal deudaPrestamoDop;
+		public Decimal deudaPrestamoUsd;
+		public Decimal cuotaTcDop;
+		public Decimal cuotaTcUsd;
+		public Decimal cuotaPrestamoDop;
+		public Decimal cuotaPrestamoUsd;
 	}
 }

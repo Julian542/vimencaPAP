@@ -11,6 +11,10 @@ public with sharing class FSC_RegenerarSolicitudCreditoService {
 	private static final String TITLE_PATTERN_CREDITO_PYME_NO_ACCENT = 'Credito PyMe - %';
 	private static final String TITLE_PATTERN_CREDITO_CONSUMO = 'Crédito Consumo - %';
 	private static final String TITLE_PATTERN_CREDITO_CONSUMO_NO_ACCENT = 'Credito Consumo - %';
+	private static final String TITLE_PATTERN_CREDITO_VEHICULO = 'Crédito Vehiculo - %';
+	private static final String TITLE_PATTERN_CREDITO_VEHICULO_NO_ACCENT = 'Credito Vehiculo - %';
+	private static final String TITLE_PATTERN_CREDITO_HIPOTECARIO = 'Crédito Hipotecario - %';
+	private static final String TITLE_PATTERN_CREDITO_HIPOTECARIO_NO_ACCENT = 'Credito Hipotecario - %';
 	private static final String TITLE_PATTERN_LEGACY_CREDITO_PYME = '(Crédito PyMe - %';
 	private static final String TITLE_PATTERN_LEGACY_CREDITO_PYME_NO_ACCENT = '(Credito PyMe - %';
 
@@ -264,6 +268,8 @@ public with sharing class FSC_RegenerarSolicitudCreditoService {
 			'FSC_Monto_Inicial_Avance_Pagado__c',
 			'FSC_Precio_de_Venta__c',
 			'FSC_Proposito_Garantia_Hipotecario__c',
+			'FSC_EsTasadorExterno__c',
+			'FSC_NombreTasadorExterno__c',
 			'FSC_Tasado_Por__c',
 			'FSC_Tipo_de_Garantia__c',
 			'FSC_Tipo_de_Inmueble__c',
@@ -576,15 +582,19 @@ public with sharing class FSC_RegenerarSolicitudCreditoService {
 		for (ContentDocumentLink link : [
 			SELECT LinkedEntityId
 			FROM ContentDocumentLink
-			WHERE LinkedEntityId IN :residentialLoanApplicationIds
-			  AND (
-				  ContentDocument.Title LIKE :TITLE_PATTERN_CREDITO_PYME
-				  OR ContentDocument.Title LIKE :TITLE_PATTERN_CREDITO_PYME_NO_ACCENT
-				  OR ContentDocument.Title LIKE :TITLE_PATTERN_CREDITO_CONSUMO
-				  OR ContentDocument.Title LIKE :TITLE_PATTERN_CREDITO_CONSUMO_NO_ACCENT
-				  OR ContentDocument.Title LIKE :TITLE_PATTERN_LEGACY_CREDITO_PYME
-				  OR ContentDocument.Title LIKE :TITLE_PATTERN_LEGACY_CREDITO_PYME_NO_ACCENT
-			  )
+			WHERE
+				LinkedEntityId IN :residentialLoanApplicationIds
+				AND (ContentDocument.Title LIKE :TITLE_PATTERN_CREDITO_PYME
+				OR ContentDocument.Title LIKE :TITLE_PATTERN_CREDITO_PYME_NO_ACCENT
+				OR ContentDocument.Title LIKE :TITLE_PATTERN_CREDITO_CONSUMO
+				OR ContentDocument.Title LIKE :TITLE_PATTERN_CREDITO_CONSUMO_NO_ACCENT
+				OR ContentDocument.Title LIKE :TITLE_PATTERN_LEGACY_CREDITO_PYME
+				OR ContentDocument.Title LIKE :TITLE_PATTERN_LEGACY_CREDITO_PYME_NO_ACCENT
+				OR ContentDocument.Title LIKE :TITLE_PATTERN_CREDITO_VEHICULO
+				OR ContentDocument.Title LIKE :TITLE_PATTERN_CREDITO_VEHICULO_NO_ACCENT
+				OR ContentDocument.Title LIKE :TITLE_PATTERN_CREDITO_HIPOTECARIO
+				OR ContentDocument.Title LIKE :TITLE_PATTERN_CREDITO_HIPOTECARIO_NO_ACCENT
+				OR ContentDocument.LatestPublishedVersion.FSC_ClaveTecnicaPrecarga__c = :FSC_ChecklistDocsPrecargaService.SOLICITUD_CREDITO)
 		]) {
 			addId(filteredIds, link.LinkedEntityId);
 		}

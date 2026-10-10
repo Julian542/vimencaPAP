@@ -2,20 +2,8 @@
 private class FSC_RlaApprovalAdminServiceTest {
 	private static final String SUBESTADO_ANALISIS = 'An\u00E1lisis de cr\u00E9dito';
 
-	private static Account buildNeutralAccount() {
-		Account acc = new Account();
-		acc.RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Juridica').getRecordTypeId();
-		acc.Name = 'Cuenta Service ' + System.now().getTime();
-		acc.ACC_RNC__c = 'RNCSERVICE001';
-		acc.ACC_NumIdentificacion__c = '00108803610';
-		acc.ACC_Condicion__c = 'PROSPECTO';
-		acc.ACC_Estado__c = 'INICIADO';
-		acc.ACC_TipoIdentificacion__c = 'RNC';
-		return acc;
-	}
-
 	private static ResidentialLoanApplication createRla() {
-		Account acc = buildNeutralAccount();
+		Account acc = new Account(Name = 'Cuenta Service ' + System.now().getTime(), ACC_NumIdentificacion__c = '00108803610');
 		insert acc;
 
 		ResidentialLoanApplication rla = new ResidentialLoanApplication(
@@ -86,7 +74,7 @@ private class FSC_RlaApprovalAdminServiceTest {
 		);
 
 		Test.startTest();
-		FSC_RlaApprovalAdminService.returnToBusiness(rla.Id, 'devolver a oficial', 'Supervisor');
+		FSC_RlaApprovalAdminService.returnToBusiness(rla.Id, 'devolver a oficial', 'FSC_CP_Supervisor');
 		Test.stopTest();
 
 		ResidentialLoanApplication refreshed = [
@@ -105,6 +93,38 @@ private class FSC_RlaApprovalAdminServiceTest {
 		System.assertEquals(false, refreshed.FSC_Doc_Completa_Analisis__c);
 		System.assertEquals('Recepción de documentos – Análisis', refreshed.FSC_Subestado__c);
 		System.assertEquals('devolver a oficial', refreshed.FSC_ObservacionSupervisor__c);
+	}
+
+	@IsTest
+	static void devolverANegocio_registraObservacionDelAdministrador() {
+		ResidentialLoanApplication rla = createRla();
+
+		Test.startTest();
+		FSC_RlaApprovalAdminService.returnToBusiness(rla.Id, 'devolver como administrador', 'FSC_CP_Administrador');
+		Test.stopTest();
+
+		ResidentialLoanApplication refreshed = [
+			SELECT FSC_ObservacionAdministrador__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :rla.Id
+		];
+		System.assertEquals('devolver como administrador', refreshed.FSC_ObservacionAdministrador__c);
+	}
+
+	@IsTest
+	static void devolverANegocio_rechazaPermisoDesconocido() {
+		ResidentialLoanApplication rla = createRla();
+		Boolean thrown = false;
+
+		Test.startTest();
+		try {
+			FSC_RlaApprovalAdminService.returnToBusiness(rla.Id, 'motivo', 'FSC_CP_Desconocido');
+		} catch (AuraHandledException ex) {
+			thrown = true;
+		}
+		Test.stopTest();
+
+		System.assertEquals(true, thrown, 'Debe rechazar un permiso personalizado no admitido.');
 	}
 
 	@IsTest
@@ -174,7 +194,7 @@ private class FSC_RlaApprovalAdminServiceTest {
 		}
 
 		try {
-			FSC_RlaApprovalAdminService.returnToBusiness(null, 'x', 'Supervisor');
+			FSC_RlaApprovalAdminService.returnToBusiness(null, 'x', 'FSC_CP_Supervisor');
 		} catch (AuraHandledException ex) {
 			thrown = true;
 		}
@@ -182,7 +202,7 @@ private class FSC_RlaApprovalAdminServiceTest {
 
 		thrown = false;
 		try {
-			FSC_RlaApprovalAdminService.returnToBusiness(UserInfo.getUserId(), '', 'Supervisor');
+			FSC_RlaApprovalAdminService.returnToBusiness(UserInfo.getUserId(), '', 'FSC_CP_Supervisor');
 		} catch (AuraHandledException ex) {
 			thrown = true;
 		}
@@ -191,7 +211,7 @@ private class FSC_RlaApprovalAdminServiceTest {
 		thrown = false;
 		Test.startTest();
 		try {
-			FSC_RlaApprovalAdminService.returnToBusiness(UserInfo.getUserId(), longMotivo, 'Supervisor');
+			FSC_RlaApprovalAdminService.returnToBusiness(UserInfo.getUserId(), longMotivo, 'FSC_CP_Supervisor');
 		} catch (AuraHandledException ex) {
 			thrown = true;
 		}

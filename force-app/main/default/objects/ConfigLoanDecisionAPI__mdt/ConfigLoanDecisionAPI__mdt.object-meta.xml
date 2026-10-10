@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Configuraciones de API Motor Decision Prestamo API</description>
+    <label>ConfigLoanDecisionAPI</label>
+    <pluralLabel>LoanDecisionAPI</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

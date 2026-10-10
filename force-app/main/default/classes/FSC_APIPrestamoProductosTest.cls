@@ -2,7 +2,7 @@
 private class FSC_APIPrestamoProductosTest {
 	@IsTest
 	static void testRun_WithProductos() {
-		FSC_APIPrestamoProductos.mockIpResponse = new Map<String, Object>{ 'productos' => buildProductos() };
+		FSC_APIPrestamoProductos.mockIpResponse = new Map<String, Object>{ 'success' => true, 'productos' => buildProductos() };
 		FSC_APIPrestamoProductos.Input input = buildInput('32', '401');
 
 		Test.startTest();
@@ -19,7 +19,7 @@ private class FSC_APIPrestamoProductosTest {
 
 	@IsTest
 	static void testRun_NoMatch() {
-		FSC_APIPrestamoProductos.mockIpResponse = new Map<String, Object>{ 'productos' => buildProductos() };
+		FSC_APIPrestamoProductos.mockIpResponse = new Map<String, Object>{ 'success' => true, 'productos' => buildProductos() };
 		FSC_APIPrestamoProductos.Input input = buildInput('99', '401');
 
 		Test.startTest();
@@ -50,7 +50,7 @@ private class FSC_APIPrestamoProductosTest {
 
 	@IsTest
 	static void testExtractProductos_FromJsonString() {
-		String responseJson = JSON.serialize(new Map<String, Object>{ 'productos' => buildProductos() });
+		String responseJson = JSON.serialize(new Map<String, Object>{ 'success' => true, 'productos' => buildProductos() });
 
 		Test.startTest();
 		List<Object> productos = FSC_APIPrestamoProductos.extractProductos(responseJson);
@@ -63,7 +63,7 @@ private class FSC_APIPrestamoProductosTest {
 	static void testExtractProductos_NullAndMissingKey() {
 		Test.startTest();
 		List<Object> nullResult = FSC_APIPrestamoProductos.extractProductos(null);
-		List<Object> missingKeyResult = FSC_APIPrestamoProductos.extractProductos(new Map<String, Object>());
+		List<Object> missingKeyResult = FSC_APIPrestamoProductos.extractProductos(new Map<String, Object>{ 'success' => true });
 		Test.stopTest();
 
 		System.assertEquals(0, nullResult.size());

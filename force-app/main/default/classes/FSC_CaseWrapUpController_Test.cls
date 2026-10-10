@@ -1,201 +1,330 @@
 @IsTest
 private class FSC_CaseWrapUpController_Test {
 
-    private static Contact createContactWithAccount(String email) {
-        Account a = new Account(
-            RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Juridica').getRecordTypeId(),
-            Name = 'Test Account WrapUp',
-            ACC_RNC__c = '131000020',
-            ACC_TipoIdentificacion__c = 'RNC',
-            ACC_Condicion__c = 'PROSPECTO',
-            ACC_Estado__c = 'INICIADO'
-        );
-        insert a;
-
-        Contact c = new Contact(
-            LastName = 'WrapUp Contact',
-            AccountId = a.Id,
-            Email = email
-        );
-        insert c;
-
-        return c;
-    }
-
     private static Case createCase(Id contactId, String suppliedEmail) {
-        Case cs = new Case(
+        Case caseRecord = new Case(
             Subject = 'WrapUp Case',
             Status = 'New',
             Origin = 'Phone',
             SuppliedEmail = suppliedEmail,
             ContactId = contactId
         );
-        insert cs;
-        return cs;
+        insert caseRecord;
+        return caseRecord;
+    }
+
+    private static Case createLegacyCase(String recordTypeDeveloperName) {
+        List<RecordType> recordTypes = [
+            SELECT Id
+            FROM RecordType
+            WHERE SObjectType = 'Case'
+                AND DeveloperName = :recordTypeDeveloperName
+            LIMIT 1
+        ];
+        System.assert(
+            !recordTypes.isEmpty(),
+            'No existe el Record Type de Case: ' + recordTypeDeveloperName
+        );
+
+        Case caseRecord = new Case(
+            RecordTypeId = recordTypes[0].Id,
+            Subject = 'Legacy WrapUp ' + recordTypeDeveloperName,
+            Status = 'New',
+            Origin = 'Phone'
+        );
+        insert caseRecord;
+        return caseRecord;
+    }
+
+    private static Contact createContactWithAccount(String email) {
+        Id accountRecordTypeId = Schema.SObjectType.Account
+            .getRecordTypeInfosByDeveloperName()
+            .get('Candidato_Persona_Juridica')
+            .getRecordTypeId();
+
+        Account accountRecord = new Account(
+            RecordTypeId = accountRecordTypeId,
+            Name = 'Test Account WrapUp',
+            ACC_RNC__c = '131000020',
+            ACC_TipoIdentificacion__c = 'RNC',
+            ACC_Condicion__c = 'PROSPECTO',
+            ACC_Estado__c = 'INICIADO'
+        );
+        insert accountRecord;
+
+        Contact contactRecord = new Contact(
+            LastName = 'WrapUp Contact',
+            AccountId = accountRecord.Id,
+            Email = email
+        );
+        insert contactRecord;
+        return contactRecord;
     }
 
     @IsTest
     static void testGetWrapUpData_UsesSuppliedEmail_WhenNoContact() {
-        Case cs = createCase(null, 'supplied@test.com');
+        Case caseRecord = createCase(null, 'supplied@test.com');
+        caseRecord = [SELECT Id, CaseNumber FROM Case WHERE Id = :caseRecord.Id];
 
-        cs = [SELECT Id, CaseNumber FROM Case WHERE Id = :cs.Id];
-        
         Test.startTest();
-        FSC_CaseWrapUpController.WrapUpResult res =
-            FSC_CaseWrapUpController.getWrapUpData(cs.Id);
+        FSC_CaseWrapUpController.WrapUpResult result =
+            FSC_CaseWrapUpController.getWrapUpData(caseRecord.Id);
         Test.stopTest();
 
-        System.assertNotEquals(null, res);
-        System.assertEquals(0, res.fileCount, 'No hay files linkeados en el test');
-        System.assertEquals('supplied@test.com', res.emailTo, 'Debe usar SuppliedEmail si no hay Contact');
-        System.assert(res.emailSubject.contains(cs.CaseNumber), 'El subject debería incluir CaseNumber');
-        System.assert(res.emailBody.contains(cs.CaseNumber), 'El body debería incluir CaseNumber');
+        System.assertNotEquals(null, result);
+        System.assertEquals(0, result.fileCount);
+        System.assertEquals('supplied@test.com', result.emailTo);
+        System.assert(result.emailSubject.contains(caseRecord.CaseNumber));
+        System.assert(result.emailBody.contains(caseRecord.CaseNumber));
     }
 
     @IsTest
     static void testGetWrapUpData_UsesContactEmail_WhenContactPresent() {
-        Contact c = createContactWithAccount('contact@test.com');
-        Case cs = createCase(c.Id, 'supplied@test.com');
+        Contact contactRecord = createContactWithAccount('contact@test.com');
+        Case caseRecord = createCase(contactRecord.Id, 'supplied@test.com');
 
         Test.startTest();
-        FSC_CaseWrapUpController.WrapUpResult res =
-            FSC_CaseWrapUpController.getWrapUpData(cs.Id);
+        FSC_CaseWrapUpController.WrapUpResult result =
+            FSC_CaseWrapUpController.getWrapUpData(caseRecord.Id);
         Test.stopTest();
 
-        System.assertNotEquals(null, res);
-        System.assertEquals('contact@test.com', res.emailTo, 'Debe priorizar Contact.Email sobre SuppliedEmail');
+        System.assertEquals('contact@test.com', result.emailTo);
+    }
+
+    @IsTest
+    static void testGetWrapUpData_CountsLinkedFile() {
+        Case caseRecord = createCase(null, 'supplied@test.com');
+        insert new ContentVersion(
+            Title = 'WrapUp Test File',
+            PathOnClient = 'WrapUpTestFile.txt',
+            VersionData = Blob.valueOf('archivo de prueba'),
+            FirstPublishLocationId = caseRecord.Id
+        );
+
+        Test.startTest();
+        FSC_CaseWrapUpController.WrapUpResult result =
+            FSC_CaseWrapUpController.getWrapUpData(caseRecord.Id);
+        Test.stopTest();
+
+        System.assertEquals(1, result.fileCount);
     }
 
     @IsTest
     static void testGetWrapUpData_NullCaseId_Throws() {
+        Boolean exceptionThrown = false;
         try {
-            Test.startTest();
             FSC_CaseWrapUpController.getWrapUpData(null);
-            Test.stopTest();
-            System.assert(false, 'Debió lanzar excepción por caseId null');
-        } catch (AuraHandledException e) {
-            
+        } catch (AuraHandledException expected) {
+            exceptionThrown = true;
         }
+        System.assertEquals(true, exceptionThrown, 'Debió exigir el Id del caso.');
+    }
+
+    @IsTest
+    static void testCloseCase_NullCaseId_Throws() {
+        Boolean exceptionThrown = false;
+        try {
+            FSC_CaseWrapUpController.closeCase(
+                null, 'Resultado', 'Resumen', false, null, null, null, null
+            );
+        } catch (AuraHandledException expected) {
+            exceptionThrown = true;
+        }
+        System.assertEquals(true, exceptionThrown, 'Debió exigir el Id del caso.');
     }
 
     @IsTest
     static void testCloseCase_MissingRequiredFields_Throws() {
-        Case cs = createCase(null, 'supplied@test.com');
-
+        Case caseRecord = createCase(null, 'supplied@test.com');
+        Boolean exceptionThrown = false;
         try {
-            Test.startTest();
             FSC_CaseWrapUpController.closeCase(
-                cs.Id,
-                null,                 
-                'Motivo',
-                'Resumen',
-                false,
-                null, null, null,
-                null
+                caseRecord.Id, null, 'Resumen', false, null, null, null, null
             );
-            Test.stopTest();
-            System.assert(false, 'Debió lanzar excepción por campos obligatorios incompletos');
-        } catch (AuraHandledException e) {
-            
+        } catch (AuraHandledException expected) {
+            exceptionThrown = true;
         }
+        System.assertEquals(true, exceptionThrown, 'Debió exigir resultado y resumen.');
     }
 
     @IsTest
-    static void testCloseCase_MissingEvidence_Throws_WhenMinFilesRequired() {
-        Case cs = createCase(null, 'supplied@test.com');
-
+    static void testCloseCase_MissingEvidence_Throws() {
+        Case caseRecord = createLegacyCase('RT_Solicitud_1_2');
+        Boolean exceptionThrown = false;
         try {
-            Test.startTest();
             FSC_CaseWrapUpController.closeCase(
-                cs.Id,
-                'Resultado',
-                'Motivo',
-                'Resumen',
-                false,
-                null, null, null,
-                3 
+                caseRecord.Id, 'Resultado', 'Resumen', false,
+                null, null, null, 3
             );
-            Test.stopTest();
-            System.assert(false, 'Debió lanzar excepción por falta de evidencias');
-        } catch (AuraHandledException e) {
-           
+        } catch (AuraHandledException expected) {
+            exceptionThrown = true;
         }
+        System.assertEquals(
+            true,
+            exceptionThrown,
+            'Debió exigir evidencias para un resultado distinto de Desestimado.'
+        );
     }
 
     @IsTest
-    static void testCloseCase_OK_WhenNoMinFilesRequired_UpdatesFields() {
-        Case cs = createCase(null, 'supplied@test.com');
+    static void testCloseCase_Desestimado_SinEvidencias_CierraSolicitudAntigua() {
+        Case caseRecord = createLegacyCase('RT_Solicitud_1_2');
 
         Test.startTest();
         FSC_CaseWrapUpController.closeCase(
-            cs.Id,
-            'Resultado OK',
-            'Motivo OK',
-            'Resumen OK',
+            caseRecord.Id,
+            'Desestimado',
+            'Caso desestimado',
             false,
-            null, null, null,
-            null 
+            null,
+            null,
+            null,
+            3
         );
         Test.stopTest();
 
-        Case updated = [
-            SELECT Id, Status,
-                   CAS_Motivo_de_Rechazo__c,
-                   FSC_CAS_Resultado__c,
-                   FSC_CAS_Motivo_de_cierre__c,
-                   FSC_CAS_Resumen_de_solucion__c
+        Case updatedCase = [
+            SELECT Status, CAS_Motivo_de_Rechazo__c,
+                FSC_CAS_Resumen_de_solucion__c, IsClosed
             FROM Case
-            WHERE Id = :cs.Id
-            LIMIT 1
+            WHERE Id = :caseRecord.Id
         ];
-
-        System.assertEquals('Resolucion del caso', updated.Status, 'Debe quedar en el estado final configurado');
-        System.assertEquals('Resultado OK', updated.CAS_Motivo_de_Rechazo__c);
-        System.assertEquals('Motivo OK', updated.FSC_CAS_Motivo_de_cierre__c);
-        System.assertEquals('Resumen OK', updated.FSC_CAS_Resumen_de_solucion__c);
+        System.assertEquals('Resolución y Cierre', updatedCase.Status);
+        System.assertEquals('Desestimado', updatedCase.CAS_Motivo_de_Rechazo__c);
+        System.assertEquals('Caso desestimado', updatedCase.FSC_CAS_Resumen_de_solucion__c);
+        System.assertEquals(true, updatedCase.IsClosed);
     }
 
     @IsTest
-    static void testSendReminderEmail_ReturnsForEmptyClosedAndMissingEmail() {
+    static void testCloseCase_Desestimado_SinEvidencias_CierraReclamacionAntigua() {
+        Case caseRecord = createLegacyCase('RT_Soporte_3');
+
         Test.startTest();
-        FSC_CaseWrapUpController.sendReminderEmail(new List<FSC_CaseWrapUpController.Request>());
+        FSC_CaseWrapUpController.closeCase(
+            caseRecord.Id,
+            'Desestimado',
+            'Caso desestimado',
+            false,
+            null,
+            null,
+            null,
+            2
+        );
         Test.stopTest();
 
-        Case missingEmailCase = createCase(null, null);
-        FSC_CaseWrapUpController.Request missingEmailRequest = new FSC_CaseWrapUpController.Request();
-        missingEmailRequest.caseId = missingEmailCase.Id;
-        FSC_CaseWrapUpController.sendReminderEmail(new List<FSC_CaseWrapUpController.Request>{ missingEmailRequest });
+        Case updatedCase = [
+            SELECT Status, IsClosed
+            FROM Case
+            WHERE Id = :caseRecord.Id
+        ];
+        System.assertEquals('Resolucion del caso', updatedCase.Status);
+        System.assertEquals(true, updatedCase.IsClosed);
+    }
+
+    @IsTest
+    static void testSendReminderEmail_EmptyRequestsDoesNotThrow() {
+        Test.startTest();
+        FSC_CaseWrapUpController.sendReminderEmail(
+            new List<FSC_CaseWrapUpController.Request>()
+        );
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void testSendReminderEmail_NullRequestDoesNotThrow() {
+        FSC_CaseWrapUpController.Request request =
+            new FSC_CaseWrapUpController.Request();
+        Test.startTest();
+        FSC_CaseWrapUpController.sendReminderEmail(
+            new List<FSC_CaseWrapUpController.Request>{ request }
+        );
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void testSendReminderEmail_MissingEmailReturns() {
+        Case caseRecord = createCase(null, null);
+        FSC_CaseWrapUpController.Request request =
+            new FSC_CaseWrapUpController.Request();
+        request.caseId = caseRecord.Id;
+
+        Test.startTest();
+        FSC_CaseWrapUpController.sendReminderEmail(
+            new List<FSC_CaseWrapUpController.Request>{ request }
+        );
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void testSendReminderEmail_WithEmailDoesNotThrow() {
+        Contact contactRecord = createContactWithAccount('client@test.com');
+        Case caseRecord = createCase(contactRecord.Id, 'client@test.com');
+        caseRecord.CAS_Correo_Electronico_Cliente__c = 'client@test.com';
+        update caseRecord;
+
+        FSC_CaseWrapUpController.Request request =
+            new FSC_CaseWrapUpController.Request();
+        request.caseId = caseRecord.Id;
+
+        Test.startTest();
+        FSC_CaseWrapUpController.sendReminderEmail(
+            new List<FSC_CaseWrapUpController.Request>{ request }
+        );
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void testSendAditionalInformationEmail_NullId_Throws() {
+        Boolean exceptionThrown = false;
+        try {
+            FSC_CaseWrapUpController.sendAditionalInformationEmail(
+                'Información adicional', null
+            );
+        } catch (AuraHandledException expected) {
+            exceptionThrown = true;
+        }
+        System.assertEquals(true, exceptionThrown, 'Debió exigir el Id del caso.');
     }
 
     @IsTest
     static void testSendAditionalInformationEmail_RequiresEmail() {
-        Case cs = createCase(null, null);
-
+        Case caseRecord = createCase(null, null);
+        Boolean exceptionThrown = false;
         try {
-            FSC_CaseWrapUpController.sendAditionalInformationEmail('Información adicional', cs.Id);
-            System.assert(false, 'Debe exigir correo del cliente');
+            FSC_CaseWrapUpController.sendAditionalInformationEmail(
+                'Información adicional', caseRecord.Id
+            );
         } catch (AuraHandledException expected) {
-            System.assertNotEquals(null, expected.getMessage());
+            exceptionThrown = true;
         }
+        System.assertEquals(true, exceptionThrown, 'Debe exigir correo del cliente.');
     }
 
     @IsTest
-    static void testSendAditionalInformationEmail_WithEmailStartsFlow() {
-        Case cs = createCase(null, 'client@test.com');
-        cs.CAS_Correo_Electronico_Cliente__c = 'client@test.com';
-        update cs;
+    static void testSendAditionalInformationEmail_WithEmailUpdatesCase() {
+        Case caseRecord = createCase(null, 'client@test.com');
+        caseRecord.CAS_Correo_Electronico_Cliente__c = 'client@test.com';
+        update caseRecord;
 
         try {
-            FSC_CaseWrapUpController.sendAditionalInformationEmail('Información adicional', cs.Id);
-        } catch (Exception expected) {
-            System.assertNotEquals(null, expected.getMessage());
+            FSC_CaseWrapUpController.sendAditionalInformationEmail(
+                'Información adicional',
+                caseRecord.Id
+            );
+        } catch (Exception flowException) {
+            // El Flow puede requerir configuración adicional del entorno de prueba;
+            // la actualización del caso ocurre antes de iniciarlo.
         }
 
-        Case refreshed = [
+        Case refreshedCase = [
             SELECT CAS_Informacion_Adicional__c
             FROM Case
-            WHERE Id = :cs.Id
+            WHERE Id = :caseRecord.Id
         ];
-        System.assertEquals('Información adicional', refreshed.CAS_Informacion_Adicional__c);
+        System.assertEquals(
+            'Información adicional',
+            refreshedCase.CAS_Informacion_Adicional__c
+        );
     }
+
 }

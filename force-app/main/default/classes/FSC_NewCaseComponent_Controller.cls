@@ -17,6 +17,18 @@ public class FSC_NewCaseComponent_Controller {
     private static final String RT_CANDIDATO_PERSONA_JURIDICA = 'Candidato_Persona_Juridica';
 
     @AuraEnabled(cacheable=true)
+    public static List<ContactPointEmail> getClientEmails(Id accountId) {
+        if (accountId == null) return new List<ContactPointEmail>();
+        Set<Id> parents = new Set<Id>{ accountId };
+        for (Account client : [SELECT PersonContactId FROM Account WHERE Id = :accountId]) {
+            if (client.PersonContactId != null) parents.add(client.PersonContactId);
+        }
+        return [SELECT Id, EmailAddress, IsPrimary FROM ContactPointEmail
+                WHERE ParentId IN :parents AND EmailAddress != null
+                ORDER BY IsPrimary DESC, CreatedDate DESC, Id ASC];
+    }
+
+    @AuraEnabled(cacheable=true)
     public static String getPrimaryEmail(Id accountId) {
 
         List<ContactPointEmail> emails = [

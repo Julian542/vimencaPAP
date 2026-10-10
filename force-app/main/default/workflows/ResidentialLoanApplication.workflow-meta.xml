@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>FSC_Notificar_Rechazo_Banca_Seguro</fullName>
+        <description>Notifica al oficial de negocio cuando Banca Seguro no aprueba la solicitud.</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/FSC_EmailSolicitudCreditoRechazoBancaSeguro</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>FSC_AsignarSubstatusAnalisisDeCredito</fullName>
+        <field>FSC_Subestado__c</field>
+        <literalValue>Análisis de crédito</literalValue>
+        <name>Asignar substatus análisis de crédito</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_AsignarSubstatusGestionarFirmas</fullName>
+        <field>FSC_Subestado__c</field>
+        <literalValue>Gestionar firmas</literalValue>
+        <name>Asignar substatus gestionar firmas</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_AsignarSubstatusPlanillaDesembolso</fullName>
+        <field>FSC_Subestado__c</field>
+        <literalValue>Pendiente planilla de desembolso</literalValue>
+        <name>Asignar substatus planilla desembolso</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_AsignarSubstatusRecepcion</fullName>
+        <field>FSC_Subestado__c</field>
+        <literalValue>Recepción de documentos – Análisis</literalValue>
+        <name>Asignar substatus recepción</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_Asignar_Doc_Inc_Post_Des_False</fullName>
+        <field>FSC_Doc_Incompleta_Post_Desembolso__c</field>
+        <literalValue>0</literalValue>
+        <name>Asignar - Doc. Inc. Post Des - False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_Asignar_Doc_Inc_Post_Des_True</fullName>
+        <field>FSC_Doc_Incompleta_Post_Desembolso__c</field>
+        <literalValue>1</literalValue>
+        <name>Asignar - Doc. Inc. Post Des - True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_Asignar_Expediente_Archivado_False</fullName>
+        <field>FSC_Expediente_Archivado__c</field>
+        <literalValue>0</literalValue>
+        <name>Asignar - Expediente Archivado - False</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_Asignar_Expediente_Archivado_True</fullName>
+        <field>FSC_Expediente_Archivado__c</field>
+        <literalValue>1</literalValue>
+        <name>Asignar - Expediente Archivado - True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_Asignar_ResultadoPEPListas_Aprobada</fullName>
+        <field>FSC_Resultado_PEP_Listas__c</field>
+        <literalValue>Coincidencia aprobada</literalValue>
+        <name>Asignar - ResultadoPEPListas - Aprobada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_Asignar_ResultadoPEPListas_Rechazada</fullName>
+        <field>FSC_Resultado_PEP_Listas__c</field>
+        <literalValue>Coincidencia no aprobada</literalValue>
+        <name>Asignar - ResultadoPEPListas - Rechazada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_Asignar_Status_Cerrada_Ganada</fullName>
+        <field>Status</field>
+        <literalValue>Cerrada Ganada</literalValue>
+        <name>Asignar - Status - Cerrada Ganada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_Asignar_Status_Cerrada_Perdida</fullName>
+        <field>Status</field>
+        <literalValue>Cerrada Perdida</literalValue>
+        <name>Asignar - Status - Cerrada Perdida</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_Asignar_Status_En_proceso</fullName>
+        <field>Status</field>
+        <literalValue>En proceso</literalValue>
+        <name>Asignar - Status - En proceso</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_Asignar_Subestado_Completado</fullName>
+        <field>FSC_Subestado__c</field>
+        <literalValue>Completado</literalValue>
+        <name>Asignar - Subestado - Completado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_Asignar_Substatus_En_Motor_Buro</fullName>
+        <field>FSC_Subestado__c</field>
+        <literalValue>En Motor Buró</literalValue>
+        <name>Asignar - Substatus - En Motor Buró</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_Asignar_Substatus_Rechazado_por_PLA</fullName>
+        <field>FSC_Subestado__c</field>
+        <literalValue>Rechazado por PLA</literalValue>
+        <name>Asignar - Substatus - Rechazado por PLA</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_BancaSeguroAprobada</fullName>
+        <field>FSC_BancaSeguroAprobada__c</field>
+        <literalValue>1</literalValue>
+        <name>Banca Seguro aprobada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_BancaSeguroContinuarDocumentacion</fullName>
+        <field>FSC_Subestado__c</field>
+        <literalValue>Documentación para contratos</literalValue>
+        <name>Banca Seguro continuar a documentación</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_DebeRevisarComite</fullName>
+        <field>FSC_DebeRevisarComite__c</field>
+        <literalValue>1</literalValue>
+        <name>Debe revisar comité</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_DebeRevisarSupervisorFalse</fullName>
+        <field>FSC_DebeRevisarSupervisor__c</field>
+        <literalValue>0</literalValue>
+        <name>Debe revisar supervisor false</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_DocumentacionCompletaAnalisisFalse</fullName>
+        <field>FSC_Doc_Completa_Analisis__c</field>
+        <literalValue>0</literalValue>
+        <name>Documentación completa análisis false</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_DocumentacionCompletaDesembolsoFalse</fullName>
+        <field>FSC_Doc_Completa_Desembolso__c</field>
+        <literalValue>0</literalValue>
+        <name>Documentación completa desembolso false</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_ExcepcionBuroAprobada</fullName>
+        <field>FSC_ExcepcionBuroAprobada__c</field>
+        <literalValue>1</literalValue>
+        <name>Excepción Buró Aprobada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_ExcepcionBuroRechazada</fullName>
+        <field>FSC_ExcepcionBuroRechazada__c</field>
+        <literalValue>1</literalValue>
+        <name>Excepción Buró Rechazada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_FechaYHoraAprobacionComite</fullName>
+        <field>FSC_FechaYHoraAprobacionComite__c</field>
+        <formula>NOW()</formula>
+        <name>Fecha y hora aprobación comité</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_ResultadoBuroReferido</fullName>
+        <field>FSC_Resultado_Buro__c</field>
+        <literalValue>Referido</literalValue>
+        <name>Resultado buró referido</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_SolicitudAprobadaPorComite</fullName>
+        <field>FSC_SolicitudAprobadaPorComite__c</field>
+        <literalValue>1</literalValue>
+        <name>Solicitud aprobada por comité</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_SolicitudCambiaASubestadoPagare</fullName>
+        <field>FSC_Subestado__c</field>
+        <literalValue>Generación de pagarés y plantillas</literalValue>
+        <name>Solicitud cambia a subestado pagaré</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_SubestadoDesembolsoValAbanks</fullName>
+        <field>FSC_Subestado__c</field>
+        <literalValue>Desembolso</literalValue>
+        <name>FSC - Subestado desembolso Abanks</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_SubestadoRechazadoPorAnalistaDeCred</fullName>
+        <field>FSC_Subestado__c</field>
+        <literalValue>Rechazado por análisis</literalValue>
+        <name>Subestado rechazado por Analista de Cred</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_SubestadoRechazadoPorBancaSeguro</fullName>
+        <field>FSC_Subestado__c</field>
+        <literalValue>Rechazado por banca seguro</literalValue>
+        <name>Subestado rechazado por Banca Seguro</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_SubestadoRechazadoPorComite</fullName>
+        <field>FSC_Subestado__c</field>
+        <literalValue>Rechazado por comité</literalValue>
+        <name>Subestado rechazado por comité</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_SubestadoRechazadoPorSupervisor</fullName>
+        <field>FSC_Subestado__c</field>
+        <literalValue>Rechazado por supervisor</literalValue>
+        <name>Subestado rechazado por supervisor</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <tasks>
+        <fullName>FSC_Documentos_a_corregir_adjuntar</fullName>
+        <assignedToType>owner</assignedToType>
+        <dueDateOffset>3</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Open</status>
+        <subject>Documentos a corregir/adjuntar</subject>
+    </tasks>
+</Workflow>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IntegrationProviderDef xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <apexClass>NotifyTravelPlansIntegrationProvider</apexClass>
+    <developerName>FSC_NotifyTravelPlans</developerName>
+    <integrationProviderAttributes>
+        <dataType>String</dataType>
+        <developerName>Named_Credential</developerName>
+        <label>Named Credential</label>
+        <required>true</required>
+        <stringValue>FSC_fsc_integrations_V1_0_0</stringValue>
+        <trueOrFalseValue>false</trueOrFalseValue>
+    </integrationProviderAttributes>
+    <integrationProviderAttributes>
+        <dataType>String</dataType>
+        <developerName>Person_Account_URL_Path</developerName>
+        <label>Person Account URL Path</label>
+        <required>true</required>
+        <stringValue>/api/customers/{recordId}</stringValue>
+        <trueOrFalseValue>false</trueOrFalseValue>
+    </integrationProviderAttributes>
+    <providerLabel>FSC_NotifyTravelPlans</providerLabel>
+    <type>Apex</type>
+</IntegrationProviderDef>

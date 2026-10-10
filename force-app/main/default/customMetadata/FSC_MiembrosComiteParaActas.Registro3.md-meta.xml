@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Registro3</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_Funcion__c</field>
+        <value xsi:type="xsd:string">Miembro</value>
+    </values>
+    <values>
+        <field>FSC_Modalidad__c</field>
+        <value xsi:type="xsd:string">Presencial</value>
+    </values>
+    <values>
+        <field>FSC_Nombre__c</field>
+        <value xsi:type="xsd:string">Jesús Cornejo Bravo</value>
+    </values>
+    <values>
+        <field>FSC_Perfil__c</field>
+        <value xsi:type="xsd:string">Vicepresidente Ejecutivo</value>
+    </values>
+</CustomMetadata>

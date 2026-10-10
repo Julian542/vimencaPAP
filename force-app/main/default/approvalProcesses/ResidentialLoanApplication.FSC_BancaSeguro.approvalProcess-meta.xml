@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>allInternalUsers</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Owner</field>
+        <field>FSC_TipoCredito__c</field>
+        <field>FSC_MontoAprobado__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>adhoc</type>
+            </approver>
+        </assignedApprover>
+        <label>Revisión Banca Seguro</label>
+        <name>Revision_Banca_Seguro</name>
+    </approvalStep>
+    <description>Revisión obligatoria de Banca Seguro para créditos vehiculares e hipotecarios aprobados.</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <criteriaItems>
+            <field>ResidentialLoanApplication.Status</field>
+            <operation>equals</operation>
+            <value>En proceso</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ResidentialLoanApplication.FSC_Subestado__c</field>
+            <operation>equals</operation>
+            <value>Banca Seguro</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ResidentialLoanApplication.FSC_BancaSeguroAprobada__c</field>
+            <operation>equals</operation>
+            <value>Falso</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>FSC_BancaSeguroAprobada</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>FSC_BancaSeguroContinuarDocumentacion</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>FSC_Asignar_Status_Cerrada_Perdida</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>FSC_Notificar_Rechazo_Banca_Seguro</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>FSC_SubestadoRechazadoPorBancaSeguro</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <label>Banca Seguro</label>
+    <processOrder>12</processOrder>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

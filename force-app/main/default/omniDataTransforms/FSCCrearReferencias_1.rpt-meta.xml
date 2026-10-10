@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniDataTransform xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <assignmentRulesUsed>false</assignmentRulesUsed>
+    <deletedOnSuccess>false</deletedOnSuccess>
+    <errorIgnored>false</errorIgnored>
+    <expectedInputJson>{
+  &quot;ResidentialLoanApplicationId&quot; : &quot;0cdVC000000JjZLYA0&quot;,
+  &quot;FSC_Referencias__c&quot; : [ {
+    &quot;FSC_Tipo_de_Producto__c&quot; : &quot;qweqw&quot;,
+    &quot;Name&quot; : &quot;qweqw&quot;
+  }, {
+    &quot;FSC_Parentesco__c&quot; : &quot;asdasd&quot;,
+    &quot;FSC_Telefono__c&quot; : 123123,
+    &quot;Name&quot; : &quot;adas&quot;
+  }, {
+    &quot;FSC_Telefono__c&quot; : 123123123,
+    &quot;Name&quot; : &quot;asdasd&quot;
+  } ]
+}</expectedInputJson>
+    <fieldLevelSecurityEnabled>true</fieldLevelSecurityEnabled>
+    <inputType>JSON</inputType>
+    <isManagedUsingStdDesigner>true</isManagedUsingStdDesigner>
+    <name>FSCCrearReferencias</name>
+    <nullInputsIncludedInOutput>false</nullInputsIncludedInOutput>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>4ddb425a-7eaf-4e09-bab2-c88c4b5f79d7</globalKey>
+        <inputFieldName>FSC_Referencias__c:FSC_Tipo_de_Producto__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearReferencias</name>
+        <omniDataTransformation>0kdVC000000Gx0C</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0C</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Tipo_de_Producto__c</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>30e78877-0178-46f3-b74c-bb7634473992</globalKey>
+        <inputFieldName>FSC_Referencias__c:FSC_Parentesco__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearReferencias</name>
+        <omniDataTransformation>0kdVC000000Gx0D</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0D</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Parentesco__c</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>bd1d9009-6adb-4114-a7e1-390b7e13d516</globalKey>
+        <inputFieldName>ResidentialLoanApplicationId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearReferencias</name>
+        <omniDataTransformation>0kdVC000000Gx0A</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0A</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Residential_Loan_Application__c</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>51950aa8-1371-4e74-b695-878827b2d552</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearReferencias</name>
+        <omniDataTransformation>0kdVC000000Gx0B</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0B</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Id</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>a0bbcc66-9cf1-4fd4-ad15-3bb5bfda5f08</globalKey>
+        <inputFieldName>FSC_Referencias__c:Name</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearReferencias</name>
+        <omniDataTransformation>0kdVC000000Gx0E</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0E</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Name</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>7a40c7d4-e4cd-47f7-9322-5c8a7eb42c6e</globalKey>
+        <inputFieldName>FSC_Referencias__c:FSC_Telefono__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearReferencias</name>
+        <omniDataTransformation>0kdVC000000Gx0F</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0F</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Telefono__c</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <outputType>SObject</outputType>
+    <previewJsonData>{
+  &quot;ResidentialLoanApplicationId&quot; : &quot;0cdVC000000KCD7YAO&quot;,
+  &quot;FSC_Referencias__c&quot; : [ {
+    &quot;FSC_Tipo_de_Producto__c&quot; : &quot;1&quot;,
+    &quot;Name_1&quot; : &quot;1&quot;
+  }, {
+    &quot;FSC_Parentesco__c&quot; : &quot;1&quot;,
+    &quot;Name_2&quot; : &quot;1&quot;,
+    &quot;FSC_Telefono__c_2&quot; : 1
+  }, {
+    &quot;Name_3&quot; : &quot;1&quot;,
+    &quot;FSC_Telefono__c_3&quot; : 1
+  } ]
+}</previewJsonData>
+    <processSuperBulk>false</processSuperBulk>
+    <responseCacheTtlMinutes>0.0</responseCacheTtlMinutes>
+    <rollbackOnError>false</rollbackOnError>
+    <sourceObjectDefault>false</sourceObjectDefault>
+    <synchronousProcessThreshold>0.0</synchronousProcessThreshold>
+    <type>Load</type>
+    <uniqueName>FSCCrearReferencias_1</uniqueName>
+    <versionNumber>1.0</versionNumber>
+    <xmlDeclarationRemoved>false</xmlDeclarationRemoved>
+</OmniDataTransform>

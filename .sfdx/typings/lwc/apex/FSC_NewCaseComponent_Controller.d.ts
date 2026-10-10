@@ -1,3 +1,6 @@
+declare module "@salesforce/apex/FSC_NewCaseComponent_Controller.getClientEmails" {
+  export default function getClientEmails(param: {accountId: any}): Promise<any>;
+}
 declare module "@salesforce/apex/FSC_NewCaseComponent_Controller.getPrimaryEmail" {
   export default function getPrimaryEmail(param: {accountId: any}): Promise<any>;
 }

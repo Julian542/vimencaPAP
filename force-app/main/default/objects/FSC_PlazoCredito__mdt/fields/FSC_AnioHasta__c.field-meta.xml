@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_AnioHasta__c</fullName>
+    <description>Antigüedad máxima inclusiva de la franja. El límite de la última franja determina la antigüedad máxima admitida.</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Ingrese años enteros. Nuevo: 0 a 0. Las franjas deben ser consecutivas, sin huecos ni solapamientos. Deje vacío para Consumo.</inlineHelpText>
+    <label>Año hasta</label>
+    <precision>2</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

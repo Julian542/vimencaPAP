@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Sucursal__c</fullName>
+    <label>Sucursal</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1</fullName>
+                <default>false</default>
+                <label>Agencia Principal</label>
+            </value>
+            <value>
+                <fullName>2</fullName>
+                <default>false</default>
+                <label>Agora Mall</label>
+            </value>
+            <value>
+                <fullName>3</fullName>
+                <default>false</default>
+                <label>Bavaro</label>
+            </value>
+            <value>
+                <fullName>4</fullName>
+                <default>false</default>
+                <label>Paseo 27</label>
+            </value>
+            <value>
+                <fullName>5</fullName>
+                <default>false</default>
+                <label>Lope Vega</label>
+            </value>
+            <value>
+                <fullName>6</fullName>
+                <default>false</default>
+                <label>Megacentro</label>
+            </value>
+            <value>
+                <fullName>7</fullName>
+                <default>false</default>
+                <label>Patio Colombia</label>
+            </value>
+            <value>
+                <fullName>8</fullName>
+                <default>false</default>
+                <label>Santiago</label>
+            </value>
+            <value>
+                <fullName>9</fullName>
+                <default>false</default>
+                <label>Oficina Principal</label>
+            </value>
+            <value>
+                <fullName>51</fullName>
+                <default>false</default>
+                <label>Independencia</label>
+            </value>
+            <value>
+                <fullName>151</fullName>
+                <default>false</default>
+                <label>Negocios Alternos</label>
+            </value>
+            <value>
+                <fullName>201</fullName>
+                <default>false</default>
+                <label>San Isidro</label>
+            </value>
+            <value>
+                <fullName>455</fullName>
+                <default>false</default>
+                <label>Banca Productos y Alianzas</label>
+            </value>
+            <value>
+                <fullName>456</fullName>
+                <default>false</default>
+                <label>Villa Mella</label>
+            </value>
+            <value>
+                <fullName>457</fullName>
+                <default>false</default>
+                <label>Banco Vimenca</label>
+            </value>
+            <value>
+                <fullName>458</fullName>
+                <default>false</default>
+                <label>Colinas Mall</label>
+            </value>
+            <value>
+                <fullName>459</fullName>
+                <default>false</default>
+                <label>Recursos Humanos</label>
+            </value>
+            <value>
+                <fullName>4801</fullName>
+                <default>false</default>
+                <label>San Cristóbal</label>
+            </value>
+            <value>
+                <fullName>6060</fullName>
+                <default>false</default>
+                <label>Villa Olga</label>
+            </value>
+            <value>
+                <fullName>6061</fullName>
+                <default>false</default>
+                <label>Santiago Center</label>
+            </value>
+            <value>
+                <fullName>6062</fullName>
+                <default>false</default>
+                <label>Punta Cana</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

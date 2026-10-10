@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Subestado__c</fullName>
+    <label>Subestado</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Status</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Completando información</fullName>
+                <default>true</default>
+                <label>Completando información</label>
+            </value>
+            <value>
+                <fullName>En validación PEP/Listas</fullName>
+                <default>false</default>
+                <label>En validación PEP/Listas</label>
+            </value>
+            <value>
+                <fullName>En Motor Buró</fullName>
+                <default>false</default>
+                <label>En Motor Buró</label>
+            </value>
+            <value>
+                <fullName>Recepción de documentos – Análisis</fullName>
+                <default>false</default>
+                <label>Recepción de documentos – Análisis</label>
+            </value>
+            <value>
+                <fullName>Análisis de crédito</fullName>
+                <default>false</default>
+                <label>Análisis de crédito</label>
+            </value>
+            <value>
+                <fullName>Banca Seguro</fullName>
+                <default>false</default>
+                <label>Banca Seguro</label>
+            </value>
+            <value>
+                <fullName>Documentación para contratos</fullName>
+                <default>false</default>
+                <label>Documentación para contratos</label>
+            </value>
+            <value>
+                <fullName>Generación de pagarés y plantillas</fullName>
+                <default>false</default>
+                <label>Generación de pagarés y plantillas</label>
+            </value>
+            <value>
+                <fullName>Generación de contrato</fullName>
+                <default>false</default>
+                <label>Generación de contrato</label>
+            </value>
+            <value>
+                <fullName>Gestionar firmas</fullName>
+                <default>false</default>
+                <label>Gestionar firmas</label>
+            </value>
+            <value>
+                <fullName>Formalización</fullName>
+                <default>false</default>
+                <label>Formalización</label>
+            </value>
+            <value>
+                <fullName>Documentación para desembolso y firmas</fullName>
+                <default>false</default>
+                <label>Documentación para desembolso y firmas</label>
+            </value>
+            <value>
+                <fullName>Pendiente planilla de desembolso</fullName>
+                <default>false</default>
+                <label>Pendiente planilla de desembolso</label>
+            </value>
+            <value>
+                <fullName>Creación de crédito</fullName>
+                <default>false</default>
+                <label>Creación de crédito</label>
+            </value>
+            <value>
+                <fullName>Desembolso</fullName>
+                <default>false</default>
+                <label>Desembolso</label>
+            </value>
+            <value>
+                <fullName>Archivo y custodia</fullName>
+                <default>false</default>
+                <label>Archivo y custodia</label>
+            </value>
+            <value>
+                <fullName>Completado</fullName>
+                <default>false</default>
+                <label>Completado</label>
+            </value>
+            <value>
+                <fullName>Rechazado por PLA</fullName>
+                <default>false</default>
+                <label>Rechazado por PLA</label>
+            </value>
+            <value>
+                <fullName>Rechazado por Buró</fullName>
+                <default>false</default>
+                <label>Rechazado por Buró</label>
+            </value>
+            <value>
+                <fullName>Rechazado por análisis</fullName>
+                <default>false</default>
+                <label>Rechazado por análisis</label>
+            </value>
+            <value>
+                <fullName>Rechazada por cliente</fullName>
+                <default>false</default>
+                <label>Rechazada por cliente</label>
+            </value>
+            <value>
+                <fullName>Rechazado por supervisor</fullName>
+                <default>false</default>
+                <label>Rechazado por supervisor</label>
+            </value>
+            <value>
+                <fullName>Rechazado por comité</fullName>
+                <default>false</default>
+                <label>Rechazado por comité</label>
+            </value>
+            <value>
+                <fullName>Rechazado por banca seguro</fullName>
+                <default>false</default>
+                <label>Rechazado por banca seguro</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Borrador</controllingFieldValue>
+            <valueName>Completando información</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>En proceso</controllingFieldValue>
+            <valueName>En validación PEP/Listas</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>En proceso</controllingFieldValue>
+            <valueName>En Motor Buró</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>En proceso</controllingFieldValue>
+            <valueName>Recepción de documentos – Análisis</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>En proceso</controllingFieldValue>
+            <valueName>Análisis de crédito</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>En proceso</controllingFieldValue>
+            <valueName>Banca Seguro</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>En proceso</controllingFieldValue>
+            <valueName>Documentación para contratos</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>En proceso</controllingFieldValue>
+            <valueName>Generación de pagarés y plantillas</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>En proceso</controllingFieldValue>
+            <valueName>Generación de contrato</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>En proceso</controllingFieldValue>
+            <valueName>Gestionar firmas</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>En proceso</controllingFieldValue>
+            <valueName>Formalización</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>En proceso</controllingFieldValue>
+            <valueName>Documentación para desembolso y firmas</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>En proceso</controllingFieldValue>
+            <valueName>Pendiente planilla de desembolso</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>En proceso</controllingFieldValue>
+            <valueName>Creación de crédito</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>En proceso</controllingFieldValue>
+            <valueName>Desembolso</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>En proceso</controllingFieldValue>
+            <valueName>Archivo y custodia</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cerrada Ganada</controllingFieldValue>
+            <valueName>Completado</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cerrada Perdida</controllingFieldValue>
+            <valueName>Rechazado por PLA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cerrada Perdida</controllingFieldValue>
+            <valueName>Rechazado por Buró</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cerrada Perdida</controllingFieldValue>
+            <valueName>Rechazado por análisis</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cerrada Perdida</controllingFieldValue>
+            <valueName>Rechazada por cliente</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cerrada Perdida</controllingFieldValue>
+            <valueName>Rechazado por supervisor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cerrada Perdida</controllingFieldValue>
+            <valueName>Rechazado por comité</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cerrada Perdida</controllingFieldValue>
+            <valueName>Rechazado por banca seguro</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

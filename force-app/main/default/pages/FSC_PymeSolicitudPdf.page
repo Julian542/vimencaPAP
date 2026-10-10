@@ -1,0 +1,1046 @@
+<apex:page controller="FSC_PYMESolicitudPDFController"
+	renderAs="pdf"
+	applyHtmlTag="false"
+	applyBodyTag="false"
+	showHeader="false"
+	standardStylesheets="false">
+	<html>
+		<head>
+			<style>
+				@page {
+					size: A4;
+					margin: 14mm 12mm 14mm 12mm;
+				}
+				body {
+					font-family: Arial, sans-serif;
+					font-size: 10.5px;
+					color: #000;
+				}
+				.title {
+					text-align: center;
+					font-weight: bold;
+					font-size: 12px;
+					margin-bottom: 6px;
+				}
+				.subTitle {
+					text-align: center;
+					font-weight: bold;
+					font-size: 10.5px;
+					margin-top: -2px;
+					margin-bottom: 8px;
+				}
+				table {
+					width: 100%;
+					border-collapse: collapse;
+					table-layout: fixed;
+				}
+				.box {
+					border: 1px solid #000;
+					margin-bottom: 8px;
+				}
+				.box th,
+				.box td {
+					border: 1px solid #000;
+					padding: 3px 4px;
+					vertical-align: top;
+					word-wrap: break-word;
+				}
+				.sec {
+					font-weight: bold;
+					text-transform: uppercase;
+					background: #f2f2f2;
+				}
+				.secS {
+					font-weight: bold;
+					background: #f2f2f2;
+				}
+				.secColor {
+					background: #f2f2f2;
+				}
+				.secColor2 {
+					background: #d9d9d9;
+				}
+				.lbl {
+					font-weight: bold;
+				}
+				.small {
+					font-size: 9.5px;
+				}
+				.center {
+					text-align: center;
+				}
+				.right {
+					text-align: right;
+				}
+				.left {
+					text-align: left;
+				}
+				.nowrap {
+					white-space: nowrap;
+				}
+				.w25 {
+					width: 25%;
+				}
+				.w40 {
+					width: 40%;
+				}
+				.w50 {
+					width: 50%;
+				}
+				.w60 {
+					width: 60%;
+				}
+				.w75 {
+					width: 75%;
+				}
+				.mt8 {
+					margin-top: 8px;
+				}
+				.mb4 {
+					margin-bottom: 4px;
+				}
+				.mb6 {
+					margin-bottom: 6px;
+				}
+				.mb8 {
+					margin-bottom: 8px;
+				}
+				.mt10 {
+					margin-top: 10px;
+				}
+				.noBorder td {
+					border: none !important;
+				}
+				.textColor {
+					color: #003ca6;
+				}
+				.loanApplicantsTable th,
+				.loanApplicantsTable td {
+					font-size: 8.5px;
+					line-height: 1.2;
+					padding: 3px 3px;
+				}
+				.loanApplicantsTable .tableTitle {
+					font-size: 9.5px;
+					padding: 3px 4px;
+				}
+				.loanApplicantsTable .emailCell {
+					font-size: 7px;
+					white-space: nowrap;
+				}
+			</style>
+		</head>
+		<body>
+			<table style="margin: 0 auto; text-align: center; border-collapse: collapse">
+				<tr>
+					<td>
+						<apex:image url="{!$Resource.VimencaLogo}"
+							style="width: 50%" />
+					</td>
+					<td
+						class="textColor"
+						style="font-weight: bold; font-size: 12px">
+						FORMULARIO SOLICITUD DE TRAMITACIÓN DE CRÉDITOS PYME (PERSONAS FÍSICAS COMERCIANTES O NEGOCIOS NO CONSTITUIDOS)
+					</td>
+				</tr>
+			</table>
+
+			<table class="noBorder mb8 mt10">
+				<tr>
+					<td class="w60"><span class="lbl">Sucursal:</span> <apex:outputText value="{!sucursal}" /></td>
+					<td class="w40 right"><span class="lbl">Fecha:</span> <apex:outputText value="{!fechaHoyFmt}" /></td>
+				</tr>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td
+						class="sec textColor"
+						colspan="4">
+						DATOS DEL SOLICITANTE – APLICA PARA PERSONA FÍSICA
+					</td>
+				</tr>
+
+				<tr>
+					<td
+						class="w25"
+						colspan="2">
+						<span class="lbl">Nombres:</span> <apex:outputText value="{!pfNombres}" />
+					</td>
+					<td
+						class="w25"
+						colspan="2">
+						<span class="lbl">Apellidos:</span> {!pfApellidos}
+					</td>
+				</tr>
+
+				<tr>
+					<td colspan="2"><span class="lbl">Tipo de Identificación:</span> {!pfTipoCedula}</td>
+					<td colspan="2"><span class="lbl">No. de Identificación:</span> {!pfNoIdentificacion}</td>
+				</tr>
+
+				<tr>
+					<td colspan="2"><span class="lbl">Nacionalidad:</span> {!pfNacionalidad}</td>
+					<td colspan="2"><span class="lbl">Sexo:</span> {!pfSexo}</td>
+				</tr>
+
+				<tr>
+					<td colspan="2"><span class="lbl">Estado Civil:</span> {!pfEstadoCivil}</td>
+					<td colspan="2"><span class="lbl">Tipo de Vivienda:</span> {!pfTipoVivienda}</td>
+				</tr>
+
+				<tr>
+					<td colspan="2"><span class="lbl">Teléfono Res.:</span> {!pfTelefono}</td>
+					<td colspan="2"><span class="lbl">Celular:</span> {!pfCelular}</td>
+				</tr>
+
+				<tr>
+					<td colspan="4"><span class="lbl">Dirección de residencia:</span> {!pfDireccion}</td>
+				</tr>
+
+				<tr>
+					<td colspan="4"><span class="lbl">Correo Electrónico:</span> {!pfEmail}</td>
+				</tr>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td
+						class="sec textColor"
+						colspan="6">
+						DATOS DEL SOLICITANTE – APLICA PARA PERSONA JURÍDICA
+					</td>
+				</tr>
+				<tr>
+					<td
+						class="w25"
+						colspan="3">
+						<span class="lbl">Razón Social:</span> {!pjRazonSocial}
+					</td>
+					<td
+						class="w25"
+						colspan="3">
+						<span class="lbl">Nombre comercial:</span> {!pjNombreComercial}
+					</td>
+				</tr>
+				<tr>
+					<td colspan="6"><span class="lbl">RNC:</span> {!pjRnc}</td>
+				</tr>
+
+				<tr>
+					<td
+						class="secS"
+						colspan="6">
+						Socios Principales / Accionistas
+					</td>
+				</tr>
+				<tr class="small center secColor">
+					<th colspan="2">Nombres y Apellidos</th>
+					<th>Identificación</th>
+					<th>No. ID</th>
+					<th>Cargo en la Empresa</th>
+					<th>% Participación en Acciones</th>
+				</tr>
+				<apex:repeat value="{!socios}"
+					var="s">
+					<tr class="small">
+						<td colspan="2"><apex:outputText value="{!s.nombre}" /></td>
+						<td><apex:outputText value="{!s.identificacion}" /></td>
+						<td><apex:outputText value="{!s.numeroId}" /></td>
+						<td><apex:outputText value="{!s.cargo}" /></td>
+						<td class="right"><apex:outputText value="{!s.porcentaje}" /></td>
+					</tr>
+				</apex:repeat>
+				<apex:outputPanel rendered="{!sociosSize == 0}">
+					<tr>
+						<td
+							colspan="5"
+							class="center">
+							N/A
+						</td>
+					</tr>
+				</apex:outputPanel>
+			</table>
+
+			<apex:outputPanel rendered="{!loanApplicantsSize > 0}"
+				layout="none">
+				<table class="box loanApplicantsTable">
+					<colgroup>
+						<col style="width: 12%" />
+						<col style="width: 15%" />
+						<col style="width: 13%" />
+						<col style="width: 13%" />
+						<col style="width: 16%" />
+						<col style="width: 11%" />
+						<col style="width: 20%" />
+					</colgroup>
+					<tr>
+						<td
+							class="sec textColor tableTitle"
+							colspan="7">
+							Co-Deudores y Garantes
+						</td>
+					</tr>
+					<tr class="small center secColor">
+						<th>Tipo de Solicitante</th>
+						<th>Nombres y Apellidos</th>
+						<th>Tipo de Identificación</th>
+						<th>Número de Identificación</th>
+						<th>Direccion</th>
+						<th>Tel&eacute;fono</th>
+						<th>Correo electr&oacute;nico</th>
+					</tr>
+					<apex:repeat value="{!loanApplicants}"
+						var="la">
+						<tr class="small">
+							<td><apex:outputText value="{!la.tipoSolicitante}" /></td>
+							<td><apex:outputText value="{!la.name}" /></td>
+							<td><apex:outputText value="{!la.tipoIdentificacion}" /></td>
+							<td><apex:outputText value="{!la.numIdentificacion}" /></td>
+							<td><apex:outputText value="{!la.direccion}" /></td>
+							<td><apex:outputText value="{!la.telefono}" /></td>
+							<td class="emailCell"><apex:outputText value="{!la.correoElectronico}" /></td>
+						</tr>
+					</apex:repeat>
+				</table>
+			</apex:outputPanel>
+
+			<table class="box">
+				<tr>
+					<td
+						class="sec textColor"
+						colspan="2">
+						DATOS DEL NEGOCIO
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><span class="lbl">Nombre del negocio:</span> <apex:outputText value="{!negocioNombre}" /></td>
+				</tr>
+				<tr>
+					<td><span class="lbl">Tiempo del negocio:</span> {!negocioTiempo}</td>
+					<td><span class="lbl">Situación Legal:</span> {!negocioSituacionLegal}</td>
+				</tr>
+				<tr>
+					<td><span class="lbl">Cargo:</span> {!negocioCargo}</td>
+					<td><span class="lbl">Cantidad de empleados:</span> {!negocioEmpleados}</td>
+				</tr>
+				<tr>
+					<td><span class="lbl">Emplea familiares:</span> {!negocioEmpleaFamilia}</td>
+					<td><span class="lbl">Años de operación / tiempo laborando:</span> {!negocioAniosOperacion}</td>
+				</tr>
+				<tr>
+					<td><span class="lbl">Local del negocio:</span> {!negocioLocal}</td>
+					<td><span class="lbl">Tiempo en el local actual:</span> {!negocioTiempoLocal}</td>
+				</tr>
+				<tr>
+					<td><span class="lbl">¿Se encuentra en el mismo inmueble de residencia?:</span> {!negocioMismaResidencia}</td>
+					<td><span class="lbl">¿Se encuentra en una zona comercial?:</span> {!negocioZonaComercial}</td>
+				</tr>
+				<tr>
+					<td colspan="2"><span class="lbl">Actividad económica:</span> {!negocioActividad}</td>
+				</tr>
+				<tr>
+					<td><span class="lbl">Ingresos Mensuales:</span> {!negocioIngresosMensualesFmt}</td>
+					<td><span class="lbl">Otros Ingresos:</span> {!negocioOtrosIngresos}</td>
+				</tr>
+				<tr rendered="{!IF(negocioOtrosIngresos != 'Si', true, false)}">
+					<td><span class="lbl">Origen de los ingresos:</span> {!negocioOrigenIngresos}</td>
+					<td><span class="lbl">Monto de los ingresos:</span> {!negocioMontoIngresosFmt}</td>
+				</tr>
+				<tr>
+					<td><span class="lbl">Teléfonos:</span> {!negocioTelefono}</td>
+					<td><span class="lbl">Correo electrónico:</span> {!negocioEmail}</td>
+				</tr>
+				<tr>
+					<td colspan="2"><span class="lbl">Dirección del negocio:</span> {!negocioDireccion}</td>
+				</tr>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td
+						class="sec textColor"
+						colspan="4">
+						DATOS DEL CRÉDITO
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4"><span class="lbl">Tipo de solicitud:</span> {!creditoTipoSolicitud}</td>
+				</tr>
+				<tr>
+					<td colspan="4"><span class="lbl">Destino del préstamo:</span> {!creditoDestino}</td>
+				</tr>
+				<tr>
+					<td><span class="lbl">Monto:</span> {!creditoMontoFmt}</td>
+					<td><span class="lbl">Plazo (meses):</span> {!creditoPlazoMeses}</td>
+					<td><span class="lbl">Tasa de interés:</span> {!tasaInteres}</td>
+					<td><span class="lbl">Moneda:</span> {!creditoMoneda}</td>
+				</tr>
+				<tr>
+					<td><span class="lbl">Clasificación de Riesgo:</span> {!creditoClasificacionRiesgo}</td>
+					<td colspan="3"><span class="lbl">Grupo de Empresa / Grupo Económico:</span> {!creditoGrupo}</td>
+				</tr>
+				<tr>
+					<td colspan="4"><span class="lbl">Descripción del Negocio:</span> {!creditoDescripcionNegocio}</td>
+				</tr>
+				<tr>
+					<td colspan="4"><span class="lbl">Condiciones de la Facilidad:</span> {!creditoCondiciones}</td>
+				</tr>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td
+						class="sec textColor"
+						colspan="2">
+						DATOS DE LA GARANTÍA (SI APLICA)
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><span class="lbl">Tipo de Garantía:</span> {!garantiaTipo}</td>
+				</tr>
+				<tr>
+					<td><span class="lbl">Valor de la Garantía:</span> {!garantiaValorFmt}</td>
+					<td><span class="lbl">% de Admisibilidad:</span> {!garantiaPorcAdmis}</td>
+				</tr>
+				<tr>
+					<td colspan="2"><span class="lbl">Descripción de la Garantía:</span> {!garantiaDescripcion}</td>
+				</tr>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td
+						class="sec textColor"
+						colspan="11">
+						DESCRIPCIÓN DE FACILIDADES DE CRÉDITO EN BANCO VIMENCA
+					</td>
+				</tr>
+				<tr class="small center">
+					<th style="width: 5%">No.</th>
+					<th style="width: 9%">Fecha Apertura</th>
+					<th style="width: 12%">Tipo de Facilidad</th>
+					<th style="width: 7%">Plazo (meses)</th>
+					<th style="width: 6%">Moneda</th>
+					<th style="width: 10%">Deuda Actual</th>
+					<th style="width: 10%">Límite Autorizado</th>
+					<th style="width: 10%">Aumento Solicitado</th>
+					<th style="width: 10%">Posible Compromiso</th>
+					<th style="width: 10%">Compromiso Mensual</th>
+					<th style="width: 11%">Tasa</th>
+				</tr>
+				<apex:repeat value="{!facilidades}"
+					var="f">
+					<tr class="small">
+						<td class="center"><apex:outputText value="{!f.numero}" /></td>
+						<td class="center"><apex:outputText value="{!f.fechaAperturaFmt}" /></td>
+						<td><apex:outputText value="{!f.tipoFacilidad}" /></td>
+						<td class="center"><apex:outputText value="{!f.plazoMeses}" /></td>
+						<td class="center"><apex:outputText value="{!f.moneda}" /></td>
+						<td class="right"><apex:outputText value="{!f.deudaActualFmt}" /></td>
+						<td class="right"><apex:outputText value="{!f.limiteAutorizadoFmt}" /></td>
+						<td class="right"><apex:outputText value="{!f.aumentoSolicitadoFmt}" /></td>
+						<td class="right"><apex:outputText value="{!f.posibleCompromisoFmt}" /></td>
+						<td class="right"><apex:outputText value="{!f.compromisoMensualFmt}" /></td>
+						<td class="center"><apex:outputText value="{!f.tasa}" /></td>
+					</tr>
+				</apex:repeat>
+				<apex:outputPanel rendered="{!facilidadesSize == 0}">
+					<tr>
+						<td
+							colspan="11"
+							class="center">
+							N/A
+						</td>
+					</tr>
+				</apex:outputPanel>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td
+						class="sec textColor"
+						colspan="2">
+						PROPOSITO Y USO DE LOS FONDOS
+					</td>
+				</tr>
+				<tr class="small center">
+					<th style="width: 20%">No. Facilidades</th>
+					<th style="width: 80%">Propósito</th>
+				</tr>
+				<apex:repeat value="{!propositos}"
+					var="p">
+					<tr class="small">
+						<td class="center"><apex:outputText value="{!p.numeroFacilidades}" /></td>
+						<td><apex:outputText value="{!p.proposito}" /></td>
+					</tr>
+				</apex:repeat>
+				<apex:outputPanel rendered="{!propositosSize == 0}">
+					<tr>
+						<td
+							colspan="2"
+							class="center">
+							N/A
+						</td>
+					</tr>
+				</apex:outputPanel>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td
+						class="sec textColor"
+						colspan="4">
+						GARANTIAS EXISTENTES / OFRECIDAS
+					</td>
+				</tr>
+				<tr class="small center">
+					<th style="width: 15%">No. Facilidades</th>
+					<th style="width: 55%">Descripción de la Garantía</th>
+					<th style="width: 15%">Valor</th>
+					<th style="width: 15%">% Admisibilidad</th>
+				</tr>
+				<apex:repeat value="{!garantiasLista}"
+					var="g">
+					<tr class="small">
+						<td class="center"><apex:outputText value="{!g.numeroFacilidades}" /></td>
+						<td><apex:outputText value="{!g.descripcion}" /></td>
+						<td class="right"><apex:outputText value="{!g.valorFmt}" /></td>
+						<td class="center"><apex:outputText value="{!g.porcAdmis}" /></td>
+					</tr>
+				</apex:repeat>
+				<apex:outputPanel rendered="{!garantiasListaSize == 0}">
+					<tr>
+						<td
+							colspan="4"
+							class="center">
+							N/A
+						</td>
+					</tr>
+				</apex:outputPanel>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td
+						class="sec textColor"
+						colspan="11">
+						RELACIÓN DE NEGOCIOS COLATERALES
+					</td>
+				</tr>
+				<tr class="small center">
+					<th style="width: 13%">Tipo de Producto</th>
+					<th style="width: 7%">No.</th>
+					<th style="width: 10%">Fecha de Apertura</th>
+					<th style="width: 10%">Balance Promedio</th>
+					<th style="width: 10%">Balance Actual</th>
+					<th style="width: 9%">Flujo Prom. Dep.</th>
+					<th style="width: 10%">Límite de Crédito</th>
+					<th style="width: 10%">Monto Apertura</th>
+					<th style="width: 9%">Monto Mínimo</th>
+					<th style="width: 6%">Periodo</th>
+					<th style="width: 6%">Tasa Pasiva</th>
+				</tr>
+				<apex:repeat value="{!relaciones}"
+					var="r">
+					<tr class="small">
+						<td><apex:outputText value="{!r.tipoProducto}" /></td>
+						<td class="center"><apex:outputText value="{!r.numero}" /></td>
+						<td class="center"><apex:outputText value="{!r.fechaAperturaFmt}" /></td>
+						<td class="right"><apex:outputText value="{!r.balancePromedioFmt}" /></td>
+						<td class="right"><apex:outputText value="{!r.balanceActualFmt}" /></td>
+						<td class="center"><apex:outputText value="{!r.flujoProm}" /></td>
+						<td class="right"><apex:outputText value="{!r.limiteCreditoFmt}" /></td>
+						<td class="right"><apex:outputText value="{!r.montoAperturaFmt}" /></td>
+						<td class="right"><apex:outputText value="{!r.montoMinimoFmt}" /></td>
+						<td class="center"><apex:outputText value="{!r.periodo}" /></td>
+						<td class="center"><apex:outputText value="{!r.tasaPasiva}" /></td>
+					</tr>
+				</apex:repeat>
+				<apex:outputPanel rendered="{!relacionesSize == 0}">
+					<tr>
+						<td
+							colspan="11"
+							class="center">
+							N/A
+						</td>
+					</tr>
+				</apex:outputPanel>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td
+						class="sec textColor"
+						colspan="4">
+						REFERENCIAS
+					</td>
+				</tr>
+				<tr class="small center">
+					<th style="width: 70%">Nombre / Entidad</th>
+					<th style="width: 30%">Tipo de Producto</th>
+					<th style="width: 30%">Parentesco</th>
+					<th style="width: 30%">Número de Teléfono</th>
+				</tr>
+				<apex:repeat value="{!referenciasParaTabla}"
+					var="rr">
+					<tr class="small">
+						<td><apex:outputText value="{!rr.nombre}" /></td>
+						<td class="center"><apex:outputText value="{!rr.tipoProducto}" /></td>
+						<td class="center"><apex:outputText value="{!rr.parentesco}" /></td>
+						<td class="center"><apex:outputText value="{!rr.telefono}" /></td>
+					</tr>
+				</apex:repeat>
+				<apex:outputPanel rendered="{!referenciasParaTablaSize == 0}">
+					<tr>
+						<td
+							colspan="4"
+							class="center">
+							N/A
+						</td>
+					</tr>
+				</apex:outputPanel>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td
+						class="sec textColor"
+						colspan="3">
+						PRINCIPALES CLIENTES / PROVEEDORES
+					</td>
+				</tr>
+				<tr class="small center">
+					<th style="width: 45%">Nombre</th>
+					<th style="width: 35%">Términos de Negociación</th>
+					<th style="width: 20%">No. Telefónico</th>
+				</tr>
+				<apex:repeat value="{!clientesProveedores}"
+					var="cp">
+					<tr class="small">
+						<td><apex:outputText value="{!cp.nombre}" /></td>
+						<td><apex:outputText value="{!cp.terminos}" /></td>
+						<td class="center"><apex:outputText value="{!cp.telefono}" /></td>
+					</tr>
+				</apex:repeat>
+				<apex:outputPanel rendered="{!clientesProveedoresSize == 0}">
+					<tr>
+						<td
+							colspan="3"
+							class="center">
+							N/A
+						</td>
+					</tr>
+				</apex:outputPanel>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td class="sec textColor">HISTORIA DEL CLIENTE</td>
+				</tr>
+				<tr>
+					<td><apex:outputText value="{!historiaCliente}" /></td>
+				</tr>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td class="sec textColor">OPERACIONES – PERSPECTIVAS</td>
+				</tr>
+				<tr>
+					<td><apex:outputText value="{!operacionesPerspectiva}" /></td>
+				</tr>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td class="sec textColor">FORTALEZAS</td>
+				</tr>
+				<apex:repeat value="{!listFortalezas}"
+					var="lf">
+					<tr class="small">
+						<td><apex:outputText value="{!lf}" /></td>
+					</tr>
+				</apex:repeat>
+				<apex:outputPanel rendered="{!listFortalezasSize == 0}">
+					<tr>
+						<td class="center">N/A</td>
+					</tr>
+				</apex:outputPanel>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td class="sec textColor">DEBILIDADES</td>
+				</tr>
+				<apex:repeat value="{!listDebilidades}"
+					var="ld">
+					<tr class="small">
+						<td><apex:outputText value="{!ld}" /></td>
+					</tr>
+				</apex:repeat>
+				<apex:outputPanel rendered="{!listDebilidadesSize == 0}">
+					<tr>
+						<td class="center">N/A</td>
+					</tr>
+				</apex:outputPanel>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td class="sec textColor">RECOMENDACIONES</td>
+				</tr>
+				<tr>
+					<td class="left">
+						<apex:outputText value="{!recomendaciones}" />
+					</td>
+				</tr>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td
+						class="sec textColor"
+						colspan="2">
+						PARA USO EXCLUSIVO DE LA UNIDAD DE NEGOCIOS
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<span class="lbl">Ejecutivo / Gerente de Negocios:</span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="lbl">Cargo:</span>
+					</td>
+					<td>
+						<span class="lbl">Código del Oficial:</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="w50 center">
+						<br /><br /><br /> __________________________<br /> Ejecutivo / Gerente de Negocios<br />
+						Firma
+					</td>
+					<td class="w50 center">
+						<br /><br /><br /> __________________________<br /> Vicepresidente / Director de Negocios<br />
+						Firma
+					</td>
+				</tr>
+			</table>
+
+			<div class="textColor">
+				ESTADOS FINANCIEROS
+				<br />
+				(Clientes con deuda inferior a RD$ 5MM en el sistema financiero)
+			</div>
+
+			<table class="box">
+				<tr>
+					<td
+						class="sec small textColor"
+						colspan="2">
+						COMPARATIVO INGRESOS MARGEN DE VENTAS
+					</td>
+				</tr>
+
+				<tr class="small center">
+					<th style="width: 18%"></th>
+					<th style="width: 19%">Total ingresos recibidos por día</th>
+				</tr>
+
+				<tr class="small">
+					<td class="lbl">Día bueno</td>
+					<td class="right"><apex:outputText value="{!totalDiasBuenosFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Día regular</td>
+					<td class="right"><apex:outputText value="{!totalDiasRegularesFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Día malo</td>
+					<td class="right"><apex:outputText value="{!totalDiasMalosFmt}" /></td>
+				</tr>
+				<tr class="small lbl secColor2">
+					<td class="lbl right">Total</td>
+					<td class="right"><apex:outputText value="{!totalSemanalFmt}" /></td>
+				</tr>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td
+						class="sec textColor"
+						colspan="4">
+						ESTADO DE SITUACIÓN
+					</td>
+				</tr>
+				<tr class="small center">
+					<th colspan="2">ACTIVOS</th>
+					<th colspan="2">PASIVOS Y CAPITAL</th>
+				</tr>
+				<tr class="small">
+					<td class="w50">Efectivo en caja y bancos</td>
+					<td class="right"><apex:outputText value="{!actEfectivoFmt}" /></td>
+					<td class="w50">Docs. Por pagar Corto Plazo</td>
+					<td class="right"><apex:outputText value="{!pasDocsFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td>Cuentas por cobrar clientes</td>
+					<td class="right"><apex:outputText value="{!actCxcFmt}" /></td>
+					<td>Otras deudas corto plazo</td>
+					<td class="right"><apex:outputText value="{!pasOtrasDeudasCPFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td>Inventario</td>
+					<td class="right"><apex:outputText value="{!actInventarioFmt}" /></td>
+					<td>Cuentas por pagar suplidores</td>
+					<td class="right"><apex:outputText value="{!pasCxpFmt}" /></td>
+				</tr>
+				<tr class="small lbl secColor2">
+					<td>Total activos corrientes</td>
+					<td class="right"><apex:outputText value="{!actTotalCorrientesFmt}" /></td>
+					<td>Total pasivos corto plazo</td>
+					<td class="right"><apex:outputText value="{!pasTotalCPFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td>Terrenos</td>
+					<td class="right"><apex:outputText value="{!actTerrenosFmt}" /></td>
+					<td>Otras cuentas por pagar</td>
+					<td class="right"><apex:outputText value="{!pasOtrasCxpFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td>Edificaciones</td>
+					<td class="right"><apex:outputText value="{!actEdificacionesFmt}" /></td>
+					<td>Otros pasivos</td>
+					<td class="right"><apex:outputText value="{!pasOtrosFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td>Maquinarias y equipos</td>
+					<td class="right"><apex:outputText value="{!actMaquinariasFmt}" /></td>
+					<td class="lbl secColor2">Total pasivos</td>
+					<td class="right lbl secColor2"><apex:outputText value="{!pasTotalFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td>Muebles y enseres</td>
+					<td class="right"><apex:outputText value="{!actMueblesFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td>Vehículos</td>
+					<td class="right"><apex:outputText value="{!actVehiculosFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td>Otros activos</td>
+					<td class="right"><apex:outputText value="{!actOtrosActivosFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td>Total Activos Fijos</td>
+					<td class="right"><apex:outputText value="{!actTotalFijosFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td>Otros activos</td>
+					<td class="right"><apex:outputText value="{!actOtrosFmt}" /></td>
+					<td>Capital</td>
+					<td class="right"><apex:outputText value="{!pasCapitalFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td class="lbl secColor2">Total activos</td>
+					<td class="right lbl secColor2"><apex:outputText value="{!actTotalFmt}" /></td>
+					<td class="lbl secColor2">Total pasivos y capital</td>
+					<td class="right lbl secColor2"><apex:outputText value="{!pasTotalPasCapFmt}" /></td>
+				</tr>
+			</table>
+
+			<table class="box">
+				<tr>
+					<td
+						class="sec textColor"
+						colspan="2">
+						ESTADO DE GANANCIAS Y PERDIDAS
+					</td>
+				</tr>
+
+				<tr class="small">
+					<td
+						class="w60 lbl"
+						colspan="2">
+						GASTOS GENERALES Y ADMINISTRATIVOS
+					</td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Nómina</td>
+					<td class="left"><apex:outputText value="{!gpNominaFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Alquiler</td>
+					<td class="left"><apex:outputText value="{!gpAlquilerGeneralesFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Servicios básicos</td>
+					<td class="left"><apex:outputText value="{!gpServiciosBasicosGeneralesFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Combustible</td>
+					<td class="left"><apex:outputText value="{!gpCombustibleFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Reparaciones</td>
+					<td class="left"><apex:outputText value="{!gpReparacionesFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Seguros</td>
+					<td class="left"><apex:outputText value="{!gpSegurosGeneralesFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Otros</td>
+					<td class="left"><apex:outputText value="{!gpOtrosGeneralesFmt}" /></td>
+				</tr>
+				<tr class="small secColor2 lbl">
+					<td class="lbl">Total Gastos Grales y Adm.</td>
+					<td class="left lbl"><apex:outputText value="{!gpTotalGGAFmt}" /></td>
+				</tr>
+
+				<tr class="small">
+					<td class="w60 lbl">GASTOS PERSONALES Y FAMILIARES</td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Alquiler</td>
+					<td class="left"><apex:outputText value="{!gpAlquilerPersonalesFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Servicios básicos</td>
+					<td class="left"><apex:outputText value="{!gpServiciosBasicosPersonalesFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Alimentos</td>
+					<td class="left"><apex:outputText value="{!gpAlimentosFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Educación</td>
+					<td class="left"><apex:outputText value="{!gpEducacionFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Transporte</td>
+					<td class="left"><apex:outputText value="{!gpTransporteFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Seguros</td>
+					<td class="left"><apex:outputText value="{!gpSegurosPersonalesFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Otros</td>
+					<td class="left"><apex:outputText value="{!gpOtrosPersonalesFmt}" /></td>
+				</tr>
+				<tr class="small secColor2 lbl">
+					<td class="lbl">Total gastos personales</td>
+					<td class="left lbl"><apex:outputText value="{!gpTotalPersonalesFmt}" /></td>
+				</tr>
+
+				<tr class="small">
+					<td class="w60 lbl">GASTOS FINANCIEROS</td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Cuotas</td>
+					<td class="left"><apex:outputText value="{!gpCuotasFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td class="lbl">Otros</td>
+					<td class="left"><apex:outputText value="{!gpOtrosFinancierosFmt}" /></td>
+				</tr>
+				<tr class="small secColor2 lbl">
+					<td class="lbl">Total gastos financieros</td>
+					<td class="left lbl"><apex:outputText value="{!gpTotalFinancierosFmt}" /></td>
+				</tr>
+				<tr class="small">
+					<td
+						class="left"
+						colspan="2">
+						Comentarios:<apex:outputText value="{!comentarios}" />
+					</td>
+				</tr>
+			</table>
+
+			<div class="small mt8">
+				Certifico que todas las informaciones suministradas arriba son correctas y autorizo a Banco Vimenca a validarlos y a consultar mi
+				historial crediticio en las bases de datos de los burós de crédito, así como a suministrar a los centros de información de crédito los
+				datos derivados de la experiencia del manejo de mi crédito.
+			</div>
+
+			<table class="noBorder mt8">
+				<tr>
+					<td class="w50 center">
+						<br />
+						<br />
+						<br />
+						__________________________
+						<br />
+						<span style="color: #fff; font-family: Arial, sans-serif; font-size: 4pt; white-space: nowrap"
+							>[[!FIRMASOLICITANTE:signer1:signature:size(width=120,height=40)]]</span
+						>
+						<br />
+						Solicitante
+						<br />
+						Firma
+						<br />
+					</td>
+				</tr>
+			</table>
+
+			<apex:outputPanel rendered="{!loanApplicantFirmantesSize > 0}"
+				layout="none">
+				<table class="noBorder mt8">
+					<apex:repeat value="{!loanApplicantFirmantes}"
+						var="la">
+						<tr>
+							<td class="w50 center">
+								<br />
+								<br />
+								<br />
+								__________________________
+								<br />
+								<span style="color: #fff; font-family: Arial, sans-serif; font-size: 4pt; white-space: nowrap"
+									>[[!{!la.firmaElementId}:signer1:signature:size(width=120,height=40)]]</span
+								>
+								<br />
+								<apex:outputText value="{!la.name}" />
+								<br />
+								<apex:outputText value="{!la.tipoSolicitante}" />
+								<br />
+								Firma
+							</td>
+						</tr>
+					</apex:repeat>
+					</table>
+				</apex:outputPanel>
+
+				<table class="noBorder mt8">
+					<tr>
+						<td class="w25">&nbsp;</td>
+						<td class="w50 center lbl">
+							<br />
+							<br />
+							<br />
+							__________________________
+							<br />
+							<span style="color: #fff; font-family: Arial, sans-serif; font-size: 4pt; white-space: nowrap"
+								>[[!FIRMAOFICIALNEGOCIO:signer1:signature:size(width=160,height=60)]]</span
+							>
+							<br />
+							<apex:outputText value="{!oficialNegociosFirma}" />
+							<br />
+							OFICIAL DE NEGOCIOS/SUBGERENTE DE NEGOCIOS/GERENTE DE NEGOCIOS
+						</td>
+						<td class="w25">&nbsp;</td>
+					</tr>
+				</table>
+
+				<table class="noBorder mt8 small">
+					<tr>
+						<td class="w60">Código: PC-BP-FOR-003</td>
+					<td class="w40 right">Versión: 01–11/03/2025</td>
+				</tr>
+			</table>
+		</body>
+	</html>
+</apex:page>

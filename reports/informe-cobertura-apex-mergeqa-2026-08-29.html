@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Informe de mejora y validación de cobertura Apex - MergeQA</title>
+  <style>
+    @page { margin: 2cm; }
+    body {
+      color: #172033;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.42;
+      margin: 32px auto;
+      max-width: 1000px;
+    }
+    h1 { color: #143b66; font-size: 24pt; margin: 0 0 8px; }
+    h2 {
+      border-bottom: 2px solid #d8e3ef;
+      color: #143b66;
+      font-size: 16pt;
+      margin-top: 30px;
+      padding-bottom: 5px;
+    }
+    h3 { color: #24588b; font-size: 12.5pt; margin: 22px 0 5px; }
+    p { margin: 6px 0 10px; }
+    ul { margin-top: 5px; }
+    li { margin-bottom: 4px; }
+    table { border-collapse: collapse; margin: 12px 0 20px; width: 100%; }
+    th, td { border: 1px solid #bdcad8; padding: 7px 8px; text-align: left; vertical-align: top; }
+    th { background: #143b66; color: white; font-weight: bold; }
+    tbody tr:nth-child(even) { background: #f4f7fa; }
+    .cover { color: #176b3a; font-weight: bold; white-space: nowrap; }
+    .meta { background: #edf4fa; border-left: 5px solid #24588b; padding: 12px 16px; }
+    .success { background: #eaf7ef; border-left: 5px solid #23854a; padding: 12px 16px; }
+    .warning { background: #fff7df; border-left: 5px solid #d39b16; padding: 12px 16px; }
+    .small { color: #526171; font-size: 9pt; }
+    .code { color: #203951; font-family: Menlo, Consolas, monospace; font-size: 9pt; }
+    .page-break { page-break-before: always; }
+  </style>
+</head>
+<body>
+  <h1>Informe técnico de mejora y validación de cobertura Apex</h1>
+  <p><strong>Ambiente:</strong> MergeQA (sandbox <span class="code">vimenca--mergeqa</span>)</p>
+  <p><strong>Fecha de validación:</strong> 29 de agosto de 2026</p>
+  <p><strong>Alcance:</strong> 14 clases Apex indicadas para el tercer simulacro de migración FSC</p>
+
+  <div class="success">
+    <strong>Resultado final:</strong> las 14 clases objetivo tienen cobertura individual igual o superior a 75%. La repetición completa ejecutó <strong>124 pruebas: 124 aprobadas, 0 fallidas y 0 omitidas</strong>.
+  </div>
+
+  <h2>1. Resumen ejecutivo</h2>
+  <ul>
+    <li>Se leyó el documento <span class="code">clases-por-corregir-para-tercer-simulacro-migracion-fsc.pdf</span> y se utilizó como guía técnica.</li>
+    <li>Antes de editar se hizo retrieve desde MergeQA de las 14 clases productivas y de sus tests relacionados.</li>
+    <li>Los cambios se concentraron en datos de prueba, mocks, caminos defensivos y helpers accesibles desde tests.</li>
+    <li>No se alteró la lógica funcional de ninguna de las 14 clases productivas objetivo.</li>
+    <li>Se hizo una única adaptación de soporte en <span class="code">VFS_FirmarDocumentoUtility</span>, exclusivamente dentro de <span class="code">Test.isRunningTest()</span>, sin efecto en ejecuciones reales.</li>
+    <li>La validación final se realizó con un único job para evitar cadenas de consultas innecesarias o interferencias entre jobs asíncronos.</li>
+  </ul>
+
+  <div class="meta">
+    <strong>Evidencia final</strong><br>
+    Test Run ID: <span class="code">707VC000021fln2</span><br>
+    Resultado: Passed<br>
+    Pruebas: 124 aprobadas / 0 fallidas / 0 omitidas<br>
+    Tiempo de ejecución Apex: 168.962 segundos<br>
+    Org ID: <span class="code">00DVC000009qkJJ2AY</span>
+  </div>
+
+  <h2>2. Cobertura comprobada</h2>
+  <p>La columna “Referencia PDF” corresponde al valor histórico incluido en el documento recibido. No debe interpretarse como una medición tomada inmediatamente antes de cada cambio: algunas clases, como <span class="code">VFS_ApCuentasEnvelope</span> e <span class="code">INT014_FSC</span>, ya estaban por encima de 75% en la versión recuperada de MergeQA y no requirieron edición.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Clase productiva</th>
+        <th>Referencia PDF</th>
+        <th>Líneas cubiertas</th>
+        <th>Cobertura final</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>VFS_ApCuentasEnvelope</td><td>6.90%</td><td>209 / 261</td><td class="cover">80.07%</td></tr>
+      <tr><td>LeadAutoQualificationQueue</td><td>46.67%</td><td>107 / 134</td><td class="cover">79.85%</td></tr>
+      <tr><td>VFS_SubirComprobanteCasoEsignQueueable</td><td>56.00%</td><td>24 / 25</td><td class="cover">96.00%</td></tr>
+      <tr><td>INT001_VAER_Controller_FSC</td><td>61.98%</td><td>93 / 119</td><td class="cover">78.15%</td></tr>
+      <tr><td>INT014_FSC</td><td>62.07%</td><td>156 / 203</td><td class="cover">76.84%</td></tr>
+      <tr><td>VFS_ComprobanteCasoAction</td><td>62.50%</td><td>32 / 32</td><td class="cover">100.00%</td></tr>
+      <tr><td>LeadDocumentsController</td><td>63.80%</td><td>412 / 547</td><td class="cover">75.31%</td></tr>
+      <tr><td>VFS_nKYCFisica_Controller</td><td>63.84%</td><td>299 / 365</td><td class="cover">81.91%</td></tr>
+      <tr><td>FSC_NewCaseComponent_Controller</td><td>64.42%</td><td>157 / 208</td><td class="cover">75.48%</td></tr>
+      <tr><td>VFS_nAperturaCuentasController</td><td>65.38%</td><td>328 / 413</td><td class="cover">79.41%</td></tr>
+      <tr><td>INT001_LEAD_VAER_Controller_FSC</td><td>67.74%</td><td>126 / 155</td><td class="cover">81.29%</td></tr>
+      <tr><td>VFS_ResumenConvenioUnicoController</td><td>68.82%</td><td>84 / 93</td><td class="cover">90.32%</td></tr>
+      <tr><td>DocumentacionLegalTriggerHandler</td><td>68.94%</td><td>121 / 161</td><td class="cover">75.15%</td></tr>
+      <tr><td>LeadConversionQueue</td><td>71.95%</td><td>616 / 820</td><td class="cover">75.12%</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. Estrategia aplicada</h2>
+  <ol>
+    <li><strong>Retrieve preventivo:</strong> se recuperó la versión vigente de cada clase y test antes de modificar, evitando sobrescribir cambios de MergeQA con versiones antiguas.</li>
+    <li><strong>Diagnóstico por clase:</strong> se ejecutaron tests de forma agrupada y controlada, revisando fallos y líneas no cubiertas.</li>
+    <li><strong>Casos simples y efectivos:</strong> se priorizaron retornos tempranos, validaciones, caminos de error y helpers <span class="code">@TestVisible</span>.</li>
+    <li><strong>Control de asíncronos:</strong> se evitó crear cadenas reales de queueables. Cuando fue necesario cubrir una continuación, se utilizó un ID inexistente controlado para que la cadena terminara inmediatamente.</li>
+    <li><strong>Despliegues incrementales:</strong> se desplegaron solo los tests afectados y la adaptación de soporte requerida.</li>
+    <li><strong>Validación consolidada:</strong> al finalizar se repitieron las 13 clases test del alcance en un único job y se consultó la cobertura agregada de las 14 clases productivas.</li>
+  </ol>
+
+  <h2 class="page-break">4. Detalle de cambios por clase</h2>
+
+  <h3>4.1 VFS_ApCuentasEnvelope — 80.07%</h3>
+  <p><strong>Test principal:</strong> <span class="code">VFS_ApCuentasEnvelopeTest</span>.</p>
+  <p>Se recuperó y ejecutó la última versión de la prueba. Ya cubría personas físicas y jurídicas, firmantes autorizados, múltiples firmantes, presencia o ausencia de gerente y obtención del correo desde vías de contacto. La medición de MergeQA fue 209/261 líneas, por lo que no se agregaron casos ni se tocó la clase productiva.</p>
+
+  <h3>4.2 LeadAutoQualificationQueue — 79.85%</h3>
+  <p><strong>Test modificado:</strong> <span class="code">LeadAutoQualificationQueueTest</span>.</p>
+  <ul>
+    <li>Se agregó un mock HTTP configurable para respuestas de padrón y RNC.</li>
+    <li>Se probaron candidatos elegibles y descartados por tipo de identificación.</li>
+    <li>Se cubrieron las etapas de padrón electoral, PEP, pasaporte y RNC.</li>
+    <li>Se cubrió el retorno con lista vacía.</li>
+    <li>Para probar la continuación del queueable sin producir recursión asíncrona, se usó un segundo Lead ID inexistente. Así el job termina de forma controlada y no crea una cadena real.</li>
+  </ul>
+  <p>No se modificó <span class="code">LeadAutoQualificationQueue</span>.</p>
+
+  <h3>4.3 VFS_SubirComprobanteCasoEsignQueueable — 96.00%</h3>
+  <p><strong>Tests relacionados:</strong> <span class="code">VFS_EsignUploadDocumentTest</span> y <span class="code">VFS_FirmarDocumentoUtilityTest</span>.</p>
+  <ul>
+    <li>Se amplió el camino exitoso para comprobar que el <span class="code">ContentVersion</span> recibe el Envelope ID y la marca de envío.</li>
+    <li>Se añadió un mock con <span class="code">FileId</span> vacío para cubrir el camino de fallo sin actualizar el documento.</li>
+    <li>El simulador existente de <span class="code">VFS_FirmarDocumentoUtility</span> indicaba éxito durante los tests, pero no devolvía Envelope ID. Se añadió <span class="code">result.envelopeId = 'test-envelope-id'</span> dentro de <span class="code">Test.isRunningTest()</span>.</li>
+  </ul>
+  <p>La adaptación anterior no cambia el comportamiento de producción: fuera de tests se mantiene el envío real y su respuesta real.</p>
+
+  <h3>4.4 INT001_VAER_Controller_FSC — 78.15%</h3>
+  <p><strong>Test modificado:</strong> <span class="code">INT001VAERFSCTest</span>.</p>
+  <ul>
+    <li>Se agregó un mock de respuesta PEP.</li>
+    <li>Se cubrió una cédula fuera del estado CREADO.</li>
+    <li>Se cubrieron candidato PEP, identificación ausente y ejecución del método invocable.</li>
+    <li>Se añadió la respuesta de padrón “documento no registrado”.</li>
+    <li>Las aserciones se centraron en resultados contractuales, evitando depender de valores secundarios que pueden cambiar por automatizaciones de la org.</li>
+  </ul>
+  <p>No se modificó <span class="code">INT001_VAER_Controller_FSC</span>.</p>
+
+  <h3>4.5 INT014_FSC — 76.84%</h3>
+  <p><strong>Test principal:</strong> <span class="code">INT014_FSC_Test</span>.</p>
+  <p>Se hizo retrieve y repetición del test vigente. La versión recuperada ya alcanzaba 156/203 líneas y pasaba correctamente, por lo que no se introdujeron cambios innecesarios.</p>
+
+  <h3>4.6 VFS_ComprobanteCasoAction — 100.00%</h3>
+  <p><strong>Test modificado:</strong> <span class="code">VFSNewEnvelopeTest</span>.</p>
+  <ul>
+    <li>Se ajustaron cantidades esperadas para reflejar la versión actual recuperada de MergeQA.</li>
+    <li>Se agregó un caso cuyo tipo requiere transacciones y se verificó el rechazo cuando no existen.</li>
+    <li>Se cubrió la validación de parámetros nulos de <span class="code">registrarEnvioFirma</span>.</li>
+    <li>Se creó un <span class="code">ContentVersion</span> y se verificaron Envelope ID, fecha de envío y banderas de firma.</li>
+  </ul>
+  <p>No se modificó <span class="code">VFS_ComprobanteCasoAction</span>.</p>
+
+  <h3>4.7 LeadDocumentsController — 75.31%</h3>
+  <p><strong>Test modificado:</strong> <span class="code">LeadDocumentsControllerTest</span>.</p>
+  <ul>
+    <li>Se cubrieron wrappers y estados vacíos.</li>
+    <li>Se validaron búsquedas cortas y parámetros nulos.</li>
+    <li>Se ejercitó el ciclo crear, actualizar, reemplazar archivo y aprobar un documento legal.</li>
+    <li>Se verificaron las filas devueltas por <span class="code">getDocuments</span> y los archivos vinculados.</li>
+    <li>Se ejecutó la evaluación de documentos requeridos sin usar una aserción frágil dependiente del catálogo configurado.</li>
+  </ul>
+  <p>No se modificó <span class="code">LeadDocumentsController</span>.</p>
+
+  <h3>4.8 VFS_nKYCFisica_Controller — 81.91%</h3>
+  <p><strong>Test modificado:</strong> <span class="code">VFSNewControllerTest</span>.</p>
+  <ul>
+    <li>Se enriquecieron los datos FSC con cónyuge, relaciones, direcciones, teléfonos, correo, empleos, información financiera y productos.</li>
+    <li>Se agregó el mock necesario para automatizaciones disparadas al insertar cuentas.</li>
+    <li>Se validó la carga de residencia, dirección laboral, historial, cónyuge y teléfono de EE. UU.</li>
+    <li>Se reemplazó el tipo antiguo <span class="code">Direccion__c</span> por <span class="code">ContactPointAddress</span>, coherente con la versión FSC actual.</li>
+  </ul>
+  <p>No se modificó <span class="code">VFS_nKYCFisica_Controller</span>.</p>
+
+  <h3>4.9 FSC_NewCaseComponent_Controller — 75.48%</h3>
+  <p><strong>Test modificado:</strong> <span class="code">AuxiliaryControllersTest</span>.</p>
+  <ul>
+    <li>Se crearon candidatos persona natural y jurídica.</li>
+    <li>Se verificó la reutilización de un candidato existente.</li>
+    <li>Se cubrieron correo principal, cuenta financiera, búsquedas básicas de cuenta y familiares vacíos.</li>
+    <li>Se ejercitaron formatos de oficina y errores controlados de campo o record type inexistente.</li>
+  </ul>
+  <p>No se modificó <span class="code">FSC_NewCaseComponent_Controller</span>.</p>
+
+  <h3>4.10 VFS_nAperturaCuentasController — 79.41%</h3>
+  <p><strong>Test modificado:</strong> <span class="code">VFSNewControllerTest</span>.</p>
+  <ul>
+    <li>Se actualizaron los datos de dirección al modelo FSC <span class="code">ContactPointAddress</span>.</li>
+    <li>Se añadieron direcciones de titular y cotitular para cubrir getters y formateo.</li>
+    <li>Se completó el mock de firmante autorizado con tipo de poder y tipo de documento.</li>
+    <li>Se corrigió la expectativa del valor normalizado <span class="code">AUTORIZADO</span>.</li>
+  </ul>
+  <p>No se modificó <span class="code">VFS_nAperturaCuentasController</span>.</p>
+
+  <h3>4.11 INT001_LEAD_VAER_Controller_FSC — 81.29%</h3>
+  <p><strong>Test modificado:</strong> <span class="code">INT001_LEAD_VAER_Controller_FSC_Test</span>.</p>
+  <ul>
+    <li>Se conservó la batería existente de padrón, fechas, lugares de nacimiento y PEP.</li>
+    <li>Se añadió específicamente un candidato con pasaporte para ejecutar el envío al flujo de aprobación.</li>
+    <li>Se verificaron el código HTTP y la bandera <span class="code">skipPep</span>.</li>
+  </ul>
+  <p>No se modificó <span class="code">INT001_LEAD_VAER_Controller_FSC</span>.</p>
+
+  <h3>4.12 VFS_ResumenConvenioUnicoController — 90.32%</h3>
+  <p><strong>Test modificado:</strong> <span class="code">VFS_ResumenConvenioUnicoTest</span>.</p>
+  <ul>
+    <li>Se agregaron <span class="code">ContactPointAddress</span> y <span class="code">ContactPointEmail</span> principales.</li>
+    <li>Se comprobó la obtención de dirección, provincia y correo mediante los fallbacks FSC.</li>
+    <li>Se cubrió el formateo seguro con lista nula y dirección parcial.</li>
+  </ul>
+  <p>No se modificó <span class="code">VFS_ResumenConvenioUnicoController</span>.</p>
+
+  <h3>4.13 DocumentacionLegalTriggerHandler — 75.15%</h3>
+  <p><strong>Test modificado:</strong> <span class="code">LowRiskUtilityCoverageTest</span>.</p>
+  <ul>
+    <li>Se reutilizaron los escenarios existentes de documentos y participantes vacíos.</li>
+    <li>Se añadió un documento en memoria asociado a un Lead inexistente para recorrer el camino de error de recálculo.</li>
+    <li>La excepción se capturó y verificó, sin crear datos complejos ni alterar el handler.</li>
+  </ul>
+  <p>No se modificó <span class="code">DocumentacionLegalTriggerHandler</span>.</p>
+
+  <h3>4.14 LeadConversionQueue — 75.12%</h3>
+  <p><strong>Test modificado:</strong> <span class="code">LeadConversionQueue_Test</span>.</p>
+  <ul>
+    <li>Se mantuvieron los escenarios de Lead convertido, no convertido, conjunto nulo, conjunto vacío y ejecución queueable.</li>
+    <li>Se añadieron pruebas directas de mapeo Lead → Account y de campos principales de dirección, teléfono y correo.</li>
+    <li>Se cubrieron normalización y traducción de picklists, helpers de texto, booleanos y detección de teléfonos.</li>
+    <li>Se cubrió la creación en memoria de referencias, teléfonos y correos para Account y Contact.</li>
+    <li>Se ejercitaron retornos seguros cuando faltan describes, valores o metadata.</li>
+    <li>Se probaron tareas pendientes, tareas ya existentes y ausencia de plantilla de Action Plan.</li>
+  </ul>
+  <p>Se eligieron helpers <span class="code">@TestVisible</span> para alcanzar el mínimo sin construir conversiones adicionales de alta complejidad. No se modificó <span class="code">LeadConversionQueue</span>.</p>
+
+  <h2 class="page-break">5. Resultado por clase test ejecutada</h2>
+  <table>
+    <thead><tr><th>Clase test</th><th>Ejecutadas</th><th>Aprobadas</th><th>Fallidas</th></tr></thead>
+    <tbody>
+      <tr><td>INT001VAERFSCTest</td><td>5</td><td>5</td><td>0</td></tr>
+      <tr><td>INT001_LEAD_VAER_Controller_FSC_Test</td><td>23</td><td>23</td><td>0</td></tr>
+      <tr><td>INT014_FSC_Test</td><td>1</td><td>1</td><td>0</td></tr>
+      <tr><td>LeadAutoQualificationQueueTest</td><td>5</td><td>5</td><td>0</td></tr>
+      <tr><td>LeadConversionQueue_Test</td><td>9</td><td>9</td><td>0</td></tr>
+      <tr><td>LeadDocumentsControllerTest</td><td>5</td><td>5</td><td>0</td></tr>
+      <tr><td>LowRiskUtilityCoverageTest</td><td>16</td><td>16</td><td>0</td></tr>
+      <tr><td>VFSNewControllerTest</td><td>9</td><td>9</td><td>0</td></tr>
+      <tr><td>VFSNewEnvelopeTest</td><td>10</td><td>10</td><td>0</td></tr>
+      <tr><td>VFS_ApCuentasEnvelopeTest</td><td>9</td><td>9</td><td>0</td></tr>
+      <tr><td>VFS_EsignUploadDocumentTest</td><td>7</td><td>7</td><td>0</td></tr>
+      <tr><td>VFS_FirmarDocumentoUtilityTest</td><td>23</td><td>23</td><td>0</td></tr>
+      <tr><td>VFS_ResumenConvenioUnicoTest</td><td>2</td><td>2</td><td>0</td></tr>
+      <tr><th>Total</th><th>124</th><th>124</th><th>0</th></tr>
+    </tbody>
+  </table>
+
+  <h2>6. Archivos modificados</h2>
+  <p>Los cambios funcionales de cobertura se encuentran en las siguientes clases test:</p>
+  <ul class="code">
+    <li>AuxiliaryControllersTest.cls</li>
+    <li>INT001VAERFSCTest.cls</li>
+    <li>INT001_LEAD_VAER_Controller_FSC_Test.cls</li>
+    <li>LeadAutoQualificationQueueTest.cls</li>
+    <li>LeadConversionQueue_Test.cls</li>
+    <li>LeadDocumentsControllerTest.cls</li>
+    <li>LowRiskUtilityCoverageTest.cls</li>
+    <li>VFSNewControllerTest.cls</li>
+    <li>VFSNewEnvelopeTest.cls</li>
+    <li>VFS_EsignUploadDocumentTest.cls</li>
+    <li>VFS_ResumenConvenioUnicoTest.cls</li>
+  </ul>
+  <p>Clase de soporte con cambio limitado al contexto de tests:</p>
+  <ul class="code"><li>VFS_FirmarDocumentoUtility.cls</li></ul>
+
+  <h2>7. Trazabilidad</h2>
+  <table>
+    <tbody>
+      <tr><th>Retrieve de clases productivas</th><td class="code">09SVC00000cHkgT2AS</td></tr>
+      <tr><th>Retrieve de clases test</th><td class="code">09SVC00000cHmDd2AK</td></tr>
+      <tr><th>Test Run final repetido</th><td class="code">707VC000021fln2</td></tr>
+      <tr><th>Resultado</th><td>Passed — 124/124</td></tr>
+    </tbody>
+  </table>
+
+  <h2>8. Consideraciones</h2>
+  <div class="warning">
+    <strong>Alcance de la métrica:</strong> el objetivo de este trabajo fue que cada una de las 14 clases indicadas alcanzara al menos 75%, y ese objetivo está cumplido. El indicador org-wide informado por Salesforce en esta ejecución fue 57%; este porcentaje considera todo el código Apex de MergeQA, incluidas clases fuera del alcance. Por lo tanto, este informe no afirma que la cobertura global de toda la org sea 75%.
+  </div>
+  <p>Los porcentajes pueden variar si posteriormente se modifican clases productivas, tests, automatizaciones, metadata o datos de configuración. Para conservar la trazabilidad, cualquier nueva validación debe referenciar el Test Run ID y la fecha.</p>
+
+  <h2>9. Conclusión</h2>
+  <p>La última versión de MergeQA fue recuperada antes de editar, los cambios se limitaron a pruebas y a una simulación activa únicamente durante tests, y las 14 clases objetivo superan el mínimo requerido. La repetición independiente solicitada finalizó sin fallos: 124 pruebas aprobadas y cobertura individual entre 75.12% y 100%.</p>
+
+  <p class="small">Informe generado a partir de la ejecución y consultas realizadas directamente contra MergeQA el 29/08/2026.</p>
+</body>
+</html>

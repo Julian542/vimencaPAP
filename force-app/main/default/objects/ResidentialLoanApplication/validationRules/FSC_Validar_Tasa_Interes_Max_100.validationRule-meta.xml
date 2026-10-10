@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Validar_Tasa_Interes_Max_100</fullName>
+    <active>true</active>
+    <description>Los campos FSC_TasaInteres__c y FSC_TasaInteresAprobada__c no deben superar el 100%</description>
+    <errorConditionFormula>OR(
+    FSC_TasaInteres__c &gt; 1,
+    FSC_TasaInteresAprobada__c &gt; 1
+)</errorConditionFormula>
+    <errorMessage>La tasa de interés no puede superar el 100%.</errorMessage>
+</ValidationRule>

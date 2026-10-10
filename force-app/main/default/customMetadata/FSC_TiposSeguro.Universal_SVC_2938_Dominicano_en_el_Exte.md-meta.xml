@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Universal SVC-2938 Dominicano en el Exte</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_AplicaHipotecario__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>FSC_AplicaVehiculo__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FSC_Base_Calculo_Prima__c</field>
+        <value xsi:type="xsd:string">MONTO_SOLICITADO</value>
+    </values>
+    <values>
+        <field>FSC_Deshabilitado__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FSC_Divisor_Tasa__c</field>
+        <value xsi:type="xsd:double">1000.0</value>
+    </values>
+    <values>
+        <field>FSC_Facilidad__c</field>
+        <value xsi:type="xsd:string">- 402</value>
+    </values>
+    <values>
+        <field>FSC_Label__c</field>
+        <value xsi:type="xsd:string">Universal SVC-2938 Dominicano en el Exterior</value>
+    </values>
+    <values>
+        <field>FSC_Parametros_Formula__c</field>
+        <value xsi:type="xsd:string">{&quot;sourceSheet&quot;:&quot;Hipotecario US$&quot;,&quot;requiresApplicantAge&quot;:true,&quot;maximumApplicantAge&quot;:65,&quot;fixedMonthlyCharge&quot;:179.8,&quot;fixedChargeMultiplierWithCoDebtor&quot;:2}</value>
+    </values>
+    <values>
+        <field>FSC_Tasa__c</field>
+        <value xsi:type="xsd:double">0.59</value>
+    </values>
+    <values>
+        <field>FSC_Tipo_Calculo_Prima__c</field>
+        <value xsi:type="xsd:string">HIPOTECARIO_VIDA</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,95 @@
+.actionsCard {
+	--slds-c-card-header-text-align: center;
+}
+
+.cardTitle {
+	text-align: center;
+	font-weight: 600;
+	font-size: 1rem;
+	padding: 0.75rem 1rem 0.25rem 1rem;
+}
+
+.container {
+	padding: 1rem 1.25rem 1.25rem 1.25rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.validationMessage {
+	padding: 1rem 1.25rem 1.25rem;
+}
+
+.actionsBlocked {
+	display: none;
+}
+
+.messagesSection {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.buttonsSection {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	margin-top: 0.25rem;
+}
+
+/* Banner / mensaje */
+.banner {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+	padding: 0.75rem 0.9rem;
+	border-radius: 0.75rem;
+	border: 1px solid #e5e5e5;
+	background: #fafafa;
+	line-height: 1.35;
+	font-size: 0.95rem;
+}
+
+.banner .icon {
+	flex: 0 0 auto;
+	margin-top: 0.05rem;
+}
+
+.banner .text {
+	flex: 1 1 auto;
+}
+
+/* Variantes */
+.banner.warning {
+	border-color: #f3dcc0;
+	background: #fff7ed;
+	color: #8a4b08;
+}
+
+.banner.success {
+	border-color: #ccead3;
+	background: #f0fff4;
+	color: #1f6f3d;
+}
+
+.banner.error {
+	border-color: #ea001e;
+	background: #fef1ee;
+	color: #8e030f;
+}
+
+/* Botonera */
+.btnRow {
+	display: flex;
+	gap: 0.75rem;
+	flex-wrap: wrap;
+}
+
+.btnRow.center {
+	justify-content: center;
+	text-align: center;
+}
+
+.btnRow lightning-button {
+	min-width: 240px;
+}

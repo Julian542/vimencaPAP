@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Validar_Plazo_Meses</fullName>
+    <active>true</active>
+    <description>Impide registrar plazos fuera del rango de uno a novecientos noventa y nueve meses.</description>
+    <errorConditionFormula>AND(
+    NOT(ISBLANK(FSC_Plazo_meses__c)),
+    OR(
+        FSC_Plazo_meses__c &lt; 1,
+        FSC_Plazo_meses__c &gt; 999
+    )
+)</errorConditionFormula>
+    <errorDisplayField>FSC_Plazo_meses__c</errorDisplayField>
+    <errorMessage>El plazo debe ser un numero entero entre 1 y 999 meses.</errorMessage>
+</ValidationRule>

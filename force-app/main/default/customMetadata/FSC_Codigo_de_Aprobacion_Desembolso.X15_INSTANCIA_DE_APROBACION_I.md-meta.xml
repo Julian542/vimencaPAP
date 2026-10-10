@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>15 - INSTANCIA DE APROBACION I</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_Codigo_de_Aprobacion__c</field>
+        <value xsi:type="xsd:string">15</value>
+    </values>
+    <values>
+        <field>FSC_Descripcion__c</field>
+        <value xsi:type="xsd:string">15 - INSTANCIA DE APROBACION I - C DESDE RD$1,000,001 HASTA RD$7,000,000 PARA PRÉSTAMOS DE CONSUMO (SUPERIORES A LOS RD$2.00MM DEBEN CONTAR CON GARANTÍA REAL ESTABLECIDO POR POLÍTICAS), HIPOTECARIOS Y DE VEHICULO; O SUS RESPECTIVAS EQUIVALENCIAS EN MONEDA EXTRANJERA (TOMANDO COMO REFERENCIA LA TASA DE VENTA DEL BANCO CENTRAL AL DÍA DE LA APROBACIÓN).</value>
+    </values>
+</CustomMetadata>

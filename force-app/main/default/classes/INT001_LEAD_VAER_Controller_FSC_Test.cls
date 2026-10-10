@@ -791,4 +791,31 @@ public with sharing class INT001_LEAD_VAER_Controller_FSC_Test {
 
     System.assertNotEquals(null, response);
   }
+
+  @isTest
+  static void testPassportCandidateUsesTheApprovalPath() {
+    Datos_Maestros__c actEcon = [SELECT Id FROM Datos_Maestros__c LIMIT 1];
+    Lead passportCandidate = new Lead(
+      FirstName = 'Passport',
+      LastName = 'Candidate',
+      Company = 'Prospecto No Cliente',
+      Status = 'Iniciado',
+      RecordTypeId = Schema.SObjectType.Lead.getRecordTypeInfosByDeveloperName()
+        .get('Candidato_Persona_Natural').getRecordTypeId(),
+      LEA_NumIdentificacion__c = '987654321',
+      LEA_TipoIdentificacion__c = 'Pasaporte',
+      LEA_Tipo_Vinculacion__c = 'DEUDOR O EMISOR NO VINCULADO',
+      LEA_Actividad_Economica__c = actEcon.Id,
+      LEA_Tipo_Sector__c = 'Privado'
+    );
+    insert passportCandidate;
+
+    Test.startTest();
+    INT001_LEAD_VAER_Controller_FSC.Response response =
+      INT001_LEAD_VAER_Controller_FSC.updateAccount(passportCandidate.Id);
+    Test.stopTest();
+
+    System.assertEquals(true, response.skipPep);
+    System.assertEquals(200, response.httpRequestStatusCode);
+  }
 }

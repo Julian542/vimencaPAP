@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ComentarioBancaSeguro__c</fullName>
+    <description>Conserva el comentario detallado de Banca Seguro asociado a una no aprobación.</description>
+    <encryptionScheme>None</encryptionScheme>
+    <inlineHelpText>Describa el contexto y las observaciones que debe conocer el oficial de negocio.</inlineHelpText>
+    <label>Comentario Banca Seguro</label>
+    <length>2000</length>
+    <trackHistory>false</trackHistory>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

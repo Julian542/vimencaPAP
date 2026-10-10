@@ -56,4 +56,45 @@ public class VFS_ResumenConvenioUnicoTest {
         VFS_ResumenConvenioUnicoController controller = new VFS_ResumenConvenioUnicoController(stdCtrl);
         controller.getDireccionJuridicaFormateada(new List<Direccion__c>{dir});
     }
+
+    @isTest
+    static void testFscContactPointFallbacksAndSafeFormatting() {
+        Test.setMock(HttpCalloutMock.class, new INT007TestMock('PF'));
+        Account acc = new Account(
+            FirstName = 'Fallback',
+            LastName = 'FSC'
+        );
+        insert acc;
+        insert new ContactPointAddress(
+            ParentId = acc.Id,
+            Name = 'Dirección principal',
+            Street = 'Av. Principal 10',
+            City = 'Santo Domingo',
+            State = 'Distrito Nacional',
+            PostalCode = '10101',
+            Country = 'Dominican Republic',
+            IsPrimary = true
+        );
+        insert new ContactPointEmail(
+            ParentId = acc.Id,
+            EmailAddress = 'fallback@example.test',
+            IsPrimary = true
+        );
+
+        VFS_ResumenConvenioUnicoController controller =
+            new VFS_ResumenConvenioUnicoController(
+                new ApexPages.StandardController(acc)
+            );
+
+        System.assert(controller.direccionFormateada.contains('Av. Principal 10'));
+        System.assertEquals('Santo Domingo', controller.provinciaDireccion);
+        System.assertEquals('fallback@example.test', controller.correoElectronico);
+        System.assertEquals('', controller.getDireccionJuridicaFormateada(null));
+        System.assertEquals(
+            'No. 15',
+            controller.getDireccionJuridicaFormateada(
+                new List<Direccion__c>{ new Direccion__c(DIR_Numero__c = '15') }
+            )
+        );
+    }
 }

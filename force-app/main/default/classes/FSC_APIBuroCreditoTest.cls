@@ -17,12 +17,7 @@ private class FSC_APIBuroCreditoTest {
 
     private static Account createAccount() {
         Account acc = new Account(
-            RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Juridica').getRecordTypeId(),
-            Name = 'Cuenta Test API Buró',
-            ACC_RNC__c = String.valueOf(Math.abs(Crypto.getRandomInteger())).leftPad(9, '0').substring(0, 9),
-            ACC_Condicion__c = 'PROSPECTO',
-            ACC_Estado__c = 'INICIADO',
-            ACC_TipoIdentificacion__c = 'RNC'
+            Name = 'Cuenta Test API Buró'
         );
         insert acc;
         return acc;

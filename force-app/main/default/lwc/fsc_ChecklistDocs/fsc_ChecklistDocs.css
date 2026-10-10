@@ -1,0 +1,75 @@
+.table-wrapper {
+	width: 100%;
+	overflow-x: hidden;
+}
+
+.checklist-table {
+	width: 100%;
+	table-layout: fixed;
+}
+
+.checklist-table th,
+.checklist-table td {
+	vertical-align: top;
+	white-space: normal;
+	word-break: break-word;
+	overflow-wrap: anywhere;
+}
+
+.checklist-table .slds-truncate {
+	white-space: normal !important;
+	overflow: visible !important;
+	text-overflow: unset !important;
+}
+
+.col-doc {
+	width: 17%;
+}
+
+.col-archivo {
+	width: 20%;
+}
+
+.col-no-aplica {
+	width: 8%;
+}
+
+.col-estado {
+	width: 12%;
+}
+
+.col-comentario-oficial {
+	width: 14%;
+}
+
+.col-comentario {
+	width: 14%;
+}
+
+.col-modifica {
+	width: 8%;
+}
+
+.col-fecha {
+	width: 7%;
+}
+
+.doc-wrap,
+.cell-wrap,
+.file-name,
+.file-row {
+	white-space: normal;
+	word-break: break-word;
+	overflow-wrap: anywhere;
+}
+
+.file-name {
+	display: inline;
+}
+
+.checklist-table lightning-input,
+.checklist-table lightning-combobox,
+.checklist-table lightning-formatted-date-time {
+	width: 100%;
+	display: block;
+}

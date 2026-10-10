@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniDataTransform xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <assignmentRulesUsed>false</assignmentRulesUsed>
+    <deletedOnSuccess>false</deletedOnSuccess>
+    <errorIgnored>false</errorIgnored>
+    <expectedInputJson>{
+  &quot;FinServRecords&quot; : [ {
+    &quot;Name&quot; : &quot;Lineas_de_credito_1775525368097&quot;,
+    &quot;RecordTypeLabel&quot; : &quot;Lineas de credito&quot;,
+    &quot;Id&quot; : &quot;a0kVC00000GkzDlYAJ&quot;,
+    &quot;AccountId&quot; : &quot;001VC00003Qiu4PYAR&quot;
+  } ]
+}</expectedInputJson>
+    <expectedOutputJson>{
+  &quot;ResidentialLoanApplicationId&quot; : &quot;&quot;,
+  &quot;FSC_Facilidades_De_Credito__c&quot; : [ {
+    &quot;FSC_Numero__c&quot; : 111,
+    &quot;FSC_Fecha_Apertura__c&quot; : &quot;2026-01-06&quot;,
+    &quot;FSC_Tipo_de_Facilidad__c&quot; : &quot;1312&quot;,
+    &quot;FSC_Facilidades_De_Credito__c_FSC_Plazo_meses__c&quot; : 2323,
+    &quot;FSC_Facilidades_De_Credito__c_FSC_Moneda__c&quot; : &quot;EUR&quot;,
+    &quot;FSC_Deuda_Actual__c&quot; : 23123,
+    &quot;FSC_Limite_Autorizado__c&quot; : 123123,
+    &quot;FSC_Posible_Compromiso__c&quot; : 232,
+    &quot;FSC_Tasa__c&quot; : 3232,
+    &quot;FSC_Requiere_Contrato_Pagare_Notarial__c&quot; : true,
+    &quot;FSC_Tiempo_Tasa_Fija__c&quot; : 12,
+    &quot;FSC_Lineas_Financieras_Empresas__c&quot; : &quot;Empresa 1&quot;,
+    &quot;FSC_Monto_De_La_Cuota__c&quot; : 8884.88,
+    &quot;FSC_Descripcion_Proposito_Facilidad__c&quot; : &quot;sadasda&quot;,
+    &quot;FSC_Tasa_Fija__c&quot; : true,
+    &quot;FSC_Prestamo_Con_Garantia__c&quot; : true,
+    &quot;FSC_Monto_Solicitado__c&quot; : 100000,
+    &quot;FSC_Prestamo_Convenio__c&quot; : true,
+    &quot;FSC_Plazo_meses__c&quot; : 12,
+    &quot;Name&quot; : &quot;CONSUMO - 401 facilidad-3&quot;,
+    &quot;FSC_Compromiso_Mensual__c&quot; : 8884.88,
+    &quot;FSC_Tipo_Facilidad__c&quot; : &quot;CONTROL DE PRESTAMOS - BPR&quot;,
+    &quot;FSC_Forma_De_Pago__c&quot; : &quot;Cuotas mensuales, iguales y consecutivas, contentivas de capital e intereses cada una&quot;,
+    &quot;FSC_Tipo_Modalidad__c&quot; : &quot;Garante solidaria de la facilidad (Garantia Empleador)&quot;,
+    &quot;FSC_Tasa_Interes__c&quot; : 12,
+    &quot;FSC_Aumento_Solicitado__c&quot; : 100000
+  } ]
+}</expectedOutputJson>
+    <fieldLevelSecurityEnabled>true</fieldLevelSecurityEnabled>
+    <inputType>JSON</inputType>
+    <isManagedUsingStdDesigner>true</isManagedUsingStdDesigner>
+    <name>FSCMapFinServRecordsToFacilidades</name>
+    <nullInputsIncludedInOutput>false</nullInputsIncludedInOutput>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>b426015f-4e18-4e92-af71-3d36126a59b9</globalKey>
+        <inputFieldName>FinServRecords:RecordTypeLabel</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCMapFinServRecordsToFacilidades</name>
+        <omniDataTransformation>0kdVC000000Gx5B</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx5B</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Facilidades_De_Credito__c:FSC_Tipo_de_Facilidad__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>ad1ded1e-5546-47fa-bdd4-dd1ee782537f</globalKey>
+        <inputFieldName>FinServRecords:Name</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCMapFinServRecordsToFacilidades</name>
+        <omniDataTransformation>0kdVC000000Gx5C</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx5C</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Facilidades_De_Credito__c:Name</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <outputType>JSON</outputType>
+    <previewJsonData>{
+  &quot;FinServRecords&quot; : [ {
+    &quot;Name&quot; : &quot;Lineas_de_credito_1775525368097&quot;,
+    &quot;RecordTypeLabel&quot; : &quot;Lineas de credito&quot;,
+    &quot;Id&quot; : &quot;a0kVC00000GkzDlYAJ&quot;,
+    &quot;AccountId&quot; : &quot;001VC00003Qiu4PYAR&quot;
+  }, {
+    &quot;Name&quot; : &quot;Tarjetas_de_credito_1775525368097&quot;,
+    &quot;RecordTypeLabel&quot; : &quot;Tarjetas de credito&quot;,
+    &quot;Id&quot; : &quot;a0kVC00000GkzDmYAJ&quot;,
+    &quot;AccountId&quot; : &quot;001VC00003Qiu4PYAR&quot;
+  }, {
+    &quot;Name&quot; : &quot;Prestamos_1775525368097&quot;,
+    &quot;RecordTypeLabel&quot; : &quot;Prestamos&quot;,
+    &quot;Id&quot; : &quot;a0kVC00000GkzDnYAJ&quot;,
+    &quot;AccountId&quot; : &quot;001VC00003Qiu4PYAR&quot;
+  } ]
+}</previewJsonData>
+    <processSuperBulk>false</processSuperBulk>
+    <responseCacheTtlMinutes>0.0</responseCacheTtlMinutes>
+    <rollbackOnError>false</rollbackOnError>
+    <sourceObjectDefault>false</sourceObjectDefault>
+    <synchronousProcessThreshold>0.0</synchronousProcessThreshold>
+    <type>Transform</type>
+    <uniqueName>FSCMapFinServRecordsToFacilidades_1</uniqueName>
+    <versionNumber>1.0</versionNumber>
+    <xmlDeclarationRemoved>false</xmlDeclarationRemoved>
+</OmniDataTransform>

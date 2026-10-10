@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Clase__c</fullName>
+    <description>Clase a la que pertenece este tipo de garantia.</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Clase a la que pertenece este tipo de garantia.</inlineHelpText>
+    <label>Clase de Garantia</label>
+    <referenceTo>FSC_ClaseGarantia__mdt</referenceTo>
+    <relationshipLabel>Tipos de Garantia</relationshipLabel>
+    <relationshipName>TiposGarantia</relationshipName>
+    <required>true</required>
+    <type>MetadataRelationship</type>
+    <unique>false</unique>
+</CustomField>

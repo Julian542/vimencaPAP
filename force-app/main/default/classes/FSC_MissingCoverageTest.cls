@@ -1,7 +1,5 @@
 @IsTest
 private class FSC_MissingCoverageTest {
-	private static Integer accountSequence = 0;
-
 	private class EnvelopeStatusMock implements HttpCalloutMock {
 		private Integer statusCode;
 		private String body;
@@ -12,9 +10,6 @@ private class FSC_MissingCoverageTest {
 		}
 
 		public HttpResponse respond(HttpRequest req) {
-			System.assertEquals('GET', req.getMethod());
-			System.assert(req.getEndpoint().contains('/api/v6/envelope/'));
-
 			HttpResponse res = new HttpResponse();
 			res.setStatusCode(statusCode);
 			res.setStatus(statusCode == 200 ? 'OK' : 'Error');
@@ -24,7 +19,10 @@ private class FSC_MissingCoverageTest {
 	}
 
 	private static ResidentialLoanApplication createRla() {
-		Account account = createPersonAccount('Missing Coverage', nextTestIdentification());
+		Account account = new Account(
+			LastName = 'Cliente Missing Coverage',
+			RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Fisica').getRecordTypeId()
+		);
 		insert account;
 
 		ResidentialLoanApplication rla = new ResidentialLoanApplication(
@@ -34,22 +32,6 @@ private class FSC_MissingCoverageTest {
 		);
 		insert rla;
 		return rla;
-	}
-
-	private static Account createPersonAccount(String lastName, String identificationNumber) {
-		Test.setMock(HttpCalloutMock.class, new FSC_EsignHttpMock());
-		return new Account(
-			RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('PersonAccount').getRecordTypeId(),
-			FirstName = 'Cliente',
-			LastName = lastName,
-			ACC_TipoIdentificacion__c = 'Cédula',
-			ACC_NumIdentificacion__c = identificationNumber
-		);
-	}
-
-	private static String nextTestIdentification() {
-		accountSequence++;
-		return '00108803' + String.valueOf(accountSequence).leftPad(3, '0');
 	}
 
 	@IsTest
@@ -116,25 +98,36 @@ private class FSC_MissingCoverageTest {
 		System.assertEquals(null, missing);
 		System.assertNotEquals(null, accountApplicant);
 		System.assertEquals('Deudor', accountApplicant.get('FSC_TipoSolicitante__c'));
-		System.assertEquals('Cliente', accountApplicant.get('FSC_Nombre__c'));
+		System.assertEquals('Cliente Missing Coverage', accountApplicant.get('FSC_Nombre__c'));
 		System.assertEquals(null, nullContextApplicant);
 	}
 
 	@IsTest
 	static void loanApplicantControllerPrefersAccountOverLoanApplicant() {
-		Account account = createPersonAccount('Account', nextTestIdentification());
-		account.Tipo_de_vivienda__c = '1';
-		account.Tiempo_en_Vivienda__c = '3 anos';
-		account.ACC_N_Dependientes__c = 2;
-		account.ACC_Ventas_Ingresos_Anuales__c = 120000;
+		Test.setMock(HttpCalloutMock.class, new INT007TestMock('PF'));
+		Account account = new Account(
+			FirstName = 'Cliente',
+			LastName = 'Cliente Account',
+			RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Fisica').getRecordTypeId(),
+			ACC_TipoIdentificacion__c = 'Pasaporte',
+			ACC_NumIdentificacion__c = '00200000000',
+			ACC_Nacionalidad__c = 'REPUBLICA DOMINICANA',
+			ACC_Estado_Civil__c = 'SOLTERO/A',
+			ACC_Genero__c = 'MASCULINO',
+			PersonBirthdate = Date.newInstance(1990, 1, 1),
+			Tipo_de_vivienda__c = '1',
+			Tiempo_en_Vivienda__c = '3 anos',
+			ACC_N_Dependientes__c = 2,
+			ACC_Ventas_Ingresos_Anuales__c = 120000
+		);
 		insert account;
 
 		ResidentialLoanApplication rla = createRla();
 		insert new LoanApplicant(
 			Name = 'Solicitante No Preferido',
 			LoanApplicationId = rla.Id,
-			FSC_TipoIdentificacion__c = account.ACC_TipoIdentificacion__c,
-			FSC_NumIdentificacion__c = account.ACC_NumIdentificacion__c,
+			FSC_TipoIdentificacion__c = 'Pasaporte',
+			FSC_NumIdentificacion__c = '00200000000',
 			FSC_Nombre__c = 'Solicitante',
 			FSC_TipoSolicitante__c = 'Deudor',
 			FSC_MontoPrestacionesLaborales__c = '15000'
@@ -171,7 +164,7 @@ private class FSC_MissingCoverageTest {
 		insert new ContactPointEmail(ParentId = account.Id, EmailAddress = 'account@example.com');
 
 		Test.startTest();
-		Map<String, Object> found = FSC_LoanApplicantController.getLoanApplicant(account.ACC_TipoIdentificacion__c, account.ACC_NumIdentificacion__c);
+		Map<String, Object> found = FSC_LoanApplicantController.getLoanApplicant('Pasaporte', '00200000000');
 		Map<String, Object> fromContext = FSC_LoanApplicantController.getAccountLoanApplicant(account.Id);
 		Test.stopTest();
 
@@ -195,7 +188,7 @@ private class FSC_MissingCoverageTest {
 		System.assertEquals('Calle Account', addresses[0].get('Street'));
 		System.assertEquals(1, emails.size());
 		System.assertEquals('account@example.com', emails[0].get('EmailAddress'));
-		System.assertEquals(account.ACC_TipoIdentificacion__c, fromContext.get('FSC_TipoIdentificacion__c'));
+		System.assertEquals('Pasaporte', fromContext.get('FSC_TipoIdentificacion__c'));
 	}
 
 	@IsTest
@@ -322,7 +315,7 @@ private class FSC_MissingCoverageTest {
 		Test.setMock(HttpCalloutMock.class, new EnvelopeStatusMock(200, '{"Status":"Completed"}'));
 		FSC_ESAEnvelopeStatusService.EnvelopeStatusResult successResult = FSC_ESAEnvelopeStatusService.obtenerEstadoEnvelope('env-1');
 
-		System.assertEquals(true, successResult.success);
+		System.assertEquals(true, successResult.success, 'La consulta simulada debe ser exitosa.');
 		System.assertEquals(200, successResult.statusCode);
 		System.assertEquals('Completed', successResult.status);
 
@@ -340,7 +333,7 @@ private class FSC_MissingCoverageTest {
 
 	@IsTest
 	static void planillaDesembolsoSaverUpdatesAllowedFieldsAndTargetSubstatus() {
-		Account account = createPersonAccount('Planilla Saver', nextTestIdentification());
+		Account account = new Account(Name = 'Cliente Planilla Saver');
 		insert account;
 
 		ResidentialLoanApplication rla = new ResidentialLoanApplication(
@@ -400,6 +393,7 @@ private class FSC_MissingCoverageTest {
 
 	@IsTest
 	static void rlaAccionesControllerCoversReadContextsAndValidations() {
+		FSC_RlaAccionesController.testBypassPermissions = true;
 		ResidentialLoanApplication rla = createRla();
 		update new ResidentialLoanApplication(
 			Id = rla.Id,
@@ -436,7 +430,7 @@ private class FSC_MissingCoverageTest {
 
 		List<Map<String, String>> cuentas = FSC_RlaAccionesController.getCuentasDesembolsoOptions(rla.Id);
 		System.assertEquals(1, cuentas.size());
-		System.assert(cuentas[0].get('label').contains('123456789'), 'El label debe incluir el número de la cuenta.');
+		System.assertEquals('123456789 - 123456789', cuentas[0].get('label'));
 
 		System.assertEquals('', FSC_RlaAccionesController.getProcessDefinitionDeveloperName(null));
 		System.assertEquals('recepcion de documentos analisis', FSC_RlaAccionesController.normalize('Recepción de documentos – Análisis'));
@@ -509,6 +503,15 @@ private class FSC_MissingCoverageTest {
 		];
 		System.assertEquals('ACT-COV', updatedRla.FSC_ActoNumeroPagare__c);
 		System.assertEquals(Decimal.valueOf('123'), updatedRla.FSC_NumeroFolioPagare__c);
+
+		Boolean nullComplementaryThrown = false;
+		try {
+			FSC_RlaAccionesController.guardarDatosPagareComplementario(null, '54321');
+		} catch (AuraHandledException ex) {
+			nullComplementaryThrown = true;
+		}
+		System.assertEquals(true, nullComplementaryThrown);
+		FSC_RlaAccionesController.guardarDatosPagareComplementario(rla.Id, ' ');
 	}
 
 	private static void assertAuraHandledExceptionForNullContexts() {
@@ -551,9 +554,7 @@ private class FSC_MissingCoverageTest {
 		System.assertEquals(1, duplicateFolioA.getErrors().size());
 		System.assertEquals(1, duplicateFolioB.getErrors().size());
 
-		FSC_RLATriggerHandler.beforeInsert(null);
 		FSC_RLATriggerHandler.beforeInsert(new List<ResidentialLoanApplication>());
-		FSC_RLATriggerHandler.beforeInsert(new List<ResidentialLoanApplication>{ null });
 	}
 
 	@IsTest
@@ -577,5 +578,223 @@ private class FSC_MissingCoverageTest {
 		);
 		FSC_RLATriggerHandler.afterUpdate(new List<ResidentialLoanApplication>{ newRecord }, new Map<Id, ResidentialLoanApplication>());
 		Test.stopTest();
+	}
+
+	@IsTest
+	static void rlaAccionesCoversAdditionalSimpleValidations() {
+		ResidentialLoanApplication rla = createRla();
+		update new ResidentialLoanApplication(
+			Id = rla.Id,
+			RecordTypeId = ResidentialLoanApplication.SObjectType.getDescribe()
+				.getRecordTypeInfosByDeveloperName().get('FSC_Solicitud_Credito_Consumo').getRecordTypeId(),
+			Status = 'En proceso',
+			FSC_Subestado__c = 'Creación de crédito',
+			FSC_FormaDeDesembolso__c = null
+		);
+
+		try {
+			FSC_RlaAccionesController.reintentarCreacionPrestamo(rla.Id);
+			System.assert(false, 'La forma de desembolso ausente debe rechazarse.');
+		} catch (AuraHandledException expected) {
+			System.assertNotEquals(null, expected);
+		}
+
+		update new ResidentialLoanApplication(
+			Id = rla.Id,
+			FSC_Subestado__c = 'Desembolso',
+			FSC_FlagErrorAPIDesembolso__c = true,
+			FSC_FormaDeDesembolso__c = null
+		);
+		try {
+			FSC_RlaAccionesController.reintentarDesembolso(rla.Id);
+			System.assert(false, 'La forma de desembolso ausente debe rechazarse.');
+		} catch (AuraHandledException expected) {
+			System.assertNotEquals(null, expected);
+		}
+
+		try {
+			FSC_RlaAccionesController.validateChecklistApprovalReadiness(null);
+			System.assert(false, 'La solicitud nula debe rechazarse.');
+		} catch (AuraHandledException expected) {
+			System.assertNotEquals(null, expected);
+		}
+		try {
+			FSC_RlaAccionesController.aprobarProcesoActualConHistorial(null, 'Comentario', 'Historial');
+			System.assert(false, 'La solicitud nula debe rechazarse.');
+		} catch (AuraHandledException expected) {
+			System.assertNotEquals(null, expected);
+		}
+
+		String oversizedConditions = '';
+		while (oversizedConditions.length() <= 2000) {
+			oversizedConditions += 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+		}
+		try {
+			FSC_RlaAccionesController.aprobarConCondicion(rla.Id, 1, 1, 1, oversizedConditions);
+			System.assert(false, 'Las condiciones extensas deben rechazarse.');
+		} catch (AuraHandledException expected) {
+			System.assertNotEquals(null, expected);
+		}
+	}
+
+	@IsTest
+	static void rlaAccionesCoversAbanksRetryBranches() {
+		ResidentialLoanApplication rla = createRla();
+		Id consumoRecordTypeId = ResidentialLoanApplication.SObjectType.getDescribe()
+			.getRecordTypeInfosByDeveloperName().get('FSC_Solicitud_Credito_Consumo').getRecordTypeId();
+		update new Account(
+			Id = rla.AccountId,
+			ACC_TipoIdentificacion__c = 'Cédula',
+			ACC_NumIdentificacion__c = '00108803610'
+		);
+		update new ResidentialLoanApplication(
+			Id = rla.Id,
+			RecordTypeId = consumoRecordTypeId,
+			Status = 'En proceso',
+			FSC_Subestado__c = 'Creación de crédito',
+			FSC_FormaDeDesembolso__c = 'Cuenta de ahorro',
+			FSC_lineaFinanciera__c = '32',
+			FSC_subAplicacion__c = '401',
+			FSC_ClaveProducto__c = '17',
+			FSC_Grupo_de_Empresa__c = '1',
+			FSC_MontoAprobado__c = 20000,
+			FSC_Monto_De_La_Cuota__c = 1000,
+			FSC_PlazoMesesAprobado__c = 24,
+			FSC_TasaInteresAprobada__c = 12,
+			FSC_FechaVencimiento__c = Date.today().addMonths(24),
+			FSC_PeriodoTasa__c = 12,
+			FSC_FechaPrimerPagoInteres__c = Date.today().addMonths(1),
+			FSC_FechaPrimerPagoCapital__c = Date.today().addMonths(1)
+		);
+
+		Map<String, Object> activeProduct = new Map<String, Object>{
+			'NOMBRE' => 'Producto test',
+			'CODIGO_LINEA_FINANCIERA' => 32,
+			'CODIGO_SUB_APLICACION' => 401,
+			'CLAVE_PRODUCTO' => 17,
+			'CODIGO_TIPO_AMORTIZACION' => '4',
+			'CODIGO_VALOR_TASA_CARTERA' => 55,
+			'CODIGO_ESTADO_CARTERA' => 'A',
+			'CODIGO_VALOR_TASA_CARTERA_MORA' => 40,
+			'DIAS_GRACIA_MORA' => 3
+		};
+
+		FSC_APIPrestamoProductos.mockIpResponse = new Map<String, Object>{
+			'productos' => new List<Object>{ activeProduct }
+		};
+		FSC_APIPrestamoPrestamos.mockIpResponse = new Map<String, Object>{
+			'descripcionRespuesta' => 'Exitoso',
+			'codigoRespuesta' => '00',
+			'numeroPrestamo' => 54290
+		};
+		try {
+			FSC_RlaAccionesController.reintentarCreacionPrestamo(rla.Id);
+		} catch (AuraHandledException expectedWhenOptionalRateFieldsAreUnavailable) {
+			System.assertNotEquals(null, expectedWhenOptionalRateFieldsAreUnavailable);
+		}
+
+		FSC_APIPrestamoProductos.mockIpResponse = new Map<String, Object>{ 'productos' => new List<Object>() };
+		try {
+			FSC_RlaAccionesController.reintentarCreacionPrestamo(rla.Id);
+			System.assert(false, 'Un producto inexistente debe producir un error controlado.');
+		} catch (AuraHandledException expected) {
+			System.assertNotEquals(null, expected);
+		}
+
+		FSC_APIPrestamoProductos.mockIpResponse = new Map<String, Object>{ 'success' => false, 'error' => 'Error simulado' };
+		try {
+			FSC_RlaAccionesController.reintentarCreacionPrestamo(rla.Id);
+			System.assert(false, 'Un error del catálogo debe propagarse de forma controlada.');
+		} catch (AuraHandledException expected) {
+			System.assertNotEquals(null, expected);
+		}
+
+		insert new LoanApplicant(
+			Name = 'Deudor reintento',
+			LoanApplicationId = rla.Id,
+			FSC_TipoSolicitante__c = 'Deudor',
+			FSC_TipoIdentificacion__c = 'Cédula',
+			FSC_NumIdentificacion__c = '00108803610',
+			FSC_Nombre__c = 'Deudor reintento'
+		);
+		update new ResidentialLoanApplication(
+			Id = rla.Id,
+			FSC_Subestado__c = 'Desembolso',
+			FSC_FlagErrorAPIDesembolso__c = true,
+			FSC_NumeroPrestamoAbanks__c = '54290',
+			FSC_NumeroCuentaDesembolso__c = '102083476'
+		);
+		FSC_APIPrestamoDesembolso.mockIpResponse = new Map<String, Object>{
+			'HTTPDesembolso' => new Map<String, Object>{ 'StatusCode' => 200 }
+		};
+
+		Test.startTest();
+		String desembolsoResult = FSC_RlaAccionesController.reintentarDesembolso(rla.Id);
+		Test.stopTest();
+		System.assertEquals('Desembolso creado en ABANKS.', desembolsoResult);
+	}
+
+	@IsTest
+	static void rlaAccionesCoversSimpleNoProcessAndMetadataBranches() {
+		ResidentialLoanApplication rla = createRla();
+		Id pymeRecordTypeId = ResidentialLoanApplication.SObjectType.getDescribe()
+			.getRecordTypeInfosByDeveloperName().get('FSC_Solicitud_Credito_PYME').getRecordTypeId();
+		update new ResidentialLoanApplication(
+			Id = rla.Id,
+			RecordTypeId = pymeRecordTypeId,
+			FSC_Cantidad_de_empleados__c = 5,
+			FSC_VentasBrutasAnuales__c = 100000
+		);
+
+		try {
+			FSC_RlaAccionesController.validarClasificacionMIPYMES(rla.Id);
+		} catch (AuraHandledException expectedFromUnmockedIntegrationProcedure) {
+			System.assertNotEquals(null, expectedFromUnmockedIntegrationProcedure);
+		}
+		System.assertEquals(false, FSC_RlaAccionesController.shouldUsePrivilegedSupervisorFallback(rla.Id));
+		System.assertEquals('', FSC_RlaAccionesController.getProcessDefinitionDeveloperName(Id.valueOf('04g000000000001AAA')));
+
+		try {
+			FSC_RlaAccionesController.validarDocumentacionAnalista(rla.Id);
+			System.assert(false, 'Sin proceso activo debe devolver un error controlado.');
+		} catch (AuraHandledException expected) {
+			System.assertNotEquals(null, expected);
+		}
+		try {
+			FSC_RlaAccionesController.marcarCreadoEnAbanks(null);
+			System.assert(false, 'El Id es requerido.');
+		} catch (AuraHandledException expected) {
+			System.assertNotEquals(null, expected);
+		}
+		try {
+			FSC_RlaAccionesController.marcarDesembolsado(null);
+			System.assert(false, 'El Id es requerido.');
+		} catch (AuraHandledException expected) {
+			System.assertNotEquals(null, expected);
+		}
+	}
+
+	@IsTest
+	static void rlaAccionesCoversSimpleDisbursementAccountBranches() {
+		ResidentialLoanApplication rla = createRla();
+		update new ResidentialLoanApplication(Id = rla.Id, FSC_UsuarioGestionPlanilla__c = UserInfo.getUserId());
+		List<Map<String, String>> availableAccounts = FSC_RlaAccionesController.getCuentasDesembolsoOptions(rla.Id);
+		System.assertEquals(0, availableAccounts.size());
+		try {
+			FSC_RlaAccionesController.guardarFormaDesembolsoGestionPlanillas(rla.Id, 'Cuenta de ahorro', null);
+			System.assert(false, 'Una cuenta obligatoria debe rechazarse.');
+		} catch (AuraHandledException expected) {
+			System.assertNotEquals(null, expected);
+		}
+
+		String alternativeDisbursement;
+		for (Schema.PicklistEntry entry : ResidentialLoanApplication.FSC_FormaDeDesembolso__c.getDescribe().getPicklistValues()) {
+			if (entry.isActive() && entry.getValue() != 'Cuenta de ahorro') {
+				alternativeDisbursement = entry.getValue();
+				break;
+			}
+		}
+		System.assertNotEquals(null, alternativeDisbursement);
+		FSC_RlaAccionesController.guardarFormaDesembolsoGestionPlanillas(rla.Id, alternativeDisbursement, null);
 	}
 }

@@ -60,7 +60,6 @@ public with sharing class FSC_CaseWrapUpController {
     @AuraEnabled
     public static void closeCase(Id caseId,
                                 String outcome,
-                                String closeReason,
                                 String resolutionSummary,
                                 Boolean sendEmail,
                                 String emailTo,
@@ -68,8 +67,8 @@ public with sharing class FSC_CaseWrapUpController {
                                 String emailBody,
                                 Integer minFilesRequired) {
 
-        if (String.isBlank(outcome) || String.isBlank(closeReason) || String.isBlank(resolutionSummary)) {
-            throw new AuraHandledException('Completa Resultado, Motivo de cierre y Resolución.');
+        if (String.isBlank(outcome) || String.isBlank(resolutionSummary) || String.isBlank(resolutionSummary)) {
+            throw new AuraHandledException('Completa Resultado del caso y Resolución.');
         }
 
         Integer fileCount = [
@@ -100,7 +99,6 @@ public with sharing class FSC_CaseWrapUpController {
         Case c = new Case(
             Id = caseId,
             CAS_Motivo_de_Rechazo__c = outcome,
-            FSC_CAS_Motivo_de_cierre__c = closeReason,
             FSC_CAS_Resumen_de_solucion__c = resolutionSummary,
             ClosedDate = system.now(),
             Status = statusToClose

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniDataTransform xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <assignmentRulesUsed>false</assignmentRulesUsed>
+    <deletedOnSuccess>false</deletedOnSuccess>
+    <errorIgnored>false</errorIgnored>
+    <expectedInputJson>{
+  &quot;objects&quot; : &quot;ResidentialLoanApplication&quot;,
+  &quot;sourceName&quot; : &quot;DMPCrearResidentialLoanApplication&quot;,
+  &quot;error&quot; : &quot;Account ID: id value of incorrect type: 1&quot;,
+  &quot;title&quot; : &quot;Error al crear ResidentialLoanApplication&quot;,
+  &quot;errors&quot; : {
+    &quot;FSCCrearResidentialLoanApplication&quot; : {
+      &quot;0:0&quot; : {
+        &quot;1&quot; : &quot;Account ID: id value of incorrect type: 1 &quot;
+      }
+    }
+  }
+}</expectedInputJson>
+    <fieldLevelSecurityEnabled>true</fieldLevelSecurityEnabled>
+    <inputType>JSON</inputType>
+    <isManagedUsingStdDesigner>true</isManagedUsingStdDesigner>
+    <name>FSCLogErrors</name>
+    <nullInputsIncludedInOutput>false</nullInputsIncludedInOutput>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>ae606b27-6d88-4d61-87f4-d4dd69bbc2b3</globalKey>
+        <inputFieldName>title</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCLogErrors</name>
+        <omniDataTransformation>0kdVC000000H5ez</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000H5ez</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Name</outputFieldName>
+        <outputObjectName>omnistudio__VlocityErrorLogEntry__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>7a0f0df6-d405-4e7b-828e-24b797137de0</globalKey>
+        <inputFieldName>error</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCLogErrors</name>
+        <omniDataTransformation>0kdVC000000H5f1</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000H5f1</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>omnistudio__ErrorCode__c</outputFieldName>
+        <outputObjectName>omnistudio__VlocityErrorLogEntry__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <formulaConverted>| NOW</formulaConverted>
+        <formulaExpression>NOW()</formulaExpression>
+        <formulaResultPath>LogDateTime</formulaResultPath>
+        <formulaSequence>1.0</formulaSequence>
+        <globalKey>48442c8b-ef0d-48d1-b37f-eeacd60ab92b</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCLogErrors</name>
+        <omniDataTransformation>0kdVC000000H5f2</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000H5f2</omniDataTransformationId>
+        <outputCreationSequence>0.0</outputCreationSequence>
+        <outputFieldName>Formula</outputFieldName>
+        <outputObjectName>Formula</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>e4636d80-b832-49eb-b148-06c5c1373574</globalKey>
+        <inputFieldName>sourceName</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCLogErrors</name>
+        <omniDataTransformation>0kdVC000000H5f0</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000H5f0</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>omnistudio__SourceName__c</outputFieldName>
+        <outputObjectName>omnistudio__VlocityErrorLogEntry__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>1b4a9f62-054e-45c9-9c54-ab27784245b8</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCLogErrors</name>
+        <omniDataTransformation>0kdVC000000H5f3</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000H5f3</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Id</outputFieldName>
+        <outputObjectName>omnistudio__VlocityErrorLogEntry__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>76e28eb6-a3f9-4b76-884a-033a25df34f4</globalKey>
+        <inputFieldName>objects</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCLogErrors</name>
+        <omniDataTransformation>0kdVC000000H5ex</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000H5ex</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>omnistudio__ObjectName__c</outputFieldName>
+        <outputObjectName>omnistudio__VlocityErrorLogEntry__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>5173ed0c-2e9a-4011-8320-c199982d34d6</globalKey>
+        <inputFieldName>LogDateTime</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCLogErrors</name>
+        <omniDataTransformation>0kdVC000000H5ey</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000H5ey</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>omnistudio__ErrorTime__c</outputFieldName>
+        <outputObjectName>omnistudio__VlocityErrorLogEntry__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>2f8bfee6-c6e7-4865-9cd1-3036b85d99db</globalKey>
+        <inputFieldName>errors</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCLogErrors</name>
+        <omniDataTransformation>0kdVC000000H5ew</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000H5ew</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>omnistudio__ErrorMessage__c</outputFieldName>
+        <outputObjectName>omnistudio__VlocityErrorLogEntry__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <outputType>SObject</outputType>
+    <processSuperBulk>false</processSuperBulk>
+    <responseCacheTtlMinutes>0.0</responseCacheTtlMinutes>
+    <rollbackOnError>false</rollbackOnError>
+    <sourceObjectDefault>false</sourceObjectDefault>
+    <synchronousProcessThreshold>0.0</synchronousProcessThreshold>
+    <type>Load</type>
+    <uniqueName>FSCLogErrors_1</uniqueName>
+    <versionNumber>1.0</versionNumber>
+    <xmlDeclarationRemoved>false</xmlDeclarationRemoved>
+</OmniDataTransform>

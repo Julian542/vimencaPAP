@@ -1,0 +1,62 @@
+<template>
+	<template if:true={showGastosTramitacion}>
+		<lightning-input
+			type="text"
+			inputmode="decimal"
+			pattern="[0-9]*([.][0-9]{0,2})?"
+			message-when-pattern-mismatch="Ingrese solo numeros con hasta dos decimales."
+			label="GASTOS TRAMITACION"
+			value={gastosTramitacionValue}
+			data-gastos-tramitacion-input
+			onkeydown={handleGastosTramitacionKeyDown}
+			onbeforeinput={handleGastosTramitacionBeforeInput}
+			oninput={handleGastosTramitacionInput}
+			onpaste={handleGastosTramitacionPaste}
+			onchange={handleGastosTramitacionChange}
+			onblur={handleGastosTramitacionBlur}>
+		</lightning-input>
+	</template>
+
+	<template if:true={showSeguroDeVida}>
+		<lightning-input
+			type="number"
+			formatter="currency"
+			label="MONTO POLIZA SEGURO DE VIDA"
+			value={seguroDeVidaValue}
+			step="0.01"
+			min="0"
+			onchange={handleSeguroDeVidaChange}
+			onblur={handleSeguroDeVidaBlur}>
+		</lightning-input>
+	</template>
+
+	<template if:true={showSucursalUsuario}>
+		<div class="omni-like-field">
+			<label
+				class="omni-like-label"
+				for="sucursalUsuario"
+				>SUCURSAL</label
+			>
+			<div
+				class="omni-like-control"
+				id="sucursalUsuario">
+				{sucursalUsuarioLabel}
+			</div>
+		</div>
+	</template>
+
+	<template if:true={showMontoCuotaRegular}>
+		<div class="omni-like-field">
+			<label
+				class="omni-like-label"
+				for="montoCuotaRegular"
+				>MONTO DE LA CUOTA REGULAR</label
+			>
+			<div
+				class="omni-like-control"
+				id="montoCuotaRegular">
+				{montoCuotaRegularFormatted}
+			</div>
+		</div>
+	</template>
+</template>

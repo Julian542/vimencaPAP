@@ -1,0 +1,12 @@
+<template>
+    <lightning-input
+        type="number"
+        formatter="currency"
+        label="GASTOS TRAMITACION"
+        value={value}
+        step="0.01"
+        min="0"
+        onchange={handleValueChange}
+        onblur={handleValueBlur}>
+    </lightning-input>
+</template>

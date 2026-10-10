@@ -3,14 +3,7 @@ private class FSC_LoanApplicantFirmanteService_Test {
 	private static Integer documentSequence = 1;
 
 	private static ResidentialLoanApplication createRla() {
-		Account account = new Account(
-			RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Juridica').getRecordTypeId(),
-			Name = 'Cliente Firmantes',
-			ACC_RNC__c = String.valueOf(Math.abs(Crypto.getRandomInteger())).leftPad(9, '0').substring(0, 9),
-			ACC_Condicion__c = 'PROSPECTO',
-			ACC_Estado__c = 'INICIADO',
-			ACC_TipoIdentificacion__c = 'RNC'
-		);
+		Account account = new Account(Name = 'Cliente Firmantes');
 		insert account;
 
 		ResidentialLoanApplication rla = new ResidentialLoanApplication(Name = 'RLA Firmantes', AccountId = account.Id, FSC_TipoSolicitud__c = 'BPR');

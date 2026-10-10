@@ -1,0 +1,288 @@
+<apex:page controller="FSC_ActaComitePDFController"
+           renderAs="pdf"
+           applyHtmlTag="false"
+           showHeader="false"
+           sidebar="false"
+           standardStylesheets="false">
+  <html>
+    <head>
+      <style type="text/css">
+        @page { size: A4; margin: 12mm; }
+
+        body{
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 10px;
+          color:#000;
+          line-height: 1.25;
+        }
+
+        .center{ text-align:center; }
+        .right{ text-align:right; }
+        .bold{ font-weight:bold; }
+        .u{ text-decoration: underline; }
+        .mt8{ margin-top:8px; }
+        .mt12{ margin-top:12px; }
+        .small{ font-size:9px; }
+
+        .h2{ font-size:12px; font-weight:bold; text-align:center; }
+        .h3{ font-size:11px; font-weight:bold; text-align:center; }
+
+        p { margin: 0 0 8px 0; }
+        .justify { text-align: justify; }
+        .indent { text-indent: 18px; }
+        .sp8 { height:8px; }
+
+        .line { display:inline-block; border-bottom:1px solid #000; min-width:140px; height:12px; vertical-align:baseline; }
+        .box  { display:inline-block; width:11px; height:11px; border:1px solid #000; text-align:center; line-height:11px; font-weight:bold; margin:0 6px 0 4px; }
+
+        .kv { width:100%; border-collapse:collapse; table-layout:fixed; }
+        .kv td{ padding:2px 0; vertical-align:top; }
+
+        .grid { width:100%; border-collapse:collapse; table-layout:fixed; }
+        table { page-break-inside: avoid; }
+        tr { page-break-inside: avoid; }
+        .grid td, .grid th { border:1px solid #000; padding:5px; vertical-align:top; }
+        .grid th{ font-weight:bold; text-align:left; }
+
+        .card {
+          width: 100%;
+          border-collapse: collapse;
+          table-layout: fixed;
+          margin: 6px 0 12px 0;
+          page-break-inside: avoid;
+        }
+        .card td {
+          border: 1px solid #000;
+          vertical-align: top;
+          padding: 4px;
+          word-wrap: break-word;
+        }
+
+        .lbl {
+          background: #4E86C6;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+        .lbt {
+          background: #17365d;
+          font-weight: bold;
+          text-transform: uppercase;
+          color: white;
+        }
+
+        .tight{ padding:2px 4px; }
+        .obs { height: 85px; }
+
+        col.c1 { width: 16%; }
+        col.c2 { width: 17%; }
+        col.c3 { width: 16%; }
+        col.c4 { width: 17%; }
+        col.c5 { width: 16%; }
+        col.c6 { width: 18%; }
+      </style>
+    </head>
+
+    <body>
+
+      <table class="grid mt8" style="margin-bottom:10px;">
+        <tr>
+          <td class="tight center">
+            Acta No. <span class="line">{!actaNumero}</span>
+            <br/>
+            Fecha: <span class="line">{!actaFecha}</span>
+            <br/>
+          </td>
+          <td class="tight center">
+            ACTA CORRESPONDIENTE A LA
+            <br/>
+            REUNION DEL COMITÉ DE CREDITO
+            <br/>
+            Y/O INSTANCIA DE APROBACION
+          </td>
+          <td class="tight center">
+            COMITÉ DE CREDITO I
+            <br/>
+            Créditos Comerciales desde los RD$500,000.00, hasta los RD$2,500,000.00, o sus respectivas equivalencias en moneda extranjera (tomando como referencia la tasa de venta del BC al día de la aprobación).
+          </td>
+        </tr>
+      </table>
+
+      <table class="grid mt8">
+        <tr>
+          <th class="center">REUNION DEL COMITÉ DE CREDITO Y/O INSTANCIA DE APROBACION</th>
+        </tr>
+      </table>
+
+      <table class="grid mt8">
+        <tr>
+          <th class="lbt center">ASISTENTES.</th>
+        </tr>
+      </table>
+      <table class="grid">
+        <apex:repeat value="{!miembrosComite}" var="mC">
+          <tr>
+            <td>{!mC.nombre}</td>
+            <td>{!mC.perfil}</td>
+            <td>{!mC.funcion}</td>
+            <td>{!mC.modalidad}</td>
+          </tr>
+        </apex:repeat>
+      </table>
+
+      <table class="grid mt8">
+        <tr>
+          <th class="lbt center">COMPROBACION DEL QUORUM.</th>
+        </tr>
+        <tr>
+          <td>{!textoQuorum}</td>
+        </tr>
+      </table>
+
+      <table class="grid mt8">
+        <tr>
+          <th class="lbt center">OBJETIVO.</th>
+        </tr>
+        <tr>
+          <td>{!textoObjetivo}</td>
+        </tr>
+      </table>
+
+      <apex:repeat value="{!seccionesActa}" var="seccion">
+        <table class="grid mt8">
+          <tr>
+            <th class="lbt">{!seccion.titulo}</th>
+          </tr>
+        </table>
+
+        <apex:repeat value="{!seccion.solicitudes}" var="r">
+          <table class="card">
+          <colgroup>
+            <col class="c1"/><col class="c2"/><col class="c3"/><col class="c4"/><col class="c5"/><col class="c6"/>
+          </colgroup>
+
+          <tr>
+            <td class="lbl tight center">NO.</td>
+            <td class="tight center">{!r.numero}</td>
+            <td class="lbl tight center">SUCURSAL.</td>
+            <td class="tight">{!r.sucursal}</td>
+            <td class="lbl tight center">OFICIAL.</td>
+            <td class="tight">{!r.oficial}</td>
+          </tr>
+
+          <tr>
+            <td class="lbl">NOMBRE DEL CLIENTE.</td>
+            <td colspan="5">{!r.nombreCliente}</td>
+          </tr>
+
+          <tr>
+            <td class="lbl">TIPO FACILIDAD.</td>
+            <td colspan="5">{!r.tipoFacilidad}</td>
+          </tr>
+
+          <tr>
+            <td class="lbl">MONTO SOLICITADO.</td>
+            <td colspan="2" class="right">{!r.montoSolicitado}</td>
+            <td class="lbl">MONTO APROBADO.</td>
+            <td colspan="2" class="right">{!r.montoAprobado}</td>
+          </tr>
+
+          <tr>
+            <td class="lbl">CUOTA SOLICITADA.</td>
+            <td class="right">{!r.cuotaSolicitada}</td>
+            <td class="lbl">PLAZO SOLICITADO.</td>
+            <td class="center">{!r.plazoSolicitado}</td>
+            <td class="lbl center small">TASA DE REFERENCIA<br/>SOLICITADA.</td>
+            <td class="center">{!r.tasaRefSolicitada}</td>
+          </tr>
+
+          <tr>
+            <td class="lbl">CUOTA APROBADA.</td>
+            <td class="right">{!r.cuotaAprobada}</td>
+            <td class="lbl">PLAZO APROBADO.</td>
+            <td class="center">{!r.plazoAprobado}</td>
+            <td class="lbl center small">TASA DE REFERENCIA<br/>APROBADA.</td>
+            <td class="center">{!r.tasaRefAprobada}</td>
+          </tr>
+
+          <tr>
+            <td class="lbl">GARANTIA PRINCIPAL.</td>
+            <td colspan="3">{!r.garantiaPrincipal}</td>
+            <td class="lbl center">VALOR.</td>
+            <td class="right">{!r.valorGarantiaPrincipal}</td>
+          </tr>
+
+          <tr>
+            <td class="lbl">DESCRIPCION<br/>GARANTIA PRINCIPAL.</td>
+            <td colspan="5" style="height:55px;">{!r.descGarantiaPrincipal}</td>
+          </tr>
+
+          <tr>
+            <td class="lbl">GARANTIA SECUNDARIA.</td>
+            <td colspan="3">{!r.garantiaSecundaria}</td>
+            <td class="lbl center">VALOR.</td>
+            <td class="right">{!r.valorGarantiaSecundaria}</td>
+          </tr>
+
+          <tr>
+            <td class="lbl">DESCRIPCION<br/>GARANTIA SECUNDARIA.</td>
+            <td colspan="5" style="height:55px;">{!r.descGarantiaSecundaria}</td>
+          </tr>
+
+          <tr>
+            <td class="lbl">DECISION COMITE.</td>
+            <td colspan="2">{!r.decisionComite}</td>
+            <td class="lbl center">CONDICION.</td>
+            <td colspan="2">{!r.condicion}</td>
+          </tr>
+
+          <tr>
+            <td colspan="6" class="lbl center">
+              OBSERVACIONES, COMENTARIOS DE LOS MIEMBROS Y/O ACUERDOS:
+            </td>
+          </tr>
+          <tr>
+            <td colspan="6" class="obs">{!r.observaciones}</td>
+          </tr>
+          </table>
+        </apex:repeat>
+      </apex:repeat>
+
+      <table class="grid mt8">
+        <tr>
+          <th class="lbt">CONFIRMACION ASISTENCIA EN MODALIDAD REMOTA DE LOS MIEMBROS DEL COMITÉ DE CREDITO:</th>
+        </tr>
+		<tr>
+		  <td style="height:70px; white-space:pre-line;">{!confirmacionRemota}</td>
+		</tr>
+      </table>
+
+      <table class="grid mt8">
+        <tr>
+          <th class="lbt">CONFIRMACION ASISTENCIA EN MODALIDAD PRESENCIAL DE LOS MIEMBROS DEL COMITÉ DE CREDITO:</th>
+        </tr>
+      </table>
+      <table class="grid mt8">
+        <tr>
+          <th class="lbl">NOMBRE</th>
+          <th class="lbl">COMITÉ</th>
+          <th class="lbl">CARGO EN LA ENTIDAD</th>
+          <th class="lbl">FIRMA**</th>
+        </tr>
+        <apex:repeat value="{!miembrosComite}" var="mC">
+          <tr>
+            <td>{!mC.nombre}</td>
+            <td>{!mC.funcion}</td>
+            <td>{!mC.perfil}</td>
+          <td style="height:28px;"></td>
+          </tr>
+        </apex:repeat>
+      </table>
+
+      <div class="mt8 small">
+        * Con Voz pero sin Voto.<br/>
+        ** A los Miembros que estuvieron participando de manera remota, su firma no será un requerimiento imprescindible.
+      </div>
+
+    </body>
+  </html>
+</apex:page>

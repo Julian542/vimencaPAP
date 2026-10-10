@@ -1,0 +1,12 @@
+:host {
+    display: block;
+    width: 100%;
+    clear: both;
+    margin-bottom: 1rem;
+}
+
+.os-table-wrapper {
+    display: block;
+    width: 100%;
+    clear: both;
+}

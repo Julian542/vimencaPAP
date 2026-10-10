@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>FSC_EmailSolicitudCreditoRechazoCoincidenciaListas</name>
+    <relatedEntityType>ResidentialLoanApplication</relatedEntityType>
+    <style>none</style>
+    <subject>Solicitud de crédito rechazada</subject>
+    <textOnly>Hola {{{ResidentialLoanApplication.FSC_Nombre_Cliente__c}}},
+
+Gracias por pensar en nuestros productos y servicios.
+
+Al validar tu solicitud, identificamos que requerimos información adicional, por lo que deseamos conectar contigo lo antes posible. Espera la llamada de nuestro Representante de Servicio.
+
+Para nosotros, es un privilegio servirte.
+
+Equipo Banca Personal 
+
+Banco Vimenca 
+
+Cuéntanos tu experiencia con nosotros en miexperiencia@bv.com.do &lt; mailto:miexperiencia@bv.com.do &gt; . ¡Queremos escucharte!</textOnly>
+    <type>custom</type>
+    <uiType>SFX</uiType>
+</EmailTemplate>

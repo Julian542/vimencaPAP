@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+	<apiVersion>66.0</apiVersion>
+	<isExposed>true</isExposed>
+	<masterLabel>FSC Omni Date With Minimum Date</masterLabel>
+	<description>Date reutilizable para OmniScript con fecha minima dinamica.</description>
+	<runtimeNamespace>omnistudio</runtimeNamespace>
+	<targets>
+		<target>lightning__AppPage</target>
+	</targets>
+	<targetConfigs>
+		<targetConfig targets="lightning__AppPage">
+			<property name="fieldApiName" type="String" label="API Name Campo de Salida"></property>
+			<property name="label" type="String" label="Etiqueta"></property>
+			<property name="defaultValue" type="String" label="Valor Inicial"></property>
+			<property name="createdDate" type="String" label="Fecha de Creacion"></property>
+			<property name="outputParentNode" type="String" label="Nodo Padre de Salida" default="PasoSolicitud"></property>
+			<property name="required" type="String" label="Requerido" default="false"></property>
+			<supportedFormFactors>
+				<supportedFormFactor type="Large"></supportedFormFactor>
+				<supportedFormFactor type="Small"></supportedFormFactor>
+			</supportedFormFactors>
+		</targetConfig>
+	</targetConfigs>
+</LightningComponentBundle>

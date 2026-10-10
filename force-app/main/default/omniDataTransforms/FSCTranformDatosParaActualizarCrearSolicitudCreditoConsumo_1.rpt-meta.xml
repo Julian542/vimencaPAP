@@ -1,0 +1,1910 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniDataTransform xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <assignmentRulesUsed>false</assignmentRulesUsed>
+    <deletedOnSuccess>false</deletedOnSuccess>
+    <errorIgnored>false</errorIgnored>
+    <expectedInputJson>{
+  &quot;StepDatosGeneralesSolicitud&quot; : {
+    &quot;FSC_EsConsolidacionDeudas__c&quot; : &quot;Si&quot;,
+    &quot;FSC_EsRefinanciamiento__c&quot; : &quot;Si&quot;,
+    &quot;FSC_Referidor__c-Block&quot; : {
+      &quot;DeveloperName&quot; : &quot;ANASTASIA_ANGUSTIA_001_0193856_1&quot;,
+      &quot;FSC_CodigoReferidor__c&quot; : &quot;33&quot;,
+      &quot;FSC_NombreReferidor__c&quot; : &quot;ANASTASIA ANGUSTIA ( 001-0193856-1)&quot;,
+      &quot;FSC_Referidor__c&quot; : &quot;ANASTASIA ANGUSTIA ( 001-0193856-1)&quot;,
+      &quot;Id&quot; : &quot;m0cVC000007eBX2YAM&quot;
+    },
+    &quot;FSC_SolicitudMedianteReferidor__c&quot; : &quot;Si&quot;,
+    &quot;FSC_TipoDeudaCancelar__c&quot; : &quot;Solo Préstamos&quot;,
+    &quot;FSC_Facilidades_De_Credito__c&quot; : [ {
+      &quot;FSC_Aumento_Solicitado__c&quot; : 100000,
+      &quot;FSC_Compromiso_Mensual__c&quot; : 8884.88,
+      &quot;FSC_Descripcion_Proposito_Facilidad__c&quot; : &quot;sadasda&quot;,
+      &quot;FSC_Facilidad__c&quot; : &quot;CONSUMO - 401&quot;,
+      &quot;FSC_Forma_De_Pago__c&quot; : &quot;Cuotas mensuales, iguales y consecutivas, contentivas de capital e intereses cada una&quot;,
+      &quot;FSC_Garantias__r&quot; : [ {
+        &quot;FSC_Clase_de_Garantia__c&quot; : &quot;BIENES INMUEBLES&quot;,
+        &quot;FSC_Descripcion_de_la_Garantia__c&quot; : &quot;asdsadas&quot;,
+        &quot;FSC_Fecha_Tasacion__c&quot; : &quot;XXXX&quot;,
+        &quot;FSC_Metros_Cuadrados_de_Construccion__c&quot; : &quot;XXXX&quot;,
+        &quot;FSC_Monto_Inicial_Avance_Pagado__c&quot; : &quot;XXXX&quot;,
+        &quot;FSC_Precio_de_Venta__c&quot; : &quot;XXXX&quot;,
+        &quot;FSC_Proposito_Garantia_Hipotecario__c&quot; : &quot;XXXX&quot;,
+        &quot;FSC_EsTasadorExterno__c&quot; : true,
+        &quot;FSC_NombreTasadorExterno__c&quot; : &quot;XXXX&quot;,
+        &quot;FSC_Tasado_Por__c&quot; : &quot;XXXX&quot;,
+        &quot;FSC_Tipo_de_Garantia__c&quot; : &quot;HIPOTECARIA INMUEBLES -H1-&quot;,
+        &quot;FSC_Tipo_de_Inmueble__c&quot; : &quot;XXXX&quot;,
+        &quot;FSC_Ubicacion__c&quot; : &quot;XXXX&quot;,
+        &quot;FSC_Valor_Inmueble__c&quot; : &quot;XXXX&quot;,
+        &quot;FSC_Valor_Tasado__c&quot; : &quot;XXXX&quot;,
+        &quot;Name&quot; : &quot;HIPOTECARIA INMUEBLES -H1-&quot;
+      } ],
+      &quot;FSC_Lineas_Financieras_Empresas__c&quot; : &quot;Empresa 1&quot;,
+      &quot;FSC_Monto_De_La_Cuota__c&quot; : 8884.88,
+      &quot;FSC_Monto_Solicitado__c&quot; : 100000,
+      &quot;FSC_Plazo_meses__c&quot; : 12,
+      &quot;FSC_Prestamo_Con_Garantia__c&quot; : true,
+      &quot;FSC_Prestamo_Convenio__c&quot; : true,
+      &quot;FSC_Requiere_Contrato_Pagare_Notarial__c&quot; : true,
+      &quot;FSC_Seguros__r&quot; : [ {
+        &quot;FSC_Monto_Prima_Desempleo__c&quot; : 1000,
+        &quot;FSC_Monto_de_la_Prima__c&quot; : 1000,
+        &quot;FSC_Tipo_de_Seguro__c&quot; : &quot;Seguro de Vida UNIT&quot;,
+        &quot;Name&quot; : &quot;Seguro de Vida UNIT&quot;
+      } ],
+      &quot;FSC_Tasa_Fija__c&quot; : true,
+      &quot;FSC_Tasa_Interes__c&quot; : 12,
+      &quot;FSC_Tasa__c&quot; : 12,
+      &quot;FSC_Tiempo_Tasa_Fija__c&quot; : 12,
+      &quot;FSC_Tipo_Facilidad__c&quot; : &quot;CONTROL DE PRESTAMOS - BPR&quot;,
+      &quot;FSC_Tipo_Modalidad__c&quot; : &quot;Garante solidaria de la facilidad (Garantia Empleador)&quot;,
+      &quot;FSC_Tipo_de_Facilidad__c&quot; : &quot;CONTROL DE PRESTAMOS - BPR&quot;,
+      &quot;Name&quot; : &quot;CONSUMO - 401 facilidad-3&quot;,
+      &quot;__key&quot; : &quot;facilidad-3&quot;
+    } ]
+  },
+  &quot;StepDatosSolicitante&quot; : {
+    &quot;AccountId&quot; : &quot;001U700000WVxHVIA1&quot;,
+    &quot;FSC_Nombre_Cliente__c&quot; : &quot;Joel Valenti&quot;,
+    &quot;FSC_Subestado__c&quot; : &quot;Completando información&quot;,
+    &quot;FormulaTitle&quot; : &quot;Crédito Consumo - Joel Valenti - 42010242&quot;,
+    &quot;LoanApplicant&quot; : [ {
+      &quot;ContactPointAddress&quot; : [ {
+        &quot;City&quot; : &quot;asdasdas&quot;,
+        &quot;Country&quot; : &quot;argesds&quot;,
+        &quot;Name&quot; : &quot;asdasd&quot;,
+        &quot;PostalCode&quot; : &quot;5511&quot;,
+        &quot;State&quot; : &quot;asdasd&quot;,
+        &quot;Street&quot; : &quot;123123&quot;
+      } ],
+      &quot;ContactPointEmail&quot; : [ {
+        &quot;EmailAddress&quot; : &quot;asdasdas@hotmail.com&quot;
+      } ],
+      &quot;ContactPointPhone&quot; : [ {
+        &quot;FSC_TipoContacto__c&quot; : &quot;Personal&quot;,
+        &quot;TelephoneNumber&quot; : &quot;1122334455&quot;
+      } ],
+      &quot;FSC_ClasificacionSIB__c&quot; : &quot;A&quot;,
+      &quot;FSC_DescripcionOtrosIngresos__c&quot; : &quot;Descripcion Ingresos&quot;,
+      &quot;FSC_EmpresaAnteriorLaboro__c&quot; : &quot;Empresa Anterior&quot;,
+      &quot;FSC_EstadoCivil__c&quot; : &quot;SOLTERO/A&quot;,
+      &quot;FSC_Facilidad_Otra_Institucion__c&quot; : [ {
+        &quot;FSC_Balance__c&quot; : &quot;123123&quot;,
+        &quot;FSC_DescripcionFacilidad__c&quot; : &quot;asdasd&quot;,
+        &quot;FSC_EntidadFinanciera__c&quot; : &quot;BANCO DE RESERVAS DE LA REPUBLICA DOMINICANA&quot;,
+        &quot;FSC_Facilidad__c&quot; : &quot;CONSUMO - 401&quot;,
+        &quot;FSC_LoanApplicant__c&quot; : &quot;0cUVC0000000e3t2AA&quot;,
+        &quot;FSC_Moneda__c&quot; : &quot;Pesos Dominicanos&quot;,
+        &quot;FSC_TipoFacilidad__c&quot; : &quot;CONTROL DE PRESTAMOS - BPR&quot;,
+        &quot;Name&quot; : &quot;asdasda&quot;
+      } ],
+      &quot;FSC_FechaNacimiento__c&quot; : &quot;2001-01-07&quot;,
+      &quot;FSC_FuenteIngreso__c&quot; : &quot;Empleado Publico&quot;,
+      &quot;FSC_IngresosMensuales__c&quot; : 1000,
+      &quot;FSC_LugarFondeLabora__c&quot; : &quot;Oficina&quot;,
+      &quot;FSC_MontoPrestacionesLaborales__c&quot; : &quot;1000&quot;,
+      &quot;FSC_Nacionalidad__c&quot; : &quot;ARGENTINA&quot;,
+      &quot;FSC_Nombre__c&quot; : &quot;Nombre&quot;,
+      &quot;FSC_NumIdentificacion__c&quot; : &quot;1122334455&quot;,
+      &quot;FSC_NumeroDependientes__c&quot; : 2,
+      &quot;FSC_Ocupacion__c&quot; : &quot;ADMINISTRACION HOTELERA&quot;,
+      &quot;FSC_OtrosIngresos__c&quot; : 500,
+      &quot;FSC_PrimerApellido__c&quot; : &quot;PrimerApellido&quot;,
+      &quot;FSC_SegundoApellido__c&quot; : &quot;SegundoApellido&quot;,
+      &quot;FSC_TiempoLaborando__c&quot; : &quot;2001-01-07&quot;,
+      &quot;FSC_TiempoVivienda__c&quot; : &quot;2001-01-07&quot;,
+      &quot;FSC_TipoIdentificacion__c&quot; : &quot;Cédula&quot;,
+      &quot;FSC_TipoNegocio__c&quot; : &quot;AAAAA&quot;,
+      &quot;FSC_TipoSolicitante__c&quot; : &quot;Deudor&quot;,
+      &quot;FSC_TipoVivienda__c&quot; : &quot;2&quot;,
+      &quot;Id&quot; : &quot;0cUVC0000000e3t2AA&quot;
+    } ],
+    &quot;Status&quot; : &quot;Borrador&quot;
+  },
+  &quot;rlaId&quot; : &quot;&quot;,
+  &quot;validacionListas&quot; : &quot;&quot;
+}</expectedInputJson>
+    <expectedOutputJson>{
+  &quot;Account&quot; : [ {
+    &quot;ACC_Estado_Civil__c&quot; : &quot;2&quot;,
+    &quot;ACC_N_Dependientes__c&quot; : &quot;2&quot;,
+    &quot;Id&quot; : &quot;001U700000WVxHVIA1&quot;,
+    &quot;Tiempo_en_Vivienda__c&quot; : &quot;2&quot;,
+    &quot;Tipo_de_vivienda__c&quot; : &quot;2&quot;
+  } ],
+  &quot;ContactPointAddress&quot; : [ {
+    &quot;City&quot; : &quot;XXXX&quot;,
+    &quot;Country&quot; : &quot;XXXX&quot;,
+    &quot;Name&quot; : &quot;XXXX&quot;,
+    &quot;ParentId&quot; : &quot;XXXX&quot;,
+    &quot;PostalCode&quot; : &quot;XXXX&quot;,
+    &quot;State&quot; : &quot;XXXX&quot;,
+    &quot;Street&quot; : &quot;XXXX&quot;
+  } ],
+  &quot;ContactPointEmail&quot; : [ {
+    &quot;EmailAddress&quot; : &quot;XXXX&quot;
+  } ],
+  &quot;ContactPointPhone&quot; : [ {
+    &quot;FSC_TipoContacto__c&quot; : &quot;XXXX&quot;,
+    &quot;ParentId&quot; : &quot;XXXX&quot;,
+    &quot;TelephoneNumber&quot; : &quot;XXXX&quot;
+  } ],
+  &quot;FSC_Facilidad_Otra_Institucion__c&quot; : [ {
+    &quot;FSC_Balance__c&quot; : &quot;123123&quot;,
+    &quot;FSC_DescripcionFacilidad__c&quot; : &quot;asdasd&quot;,
+    &quot;FSC_EntidadFinanciera__c&quot; : &quot;BANCO DE RESERVAS DE LA REPUBLICA DOMINICANA&quot;,
+    &quot;FSC_Facilidad__c&quot; : &quot;CONSUMO - 401&quot;,
+    &quot;FSC_LoanApplicant__c&quot; : &quot;0cUVC0000000e3t2AA&quot;,
+    &quot;FSC_Moneda__c&quot; : &quot;Pesos Dominicanos&quot;,
+    &quot;FSC_TipoFacilidad__c&quot; : &quot;CONTROL DE PRESTAMOS - BPR&quot;,
+    &quot;Name&quot; : &quot;asdasda&quot;
+  } ],
+  &quot;FSC_Facilidades_De_Credito__c&quot; : [ {
+    &quot;FSC_Aumento_Solicitado__c&quot; : 100000,
+    &quot;FSC_Compromiso_Mensual__c&quot; : 8884.88,
+    &quot;FSC_Descripcion_Proposito_Facilidad__c&quot; : &quot;sadasda&quot;,
+    &quot;FSC_Facilidad__c&quot; : &quot;CONSUMO - 401&quot;,
+    &quot;FSC_Forma_De_Pago__c&quot; : &quot;Cuotas mensuales, iguales y consecutivas, contentivas de capital e intereses cada una&quot;,
+    &quot;FSC_Lineas_Financieras_Empresas__c&quot; : &quot;Empresa 1&quot;,
+    &quot;FSC_Monto_De_La_Cuota__c&quot; : 8884.88,
+    &quot;FSC_Monto_Solicitado__c&quot; : 100000,
+    &quot;FSC_Plazo_meses__c&quot; : 12,
+    &quot;FSC_Prestamo_Con_Garantia__c&quot; : true,
+    &quot;FSC_Prestamo_Convenio__c&quot; : true,
+    &quot;FSC_Requiere_Contrato_Pagare_Notarial__c&quot; : true,
+    &quot;FSC_Tasa_Fija__c&quot; : true,
+    &quot;FSC_Tasa_Interes__c&quot; : 12,
+    &quot;FSC_Tasa__c&quot; : 12,
+    &quot;FSC_Tiempo_Tasa_Fija__c&quot; : 12,
+    &quot;FSC_Tipo_Facilidad__c&quot; : &quot;CONTROL DE PRESTAMOS - BPR&quot;,
+    &quot;FSC_Tipo_Modalidad__c&quot; : &quot;Garante solidaria de la facilidad (Garantia Empleador)&quot;,
+    &quot;FSC_Tipo_de_Facilidad__c&quot; : &quot;CONTROL DE PRESTAMOS - BPR&quot;,
+    &quot;Name&quot; : &quot;CONSUMO - 401 facilidad-3&quot;
+  } ],
+  &quot;FSC_Garantias__c&quot; : [ {
+    &quot;FSC_Clase_de_Garantia__c&quot; : &quot;BIENES INMUEBLES&quot;,
+    &quot;FSC_Descripcion_de_la_Garantia__c&quot; : &quot;asdsadas&quot;,
+    &quot;FSC_Fecha_Tasacion__c&quot; : &quot;XXXX&quot;,
+    &quot;FSC_Metros_Cuadrados_de_Construccion__c&quot; : &quot;XXXX&quot;,
+    &quot;FSC_Monto_Inicial_Avance_Pagado__c&quot; : &quot;XXXX&quot;,
+    &quot;FSC_Precio_de_Venta__c&quot; : &quot;XXXX&quot;,
+    &quot;FSC_Proposito_Garantia_Hipotecario__c&quot; : &quot;XXXX&quot;,
+    &quot;FSC_EsTasadorExterno__c&quot; : true,
+    &quot;FSC_NombreTasadorExterno__c&quot; : &quot;XXXX&quot;,
+    &quot;FSC_Tasado_Por__c&quot; : &quot;XXXX&quot;,
+    &quot;FSC_Tipo_de_Garantia__c&quot; : &quot;HIPOTECARIA INMUEBLES -H1-&quot;,
+    &quot;FSC_Tipo_de_Inmueble__c&quot; : &quot;XXXX&quot;,
+    &quot;FSC_Ubicacion__c&quot; : &quot;XXXX&quot;,
+    &quot;FSC_Valor_Inmueble__c&quot; : &quot;XXXX&quot;,
+    &quot;FSC_Valor_Tasado__c&quot; : &quot;XXXX&quot;,
+    &quot;Name&quot; : &quot;HIPOTECARIA INMUEBLES -H1-&quot;
+  } ],
+  &quot;FSC_Seguros__c&quot; : [ {
+    &quot;FSC_Monto_Prima_Desempleo__c&quot; : 1000,
+    &quot;FSC_Monto_de_la_Prima__c&quot; : 1000,
+    &quot;FSC_Tipo_de_Seguro__c&quot; : &quot;Seguro de Vida UNIT&quot;,
+    &quot;Name&quot; : &quot;Seguro de Vida UNIT&quot;
+  } ],
+  &quot;LoanApplicant&quot; : [ {
+    &quot;FSC_ClasificacionSIB__c&quot; : &quot;A&quot;,
+    &quot;FSC_DescripcionOtrosIngresos__c&quot; : &quot;Descripcion Ingresos&quot;,
+    &quot;FSC_EmpresaAnteriorLaboro__c&quot; : &quot;Empresa Anterior&quot;,
+    &quot;FSC_EstadoCivil__c&quot; : &quot;SOLTERO/A&quot;,
+    &quot;FSC_FechaNacimiento__c&quot; : &quot;2001-01-07&quot;,
+    &quot;FSC_FuenteIngreso__c&quot; : &quot;Empleado Publico&quot;,
+    &quot;FSC_IngresosMensuales__c&quot; : 1000,
+    &quot;FSC_LugarFondeLabora__c&quot; : &quot;Oficina&quot;,
+    &quot;FSC_MontoPrestacionesLaborales__c&quot; : &quot;1000&quot;,
+    &quot;FSC_Nacionalidad__c&quot; : &quot;ARGENTINA&quot;,
+    &quot;FSC_Nombre__c&quot; : &quot;Nombre&quot;,
+    &quot;FSC_NumIdentificacion__c&quot; : &quot;1122334455&quot;,
+    &quot;FSC_NumeroDependientes__c&quot; : 2,
+    &quot;FSC_Ocupacion__c&quot; : &quot;ADMINISTRACION HOTELERA&quot;,
+    &quot;FSC_OtrosIngresos__c&quot; : 500,
+    &quot;FSC_PrimerApellido__c&quot; : &quot;PrimerApellido&quot;,
+    &quot;FSC_SegundoApellido__c&quot; : &quot;SegundoApellido&quot;,
+    &quot;FSC_TiempoLaborando__c&quot; : &quot;2001-01-07&quot;,
+    &quot;FSC_TiempoVivienda__c&quot; : &quot;2001-01-07&quot;,
+    &quot;FSC_TipoDeudor__c&quot; : &quot;XXXX&quot;,
+    &quot;FSC_TipoIdentificacion__c&quot; : &quot;Cédula&quot;,
+    &quot;FSC_TipoNegocio__c&quot; : &quot;AAAAA&quot;,
+    &quot;FSC_TipoSolicitante__c&quot; : &quot;Deudor&quot;,
+    &quot;FSC_TipoVivienda__c&quot; : &quot;2&quot;,
+    &quot;Id&quot; : &quot;0cUVC0000000e3t2AA&quot;,
+    &quot;Name&quot; : &quot;XXXX&quot;
+  } ],
+  &quot;ResidentialLoanApplication&quot; : [ {
+    &quot;AccountId&quot; : &quot;&quot;,
+    &quot;AmortizationTerm&quot; : &quot;&quot;,
+    &quot;AmortizationType&quot; : &quot;&quot;,
+    &quot;ApplicationExtIdentifier&quot; : &quot;&quot;,
+    &quot;BalloonTermMonths&quot; : &quot;&quot;,
+    &quot;CreatedById&quot; : &quot;&quot;,
+    &quot;CreatedDate&quot; : &quot;&quot;,
+    &quot;EstateHoldType&quot; : &quot;&quot;,
+    &quot;FSC_A_os_de_operacion__c&quot; : &quot;&quot;,
+    &quot;FSC_Actividad_economica__c&quot; : &quot;&quot;,
+    &quot;FSC_ActoNumeroPagare__c&quot; : &quot;&quot;,
+    &quot;FSC_Alimentos__c&quot; : &quot;&quot;,
+    &quot;FSC_Alquiler_Generales__c&quot; : &quot;&quot;,
+    &quot;FSC_Alquiler_Personales__c&quot; : &quot;&quot;,
+    &quot;FSC_AplicaExcepcionBuro__c&quot; : &quot;&quot;,
+    &quot;FSC_Aplica_Garantia__c&quot; : &quot;&quot;,
+    &quot;FSC_Aprobado_con_Condiciones__c&quot; : &quot;&quot;,
+    &quot;FSC_AyuntamientoRegistroCivil__c&quot; : &quot;&quot;,
+    &quot;FSC_Cantidad_de_empleados__c&quot; : &quot;&quot;,
+    &quot;FSC_Capital__c&quot; : &quot;&quot;,
+    &quot;FSC_Cargo__c&quot; : &quot;&quot;,
+    &quot;FSC_Clasificacion_de_Riesgo__c&quot; : &quot;&quot;,
+    &quot;FSC_CodigoAprobacion__c&quot; : &quot;&quot;,
+    &quot;FSC_Combustible__c&quot; : &quot;&quot;,
+    &quot;FSC_ComisionAdminSeguroMonto__c&quot; : &quot;&quot;,
+    &quot;FSC_ComisionEndosoPoliza__c&quot; : &quot;&quot;,
+    &quot;FSC_CondicionComite__c&quot; : &quot;&quot;,
+    &quot;FSC_Condiciones_de_la_Facilidad__c&quot; : &quot;&quot;,
+    &quot;FSC_ConfeccionCheque__c&quot; : &quot;&quot;,
+    &quot;FSC_Contrato_Generado__c&quot; : &quot;&quot;,
+    &quot;FSC_CoreInsuranceId__c&quot; : &quot;&quot;,
+    &quot;FSC_CoreLoanId__c&quot; : &quot;&quot;,
+    &quot;FSC_Correo_Electronico__c&quot; : &quot;&quot;,
+    &quot;FSC_CreatedBy_Email__c&quot; : &quot;&quot;,
+    &quot;FSC_CreatedBy_Name__c&quot; : &quot;&quot;,
+    &quot;FSC_Cuentas_por_cobrar_clientes__c&quot; : &quot;&quot;,
+    &quot;FSC_Cuentas_por_pagar_suplidores__c&quot; : &quot;&quot;,
+    &quot;FSC_Cuotas__c&quot; : &quot;&quot;,
+    &quot;FSC_DebeRevisarComite__c&quot; : &quot;&quot;,
+    &quot;FSC_DebeRevisarSupervisor__c&quot; : &quot;&quot;,
+    &quot;FSC_DecisionComite__c&quot; : &quot;&quot;,
+    &quot;FSC_Descripcion_de_la_Garantia__c&quot; : &quot;&quot;,
+    &quot;FSC_Descripcion_del_Negocio__c&quot; : &quot;&quot;,
+    &quot;FSC_DesembolsoNeto__c&quot; : &quot;&quot;,
+    &quot;FSC_Desembolso_Realizado__c&quot; : &quot;&quot;,
+    &quot;FSC_Destino_del_Prestamo__c&quot; : &quot;&quot;,
+    &quot;FSC_Direccion_del_Negocio__c&quot; : &quot;&quot;,
+    &quot;FSC_Doc_Completa_Analisis__c&quot; : &quot;&quot;,
+    &quot;FSC_Doc_Completa_Desembolso__c&quot; : &quot;&quot;,
+    &quot;FSC_Doc_Incompleta_Analisis__c&quot; : &quot;&quot;,
+    &quot;FSC_Doc_Incompleta_Desembolso__c&quot; : &quot;&quot;,
+    &quot;FSC_Doc_Incompleta_Post_Desembolso__c&quot; : &quot;&quot;,
+    &quot;FSC_Docs_Por_pagar_Corto_Plazo__c&quot; : &quot;&quot;,
+    &quot;FSC_Edificaciones__c&quot; : &quot;&quot;,
+    &quot;FSC_Educacion__c&quot; : &quot;&quot;,
+    &quot;FSC_Efectivo_en_caja_y_bancos__c&quot; : &quot;&quot;,
+    &quot;FSC_Emplea_familiares__c&quot; : &quot;&quot;,
+    &quot;FSC_EnviadoAFirmar__c&quot; : &quot;&quot;,
+    &quot;FSC_ErrorValidacionListas__c&quot; : &quot;&quot;,
+    &quot;FSC_EsConsolidacionDeudas__c&quot; : &quot;&quot;,
+    &quot;FSC_EsRefinanciamiento__c&quot; : &quot;&quot;,
+    &quot;FSC_ExcepcionBuroAprobada__c&quot; : &quot;&quot;,
+    &quot;FSC_ExcepcionBuroRechazada__c&quot; : &quot;&quot;,
+    &quot;FSC_Expediente_Archivado__c&quot; : &quot;&quot;,
+    &quot;FSC_FechaAprobacion__c&quot; : &quot;&quot;,
+    &quot;FSC_FechaVencimientoContrato__c&quot; : &quot;&quot;,
+    &quot;FSC_FechaVencimiento__c&quot; : &quot;&quot;,
+    &quot;FSC_FechaYHoraAprobacionComite__c&quot; : &quot;&quot;,
+    &quot;FSC_Financial_Account__c&quot; : &quot;&quot;,
+    &quot;FSC_Firma_completada__c&quot; : &quot;&quot;,
+    &quot;FSC_FormaDeDesembolso__c&quot; : &quot;&quot;,
+    &quot;FSC_FormaDesembolso__c&quot; : &quot;&quot;,
+    &quot;FSC_FormaPago__c&quot; : &quot;&quot;,
+    &quot;FSC_GastosTramitacion__c&quot; : &quot;&quot;,
+    &quot;FSC_Grupo_de_Empresa__c&quot; : &quot;&quot;,
+    &quot;FSC_Historial_del_cliente__c&quot; : &quot;&quot;,
+    &quot;FSC_HonorariosLegalizacion__c&quot; : &quot;&quot;,
+    &quot;FSC_Ingresos_Mensuales__c&quot; : &quot;&quot;,
+    &quot;FSC_InscripcionHipoteca__c&quot; : &quot;&quot;,
+    &quot;FSC_Inventario__c&quot; : &quot;&quot;,
+    &quot;FSC_LineaCreditoNumero__c&quot; : &quot;&quot;,
+    &quot;FSC_Local_del_negocio__c&quot; : &quot;&quot;,
+    &quot;FSC_LogErrores__c&quot; : &quot;&quot;,
+    &quot;FSC_Maquinarias_y_equipos__c&quot; : &quot;&quot;,
+    &quot;FSC_Mensajes_Buro__c&quot; : &quot;&quot;,
+    &quot;FSC_Moneda__c&quot; : &quot;&quot;,
+    &quot;FSC_MontoAprobado__c&quot; : &quot;&quot;,
+    &quot;FSC_MontoCuotaRegular__c&quot; : &quot;&quot;,
+    &quot;FSC_MontoDesembolsar__c&quot; : &quot;&quot;,
+    &quot;FSC_MontoDesembolso__c&quot; : &quot;&quot;,
+    &quot;FSC_MontoTotalCuotaMensual__c&quot; : &quot;&quot;,
+    &quot;FSC_Monto__c&quot; : &quot;&quot;,
+    &quot;FSC_Monto_de_los_Ingresos__c&quot; : &quot;&quot;,
+    &quot;FSC_Mora__c&quot; : &quot;&quot;,
+    &quot;FSC_Motivo_Rechazo__c&quot; : &quot;&quot;,
+    &quot;FSC_Muebles_y_enseres__c&quot; : &quot;&quot;,
+    &quot;FSC_Nombre_Cliente__c&quot; : &quot;&quot;,
+    &quot;FSC_Nombre_del_negocio__c&quot; : &quot;&quot;,
+    &quot;FSC_Nomina__c&quot; : &quot;&quot;,
+    &quot;FSC_NumeroCliente__c&quot; : &quot;&quot;,
+    &quot;FSC_ObservacionAdministrador__c&quot; : &quot;&quot;,
+    &quot;FSC_ObservacionAnalistaDeCredito__c&quot; : &quot;&quot;,
+    &quot;FSC_ObservacionArchyCustodiaDeValores__c&quot; : &quot;&quot;,
+    &quot;FSC_ObservacionPLA__c&quot; : &quot;&quot;,
+    &quot;FSC_ObservacionRecepcionYControlDeDocs__c&quot; : &quot;&quot;,
+    &quot;FSC_ObservacionSupervisor__c&quot; : &quot;&quot;,
+    &quot;FSC_ObservacionesComite__c&quot; : &quot;&quot;,
+    &quot;FSC_Observaciones__c&quot; : &quot;&quot;,
+    &quot;FSC_Operaciones_Perspectiva__c&quot; : &quot;&quot;,
+    &quot;FSC_Origen_de_los_Ingresos__c&quot; : &quot;&quot;,
+    &quot;FSC_Otras_cuentas_por_pagar__c&quot; : &quot;&quot;,
+    &quot;FSC_Otras_deudas_corto_plazo__c&quot; : &quot;&quot;,
+    &quot;FSC_OtrosGastosLegales__c&quot; : &quot;&quot;,
+    &quot;FSC_Otros_Financieros__c&quot; : &quot;&quot;,
+    &quot;FSC_Otros_Generales__c&quot; : &quot;&quot;,
+    &quot;FSC_Otros_Personales__c&quot; : &quot;&quot;,
+    &quot;FSC_Otros_activos__c&quot; : &quot;&quot;,
+    &quot;FSC_Otros_activos_fijos__c&quot; : &quot;&quot;,
+    &quot;FSC_Otros_pasivos__c&quot; : &quot;&quot;,
+    &quot;FSC_Pagares_y_Plantillas_Generados__c&quot; : &quot;&quot;,
+    &quot;FSC_PlazoMesesAprobado__c&quot; : &quot;&quot;,
+    &quot;FSC_PlazoMeses__c&quot; : &quot;&quot;,
+    &quot;FSC_Plazo_meses__c&quot; : &quot;&quot;,
+    &quot;FSC_Porcentaje_de_Admisibilidad__c&quot; : &quot;&quot;,
+    &quot;FSC_PrestamoConvenio__c&quot; : &quot;&quot;,
+    &quot;FSC_PrestamoGarantia__c&quot; : &quot;&quot;,
+    &quot;FSC_Recomendaciones__c&quot; : &quot;&quot;,
+    &quot;FSC_Referidor__c&quot; : &quot;&quot;,
+    &quot;FSC_Reparaciones__c&quot; : &quot;&quot;,
+    &quot;FSC_RequiereContratoPagareNotarial__c&quot; : &quot;&quot;,
+    &quot;FSC_Resultado_Buro__c&quot; : &quot;&quot;,
+    &quot;FSC_Resultado_PEP_Listas__c&quot; : &quot;&quot;,
+    &quot;FSC_Se_encuentra_en_la_misma_residencia__c&quot; : &quot;&quot;,
+    &quot;FSC_Se_encuentra_en_zona_comercial__c&quot; : &quot;&quot;,
+    &quot;FSC_SeguroPropiedadMonto__c&quot; : &quot;&quot;,
+    &quot;FSC_SeguroVidaMonto__c&quot; : &quot;&quot;,
+    &quot;FSC_Seguros_Generales__c&quot; : &quot;&quot;,
+    &quot;FSC_Seguros_Personales__c&quot; : &quot;&quot;,
+    &quot;FSC_Servicios_basicos_Generales__c&quot; : &quot;&quot;,
+    &quot;FSC_Servicios_basicos_Personales__c&quot; : &quot;&quot;,
+    &quot;FSC_Situacion_Legal__c&quot; : &quot;&quot;,
+    &quot;FSC_SolicitaExcepcionParaRechazoDeBuro__c&quot; : &quot;&quot;,
+    &quot;FSC_SolicitudAprobadaPorComite__c&quot; : &quot;&quot;,
+    &quot;FSC_SolicitudMedianteReferidor__c&quot; : &quot;&quot;,
+    &quot;FSC_Subestado__c&quot; : &quot;&quot;,
+    &quot;FSC_Sucursal__c&quot; : &quot;&quot;,
+    &quot;FSC_TasaInteresAprobada__c&quot; : &quot;&quot;,
+    &quot;FSC_TasaInteres__c&quot; : &quot;&quot;,
+    &quot;FSC_TasasServicios__c&quot; : &quot;&quot;,
+    &quot;FSC_Telefono__c&quot; : &quot;&quot;,
+    &quot;FSC_Terrenos__c&quot; : &quot;&quot;,
+    &quot;FSC_Tiempo_del_negocio__c&quot; : &quot;&quot;,
+    &quot;FSC_Tiempo_en_el_local_actual__c&quot; : &quot;&quot;,
+    &quot;FSC_TipoCredito__c&quot; : &quot;&quot;,
+    &quot;FSC_TipoDesembolsoSolicitado__c&quot; : &quot;&quot;,
+    &quot;FSC_TipoDeudaCancelar__c&quot; : &quot;&quot;,
+    &quot;FSC_TipoGarantia__c&quot; : &quot;&quot;,
+    &quot;FSC_TipoSolicitud__c&quot; : &quot;&quot;,
+    &quot;FSC_Tipo_de_Garantia__c&quot; : &quot;&quot;,
+    &quot;FSC_Tipo_de_solicitud_Otro__c&quot; : &quot;&quot;,
+    &quot;FSC_Tipo_de_solicitud__c&quot; : &quot;&quot;,
+    &quot;FSC_TotalDescuentos__c&quot; : &quot;&quot;,
+    &quot;FSC_Total_Activos_Fijos__c&quot; : &quot;&quot;,
+    &quot;FSC_Total_Dias_Buenos__c&quot; : &quot;&quot;,
+    &quot;FSC_Total_Dias_Malos__c&quot; : &quot;&quot;,
+    &quot;FSC_Total_Dias_Regulares__c&quot; : &quot;&quot;,
+    &quot;FSC_Total_Gastos_Grales_y_Adm__c&quot; : &quot;&quot;,
+    &quot;FSC_Total_Pasivos__c&quot; : &quot;&quot;,
+    &quot;FSC_Total_Semanal__c&quot; : &quot;&quot;,
+    &quot;FSC_Total_activos__c&quot; : &quot;&quot;,
+    &quot;FSC_Total_activos_corrientes__c&quot; : &quot;&quot;,
+    &quot;FSC_Total_gastos_financieros__c&quot; : &quot;&quot;,
+    &quot;FSC_Total_gastos_personales__c&quot; : &quot;&quot;,
+    &quot;FSC_Total_pasivos_corto_plazo__c&quot; : &quot;&quot;,
+    &quot;FSC_Total_pasivos_y_capital__c&quot; : &quot;&quot;,
+    &quot;FSC_TransferenciaInmobiliaria__c&quot; : &quot;&quot;,
+    &quot;FSC_Transporte__c&quot; : &quot;&quot;,
+    &quot;FSC_URLDeRegistro__c&quot; : &quot;&quot;,
+    &quot;FSC_UsuarioAnalista__c&quot; : &quot;&quot;,
+    &quot;FSC_UsuarioComite__c&quot; : &quot;&quot;,
+    &quot;FSC_UsuarioControlDocumentos__c&quot; : &quot;&quot;,
+    &quot;FSC_UsuarioSupervisor__c&quot; : &quot;&quot;,
+    &quot;FSC_Valor_de_la_Garantia__c&quot; : &quot;&quot;,
+    &quot;FSC_Vehiculos__c&quot; : &quot;&quot;,
+    &quot;FSC_XCore_Buro__c&quot; : &quot;&quot;,
+    &quot;FSC_clasificacionSib__c&quot; : &quot;&quot;,
+    &quot;FSC_lineaFinanciera__c&quot; : &quot;&quot;,
+    &quot;FSC_productoBanco__c&quot; : &quot;&quot;,
+    &quot;FSC_subAplicacion__c&quot; : &quot;&quot;,
+    &quot;HasOtherLoanFeature&quot; : &quot;&quot;,
+    &quot;HasPrepaymentPenalty&quot; : &quot;&quot;,
+    &quot;Id&quot; : &quot;&quot;,
+    &quot;ImprovementCost&quot; : &quot;&quot;,
+    &quot;InitialBuydownRate&quot; : &quot;&quot;,
+    &quot;IntOnlyTermMonthCount&quot; : &quot;&quot;,
+    &quot;InterestRate&quot; : &quot;&quot;,
+    &quot;IsBalloon&quot; : &quot;&quot;,
+    &quot;IsBorrowerCommPropState&quot; : &quot;&quot;,
+    &quot;IsConstructionConversion&quot; : &quot;&quot;,
+    &quot;IsContractConversion&quot; : &quot;&quot;,
+    &quot;IsDeleted&quot; : &quot;&quot;,
+    &quot;IsEnergyRelImprovement&quot; : &quot;&quot;,
+    &quot;IsInterestOnly&quot; : &quot;&quot;,
+    &quot;IsNegativeAmortization&quot; : &quot;&quot;,
+    &quot;IsPropertyCommPropState&quot; : &quot;&quot;,
+    &quot;IsRenovation&quot; : &quot;&quot;,
+    &quot;IsSingleClosing&quot; : &quot;&quot;,
+    &quot;IsSubjectToPriorityLien&quot; : &quot;&quot;,
+    &quot;IsTempIntRateBuydown&quot; : &quot;&quot;,
+    &quot;LastModifiedById&quot; : &quot;&quot;,
+    &quot;LastModifiedDate&quot; : &quot;&quot;,
+    &quot;LastReferencedDate&quot; : &quot;&quot;,
+    &quot;LastViewedDate&quot; : &quot;&quot;,
+    &quot;LeaseHoldExpirationDate&quot; : &quot;&quot;,
+    &quot;LoanPurpose&quot; : &quot;&quot;,
+    &quot;LotAcquiredDate&quot; : &quot;&quot;,
+    &quot;LotOriginalCost&quot; : &quot;&quot;,
+    &quot;MonthsBeforeFirstAdj&quot; : &quot;&quot;,
+    &quot;MonthsBetweenAdjustments&quot; : &quot;&quot;,
+    &quot;MortgageLienType&quot; : &quot;&quot;,
+    &quot;MortgageProgramType&quot; : &quot;&quot;,
+    &quot;Name&quot; : &quot;&quot;,
+    &quot;NativeLandTenure&quot; : &quot;&quot;,
+    &quot;OpportunityId&quot; : &quot;&quot;,
+    &quot;OtherAmortizationType&quot; : &quot;&quot;,
+    &quot;OtherLoanFeature&quot; : &quot;&quot;,
+    &quot;OtherLoanPurpose&quot; : &quot;&quot;,
+    &quot;OtherMortgageProgramType&quot; : &quot;&quot;,
+    &quot;OtherRefinanceProgType&quot; : &quot;&quot;,
+    &quot;OwnerId&quot; : &quot;&quot;,
+    &quot;PrepayPenaltyTermMonth&quot; : &quot;&quot;,
+    &quot;ProjectType&quot; : &quot;&quot;,
+    &quot;RecordTypeId&quot; : &quot;&quot;,
+    &quot;RefinanceProgramType&quot; : &quot;&quot;,
+    &quot;RefinanceType&quot; : &quot;&quot;,
+    &quot;Status&quot; : &quot;&quot;,
+    &quot;SystemModstamp&quot; : &quot;&quot;,
+    &quot;TitleType&quot; : &quot;&quot;,
+    &quot;TotalFinLiabilityMonthlyAmt&quot; : &quot;&quot;,
+    &quot;TotalFinancialAssetAmount&quot; : &quot;&quot;,
+    &quot;TotalOtherAssetAmount&quot; : &quot;&quot;,
+    &quot;TotalOtherFinLiabilityMonthlyAmt&quot; : &quot;&quot;,
+    &quot;TrustTitleType&quot; : &quot;&quot;
+  } ]
+}</expectedOutputJson>
+    <fieldLevelSecurityEnabled>true</fieldLevelSecurityEnabled>
+    <inputType>JSON</inputType>
+    <isManagedUsingStdDesigner>true</isManagedUsingStdDesigner>
+    <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+    <nullInputsIncludedInOutput>false</nullInputsIncludedInOutput>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>ee41ca0a-3948-4ba3-bd71-6718025a2d46</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Valor_Tasado__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2v5</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2v5</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Valor_Tasado__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>82259247-74be-4658-89a6-2951b71df5c9</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tasa_Interes__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2v6</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2v6</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Tasa_Interes__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>b2dda74c-4ddc-48d7-b2a5-e768bba325c3</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Seguros__r:FSC_Monto_Prima_Desempleo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vy</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vy</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Seguros__c:FSC_Monto_Prima_Desempleo__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>f72704a4-7155-44e5-a1c1-62c1a68b4121</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Precio_de_Venta__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vz</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vz</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Precio_de_Venta__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>60faa345-0a3f-4635-b4e9-7b5dddcc4bd9</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tipo_Modalidad__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vw</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vw</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Tipo_Modalidad__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>81d7b013-e674-48a7-a016-047d4a0cda2a</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Prestamo_Convenio__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vx</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vx</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Prestamo_Convenio__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190104</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Modelo_Vehiculo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vq</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vq</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Modelo_Vehiculo__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>18c24e08-2ab4-4dbd-b743-7f091c048ee0</globalKey>
+        <inputFieldName>StepDatosSolicitante:FormulaTitle</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vr</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vr</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:Name</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190106</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Color_Vehiculo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vo</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vo</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Color_Vehiculo__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>2240349c-72a7-4912-a5fc-6db4e1f87793</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Ubicacion__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vp</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vp</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Ubicacion__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>317b62ed-482a-4cf6-99cb-ee218fb6eca9</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Seguros__r:FSC_Monto_de_la_Prima__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vu</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vu</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Seguros__c:FSC_Monto_de_la_Prima__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>17fc330a-f81e-4d8f-9991-03270c8af1cc</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Clase_de_Garantia__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vv</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vv</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Clase_de_Garantia__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190105</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Ano_Vehiculo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vs</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vs</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Ano_Vehiculo__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>5a53a107-1f35-47e5-8b00-9bb944aa8ec4</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Referidor__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vt</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vt</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Referidor__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190107</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Numero_Chasis_Vehiculo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vi</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vi</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Numero_Chasis_Vehiculo__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>d153c881-cb94-4ae4-aacc-c35ae53c2bb3</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_EsTasadorExterno__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2wJ</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2wJ</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_EsTasadorExterno__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>4c2dcd91-0f46-4b8e-865f-c123179581ed</globalKey>
+        <inputFieldName>FormulaRecordTypeId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vj</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vj</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:RecordTypeId</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>fb04224d-6e45-4cb3-9d01-b4f6bda0c805</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_NombreTasadorExterno__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2wK</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2wK</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_NombreTasadorExterno__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190109</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Numero_Placa_Vehiculo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vg</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vg</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Numero_Placa_Vehiculo__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>96426ac4-3381-434c-b8f2-253889311aba</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Requiere_Contrato_Pagare_Notarial__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2wH</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2wH</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Requiere_Contrato_Pagare_Notarial__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>8e189c46-4f26-488f-ad8a-bf7b9e5f1aca</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vh</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vh</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
+        <outputFieldName>LoanApplicant:ContactPointAddress</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>7914aedf-4f97-48ca-956c-818aee4b01ff</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Tasado_Por__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2wI</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2wI</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Tasado_Por__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb19010a</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Numero_Matricula__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vm</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vm</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Numero_Matricula__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb19010b</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Fecha_Expedicion_Vehiculo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vn</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vn</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Fecha_Expedicion_Vehiculo__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb19010c</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Valor_Vehiculo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vk</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vk</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Valor_Vehiculo__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>ef1dbb52-851d-48e1-ad84-5b51978e6c3b</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vl</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vl</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
+        <outputFieldName>FSC_Facilidades_De_Credito__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>c5f5f434-155a-41ab-931e-9825744199a5</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2va</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2va</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
+        <outputFieldName>FSC_Garantias__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>3b7b9924-a930-4de2-89ea-40afabd857ee</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Proposito_Garantia_Hipotecario__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2wB</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2wB</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Proposito_Garantia_Hipotecario__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>bc315d5b-e2ee-4f51-be79-e420b6619d27</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Descripcion_Proposito_Facilidad__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vb</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vb</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Descripcion_Proposito_Facilidad__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>990a18f4-c064-4c45-8f14-255e42d4fb49</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Metros_Cuadrados_de_Construccion__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2wC</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2wC</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Metros_Cuadrados_de_Construccion__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>23b872ff-cd47-4bbe-9096-974cf358e955</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Plazo_meses__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2wA</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2wA</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Plazo_meses__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>4f89af6a-5b6b-4bee-b4d4-dcaf942e275f</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Plazo_meses__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2ve</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2ve</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Cuotas__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>924e3a26-9604-4d33-836c-57ee34c32c61</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Monto_Inicial_Avance_Pagado__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2wF</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2wF</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Monto_Inicial_Avance_Pagado__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190108</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Serial_Motor_Vehiculo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vf</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vf</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Serial_Motor_Vehiculo__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>db4e8e6d-32f0-4d29-8f64-33289e53cc36</globalKey>
+        <inputFieldName>rlaId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2wG</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2wG</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:Id</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>b91d9bf5-cbc0-4cbf-83e7-e7acca2c55a0</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Monto_De_La_Cuota__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vc</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vc</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Monto_De_La_Cuota__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0831602d-1cbb-43a6-ab63-b7064909f899</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Prestamo_Con_Garantia__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2wD</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2wD</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Prestamo_Con_Garantia__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>7fc9cda0-6fd1-4995-8f64-a715ed2f7967</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_EsRefinanciamiento__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vd</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vd</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>Boolean</outputFieldFormat>
+        <outputFieldName>ResidentialLoanApplication:FSC_EsRefinanciamiento__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{
+  &quot;Si&quot; : &quot;true&quot;,
+  &quot;No&quot; : &quot;false&quot;
+}</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>423911c7-1b89-4e7d-a41b-692252121a07</globalKey>
+        <inputFieldName>validacionListas</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2wE</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2wE</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Resultado_PEP_Listas__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{
+  &quot;true&quot; : &quot;Coincidencia&quot;,
+  &quot;false&quot; : &quot;Sin coincidencias&quot;
+}</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>fc9d3f4a-1cfd-4891-b77b-af128d72ceb0</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_EsConsolidacionDeudas__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vY</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vY</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>Boolean</outputFieldFormat>
+        <outputFieldName>ResidentialLoanApplication:FSC_EsConsolidacionDeudas__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{
+  &quot;Si&quot; : &quot;true&quot;,
+  &quot;No&quot; : &quot;false&quot;
+}</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>7f0b00bb-ead5-4d00-8728-07a554b6a29b</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Monto_Solicitado__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vZ</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vZ</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Monto__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>18c5b94d-edd7-4bff-b58b-959b53989ab8</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Compromiso_Mensual__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vW</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vW</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Compromiso_Mensual__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190101</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Es_Concesionario_Dealer__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2w8</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2w8</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Es_Concesionario_Dealer__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>5063f8eb-d47d-4f8b-9250-50565fa56046</globalKey>
+        <inputFieldName>StepDatosSolicitante:FSC_Nombre_Cliente__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vX</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vX</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Nombre_Cliente__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>358f6bec-e9dd-4f53-a72b-10093c6d32d5</globalKey>
+        <inputFieldName>StepDatosSolicitante:Status</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2w9</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2w9</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:Status</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>9f598bae-5d55-4332-beb8-82f90591881c</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Lineas_Financieras_Empresas__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vQ</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vQ</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Lineas_Financieras_Empresas__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>2d7257f6-fe87-45c7-a582-cfdd73d61933</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2w2</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2w2</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
+        <outputFieldName>LoanApplicant:ContactPointPhone</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <formulaConverted>| | var:recordTypeName ISNOTBLANK | &quot;SELECT/\/\/Id/\/\/FROM/\/\/RecordType/\/\/WHERE/\/\/SobjectType/\/\/=/\/\/&apos;ResidentialLoanApplication&apos;/\/\/AND/\/\/DeveloperName/\/\/=/\/\/&apos;{0}&apos;&quot; var:recordTypeName QUERY &apos;&apos; IF</formulaConverted>
+        <formulaExpression>IF(ISNOTBLANK(%recordTypeName%), QUERY(&quot;SELECT Id FROM RecordType WHERE SobjectType = &apos;ResidentialLoanApplication&apos; AND DeveloperName = &apos;{0}&apos;&quot;, recordTypeName), &apos;&apos;)</formulaExpression>
+        <formulaResultPath>FormulaRecordTypeId</formulaResultPath>
+        <formulaSequence>1.0</formulaSequence>
+        <globalKey>1f908843-e82b-415b-8bd9-fe660d31ad5d</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vR</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vR</omniDataTransformationId>
+        <outputCreationSequence>0.0</outputCreationSequence>
+        <outputFieldName>Formula</outputFieldName>
+        <outputObjectName>Formula</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>2bb31c69-5454-4bc9-af37-6edf469e1d7b</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2w3</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2w3</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
+        <outputFieldName>LoanApplicant:FSC_Referencias__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>3fa5e9b1-dcff-4840-a58c-5d6758d832a4</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tipo_de_Facilidad__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vO</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vO</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Tipo_de_Facilidad__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a869b9c-90fa-4d02-8107-62a75ff95cf9</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tipo_Facilidad__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2w0</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2w0</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Tipo_Facilidad__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>9f99e20d-ae95-4a76-b4ef-256b657e6fe1</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Forma_De_Pago__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vP</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vP</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Forma_De_Pago__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190102</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Concesionario__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2w1</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2w1</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Concesionario__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>54dd78ac-209b-403c-9e6e-496131e020f4</globalKey>
+        <inputFieldName>StepDatosSolicitante:AccountId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vU</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vU</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:AccountId</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>10d6a3a3-4d25-4a5f-b97a-81d9f755d2fc</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Descripcion_de_la_Garantia__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2w6</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2w6</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Descripcion_de_la_Garantia__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>01e8ec6d-ef58-4d2a-91bc-60407b2b806f</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Aumento_Solicitado__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vV</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vV</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Aumento_Solicitado__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>c9750b74-a2c6-4196-a17a-777219df24be</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2w7</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2w7</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
+        <outputFieldName>LoanApplicant:ContactPointEmail</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>772d0b63-4325-433a-a20d-297a175e9e58</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Monto_Solicitado__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vS</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vS</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Monto_Solicitado__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190103</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Marca_Vehiculo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2w4</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2w4</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Marca_Vehiculo__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>bed5bedd-99bf-4415-ba41-7e5d9ee6b3ee</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vT</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vT</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
+        <outputFieldName>LoanApplicant:FSC_Facilidad_Otra_Institucion__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>d43449f5-ca43-4e9b-b8bb-1786707d7e86</globalKey>
+        <inputFieldName>StepDatosSolicitante:LoanApplicant</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2w5</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2w5</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
+        <outputFieldName>LoanApplicant</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>8bb1d840-5fe0-4045-9535-00a99af20c77</globalKey>
+        <inputFieldName>StepDatosSolicitante:FSC_Subestado__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vI</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vI</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Subestado__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{
+  &quot;En Motor Buro&quot; : &quot;En Motor Buró&quot;
+}</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>8a14be0d-87c9-40fe-bbad-42477e89a6df</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vJ</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vJ</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
+        <outputFieldName>FSC_Seguros__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>b5655a1c-6a26-4b51-aa20-24de86f0005e</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tasa_Interes__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vG</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vG</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_TasaInteres__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>ea380ecd-8816-4564-80cd-2fb6b209677d</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Valor_Inmueble__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vH</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vH</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Valor_Inmueble__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>80680543-1691-46ae-b042-5e4c6b06f161</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Seguros__r:FSC_Tipo_de_Seguro__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vM</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vM</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Seguros__c:FSC_Tipo_de_Seguro__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>85fdf9b8-14e1-4522-8912-5bf9b0092d60</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Seguros__r:FSC_Seguro_Desempleo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vN</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vN</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Seguros__c:FSC_Seguro_Desempleo__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>540ae3a3-4d3d-44f0-9852-6f92e6b58092</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_SolicitudMedianteReferidor__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vK</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vK</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>Boolean</outputFieldFormat>
+        <outputFieldName>ResidentialLoanApplication:FSC_SolicitudMedianteReferidor__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{
+  &quot;Si&quot; : &quot;true&quot;,
+  &quot;No&quot; : &quot;false&quot;
+}</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>a5c17c79-041e-45bd-8e40-7f8d780dcc3f</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Tipo_de_Inmueble__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vL</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vL</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Tipo_de_Inmueble__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>ca43f188-3264-43bf-a58b-39b137e169a3</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:Name</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vA</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vA</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:Name</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>18e395b3-d6f2-4e39-a7de-c040eea069e2</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tasa__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vB</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vB</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Tasa__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>eb57fd71-a73a-4216-9ca6-7b8d567fc00f</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tasa_Fija__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vE</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vE</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Tasa_Fija__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>a0db24d1-f8bb-484e-9da6-c272a833afa0</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Tipo_de_Garantia__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vF</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vF</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Tipo_de_Garantia__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>d5598f6a-b89e-46c2-b9ed-94733639a355</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tiempo_Tasa_Fija__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vC</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vC</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Tiempo_Tasa_Fija__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>2d60c7b5-7977-472c-9fde-b89e4cb7ecd0</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Seguros__r:FSC_Fuente_de_Ingresos__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2vD</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2vD</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Seguros__c:FSC_Fuente_de_Ingresos__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>43d97d67-d9a2-45be-b4b7-c6ca58841990</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Plazo_meses__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2v9</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2v9</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Plazo_meses__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>256310b7-9049-47b7-ac6f-cdefb9cb7024</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_TipoDeudaCancelar__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2v7</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2v7</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_TipoDeudaCancelar__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>655d68d1-503e-456f-98a6-fa81aacd12ce</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Fecha_Tasacion__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000I2v8</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I2v8</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Fecha_Tasacion__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <outputType>JSON</outputType>
+    <previewJsonData>{
+  &quot;StepDatosGeneralesSolicitud&quot; : {
+    &quot;FSC_Referidor__c-Block&quot; : null,
+    &quot;FSC_SolicitudMedianteReferidor__c&quot; : &quot;No&quot;,
+    &quot;FSC_Facilidades_De_Credito__c&quot; : [ {
+      &quot;FSC_Aumento_Solicitado__c&quot; : &quot;1&quot;,
+      &quot;FSC_Compromiso_Mensual__c&quot; : 1,
+      &quot;FSC_Descripcion_Proposito_Facilidad__c&quot; : &quot;&quot;,
+      &quot;FSC_EstadoDelVehiculo__c&quot; : null,
+      &quot;FSC_Facilidad__c&quot; : &quot;HIPOTECARIOS PARA LA VIVIENDA - 402&quot;,
+      &quot;FSC_Forma_De_Pago__c&quot; : &quot;Cuotas mensuales, iguales y consecutivas, contentivas de capital e intereses cada una&quot;,
+      &quot;FSC_Garantias__r&quot; : [ ],
+      &quot;FSC_Lineas_Financieras_Empresas__c&quot; : &quot;&quot;,
+      &quot;FSC_Monto_De_La_Cuota__c&quot; : 1,
+      &quot;FSC_Monto_Solicitado__c&quot; : &quot;1&quot;,
+      &quot;FSC_Plazo_meses__c&quot; : 1,
+      &quot;FSC_Prestamo_Con_Garantia__c&quot; : false,
+      &quot;FSC_Prestamo_Convenio__c&quot; : false,
+      &quot;FSC_Requiere_Contrato_Pagare_Notarial__c&quot; : false,
+      &quot;FSC_Seguros__r&quot; : [ ],
+      &quot;FSC_Tasa_Fija__c&quot; : false,
+      &quot;FSC_Tasa_Interes__c&quot; : 1,
+      &quot;FSC_Tasa__c&quot; : 1,
+      &quot;FSC_Tiempo_Tasa_Fija__c&quot; : null,
+      &quot;FSC_Tipo_Facilidad__c&quot; : &quot;CONTROL DE PRESTAMOS - BPR&quot;,
+      &quot;FSC_Tipo_Modalidad__c&quot; : &quot;&quot;,
+      &quot;FSC_Tipo_de_Facilidad__c&quot; : &quot;CONTROL DE PRESTAMOS - BPR&quot;,
+      &quot;Name&quot; : &quot;HIPOTECARIOS PARA LA VIVIENDA - 402 facilidad-1&quot;,
+      &quot;__key&quot; : &quot;facilidad-1&quot;
+    } ]
+  },
+  &quot;StepDatosSolicitante&quot; : {
+    &quot;AccountId&quot; : &quot;001U700000WVxHVIA1&quot;,
+    &quot;FSC_Nombre_Cliente__c&quot; : &quot;Joel Valenti&quot;,
+    &quot;FSC_Subestado__c&quot; : &quot;En Motor Buró&quot;,
+    &quot;FormulaTitle&quot; : &quot;Crédito Hipotecario - Joel Valenti - 42010242&quot;,
+    &quot;LoanApplicant&quot; : [ {
+      &quot;ContactPointAddress&quot; : [ ],
+      &quot;ContactPointEmail&quot; : [ ],
+      &quot;ContactPointPhone&quot; : [ ],
+      &quot;FSC_ClasificacionSIB__c&quot; : &quot;&quot;,
+      &quot;FSC_DescripcionOtrosIngresos__c&quot; : &quot;2323&quot;,
+      &quot;FSC_EmpresaAnteriorLaboro__c&quot; : &quot;&quot;,
+      &quot;FSC_EstadoCivil__c&quot; : &quot;CASADO/A&quot;,
+      &quot;FSC_Facilidad_Otra_Institucion__c&quot; : [ ],
+      &quot;FSC_FechaNacimiento__c&quot; : &quot;2026-05-18&quot;,
+      &quot;FSC_FuenteIngreso__c&quot; : &quot;Empleado Privado&quot;,
+      &quot;FSC_IngresosMensuales__c&quot; : 2323,
+      &quot;FSC_LugarFondeLabora__c&quot; : &quot;12&quot;,
+      &quot;FSC_MontoPrestacionesLaborales__c&quot; : &quot;2323&quot;,
+      &quot;FSC_Nacionalidad__c&quot; : &quot;ALBANIA&quot;,
+      &quot;FSC_Nombre__c&quot; : &quot;asdas&quot;,
+      &quot;FSC_NumIdentificacion__c&quot; : &quot;1122334455&quot;,
+      &quot;FSC_NumeroDependientes__c&quot; : 12,
+      &quot;FSC_Ocupacion__c&quot; : &quot;ABOGADO&quot;,
+      &quot;FSC_OtrosIngresos__c&quot; : 1232,
+      &quot;FSC_PrimerApellido__c&quot; : &quot;asdas&quot;,
+      &quot;FSC_SegundoApellido__c&quot; : &quot;asdas&quot;,
+      &quot;FSC_TiempoLaborando__c&quot; : &quot;2026-05-22&quot;,
+      &quot;FSC_TiempoVivienda__c&quot; : &quot;12&quot;,
+      &quot;FSC_TipoIdentificacion__c&quot; : &quot;Cédula&quot;,
+      &quot;FSC_TipoNegocio__c&quot; : &quot;123&quot;,
+      &quot;FSC_TipoSolicitante__c&quot; : &quot;Deudor&quot;,
+      &quot;FSC_TipoVivienda__c&quot; : &quot;2&quot;,
+      &quot;Name&quot; : &quot;asdas asdas asdas&quot;
+    }, {
+      &quot;ContactPointAddress&quot; : [ ],
+      &quot;ContactPointEmail&quot; : [ ],
+      &quot;ContactPointPhone&quot; : [ ],
+      &quot;FSC_ClasificacionSIB__c&quot; : &quot;A&quot;,
+      &quot;FSC_DescripcionOtrosIngresos__c&quot; : &quot;&quot;,
+      &quot;FSC_EmpresaAnteriorLaboro__c&quot; : &quot;&quot;,
+      &quot;FSC_EstadoCivil__c&quot; : &quot;CASADO/A&quot;,
+      &quot;FSC_Facilidad_Otra_Institucion__c&quot; : [ ],
+      &quot;FSC_FechaNacimiento__c&quot; : &quot;2026-05-31&quot;,
+      &quot;FSC_FuenteIngreso__c&quot; : &quot;&quot;,
+      &quot;FSC_IngresosMensuales__c&quot; : &quot;&quot;,
+      &quot;FSC_LugarFondeLabora__c&quot; : &quot;&quot;,
+      &quot;FSC_MontoPrestacionesLaborales__c&quot; : &quot;&quot;,
+      &quot;FSC_Nacionalidad__c&quot; : &quot;ANTIGUA Y BARBUDA&quot;,
+      &quot;FSC_Nombre__c&quot; : &quot;asdasda&quot;,
+      &quot;FSC_NumIdentificacion__c&quot; : &quot;112233445&quot;,
+      &quot;FSC_NumeroDependientes__c&quot; : 12,
+      &quot;FSC_Ocupacion__c&quot; : &quot;&quot;,
+      &quot;FSC_OtrosIngresos__c&quot; : &quot;&quot;,
+      &quot;FSC_PrimerApellido__c&quot; : &quot;asdasda&quot;,
+      &quot;FSC_SegundoApellido__c&quot; : &quot;fgfg&quot;,
+      &quot;FSC_TiempoLaborando__c&quot; : &quot;&quot;,
+      &quot;FSC_TiempoVivienda__c&quot; : &quot;2000&quot;,
+      &quot;FSC_TipoIdentificacion__c&quot; : &quot;Cédula&quot;,
+      &quot;FSC_TipoNegocio__c&quot; : &quot;&quot;,
+      &quot;FSC_TipoSolicitante__c&quot; : &quot;Co-Deudor&quot;,
+      &quot;FSC_TipoVivienda__c&quot; : &quot;2&quot;,
+      &quot;Name&quot; : &quot;asdasda asdasda fgfg&quot;
+    } ],
+    &quot;Status&quot; : &quot;En proceso&quot;
+  },
+  &quot;recordTypeName&quot; : &quot;FSC_Solicitud_Credito_Consumo&quot;,
+  &quot;rlaId&quot; : &quot;&quot;,
+  &quot;validacionListas&quot; : false
+}</previewJsonData>
+    <processSuperBulk>false</processSuperBulk>
+    <responseCacheTtlMinutes>0.0</responseCacheTtlMinutes>
+    <rollbackOnError>false</rollbackOnError>
+    <sourceObjectDefault>false</sourceObjectDefault>
+    <synchronousProcessThreshold>0.0</synchronousProcessThreshold>
+    <type>Transform</type>
+    <uniqueName>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo_1</uniqueName>
+    <versionNumber>1.0</versionNumber>
+    <xmlDeclarationRemoved>false</xmlDeclarationRemoved>
+</OmniDataTransform>

@@ -3,19 +3,6 @@ private class FSC_RandomQueueApproverActionTest {
 
     private static final String SUBESTADO_ANALISIS = 'An\u00E1lisis de cr\u00E9dito';
 
-    private static Account createNeutralAccount(String name) {
-        Account acc = new Account(
-            RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Juridica').getRecordTypeId(),
-            Name = name,
-            ACC_RNC__c = String.valueOf(Math.abs(Crypto.getRandomInteger())).leftPad(9, '0').substring(0, 9),
-            ACC_Condicion__c = 'PROSPECTO',
-            ACC_Estado__c = 'INICIADO',
-            ACC_TipoIdentificacion__c = 'RNC'
-        );
-        insert acc;
-        return acc;
-    }
-
     private static User createUser(String uniqueKey) {
         Profile profileRecord = [
             SELECT Id
@@ -37,8 +24,41 @@ private class FSC_RandomQueueApproverActionTest {
             LanguageLocaleKey = 'es',
             ProfileId = profileRecord.Id
         );
+        completarCamposObligatoriosUsuario(userRecord);
         insert userRecord;
         return userRecord;
+    }
+
+    // La org exige Oficina, Codigo y Canal de Atencion en todo usuario (regla Validar_Campos_Obligatorios_Usuario).
+    private static void completarCamposObligatoriosUsuario(User usuario) {
+        Map<String, Schema.SObjectField> campos = Schema.SObjectType.User.fields.getMap();
+        for (String campo : new List<String>{ 'USE_Oficina__c', 'Canal_Atencion__c' }) {
+            if (!campos.containsKey(campo)) {
+                continue;
+            }
+            for (Schema.PicklistEntry valor : campos.get(campo).getDescribe().getPicklistValues()) {
+                if (valor.isActive()) {
+                    usuario.put(campo, valor.getValue());
+                    break;
+                }
+            }
+        }
+        if (campos.containsKey('USE_Codigo__c')) {
+            usuario.put('USE_Codigo__c', 'TEST');
+        }
+        if (campos.containsKey('USE_Oficina__c')) {
+            asegurarOficinaEnDatosMaestros((String) usuario.get('USE_Oficina__c'));
+        }
+    }
+
+    // El flow "Información usuario" busca la oficina del usuario en Datos_Maestros__c y falla si no existe.
+    private static void asegurarOficinaEnDatosMaestros(String oficina) {
+        if (String.isBlank(oficina) || [SELECT COUNT() FROM Datos_Maestros__c WHERE DM_Codigo_Oficina__c = :oficina AND DM_Tipo__c = 'Oficina'] > 0) {
+            return;
+        }
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            insert new Datos_Maestros__c(Name = 'Oficina test ' + oficina, DM_Codigo_Oficina__c = oficina, DM_Tipo__c = 'Oficina');
+        }
     }
 
     @IsTest
@@ -88,7 +108,8 @@ private class FSC_RandomQueueApproverActionTest {
         insert new GroupMember(GroupId = publicGroup.Id, UserOrGroupId = busiestUser.Id);
 
         System.runAs(leastLoadedUser) {
-            Account acc = createNeutralAccount('Cuenta test menor carga');
+            Account acc = new Account(Name = 'Cuenta test menor carga');
+            insert acc;
 
             insert new List<ResidentialLoanApplication>{
                 new ResidentialLoanApplication(
@@ -137,7 +158,8 @@ private class FSC_RandomQueueApproverActionTest {
         insert new GroupMember(GroupId = publicGroup.Id, UserOrGroupId = busiestUser.Id);
 
         System.runAs(leastLoadedUser) {
-            Account acc = createNeutralAccount('Cuenta test menor carga comite');
+            Account acc = new Account(Name = 'Cuenta test menor carga comite');
+            insert acc;
 
             insert new List<ResidentialLoanApplication>{
                 new ResidentialLoanApplication(

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Catálogo de excepciones del manual PC-CE-POL-010.</description>
+    <label>Excepción de crédito</label>
+    <pluralLabel>Excepciones de crédito</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -125,6 +125,15 @@ public without sharing class FSC_PagareComercialComplementarioCtrl {
 	public String numeroFolioPagare { get; private set; }
 	public Integer numeroFolioInicial { get; private set; }
 	public String numeroFolioPagina2 { get; private set; }
+	public String numeroPrestamoPagare { get; private set; }
+	public String fechaPagare { get; private set; }
+	public String fechaVencimientoPagare { get; private set; }
+	public String nombreContratoPagare { get; private set; }
+	public String nombreMonedaPagare { get; private set; }
+	public String simboloMonedaPagare { get; private set; }
+	public String nacionalidadCliente { get; private set; }
+	public String estadoCivilCliente { get; private set; }
+	public String tasaInteresNumero { get; private set; }
 	public String nombreCliente { get; private set; }
 	public String cedula { get; private set; }
 	public String direccion { get; private set; }
@@ -153,6 +162,14 @@ public without sharing class FSC_PagareComercialComplementarioCtrl {
 	public FSC_IndividuosEnPagareDeCredito__mdt individuo2 { get; private set; }
 	public FSC_IndividuosEnPagareDeCredito__mdt individuo3 { get; private set; }
 	public List<FSC_LoanApplicantFirmanteService.Firmante> loanApplicantFirmantes { get; private set; }
+	public List<FSC_LoanApplicantFirmanteService.Firmante> garanteFirmantes { get; private set; }
+	public Boolean esPagareSimpleFiador { get; private set; }
+	public Boolean esPagareComplementario { get; private set; }
+	public String nombreGarante { get; private set; }
+	public String identificacionGarante { get; private set; }
+	public String nacionalidadGarante { get; private set; }
+	public String estadoCivilGarante { get; private set; }
+	public String domicilioGarante { get; private set; }
 
 	public FSC_PagareComercialComplementarioCtrl(ApexPages.StandardController sc) {
 		Id rlaId = (Id) ApexPages.currentPage().getParameters().get('id');
@@ -170,9 +187,27 @@ public without sharing class FSC_PagareComercialComplementarioCtrl {
 				FSC_ComisionAdminSeguroMonto__c,
 				FSC_ActoNumeroPagare__c,
 				FSC_NumeroFolioPagare__c,
+				FSC_Numero_Prestamo_Pagare__c,
+				FSC_NumeroPrestamoAbanks__c,
+				FSC_FechaVencimiento__c,
+				FSC_Fecha_Contrato__c,
+				FSC_RequiereContratoPagareNotarial__c,
+				FSC_Identificacion_Cliente_Contrato__c,
+				FSC_Nacionalidad_Cliente_Contrato__c,
+				FSC_Estado_Civil_Cliente_Contrato__c,
+				FSC_Domicilio_Cliente_Contrato__c,
+				FSC_Nombre_Garante_Contrato__c,
+				FSC_Identificacion_Garante_Contrato__c,
+				FSC_Nacionalidad_Garante_Contrato__c,
+				FSC_Estado_Civil_Garante_Contrato__c,
+				FSC_Domicilio_Garante_Contrato__c,
+				FSC_Moneda__c,
 				FSC_Aprobado_con_Condiciones__c,
+				RecordType.DeveloperName,
 				Account.Name,
 				Account.ACC_NumIdentificacion__c,
+				Account.ACC_Nacionalidad__c,
+				Account.ACC_Estado_Civil__c,
 				Account.BillingStreet,
 				Account.BillingCity,
 				Account.BillingState,
@@ -188,19 +223,56 @@ public without sharing class FSC_PagareComercialComplementarioCtrl {
 
 		Decimal monto = rla.FSC_MontoAprobado__c;
 		Integer meses = (rla.FSC_PlazoMesesAprobado__c == null) ? 0 : Integer.valueOf(rla.FSC_PlazoMesesAprobado__c);
+		String codigoPagare = resolvePagareCode(rla, rlaId);
+		esPagareComplementario = codigoPagare == FSC_ConsumoDocumentoResolver.PAGARE_COMPLEMENTARIO;
 
 		valorMonto = formatAmountEs(monto);
 		valorMontoTexto = numberToWordsEs(monto);
 		setFolioFields(rla);
+		// El pagare inicial queda en blanco hasta recibir el numero de ABANKS.
+		Boolean completarDatosComplementario = esPagareComplementario &&
+			!String.isBlank(rla.FSC_NumeroPrestamoAbanks__c);
+		Date fechaDocumento = rla.FSC_Fecha_Contrato__c == null ? Date.today() : rla.FSC_Fecha_Contrato__c;
+		Date fechaVencimiento = rla.FSC_FechaVencimiento__c == null
+			? fechaDocumento.addMonths(meses)
+			: rla.FSC_FechaVencimiento__c;
+		numeroPrestamoPagare = completarDatosComplementario
+			? rla.FSC_NumeroPrestamoAbanks__c.trim()
+			: '';
+		fechaPagare = FSC_ContratoFormatoService.fechaCortaEnLetras(fechaDocumento);
+		fechaVencimientoPagare = esPagareComplementario && !completarDatosComplementario
+			? ''
+			: FSC_ContratoFormatoService.fechaCortaEnLetras(fechaVencimiento);
+		nombreMonedaPagare = FSC_ContratoFormatoService.nombreMoneda(rla.FSC_Moneda__c);
+		simboloMonedaPagare = FSC_ContratoFormatoService.simboloMoneda(rla.FSC_Moneda__c);
+		if (rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_PYME') {
+			FSC_RLAContractTemplateResolver.ContractResolution resolution =
+				FSC_RLAContractTemplateResolver.resolve(rlaId);
+			nombreContratoPagare = resolution.nombreContrato;
+		} else if (rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Consumo') {
+			FSC_ConsumoDocumentoResolver.ResolucionDocumento consumption =
+				FSC_ConsumoDocumentoResolver.resolve(rlaId);
+			esPagareSimpleFiador = codigoPagare == FSC_ConsumoDocumentoResolver.PAGARE_SIMPLE_FIADOR;
+			nombreContratoPagare = consumption.tipoGarantia == FSC_ConsumoDocumentoResolver.GARANTIA_CD
+				? 'DOCUMENTO DE PIGNORACIÓN'
+				: 'CONTRATO DE PRÉSTAMO DE CONSUMO';
+		} else if (rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Vehiculo') {
+			nombreContratoPagare = 'CONTRATO DE PRÉSTAMO DE CONSUMO CON GARANTÍA MOBILIARIA';
+		} else if (rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Hipotecario') {
+			nombreContratoPagare = FSC_RLAContractTemplateResolver.resolve(rlaId).nombreContrato;
+		}
 
 		nombreCliente = (rla.Account == null) ? '' : rla.Account.Name;
-		cedula = (rla.Account == null) ? '' : formatCedula(rla.Account.ACC_NumIdentificacion__c);
+		cedula = formatCedula(firstNonBlank(rla.FSC_Identificacion_Cliente_Contrato__c, rla.Account == null ? null : rla.Account.ACC_NumIdentificacion__c));
+		nacionalidadCliente = normalizeTextValue(firstNonBlank(rla.FSC_Nacionalidad_Cliente_Contrato__c, rla.Account == null ? null : rla.Account.ACC_Nacionalidad__c));
+		estadoCivilCliente = normalizeTextValue(firstNonBlank(rla.FSC_Estado_Civil_Cliente_Contrato__c, rla.Account == null ? null : rla.Account.ACC_Estado_Civil__c));
 		nombreDeudorFirma = nombreCliente;
 
 		Decimal tasaDec = rla.FSC_TasaInteresAprobada__c;
 		Integer tasaEntera = (tasaDec == null) ? 0 : Integer.valueOf(tasaDec.setScale(0));
 		tasaInteres = tasaEntera;
 		tasaInteresTexto = integerToWordsEs(tasaEntera);
+		tasaInteresNumero = tasaDec == null ? '' : String.valueOf(tasaDec);
 
 		plazoMeses = (meses == 0) ? '' : String.valueOf(meses);
 		plazoMesesTexto = (meses == 0) ? '' : integerToWordsEs(meses);
@@ -209,7 +281,7 @@ public without sharing class FSC_PagareComercialComplementarioCtrl {
 		plazoAnios = (meses == 0) ? '' : String.valueOf(anios);
 		plazoAniosTexto = buildPlazoAniosTexto(meses);
 
-		Decimal cuota = (meses > 0 && monto != null) ? (monto / Decimal.valueOf(meses)).setScale(2) : 0;
+		Decimal cuota = FSC_ContratoFormatoService.calcularCuota(monto, tasaDec, meses);
 		cuotaMensual = formatAmountEs(cuota);
 		cuotaMensualTexto = numberToWordsEs(cuota);
 		seguroVidaMonto = formatAmountEs(rla.FSC_SeguroVidaMonto__c);
@@ -225,8 +297,62 @@ public without sharing class FSC_PagareComercialComplementarioCtrl {
 		nombreTestigo1Firma = (individuo2 == null) ? '' : individuo2.FSC_Nombre__c;
 		nombreTestigo2Firma = (individuo3 == null) ? '' : individuo3.FSC_Nombre__c;
 
-		direccion = buildDireccion(rla.Account);
+		direccion = firstNonBlank(rla.FSC_Domicilio_Cliente_Contrato__c, buildDireccion(rla.Account));
 		loanApplicantFirmantes = FSC_LoanApplicantFirmanteService.queryFirmantes(rlaId);
+		garanteFirmantes = new List<FSC_LoanApplicantFirmanteService.Firmante>();
+		for (FSC_LoanApplicantFirmanteService.Firmante signer : loanApplicantFirmantes) {
+			if (signer.tipoSolicitante.toLowerCase().contains('garante')) garanteFirmantes.add(signer);
+		}
+		setGuarantorData(rla, rlaId);
+	}
+
+	private static String resolvePagareCode(ResidentialLoanApplication rla, Id rlaId) {
+		if (rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Consumo') {
+			return FSC_ConsumoDocumentoResolver.resolve(rlaId).codigoPagare;
+		}
+		if (rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Vehiculo') {
+			return FSC_VehiculoDocumentoResolver.resolve(rlaId).codigoPagare;
+		}
+		if (rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Hipotecario') {
+			return FSC_HipotecarioDocumentoResolver.resolve(rlaId).codigoPagare;
+		}
+		if (rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_PYME' &&
+			rla.FSC_RequiereContratoPagareNotarial__c != true) {
+			return FSC_ConsumoDocumentoResolver.PAGARE_COMPLEMENTARIO;
+		}
+		return FSC_ConsumoDocumentoResolver.PAGARE_NOTARIAL;
+	}
+
+	private void setGuarantorData(ResidentialLoanApplication rla, Id rlaId) {
+		List<LoanApplicant> guarantors = [
+			SELECT Id, Name, FSC_Nombre__c, FSC_PrimerApellido__c, FSC_SegundoApellido__c,
+				FSC_NumIdentificacion__c, FSC_Nacionalidad__c, FSC_EstadoCivil__c,
+				Contact.MailingStreet, Contact.MailingCity, Contact.MailingState, Contact.MailingCountry
+			FROM LoanApplicant
+			WHERE LoanApplicationId = :rlaId AND FSC_TipoSolicitante__c = 'Garante'
+			ORDER BY CreatedDate, Id
+			LIMIT 1
+		];
+		LoanApplicant guarantor = guarantors.isEmpty() ? null : guarantors[0];
+		nombreGarante = firstNonBlank(rla.FSC_Nombre_Garante_Contrato__c, guarantor == null ? null : guarantor.Name);
+		identificacionGarante = formatCedula(firstNonBlank(rla.FSC_Identificacion_Garante_Contrato__c, guarantor == null ? null : guarantor.FSC_NumIdentificacion__c));
+		nacionalidadGarante = firstNonBlank(rla.FSC_Nacionalidad_Garante_Contrato__c, guarantor == null ? null : guarantor.FSC_Nacionalidad__c);
+		estadoCivilGarante = firstNonBlank(rla.FSC_Estado_Civil_Garante_Contrato__c, guarantor == null ? null : guarantor.FSC_EstadoCivil__c);
+		domicilioGarante = firstNonBlank(rla.FSC_Domicilio_Garante_Contrato__c, buildGuarantorAddress(guarantor));
+	}
+
+	private static String buildGuarantorAddress(LoanApplicant guarantor) {
+		if (guarantor == null || guarantor.Contact == null) return '';
+		List<String> parts = new List<String>();
+		addIfNotBlank(parts, guarantor.Contact.MailingStreet);
+		addIfNotBlank(parts, guarantor.Contact.MailingCity);
+		addIfNotBlank(parts, guarantor.Contact.MailingState);
+		addIfNotBlank(parts, guarantor.Contact.MailingCountry);
+		return String.join(parts, ', ');
+	}
+
+	private static String firstNonBlank(String firstValue, String secondValue) {
+		return String.isBlank(firstValue) ? normalizeTextValue(secondValue) : firstValue.trim();
 	}
 
 	private static List<FSC_IndividuosEnPagareDeCredito__mdt> queryIndividuos() {

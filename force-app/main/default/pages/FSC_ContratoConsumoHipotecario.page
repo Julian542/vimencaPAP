@@ -1,0 +1,569 @@
+<apex:page standardController="ResidentialLoanApplication"
+	extensions="FSC_ContratoConsumoHipotecarioCtrl"
+	applyBodyTag="false"
+	applyHtmlTag="false"
+	showHeader="false"
+	sidebar="false"
+	standardStylesheets="false"
+	cache="false"
+	language="es"
+	renderAs="pdf">
+	<html>
+		<head>
+			<meta
+				http-equiv="Content-Type"
+				content="text/html; charset=UTF-8" />
+			<style type="text/css">
+				@page {
+					size: letter;
+					margin: 25mm 19mm 21mm 19mm;
+					@bottom-center {
+						content: counter(page);
+						font-family: 'Arial Narrow', Arial, sans-serif;
+						font-size: 9pt;
+					}
+				}
+				body {
+					margin: 0;
+					padding: 0;
+					color: #000;
+					font-family: 'Arial Narrow', Arial, sans-serif;
+					font-size: 11pt;
+					line-height: 1.2;
+				}
+				.title {
+					margin: 0 0 1.2em;
+					text-align: center;
+					font-weight: 700;
+				}
+				.paragraph {
+					margin: 0 0 1.2em;
+					text-align: justify;
+					orphans: 3;
+					widows: 3;
+				}
+				.quote {
+					margin: 0 7mm 1.2em;
+					text-align: justify;
+				}
+				.strong {
+					font-weight: 700;
+				}
+				.centered {
+					text-align: center;
+				}
+				.signature-section,
+				.notary-block {
+					margin-top: 8mm;
+					page-break-inside: avoid;
+				}
+				.signature-table {
+					width: 100%;
+					border-collapse: collapse;
+					margin-top: 8mm;
+					page-break-inside: avoid;
+				}
+				.signature-cell {
+					width: 50%;
+					padding: 0 6mm;
+					vertical-align: top;
+				}
+				.signature-line {
+					border-top: 1px solid #000;
+				}
+				.signature-name,
+				.signature-role {
+					margin-top: 1.5mm;
+					text-align: center;
+				}
+				.signature-heading {
+					margin-top: 6mm;
+					font-weight: 700;
+				}
+				.notary-signature {
+					width: 45%;
+					margin: 10mm auto 0;
+				}
+				.reference-code {
+					margin-top: 6mm;
+				}
+			</style>
+		</head>
+		<body>
+			<div class="title">{!datos.tituloContrato}</div>
+			<p class="paragraph">
+				ENTRE: BANCO MÚLTIPLE VIMENCA, S. A., entidad de intermediación financiera organizada de conformidad con las leyes de la República
+				Dominicana, RNC No. 1-01-02141-1, Registro Mercantil No. 10019SD, con su domicilio social en la Avenida Abraham Lincoln No. 306,
+				Sector La Julia, Santo Domingo, Distrito Nacional, capital de la República Dominicana, debidamente representada por su
+				{!datos.bancoRepresentante1.cargo}, {!datos.bancoRepresentante1.tratamiento} {!datos.bancoRepresentante1.nombreCompleto},
+				{!datos.bancoRepresentante1.nacionalidad}, mayor de edad, {!datos.bancoRepresentante1.estadoCivil}, portador de la identificación No.
+				{!datos.bancoRepresentante1.identificacion}, domiciliado y residente en {!datos.bancoRepresentante1.domicilio}, y por su
+				{!datos.bancoRepresentante2.cargo}, {!datos.bancoRepresentante2.tratamiento} {!datos.bancoRepresentante2.nombreCompleto},
+				{!datos.bancoRepresentante2.nacionalidad}, mayor de edad, {!datos.bancoRepresentante2.estadoCivil}, portador de la identificación No.
+				{!datos.bancoRepresentante2.identificacion}, domiciliado y residente en {!datos.bancoRepresentante2.domicilio}, entidad que en lo que
+				sigue se denominará EL BANCO, de una parte, y de otra parte;
+			</p>
+			<p class="paragraph">
+				{!datos.clienteNombre}, {!datos.clienteNacionalidad}, mayor de edad, {!datos.clienteEstadoCivil}, portador de la identificación No.
+				{!datos.clienteIdentificacion}, domiciliado y residente en {!datos.clienteDomicilio}, quien para los fines del presente contrato se
+				denominará EL PRESTATARIO.
+			</p>
+			<p class="paragraph">
+				{!datos.clienteNombre}, de generales antes indicadas, quien en calidad de propietario del inmueble descrito en este contrato se
+				denominará EL GARANTE REAL.
+			</p>
+			<p class="paragraph">
+				POR CUANTO: EL PRESTATARIO ha solicitado a EL BANCO un Préstamo con Garantía Hipotecaria, por un monto de {!datos.montoLetras}
+				({!datos.simboloMoneda}{!datos.montoNumero}).
+			</p>
+			<p class="paragraph">
+				POR CUANTO: Para seguridad del pago de la suma solicitada por EL PRESTATARIO, &#233;ste ofrece en garant&#237;a el inmueble que se
+				describe a continuaci&#243;n:
+			</p>
+			<p class="quote">"{!datos.garantiaDescripcion}"</p>
+			<p class="paragraph">
+				POR CUANTO: EL BANCO ha consentido en otorgar el Préstamo con Garantía Hipotecaria por un monto de {!datos.montoLetras}
+				({!datos.simboloMoneda}{!datos.montoNumero}), solicitado por EL PRESTATARIO, bajo los términos convenidos en el presente contrato.
+			</p>
+			<p class="paragraph">
+				POR CUANTO: Toda vez que sean mencionados EL BANCO, EL PRESTATARIO y LOS GARANTES REALES, en su conjunto, se nombrar&#225;n LAS
+				PARTES;
+			</p>
+			<p class="paragraph">POR TANTO: En el entendido de que los anteriores POR CUANTOS forman parte integral del presente contrato,</p>
+			<p class="paragraph strong centered">SE HA CONVENIDO Y PACTADO LO SIGUIENTE:</p>
+			<p class="paragraph">
+				ARTÍCULO 1. MONTO. EL BANCO, por el presente contrato concede a EL PRESTATARIO, quien acepta, un préstamo por la suma de
+				{!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}), para ser destinado a {!datos.destinoPrestamo}, suma que EL
+				PRESTATARIO declara haber recibido a su entera satisfacción.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO I: La tabla de amortizaci&#243;n del pr&#233;stamo deber&#225; ser entregada por EL BANCO a la firma del presente
+				contrato y formar&#225; parte integral del mismo.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO II: EL PRESTATARIO se comprometen a suministrar a EL BANCO, de manera oportuna y durante la vigencia del pr&#233;stamo,
+				todas las informaciones que, seg&#250;n las normas vigentes se requieran a los fines de poder mantener actualizado el expediente de
+				cr&#233;dito.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO 2. PAGARÉ. EL PRESTATARIO se compromete a suscribir, conjuntamente con el presente contrato de préstamo, un pagaré a favor de
+				EL BANCO por la suma de {!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}). En dicho pagaré se consignarán las
+				condiciones financieras particulares del desembolso realizado.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO 3. INTERESES. EL PRESTATARIO pagará intereses sobre saldos insolutos de capital, a razón de {!datos.tasaLetras} por ciento
+				({!datos.tasaNumero}%) anual, sobre la base de un (1) año de trescientos sesenta (360) días.
+			</p>
+			<p class="paragraph">
+				ART&#205;CULO 4. VARIACI&#211;N DE LA TASA DE INTER&#201;S. - Las partes convienen que, en caso de operarse durante la vigencia de
+				este contrato, una variaci&#243;n de los intereses en el Mercado Bancario, dicha variaci&#243;n ser&#225; aplicada, al saldo insoluto
+				del pr&#233;stamo, previa notificaci&#243;n a EL PRESTATARIO antes de su aplicaci&#243;n, con treinta (30) d&#237;as calendario de
+				anticipaci&#243;n. Igualmente, es entendido y acordado entre las partes que en caso de que EL PRESTATARIO pasen a ser mayor deudor
+				comercial en el sistema financiero de acuerdo con los criterios que establezca la Superintendencia de Bancos de la Rep&#250;blica
+				Dominicana, EL BANCO podr&#225; realizar un aumento de la tasa aplicable a los intereses del pr&#233;stamo acorde a la
+				calificaci&#243;n del sistema financiero previa notificaci&#243;n a EL PRESTATARIO antes de su aplicaci&#243;n, con treinta (30)
+				d&#237;as calendario de anticipaci&#243;n. Las notificaciones a las que se refiere este art&#237;culo se realizar&#225;n y se
+				considerar&#225;n v&#225;lidamente recibidas si se realizan a trav&#233;s de uno de los medios siguientes a opci&#243;n de EL BANCO:
+				a) mediante comunicaci&#243;n f&#237;sica por escrito; b) al correo electr&#243;nico suministrado por EL PRESTATARIO a EL BANCO, o; c)
+				cualquier otro medio fehaciente de conformidad con el derecho com&#250;n dominicano.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO I: Con cada variaci&#243;n de la tasa de inter&#233;s, EL BANCO deber&#225; entregar a EL PRESTATARIO la tabla de
+				amortizaci&#243;n correspondiente.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO II: Si producto de las variaciones de tasa de inter&#233;s o de cualquier otra modificaci&#243;n unilateral de las
+				condiciones del contrato realizada por EL BANCO, EL PRESTATARIO opta por terminar la relaci&#243;n contractual, EL PRESTATARIO no
+				incurrir&#225; en ning&#250;n tipo de responsabilidad y EL BANCO no podr&#225; cobrarles penalidad alguna por este motivo, esto
+				as&#237;, siempre y cuando EL PRESTATARIO notifique la terminaci&#243;n y salden totalmente los valores adeudados de capital,
+				intereses y dem&#225;s accesorios antes de la entrada en vigencia de la modificaci&#243;n realizada que genera la solicitud de
+				terminaci&#243;n.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO 5. VENCIMIENTO Y FORMA DE PAGO. EL PRESTATARIO se obliga a pagar esta deuda en el término de {!datos.plazoLetras}
+				({!datos.plazoNumero}) meses, contados a partir del {!datos.fechaContrato}, mediante {!datos.plazoLetras} ({!datos.plazoNumero})
+				cuotas mensuales, iguales y consecutivas, contentivas de capital e intereses, por la suma de {!datos.cuotaLetras}
+				({!datos.simboloMoneda}{!datos.cuotaNumero}), con vencimiento del préstamo el {!datos.fechaVencimiento}.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO I: Es entendido y acordado por las partes que EL PRESTATARIO pagar&#225;n a EL BANCO intereses mensuales sobre saldo
+				insoluto de capital de conformidad con lo establecido en el art&#237;culo tercero del presente contrato, debiendo saldar el total del
+				capital adeudado m&#225;s los intereses y accesorios pendientes de pago al momento del vencimiento del t&#233;rmino de vigencia del
+				Pr&#233;stamo. Los pagos deber&#225;n ser realizados por el cliente en cualquiera de las sucursales o puntos autorizados por EL BANCO,
+				en efectivo, cheque o transferencia electr&#243;nica de conformidad a las normas que rigen cada uno de estos medios de pagos. EL BANCO
+				podr&#225; poner a disposici&#243;n del cliente otros medios de pagos que le ser&#225;n informados a &#233;ste de manera oportuna.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO II: Los pagos realizados por EL PRESTATARIO ser&#225;n aplicados por EL BANCO a la deuda que surja del presente contrato
+				en el siguiente orden: primero al pago de honorarios, impuestos, comisiones, primas de p&#243;lizas de seguros y gastos pendientes de
+				pago as&#237; como sumas avanzadas por EL BANCO con la finalidad de proteger o mantener las garant&#237;as otorgadas por EL
+				PRESTATARIO o de manera general sumas pagadas por EL BANCO por cuenta de EL PRESTATARIO, previa autorizaci&#243;n de estos; segundo al
+				pago de mora; tercero a los intereses ordinarios devengados; y por &#250;ltimo al capital adeudado.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO III: Los pagos realizados mediante cheques por EL PRESTATARIO a EL BANCO, se considerar&#225;n efectivos el d&#237;a en
+				que los fondos correspondientes a los mismos est&#233;n disponibles y se hagan efectivos los pagos correspondientes.
+			</p>
+			<p class="paragraph">
+				ART&#205;CULO 6: MORA: EL PRESTATARIO se comprometen, en caso de no cumplir a su vencimiento, con una cualquiera de sus obligaciones
+				de pago, a pagar por concepto de mora, a t&#237;tulo de cl&#225;usula penal, el cinco por ciento (5%) mensual o fracci&#243;n de mes,
+				sobre el monto vencido, sin formalidad judicial, ni extrajudicial alguna.
+			</p>
+			<p class="paragraph">
+				ART&#205;CULO 7: GARANT&#205;A. Para seguridad del pago de la deuda asumida por LOS GARANTES REALES, as&#237; como de los intereses y
+				dem&#225;s obligaciones a su cargo, LOS GARANTES REALES otorgan una hipoteca en PRIMER RANGO a favor de EL BANCO sobre el inmueble de
+				su propiedad descrito a continuaci&#243;n, bajo el expreso entendido de que EL BANCO podr&#225; ejecutar la hipoteca otorgada en caso
+				de que se produzca cualquier incumplimiento de los t&#233;rminos contenidos en el presente contrato:
+			</p>
+			<p class="quote">"{!datos.garantiaDescripcion}"</p>
+			<p class="paragraph">
+				PÁRRAFO I: EL GARANTE REAL declara que el inmueble otorgado en hipoteca es de su propiedad y justifica su derecho mediante el
+				Certificado de Título No. {!datos.garantiaNumeroTitulo}, emitido por {!datos.garantiaRegistroTitulos}, en fecha
+				{!datos.garantiaFechaTitulo}, haciendo entrega del mismo a EL BANCO para los fines indicados en este contrato.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO II: BIENES AFECTADOS POR LA HIPOTECA.- LOS GARANTES REALES, en sus calidades de propietarios del bien afectado, declara
+				por este acto, que la hipoteca que se consiente sobre el inmueble anteriormente descrito, afectar&#225; no solamente las mejoras
+				existentes a la fecha de la suscripci&#243;n de este contrato, sino tambi&#233;n las que puedan existir en el futuro, as&#237; como
+				los bienes que para tales fines se consideren inmuebles por naturaleza o por su destino, en especial, aunque no exclusivamente, las
+				edificaciones, estructuras, plantas f&#237;sicas, anexidades y dependencias, as&#237; como los dem&#225;s bienes que, por estar
+				destinados al uso de los inmuebles, se consideren inmuebles por destinaci&#243;n. Asimismo, es entendido que las hipotecas gravan todo
+				lo enclavado, plantado, adherido al suelo, muros, techos, anexidades, mejoras, no solamente de las construcciones y mejoras
+				actualmente existentes, sino tambi&#233;n de las que se construyen, hagan o edifiquen en dichos inmuebles y constituyan inmuebles por
+				destinaci&#243;n.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO III: LOS GARANTES REALES, autorizan a EL BANCO o a la persona en quien &#233;sta delegue, a retirar del Registro de
+				T&#237;tulos el Duplicado del Due&#241;o, luego de haberse inscrito la hipoteca, y una vez en las oficinas de EL BANCO, el Duplicado
+				del Due&#241;o ser&#225; entregado a su titular.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO IV: LOS GARANTES REALES, se comprometen formalmente a lo siguiente: a) pagar todos los impuestos que les corresponde
+				pagar, incluyendo los impuestos que recaen sobre los inmuebles otorgados en garant&#237;a, dentro de los periodos establecidos por la
+				Ley; b) dar aviso inmediato por correo certificado o carta con acuse de recibo a EL BANCO sobre cualquier da&#241;o material que sufra
+				el inmueble otorgado en garant&#237;a; c) cuidar dicho inmueble como lo har&#237;a un buen padre de familia y mantenerlo en buen
+				estado de conservaci&#243;n y reparaci&#243;n.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO V: LOS GARANTES REALES, reconocen que no podr&#225;n transferir a terceros este contrato, ni constituir nuevas hipotecas
+				o afectar con cualquier otro gravamen el inmueble dado en garant&#237;a, sin contar con la autorizaci&#243;n previa, expresa y por
+				escrito de EL BANCO. La falta de autorizaci&#243;n de EL BANCO para constituir nuevas hipotecas ser&#225; una causa de incumplimiento
+				y en consecuencia LOS GARANTES REALES perder&#225;n el beneficio del t&#233;rmino y de las facilidades de pago bajo este contrato,
+				haci&#233;ndose ejecutable la garant&#237;a hipotecaria otorgada, atendiendo a las formalidades de ley.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO VI: LOS GARANTES REALES, declaran y reconocen que en caso de que la totalidad o parte del inmueble dado en garant&#237;a
+				hipotecaria mediante este contrato, sean expropiados por el Estado Dominicano o por cualquier organismo competente, el precio que se
+				pague como resultado de la expropiaci&#243;n ser&#225; entregado a EL BANCO para aplicarlo al pago de las sumas adeudadas bajo el
+				presente contrato. En consecuencia, en caso de que ocurra tal eventualidad, LOS GARANTES REALES autorizan expresa e irrevocablemente
+				al expropiante o adquiriente a entregar directamente a EL BANCO los valores resultantes de la expropiaci&#243;n, para aplicarlos al
+				pago de las sumas adeudadas, debiendo EL BANCO entregar a LOS GARANTES REALES el excedente, en caso de que el pago del precio de la
+				expropiaci&#243;n exceda el monto adeudado.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO VII: LOS GARANTES REALES declaran y reconocen que la hipoteca otorgada cubre cualquier valor adeudado en virtud del
+				presente contrato y que en caso de EL BANCO tenga que ejecutar la hipoteca por falta de pago o incumplimiento del presente contrato,
+				la extinci&#243;n de dicha garant&#237;a no extingue la acreencia sino hasta la concurrencia del precio de adjudicaci&#243;n del
+				inmueble. Es decir que, si el monto adeudado llegare a ser mayor que el valor de adjudicaci&#243;n, EL BANCO podr&#225; perseguir el
+				pago de la deuda restante.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO VIII: En los casos donde la normativa vigente exija a las entidades de intermediaci&#243;n financiera mantener una
+				tasaci&#243;n actualizada de las garant&#237;as, LOS GARANTES REALES se obligan a proporcionarla a su solo costo. En caso de que LOS
+				GARANTES REALES no cumpla con esta obligaci&#243;n, EL BANCO tendr&#225; el derecho, m&#225;s no la obligaci&#243;n, de avanzar estos
+				gastos con fondos propios y reclamar su pago directo a LOS GARANTES REALES o cargar dicha erogaci&#243;n al pr&#233;stamo, cuando
+				&#233;stos no obtemperen al requerimiento de pago que al efecto realice EL BANCO.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO 8. SEGURO DE PROPIEDAD. EL PRESTATARIO ha decidido contratar un seguro de protección a la propiedad, del cual EL BANCO es
+				beneficiario irrevocable, conforme a la póliza No. {!datos.seguroPoliza}, expedida por {!datos.seguroAseguradora}, ubicada en
+				{!datos.seguroDireccion}, por un monto asegurado de {!datos.seguroMontoLetras} ({!datos.simboloMoneda}{!datos.seguroMontoNumero}). La
+				prima mensual será de {!datos.seguroPrimaLetras} ({!datos.simboloMoneda}{!datos.seguroPrimaNumero}). EL PRESTATARIO se compromete a
+				mantener dicha póliza vigente durante el presente contrato.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO I: La p&#243;liza de seguro que EL PRESTATARIO suscriban a tales fines, podr&#225; ser aumentada por EL BANCO si en
+				cualquier momento durante la vigencia de la p&#243;liza de seguros contratada, la compa&#241;&#237;a aseguradora decide aumentar la
+				prima de seguro por cualquier causa justificada, previa notificaci&#243;n por escrito o por cualquier medio fehaciente a EL
+				PRESTATARIO antes de su aplicaci&#243;n, con treinta (30) d&#237;as calendario de anticipaci&#243;n.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO II: EL PRESTATARIO mientras sean deudores de EL BANCO se obligan a mantener la p&#243;liza de seguro vigente por
+				renovaciones sucesivas, en el entendido de que si dejaren de hacerlo EL BANCO estar&#225; autorizado, sin estar obligado, a hacer
+				dicha renovaci&#243;n por cuenta de EL PRESTATARIO, en cuyo caso notificar&#225; a los mismos sobre la renovaci&#243;n realizada,
+				debiendo EL PRESTATARIO cancelar los avances en que incurra EL BANCO por dicho concepto, antes del pr&#243;ximo vencimiento de los
+				intereses convencionales establecidos en el presente contrato. Las sumas que EL BANCO avance por tal concepto, estar&#225;n avaladas
+				por la garant&#237;a descrita en este acto, acordando que las sumas que por este concepto avance EL BANCO devengar&#225;n intereses de
+				acuerdo a la tasa vigente en el mercado, los cuales ser&#225;n exigibles a opci&#243;n de EL BANCO.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO III: En caso de que se produjera un siniestro EL PRESTATARIO deber&#225;n comunicarlo inmediatamente por escrito a EL
+				BANCO dentro de las veinticuatro (24) horas subsiguientes; evaluados los da&#241;os reales, el importe ser&#225; pagado directamente a
+				EL BANCO y se destinar&#225; en primer lugar a la cancelaci&#243;n del pr&#233;stamo, entendi&#233;ndose, asimismo, que en caso de
+				insuficiencia del valor percibido para cancelar la totalidad del cr&#233;dito, EL BANCO podr&#225; perseguir el pago del saldo vencido
+				y exigible a su elecci&#243;n.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO IV: En caso de presentarse, durante el curso del pr&#233;stamo, una situaci&#243;n ajena a EL BANCO y a EL PRESTATARIO
+				que afecten la p&#243;liza de seguro contratada, por lo cual EL BANCO tenga que contratar los servicios de otra compa&#241;&#237;a de
+				seguros, EL BANCO y EL PRESTATARIO evaluar&#225;n y contratar&#225;n la p&#243;liza de la compa&#241;&#237;a aseguradora m&#225;s
+				conveniente dentro del mercado.
+			</p>
+			<p class="paragraph">
+				ARTÍCULO 9. SEGURO DE VIDA. EL PRESTATARIO se obliga a mantener vigente durante el contrato el seguro de vida asociado al préstamo,
+				del cual EL BANCO será beneficiario irrevocable, conforme a las condiciones de la póliza correspondiente.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: La póliza de seguro de vida será pagada por EL PRESTATARIO mediante {!datos.plazoLetras} ({!datos.plazoNumero}) cuotas
+				mensuales, iguales y consecutivas, por un monto de {!datos.seguroVidaMontoLetras}
+				({!datos.simboloMoneda}{!datos.seguroVidaMontoNumero}), y en caso de incumplimiento de esta obligación EL PRESTATARIO perderá el
+				beneficio de los plazos acordados. Cualquier aumento de la prima deberá ser notificado a EL PRESTATARIO por un medio fehaciente con
+				treinta (30) días calendario de anticipación.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO II: EL PRESTATARIO mientras sean deudores de EL BANCO se obligan a pagar los valores correspondientes a las renovaciones
+				de la p&#243;liza de seguro, en el entendido de que si dejaren de hacerlo EL BANCO estar&#225; autorizado, sin estar obligado, a hacer
+				dicha renovaci&#243;n por cuenta de EL PRESTATARIO, en cuyo caso notificar&#225;n a los mismos sobre la renovaci&#243;n realizada,
+				debiendo EL PRESTATARIO cancelar los avances en que incurra EL BANCO por dicho concepto, antes del pr&#243;ximo vencimiento de los
+				intereses convencionales establecidos en el presente contrato. Las sumas que EL BANCO avance por tal concepto, estar&#225;n avaladas
+				por la garant&#237;a descrita en este acto, acordando que las sumas que por este concepto avance EL BANCO devengar&#225;n intereses de
+				acuerdo a la tasa vigente en el mercado, los cuales ser&#225;n exigibles a opci&#243;n de EL BANCO.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO III: En caso de presentarse, durante el curso del pr&#233;stamo, una situaci&#243;n ajena a EL BANCO y EL PRESTATARIO
+				afecten la p&#243;liza de seguro contratada, por lo cual EL BANCO tenga que contratar los servicios de otra compa&#241;&#237;a de
+				seguros, EL BANCO y EL PRESTATARIO evaluar&#225;n y contratar&#225;n la p&#243;liza de la compa&#241;&#237;a aseguradora m&#225;s
+				conveniente dentro del mercado, quedando EL BANCO obligado a entregar a EL PRESTATARIO los documentos relativos a la contrataci&#243;n
+				de la p&#243;liza y su cobertura.
+			</p>
+			<p class="paragraph">
+				ART&#205;CULO 10: OPCI&#211;N DE COBROS. Queda convenido que a su vencimiento EL BANCO podr&#225; exigir a su opci&#243;n, el pago de
+				la deuda a EL PRESTATARIO mediante la ejecuci&#243;n del pagar&#233; antes mencionado, o por todas las v&#237;as de derecho, sin que
+				tal cosa implique renuncia de parte de EL BANCO a ning&#250;n otro de los derechos que le corresponden en su condici&#243;n de
+				acreedor.
+			</p>
+			<p class="paragraph">
+				ART&#205;CULO 11. COMPENSACI&#211;N DE DEUDA. Asimismo, EL PRESTATARIO autorizan y facultan a EL BANCO, a su &#250;nica opci&#243;n, a
+				que en cualquier momento pueda compensar la deuda mediante la apropiaci&#243;n de cualquier suma de dinero de su propiedad que se
+				encuentre en manos de EL BANCO, para cubrir el pago de capital, intereses y accesorios o de derechos vencidos originados por el
+				presente contrato. En caso de aplicar una compensaci&#243;n de deuda EL BANCO deber&#225; notificarlo a EL PRESTATARIO indicando el
+				monto compensado, la cuenta afectada y la forma en que fueron aplicados los valores a la deuda. Dicha notificaci&#243;n podr&#225;
+				hacerse por uno de los medios siguientes a opci&#243;n de EL BANCO: a) mediante comunicaci&#243;n f&#237;sica por escrito; b) al
+				correo electr&#243;nico suministrado por EL PRESTATARIO a EL BANCO, o; c) cualquier otro medio fehaciente de conformidad con el
+				derecho com&#250;n dominicano.
+			</p>
+			<p class="paragraph">
+				ART&#205;CULO 12. CADUCIDAD y TERMINACI&#211;N. La falta de pago de dos (02) cuotas de capital e intereses, o el incumplimiento de
+				cualquier obligaci&#243;n a cargo de EL PRESTATARIO producir&#225;n el vencimiento del t&#233;rmino del presente contrato a
+				opci&#243;n de EL BANCO, haci&#233;ndose exigible la totalidad de la deuda, y ejecutable la garant&#237;a, atendiendo a las
+				formalidades legales establecidas, sin que haya plazo para que EL BANCO ejerza este derecho.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO I: Sin perjuicio de otras causas de caducidad del t&#233;rmino que resultan de la legislaci&#243;n vigente y de las que
+				se consignen en otras partes del presente documento, este contrato podr&#225; terminarse por las razones siguientes:
+			</p>
+			<p class="paragraph">Por la llegada del t&#233;rmino;</p>
+			<p class="paragraph">Por mutuo acuerdo entre las partes contratantes (previo saldo del total adeudado);</p>
+			<p class="paragraph">
+				Igualmente, EL BANCO podr&#225;, a su &#250;nica opci&#243;n, dar t&#233;rmino al presente contrato en cualquier momento antes del
+				t&#233;rmino estipulado, haci&#233;ndose exigible la totalidad de la deuda y suspendiendo cualquier desembolso pendiente, sin
+				comprometer su responsabilidad y sin necesidad alguna de formalidad judicial o extrajudicial, si ocurre alguna de las situaciones
+				siguientes: a) EL PRESTATARIO utilizaren los fondos desembolsados para fines contrarios al prop&#243;sito del pr&#233;stamo consignado
+				en este documento; b) ante la ocurrencia de cualquier evento que, en el criterio razonable de EL BANCO, ponga en riesgo el
+				cr&#233;dito, afecte la capacidad financiera o disminuya el valor del patrimonio de EL PRESTATARIO, para cumplir satisfactoriamente
+				con las obligaciones asumidas en el presente contrato; c) si EL PRESTATARIO son demandados o se produce el secuestro, embargo
+				conservatorio, retentivo o ejecutorio contra cualquiera de sus bienes; d) en caso de incumplimiento por parte de EL PRESTATARIO de una
+				cualquiera de las obligaciones resultantes del presente contrato; e) si EL BANCO descubre que hubo falsificaci&#243;n,
+				manipulaci&#243;n o inexactitud de la documentaci&#243;n financiera, legal o de cualquier naturaleza suministrada a EL BANCO por parte
+				de EL PRESTATARIO para el otorgamiento del pr&#233;stamo; f) si se demuestra que EL PRESTATARIO hubiere ocultado u omitido alguna
+				informaci&#243;n o dato razonable y objetivamente relevante para el otorgamiento del cr&#233;dito y que de haber sido sabido por EL
+				BANCO, no se hubiera aprobado la facilidad crediticia.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO II: En los casos de terminaci&#243;n anticipada previstos en este contrato, EL BANCO deber&#225; notificar la ruptura del
+				contrato a EL PRESTATARIO, por escrito o por cualquier medio fehaciente, con treinta (30) d&#237;as calendario de antelaci&#243;n a
+				dicha terminaci&#243;n, salvo que se identifiquen elementos de alto riesgo relacionados a actos il&#237;citos cometidos por EL
+				PRESTATARIO, sus administradores y/o accionistas con participaci&#243;n significativa, en cuyo caso EL BANCO deber&#225; notificar la
+				terminaci&#243;n a EL PRESTATARIO en un plazo no mayor a cinco (5) d&#237;as posteriores a la terminaci&#243;n.
+			</p>
+			<p class="paragraph">
+				ART&#205;CULO 13. SOBRE LA REESTRUCTURACI&#211;N Y LIQUIDACI&#211;N DE EMPRESAS Y PERSONAS F&#205;SICAS COMERCIANTES. EL PRESTATARIO
+				comerciantes, por medio del presente contrato declara que no ha sido sometido ni ha sido iniciado un proceso de reestructuraci&#243;n,
+				de liquidaci&#243;n o de acuerdo previo de plan, del cual formen parte, de conformidad con las disposiciones de la Ley No. 141-15 de
+				fecha 7 de agosto de 2015, sobre Reestructuraci&#243;n y Liquidaci&#243;n de Empresas y Personas F&#237;sicas Comerciantes EL
+				PRESTATARIO reconoce que dicha declaraci&#243;n es un elemento esencial tomado en cuenta por EL BANCO para la firma del presente
+				contrato.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO I: En caso de EL PRESTATARIO o alguno de sus acreedores se acoja a la Ley 141-15, su Reglamento de aplicaci&#243;n y sus
+				modificaciones, o aquella que la sustituya, EL PRESTATARIO se comprometen a: a) notificar a EL BANCO en un plazo no mayor de dos (2)
+				d&#237;as laborables, previo al sometimiento al tribunal el Acuerdo Previo de Plan que ser&#225; sometido; b) notificar a EL BANCO con
+				treinta (30) d&#237;as laborables de antelaci&#243;n al sometimiento por parte de EL PRESTATARIO de la solicitud de
+				reestructuraci&#243;n al tribunal u &#243;rganos correspondientes, adjuntando a dicha notificaci&#243;n las razones que fundamentan la
+				solicitud y el posible plan de reestructuraci&#243;n; c) notificar a EL BANCO cuando se trate de una solicitud de
+				Reestructuraci&#243;n iniciada por uno o m&#225;s acreedores de EL PRESTATARIO a m&#225;s tardar el d&#237;a siguiente de recibida la
+				solicitud de reestructuraci&#243;n; d) informar a EL BANCO cuando se encuentre en al menos una de las condiciones que fundamentan la
+				solicitud de reestructuraci&#243;n de conformidad con la referida ley; y e) a incluir en toda solicitud de reestructuraci&#243;n de
+				deuda a EL BANCO como acreedor de este en la relaci&#243;n de todos sus acreedores, siempre que existan cr&#233;ditos pendientes de
+				pago a EL BANCO.
+			</p>
+			<p class="paragraph">
+				ART&#205;CULO 14. SUMINISTRO DE INFORMACI&#211;N. En virtud de las disposiciones de la Ley Org&#225;nica sobre Protecci&#243;n de
+				Datos de Car&#225;cter Personal No. 172-13, del trece (13) de diciembre del a&#241;o dos mil trece (2013). EL PRESTATARIO autorizan a
+				EL BANCO a consultarlo en la base de datos de las Sociedades de Informaci&#243;n Crediticia (SIC) a los fines de evaluaci&#243;n de
+				cr&#233;dito, as&#237; como para cualquier uso adicional que EL BANCO considere pertinente con el objetivo de brindar sus servicios a
+				EL PRESTATARIO; as&#237; como para dar cumplimiento a las disposiciones legales vigentes, especialmente, y sin que ello sea
+				limitativo, a las disposiciones sobre prevenci&#243;n de lavado de activos y financiamiento del terrorismo. EL PRESTATARIO declaran,
+				reconocen y aceptan el uso y conservaci&#243;n de la informaci&#243;n de car&#225;cter personal y crediticia otorgada a EL BANCO,
+				facult&#225;ndolo a mantener dichas informaciones en su base de datos. De igual forma, EL PRESTATARIO autorizan a EL BANCO a
+				transmitir a las Sociedades de Informaci&#243;n Crediticia (SIC) la informaci&#243;n requerida conforme los par&#225;metros de ley y
+				necesaria para los fines de evaluaci&#243;n del cr&#233;dito por parte de otras instituciones suscriptores de dichas Sociedades de
+				Informaci&#243;n, reconociendo y garantizando que la revelaci&#243;n de dichas informaciones por parte de EL BANCO y/o por las
+				Sociedades de Informaci&#243;n Crediticia y/o por sus respectivos empleados, funcionarios y accionistas no conllevara violaci&#243;n
+				de secreto profesional a los efectos del art&#237;culo 377 del C&#243;digo Penal, violaci&#243;n al secreto bancario a los efectos del
+				literal b) de la Ley Monetaria y Financiera No. 183-02, ni generar&#225;n responsabilidades bajo los art&#237;culos 1382 y siguiente
+				del C&#243;digo Civil, ni bajo ning&#250;n otro texto legal. De igual forma, EL PRESTATARIO consienten y autorizan a EL BANCO a ceder
+				las informaciones otorgadas, incluyendo informaciones biogr&#225;ficas, a sus gestores de cobro y a las sociedades con las que
+				mantenga acuerdos de referimiento o relaciones comerciales para dar cumplimiento a los fines directamente relacionados con el
+				inter&#233;s leg&#237;timo de EL BANCO y EL PRESTATARIO, manteniendo &#233;ste la facultad de rectificar y/o suprimir los datos que
+				demuestre sean incorrectos, incompletos, desactualizados o cuyo registro est&#233; prohibido.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO I: Asimismo, EL PRESTATARIO autorizan expresamente a EL BANCO a consultar sus datos en el Maestro de Cedulados que
+				mantiene la Junta Central Electoral (JCE), conforme las disposiciones del Reglamento que establece el Procedimiento para Acceder al
+				Maestro de Cedulados y Fija las tasas por los Servicios de Acceso de fecha veintitr&#233;s (23) de julio del a&#241;o dos mil trece
+				(2013), descargando a EL BANCO de cualquier responsabilidad relativa a la consulta realizada en el referido Maestro, en el entendido
+				de que dichos datos deber&#225;n ser manejados con la debida confidencialidad y no podr&#225;n ser divulgados sin el consentimiento de
+				EL PRESTATARIO.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO II: EL PRESTATARIO de nacionalidad extranjera, en los casos que aplique, autorizan a EL BANCO, a realizar las revisiones
+				correspondientes de su historial crediticio en el bur&#243; de cr&#233;dito internacional que corresponda.
+			</p>
+			<p class="paragraph">
+				ART&#205;CULO 15. PREVENCI&#211;N LAVADO DE ACTIVOS. EL PRESTATARIO declaran, reconocen y aceptan haber sido informado por EL BANCO de
+				las disposiciones contenidas en la Ley No. 155-17 de fecha 1&#186; de junio de 2017, contra el lavado de activos y financiamiento del
+				terrorismo, admitiendo que se constituye en sujeto obligado a los fines de dicha ley y a las regulaciones emanadas de las autoridades
+				monetarias y financieras.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO: EL PRESTATARIO quedan obligados a ofrecer a EL BANCO las informaciones que le sean solicitadas, en forma veraz y sin
+				demora, quedando comprometidos a colaborar para lograr una eficiente prevenci&#243;n en el lavado de activos, en caso contrario,
+				significar&#225; un incumplimiento del presente contrato, y esta situaci&#243;n generar&#225; la opci&#243;n a favor de EL BANCO de
+				terminaci&#243;n inmediata del mismo, sin que implique responsabilidad para EL BANCO.
+			</p>
+			<p class="paragraph">
+				ART&#205;CULO 16. DERECHOS DE EL PRESTATARIO. Quedan entendido entre las partes que EL PRESTATARIO tendr&#225;n derecho a una
+				contrataci&#243;n justa, a reclamar, a que exista equilibrio entre la protecci&#243;n del usuario y la provisi&#243;n de servicios
+				financieros a costos accesibles, a la libre elecci&#243;n, a la publicidad y difusi&#243;n, a las reglas de interpretaci&#243;n, a la
+				transparencia, al trato equitativo, no discriminatorio o abusivo, y al trato igualitario para los usuarios discapacitados.
+			</p>
+			<p class="paragraph">
+				ART&#205;CULO 17. IMPUESTOS, GASTOS Y HONORARIOS. EL PRESTATARIO se obliga a pagar todos los impuestos, gastos y honorarios que
+				origine este contrato, as&#237; como cualquier suma de dinero que EL BANCO tuviere que pagar por concepto de gastos y honorarios, como
+				consecuencia de cualquier actuaci&#243;n judicial o extrajudicial que realice en relaci&#243;n con el mismo.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO I: EL PRESTATARIO podr&#225;n solicitar a EL BANCO, y este deber&#225; obtemperar al requerimiento, todos los
+				comprobantes de aquellos impuestos y gastos en que se incurra respecto del presente contrato de pr&#233;stamo. Asimismo, EL
+				PRESTATARIO declaran que ha recibido y evaluado el documento contentivo del desglose de impuestos, gastos, honorarios y comisiones que
+				deber&#225; pagar en ocasi&#243;n de la suscripci&#243;n del presente contrato, sin perjuicio de aquellos montos que surjan de manera
+				imprevisible los cuales al momento de presentarse deber&#225;n ser notificados a EL PRESTATARIO con la justificaci&#243;n
+				correspondiente.
+			</p>
+			<p class="paragraph">
+				P&#225;rrafo II: EL PRESTATARIO se comprometen a pagar conjuntamente con la cancelaci&#243;n del pr&#233;stamo otorgado en virtud del
+				presente contrato, la suma aplicable por la expedici&#243;n de la cancelaci&#243;n de hipoteca (acto de radiaci&#243;n), de
+				conformidad a lo indicado en el tarifario vigente al momento de la cancelaci&#243;n.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO III: El tarifario de servicios formar&#225; parte integral del presente contrato, as&#237; como cualquier
+				modificaci&#243;n posterior al mismo.
+			</p>
+			<p class="paragraph">
+				ART&#205;CULO 18. CESI&#211;N DE CR&#201;DITO. Queda expresamente convenido entre las partes que EL BANCO podr&#225; ceder el
+				cr&#233;dito emergente de la L&#237;nea de Cr&#233;dito otorgada en virtud del presente contrato, as&#237; como sus accesorios. En ese
+				caso, EL BANCO deber&#225; notificar por cualquier medio escrito la cesi&#243;n a EL PRESTATARIO, consintiendo &#233;stos &#250;ltimos
+				por medio del presente contrato a la cesi&#243;n y oblig&#225;ndose a no oponer objeci&#243;n o traba alguna al respecto. De igual
+				manera, EL BANCO podr&#225; proporcionar al cesionario las informaciones personales y crediticias de EL PRESTATARIO, sin que ello
+				implique violaci&#243;n alguna a la Ley Org&#225;nica sobre Protecci&#243;n de Datos de Car&#225;cter Personal No. 172-13, o de
+				derechos de EL PRESTATARIO.
+			</p>
+			<p class="paragraph">
+				ART&#205;CULO 19. NO RENUNCIA. EL retraso o no ejercicio por EL BANCO de cualquier acci&#243;n, derecho o privilegio otorgado por
+				medio del presente contrato, no debe interpretarse como una renuncia a ejercer dicha acci&#243;n, derecho o privilegio en el futuro.
+			</p>
+			<p class="paragraph">
+				ART&#205;CULO 20. MODIFICACIONES. Sin perjuicio de lo previsto en otra parte del presente documento, este contrato podr&#225; ser
+				modificado: a) por el mutuo acuerdo entre las partes; b) en virtud de cualquier disposici&#243;n legal que se dicte en el futuro en
+				relaci&#243;n con el objeto de este contrato; y c) por modificaciones a la tasa, cargos, comisiones, fechas y lugares de pago. En este
+				&#250;ltimo caso, EL BANCO comunicar&#225; tales cambios a EL PRESTATARIO, con treinta (30) d&#237;as de anticipaci&#243;n a la fecha
+				efectiva, por los medios que se establecen en el presente contrato o cualquier otro medio fehaciente.
+			</p>
+			<p class="paragraph">
+				ART&#205;CULO 21. ELECCI&#211;N DE DOMICILIO Y NOTIFICACIONES. Para el cumplimiento y ejecuci&#243;n del presente contrato, las partes
+				hacen elecci&#243;n de domicilio en las direcciones indicadas al principio de este contrato.
+			</p>
+			<p class="paragraph">
+				P&#193;RRAFO: Todas las comunicaciones, avisos o cartas que deban ser enviadas por una parte a la otra en cumplimiento de las
+				disposiciones de este contrato, ser&#225;n consideradas debidamente recibidas, si son enviados por escrito por medio de correo u otro
+				medio de comunicaci&#243;n admisible como correo electr&#243;nico, carta, fax o a las direcciones que se indican en este contrato. Es
+				responsabilidad de EL PRESTATARIO notificar a EL BANCO cualquier cambio en la direcci&#243;n y los datos de contacto suministrados. A
+				falta de esta notificaci&#243;n, los avisos y dem&#225;s correspondencia se considerar&#225;n dados v&#225;lidamente, cuando hayan
+				sido remitidos a la &#250;ltima direcci&#243;n que aparezca registrada en EL BANCO.
+			</p>
+			<p class="paragraph">
+				ART&#205;CULO 22. LEY APLICABLE. Para lo no previsto en el presente contrato las partes se someten a las disposiciones de la Ley
+				Monetaria y Financiera No. 183-02, de las normas dictadas por la Autoridad Monetaria y Financiera de la Rep&#250;blica Dominicana, y
+				las disposiciones de derecho com&#250;n, siendo competencia exclusiva de los tribunales de la Rep&#250;blica Dominicana el
+				conocimiento de las acciones judiciales derivadas de la ejecuci&#243;n del presente acuerdo.
+			</p>
+			<p class="paragraph">
+				HECHO Y FIRMADO DE BUENA FE, en cuatro (4) originales de un mismo tenor y efecto, en {!datos.lugarFirma}, a los
+				{!datos.fechaContratoDiaLetras} ({!datos.fechaContratoDiaNumero}) días del mes de {!datos.fechaContratoMes} del año
+				{!datos.fechaContratoAnoLetras} ({!datos.fechaContratoAnoNumero}).
+			</p>
+			<div class="signature-section">
+				<div class="signature-heading">POR EL PRESTATARIO Y GARANTE REAL:</div>
+				<table class="signature-table">
+					<tr>
+						<td class="signature-cell">
+							<div class="signature-line"></div>
+							<div class="signature-name">{!datos.clienteNombre}</div>
+						</td>
+						<td class="signature-cell"></td>
+					</tr>
+				</table>
+				<div class="signature-heading">POR EL BANCO:</div>
+				<table class="signature-table">
+					<tr>
+						<td class="signature-cell">
+							<div class="signature-line"></div>
+							<div class="signature-name">{!datos.bancoRepresentante1.nombreCompleto}</div>
+							<div class="signature-role">{!datos.bancoRepresentante1.cargo}</div>
+						</td>
+						<td class="signature-cell">
+							<div class="signature-line"></div>
+							<div class="signature-name">{!datos.bancoRepresentante2.nombreCompleto}</div>
+							<div class="signature-role">{!datos.bancoRepresentante2.cargo}</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="notary-block">
+				<p class="paragraph">
+					YO, {!datos.notario.tratamiento} {!datos.notario.nombreCompleto}, Notario Público de los del Número para
+					{!datos.notario.jurisdiccionNotario}, Matrícula No. {!datos.notario.matriculaNotario}, del Colegio Dominicano de Notarios,
+					CERTIFICO Y DOY FE de que por ante mí fueron puestas las firmas de {!datos.nombresFirmantesNotario}, cuyas generales constan. En
+					{!datos.lugarFirma}, a los {!datos.fechaContratoDiaLetras} ({!datos.fechaContratoDiaNumero}) días del mes de
+					{!datos.fechaContratoMes} del año {!datos.fechaContratoAnoLetras} ({!datos.fechaContratoAnoNumero}).
+				</p>
+				<div class="notary-signature">
+					<div class="signature-line"></div>
+					<div class="signature-name">{!datos.notario.nombreCompleto}</div>
+					<div class="signature-role">Notario Público</div>
+				</div>
+			</div>
+		</body>
+	</html>
+</apex:page>

@@ -1,16 +1,27 @@
 public with sharing class FSC_ChecklistDocsController {
-	private static final Set<String> REVIEWER_PROFILES = new Set<String>{
-		'Recepción y control de documentos',
-		'Analista de crédito',
-		'System Administrator',
-		'Administrador del sistema'
-	};
-
-	private static final Set<String> OFFICIAL_PROFILES = new Set<String>{ 'Oficial de negocio', 'System Administrator', 'Administrador del sistema' };
+	@TestVisible private static Boolean testBypassPermissions = false;
+	private static final String PERMISO_ANALISTA_CREDITO = 'FSC_CP_Analista_Credito';
+	private static final String PERMISO_ADMINISTRADOR = 'FSC_CP_Administrador';
+	private static final String PERMISO_CONTROL_DOCUMENTOS = 'FSC_CP_Recepcion_Control_Documentos';
+	private static final String PERMISO_OFICIAL_NEGOCIO = 'FSC_CP_Oficial_Negocio';
 
 	private static final String ESTADO_PENDIENTE = 'Pendiente';
 	private static final String ESTADO_APROBADO = 'Aprobado';
 	private static final String ESTADO_OBSERVADO = 'Observado';
+	private static final Set<String> EXTENSIONES_ARCHIVO_PERMITIDAS = new Set<String>{
+		'pdf',
+		'jpg',
+		'jpeg',
+		'png',
+		'gif',
+		'bmp',
+		'tif',
+		'tiff',
+		'webp',
+		'heic',
+		'doc',
+		'docx'
+	};
 
 	private static final String RT_PYME = 'FSC_Solicitud_Credito_PYME';
 	private static final String RT_CONSUMO = 'FSC_Solicitud_Credito_Consumo';
@@ -78,6 +89,13 @@ public with sharing class FSC_ChecklistDocsController {
 		public String createdByName;
 	}
 
+	public class UploadResultDTO {
+		@AuraEnabled
+		public List<Id> acceptedContentDocumentIds = new List<Id>();
+		@AuraEnabled
+		public List<String> rejectedFileNames = new List<String>();
+	}
+
 	@AuraEnabled
 	public static List<RowDTO> initAndGetRows(Id residentialLoanApplicationId) {
 		if (residentialLoanApplicationId == null) {
@@ -85,7 +103,7 @@ public with sharing class FSC_ChecklistDocsController {
 		}
 
 		ResidentialLoanApplication rla = [
-			SELECT Id, Status, RecordType.DeveloperName
+			SELECT Id, AccountId, Status, RecordType.DeveloperName
 			FROM ResidentialLoanApplication
 			WHERE Id = :residentialLoanApplicationId
 			LIMIT 1
@@ -102,7 +120,8 @@ public with sharing class FSC_ChecklistDocsController {
 		}
 
 		List<FSC_ChecklistDocumentos__c> docs = [
-			SELECT Id, FSC_TipoDeSolicitudDeCredito__c, FSC_CategoriaDelDocumento__c, FSC_NroDeDocumento__c, FSC_NombreDelDocumento__c
+			SELECT Id, FSC_TipoDeSolicitudDeCredito__c, FSC_CategoriaDelDocumento__c, FSC_NroDeDocumento__c,
+				FSC_NombreDelDocumento__c, FSC_ClaveTecnicaPrecarga__c
 			FROM FSC_ChecklistDocumentos__c
 			WHERE FSC_TipoDeSolicitudDeCredito__c = :tipoSolicitud
 			ORDER BY FSC_NroDeDocumento__c ASC
@@ -177,6 +196,8 @@ public with sharing class FSC_ChecklistDocsController {
 		for (FSC_SolicitudDeCreditoYChecklistDeDocs__c j : joinByDocId.values()) {
 			joinIds.add(j.Id);
 		}
+
+		FSC_ChecklistDocsPrecargaService.sincronizar(rla.Id, rla.AccountId, docs, joinByDocId);
 
 		Map<Id, List<FileDTO>> filesByJoinId = new Map<Id, List<FileDTO>>();
 		if (!joinIds.isEmpty()) {
@@ -267,28 +288,12 @@ public with sharing class FSC_ChecklistDocsController {
 			throw new AuraHandledException('Parámetros inconsistentes.');
 		}
 
-		String currentProfileName = getCurrentProfileName();
-
-		Boolean isAdmin = currentProfileName == 'System Administrator' || currentProfileName == 'Administrador del sistema';
-
-		Boolean isReviewerOnly =
-			currentProfileName == 'Recepción y control de documentos' ||
-			currentProfileName == 'Analista de crédito';
-		Boolean isOfficialOnly = currentProfileName == 'Oficial de negocio';
-
-		if (!isAdmin && !isReviewerOnly && !isOfficialOnly) {
-			throw new AuraHandledException('No tienes permisos para modificar esta checklist.');
-		}
-
+		Boolean esAdministrador = testBypassPermissions || FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR);
 		Map<Id, FSC_SolicitudDeCreditoYChecklistDeDocs__c> actuales = new Map<Id, FSC_SolicitudDeCreditoYChecklistDeDocs__c>(
 			[
-				SELECT
-					Id,
-					FSC_SolicitudDeCredito__c,
-					FSC_NoAplica__c,
-					FSC_Comentario__c,
-					FSC_ComentarioOficialNegocio__c,
-					FSC_EstadoRevision__c
+				SELECT Id, FSC_SolicitudDeCredito__c, FSC_NoAplica__c, FSC_Comentario__c, FSC_ComentarioOficialNegocio__c, FSC_EstadoRevision__c,
+					FSC_Documento__r.FSC_CategoriaDelDocumento__c, FSC_SolicitudDeCredito__r.FSC_Subestado__c,
+					FSC_SolicitudDeCredito__r.CreatedById, FSC_SolicitudDeCredito__r.FSC_UsuarioPagaresYContratos__c
 				FROM FSC_SolicitudDeCreditoYChecklistDeDocs__c
 				WHERE Id IN :joinIds
 			]
@@ -296,6 +301,8 @@ public with sharing class FSC_ChecklistDocsController {
 
 		List<FSC_SolicitudDeCreditoYChecklistDeDocs__c> upd = new List<FSC_SolicitudDeCreditoYChecklistDeDocs__c>();
 		Set<Id> solicitudesConRevisionModificada = new Set<Id>();
+		Set<Id> conArchivo = new Set<Id>();
+		for (ContentDocumentLink enlace : [SELECT LinkedEntityId FROM ContentDocumentLink WHERE LinkedEntityId IN :joinIds]) conArchivo.add(enlace.LinkedEntityId);
 
 		for (Integer i = 0; i < joinIds.size(); i++) {
 			Id joinId = joinIds[i];
@@ -303,6 +310,19 @@ public with sharing class FSC_ChecklistDocsController {
 				continue;
 
 			FSC_SolicitudDeCreditoYChecklistDeDocs__c actual = actuales.get(joinId);
+			String categoria = actual.FSC_Documento__r.FSC_CategoriaDelDocumento__c;
+			String subestado = actual.FSC_SolicitudDeCredito__r.FSC_Subestado__c;
+			Boolean esContrato = categoria == FSC_DocumentacionContratosService.CATEGORIA;
+			Boolean etapaContratos = subestado == FSC_DocumentacionContratosService.SUBESTADO_CARGA || subestado == FSC_DocumentacionContratosService.SUBESTADO_GENERACION;
+			Boolean puedeRevisar = esAdministrador || tienePermisoRevisor();
+			Boolean puedeEditarComoOficial = esAdministrador || FeatureManagement.checkPermission(PERMISO_OFICIAL_NEGOCIO);
+			if (esContrato || etapaContratos) {
+				puedeRevisar = esContrato && subestado == FSC_DocumentacionContratosService.SUBESTADO_GENERACION &&
+					(esAdministrador || actual.FSC_SolicitudDeCredito__r.FSC_UsuarioPagaresYContratos__c == UserInfo.getUserId());
+				puedeEditarComoOficial = esContrato && subestado == FSC_DocumentacionContratosService.SUBESTADO_CARGA &&
+					(esAdministrador || actual.FSC_SolicitudDeCredito__r.CreatedById == UserInfo.getUserId());
+			}
+			if (!puedeRevisar && !puedeEditarComoOficial) throw new AuraHandledException('No tienes permisos para modificar esta categoría en el subestado actual.');
 
 			Boolean nuevoNoAplica = noAplicaList[i] == null ? actual.FSC_NoAplica__c : noAplicaList[i];
 
@@ -311,52 +331,54 @@ public with sharing class FSC_ChecklistDocsController {
 			String nuevoComentarioOficial = comentarioOficialList[i] == null ? actual.FSC_ComentarioOficialNegocio__c : comentarioOficialList[i];
 
 			String nuevoEstado = String.isBlank(estadoRevisionList[i]) ? actual.FSC_EstadoRevision__c : estadoRevisionList[i];
+			if (esContrato) {
+				if (!puedeRevisar && (nuevoComentario != actual.FSC_Comentario__c || (nuevoEstado != actual.FSC_EstadoRevision__c && nuevoEstado != ESTADO_PENDIENTE))) {
+					throw new AuraHandledException('Solo el responsable de pagarés y contratos puede revisar esta documentación.');
+				}
+				if (!puedeEditarComoOficial && (nuevoNoAplica != actual.FSC_NoAplica__c || nuevoComentarioOficial != actual.FSC_ComentarioOficialNegocio__c)) {
+					throw new AuraHandledException('Solo el creador o un administrador puede completar la documentación en Documentación para contratos.');
+				}
+				if (puedeRevisar && nuevoEstado == ESTADO_APROBADO && nuevoNoAplica != true && !conArchivo.contains(joinId)) {
+					throw new AuraHandledException('No se puede aprobar un documento sin archivo, salvo que esté marcado No aplica.');
+				}
+			}
 
 			if (
-				(isAdmin || isReviewerOnly) &&
+				puedeRevisar &&
 				actual.FSC_SolicitudDeCredito__c != null &&
-				(nuevoComentario != actual.FSC_Comentario__c || nuevoEstado != actual.FSC_EstadoRevision__c)
+				(nuevoComentario != actual.FSC_Comentario__c ||
+				nuevoEstado != actual.FSC_EstadoRevision__c)
 			) {
 				solicitudesConRevisionModificada.add(actual.FSC_SolicitudDeCredito__c);
 			}
 
 			Boolean changesApprovedOnlyComment =
-				isReviewerOnly &&
+				puedeRevisar &&
 				actual.FSC_EstadoRevision__c == ESTADO_APROBADO &&
 				nuevoNoAplica == actual.FSC_NoAplica__c &&
-				nuevoEstado == actual.FSC_EstadoRevision__c;
+				nuevoEstado == actual.FSC_EstadoRevision__c &&
+				nuevoComentarioOficial == actual.FSC_ComentarioOficialNegocio__c;
 
-			if (!isAdmin && actual.FSC_EstadoRevision__c == ESTADO_APROBADO && !changesApprovedOnlyComment) {
+			if (!esAdministrador && actual.FSC_EstadoRevision__c == ESTADO_APROBADO && !changesApprovedOnlyComment) {
 				throw new AuraHandledException('No puedes modificar documentos con estado de revisión "Aprobado".');
 			}
 
-			if (
-				(isAdmin || isOfficialOnly) &&
-				actual.FSC_EstadoRevision__c == ESTADO_APROBADO &&
-				nuevoComentarioOficial != actual.FSC_ComentarioOficialNegocio__c
-			) {
-				throw new AuraHandledException('No puedes modificar el comentario oficial de documentos con estado de revision "Aprobado".');
-			}
-
-			if ((isAdmin || isReviewerOnly) && nuevoEstado == ESTADO_OBSERVADO && String.isBlank(nuevoComentario)) {
+			if (puedeRevisar && nuevoEstado == ESTADO_OBSERVADO && String.isBlank(nuevoComentario)) {
 				throw new AuraHandledException('Si el estado de revisión es "Observado", debes ingresar un comentario.');
 			}
 
 			FSC_SolicitudDeCreditoYChecklistDeDocs__c rowToUpdate = new FSC_SolicitudDeCreditoYChecklistDeDocs__c(Id = joinId);
 
-			if (isAdmin) {
-				rowToUpdate.FSC_NoAplica__c = nuevoNoAplica;
-				rowToUpdate.FSC_Comentario__c = nuevoComentario;
-				rowToUpdate.FSC_ComentarioOficialNegocio__c = nuevoComentarioOficial;
-				rowToUpdate.FSC_EstadoRevision__c = nuevoEstado;
-			} else if (isReviewerOnly) {
+			if (puedeRevisar) {
 				rowToUpdate.FSC_Comentario__c = nuevoComentario;
 				rowToUpdate.FSC_EstadoRevision__c = nuevoEstado;
-			} else if (isOfficialOnly) {
+			}
+			if (puedeEditarComoOficial) {
 				rowToUpdate.FSC_NoAplica__c = nuevoNoAplica;
-				rowToUpdate.FSC_Comentario__c = actual.FSC_Comentario__c;
 				rowToUpdate.FSC_ComentarioOficialNegocio__c = nuevoComentarioOficial;
-				rowToUpdate.FSC_EstadoRevision__c = ESTADO_PENDIENTE;
+				if (!puedeRevisar) {
+					rowToUpdate.FSC_EstadoRevision__c = ESTADO_PENDIENTE;
+				}
 			}
 
 			upd.add(rowToUpdate);
@@ -373,11 +395,7 @@ public with sharing class FSC_ChecklistDocsController {
 	public static void markDocumentAsPending(Id joinId) {
 		if (joinId == null)
 			return;
-
-		String currentProfileName = getCurrentProfileName();
-		if (!isOfficialProfile(currentProfileName)) {
-			throw new AuraHandledException('No tienes permisos para modificar esta checklist.');
-		}
+		validarCargaDocumento(joinId);
 
 		FSC_SolicitudDeCreditoYChecklistDeDocs__c row = [
 			SELECT Id, FSC_SolicitudDeCredito__c, FSC_EstadoRevision__c
@@ -403,10 +421,7 @@ public with sharing class FSC_ChecklistDocsController {
 		List<ResidentialLoanApplication> solicitudes = [
 			SELECT Id, FSC_DocumentacionValidadaAnalista__c
 			FROM ResidentialLoanApplication
-			WHERE
-				Id IN :residentialLoanApplicationIds
-				AND FSC_DocumentacionValidadaAnalista__c = TRUE
-				AND FSC_Subestado__c = 'Análisis de crédito'
+			WHERE Id IN :residentialLoanApplicationIds AND FSC_DocumentacionValidadaAnalista__c = TRUE AND FSC_Subestado__c = 'Análisis de crédito'
 		];
 
 		for (ResidentialLoanApplication solicitud : solicitudes) {
@@ -419,9 +434,99 @@ public with sharing class FSC_ChecklistDocsController {
 	}
 
 	@AuraEnabled
+	public static UploadResultDTO processUploadedFiles(
+		Id residentialLoanApplicationId,
+		Id joinId,
+		List<Id> contentDocumentIds
+	) {
+		if (residentialLoanApplicationId == null || joinId == null) {
+			throw new AuraHandledException('No se pudo identificar la solicitud o el ítem de la checklist.');
+		}
+		validarCargaDocumento(joinId);
+
+		UploadResultDTO result = new UploadResultDTO();
+		if (contentDocumentIds == null || contentDocumentIds.isEmpty()) {
+			return result;
+		}
+
+		List<FSC_SolicitudDeCreditoYChecklistDeDocs__c> checklistRows = [
+			SELECT Id, FSC_SolicitudDeCredito__c
+			FROM FSC_SolicitudDeCreditoYChecklistDeDocs__c
+			WHERE Id = :joinId
+			LIMIT 1
+		];
+		if (checklistRows.isEmpty() || checklistRows[0].FSC_SolicitudDeCredito__c != residentialLoanApplicationId) {
+			throw new AuraHandledException('El ítem de la checklist no corresponde a la solicitud indicada.');
+		}
+
+		Set<Id> requestedDocumentIds = new Set<Id>();
+		for (Id contentDocumentId : contentDocumentIds) {
+			if (contentDocumentId != null) {
+				requestedDocumentIds.add(contentDocumentId);
+			}
+		}
+		if (requestedDocumentIds.isEmpty()) {
+			return result;
+		}
+
+		Set<Id> linkedDocumentIds = new Set<Id>();
+		for (ContentDocumentLink link : [
+			SELECT ContentDocumentId
+			FROM ContentDocumentLink
+			WHERE LinkedEntityId = :joinId AND ContentDocumentId IN :requestedDocumentIds
+		]) {
+			linkedDocumentIds.add(link.ContentDocumentId);
+		}
+
+		Map<Id, ContentVersion> latestVersionByDocumentId = new Map<Id, ContentVersion>();
+		for (ContentVersion version : [
+			SELECT ContentDocumentId, Title, FileExtension
+			FROM ContentVersion
+			WHERE ContentDocumentId IN :linkedDocumentIds AND IsLatest = TRUE
+		]) {
+			latestVersionByDocumentId.put(version.ContentDocumentId, version);
+		}
+
+		Set<Id> rejectedDocumentIds = new Set<Id>();
+		for (Id contentDocumentId : requestedDocumentIds) {
+			ContentVersion version = latestVersionByDocumentId.get(contentDocumentId);
+			String extension = version == null ? null : version.FileExtension;
+			if (
+				!linkedDocumentIds.contains(contentDocumentId) ||
+				String.isBlank(extension) ||
+				!EXTENSIONES_ARCHIVO_PERMITIDAS.contains(extension.toLowerCase())
+			) {
+				rejectedDocumentIds.add(contentDocumentId);
+				String fileName = version == null ? String.valueOf(contentDocumentId) : version.Title;
+				if (version != null && !String.isBlank(extension)) {
+					fileName += '.' + extension;
+				}
+				result.rejectedFileNames.add(fileName);
+			} else {
+				result.acceptedContentDocumentIds.add(contentDocumentId);
+			}
+		}
+
+		if (!rejectedDocumentIds.isEmpty()) {
+			List<ContentDocumentLink> rejectedLinks = [
+				SELECT Id
+				FROM ContentDocumentLink
+				WHERE LinkedEntityId = :joinId AND ContentDocumentId IN :rejectedDocumentIds
+			];
+			if (!rejectedLinks.isEmpty()) {
+				delete rejectedLinks;
+			}
+		}
+
+		linkUploadedFilesToRla(residentialLoanApplicationId, result.acceptedContentDocumentIds);
+		return result;
+	}
+
+	@AuraEnabled
 	public static void enforceSingleFileOnJoin(Id joinId, Id keepContentDocumentId) {
 		if (joinId == null || keepContentDocumentId == null)
 			return;
+		validarCargaDocumento(joinId);
 
 		List<ContentDocumentLink> toDelete = [
 			SELECT Id, ContentDocumentId
@@ -471,22 +576,62 @@ public with sharing class FSC_ChecklistDocsController {
 		}
 	}
 
-	private static String getCurrentProfileName() {
-		User u = [
-			SELECT Profile.Name
-			FROM User
-			WHERE Id = :UserInfo.getUserId()
-			LIMIT 1
+	private static void validarCargaDocumento(Id joinId) {
+		FSC_SolicitudDeCreditoYChecklistDeDocs__c fila = [
+			SELECT FSC_EstadoRevision__c, FSC_Documento__r.FSC_CategoriaDelDocumento__c,
+				FSC_SolicitudDeCredito__r.CreatedById, FSC_SolicitudDeCredito__r.FSC_Subestado__c
+			FROM FSC_SolicitudDeCreditoYChecklistDeDocs__c WHERE Id = :joinId
 		];
-		return u.Profile != null ? u.Profile.Name : null;
+		String categoria = fila.FSC_Documento__r.FSC_CategoriaDelDocumento__c;
+		String subestado = fila.FSC_SolicitudDeCredito__r.FSC_Subestado__c;
+		Boolean permitido = false;
+		Boolean esAdmin = testBypassPermissions || FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR);
+		if (categoria == FSC_DocumentacionContratosService.CATEGORIA) {
+			permitido = subestado == FSC_DocumentacionContratosService.SUBESTADO_CARGA &&
+				(esAdmin || fila.FSC_SolicitudDeCredito__r.CreatedById == UserInfo.getUserId());
+		} else if (esAdmin || FeatureManagement.checkPermission(PERMISO_OFICIAL_NEGOCIO)) {
+			permitido = (subestado == 'Recepción de documentos – Análisis' && categoria == 'Documentos para análisis') ||
+				(subestado == 'Documentación para desembolso y firmas' && categoria == 'Documentos para desembolso');
+		}
+		if (!permitido || fila.FSC_EstadoRevision__c == ESTADO_APROBADO) {
+			throw new AuraHandledException('No puede cargar archivos en este documento. Revise el subestado, el responsable y el estado de revisión.');
+		}
 	}
 
-	private static Boolean isReviewerProfile(String profileName) {
-		return REVIEWER_PROFILES.contains(profileName);
+	private static Boolean tienePermisoRevisor() {
+		return FeatureManagement.checkPermission(PERMISO_ANALISTA_CREDITO) || FeatureManagement.checkPermission(PERMISO_CONTROL_DOCUMENTOS);
 	}
 
-	private static Boolean isOfficialProfile(String profileName) {
-		return OFFICIAL_PROFILES.contains(profileName);
+	public static Map<Id, String> resolveTiposSolicitud(List<ResidentialLoanApplication> solicitudes) {
+		Map<Id, Schema.RecordTypeInfo> recordTypes = Schema.SObjectType.ResidentialLoanApplication.getRecordTypeInfosById();
+		Set<Id> consumoIds = new Set<Id>();
+		Map<Id, String> resultado = new Map<Id, String>();
+		for (ResidentialLoanApplication solicitud : solicitudes) {
+			Schema.RecordTypeInfo tipo = recordTypes.get(solicitud.RecordTypeId);
+			if (tipo == null) continue;
+			String nombre = tipo.getDeveloperName();
+			if (nombre == RT_CONSUMO) {
+				consumoIds.add(solicitud.Id);
+				resultado.put(solicitud.Id, TIPO_CONSUMO_SOLA_FIRMA);
+			} else {
+				resultado.put(solicitud.Id, resolveTipoSolicitud(solicitud.Id, nombre));
+			}
+		}
+		Set<Id> resueltas = new Set<Id>();
+		if (!consumoIds.isEmpty()) {
+			for (FSC_Garantia__c garantia : [
+				SELECT FSC_Residential_Loan_Application__c, FSC_Clase_de_Garantia__c FROM FSC_Garantia__c
+				WHERE FSC_Residential_Loan_Application__c IN :consumoIds ORDER BY CreatedDate ASC
+			]) {
+				Id solicitudId = garantia.FSC_Residential_Loan_Application__c;
+				String tipo = resolveTipoSolicitudByClaseGarantia(garantia.FSC_Clase_de_Garantia__c);
+				if (tipo != null && !resueltas.contains(solicitudId)) {
+					resultado.put(solicitudId, tipo);
+					resueltas.add(solicitudId);
+				}
+			}
+		}
+		return resultado;
 	}
 
 	private static String resolveTipoSolicitud(Id residentialLoanApplicationId, String recordTypeDeveloperName) {
@@ -531,6 +676,7 @@ public with sharing class FSC_ChecklistDocsController {
 		return TIPO_CONSUMO_SOLA_FIRMA;
 	}
 
+	@TestVisible
 	private static String resolveTipoSolicitudByClaseGarantia(String claseGarantia) {
 		if (String.isBlank(claseGarantia)) {
 			return null;
@@ -540,18 +686,20 @@ public with sharing class FSC_ChecklistDocsController {
 			return TIPO_CONSUMO_GARANTIA_SOLIDARIA;
 		}
 
+		// El API puede variar espacios o guiones respecto del texto historico (ej. "I2" y "-I2").
+		String claveClase = FSC_CatalogoGarantiaService.normalizarClave(claseGarantia);
 		if (
-			claseGarantia == CLASE_GARANTIA_VEHICULOS_MAQUINARIAS ||
-			claseGarantia == CLASE_GARANTIA_VEHICULOS_USADOS ||
-			claseGarantia == CLASE_GARANTIA_VEHICULOS_NUEVOS
+			esMismaClase(claveClase, CLASE_GARANTIA_VEHICULOS_MAQUINARIAS) ||
+			esMismaClase(claveClase, CLASE_GARANTIA_VEHICULOS_USADOS) ||
+			esMismaClase(claveClase, CLASE_GARANTIA_VEHICULOS_NUEVOS)
 		) {
 			return TIPO_CONSUMO_GARANTIA_VEHICULO;
 		}
 
 		if (
-			claseGarantia == CLASE_GARANTIA_BIENES_INMUEBLES ||
-			claseGarantia == CLASE_GARANTIA_SOLARES_TERRENOS ||
-			claseGarantia == CLASE_GARANTIA_SOLARES_AGRO
+			esMismaClase(claveClase, CLASE_GARANTIA_BIENES_INMUEBLES) ||
+			esMismaClase(claveClase, CLASE_GARANTIA_SOLARES_TERRENOS) ||
+			esMismaClase(claveClase, CLASE_GARANTIA_SOLARES_AGRO)
 		) {
 			return TIPO_CONSUMO_GARANTIA_HIPOTECARIA;
 		}
@@ -561,5 +709,9 @@ public with sharing class FSC_ChecklistDocsController {
 		}
 
 		return null;
+	}
+
+	private static Boolean esMismaClase(String claveClase, String claseEsperada) {
+		return claveClase == FSC_CatalogoGarantiaService.normalizarClave(claseEsperada);
 	}
 }

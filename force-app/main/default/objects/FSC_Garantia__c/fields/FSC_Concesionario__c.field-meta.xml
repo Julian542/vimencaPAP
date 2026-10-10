@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Concesionario__c</fullName>
+    <label>Concesionario</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CELCO AUTO, S.A. (1-01-83936-8)</fullName>
+                <default>false</default>
+                <label>CELCO AUTO, S.A. (1-01-83936-8)</label>
+            </value>
+            <value>
+                <fullName>AUTO OZAMA, S.A. (1-01-70933-2)</fullName>
+                <default>false</default>
+                <label>AUTO OZAMA, S.A. (1-01-70933-2)</label>
+            </value>
+            <value>
+                <fullName>AGENCIA BELLA, C. POR A. (1-01-00023-6)</fullName>
+                <default>false</default>
+                <label>AGENCIA BELLA, C. POR A. (1-01-00023-6)</label>
+            </value>
+            <value>
+                <fullName>AVELINO ABREU, S. A. S. (1-01-02367-8)</fullName>
+                <default>false</default>
+                <label>AVELINO ABREU, S. A. S. (1-01-02367-8)</label>
+            </value>
+            <value>
+                <fullName>MOTORALEX, S.R.L (1-01-04527-2)</fullName>
+                <default>false</default>
+                <label>MOTORALEX, S.R.L (1-01-04527-2)</label>
+            </value>
+            <value>
+                <fullName>NORTONESKI DEVELOPMENT OFFICE, SRL (1-30-26556-9)</fullName>
+                <default>false</default>
+                <label>NORTONESKI DEVELOPMENT OFFICE, SRL (1-30-26556-9)</label>
+            </value>
+            <value>
+                <fullName>CLEANER STUDIO, S.R.L. (1-30-52080-1)</fullName>
+                <default>false</default>
+                <label>CLEANER STUDIO, S.R.L. (1-30-52080-1)</label>
+            </value>
+            <value>
+                <fullName>HYNAJA SRL (1-30-24819-2)</fullName>
+                <default>false</default>
+                <label>HYNAJA SRL (1-30-24819-2)</label>
+            </value>
+            <value>
+                <fullName>MAGNA MOTORS, S.A. (1-01-05557-1)</fullName>
+                <default>false</default>
+                <label>MAGNA MOTORS, S.A. (1-01-05557-1)</label>
+            </value>
+            <value>
+                <fullName>MATEOSA, S.A. (1-30-35495-2)</fullName>
+                <default>false</default>
+                <label>MATEOSA, S.A. (1-30-35495-2)</label>
+            </value>
+            <value>
+                <fullName>DELTA COMERCIAL, S.A. (1-01-01193-9)</fullName>
+                <default>false</default>
+                <label>DELTA COMERCIAL, S.A. (1-01-01193-9)</label>
+            </value>
+            <value>
+                <fullName>VIAMAR, S.A. (1-01-01114-9)</fullName>
+                <default>false</default>
+                <label>VIAMAR, S.A. (1-01-01114-9)</label>
+            </value>
+            <value>
+                <fullName>COMERCIAL KARROS, S.R.L. (1-01-71756-1)</fullName>
+                <default>false</default>
+                <label>COMERCIAL KARROS, S.R.L. (1-01-71756-1)</label>
+            </value>
+            <value>
+                <fullName>SANTO DOMINGO MOTORS COMPANY, S.A. (1-01-00806-7)</fullName>
+                <default>false</default>
+                <label>SANTO DOMINGO MOTORS COMPANY, S.A. (1-01-00806-7)</label>
+            </value>
+            <value>
+                <fullName>TENEDORA, DESCALIA, S.R.L. (1-24-00330-1)</fullName>
+                <default>false</default>
+                <label>TENEDORA, DESCALIA, S.R.L. (1-24-00330-1)</label>
+            </value>
+            <value>
+                <fullName>BRITISH MOTORS, SRL (1-30-80470-2)</fullName>
+                <default>false</default>
+                <label>BRITISH MOTORS, SRL (1-30-80470-2)</label>
+            </value>
+            <value>
+                <fullName>AUTO PANIAGUA, SRL (1-01-66249-2)</fullName>
+                <default>false</default>
+                <label>AUTO PANIAGUA, SRL (1-01-66249-2)</label>
+            </value>
+            <value>
+                <fullName>FICISA MOTORS, SRL (1-01-73134-6)</fullName>
+                <default>false</default>
+                <label>FICISA MOTORS, SRL (1-01-73134-6)</label>
+            </value>
+            <value>
+                <fullName>AUTO BAHN MOTORS (1-30-77603-2)</fullName>
+                <default>false</default>
+                <label>AUTO BAHN MOTORS (1-30-77603-2)</label>
+            </value>
+            <value>
+                <fullName>REID &amp; COMPAÑIA (1-01-01045-2)</fullName>
+                <default>false</default>
+                <label>REID &amp; COMPAÑIA (1-01-01045-2)</label>
+            </value>
+            <value>
+                <fullName>SPEED AUTO IMPORT (1-30-73419-4)</fullName>
+                <default>false</default>
+                <label>SPEED AUTO IMPORT (1-30-73419-4)</label>
+            </value>
+            <value>
+                <fullName>AUTO LUJASA (1-24-00674-2)</fullName>
+                <default>false</default>
+                <label>AUTO LUJASA (1-24-00674-2)</label>
+            </value>
+            <value>
+                <fullName>FEVI SPORT (1-30-42493-4)</fullName>
+                <default>false</default>
+                <label>FEVI SPORT (1-30-42493-4)</label>
+            </value>
+            <value>
+                <fullName>DIAMANTE AUTO IMPORT (1-30-92877-2)</fullName>
+                <default>false</default>
+                <label>DIAMANTE AUTO IMPORT (1-30-92877-2)</label>
+            </value>
+            <value>
+                <fullName>HPL INVESTMENT SRL, (1-32-22112-5)</fullName>
+                <default>false</default>
+                <label>HPL INVESTMENT SRL, (1-32-22112-5)</label>
+            </value>
+            <value>
+                <fullName>AUTO SERVICES &amp; IMPORT (132402979)</fullName>
+                <default>false</default>
+                <label>AUTO SERVICES &amp; IMPORT (132402979)</label>
+            </value>
+            <value>
+                <fullName>YEFREDDY AUTO, SRL. (1-30-49027-9)</fullName>
+                <default>false</default>
+                <label>YEFREDDY AUTO, SRL. (1-30-49027-9)</label>
+            </value>
+            <value>
+                <fullName>CESAR MOTORS (1-01-55362-6)</fullName>
+                <default>false</default>
+                <label>CESAR MOTORS (1-01-55362-6)</label>
+            </value>
+            <value>
+                <fullName>Domingo Auto Import (1-01-86613-6)</fullName>
+                <default>false</default>
+                <label>Domingo Auto Import (1-01-86613-6)</label>
+            </value>
+            <value>
+                <fullName>AUTO ESPIRIA (132-39657-1)</fullName>
+                <default>false</default>
+                <label>AUTO ESPIRIA (132-39657-1)</label>
+            </value>
+            <value>
+                <fullName>AUTO SPOT CLC, SRL (1-30-79808-7)</fullName>
+                <default>false</default>
+                <label>AUTO SPOT CLC, SRL (1-30-79808-7)</label>
+            </value>
+            <value>
+                <fullName>Grupo Bonanza (1-31-57433-5)</fullName>
+                <default>false</default>
+                <label>Grupo Bonanza (1-31-57433-5)</label>
+            </value>
+            <value>
+                <fullName>Cathay Group ((Grupo Bonanza) (1-31-57433-5)</fullName>
+                <default>false</default>
+                <label>Cathay Group ((Grupo Bonanza) (1-31-57433-5)</label>
+            </value>
+            <value>
+                <fullName>VELOCITY (1-32-26060-2)</fullName>
+                <default>false</default>
+                <label>VELOCITY (1-32-26060-2)</label>
+            </value>
+            <value>
+                <fullName>CENTRO DE VEHICULOS NDC (1-01-61975-9)</fullName>
+                <default>false</default>
+                <label>CENTRO DE VEHICULOS NDC (1-01-61975-9)</label>
+            </value>
+            <value>
+                <fullName>PH Brothers (1-23-00619-5)</fullName>
+                <default>false</default>
+                <label>PH Brothers (1-23-00619-5)</label>
+            </value>
+            <value>
+                <fullName>TOP AUTOS (1-32-20562-6)</fullName>
+                <default>false</default>
+                <label>TOP AUTOS (1-32-20562-6)</label>
+            </value>
+            <value>
+                <fullName>Auto Americana(1-11-15829-1)</fullName>
+                <default>false</default>
+                <label>Auto Americana(1-11-15829-1)</label>
+            </value>
+            <value>
+                <fullName>Motor Hub(1-32-45055-8)</fullName>
+                <default>false</default>
+                <label>Motor Hub(1-32-45055-8)</label>
+            </value>
+            <value>
+                <fullName>Yaham auto (1-3130444-3)</fullName>
+                <default>false</default>
+                <label>Yaham auto (1-3130444-3)</label>
+            </value>
+            <value>
+                <fullName>Auto Corolla (1-01-72754-3)</fullName>
+                <default>false</default>
+                <label>Auto Corolla (1-01-72754-3)</label>
+            </value>
+            <value>
+                <fullName>ALIADOS AUTO IMPORT (1311551629)</fullName>
+                <default>false</default>
+                <label>ALIADOS AUTO IMPORT (1311551629)</label>
+            </value>
+            <value>
+                <fullName>ARS AUTO IMPORT, S.R.L. (1-31-40952-2)</fullName>
+                <default>false</default>
+                <label>ARS AUTO IMPORT, S.R.L. (1-31-40952-2)</label>
+            </value>
+            <value>
+                <fullName>AUTO REOUESTO R. MONTILLA (MONTILLA MOTORS.CXA) (1-30-209294)</fullName>
+                <default>false</default>
+                <label>AUTO REOUESTO R. MONTILLA (MONTILLA MOTORS.CXA) (1-30-209294)</label>
+            </value>
+            <value>
+                <fullName>AUTO TRUST (1-32-221125)</fullName>
+                <default>false</default>
+                <label>AUTO TRUST (1-32-221125)</label>
+            </value>
+            <value>
+                <fullName>Cava Auto (131969194)</fullName>
+                <default>false</default>
+                <label>Cava Auto (131969194)</label>
+            </value>
+            <value>
+                <fullName>Jey Ferreras Autoimport (1-32-332938)</fullName>
+                <default>false</default>
+                <label>Jey Ferreras Autoimport (1-32-332938)</label>
+            </value>
+            <value>
+                <fullName>Auto Gallery (1-30-865507)</fullName>
+                <default>false</default>
+                <label>Auto Gallery (1-30-865507)</label>
+            </value>
+            <value>
+                <fullName>JACKSONVILLE AUTO IMPORT (130488012)</fullName>
+                <default>false</default>
+                <label>JACKSONVILLE AUTO IMPORT (130488012)</label>
+            </value>
+            <value>
+                <fullName>OBB (1-31-135668)</fullName>
+                <default>false</default>
+                <label>OBB (1-31-135668)</label>
+            </value>
+            <value>
+                <fullName>F &amp; L Autos S.R.L(1-30-71856-3)</fullName>
+                <default>false</default>
+                <label>F &amp; L Autos S.R.L(1-30-71856-3)</label>
+            </value>
+            <value>
+                <fullName>VV Autos S.A.S (130-78758-1)</fullName>
+                <default>false</default>
+                <label>VV Autos S.A.S (130-78758-1)</label>
+            </value>
+            <value>
+                <fullName>Vegamovil (RNC. 130-01037-4)</fullName>
+                <default>false</default>
+                <label>Vegamovil (RNC. 130-01037-4)</label>
+            </value>
+            <value>
+                <fullName>Maryland Motors(132-10524-9)</fullName>
+                <default>false</default>
+                <label>Maryland Motors(132-10524-9)</label>
+            </value>
+            <value>
+                <fullName>PREFIAUTO</fullName>
+                <default>false</default>
+                <label>PREFIAUTO</label>
+            </value>
+            <value>
+                <fullName>Ciber Dealer, SRL</fullName>
+                <default>false</default>
+                <label>Ciber Dealer, SRL</label>
+            </value>
+            <value>
+                <fullName>MOTORLAND, SRL (1-32-70767-2)</fullName>
+                <default>false</default>
+                <label>MOTORLAND, SRL (1-32-70767-2)</label>
+            </value>
+            <value>
+                <fullName>FRANCIS MIESES AUTO IMPORT S.R.L (1-32-65356-4)</fullName>
+                <default>false</default>
+                <label>FRANCIS MIESES AUTO IMPORT S.R.L (1-32-65356-4)</label>
+            </value>
+            <value>
+                <fullName>SID AUTOS S.R.L (1-30-29718-5)</fullName>
+                <default>false</default>
+                <label>SID AUTOS S.R.L (1-30-29718-5)</label>
+            </value>
+            <value>
+                <fullName>Herrfrank Auto Import (1-32-14398-1)</fullName>
+                <default>false</default>
+                <label>Herrfrank Auto Import (1-32-14398-1)</label>
+            </value>
+            <value>
+                <fullName>MOVITI (1-30-787518-1)</fullName>
+                <default>false</default>
+                <label>MOVITI (1-30-787518-1)</label>
+            </value>
+            <value>
+                <fullName>GO ELECTRIC (132093674)</fullName>
+                <default>false</default>
+                <label>GO ELECTRIC (132093674)</label>
+            </value>
+            <value>
+                <fullName>ACELA AUTO IMPORT, S.R.L.</fullName>
+                <default>false</default>
+                <label>ACELA AUTO IMPORT, S.R.L.</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

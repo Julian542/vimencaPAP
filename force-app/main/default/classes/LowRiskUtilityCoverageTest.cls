@@ -177,6 +177,25 @@ private class LowRiskUtilityCoverageTest {
     }
 
     @IsTest
+    static void handlesARecalculationFailureFromAnUnknownLead() {
+        String leadPrefix = Lead.SObjectType.getDescribe().getKeyPrefix();
+        Documentacion_Legal__c document = new Documentacion_Legal__c(
+            DOC_Candidato__c = Id.valueOf(leadPrefix + '000000000099')
+        );
+
+        Boolean rejected = false;
+        try {
+            DocumentacionLegalTriggerHandler.afterInsert(
+                new List<Documentacion_Legal__c>{ document }
+            );
+        } catch (Exception expected) {
+            rejected = true;
+        }
+
+        System.assertEquals(true, rejected);
+    }
+
+    @IsTest
     static void parsesInt057ResponsesAndFrames() {
         String successXml =
             '<ErrorCode>000</ErrorCode><ErrorText>OK</ErrorText>' +

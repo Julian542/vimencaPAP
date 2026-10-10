@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniIntegrationProcedure xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customJavaScript>{}</customJavaScript>
+    <description>Dev: FR. HU/BUG: BV-589. Description: Consume API Saldo. Version Cloning: 0.</description>
+    <elementTypeComponentMapping>{&quot;ElementTypeToHTMLTemplateList&quot;:[]}</elementTypeComponentMapping>
+    <isActive>true</isActive>
+    <isIntegProcdSignatureAvl>false</isIntegProcdSignatureAvl>
+    <isIntegrationProcedure>true</isIntegrationProcedure>
+    <isManagedUsingStdDesigner>true</isManagedUsingStdDesigner>
+    <isMetadataCacheDisabled>false</isMetadataCacheDisabled>
+    <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+    <isTestProcedure>false</isTestProcedure>
+    <isWebCompEnabled>false</isWebCompEnabled>
+    <language>English</language>
+    <name>FSC_APISaldo</name>
+    <omniProcessElements>
+        <description>Http Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>HTTPSaldo</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : false,
+  &quot;returnFullDataJSON&quot; : false,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;responseFormat&quot; : &quot;&quot;,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;namedCredential&quot; : &quot;FSC_APIProductos&quot;,
+  &quot;postActionLogging&quot; : &quot;&quot;,
+  &quot;restMethod&quot; : &quot;GET&quot;,
+  &quot;preActionLogging&quot; : &quot;&quot;,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;HTTPSaldo&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;restPath&quot; : &quot;/api/prestamo/tipos/saldo&quot;,
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;id&quot; : &quot;&quot;,
+  &quot;restOptions&quot; : {
+    &quot;headers&quot; : {
+      &quot;Authorization&quot; : &quot;Bearer idaxeupffxg2lw32jvjo3644zp7vtbfswp5hjmtywyuzpitbwjfn75gspj8qidyl&quot;,
+      &quot;Content-Type&quot; : &quot;application/json&quot;
+    },
+    &quot;params&quot; : { },
+    &quot;timeout&quot; : &quot;120000&quot;
+  },
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>1.0</sequenceNumber>
+        <type>Rest Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Response Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>ResponseAction</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;returnFullDataJSON&quot; : false,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;responseFormat&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;HTTPSaldo&quot;,
+  &quot;id&quot; : &quot;&quot;,
+  &quot;restOptions&quot; : { },
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>3.0</sequenceNumber>
+        <type>Response Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Set Values Action</description>
+        <isActive>false</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>SetValues</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;HTTPProductos&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;elementValueMap&quot; : {
+    &quot;productos&quot; : [ {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;G/IMP. INSCRIPCION (2%)&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 93
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;G/IMP.TRANSF. HIP. (3%)&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 95
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;G/IMP. IMPRESION MATRICULA&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 96
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;PAGO POR REGISTRO DE PAGARE&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 97
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;COMISION POR DESEMBOLSO&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 21
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;G/TRAM RENOV/PP LC (4500)&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 33
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;GASTOS HONOR. NOTAR. PUBLIC.&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 41
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;GASTOS NOTARIALES BCJ JUI-1&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 42
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;GASTOS ADMINIST. BCJ JUI-1&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 43
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;SEG. VIDA (DEP/ANTIC.)&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 49
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;SEG. INCENDIO (DEP/ANTIC.)&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 50
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;SEG. AUTOMOVIL  (DEP/ANTIC.)&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 51
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;SEG. HIPOT. VIDA  (DEP/ANTIC.)&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 52
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;CARGO POR INTIMACION&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 53
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;NA&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 55
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;GESTION DE COBROS&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 60
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;INCENTIVO POR VENTAS&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 62
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;CARGOS CHEQUE DEVUELTO&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 70
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;EXENCION DE IMPUESTO 2%&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 82
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;RENOVACION PLACA&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 9
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;PAGO X INSCR. GTIA. CEVALDOM&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 31
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;OTROS GASTOS X RECUPERAR&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 75
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;SERV. ADM DE SEGUROS&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 13
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;IMP. 0.15% CK. ADMINISTRACION&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 14
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;COMISION POR MANEJO&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 22
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;GASTOS SELLOS Y RECIBOS&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 34
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;PAGARE NOTARIAL&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 56
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;CESION DE CREDITO&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 57
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;GASTOS TASAS&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 35
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;COMISION ABONO C /CANC. ANT.&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 27
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;G&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;COMISION GESTION DE COBROS&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 28
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;P&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;GASTOS LEGALES&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 48
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;P&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;TRAMITACION DE PRESTAMO&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 59
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;P&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;GASTOS DE TRAMITACION&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 32
+    }, {
+      &quot;TIPO_ABONO&quot; : &quot;P&quot;,
+      &quot;ES_APORTACION&quot; : null,
+      &quot;CARGAR_GASTOS_A&quot; : &quot;C&quot;,
+      &quot;DESCRIPCION&quot; : &quot;COMISION POR ENDOSO POLIZA&quot;,
+      &quot;TIPO_SALDO&quot; : null,
+      &quot;CODIGO_TIPO_SALDO&quot; : 36
+    } ]
+  },
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failOnStepError&quot; : false,
+  &quot;id&quot; : &quot;&quot;,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : false,
+  &quot;restOptions&quot; : { },
+  &quot;chainOnStep&quot; : false
+}</propertySetConfig>
+        <sequenceNumber>2.0</sequenceNumber>
+        <type>Set Values</type>
+    </omniProcessElements>
+    <omniProcessKey>FSC_APISaldo</omniProcessKey>
+    <omniProcessType>Integration Procedure</omniProcessType>
+    <propertySetConfig>{
+  &quot;linkToExternalObject&quot; : &quot;&quot;,
+  &quot;trackingCustomData&quot; : { },
+  &quot;includeAllActionsInResponse&quot; : false,
+  &quot;columnsPropertyMap&quot; : [ ],
+  &quot;relationshipFieldsMap&quot; : [ ],
+  &quot;labelSingular&quot; : &quot;&quot;,
+  &quot;labelPlural&quot; : &quot;&quot;,
+  &quot;description&quot; : &quot;&quot;,
+  &quot;nameColumn&quot; : &quot;&quot;,
+  &quot;rollbackOnError&quot; : false,
+  &quot;chainableQueriesLimit&quot; : 50,
+  &quot;chainableDMLStatementsLimit&quot; : null,
+  &quot;chainableCpuLimit&quot; : 2000,
+  &quot;chainableHeapSizeLimit&quot; : null,
+  &quot;chainableDMLRowsLimit&quot; : null,
+  &quot;chainableQueryRowsLimit&quot; : null,
+  &quot;chainableSoslQueriesLimit&quot; : null,
+  &quot;additionalChainableResponse&quot; : { },
+  &quot;chainableActualTimeLimit&quot; : null,
+  &quot;transientValues&quot; : {
+    &quot;activateOrDeactivateConsent&quot; : false
+  }
+}</propertySetConfig>
+    <subType>APISaldo</subType>
+    <type>FSC</type>
+    <uniqueName>FSC_APISaldo_English_1</uniqueName>
+    <versionNumber>1.0</versionNumber>
+</OmniIntegrationProcedure>

@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Descripcion_de_la_Garantia__c</fullName>
+    <label>Descripción de la Garantía</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>1</fullName>
+                <default>false</default>
+                <label>GARANTIAS EN PESOS</label>
+            </value>
+            <value>
+                <fullName>2</fullName>
+                <default>false</default>
+                <label>GARANTIAS EN DOLARES</label>
+            </value>
+            <value>
+                <fullName>3</fullName>
+                <default>false</default>
+                <label>HIPOTECARIA INMUEBLES -H1-</label>
+            </value>
+            <value>
+                <fullName>5</fullName>
+                <default>false</default>
+                <label>CARTA DE DESAHUCIO EMPL. GRUPO VIMENCA -G3-</label>
+            </value>
+            <value>
+                <fullName>6</fullName>
+                <default>false</default>
+                <label>INDUSTRIA DE USO MULTIPLE -H2-</label>
+            </value>
+            <value>
+                <fullName>7</fullName>
+                <default>false</default>
+                <label>PRENDARIA SIN DESAPODERAMIENTO-P2</label>
+            </value>
+            <value>
+                <fullName>8</fullName>
+                <default>false</default>
+                <label>MAQUINARIAS Y EQUIPOS DE USO ESPECIALIZADO-(MN)</label>
+            </value>
+            <value>
+                <fullName>9</fullName>
+                <default>false</default>
+                <label>-HOTELES EN POLOS TURISTICOS DESARROLLADOS -H3-</label>
+            </value>
+            <value>
+                <fullName>10</fullName>
+                <default>false</default>
+                <label>-HOTELES EN POLOS TURISTICOS INCIPIENTES -H4-</label>
+            </value>
+            <value>
+                <fullName>11</fullName>
+                <default>false</default>
+                <label>INSTRUMENTOS OTRAS ENTIDADES. FIN -V3-</label>
+            </value>
+            <value>
+                <fullName>12</fullName>
+                <default>false</default>
+                <label>ZONAS FRANCAS DE USO MULTIPLE -H5-</label>
+            </value>
+            <value>
+                <fullName>13</fullName>
+                <default>false</default>
+                <label>PAGARE COMERCIAL-G3</label>
+            </value>
+            <value>
+                <fullName>15</fullName>
+                <default>false</default>
+                <label>PRENDARIA VEHICULOS-P2-</label>
+            </value>
+            <value>
+                <fullName>16</fullName>
+                <default>false</default>
+                <label>INVENTARIO ALMACENAMIENTO MERCANCIA -P1-</label>
+            </value>
+            <value>
+                <fullName>19</fullName>
+                <default>false</default>
+                <label>CARTA COMPROMISO -G3-</label>
+            </value>
+            <value>
+                <fullName>26</fullName>
+                <default>false</default>
+                <label>ENDOSO POLIZA</label>
+            </value>
+            <value>
+                <fullName>27</fullName>
+                <default>false</default>
+                <label>HIPOTECARIA INMUEBLES</label>
+            </value>
+            <value>
+                <fullName>28</fullName>
+                <default>false</default>
+                <label>PRENDARIA VEHICULOS</label>
+            </value>
+            <value>
+                <fullName>29</fullName>
+                <default>false</default>
+                <label>HIPOTECARIA EN DOLARES (US$)</label>
+            </value>
+            <value>
+                <fullName>30</fullName>
+                <default>false</default>
+                <label>PAGARE COMERCIAL EN DOLARES (US$) G3</label>
+            </value>
+            <value>
+                <fullName>31</fullName>
+                <default>false</default>
+                <label>CERTIFICADO DE DEPOSITO FIJO EN DOLARES US$</label>
+            </value>
+            <value>
+                <fullName>32</fullName>
+                <default>false</default>
+                <label>FIRMAS SOLIDARIAS PERSONALES EN DOLARES-S4-</label>
+            </value>
+            <value>
+                <fullName>33</fullName>
+                <default>false</default>
+                <label>MAQUINARIAS Y EQUIPOS DE USO ESPECIALIZADO-(ME)</label>
+            </value>
+            <value>
+                <fullName>34</fullName>
+                <default>false</default>
+                <label>MAQUINARIAS Y EQUIPOS DE USO MULTIPLE-(MN)</label>
+            </value>
+            <value>
+                <fullName>36</fullName>
+                <default>false</default>
+                <label>SOLARES O TERRENOS-I1</label>
+            </value>
+            <value>
+                <fullName>37</fullName>
+                <default>false</default>
+                <label>SOLARES O TERRENOS PARA FINES AGROPECUARIOS-I2</label>
+            </value>
+            <value>
+                <fullName>38</fullName>
+                <default>false</default>
+                <label>EDIFICIOS Y LOCALES COMERCIALES-I4</label>
+            </value>
+            <value>
+                <fullName>39</fullName>
+                <default>false</default>
+                <label>AERONAVES-H7</label>
+            </value>
+            <value>
+                <fullName>40</fullName>
+                <default>false</default>
+                <label>TITULOS  DE DEUDA EN (MN)  EMITIDOS POR EL ESTADO (BC- MH)-V4</label>
+            </value>
+            <value>
+                <fullName>41</fullName>
+                <default>false</default>
+                <label>TITULOS  DE DEUDA EN (MN)  EMITIDOS POR EL ESTADO (BC- MH)-V11</label>
+            </value>
+            <value>
+                <fullName>42</fullName>
+                <default>false</default>
+                <label>TITULOS  REPRESENTATIVOS DE DEUDA  EMITIDOS POR EIF-V5</label>
+            </value>
+            <value>
+                <fullName>43</fullName>
+                <default>false</default>
+                <label>AVALES O FIANZA, CARTAS DE CRED. EXP. E IMP. IRREB-V8</label>
+            </value>
+            <value>
+                <fullName>44</fullName>
+                <default>false</default>
+                <label>AVALES O FIANZA, CARTAS DE CRED. EXP. E IMP. IRREB-V14</label>
+            </value>
+            <value>
+                <fullName>45</fullName>
+                <default>false</default>
+                <label>CUOTA DE PARTICIPACION DE FONDOS DE INVERSION EN (ME)-V15</label>
+            </value>
+            <value>
+                <fullName>46</fullName>
+                <default>false</default>
+                <label>CUOTA DE PARTICIPACION DE FONDOS DE INVERSION EN (MN)-V9</label>
+            </value>
+            <value>
+                <fullName>47</fullName>
+                <default>false</default>
+                <label>CERTIFICADO DE GARANTIA RECIPROCA EN (MN)-V10</label>
+            </value>
+            <value>
+                <fullName>48</fullName>
+                <default>false</default>
+                <label>GARANTIA PERSONAL-OTROS AVALES-S2</label>
+            </value>
+            <value>
+                <fullName>49</fullName>
+                <default>false</default>
+                <label>PANELES FOTOVOLTAICOS-J1</label>
+            </value>
+            <value>
+                <fullName>50</fullName>
+                <default>false</default>
+                <label>MOLINOS DE VIENTO-J2</label>
+            </value>
+            <value>
+                <fullName>51</fullName>
+                <default>false</default>
+                <label>ABSORBEDORES DE COLOR PARA REFRIGERACIÓN-J3</label>
+            </value>
+            <value>
+                <fullName>52</fullName>
+                <default>false</default>
+                <label>CALENTADORES SOLARES PARA AGUA Y/O ACEITE TÉRMICO-J4</label>
+            </value>
+            <value>
+                <fullName>53</fullName>
+                <default>false</default>
+                <label>PLANTAS DE GENERACIÓN DE ENERGÍA ELÉCTRICA-J5</label>
+            </value>
+            <value>
+                <fullName>54</fullName>
+                <default>false</default>
+                <label>GASIFICADORES DE BIOMASA-J6</label>
+            </value>
+            <value>
+                <fullName>55</fullName>
+                <default>false</default>
+                <label>EQUIPOS CONEXOS DE CONV. DE CORR. DIR. PAN. SOL.-J7</label>
+            </value>
+            <value>
+                <fullName>56</fullName>
+                <default>false</default>
+                <label>EQUIPOS DE GENERACION ELECT. DE CICLO ORG. RANK.-J8</label>
+            </value>
+            <value>
+                <fullName>57</fullName>
+                <default>false</default>
+                <label>EQUIPOS DE ALM. DE ENERG. ELEC. O TERMICA-J9</label>
+            </value>
+            <value>
+                <fullName>58</fullName>
+                <default>false</default>
+                <label>PANALES PARABOLICOS O PLANOS CONC. ENE. SOL.-K1</label>
+            </value>
+            <value>
+                <fullName>59</fullName>
+                <default>false</default>
+                <label>BIODIGESTORES-K2</label>
+            </value>
+            <value>
+                <fullName>60</fullName>
+                <default>false</default>
+                <label>CALDERAS BIOMASA, BR. DE BIOMASA, MAQ. F.P.B-K3</label>
+            </value>
+            <value>
+                <fullName>61</fullName>
+                <default>false</default>
+                <label>CALENTADORES PARA USO AGRO E IND. BIOMASA-K4</label>
+            </value>
+            <value>
+                <fullName>62</fullName>
+                <default>false</default>
+                <label>MOTORES DE COMBUSTION INT. BIOGOS Y GAS SINT.-K5</label>
+            </value>
+            <value>
+                <fullName>63</fullName>
+                <default>false</default>
+                <label>MOTORES DE PISTONES A PRESIÓN DE VAPOR-K6</label>
+            </value>
+            <value>
+                <fullName>64</fullName>
+                <default>false</default>
+                <label>TURBINAS HIDRAULICAS SUMERGIBLES, CMOAGUA PES-K7</label>
+            </value>
+            <value>
+                <fullName>65</fullName>
+                <default>false</default>
+                <label>FLOTADORES OSCILANTES PARA GEN. E.E.CON OLAS. M-K8</label>
+            </value>
+            <value>
+                <fullName>66</fullName>
+                <default>false</default>
+                <label>AEROGENERADORES Y EQUIPOS CONEXOS INST. Y O/S-K9</label>
+            </value>
+            <value>
+                <fullName>67</fullName>
+                <default>false</default>
+                <label>VALORES DE FIDEICOMISO GARANTIZADOS (BC) (MH)-F1</label>
+            </value>
+            <value>
+                <fullName>68</fullName>
+                <default>false</default>
+                <label>CERTIFICADO DE GARANTÍA FIDUCIARIA FIDEICOMISOS (PRENDA)-F2</label>
+            </value>
+            <value>
+                <fullName>69</fullName>
+                <default>false</default>
+                <label>CERTIFICADO DE GARANTÍA FIDUCIARIA SOBRE FIDEICOMISOS (HIP.)-F2</label>
+            </value>
+            <value>
+                <fullName>70</fullName>
+                <default>false</default>
+                <label>FLUJOS DE FIDEICOMISOS DE FUENTE DE PAGO-F3</label>
+            </value>
+            <value>
+                <fullName>71</fullName>
+                <default>false</default>
+                <label>DEPÓSITOS A PLAZO EN MN DE OTRAS EIF</label>
+            </value>
+            <value>
+                <fullName>72</fullName>
+                <default>false</default>
+                <label>DEPÓSITOS A PLAZO EN MN DE LA PROPIA  EIF</label>
+            </value>
+            <value>
+                <fullName>73</fullName>
+                <default>false</default>
+                <label>DEPÓSITOS A PLAZO EN ME DE LA PROPIA EIF</label>
+            </value>
+            <value>
+                <fullName>74</fullName>
+                <default>false</default>
+                <label>INVENTARIO ALMACENAMIENTO MERCANCIA (MN)</label>
+            </value>
+            <value>
+                <fullName>75</fullName>
+                <default>false</default>
+                <label>INVENTARIO ALMACENAMIENTO MERCANCIA (ME)</label>
+            </value>
+            <value>
+                <fullName>76</fullName>
+                <default>false</default>
+                <label>EDIFICIOS RESIDENCIALES, VIVIENDAS O APTOS.</label>
+            </value>
+            <value>
+                <fullName>77</fullName>
+                <default>false</default>
+                <label>VEHICULOS CON ANTIGUEDAD MENOR DE 5 AÑOS</label>
+            </value>
+            <value>
+                <fullName>78</fullName>
+                <default>false</default>
+                <label>FIRMAS SOLIDARIAS</label>
+            </value>
+            <value>
+                <fullName>79</fullName>
+                <default>false</default>
+                <label>GARANTIA PERSONAL-FIANZAS</label>
+            </value>
+            <value>
+                <fullName>80</fullName>
+                <default>false</default>
+                <label>VEHICULOS PESADOS</label>
+            </value>
+            <value>
+                <fullName>81</fullName>
+                <default>false</default>
+                <label>PROYECTOS HOTELEROS EN CONSTRUCCION</label>
+            </value>
+            <value>
+                <fullName>82</fullName>
+                <default>false</default>
+                <label>HOTELES EN OPERACION</label>
+            </value>
+            <value>
+                <fullName>83</fullName>
+                <default>false</default>
+                <label>ZONAS FRANCAS-INMUEBLES</label>
+            </value>
+            <value>
+                <fullName>84</fullName>
+                <default>false</default>
+                <label>NAVES INDUSTRIALES</label>
+            </value>
+            <value>
+                <fullName>86</fullName>
+                <default>false</default>
+                <label>OTRAS GARANTIAS</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

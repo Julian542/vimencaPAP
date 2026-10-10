@@ -14,6 +14,7 @@ public without sharing class FSC_FirmarDocumentoUtility {
 	private static final String PROCESO_PAGARE = 'PAGARE';
 	private static final String PROCESO_CONTRATO = 'CONTRATO';
 	private static final String DISPLAYED_EMAIL_SENDER = 'Banco Vimenca';
+	private static final String DOC_PREFIX_CREDITO = 'Crédito ';
 	private static final String RT_CREDITO_PYME = 'FSC_Solicitud_Credito_PYME';
 	private static final String RT_CREDITO_CONSUMO = 'FSC_Solicitud_Credito_Consumo';
 	private static final String RT_CREDITO_VEHICULO = 'FSC_Solicitud_Credito_Vehiculo';
@@ -21,10 +22,7 @@ public without sharing class FSC_FirmarDocumentoUtility {
 	private static final String RT_LEGACY_CONSUMO = 'Consumo';
 	private static final String RT_LEGACY_VEHICULO = 'Vehiculo';
 	private static final String RT_LEGACY_HIPOTECARIO = 'Hipotecario';
-	private static final Set<String> ADMIN_PROFILE_NAMES = new Set<String>{
-		'Administrador del sistema',
-		'System Administrator'
-	};
+	private static final String PERMISO_ADMINISTRADOR = 'FSC_CP_Administrador';
 
 	@AuraEnabled(cacheable=false)
 	public static SendDocumentsResult enviarDocumentosFirmar(String buttonName, String recordId) {
@@ -79,7 +77,8 @@ public without sharing class FSC_FirmarDocumentoUtility {
 		}
 
 		response.documentsSent = !queuedProcesses.isEmpty();
-		response.physicalOnly = !response.documentsSent &&
+		response.physicalOnly =
+			!response.documentsSent &&
 			digitalProcesses.isEmpty() &&
 			FSC_ConfiguracionFirmaDocumentosService.hasDocumentosFirmaFisica(recordTypeDeveloperName);
 		response.success = response.documentsSent || response.physicalOnly;
@@ -169,9 +168,7 @@ public without sharing class FSC_FirmarDocumentoUtility {
 			res = http.send(req);
 
 			if (res.getStatusCode() < 200 || res.getStatusCode() >= 300) {
-				throw new FSC_FirmarDocumentoUtilityException(
-					'No se pudieron descargar los archivos firmados. StatusCode: ' + res.getStatusCode()
-				);
+				throw new FSC_FirmarDocumentoUtilityException('No se pudieron descargar los archivos firmados. StatusCode: ' + res.getStatusCode());
 			}
 
 			List<SignedEnvelopeFile> files = parseSignedEnvelopeFiles(envelopeId, res);
@@ -273,17 +270,8 @@ public without sharing class FSC_FirmarDocumentoUtility {
 	}
 
 	private static void validarUsuarioPuedeEnviarAFirmar(ResidentialLoanApplication rla) {
-		Profile currentProfile = [
-			SELECT Name
-			FROM Profile
-			WHERE Id = :UserInfo.getProfileId()
-			LIMIT 1
-		];
-
-		if (rla.OwnerId != UserInfo.getUserId() && !ADMIN_PROFILE_NAMES.contains(currentProfile.Name)) {
-			throw new AuraHandledException(
-				'Solo el dueño del registro puede enviar a firmar la solicitud de crédito: ' + rla.Owner.Name
-			);
+		if (rla.OwnerId != UserInfo.getUserId() && !FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR)) {
+			throw new AuraHandledException('Solo el dueño del registro puede enviar a firmar la solicitud de crédito: ' + rla.Owner.Name);
 		}
 	}
 
@@ -295,7 +283,7 @@ public without sharing class FSC_FirmarDocumentoUtility {
 
 			return new ConfigProceso(
 				'Firmar Credito ' + emailCreditLabel,
-				'Crédito ' + titleCreditLabel + ' - %',
+				DOC_PREFIX_CREDITO + titleCreditLabel + ' - %',
 				'Credito ' + emailCreditLabel,
 				emailCreditLabel,
 				PROCESO_CREDITO,
@@ -385,6 +373,7 @@ public without sharing class FSC_FirmarDocumentoUtility {
 		return getEmailCreditLabel(recordTypeDeveloperName);
 	}
 
+	@TestVisible
 	private static List<ContentVersion> obtenerArchivosPendientes(String recordId, String titleLike) {
 		Set<Id> contentDocumentIds = new Set<Id>();
 
@@ -403,12 +392,16 @@ public without sharing class FSC_FirmarDocumentoUtility {
 		if (String.isBlank(titleLike)) {
 			return obtenerContratosPendientes(recordId, contentDocumentIds);
 		}
+		if (titleLike.startsWith(DOC_PREFIX_CREDITO)) {
+			FSC_GenerarPDF.validarSolicitudParaFirma((Id) recordId);
+		}
 
 		return [
 			SELECT Id, ContentDocumentId, Title, FSC_FechaEnvioFirma__c
 			FROM ContentVersion
 			WHERE
 				ContentDocumentId IN :contentDocumentIds
+				AND IsLatest = TRUE
 				AND FSC_EnviarDocumento__c = TRUE
 				AND FSC_FechaEnvioFirma__c = NULL
 				AND Title LIKE :titleLike
@@ -424,13 +417,12 @@ public without sharing class FSC_FirmarDocumentoUtility {
 		for (ContentVersion cv : [
 			SELECT Id, ContentDocumentId, Title, FSC_FechaEnvioFirma__c
 			FROM ContentVersion
-			WHERE ContentDocumentId IN :contentDocumentIds
-			AND IsLatest = TRUE
-			AND FSC_FechaEnvioFirma__c = NULL
+			WHERE ContentDocumentId IN :contentDocumentIds AND IsLatest = TRUE AND FSC_FechaEnvioFirma__c = NULL
 			ORDER BY Title
 		]) {
 			String title = cv.Title == null ? '' : cv.Title.toLowerCase();
-			if (title.contains('contrato') && (title.contains(recordIdText) || title.contains(recordId15))) {
+			Boolean esDocumentoFormalizacion = title.contains('contrato') || title.contains('pignoracion') || title.contains('pignoración');
+			if (esDocumentoFormalizacion && (title.contains(recordIdText) || title.contains(recordId15))) {
 				pendingContracts.add(cv);
 			}
 		}
@@ -501,9 +493,7 @@ public without sharing class FSC_FirmarDocumentoUtility {
 			return new List<SignedEnvelopeFile>();
 		}
 
-		return new List<SignedEnvelopeFile>{
-			new SignedEnvelopeFile(envelopeId + '.pdf', bodyBlob)
-		};
+		return new List<SignedEnvelopeFile>{ new SignedEnvelopeFile(envelopeId + '.pdf', bodyBlob) };
 	}
 
 	private static List<SignedEnvelopeFile> parseSignedEnvelopeFilesFromJson(String envelopeId, String body) {

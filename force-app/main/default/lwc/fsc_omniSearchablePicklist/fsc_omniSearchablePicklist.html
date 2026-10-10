@@ -1,0 +1,90 @@
+<template>
+	<div class={formElementClass}>
+		<label
+			class="slds-form-element__label"
+			for="search-input">
+			<template if:true={isRequired}>
+				<abbr
+					class="slds-required"
+					title="required"
+					>*</abbr
+				>
+			</template>
+			{label}
+		</label>
+		<div class="slds-form-element__control">
+			<div class="slds-combobox_container">
+				<div class={comboboxClass}>
+					<input
+						id="search-input"
+						type="text"
+						class="slds-input slds-combobox__input c-searchable-picklist__input"
+						role="combobox"
+						aria-expanded={showDropdown}
+						aria-haspopup="listbox"
+						aria-controls="search-listbox"
+						aria-autocomplete="list"
+						aria-invalid={hasValidationError}
+						aria-describedby={inputDescribedBy}
+						required={isRequired}
+						value={searchTerm}
+						placeholder={placeholder}
+						autocomplete="off"
+						spellcheck="false"
+						onfocus={handleFocus}
+						oninput={handleSearchInput}
+						onblur={handleBlur} />
+
+					<template if:true={showDropdown}>
+						<div
+							id="search-listbox"
+							class="slds-dropdown slds-dropdown_length-7 slds-dropdown_fluid c-searchable-picklist__dropdown"
+							role="listbox"
+							onpointerdown={handleDropdownPointerDown}>
+							<ul
+								class="slds-listbox slds-listbox_vertical"
+								role="presentation">
+								<template
+									for:each={renderedOptions}
+									for:item="option">
+									<li
+										key={option.value}
+										role="presentation"
+										class={option.className}>
+										<button
+											type="button"
+											class="slds-button slds-button_reset slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_center slds-size_full c-searchable-picklist__option"
+											role="option"
+											aria-selected={option.ariaSelected}
+											data-value={option.value}
+											onclick={handleSelect}>
+											<span class="slds-media__body">
+												<span class="slds-truncate">{option.label}</span>
+											</span>
+										</button>
+									</li>
+								</template>
+								<li
+									role="presentation"
+									class={emptyOptionClass}>
+									<div class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_center">
+										<span class="slds-media__body">
+											<span class="slds-truncate">{currentEmptyMessage}</span>
+										</span>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</template>
+				</div>
+			</div>
+		</div>
+		<template if:true={hasValidationError}>
+			<div
+				id="search-input-error"
+				class="slds-form-element__help">
+				{validationMessage}
+			</div>
+		</template>
+	</div>
+</template>

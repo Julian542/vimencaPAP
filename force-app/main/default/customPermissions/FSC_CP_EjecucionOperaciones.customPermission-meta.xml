@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomPermission xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Permite gestionar la etapa manual de ejecución de operaciones asignada al usuario.</description>
+    <isLicensed>false</isLicensed>
+    <label>FSC - Ejecución de operaciones</label>
+</CustomPermission>

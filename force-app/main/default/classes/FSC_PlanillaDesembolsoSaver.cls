@@ -1,6 +1,5 @@
 public without sharing class FSC_PlanillaDesembolsoSaver {
 	private static final String TARGET_SUBSTATUS = 'Creación de crédito';
-	private static final Set<String> ADMIN_PROFILES = new Set<String>{ 'System Administrator', 'Administrador del sistema' };
 
 	public static void save(Id loanAppId, Map<String, Object> inputMap) {
 		if (loanAppId == null || loanAppId.getSObjectType() != ResidentialLoanApplication.SObjectType) {
@@ -46,14 +45,7 @@ public without sharing class FSC_PlanillaDesembolsoSaver {
 	}
 
 	private static Boolean isAllowed(ResidentialLoanApplication rla) {
-		User currentUser = [
-			SELECT Profile.Name
-			FROM User
-			WHERE Id = :UserInfo.getUserId()
-			LIMIT 1
-		];
-
-		return ADMIN_PROFILES.contains(currentUser.Profile.Name) || rla.FSC_UsuarioGestionPlanilla__c == UserInfo.getUserId();
+		return FSC_RoleAuthorizationService.canManageDisbursement(rla.FSC_UsuarioGestionPlanilla__c);
 	}
 
 	private static Object convertValue(Object value, Schema.DescribeFieldResult fieldDescribe) {
@@ -67,11 +59,7 @@ public without sharing class FSC_PlanillaDesembolsoSaver {
 		if (fieldType == Schema.DisplayType.Boolean) {
 			return value instanceof Boolean ? value : Boolean.valueOf(rawValue);
 		}
-		if (
-			fieldType == Schema.DisplayType.Currency ||
-			fieldType == Schema.DisplayType.Double ||
-			fieldType == Schema.DisplayType.Percent
-		) {
+		if (fieldType == Schema.DisplayType.Currency || fieldType == Schema.DisplayType.Double || fieldType == Schema.DisplayType.Percent) {
 			return value instanceof Decimal ? value : Decimal.valueOf(rawValue.replace(',', ''));
 		}
 		if (fieldType == Schema.DisplayType.Integer) {

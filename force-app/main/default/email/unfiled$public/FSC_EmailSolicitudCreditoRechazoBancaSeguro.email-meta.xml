@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>FSC - Email Solicitud Credito Rechazo Banca Seguro</name>
+    <style>none</style>
+    <subject>Banca Seguro no aprobó la solicitud {!ResidentialLoanApplication.Name}</subject>
+    <textOnly>Hola,
+
+Banca Seguro no aprobó la solicitud de crédito {!ResidentialLoanApplication.Name}, correspondiente a {!ResidentialLoanApplication.FSC_Nombre_Cliente__c}.
+
+Motivo: {!ResidentialLoanApplication.FSC_MotivoRechazoBancaSeguro__c}
+
+Comentario: {!ResidentialLoanApplication.FSC_ComentarioBancaSeguro__c}
+
+La solicitud quedó Cerrada Perdida con el subestado Rechazado por banca seguro.
+
+Banco Vimenca</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

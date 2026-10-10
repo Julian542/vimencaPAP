@@ -8,15 +8,15 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
     private static final String ERROR_LOG_SEPARATOR = '\n--------------------\n';
     private static final String ERROR_LOG_TIMESTAMP_FORMAT = 'yyyy-MM-dd HH:mm:ss';
     private static final Integer ERROR_LOG_MESSAGE_MAX_LENGTH = 255;
+    private static final String TIPO_ARCHIVO_CONTRATO = 'CONTRATO';
+    private static final String TIPO_ARCHIVO_PIGNORACION = 'PIGNORACION';
 
     private List<Id> residentialLoanApplicationIds;
 
     public FSC_GenerarContratoPDFQueueable(List<Id> residentialLoanApplicationIds) {
-        this.residentialLoanApplicationIds = new List<Id>();
-
-        if (residentialLoanApplicationIds != null) {
-            this.residentialLoanApplicationIds.addAll(residentialLoanApplicationIds);
-        }
+        this.residentialLoanApplicationIds = residentialLoanApplicationIds == null
+            ? new List<Id>()
+            : new List<Id>(new Set<Id>(residentialLoanApplicationIds));
     }
 
     public void execute(QueueableContext context) {
@@ -25,7 +25,10 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
         }
 
         List<ResidentialLoanApplication> loanApplications = [
-            SELECT Id, FSC_Subestado__c, FSC_Contrato_Generado__c, FSC_LogErrores__c
+            SELECT Id, RecordType.DeveloperName, FSC_Subestado__c, FSC_Contrato_Generado__c,
+                FSC_LogErrores__c, FSC_RequiereContratoPagareNotarial__c,
+                FSC_Excepcion_Contrato_Notarial__c, FSC_Pignoracion_Generada__c,
+                FSC_Relacion_Propietario_CD__c, FSC_Fecha_Contrato__c
             FROM ResidentialLoanApplication
             WHERE Id IN :residentialLoanApplicationIds
         ];
@@ -38,6 +41,8 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
         Map<Id, String> pendingErrorLogsByLoanApplicationId = new Map<Id, String>();
         List<ContentVersion> filesToInsert = new List<ContentVersion>();
         List<Id> fileLoanApplicationIds = new List<Id>();
+        List<String> fileTypes = new List<String>();
+        Set<Id> loanApplicationsToAdvanceWithoutFile = new Set<Id>();
 
         for (ResidentialLoanApplication loanApplication : loanApplications) {
             if (loanApplication.FSC_Subestado__c != SUBESTADO_GENERACION_CONTRATO) {
@@ -49,7 +54,87 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
                     throw new FSC_GenerarContratoPDFQueueableException('Error de generación forzado para prueba.');
                 }
 
-                PageReference contractPage = FSC_RLAContractTemplateResolver.resolvePageReference(loanApplication.Id);
+                Boolean esPyme = loanApplication.RecordType.DeveloperName == 'FSC_Solicitud_Credito_PYME';
+                Boolean esConsumo = loanApplication.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Consumo';
+                Boolean esVehiculo = loanApplication.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Vehiculo';
+                Boolean esHipotecario = loanApplication.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Hipotecario';
+                FSC_ConsumoDocumentoResolver.ResolucionDocumento consumo = esConsumo
+                    ? FSC_ConsumoDocumentoResolver.resolve(loanApplication.Id)
+                    : null;
+                FSC_VehiculoDocumentoResolver.ResolucionDocumento vehiculo = esVehiculo
+                    ? FSC_VehiculoDocumentoResolver.resolve(loanApplication.Id)
+                    : null;
+                FSC_HipotecarioDocumentoResolver.ResolucionDocumento hipotecario = esHipotecario
+                    ? FSC_HipotecarioDocumentoResolver.resolve(loanApplication.Id)
+                    : null;
+                Boolean requierePignoracion = esConsumo &&
+                    consumo.codigoPagare == FSC_ConsumoDocumentoResolver.PAGARE_COMPLEMENTARIO &&
+                    consumo.tipoGarantia == FSC_ConsumoDocumentoResolver.GARANTIA_CD;
+
+                if (requierePignoracion) {
+                    if (loanApplication.FSC_Pignoracion_Generada__c == true) {
+                        loanApplicationsToAdvanceWithoutFile.add(loanApplication.Id);
+                        continue;
+                    }
+
+                    PageReference pignorationPage = Page.FSC_PignoracionCertificadoConsumoPDF;
+                    pignorationPage.getParameters().put('id', String.valueOf(loanApplication.Id));
+                    pignorationPage.getParameters().put('fechaDocumento', String.valueOf(Date.today()));
+                    Blob pignorationBlob = Test.isRunningTest()
+                        ? Blob.valueOf('TEST PDF CONTENT')
+                        : pignorationPage.getContentAsPDF();
+                    if (pignorationBlob == null || pignorationBlob.size() == 0) {
+                        throw new FSC_GenerarContratoPDFQueueableException('El PDF de pignoración se generó vacío.');
+                    }
+
+                    String titlePrefix = loanApplication.FSC_Relacion_Propietario_CD__c == 'Persona distinta'
+                        ? 'MODELO DE PIGNORACION DE CERTIFICADO PARA PRESTAMO OTORGADO A UNA PERSONA DISTINTA AL DUENO DEL CD'
+                        : 'MODELO DE PIGNORACION DE CERTIFICADO PARA PRESTAMO OTORGADO AL DUENO DEL CD';
+                    String pignorationTitle = titlePrefix + ' ' + String.valueOf(loanApplication.Id);
+                    filesToInsert.add(new ContentVersion(
+                        Title = pignorationTitle,
+                        PathOnClient = pignorationTitle + '.pdf',
+                        VersionData = pignorationBlob,
+                        FirstPublishLocationId = loanApplication.Id,
+                        FSC_EnviarDocumento__c = true
+                    ));
+                    fileLoanApplicationIds.add(loanApplication.Id);
+                    fileTypes.add(TIPO_ARCHIVO_PIGNORACION);
+                    continue;
+                }
+
+                if (loanApplication.FSC_Contrato_Generado__c == true) {
+                    loanApplicationsToAdvanceWithoutFile.add(loanApplication.Id);
+                    continue;
+                }
+
+                Boolean usaPagareNotarial = esConsumo
+                    ? consumo.codigoPagare == FSC_ConsumoDocumentoResolver.PAGARE_NOTARIAL
+                    : esVehiculo
+                        ? vehiculo.codigoPagare == FSC_ConsumoDocumentoResolver.PAGARE_NOTARIAL
+                        : esHipotecario
+                            ? hipotecario.codigoPagare == FSC_ConsumoDocumentoResolver.PAGARE_NOTARIAL
+                        : esPyme && loanApplication.FSC_RequiereContratoPagareNotarial__c == true;
+                if (!esHipotecario && usaPagareNotarial && loanApplication.FSC_Excepcion_Contrato_Notarial__c != true) {
+                    loanApplicationsToAdvanceWithoutFile.add(loanApplication.Id);
+                    continue;
+                }
+
+                FSC_RLAContractTemplateResolver.ContractResolution resolution =
+                    FSC_RLAContractTemplateResolver.resolve(loanApplication.Id);
+                if (!resolution.aplicaContrato) {
+                    loanApplicationsToAdvanceWithoutFile.add(loanApplication.Id);
+                    continue;
+                }
+
+                PageReference contractPage = FSC_RLAContractTemplateResolver.resolvePageReference(
+                    loanApplication.Id,
+                    resolution.templateCode
+                );
+                Date contractDate = loanApplication.FSC_Fecha_Contrato__c == null
+                    ? Date.today()
+                    : loanApplication.FSC_Fecha_Contrato__c;
+                contractPage.getParameters().put('fechaContrato', String.valueOf(contractDate));
 
                 Blob pdfBlob = Test.isRunningTest()
                     ? Blob.valueOf('TEST PDF CONTENT')
@@ -59,7 +144,7 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
                     throw new FSC_GenerarContratoPDFQueueableException('El PDF se generó vacío.');
                 }
 
-                String fileTitle = buildFileTitle(loanApplication.Id);
+                String fileTitle = resolution.tituloArchivo + ' ' + String.valueOf(loanApplication.Id);
 
                 filesToInsert.add(new ContentVersion(
                     Title = fileTitle,
@@ -69,12 +154,13 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
                     FSC_EnviarDocumento__c = true
                 ));
                 fileLoanApplicationIds.add(loanApplication.Id);
+                fileTypes.add(TIPO_ARCHIVO_CONTRATO);
             } catch (Exception e) {
                 registerError(
                     currentErrorLogsByLoanApplicationId,
                     pendingErrorLogsByLoanApplicationId,
                     loanApplication.Id,
-                    'Error generando contrato PDF: ' + trimForLog(e.getMessage(), ERROR_LOG_MESSAGE_MAX_LENGTH)
+                    'Error generando documento PDF: ' + trimForLog(e.getMessage(), ERROR_LOG_MESSAGE_MAX_LENGTH)
                 );
 
                 System.debug(
@@ -84,21 +170,55 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
             }
         }
 
-        Set<Id> successfulLoanApplicationIds = new Set<Id>();
+        Set<Id> successfulContractLoanApplicationIds = new Set<Id>();
+        Set<Id> successfulPignorationLoanApplicationIds = new Set<Id>();
+
+        if (!filesToInsert.isEmpty()) {
+            Map<Id, ResidentialLoanApplication> lockedLoanApplications = new Map<Id, ResidentialLoanApplication>([
+                SELECT Id, FSC_Contrato_Generado__c, FSC_Pignoracion_Generada__c
+                FROM ResidentialLoanApplication
+                WHERE Id IN :fileLoanApplicationIds
+                FOR UPDATE
+            ]);
+            List<ContentVersion> filteredFiles = new List<ContentVersion>();
+            List<Id> filteredFileLoanApplicationIds = new List<Id>();
+            List<String> filteredFileTypes = new List<String>();
+            for (Integer i = 0; i < filesToInsert.size(); i++) {
+                ResidentialLoanApplication lockedRla = lockedLoanApplications.get(fileLoanApplicationIds[i]);
+                Boolean alreadyGenerated = lockedRla != null &&
+                    (fileTypes[i] == TIPO_ARCHIVO_PIGNORACION
+                        ? lockedRla.FSC_Pignoracion_Generada__c == true
+                        : lockedRla.FSC_Contrato_Generado__c == true);
+                if (lockedRla != null && !alreadyGenerated) {
+                    filteredFiles.add(filesToInsert[i]);
+                    filteredFileLoanApplicationIds.add(fileLoanApplicationIds[i]);
+                    filteredFileTypes.add(fileTypes[i]);
+                } else if (lockedRla != null) {
+                    loanApplicationsToAdvanceWithoutFile.add(fileLoanApplicationIds[i]);
+                }
+            }
+            filesToInsert = filteredFiles;
+            fileLoanApplicationIds = filteredFileLoanApplicationIds;
+            fileTypes = filteredFileTypes;
+        }
 
         if (!filesToInsert.isEmpty()) {
             Database.SaveResult[] saveResults = Database.insert(filesToInsert, false);
 
             for (Integer i = 0; i < saveResults.size(); i++) {
                 if (saveResults[i].isSuccess()) {
-                    successfulLoanApplicationIds.add(fileLoanApplicationIds[i]);
+                    if (fileTypes[i] == TIPO_ARCHIVO_PIGNORACION) {
+                        successfulPignorationLoanApplicationIds.add(fileLoanApplicationIds[i]);
+                    } else {
+                        successfulContractLoanApplicationIds.add(fileLoanApplicationIds[i]);
+                    }
                 } else {
                     String insertErrorMessage = buildDatabaseErrorMessage(saveResults[i].getErrors());
                     registerError(
                         currentErrorLogsByLoanApplicationId,
                         pendingErrorLogsByLoanApplicationId,
                         fileLoanApplicationIds[i],
-                        'Error guardando contrato PDF: ' + insertErrorMessage
+                        'Error guardando documento PDF: ' + insertErrorMessage
                     );
 
                     System.debug(
@@ -109,15 +229,35 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
             }
         }
 
-        if (!successfulLoanApplicationIds.isEmpty()) {
+        if (!successfulContractLoanApplicationIds.isEmpty() ||
+            !successfulPignorationLoanApplicationIds.isEmpty() ||
+            !loanApplicationsToAdvanceWithoutFile.isEmpty()) {
             List<ResidentialLoanApplication> loanApplicationsToUpdate = new List<ResidentialLoanApplication>();
             List<Id> updateLoanApplicationIds = new List<Id>();
 
-            for (Id loanApplicationId : successfulLoanApplicationIds) {
+            for (Id loanApplicationId : successfulContractLoanApplicationIds) {
                 loanApplicationsToUpdate.add(new ResidentialLoanApplication(
                     Id = loanApplicationId,
                     FSC_Subestado__c = SUBESTADO_GESTIONAR_FIRMAS,
-                    FSC_Contrato_Generado__c = true
+                    FSC_Contrato_Generado__c = true,
+                    FSC_Fecha_Contrato__c = contractDateFor(loanApplications, loanApplicationId)
+                ));
+                updateLoanApplicationIds.add(loanApplicationId);
+            }
+
+            for (Id loanApplicationId : successfulPignorationLoanApplicationIds) {
+                loanApplicationsToUpdate.add(new ResidentialLoanApplication(
+                    Id = loanApplicationId,
+                    FSC_Subestado__c = SUBESTADO_GESTIONAR_FIRMAS,
+                    FSC_Pignoracion_Generada__c = true
+                ));
+                updateLoanApplicationIds.add(loanApplicationId);
+            }
+
+            for (Id loanApplicationId : loanApplicationsToAdvanceWithoutFile) {
+                loanApplicationsToUpdate.add(new ResidentialLoanApplication(
+                    Id = loanApplicationId,
+                    FSC_Subestado__c = SUBESTADO_GESTIONAR_FIRMAS
                 ));
                 updateLoanApplicationIds.add(loanApplicationId);
             }
@@ -131,7 +271,7 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
                         currentErrorLogsByLoanApplicationId,
                         pendingErrorLogsByLoanApplicationId,
                         updateLoanApplicationIds[i],
-                        'Error actualizando ResidentialLoanApplication luego de generar contrato PDF: ' + updateErrorMessage
+                        'Error actualizando ResidentialLoanApplication luego de generar documento PDF: ' + updateErrorMessage
                     );
 
                     System.debug(
@@ -172,6 +312,15 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
         );
     }
 
+    private static Date contractDateFor(List<ResidentialLoanApplication> loanApplications, Id loanApplicationId) {
+        for (ResidentialLoanApplication loanApplication : loanApplications) {
+            if (loanApplication.Id == loanApplicationId && loanApplication.FSC_Fecha_Contrato__c != null) {
+                return loanApplication.FSC_Fecha_Contrato__c;
+            }
+        }
+        return Date.today();
+    }
+
     private static String buildDatabaseErrorMessage(Database.Error[] errors) {
         if (errors == null || errors.isEmpty()) {
             return 'Error desconocido.';
@@ -206,10 +355,6 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
         }
 
         return value.substring(0, maxLength) + '...';
-    }
-
-    private static String buildFileTitle(Id loanApplicationId) {
-        return 'Contrato_RLA_' + String.valueOf(loanApplicationId);
     }
 
     public class FSC_GenerarContratoPDFQueueableException extends Exception {}

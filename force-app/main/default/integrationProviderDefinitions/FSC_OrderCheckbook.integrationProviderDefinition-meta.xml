@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IntegrationProviderDef xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <apexClass>OrderCheckbookIntegrationProvider</apexClass>
+    <developerName>FSC_OrderCheckbook</developerName>
+    <integrationProviderAttributes>
+        <dataType>String</dataType>
+        <developerName>Named_Credential</developerName>
+        <label>Named Credential</label>
+        <required>true</required>
+        <stringValue>FSC_fsc_integrations_V1_0_0</stringValue>
+        <trueOrFalseValue>false</trueOrFalseValue>
+    </integrationProviderAttributes>
+    <providerLabel>FSC_OrderCheckbook</providerLabel>
+    <type>Apex</type>
+</IntegrationProviderDef>

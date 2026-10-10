@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_CategoriaDelDocumento__c</fullName>
+    <label>Categoría del documento</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Documentos para análisis</fullName>
+                <default>false</default>
+                <label>Documentos para análisis</label>
+            </value>
+            <value>
+                <fullName>Documentos para confección de contrato</fullName>
+                <default>false</default>
+                <label>Documentos para confección de contrato</label>
+            </value>
+            <value>
+                <fullName>Documentos para desembolso</fullName>
+                <default>false</default>
+                <label>Documentos para desembolso</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

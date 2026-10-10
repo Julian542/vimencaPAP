@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Correo_Electronico</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+$Label.Validaciones =&apos;Si&apos;,
+ISPICKVAL(CPE_Tipo__c, &apos;CORREO ELECTRÓNICO&apos;),
+NOT(CONTAINS(EmailAddress, &apos;@&apos;)),
+Contains(EmailAddress,&apos; &apos;)
+)</errorConditionFormula>
+    <errorMessage>La información no es de formato correo electrónico</errorMessage>
+</ValidationRule>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>GIACOBBE, S.R.L.(1-32-36578-1)</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_CodigoReferidor__c</field>
+        <value xsi:type="xsd:string">111</value>
+    </values>
+    <values>
+        <field>FSC_NombreReferidor__c</field>
+        <value xsi:type="xsd:string">GIACOBBE, S.R.L.(1-32-36578-1)</value>
+    </values>
+</CustomMetadata>

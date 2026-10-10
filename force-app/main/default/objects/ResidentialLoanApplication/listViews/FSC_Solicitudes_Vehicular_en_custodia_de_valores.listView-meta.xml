@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Solicitudes_Vehicular_en_custodia_de_valores</fullName>
+    <columns>FSC_Prioridad__c</columns>
+    <columns>Name</columns>
+    <columns>FSC_Subestado__c</columns>
+    <columns>Account</columns>
+    <columns>FSC_PlazoMesesAprobado__c</columns>
+    <columns>FSC_MontoAprobado__c</columns>
+    <columns>CreatedDate</columns>
+    <columns>CreatedBy</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>FSC_Subestado__c</field>
+        <operation>equals</operation>
+        <value>Archivo y custodia</value>
+    </filters>
+    <filters>
+        <field>RecordType</field>
+        <operation>equals</operation>
+        <value>ResidentialLoanApplication.FSC_Solicitud_Credito_Vehiculo</value>
+    </filters>
+    <filters>
+        <field>FSC_Doc_Incompleta_Post_Desembolso__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <label>Solicitudes Vehicular custodia valores</label>
+</ListView>

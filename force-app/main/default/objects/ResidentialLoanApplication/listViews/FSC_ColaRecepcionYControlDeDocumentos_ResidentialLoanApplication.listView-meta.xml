@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ColaRecepcionYControlDeDocumentos_ResidentialLoanApplication</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Cola recepción y control de documentos</label>
+    <queue>FSC_ColaRecepcionYControlDeDocumentos</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

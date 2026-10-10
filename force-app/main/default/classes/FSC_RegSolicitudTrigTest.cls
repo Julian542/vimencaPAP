@@ -1,7 +1,5 @@
 @IsTest
 private class FSC_RegSolicitudTrigTest {
-	private static Integer accountSequence = 0;
-
 	private static String firstActivePicklistValue(Schema.SObjectField fieldToken) {
 		for (Schema.PicklistEntry entry : fieldToken.getDescribe().getPicklistValues()) {
 			if (entry.isActive()) {
@@ -12,14 +10,7 @@ private class FSC_RegSolicitudTrigTest {
 	}
 
 	private static ResidentialLoanApplication createRla() {
-		Test.setMock(HttpCalloutMock.class, new FSC_EsignHttpMock());
-		Account account = new Account(
-			RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('PersonAccount').getRecordTypeId(),
-			FirstName = 'Cuenta',
-			LastName = 'Trigger Coverage ' + System.now().getTime(),
-			ACC_TipoIdentificacion__c = 'Cédula',
-			ACC_NumIdentificacion__c = nextTestIdentification()
-		);
+		Account account = new Account(Name = 'Cuenta Trigger Coverage ' + System.now().getTime());
 		insert account;
 
 		ResidentialLoanApplication rla = new ResidentialLoanApplication(
@@ -31,11 +22,6 @@ private class FSC_RegSolicitudTrigTest {
 		);
 		insert rla;
 		return rla;
-	}
-
-	private static String nextTestIdentification() {
-		accountSequence++;
-		return '00108803' + String.valueOf(accountSequence).leftPad(3, '0');
 	}
 
 	private static LoanApplicant createLoanApplicant(ResidentialLoanApplication rla) {

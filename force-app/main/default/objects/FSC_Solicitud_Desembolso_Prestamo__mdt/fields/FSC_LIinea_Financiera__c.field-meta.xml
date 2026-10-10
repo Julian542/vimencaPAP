@@ -1,0 +1,1759 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_LIinea_Financiera__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>LIinea Financiera</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>01 - COMERCIAL VEHICULOS USADOS</fullName>
+                <default>true</default>
+                <label>01 - COMERCIAL VEHICULOS USADOS</label>
+            </value>
+            <value>
+                <fullName>03 - CONSUMO SIN GARANTIA REAL</fullName>
+                <default>false</default>
+                <label>03 - CONSUMO SIN GARANTIA REAL</label>
+            </value>
+            <value>
+                <fullName>05 - CONSUMO GARANTIA CD</fullName>
+                <default>false</default>
+                <label>05 - CONSUMO GARANTIA CD</label>
+            </value>
+            <value>
+                <fullName>06 - FONDOS FLR-REFINANCIAMIENTOS</fullName>
+                <default>false</default>
+                <label>06 - FONDOS FLR-REFINANCIAMIENTOS</label>
+            </value>
+            <value>
+                <fullName>08 - PERSONA JURIDICA CON GAR. REAL</fullName>
+                <default>false</default>
+                <label>08 - PERSONA JURIDICA CON GAR. REAL</label>
+            </value>
+            <value>
+                <fullName>09 - PERSONA NATURAL CON GAR. REAL</fullName>
+                <default>false</default>
+                <label>09 - PERSONA NATURAL CON GAR. REAL</label>
+            </value>
+            <value>
+                <fullName>10 - HIPOTECARIOS PARA LA VIVIENDA</fullName>
+                <default>false</default>
+                <label>10 - HIPOTECARIOS PARA LA VIVIENDA</label>
+            </value>
+            <value>
+                <fullName>12 - PERSONA JURIDICA SIN GAR. REAL</fullName>
+                <default>false</default>
+                <label>12 - PERSONA JURIDICA SIN GAR. REAL</label>
+            </value>
+            <value>
+                <fullName>17 - PRE-APROBADOS</fullName>
+                <default>false</default>
+                <label>17 - PRE-APROBADOS</label>
+            </value>
+            <value>
+                <fullName>20 - EMPLEADOS FONT GAMUNDI</fullName>
+                <default>false</default>
+                <label>20 - EMPLEADOS FONT GAMUNDI</label>
+            </value>
+            <value>
+                <fullName>22 - CONSUMO EMPLEADO BANCO VIMENCA</fullName>
+                <default>false</default>
+                <label>22 - CONSUMO EMPLEADO BANCO VIMENCA</label>
+            </value>
+            <value>
+                <fullName>23 - EMPLEADOS ALARMA 24, S. A.</fullName>
+                <default>false</default>
+                <label>23 - EMPLEADOS ALARMA 24, S. A.</label>
+            </value>
+            <value>
+                <fullName>25 - EMPLEADOS NUTRIFARMA, S. A.</fullName>
+                <default>false</default>
+                <label>25 - EMPLEADOS NUTRIFARMA, S. A.</label>
+            </value>
+            <value>
+                <fullName>29 - EMPLEADOS PLAZA LAMA</fullName>
+                <default>false</default>
+                <label>29 - EMPLEADOS PLAZA LAMA</label>
+            </value>
+            <value>
+                <fullName>32 - EMPLEADOS REMESAS VIMENCA</fullName>
+                <default>false</default>
+                <label>32 - EMPLEADOS REMESAS VIMENCA</label>
+            </value>
+            <value>
+                <fullName>34 - EMPLEADOS DATA-VIMENCA</fullName>
+                <default>false</default>
+                <label>34 - EMPLEADOS DATA-VIMENCA</label>
+            </value>
+            <value>
+                <fullName>35 - EMPLEADOS VIMENPAQ</fullName>
+                <default>false</default>
+                <label>35 - EMPLEADOS VIMENPAQ</label>
+            </value>
+            <value>
+                <fullName>39 - HIPOTEC. REC. LIB. ENC. LEGAL</fullName>
+                <default>false</default>
+                <label>39 - HIPOTEC. REC. LIB. ENC. LEGAL</label>
+            </value>
+            <value>
+                <fullName>40 - EMPLEADOS  ARS-SDS</fullName>
+                <default>false</default>
+                <label>40 - EMPLEADOS  ARS-SDS</label>
+            </value>
+            <value>
+                <fullName>41 - COMERCIALES REC. LIB. ENC. LEG</fullName>
+                <default>false</default>
+                <label>41 - COMERCIALES REC. LIB. ENC. LEG</label>
+            </value>
+            <value>
+                <fullName>42 - CONSUMO REC. LIB. ENCAJE LEGAL</fullName>
+                <default>false</default>
+                <label>42 - CONSUMO REC. LIB. ENCAJE LEGAL</label>
+            </value>
+            <value>
+                <fullName>48 - EMPLEADO RAMON L. BAEZ, S.A.S.</fullName>
+                <default>false</default>
+                <label>48 - EMPLEADO RAMON L. BAEZ, S.A.S.</label>
+            </value>
+            <value>
+                <fullName>49 - EMPLEADOS DE PERAVIA MOTORS</fullName>
+                <default>false</default>
+                <label>49 - EMPLEADOS DE PERAVIA MOTORS</label>
+            </value>
+            <value>
+                <fullName>50 - EMPLEADOS LABORATORIOS LAM</fullName>
+                <default>false</default>
+                <label>50 - EMPLEADOS LABORATORIOS LAM</label>
+            </value>
+            <value>
+                <fullName>51 - EX-EMPLEADO  BANCO VIMENCA</fullName>
+                <default>false</default>
+                <label>51 - EX-EMPLEADO  BANCO VIMENCA</label>
+            </value>
+            <value>
+                <fullName>54 - CONSUMO VEHICULOS USADOS</fullName>
+                <default>false</default>
+                <label>54 - CONSUMO VEHICULOS USADOS</label>
+            </value>
+            <value>
+                <fullName>55 - VEHICULO MOTORALEX</fullName>
+                <default>false</default>
+                <label>55 - VEHICULO MOTORALEX</label>
+            </value>
+            <value>
+                <fullName>56 - EDITORA DE FORMAS, S. A.</fullName>
+                <default>false</default>
+                <label>56 - EDITORA DE FORMAS, S. A.</label>
+            </value>
+            <value>
+                <fullName>57 - COMERCIAL REEST. SIN GAR. REAL</fullName>
+                <default>false</default>
+                <label>57 - COMERCIAL REEST. SIN GAR. REAL</label>
+            </value>
+            <value>
+                <fullName>58 - CONSUMO  REEST. SIN GAR. REAL</fullName>
+                <default>false</default>
+                <label>58 - CONSUMO  REEST. SIN GAR. REAL</label>
+            </value>
+            <value>
+                <fullName>59 - HIPOT. VIVIENDA REESTRUCTURADO</fullName>
+                <default>false</default>
+                <label>59 - HIPOT. VIVIENDA REESTRUCTURADO</label>
+            </value>
+            <value>
+                <fullName>60 - COMERCIAL VEHICULOS NUEVOS</fullName>
+                <default>false</default>
+                <label>60 - COMERCIAL VEHICULOS NUEVOS</label>
+            </value>
+            <value>
+                <fullName>61 - CONSUMO VEHICULOS NUEVOS</fullName>
+                <default>false</default>
+                <label>61 - CONSUMO VEHICULOS NUEVOS</label>
+            </value>
+            <value>
+                <fullName>62 - COMERCIAL P. N.  SIN GAR. REAL</fullName>
+                <default>false</default>
+                <label>62 - COMERCIAL P. N.  SIN GAR. REAL</label>
+            </value>
+            <value>
+                <fullName>63 - EMPLEADOS B. VIMENCA (HIPOT.)</fullName>
+                <default>false</default>
+                <label>63 - EMPLEADOS B. VIMENCA (HIPOT.)</label>
+            </value>
+            <value>
+                <fullName>64 - EMPLEADOS B.VIMENCA (VEH.NUEV)</fullName>
+                <default>false</default>
+                <label>64 - EMPLEADOS B.VIMENCA (VEH.NUEV)</label>
+            </value>
+            <value>
+                <fullName>65 - EX-EMPLEADO  B.VIMENCA (HIPOT)</fullName>
+                <default>false</default>
+                <label>65 - EX-EMPLEADO  B.VIMENCA (HIPOT)</label>
+            </value>
+            <value>
+                <fullName>66 - EX-EMPLEADO B.VIMENCA (VEH.)</fullName>
+                <default>false</default>
+                <label>66 - EX-EMPLEADO B.VIMENCA (VEH.)</label>
+            </value>
+            <value>
+                <fullName>67 - CONSUMO  REEST. CON GAR. REAL</fullName>
+                <default>false</default>
+                <label>67 - CONSUMO  REEST. CON GAR. REAL</label>
+            </value>
+            <value>
+                <fullName>68 - COMERCIAL REEST. CON GAR. REAL</fullName>
+                <default>false</default>
+                <label>68 - COMERCIAL REEST. CON GAR. REAL</label>
+            </value>
+            <value>
+                <fullName>69 - COMERCIAL REEST. VEHICULO</fullName>
+                <default>false</default>
+                <label>69 - COMERCIAL REEST. VEHICULO</label>
+            </value>
+            <value>
+                <fullName>70 - CONS. REC. LIB. ENC. LEGAL VEH</fullName>
+                <default>false</default>
+                <label>70 - CONS. REC. LIB. ENC. LEGAL VEH</label>
+            </value>
+            <value>
+                <fullName>71 - CONSUMO  REEST.  VEHICULOS</fullName>
+                <default>false</default>
+                <label>71 - CONSUMO  REEST.  VEHICULOS</label>
+            </value>
+            <value>
+                <fullName>72 - CONSUMO GARANTIA HIPOTECARIA</fullName>
+                <default>false</default>
+                <label>72 - CONSUMO GARANTIA HIPOTECARIA</label>
+            </value>
+            <value>
+                <fullName>73 - EMPLEADOS TODOPAGO</fullName>
+                <default>false</default>
+                <label>73 - EMPLEADOS TODOPAGO</label>
+            </value>
+            <value>
+                <fullName>77 - EMPLEADOS ICDA( INST DOM. A)</fullName>
+                <default>false</default>
+                <label>77 - EMPLEADOS ICDA( INST DOM. A)</label>
+            </value>
+            <value>
+                <fullName>78 - EMPLEADOS DATA-CREDITO</fullName>
+                <default>false</default>
+                <label>78 - EMPLEADOS DATA-CREDITO</label>
+            </value>
+            <value>
+                <fullName>79 - EMPLEADOS A.S. INTERIORES</fullName>
+                <default>false</default>
+                <label>79 - EMPLEADOS A.S. INTERIORES</label>
+            </value>
+            <value>
+                <fullName>80 - EMPLEADOS BANCO LOPEZ DE HARO</fullName>
+                <default>false</default>
+                <label>80 - EMPLEADOS BANCO LOPEZ DE HARO</label>
+            </value>
+            <value>
+                <fullName>81 - TELE-MARKETING</fullName>
+                <default>false</default>
+                <label>81 - TELE-MARKETING</label>
+            </value>
+            <value>
+                <fullName>82 - EMPLEADOS AVÁNZAME DOMINICANA</fullName>
+                <default>false</default>
+                <label>82 - EMPLEADOS AVÁNZAME DOMINICANA</label>
+            </value>
+            <value>
+                <fullName>83 - EMPLEADOS BASANTA FILMS, SRL</fullName>
+                <default>false</default>
+                <label>83 - EMPLEADOS BASANTA FILMS, SRL</label>
+            </value>
+            <value>
+                <fullName>84 - EMPLEADOS GRUPO NEW HORIZONS</fullName>
+                <default>false</default>
+                <label>84 - EMPLEADOS GRUPO NEW HORIZONS</label>
+            </value>
+            <value>
+                <fullName>85 - CELEBRALO CON NOSOTROS</fullName>
+                <default>false</default>
+                <label>85 - CELEBRALO CON NOSOTROS</label>
+            </value>
+            <value>
+                <fullName>86 - BONA, S.A</fullName>
+                <default>false</default>
+                <label>86 - BONA, S.A</label>
+            </value>
+            <value>
+                <fullName>87 - COMERCIAL PN DOLARES SIN GTIA</fullName>
+                <default>false</default>
+                <label>87 - COMERCIAL PN DOLARES SIN GTIA</label>
+            </value>
+            <value>
+                <fullName>88 - COMERCIAL PN DOLARES CON GTIA</fullName>
+                <default>false</default>
+                <label>88 - COMERCIAL PN DOLARES CON GTIA</label>
+            </value>
+            <value>
+                <fullName>89 - COMERCIAL DOLARES SIN GTIA R</fullName>
+                <default>false</default>
+                <label>89 - COMERCIAL DOLARES SIN GTIA R</label>
+            </value>
+            <value>
+                <fullName>90 - COMERCIAL DOLARES CON GTIA R</fullName>
+                <default>false</default>
+                <label>90 - COMERCIAL DOLARES CON GTIA R</label>
+            </value>
+            <value>
+                <fullName>91 - CONSUMO DOLARES SIN GTIA REAL</fullName>
+                <default>false</default>
+                <label>91 - CONSUMO DOLARES SIN GTIA REAL</label>
+            </value>
+            <value>
+                <fullName>92 - CONSUMO DOLARES CON GTIA REAL</fullName>
+                <default>false</default>
+                <label>92 - CONSUMO DOLARES CON GTIA REAL</label>
+            </value>
+            <value>
+                <fullName>93 - VEHICULOS ACROMAX</fullName>
+                <default>false</default>
+                <label>93 - VEHICULOS ACROMAX</label>
+            </value>
+            <value>
+                <fullName>94 - FERIA PADRES MAGNA MOTORS</fullName>
+                <default>false</default>
+                <label>94 - FERIA PADRES MAGNA MOTORS</label>
+            </value>
+            <value>
+                <fullName>96 - EMPLEADOS CASA DEL ACERO INOX.</fullName>
+                <default>false</default>
+                <label>96 - EMPLEADOS CASA DEL ACERO INOX.</label>
+            </value>
+            <value>
+                <fullName>98 - EMPLEADOS ARS RENACER, S.A</fullName>
+                <default>false</default>
+                <label>98 - EMPLEADOS ARS RENACER, S.A</label>
+            </value>
+            <value>
+                <fullName>104 - EMPLEADOS BARRICK GOLD</fullName>
+                <default>false</default>
+                <label>104 - EMPLEADOS BARRICK GOLD</label>
+            </value>
+            <value>
+                <fullName>105 - EMPLEADOS VIP CATERING GOURMET</fullName>
+                <default>false</default>
+                <label>105 - EMPLEADOS VIP CATERING GOURMET</label>
+            </value>
+            <value>
+                <fullName>106 - EMPLEADOS UNICARIBE</fullName>
+                <default>false</default>
+                <label>106 - EMPLEADOS UNICARIBE</label>
+            </value>
+            <value>
+                <fullName>107 - DOCTORES MALLEN GUERRA, CXA</fullName>
+                <default>false</default>
+                <label>107 - DOCTORES MALLEN GUERRA, CXA</label>
+            </value>
+            <value>
+                <fullName>108 - LABORATORIOS MALLEN, S.A.</fullName>
+                <default>false</default>
+                <label>108 - LABORATORIOS MALLEN, S.A.</label>
+            </value>
+            <value>
+                <fullName>109 - MALLEN VETERINARIA, S.A</fullName>
+                <default>false</default>
+                <label>109 - MALLEN VETERINARIA, S.A</label>
+            </value>
+            <value>
+                <fullName>110 - EMPLEADOS CORAZONES UNIDOS</fullName>
+                <default>false</default>
+                <label>110 - EMPLEADOS CORAZONES UNIDOS</label>
+            </value>
+            <value>
+                <fullName>111 - EMPLEADOS GRUPO MISTER ZAPATO</fullName>
+                <default>false</default>
+                <label>111 - EMPLEADOS GRUPO MISTER ZAPATO</label>
+            </value>
+            <value>
+                <fullName>112 - EMPRESA CAMSOFT (GRUPO MALLEN)</fullName>
+                <default>false</default>
+                <label>112 - EMPRESA CAMSOFT (GRUPO MALLEN)</label>
+            </value>
+            <value>
+                <fullName>113 - DITEK, S,A,S, (GRUPO FONT GDY)</fullName>
+                <default>false</default>
+                <label>113 - DITEK, S,A,S, (GRUPO FONT GDY)</label>
+            </value>
+            <value>
+                <fullName>114 - FUNDACION CORAZONES UNIDOS</fullName>
+                <default>false</default>
+                <label>114 - FUNDACION CORAZONES UNIDOS</label>
+            </value>
+            <value>
+                <fullName>115 -  RAVILLA,  S.A.  GRUPO MALLÉN.</fullName>
+                <default>false</default>
+                <label>115 -  RAVILLA,  S.A.  GRUPO MALLÉN.</label>
+            </value>
+            <value>
+                <fullName>116 - PROGRAMA GASTOS EDUCATIVOS NHS</fullName>
+                <default>false</default>
+                <label>116 - PROGRAMA GASTOS EDUCATIVOS NHS</label>
+            </value>
+            <value>
+                <fullName>117 - EMPLEADOS SEGUROS PEPIN</fullName>
+                <default>false</default>
+                <label>117 - EMPLEADOS SEGUROS PEPIN</label>
+            </value>
+            <value>
+                <fullName>118 - EMPLEADOS ANFITRIONES SAS</fullName>
+                <default>false</default>
+                <label>118 - EMPLEADOS ANFITRIONES SAS</label>
+            </value>
+            <value>
+                <fullName>119 - BMI COMPAÑIA DE SEGUROS</fullName>
+                <default>false</default>
+                <label>119 - BMI COMPAÑIA DE SEGUROS</label>
+            </value>
+            <value>
+                <fullName>120 - MULTI ASSISTANCE SERVICES, INC</fullName>
+                <default>false</default>
+                <label>120 - MULTI ASSISTANCE SERVICES, INC</label>
+            </value>
+            <value>
+                <fullName>121 - INVERSIONES RIBAMAR,  SRL</fullName>
+                <default>false</default>
+                <label>121 - INVERSIONES RIBAMAR,  SRL</label>
+            </value>
+            <value>
+                <fullName>122 - EMPLEADOS SERVIKARTON</fullName>
+                <default>false</default>
+                <label>122 - EMPLEADOS SERVIKARTON</label>
+            </value>
+            <value>
+                <fullName>123 - EMPLEADOS CARIBE CARGO, SRL.</fullName>
+                <default>false</default>
+                <label>123 - EMPLEADOS CARIBE CARGO, SRL.</label>
+            </value>
+            <value>
+                <fullName>124 - BELL DOMINICANA.</fullName>
+                <default>false</default>
+                <label>124 - BELL DOMINICANA.</label>
+            </value>
+            <value>
+                <fullName>125 - EX-EMPLEADOS BARRICK GOLD</fullName>
+                <default>false</default>
+                <label>125 - EX-EMPLEADOS BARRICK GOLD</label>
+            </value>
+            <value>
+                <fullName>126 - INDUSMETAL BLANCO LISTER, SRL.</fullName>
+                <default>false</default>
+                <label>126 - INDUSMETAL BLANCO LISTER, SRL.</label>
+            </value>
+            <value>
+                <fullName>127 - AUTONEXT</fullName>
+                <default>false</default>
+                <label>127 - AUTONEXT</label>
+            </value>
+            <value>
+                <fullName>128 - EMPLEADOS GRAFIFLEX, SRL.</fullName>
+                <default>false</default>
+                <label>128 - EMPLEADOS GRAFIFLEX, SRL.</label>
+            </value>
+            <value>
+                <fullName>129 - EMPLEADOS DE CEDIMAT</fullName>
+                <default>false</default>
+                <label>129 - EMPLEADOS DE CEDIMAT</label>
+            </value>
+            <value>
+                <fullName>130 - EMPLEADOS PROMOTORA  RDC</fullName>
+                <default>false</default>
+                <label>130 - EMPLEADOS PROMOTORA  RDC</label>
+            </value>
+            <value>
+                <fullName>131 - EMPLEADOS  LEAR INVESTMENTS</fullName>
+                <default>false</default>
+                <label>131 - EMPLEADOS  LEAR INVESTMENTS</label>
+            </value>
+            <value>
+                <fullName>132 - EMPLEADOS EXCEL CONSULTORES</fullName>
+                <default>false</default>
+                <label>132 - EMPLEADOS EXCEL CONSULTORES</label>
+            </value>
+            <value>
+                <fullName>134 - COMERCIAL CON GAR. FIDUCIARIA</fullName>
+                <default>false</default>
+                <label>134 - COMERCIAL CON GAR. FIDUCIARIA</label>
+            </value>
+            <value>
+                <fullName>135 - EMPLEADOS FARMA CARD</fullName>
+                <default>false</default>
+                <label>135 - EMPLEADOS FARMA CARD</label>
+            </value>
+            <value>
+                <fullName>136 - EMPLEADOS SALUD BUCAL, SRL</fullName>
+                <default>false</default>
+                <label>136 - EMPLEADOS SALUD BUCAL, SRL</label>
+            </value>
+            <value>
+                <fullName>137 - EMPLEADOS KHERSUN, S. A.</fullName>
+                <default>false</default>
+                <label>137 - EMPLEADOS KHERSUN, S. A.</label>
+            </value>
+            <value>
+                <fullName>138 - EMPLEADOS PROMED DOMINICANA</fullName>
+                <default>false</default>
+                <label>138 - EMPLEADOS PROMED DOMINICANA</label>
+            </value>
+            <value>
+                <fullName>139 - EMPLEADOS RED MEDICA DOM.</fullName>
+                <default>false</default>
+                <label>139 - EMPLEADOS RED MEDICA DOM.</label>
+            </value>
+            <value>
+                <fullName>140 - EMPLEADOS PASEK LABORATORIO</fullName>
+                <default>false</default>
+                <label>140 - EMPLEADOS PASEK LABORATORIO</label>
+            </value>
+            <value>
+                <fullName>141 - EMPLEADOS VELAS HISPANIOLA</fullName>
+                <default>false</default>
+                <label>141 - EMPLEADOS VELAS HISPANIOLA</label>
+            </value>
+            <value>
+                <fullName>142 - FERIA MAGNA MOTORS EXCEP.GTOS.</fullName>
+                <default>false</default>
+                <label>142 - FERIA MAGNA MOTORS EXCEP.GTOS.</label>
+            </value>
+            <value>
+                <fullName>143 - EMPLEADOS YAO</fullName>
+                <default>false</default>
+                <label>143 - EMPLEADOS YAO</label>
+            </value>
+            <value>
+                <fullName>144 -  A Y R CONSULTORES LEGALES</fullName>
+                <default>false</default>
+                <label>144 -  A Y R CONSULTORES LEGALES</label>
+            </value>
+            <value>
+                <fullName>145 -  SERVICOBROS</fullName>
+                <default>false</default>
+                <label>145 -  SERVICOBROS</label>
+            </value>
+            <value>
+                <fullName>146 -  RAMOS &amp; CALZADA ASOC.</fullName>
+                <default>false</default>
+                <label>146 -  RAMOS &amp; CALZADA ASOC.</label>
+            </value>
+            <value>
+                <fullName>147 - CORDERO SALADIN ABOG Y CONSUL.</fullName>
+                <default>false</default>
+                <label>147 - CORDERO SALADIN ABOG Y CONSUL.</label>
+            </value>
+            <value>
+                <fullName>148 -  COLLETION ADMIN CENTER, S.R.L</fullName>
+                <default>false</default>
+                <label>148 -  COLLETION ADMIN CENTER, S.R.L</label>
+            </value>
+            <value>
+                <fullName>149 - EMPLEADOS CASA PACO</fullName>
+                <default>false</default>
+                <label>149 - EMPLEADOS CASA PACO</label>
+            </value>
+            <value>
+                <fullName>150 - COND. CENTRO COMER. ACROPOLIS</fullName>
+                <default>false</default>
+                <label>150 - COND. CENTRO COMER. ACROPOLIS</label>
+            </value>
+            <value>
+                <fullName>151 - EMPLEADO UNICARIBE VP.</fullName>
+                <default>false</default>
+                <label>151 - EMPLEADO UNICARIBE VP.</label>
+            </value>
+            <value>
+                <fullName>152 - EMPLEADOS ALUMINIO ARZENO,S.A.</fullName>
+                <default>false</default>
+                <label>152 - EMPLEADOS ALUMINIO ARZENO,S.A.</label>
+            </value>
+            <value>
+                <fullName>153 - EMPLEADOS DE MADE</fullName>
+                <default>false</default>
+                <label>153 - EMPLEADOS DE MADE</label>
+            </value>
+            <value>
+                <fullName>154 - EMPLEADOS INESA</fullName>
+                <default>false</default>
+                <label>154 - EMPLEADOS INESA</label>
+            </value>
+            <value>
+                <fullName>155 - EMPLEADOS SECURITY FORCE</fullName>
+                <default>false</default>
+                <label>155 - EMPLEADOS SECURITY FORCE</label>
+            </value>
+            <value>
+                <fullName>156 - EX. EMP. PROG. DES. BCA ALIANZA</fullName>
+                <default>false</default>
+                <label>156 - EX. EMP. PROG. DES. BCA ALIANZA</label>
+            </value>
+            <value>
+                <fullName>157 - EMPLEADOS WEST, S.A.</fullName>
+                <default>false</default>
+                <label>157 - EMPLEADOS WEST, S.A.</label>
+            </value>
+            <value>
+                <fullName>158 - EMPLEADOS GEOTRACK SOLUTIONS</fullName>
+                <default>false</default>
+                <label>158 - EMPLEADOS GEOTRACK SOLUTIONS</label>
+            </value>
+            <value>
+                <fullName>159 - EMPLEADOS POINT</fullName>
+                <default>false</default>
+                <label>159 - EMPLEADOS POINT</label>
+            </value>
+            <value>
+                <fullName>160 - EMPLEADOS GRUPO ALASKA</fullName>
+                <default>false</default>
+                <label>160 - EMPLEADOS GRUPO ALASKA</label>
+            </value>
+            <value>
+                <fullName>161 - PRÉSTAMOS VÍA WEB</fullName>
+                <default>false</default>
+                <label>161 - PRÉSTAMOS VÍA WEB</label>
+            </value>
+            <value>
+                <fullName>162 - EMPLEADOS J E H S CORREDURIA Y GESTION DE SEGUROS, S.R.L.</fullName>
+                <default>false</default>
+                <label>162 - EMPLEADOS J E H S CORREDURIA Y GESTION DE SEGUROS, S.R.L.</label>
+            </value>
+            <value>
+                <fullName>163 - EMPLEADOS HUMANO</fullName>
+                <default>false</default>
+                <label>163 - EMPLEADOS HUMANO</label>
+            </value>
+            <value>
+                <fullName>164 - EMPLEADOS PRIMERA ARS HUMANO</fullName>
+                <default>false</default>
+                <label>164 - EMPLEADOS PRIMERA ARS HUMANO</label>
+            </value>
+            <value>
+                <fullName>165 - EMPLEADOS GRUPO EGO</fullName>
+                <default>false</default>
+                <label>165 - EMPLEADOS GRUPO EGO</label>
+            </value>
+            <value>
+                <fullName>166 - EMPLEADOS GEINCO</fullName>
+                <default>false</default>
+                <label>166 - EMPLEADOS GEINCO</label>
+            </value>
+            <value>
+                <fullName>167 - EMPLEADOS NUTRIFARMA</fullName>
+                <default>false</default>
+                <label>167 - EMPLEADOS NUTRIFARMA</label>
+            </value>
+            <value>
+                <fullName>168 - EMPLEADOS LA INNOVACIÓN</fullName>
+                <default>false</default>
+                <label>168 - EMPLEADOS LA INNOVACIÓN</label>
+            </value>
+            <value>
+                <fullName>169 - EMPLEADOS DINAFA VEHICULOS</fullName>
+                <default>false</default>
+                <label>169 - EMPLEADOS DINAFA VEHICULOS</label>
+            </value>
+            <value>
+                <fullName>170 - EMPLEADOS LETERAGO, S.R.L.</fullName>
+                <default>false</default>
+                <label>170 - EMPLEADOS LETERAGO, S.R.L.</label>
+            </value>
+            <value>
+                <fullName>171 - EMPLEADOS DR. KITCHEN SERVICES</fullName>
+                <default>false</default>
+                <label>171 - EMPLEADOS DR. KITCHEN SERVICES</label>
+            </value>
+            <value>
+                <fullName>172 - EMPLEADOS INDUSMETAL LISTER</fullName>
+                <default>false</default>
+                <label>172 - EMPLEADOS INDUSMETAL LISTER</label>
+            </value>
+            <value>
+                <fullName>173 - EMPLEADOS GBM</fullName>
+                <default>false</default>
+                <label>173 - EMPLEADOS GBM</label>
+            </value>
+            <value>
+                <fullName>174 - FUERZA DE VENTA EXTERNA</fullName>
+                <default>false</default>
+                <label>174 - FUERZA DE VENTA EXTERNA</label>
+            </value>
+            <value>
+                <fullName>175 - EMPLEADOS LABORATORIOS AMADITA</fullName>
+                <default>false</default>
+                <label>175 - EMPLEADOS LABORATORIOS AMADITA</label>
+            </value>
+            <value>
+                <fullName>176 - EMPLEADOS DINAFA</fullName>
+                <default>false</default>
+                <label>176 - EMPLEADOS DINAFA</label>
+            </value>
+            <value>
+                <fullName>177 - LOS HIDALGOS FARMACIAS</fullName>
+                <default>false</default>
+                <label>177 - LOS HIDALGOS FARMACIAS</label>
+            </value>
+            <value>
+                <fullName>178 - PRESTAMOS RESTRUCTURADOS TDC</fullName>
+                <default>false</default>
+                <label>178 - PRESTAMOS RESTRUCTURADOS TDC</label>
+            </value>
+            <value>
+                <fullName>179 - EMPLEADOS FERNANDO GIRALDEZ</fullName>
+                <default>false</default>
+                <label>179 - EMPLEADOS FERNANDO GIRALDEZ</label>
+            </value>
+            <value>
+                <fullName>180 - EMPLEADOS NEMUNAS, S.R.L.</fullName>
+                <default>false</default>
+                <label>180 - EMPLEADOS NEMUNAS, S.R.L.</label>
+            </value>
+            <value>
+                <fullName>181 - EMPLEADOS DE ETHEINSEN</fullName>
+                <default>false</default>
+                <label>181 - EMPLEADOS DE ETHEINSEN</label>
+            </value>
+            <value>
+                <fullName>182 - EMPL. TERM. CONTEN. ATLANTICO</fullName>
+                <default>false</default>
+                <label>182 - EMPL. TERM. CONTEN. ATLANTICO</label>
+            </value>
+            <value>
+                <fullName>183 - EMPLEADOS AMERICAN SCHOOL</fullName>
+                <default>false</default>
+                <label>183 - EMPLEADOS AMERICAN SCHOOL</label>
+            </value>
+            <value>
+                <fullName>184 - EMPLEADOS GRUPO VIAMAR, S.A.</fullName>
+                <default>false</default>
+                <label>184 - EMPLEADOS GRUPO VIAMAR, S.A.</label>
+            </value>
+            <value>
+                <fullName>185 - EMPLEADOS HACIENDA LA CORTINA</fullName>
+                <default>false</default>
+                <label>185 - EMPLEADOS HACIENDA LA CORTINA</label>
+            </value>
+            <value>
+                <fullName>186 - EMPLEADOS ECO MOTORS</fullName>
+                <default>false</default>
+                <label>186 - EMPLEADOS ECO MOTORS</label>
+            </value>
+            <value>
+                <fullName>187 - EMPLEADOS VIAPAINT TALLER PINT</fullName>
+                <default>false</default>
+                <label>187 - EMPLEADOS VIAPAINT TALLER PINT</label>
+            </value>
+            <value>
+                <fullName>188 - EMPLEADOS CEDE (GRUPO VIAMAR)</fullName>
+                <default>false</default>
+                <label>188 - EMPLEADOS CEDE (GRUPO VIAMAR)</label>
+            </value>
+            <value>
+                <fullName>189 - EMPLEADOS JOB, BAEZ, SOTO &amp; AS.</fullName>
+                <default>false</default>
+                <label>189 - EMPLEADOS JOB, BAEZ, SOTO &amp; AS.</label>
+            </value>
+            <value>
+                <fullName>190 - REFINAN. TARJETA DE CRÉDITO</fullName>
+                <default>false</default>
+                <label>190 - REFINAN. TARJETA DE CRÉDITO</label>
+            </value>
+            <value>
+                <fullName>191 - EMPLEADOS RIVERWIND INVESTMENTS</fullName>
+                <default>false</default>
+                <label>191 - EMPLEADOS RIVERWIND INVESTMENTS</label>
+            </value>
+            <value>
+                <fullName>192 - EMPLEADOS KIDS CREATE</fullName>
+                <default>false</default>
+                <label>192 - EMPLEADOS KIDS CREATE</label>
+            </value>
+            <value>
+                <fullName>193 - EMPLEADOS DE ANIMAL FOOD LINE</fullName>
+                <default>false</default>
+                <label>193 - EMPLEADOS DE ANIMAL FOOD LINE</label>
+            </value>
+            <value>
+                <fullName>194 - HIPOTECARIO DOM. AL EXTERIOR</fullName>
+                <default>false</default>
+                <label>194 - HIPOTECARIO DOM. AL EXTERIOR</label>
+            </value>
+            <value>
+                <fullName>195 - EMPLEADOS DTA INTERNACIONA, SRL</fullName>
+                <default>false</default>
+                <label>195 - EMPLEADOS DTA INTERNACIONA, SRL</label>
+            </value>
+            <value>
+                <fullName>196 - EMPLEADOS NOVAHEN MOTORS</fullName>
+                <default>false</default>
+                <label>196 - EMPLEADOS NOVAHEN MOTORS</label>
+            </value>
+            <value>
+                <fullName>197 - EMPLEADOS 3G SOLUTIONS</fullName>
+                <default>false</default>
+                <label>197 - EMPLEADOS 3G SOLUTIONS</label>
+            </value>
+            <value>
+                <fullName>198 - EMPLEADOS PROM. GRAPHIC SOLUC.</fullName>
+                <default>false</default>
+                <label>198 - EMPLEADOS PROM. GRAPHIC SOLUC.</label>
+            </value>
+            <value>
+                <fullName>199 - EMPLEADOS DANIEL NIVAR &amp; ASOC.</fullName>
+                <default>false</default>
+                <label>199 - EMPLEADOS DANIEL NIVAR &amp; ASOC.</label>
+            </value>
+            <value>
+                <fullName>200 - EMPLEADOS CARGO TEC VN, SRL.</fullName>
+                <default>false</default>
+                <label>200 - EMPLEADOS CARGO TEC VN, SRL.</label>
+            </value>
+            <value>
+                <fullName>201 - EMPLEADOS LABORATORIOS SAN LUIS</fullName>
+                <default>false</default>
+                <label>201 - EMPLEADOS LABORATORIOS SAN LUIS</label>
+            </value>
+            <value>
+                <fullName>202 - EMPLEADO COND. PLAZA LAS AMER.</fullName>
+                <default>false</default>
+                <label>202 - EMPLEADO COND. PLAZA LAS AMER.</label>
+            </value>
+            <value>
+                <fullName>203 - EMPLEADOS REMOD. DEL ATLANTICO</fullName>
+                <default>false</default>
+                <label>203 - EMPLEADOS REMOD. DEL ATLANTICO</label>
+            </value>
+            <value>
+                <fullName>204 - EMPLEADOS AGENCIA BELLA</fullName>
+                <default>false</default>
+                <label>204 - EMPLEADOS AGENCIA BELLA</label>
+            </value>
+            <value>
+                <fullName>205 - EMPLEADOS AUTOBRITANICA</fullName>
+                <default>false</default>
+                <label>205 - EMPLEADOS AUTOBRITANICA</label>
+            </value>
+            <value>
+                <fullName>206 - EMPLEADOS HONDA RENT A CAR</fullName>
+                <default>false</default>
+                <label>206 - EMPLEADOS HONDA RENT A CAR</label>
+            </value>
+            <value>
+                <fullName>207 - ELECTROHOGAR</fullName>
+                <default>false</default>
+                <label>207 - ELECTROHOGAR</label>
+            </value>
+            <value>
+                <fullName>208 - VENTAS EXTERNAS GEA</fullName>
+                <default>false</default>
+                <label>208 - VENTAS EXTERNAS GEA</label>
+            </value>
+            <value>
+                <fullName>216 - EMPLEADOS LUX MUNDI</fullName>
+                <default>false</default>
+                <label>216 - EMPLEADOS LUX MUNDI</label>
+            </value>
+            <value>
+                <fullName>217 - EMPLEADOS DE ACROMAX DOMINICANA</fullName>
+                <default>false</default>
+                <label>217 - EMPLEADOS DE ACROMAX DOMINICANA</label>
+            </value>
+            <value>
+                <fullName>218 - LIBERACION ENCAJE JUNIO-2019</fullName>
+                <default>false</default>
+                <label>218 - LIBERACION ENCAJE JUNIO-2019</label>
+            </value>
+            <value>
+                <fullName>219 - EMPLEADOS TRANSPORTE IMPALA</fullName>
+                <default>false</default>
+                <label>219 - EMPLEADOS TRANSPORTE IMPALA</label>
+            </value>
+            <value>
+                <fullName>220 - EMPLEADOS HUMANO-HIPOTECARIO</fullName>
+                <default>false</default>
+                <label>220 - EMPLEADOS HUMANO-HIPOTECARIO</label>
+            </value>
+            <value>
+                <fullName>221 - EMPLEADOS PLASTIFAR</fullName>
+                <default>false</default>
+                <label>221 - EMPLEADOS PLASTIFAR</label>
+            </value>
+            <value>
+                <fullName>222 - EMPLEADOS CENTRO COM ACROPOLIS</fullName>
+                <default>false</default>
+                <label>222 - EMPLEADOS CENTRO COM ACROPOLIS</label>
+            </value>
+            <value>
+                <fullName>223 - EMPLEADOS DE ALIAS FINANCING</fullName>
+                <default>false</default>
+                <label>223 - EMPLEADOS DE ALIAS FINANCING</label>
+            </value>
+            <value>
+                <fullName>224 - EMPLEADOS QUIEREME COMO SOY</fullName>
+                <default>false</default>
+                <label>224 - EMPLEADOS QUIEREME COMO SOY</label>
+            </value>
+            <value>
+                <fullName>225 - EMPLEADOS HATUEY ALMACENES</fullName>
+                <default>false</default>
+                <label>225 - EMPLEADOS HATUEY ALMACENES</label>
+            </value>
+            <value>
+                <fullName>227 - EMPLEADOS MARTICA COMERCIAL, SRL</fullName>
+                <default>false</default>
+                <label>227 - EMPLEADOS MARTICA COMERCIAL, SRL</label>
+            </value>
+            <value>
+                <fullName>228 - EMPLEADOS SUNIX PETROLEUM, SRL</fullName>
+                <default>false</default>
+                <label>228 - EMPLEADOS SUNIX PETROLEUM, SRL</label>
+            </value>
+            <value>
+                <fullName>229 - EMPLEADOS TROPIGAS DOMINICANA</fullName>
+                <default>false</default>
+                <label>229 - EMPLEADOS TROPIGAS DOMINICANA</label>
+            </value>
+            <value>
+                <fullName>230 - EMPLEADOS VV AUTOS, SAS</fullName>
+                <default>false</default>
+                <label>230 - EMPLEADOS VV AUTOS, SAS</label>
+            </value>
+            <value>
+                <fullName>231 - EMPLEADOS AMERICAPITAL, SRL</fullName>
+                <default>false</default>
+                <label>231 - EMPLEADOS AMERICAPITAL, SRL</label>
+            </value>
+            <value>
+                <fullName>232 - EMPLEADOS EDITORIAL CM, SRL</fullName>
+                <default>false</default>
+                <label>232 - EMPLEADOS EDITORIAL CM, SRL</label>
+            </value>
+            <value>
+                <fullName>233 - EMPLEADOS LABORAT. REFERENCIA</fullName>
+                <default>false</default>
+                <label>233 - EMPLEADOS LABORAT. REFERENCIA</label>
+            </value>
+            <value>
+                <fullName>234 - REENGANCHE EMP. REMESAS VIMENCA</fullName>
+                <default>false</default>
+                <label>234 - REENGANCHE EMP. REMESAS VIMENCA</label>
+            </value>
+            <value>
+                <fullName>235 - REENGANCHE EMPL. DATA VIMENCA</fullName>
+                <default>false</default>
+                <label>235 - REENGANCHE EMPL. DATA VIMENCA</label>
+            </value>
+            <value>
+                <fullName>236 - REENGANCHE EMPLEADO VIMENPAQ</fullName>
+                <default>false</default>
+                <label>236 - REENGANCHE EMPLEADO VIMENPAQ</label>
+            </value>
+            <value>
+                <fullName>237 - REENGANCHE EMPLEADO PAGATODO</fullName>
+                <default>false</default>
+                <label>237 - REENGANCHE EMPLEADO PAGATODO</label>
+            </value>
+            <value>
+                <fullName>238 - EMPLEADOS LASA MOTOR</fullName>
+                <default>false</default>
+                <label>238 - EMPLEADOS LASA MOTOR</label>
+            </value>
+            <value>
+                <fullName>239 - EMPLEADOS AVANT AUTO</fullName>
+                <default>false</default>
+                <label>239 - EMPLEADOS AVANT AUTO</label>
+            </value>
+            <value>
+                <fullName>240 - BPR CLIENTES REMESAS OCTUBRE.19</fullName>
+                <default>false</default>
+                <label>240 - BPR CLIENTES REMESAS OCTUBRE.19</label>
+            </value>
+            <value>
+                <fullName>241 - EMPLEADOS QUISQUEYA COMERCIAL</fullName>
+                <default>false</default>
+                <label>241 - EMPLEADOS QUISQUEYA COMERCIAL</label>
+            </value>
+            <value>
+                <fullName>242 - EMPLEADOS GRUPO COMETA</fullName>
+                <default>false</default>
+                <label>242 - EMPLEADOS GRUPO COMETA</label>
+            </value>
+            <value>
+                <fullName>243 - EMPLEADOS MOTOPLEX</fullName>
+                <default>false</default>
+                <label>243 - EMPLEADOS MOTOPLEX</label>
+            </value>
+            <value>
+                <fullName>244 - CR. VEH. COMPENSAC. BENEFICIOS</fullName>
+                <default>false</default>
+                <label>244 - CR. VEH. COMPENSAC. BENEFICIOS</label>
+            </value>
+            <value>
+                <fullName>245 - PRESTAMOS PRE-APROB. POR MOTOR</fullName>
+                <default>false</default>
+                <label>245 - PRESTAMOS PRE-APROB. POR MOTOR</label>
+            </value>
+            <value>
+                <fullName>246 - PRESTAMOS PARA CONS. DE TARJETA</fullName>
+                <default>false</default>
+                <label>246 - PRESTAMOS PARA CONS. DE TARJETA</label>
+            </value>
+            <value>
+                <fullName>247 - PREST. CONS. DE PRESTAM. Y TC</fullName>
+                <default>false</default>
+                <label>247 - PREST. CONS. DE PRESTAM. Y TC</label>
+            </value>
+            <value>
+                <fullName>248 - PRESTAMOS PARA CONS. DE PREST.</fullName>
+                <default>false</default>
+                <label>248 - PRESTAMOS PARA CONS. DE PREST.</label>
+            </value>
+            <value>
+                <fullName>249 - EMPLEADOS PALMA DEL SOL</fullName>
+                <default>false</default>
+                <label>249 - EMPLEADOS PALMA DEL SOL</label>
+            </value>
+            <value>
+                <fullName>250 - SC SALUD CORPORAL</fullName>
+                <default>false</default>
+                <label>250 - SC SALUD CORPORAL</label>
+            </value>
+            <value>
+                <fullName>251 - EMPL. MACORISANA COMBUSTIBLE</fullName>
+                <default>false</default>
+                <label>251 - EMPL. MACORISANA COMBUSTIBLE</label>
+            </value>
+            <value>
+                <fullName>252 - EMPL. OPERADORA SERV. MACAJO</fullName>
+                <default>false</default>
+                <label>252 - EMPL. OPERADORA SERV. MACAJO</label>
+            </value>
+            <value>
+                <fullName>253 - EMPLEADOS MOVIL PORT</fullName>
+                <default>false</default>
+                <label>253 - EMPLEADOS MOVIL PORT</label>
+            </value>
+            <value>
+                <fullName>254 - EMPLEADOS EMPRESAS VIBRA</fullName>
+                <default>false</default>
+                <label>254 - EMPLEADOS EMPRESAS VIBRA</label>
+            </value>
+            <value>
+                <fullName>255 - EMPLEADO A. V. BLANDINO</fullName>
+                <default>false</default>
+                <label>255 - EMPLEADO A. V. BLANDINO</label>
+            </value>
+            <value>
+                <fullName>256 - VENTAS INTERNAS</fullName>
+                <default>false</default>
+                <label>256 - VENTAS INTERNAS</label>
+            </value>
+            <value>
+                <fullName>257 - EMPLEADOS GUEST SERVICE</fullName>
+                <default>false</default>
+                <label>257 - EMPLEADOS GUEST SERVICE</label>
+            </value>
+            <value>
+                <fullName>258 - EMPLEADOS AJFA</fullName>
+                <default>false</default>
+                <label>258 - EMPLEADOS AJFA</label>
+            </value>
+            <value>
+                <fullName>259 - LIBERACION ENCAJE MARZO 2020</fullName>
+                <default>false</default>
+                <label>259 - LIBERACION ENCAJE MARZO 2020</label>
+            </value>
+            <value>
+                <fullName>260 - FLEXIBILIZ. NORMAT. 3/2020 INT.C</fullName>
+                <default>false</default>
+                <label>260 - FLEXIBILIZ. NORMAT. 3/2020 INT.C</label>
+            </value>
+            <value>
+                <fullName>261 - FLEXIBILIZ. NORMAT. 3/2020</fullName>
+                <default>false</default>
+                <label>261 - FLEXIBILIZ. NORMAT. 3/2020</label>
+            </value>
+            <value>
+                <fullName>262 - EMPLEADOS SEGUROS SURA</fullName>
+                <default>false</default>
+                <label>262 - EMPLEADOS SEGUROS SURA</label>
+            </value>
+            <value>
+                <fullName>263 - VEHICULO MAGNA 2021</fullName>
+                <default>false</default>
+                <label>263 - VEHICULO MAGNA 2021</label>
+            </value>
+            <value>
+                <fullName>264 - FONDOS FLR-NUEVOS PRESTAMOS</fullName>
+                <default>false</default>
+                <label>264 - FONDOS FLR-NUEVOS PRESTAMOS</label>
+            </value>
+            <value>
+                <fullName>265 - FONDOS FLR-OTRAS MODALIDADES</fullName>
+                <default>false</default>
+                <label>265 - FONDOS FLR-OTRAS MODALIDADES</label>
+            </value>
+            <value>
+                <fullName>266 - FONDOS FLR-EMPLEADOS</fullName>
+                <default>false</default>
+                <label>266 - FONDOS FLR-EMPLEADOS</label>
+            </value>
+            <value>
+                <fullName>267 - EMPLEADOS LUIS E. BETANCES R &amp; CO.</fullName>
+                <default>false</default>
+                <label>267 - EMPLEADOS LUIS E. BETANCES R &amp; CO.</label>
+            </value>
+            <value>
+                <fullName>268 - EMPLEADOS ABAXA CORPORATION</fullName>
+                <default>false</default>
+                <label>268 - EMPLEADOS ABAXA CORPORATION</label>
+            </value>
+            <value>
+                <fullName>269 - EMPLEADOS TERRACHEM, S.A.</fullName>
+                <default>false</default>
+                <label>269 - EMPLEADOS TERRACHEM, S.A.</label>
+            </value>
+            <value>
+                <fullName>270 - EMPLEADOS GAR 210, SRL</fullName>
+                <default>false</default>
+                <label>270 - EMPLEADOS GAR 210, SRL</label>
+            </value>
+            <value>
+                <fullName>271 - EMPLEADOS FABREGAS SERVICES</fullName>
+                <default>false</default>
+                <label>271 - EMPLEADOS FABREGAS SERVICES</label>
+            </value>
+            <value>
+                <fullName>272 - EMPLEADOS INCUBE, SRL</fullName>
+                <default>false</default>
+                <label>272 - EMPLEADOS INCUBE, SRL</label>
+            </value>
+            <value>
+                <fullName>273 - EMPLEADOS COFACA</fullName>
+                <default>false</default>
+                <label>273 - EMPLEADOS COFACA</label>
+            </value>
+            <value>
+                <fullName>274 - EMPLEADOS FARACH, S.A.</fullName>
+                <default>false</default>
+                <label>274 - EMPLEADOS FARACH, S.A.</label>
+            </value>
+            <value>
+                <fullName>275 - EMPLEADOS HYLSA</fullName>
+                <default>false</default>
+                <label>275 - EMPLEADOS HYLSA</label>
+            </value>
+            <value>
+                <fullName>276 - EMPLEADOS SEGUROS CRECER</fullName>
+                <default>false</default>
+                <label>276 - EMPLEADOS SEGUROS CRECER</label>
+            </value>
+            <value>
+                <fullName>277 - EMPLEADOS AFP CRECER</fullName>
+                <default>false</default>
+                <label>277 - EMPLEADOS AFP CRECER</label>
+            </value>
+            <value>
+                <fullName>278 - EMPLEADOS JYL GLOBAL SERVICES</fullName>
+                <default>false</default>
+                <label>278 - EMPLEADOS JYL GLOBAL SERVICES</label>
+            </value>
+            <value>
+                <fullName>279 - EMPL. RECAUCHADORA DEL CARIBE</fullName>
+                <default>false</default>
+                <label>279 - EMPL. RECAUCHADORA DEL CARIBE</label>
+            </value>
+            <value>
+                <fullName>280 - EMPLEADOS CKTRANS MOTORS</fullName>
+                <default>false</default>
+                <label>280 - EMPLEADOS CKTRANS MOTORS</label>
+            </value>
+            <value>
+                <fullName>281 - EMPLEADOS FARBEL.S.A.</fullName>
+                <default>false</default>
+                <label>281 - EMPLEADOS FARBEL.S.A.</label>
+            </value>
+            <value>
+                <fullName>282 - PREST. REESTRUC.TC-INTERES CAP</fullName>
+                <default>false</default>
+                <label>282 - PREST. REESTRUC.TC-INTERES CAP</label>
+            </value>
+            <value>
+                <fullName>283 - EMPLEADOS MERCAPLAS, SRL.</fullName>
+                <default>false</default>
+                <label>283 - EMPLEADOS MERCAPLAS, SRL.</label>
+            </value>
+            <value>
+                <fullName>284 - CLIENTES FALLECIDOS</fullName>
+                <default>false</default>
+                <label>284 - CLIENTES FALLECIDOS</label>
+            </value>
+            <value>
+                <fullName>285 - EMPLEADOS AUTOBRITANICA LTD</fullName>
+                <default>false</default>
+                <label>285 - EMPLEADOS AUTOBRITANICA LTD</label>
+            </value>
+            <value>
+                <fullName>286 - EMPLEADOS ANIMAL FOOD LINE, S.A.</fullName>
+                <default>false</default>
+                <label>286 - EMPLEADOS ANIMAL FOOD LINE, S.A.</label>
+            </value>
+            <value>
+                <fullName>288 - EMPLEADOS MEDITERRANEO INTER.</fullName>
+                <default>false</default>
+                <label>288 - EMPLEADOS MEDITERRANEO INTER.</label>
+            </value>
+            <value>
+                <fullName>289 - LIB ENCAJE 1 &amp; 2 RESOL. 03/20</fullName>
+                <default>false</default>
+                <label>289 - LIB ENCAJE 1 &amp; 2 RESOL. 03/20</label>
+            </value>
+            <value>
+                <fullName>290 - LIB ENCAJE 3 RESOL. 04/20</fullName>
+                <default>false</default>
+                <label>290 - LIB ENCAJE 3 RESOL. 04/20</label>
+            </value>
+            <value>
+                <fullName>291 - EMPLEADOS ROFASA FARMA, EIRL</fullName>
+                <default>false</default>
+                <label>291 - EMPLEADOS ROFASA FARMA, EIRL</label>
+            </value>
+            <value>
+                <fullName>292 - LIB. ENCAJE RESOL. 07/17</fullName>
+                <default>false</default>
+                <label>292 - LIB. ENCAJE RESOL. 07/17</label>
+            </value>
+            <value>
+                <fullName>293 - EMPLEADOS INPROCA</fullName>
+                <default>false</default>
+                <label>293 - EMPLEADOS INPROCA</label>
+            </value>
+            <value>
+                <fullName>294 - EMPLEADOS FERNANDEZ DE JESUS</fullName>
+                <default>false</default>
+                <label>294 - EMPLEADOS FERNANDEZ DE JESUS</label>
+            </value>
+            <value>
+                <fullName>295 - EMPLEADOS FUENTES FERNANDEZ</fullName>
+                <default>false</default>
+                <label>295 - EMPLEADOS FUENTES FERNANDEZ</label>
+            </value>
+            <value>
+                <fullName>296 - POOL DE BANCOS</fullName>
+                <default>false</default>
+                <label>296 - POOL DE BANCOS</label>
+            </value>
+            <value>
+                <fullName>297 - EMPLEADOS LECHE FRESCA, SRL.</fullName>
+                <default>false</default>
+                <label>297 - EMPLEADOS LECHE FRESCA, SRL.</label>
+            </value>
+            <value>
+                <fullName>298 - OUTSORSING ENSERROS EIRL.</fullName>
+                <default>false</default>
+                <label>298 - OUTSORSING ENSERROS EIRL.</label>
+            </value>
+            <value>
+                <fullName>299 - EMPLEADOS MERCORP, SAS.</fullName>
+                <default>false</default>
+                <label>299 - EMPLEADOS MERCORP, SAS.</label>
+            </value>
+            <value>
+                <fullName>300 - TASA PREF. PR. HIPOTE, II 2021</fullName>
+                <default>false</default>
+                <label>300 - TASA PREF. PR. HIPOTE, II 2021</label>
+            </value>
+            <value>
+                <fullName>301 - TASA PREF. PR. CONSUM, II 2021</fullName>
+                <default>false</default>
+                <label>301 - TASA PREF. PR. CONSUM, II 2021</label>
+            </value>
+            <value>
+                <fullName>303 - EMPLEADOS VISION FUND RD. SAS</fullName>
+                <default>false</default>
+                <label>303 - EMPLEADOS VISION FUND RD. SAS</label>
+            </value>
+            <value>
+                <fullName>304 - VLOI VIA SMART AUTO PAINT SRL</fullName>
+                <default>false</default>
+                <label>304 - VLOI VIA SMART AUTO PAINT SRL</label>
+            </value>
+            <value>
+                <fullName>305 - CLIENTES INDEPENDIENTES PYME</fullName>
+                <default>false</default>
+                <label>305 - CLIENTES INDEPENDIENTES PYME</label>
+            </value>
+            <value>
+                <fullName>306 - TASA PREF. HIPOTECARIO 1-2022</fullName>
+                <default>false</default>
+                <label>306 - TASA PREF. HIPOTECARIO 1-2022</label>
+            </value>
+            <value>
+                <fullName>307 - TASA PREF. CONSUMO 1-2022</fullName>
+                <default>false</default>
+                <label>307 - TASA PREF. CONSUMO 1-2022</label>
+            </value>
+            <value>
+                <fullName>308 - TASA PREF. VEHICULOS 1-2022</fullName>
+                <default>false</default>
+                <label>308 - TASA PREF. VEHICULOS 1-2022</label>
+            </value>
+            <value>
+                <fullName>309 - EMPLEADOS PREBEA SRL</fullName>
+                <default>false</default>
+                <label>309 - EMPLEADOS PREBEA SRL</label>
+            </value>
+            <value>
+                <fullName>310 - EMPLEADOS CAMORUCO GROUP</fullName>
+                <default>false</default>
+                <label>310 - EMPLEADOS CAMORUCO GROUP</label>
+            </value>
+            <value>
+                <fullName>311 - EMPLEADOS AMIGO LEAL SRL.</fullName>
+                <default>false</default>
+                <label>311 - EMPLEADOS AMIGO LEAL SRL.</label>
+            </value>
+            <value>
+                <fullName>312 - EMPLEADOS MERCADO MEDIA NETWORK</fullName>
+                <default>false</default>
+                <label>312 - EMPLEADOS MERCADO MEDIA NETWORK</label>
+            </value>
+            <value>
+                <fullName>313 - HIPOTECARIOS PARA EXTRANJEROS</fullName>
+                <default>false</default>
+                <label>313 - HIPOTECARIOS PARA EXTRANJEROS</label>
+            </value>
+            <value>
+                <fullName>314 - EMPLEADOS ANDOSA DOMINICANA</fullName>
+                <default>false</default>
+                <label>314 - EMPLEADOS ANDOSA DOMINICANA</label>
+            </value>
+            <value>
+                <fullName>315 - VENTAS INTERNA II</fullName>
+                <default>false</default>
+                <label>315 - VENTAS INTERNA II</label>
+            </value>
+            <value>
+                <fullName>316 - EMPLEADOS BTRD OPERATIONS</fullName>
+                <default>false</default>
+                <label>316 - EMPLEADOS BTRD OPERATIONS</label>
+            </value>
+            <value>
+                <fullName>317 - TOKMAKJIAN INTERNATIONAL INC</fullName>
+                <default>false</default>
+                <label>317 - TOKMAKJIAN INTERNATIONAL INC</label>
+            </value>
+            <value>
+                <fullName>318 - VENTAS EXTERNAS EE SOLUTIONS</fullName>
+                <default>false</default>
+                <label>318 - VENTAS EXTERNAS EE SOLUTIONS</label>
+            </value>
+            <value>
+                <fullName>319 - EMPLEADOS ARS YUNEN</fullName>
+                <default>false</default>
+                <label>319 - EMPLEADOS ARS YUNEN</label>
+            </value>
+            <value>
+                <fullName>320 - EMPLEADOS DEGUSSA, S.R.L.</fullName>
+                <default>false</default>
+                <label>320 - EMPLEADOS DEGUSSA, S.R.L.</label>
+            </value>
+            <value>
+                <fullName>321 - EMPLEADO AFINITY MARKETING SER</fullName>
+                <default>false</default>
+                <label>321 - EMPLEADO AFINITY MARKETING SER</label>
+            </value>
+            <value>
+                <fullName>322 - EMPLEADOS CORAL HOSPITALITY CO</fullName>
+                <default>false</default>
+                <label>322 - EMPLEADOS CORAL HOSPITALITY CO</label>
+            </value>
+            <value>
+                <fullName>323 - EMPLEADOS PUNTA VISTA, S.R.L</fullName>
+                <default>false</default>
+                <label>323 - EMPLEADOS PUNTA VISTA, S.R.L</label>
+            </value>
+            <value>
+                <fullName>324 - EMPLEADOS AMIPHARMA, SRL.</fullName>
+                <default>false</default>
+                <label>324 - EMPLEADOS AMIPHARMA, SRL.</label>
+            </value>
+            <value>
+                <fullName>325 - EMPLEADOS VIA LEASING, S.A.S.</fullName>
+                <default>false</default>
+                <label>325 - EMPLEADOS VIA LEASING, S.A.S.</label>
+            </value>
+            <value>
+                <fullName>326 - EMPLEADOS ABTX DOMINICANA, SRL.</fullName>
+                <default>false</default>
+                <label>326 - EMPLEADOS ABTX DOMINICANA, SRL.</label>
+            </value>
+            <value>
+                <fullName>327 - EMPLEADOS TODOLEASING, SRL.</fullName>
+                <default>false</default>
+                <label>327 - EMPLEADOS TODOLEASING, SRL.</label>
+            </value>
+            <value>
+                <fullName>328 - PROGRAMA TASAS ESPECIALES 0523</fullName>
+                <default>false</default>
+                <label>328 - PROGRAMA TASAS ESPECIALES 0523</label>
+            </value>
+            <value>
+                <fullName>329 - CAMPANA PRESTAMOS EXPRESS 2023</fullName>
+                <default>false</default>
+                <label>329 - CAMPANA PRESTAMOS EXPRESS 2023</label>
+            </value>
+            <value>
+                <fullName>333 - EMPLEADOS B. VIMENCA (VEH.USAD)</fullName>
+                <default>false</default>
+                <label>333 - EMPLEADOS B. VIMENCA (VEH.USAD)</label>
+            </value>
+            <value>
+                <fullName>334 - EMPLEADOS B. VIMENCA CONS HIPOT</fullName>
+                <default>false</default>
+                <label>334 - EMPLEADOS B. VIMENCA CONS HIPOT</label>
+            </value>
+            <value>
+                <fullName>335 - EMPLEADO LABORATORIOS MEGALABS</fullName>
+                <default>false</default>
+                <label>335 - EMPLEADO LABORATORIOS MEGALABS</label>
+            </value>
+            <value>
+                <fullName>336 - EMPLEADOS IQTEK SOLUTIONS SRL</fullName>
+                <default>false</default>
+                <label>336 - EMPLEADOS IQTEK SOLUTIONS SRL</label>
+            </value>
+            <value>
+                <fullName>337 - CERVECERIA NACIONAL DOMINICANA</fullName>
+                <default>false</default>
+                <label>337 - CERVECERIA NACIONAL DOMINICANA</label>
+            </value>
+            <value>
+                <fullName>338 - EMPLEADOS LAB. ROWE-MARKETING</fullName>
+                <default>false</default>
+                <label>338 - EMPLEADOS LAB. ROWE-MARKETING</label>
+            </value>
+            <value>
+                <fullName>339 - LIB. ENCAJE 1 RESOL.01/23</fullName>
+                <default>false</default>
+                <label>339 - LIB. ENCAJE 1 RESOL.01/23</label>
+            </value>
+            <value>
+                <fullName>340 - VENTAS EXTERNA COLONY, SRL.</fullName>
+                <default>false</default>
+                <label>340 - VENTAS EXTERNA COLONY, SRL.</label>
+            </value>
+            <value>
+                <fullName>341 - EX-EMPLEADO CONVENIOS 2023</fullName>
+                <default>false</default>
+                <label>341 - EX-EMPLEADO CONVENIOS 2023</label>
+            </value>
+            <value>
+                <fullName>342 - LIB ENCAJE 2 RESOL. 06/2023</fullName>
+                <default>false</default>
+                <label>342 - LIB ENCAJE 2 RESOL. 06/2023</label>
+            </value>
+            <value>
+                <fullName>343 - FONDOS FLR 2023 PRESTAMOS NUEV</fullName>
+                <default>false</default>
+                <label>343 - FONDOS FLR 2023 PRESTAMOS NUEV</label>
+            </value>
+            <value>
+                <fullName>344 - EMPLEADOS COLONY, SRL</fullName>
+                <default>false</default>
+                <label>344 - EMPLEADOS COLONY, SRL</label>
+            </value>
+            <value>
+                <fullName>345 - FLR NO COLOCADOS EN BC</fullName>
+                <default>false</default>
+                <label>345 - FLR NO COLOCADOS EN BC</label>
+            </value>
+            <value>
+                <fullName>346 - TASAS ESPECIALES JULIO 2023</fullName>
+                <default>false</default>
+                <label>346 - TASAS ESPECIALES JULIO 2023</label>
+            </value>
+            <value>
+                <fullName>347 - FONDOS FLR 2023 -RD$25MM</fullName>
+                <default>false</default>
+                <label>347 - FONDOS FLR 2023 -RD$25MM</label>
+            </value>
+            <value>
+                <fullName>348 - EMPLEADOS TEMPLARIS</fullName>
+                <default>false</default>
+                <label>348 - EMPLEADOS TEMPLARIS</label>
+            </value>
+            <value>
+                <fullName>349 - EMPLEADOS GRUPO ARBOLEDA</fullName>
+                <default>false</default>
+                <label>349 - EMPLEADOS GRUPO ARBOLEDA</label>
+            </value>
+            <value>
+                <fullName>350 - EMPLEADOS WOMEN&apos;S CARE CENTER</fullName>
+                <default>false</default>
+                <label>350 - EMPLEADOS WOMEN&apos;S CARE CENTER</label>
+            </value>
+            <value>
+                <fullName>351 - FONDOS FLR 2023 - RD$265MM</fullName>
+                <default>false</default>
+                <label>351 - FONDOS FLR 2023 - RD$265MM</label>
+            </value>
+            <value>
+                <fullName>352 - TASAS ESPECIALES OCTUBRE 2023</fullName>
+                <default>false</default>
+                <label>352 - TASAS ESPECIALES OCTUBRE 2023</label>
+            </value>
+            <value>
+                <fullName>353 - EMPLEADOS GROB PHARMA CORP</fullName>
+                <default>false</default>
+                <label>353 - EMPLEADOS GROB PHARMA CORP</label>
+            </value>
+            <value>
+                <fullName>354 - EMPLEADOS MICROPORT CRM-SORIN</fullName>
+                <default>false</default>
+                <label>354 - EMPLEADOS MICROPORT CRM-SORIN</label>
+            </value>
+            <value>
+                <fullName>355 - EMPLEADOS DCBM GRUPO TEMPLARIS</fullName>
+                <default>false</default>
+                <label>355 - EMPLEADOS DCBM GRUPO TEMPLARIS</label>
+            </value>
+            <value>
+                <fullName>356 - REESTRUCTURACION BEES</fullName>
+                <default>false</default>
+                <label>356 - REESTRUCTURACION BEES</label>
+            </value>
+            <value>
+                <fullName>357 - EMPLEADOS CMP (PORTAL)</fullName>
+                <default>false</default>
+                <label>357 - EMPLEADOS CMP (PORTAL)</label>
+            </value>
+            <value>
+                <fullName>358 - FONDOS FLR 2023 - RD$169MM</fullName>
+                <default>false</default>
+                <label>358 - FONDOS FLR 2023 - RD$169MM</label>
+            </value>
+            <value>
+                <fullName>359 - EMPLEADO BEST FRIENDS PET CARE</fullName>
+                <default>false</default>
+                <label>359 - EMPLEADO BEST FRIENDS PET CARE</label>
+            </value>
+            <value>
+                <fullName>360 - EMPL. BABEQUE SECUNDARIA</fullName>
+                <default>false</default>
+                <label>360 - EMPL. BABEQUE SECUNDARIA</label>
+            </value>
+            <value>
+                <fullName>361 - EMPL. LA CASA DEL RESTAURANT</fullName>
+                <default>false</default>
+                <label>361 - EMPL. LA CASA DEL RESTAURANT</label>
+            </value>
+            <value>
+                <fullName>362 - EMPL. SOLO PASTELITOS GUILBE</fullName>
+                <default>false</default>
+                <label>362 - EMPL. SOLO PASTELITOS GUILBE</label>
+            </value>
+            <value>
+                <fullName>363 - EMPL. HIRE HORATIO. CO</fullName>
+                <default>false</default>
+                <label>363 - EMPL. HIRE HORATIO. CO</label>
+            </value>
+            <value>
+                <fullName>364 - PAGADORES</fullName>
+                <default>false</default>
+                <label>364 - PAGADORES</label>
+            </value>
+            <value>
+                <fullName>365 - EMPL. MILENA TOURS, SRL</fullName>
+                <default>false</default>
+                <label>365 - EMPL. MILENA TOURS, SRL</label>
+            </value>
+            <value>
+                <fullName>366 - VENTAS EXTERNAS TEMPLARIS</fullName>
+                <default>false</default>
+                <label>366 - VENTAS EXTERNAS TEMPLARIS</label>
+            </value>
+            <value>
+                <fullName>367 - PROG. 1 RD$ HIPOT. 19.00% A 1AÑO</fullName>
+                <default>false</default>
+                <label>367 - PROG. 1 RD$ HIPOT. 19.00% A 1AÑO</label>
+            </value>
+            <value>
+                <fullName>368 - PROG.1 RD$ HIPOT. 19.90% A 2AÑO</fullName>
+                <default>false</default>
+                <label>368 - PROG.1 RD$ HIPOT. 19.90% A 2AÑO</label>
+            </value>
+            <value>
+                <fullName>369 - PROG.1 RD$ CONV. 19.00% A 1AÑO</fullName>
+                <default>false</default>
+                <label>369 - PROG.1 RD$ CONV. 19.00% A 1AÑO</label>
+            </value>
+            <value>
+                <fullName>370 - PROG.2 US$ HIPOT.10.25% A 1AÑO</fullName>
+                <default>false</default>
+                <label>370 - PROG.2 US$ HIPOT.10.25% A 1AÑO</label>
+            </value>
+            <value>
+                <fullName>371 - PROG.2 US$ HIPOT.10.90% A 2AÑO</fullName>
+                <default>false</default>
+                <label>371 - PROG.2 US$ HIPOT.10.90% A 2AÑO</label>
+            </value>
+            <value>
+                <fullName>372 - EMPL. CHEMPROD, SRL.</fullName>
+                <default>false</default>
+                <label>372 - EMPL. CHEMPROD, SRL.</label>
+            </value>
+            <value>
+                <fullName>373 - EMPL. EL DINERO (GRUPO MARTI)</fullName>
+                <default>false</default>
+                <label>373 - EMPL. EL DINERO (GRUPO MARTI)</label>
+            </value>
+            <value>
+                <fullName>374 - EMPL. EMBRIODOM, S.A.</fullName>
+                <default>false</default>
+                <label>374 - EMPL. EMBRIODOM, S.A.</label>
+            </value>
+            <value>
+                <fullName>375 - EMPL. PAGADORES, SRL.</fullName>
+                <default>false</default>
+                <label>375 - EMPL. PAGADORES, SRL.</label>
+            </value>
+            <value>
+                <fullName>376 - REFINANCIAMIENTO BEES</fullName>
+                <default>false</default>
+                <label>376 - REFINANCIAMIENTO BEES</label>
+            </value>
+            <value>
+                <fullName>377 - EMPL. DESC. MEDICOS GRUPO READ</fullName>
+                <default>false</default>
+                <label>377 - EMPL. DESC. MEDICOS GRUPO READ</label>
+            </value>
+            <value>
+                <fullName>378 - LIB ENCAJE 5 RESOL. 11/24</fullName>
+                <default>false</default>
+                <label>378 - LIB ENCAJE 5 RESOL. 11/24</label>
+            </value>
+            <value>
+                <fullName>379 - EMPL.CENTRO CORRD. EMPRESARIAL</fullName>
+                <default>false</default>
+                <label>379 - EMPL.CENTRO CORRD. EMPRESARIAL</label>
+            </value>
+            <value>
+                <fullName>380 - EMPL. NAVES DEL ATLANTICO NDA</fullName>
+                <default>false</default>
+                <label>380 - EMPL. NAVES DEL ATLANTICO NDA</label>
+            </value>
+            <value>
+                <fullName>381 - EMPL. OPTIMA TALENTO, SRL.</fullName>
+                <default>false</default>
+                <label>381 - EMPL. OPTIMA TALENTO, SRL.</label>
+            </value>
+            <value>
+                <fullName>382 - EMPL. FACILIT. DE DESP. ATLANT</fullName>
+                <default>false</default>
+                <label>382 - EMPL. FACILIT. DE DESP. ATLANT</label>
+            </value>
+            <value>
+                <fullName>383 - EMPL. LA IBERICA</fullName>
+                <default>false</default>
+                <label>383 - EMPL. LA IBERICA</label>
+            </value>
+            <value>
+                <fullName>384 - EMPL. AGENCIA DE CAMBIO EXTRAN</fullName>
+                <default>false</default>
+                <label>384 - EMPL. AGENCIA DE CAMBIO EXTRAN</label>
+            </value>
+            <value>
+                <fullName>385 - RENTA VITALICIA SEG. CRECER</fullName>
+                <default>false</default>
+                <label>385 - RENTA VITALICIA SEG. CRECER</label>
+            </value>
+            <value>
+                <fullName>386 - EMPL.COND MALECON CENTER</fullName>
+                <default>false</default>
+                <label>386 - EMPL.COND MALECON CENTER</label>
+            </value>
+            <value>
+                <fullName>387 - EMPL. PUNTO VISUAL R E SRL</fullName>
+                <default>false</default>
+                <label>387 - EMPL. PUNTO VISUAL R E SRL</label>
+            </value>
+            <value>
+                <fullName>388 - CREDITOS PYMES</fullName>
+                <default>false</default>
+                <label>388 - CREDITOS PYMES</label>
+            </value>
+            <value>
+                <fullName>389 - EMPLEADOS REFERENCIA IMG. DIAG</fullName>
+                <default>false</default>
+                <label>389 - EMPLEADOS REFERENCIA IMG. DIAG</label>
+            </value>
+            <value>
+                <fullName>390 - EMPLEADOS KTM IMPORT</fullName>
+                <default>false</default>
+                <label>390 - EMPLEADOS KTM IMPORT</label>
+            </value>
+            <value>
+                <fullName>391 - EMPLEADOS H Y H SOLUTIONS</fullName>
+                <default>false</default>
+                <label>391 - EMPLEADOS H Y H SOLUTIONS</label>
+            </value>
+            <value>
+                <fullName>392 - CAMP. REFINANCIAMIENTO</fullName>
+                <default>false</default>
+                <label>392 - CAMP. REFINANCIAMIENTO</label>
+            </value>
+            <value>
+                <fullName>393 - EMPL. GOLD&apos;S GYM RD</fullName>
+                <default>false</default>
+                <label>393 - EMPL. GOLD&apos;S GYM RD</label>
+            </value>
+            <value>
+                <fullName>394 - EMPLEADOS FARMA EXTRA</fullName>
+                <default>false</default>
+                <label>394 - EMPLEADOS FARMA EXTRA</label>
+            </value>
+            <value>
+                <fullName>395 - EMPLEADOS ZOLUX DEVELOPMENT</fullName>
+                <default>false</default>
+                <label>395 - EMPLEADOS ZOLUX DEVELOPMENT</label>
+            </value>
+            <value>
+                <fullName>396 - LIB ENCAJE 1 RESOL. 06/25</fullName>
+                <default>false</default>
+                <label>396 - LIB ENCAJE 1 RESOL. 06/25</label>
+            </value>
+            <value>
+                <fullName>397 - EMPL. DELICIEL.</fullName>
+                <default>false</default>
+                <label>397 - EMPL. DELICIEL.</label>
+            </value>
+            <value>
+                <fullName>398 - RENTA VITALICIA DOM. SEGUROS</fullName>
+                <default>false</default>
+                <label>398 - RENTA VITALICIA DOM. SEGUROS</label>
+            </value>
+            <value>
+                <fullName>399 - RENTA VITALICIA SEGUROS APS</fullName>
+                <default>false</default>
+                <label>399 - RENTA VITALICIA SEGUROS APS</label>
+            </value>
+            <value>
+                <fullName>400 - EMPL. GUARDIANES MAX SEG</fullName>
+                <default>false</default>
+                <label>400 - EMPL. GUARDIANES MAX SEG</label>
+            </value>
+            <value>
+                <fullName>401 - VENTAS EXTERNAS ALLYPRO</fullName>
+                <default>false</default>
+                <label>401 - VENTAS EXTERNAS ALLYPRO</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

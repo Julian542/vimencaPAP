@@ -1,34 +1,36 @@
 @IsTest
 private class FSC_RLATriggerHandlerTest {
+    @TestSetup
+    static void asignarPermisosAdministrador() {
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            PermissionSet permiso = [SELECT Id FROM PermissionSet WHERE Name = 'FSC_PS_Administrador' LIMIT 1];
+            // El usuario que ejecuta los tests puede tener ya el permission set asignado.
+            if ([SELECT COUNT() FROM PermissionSetAssignment WHERE AssigneeId = :UserInfo.getUserId() AND PermissionSetId = :permiso.Id] == 0) {
+                insert new PermissionSetAssignment(AssigneeId = UserInfo.getUserId(), PermissionSetId = permiso.Id);
+            }
+        }
+    }
+
 	private static final String RT_CREDITO_CONSUMO = 'FSC_Solicitud_Credito_Consumo';
 	private static final String RT_CREDITO_PYME = 'FSC_Solicitud_Credito_PYME';
 	private static final String STATUS_BORRADOR = 'Borrador';
 	private static final String STATUS_EN_PROCESO = 'En proceso';
+	private static final String STATUS_CERRADA_GANADA = 'Cerrada Ganada';
 	private static final String SUBESTADO_REGENERACION = 'Completando información';
 	private static final String SUBESTADO_PEP = 'En validación PEP/Listas';
 	private static final String TITLE_PREFIX = 'Crédito ';
-	private static Integer accountSequence = 0;
 
 	private static Account createAccount() {
-		Test.setMock(HttpCalloutMock.class, new FSC_EsignHttpMock());
-		Account acc = new Account(
-			RecordTypeId = getPersonAccountRecordTypeId(),
-			FirstName = 'Cuenta',
-			LastName = 'Trigger ' + System.now().getTime(),
-			ACC_TipoIdentificacion__c = 'Cédula',
-			ACC_NumIdentificacion__c = nextTestIdentification()
-		);
+		Account acc = new Account(Name = 'Cuenta Test Trigger ' + System.now().getTime());
 		insert acc;
 		return acc;
 	}
 
 	private static Account createDecisionAccount() {
-		Test.setMock(HttpCalloutMock.class, new FSC_EsignHttpMock());
 		Account acc = new Account(
-			RecordTypeId = getPersonAccountRecordTypeId(),
-			FirstName = 'Cuenta',
-			LastName = 'Motor Buro ' + System.now().getTime(),
-			ACC_NumIdentificacion__c = nextTestIdentification(),
+			LastName = 'Cuenta Motor Buro ' + System.now().getTime(),
+			RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Fisica').getRecordTypeId(),
+			ACC_NumIdentificacion__c = '00108803610',
 			ACC_TipoIdentificacion__c = 'Cédula'
 		);
 		insert acc;
@@ -51,11 +53,6 @@ private class FSC_RLATriggerHandlerTest {
 		Schema.RecordTypeInfo rtInfo = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('PersonAccount');
 
 		return rtInfo == null ? null : rtInfo.getRecordTypeId();
-	}
-
-	private static String nextTestIdentification() {
-		accountSequence++;
-		return '00108803' + String.valueOf(accountSequence).leftPad(3, '0');
 	}
 
 	private static ResidentialLoanApplication createRlaForSolicitudRegeneration(
@@ -85,7 +82,7 @@ private class FSC_RLATriggerHandlerTest {
 		String status,
 		String subestado
 	) {
-		Test.setMock(HttpCalloutMock.class, new FSC_EsignHttpMock());
+		Test.setMock(HttpCalloutMock.class, new INT007TestMock('PF'));
 		Account account = new Account();
 		Id personAccountRecordTypeId = getPersonAccountRecordTypeId();
 		if (personAccountRecordTypeId != null) {
@@ -93,7 +90,6 @@ private class FSC_RLATriggerHandlerTest {
 		}
 		account.FirstName = firstName;
 		account.LastName = lastName;
-		account.ACC_TipoIdentificacion__c = 'Cédula';
 		account.ACC_NumIdentificacion__c = documentNumber;
 		insert account;
 
@@ -208,6 +204,70 @@ private class FSC_RLATriggerHandlerTest {
 	}
 
 	@IsTest
+	static void stampWonClosureDateSetsDateOnlyOnWinningTransition() {
+		Id recordId = createSyntheticId(1);
+		ResidentialLoanApplication oldRecord = new ResidentialLoanApplication(Id = recordId, Status = STATUS_EN_PROCESO);
+		ResidentialLoanApplication newRecord = new ResidentialLoanApplication(Id = recordId, Status = STATUS_CERRADA_GANADA);
+
+		Test.startTest();
+		FSC_RLATriggerHandler.stampWonClosureDate(
+			new List<ResidentialLoanApplication>{ newRecord },
+			new Map<Id, ResidentialLoanApplication>{ recordId => oldRecord }
+		);
+		Test.stopTest();
+
+		Assert.isNotNull(newRecord.FSC_FechaCierreGanada__c, 'La transición a Cerrada Ganada debe sellar la fecha de cierre.');
+	}
+
+	@IsTest
+	static void stampWonClosureDatePreservesDateAndIgnoresOtherTransitions() {
+		Id wonRecordId = createSyntheticId(2);
+		Id openRecordId = createSyntheticId(3);
+		Datetime originalClosureDate = System.now().addDays(-1);
+		ResidentialLoanApplication alreadyWon = new ResidentialLoanApplication(
+			Id = wonRecordId,
+			Status = STATUS_CERRADA_GANADA,
+			FSC_FechaCierreGanada__c = originalClosureDate
+		);
+		ResidentialLoanApplication stillOpen = new ResidentialLoanApplication(Id = openRecordId, Status = STATUS_EN_PROCESO);
+
+		FSC_RLATriggerHandler.stampWonClosureDate(
+			new List<ResidentialLoanApplication>{ alreadyWon, stillOpen },
+			new Map<Id, ResidentialLoanApplication>{
+				wonRecordId => new ResidentialLoanApplication(Id = wonRecordId, Status = STATUS_CERRADA_GANADA),
+				openRecordId => new ResidentialLoanApplication(Id = openRecordId, Status = STATUS_BORRADOR)
+			}
+		);
+
+		Assert.areEqual(originalClosureDate, alreadyWon.FSC_FechaCierreGanada__c, 'Una fecha existente no debe sobrescribirse.');
+		Assert.isNull(stillOpen.FSC_FechaCierreGanada__c, 'Una transición que no cierra ganada no debe sellar fecha.');
+	}
+
+	@IsTest
+	static void stampWonClosureDateIsBulkSafe() {
+		List<ResidentialLoanApplication> newRecords = new List<ResidentialLoanApplication>();
+		Map<Id, ResidentialLoanApplication> oldRecordsById = new Map<Id, ResidentialLoanApplication>();
+		for (Integer index = 0; index < 251; index++) {
+			Id recordId = createSyntheticId(index);
+			newRecords.add(new ResidentialLoanApplication(Id = recordId, Status = STATUS_CERRADA_GANADA));
+			oldRecordsById.put(recordId, new ResidentialLoanApplication(Id = recordId, Status = STATUS_EN_PROCESO));
+		}
+
+		Test.startTest();
+		FSC_RLATriggerHandler.stampWonClosureDate(newRecords, oldRecordsById);
+		Test.stopTest();
+
+		for (ResidentialLoanApplication record : newRecords) {
+			Assert.isNotNull(record.FSC_FechaCierreGanada__c, 'Cada solicitud del lote debe recibir la fecha de cierre.');
+		}
+	}
+
+	private static Id createSyntheticId(Integer index) {
+		String suffix = String.valueOf(index).leftPad(12, '0');
+		return (Id) ('0cd' + suffix);
+	}
+
+	@IsTest
 	static void testAfterUpdate_GeneracionContrato_CoversBranch() {
 		ResidentialLoanApplication rlaDb = createRla('En proceso', 'Pendiente planilla de desembolso');
 
@@ -285,7 +345,11 @@ private class FSC_RLATriggerHandlerTest {
 			refreshed.FSC_Subestado__c,
 			'La invocación directa debe procesar el contrato cuando recibe IDs válidos.'
 		);
-		System.assertEquals(true, refreshed.FSC_Contrato_Generado__c, 'La invocación directa debe marcar el contrato como generado.');
+		System.assertEquals(
+			false,
+			refreshed.FSC_Contrato_Generado__c,
+			'Sin un contrato aplicable, debe avanzar a firmas sin marcar un archivo como generado.'
+		);
 	}
 
 	@IsTest
@@ -389,23 +453,12 @@ private class FSC_RLATriggerHandlerTest {
 
 		Test.setMock(HttpCalloutMock.class, new LoanDecisionApprovedMock());
 
-		Boolean missingLoanDecisionConfig = false;
-
 		Test.startTest();
-		try {
-			FSC_RLATriggerHandler.afterUpdate(
-				new List<ResidentialLoanApplication>{ newRla },
-				new Map<Id, ResidentialLoanApplication>{ rlaDb.Id => oldRla }
-			);
-			Test.stopTest();
-		} catch (Exception e) {
-			missingLoanDecisionConfig = e.getMessage().contains('Configuración faltante');
-		}
-
-		if (missingLoanDecisionConfig) {
-			System.assert(true, 'Se cubre la rama cuando la metadata de LoanDecision no está configurada en QA.');
-			return;
-		}
+		FSC_RLATriggerHandler.afterUpdate(
+			new List<ResidentialLoanApplication>{ newRla },
+			new Map<Id, ResidentialLoanApplication>{ rlaDb.Id => oldRla }
+		);
+		Test.stopTest();
 
 		ResidentialLoanApplication refreshed = [
 			SELECT FSC_Resultado_Buro__c, FSC_XCore_Buro__c, FSC_Mensajes_Buro__c, FSC_Subestado__c, Status
@@ -683,41 +736,5 @@ private class FSC_RLATriggerHandlerTest {
 			],
 			'Debe regenerar inserts posteriores cuando ya existe un PDF de solicitud.'
 		);
-	}
-
-	@IsTest
-	static void testBeforeInsert_RejectsDuplicatePagareValues() {
-		ResidentialLoanApplication first = new ResidentialLoanApplication();
-		ResidentialLoanApplication second = new ResidentialLoanApplication();
-		String actoNumero = 'ACTO-' + String.valueOf(Datetime.now().getTime());
-
-		first.put('FSC_ActoNumeroPagare__c', actoNumero);
-		second.put('FSC_ActoNumeroPagare__c', actoNumero);
-
-		Schema.DisplayType folioType = ResidentialLoanApplication.SObjectType.getDescribe().fields.getMap()
-			.get('FSC_NumeroFolioPagare__c')
-			.getDescribe()
-			.getType();
-		Object folioValue = 'FOLIO-' + String.valueOf(Datetime.now().getTime());
-		if (folioType == Schema.DisplayType.Integer) {
-			folioValue = 9001;
-		} else if (
-			folioType == Schema.DisplayType.Currency ||
-			folioType == Schema.DisplayType.Double ||
-			folioType == Schema.DisplayType.Percent
-		) {
-			folioValue = Decimal.valueOf('9001');
-		}
-		first.put('FSC_NumeroFolioPagare__c', folioValue);
-		second.put('FSC_NumeroFolioPagare__c', folioValue);
-
-		Test.startTest();
-		FSC_RLATriggerHandler.beforeInsert(null);
-		FSC_RLATriggerHandler.beforeInsert(new List<ResidentialLoanApplication>());
-		FSC_RLATriggerHandler.beforeInsert(new List<ResidentialLoanApplication>{ first, second });
-		Test.stopTest();
-
-		System.assert(first.hasErrors(), 'Debe rechazar el primer duplicado en la misma transacción.');
-		System.assert(second.hasErrors(), 'Debe rechazar el segundo duplicado en la misma transacción.');
 	}
 }

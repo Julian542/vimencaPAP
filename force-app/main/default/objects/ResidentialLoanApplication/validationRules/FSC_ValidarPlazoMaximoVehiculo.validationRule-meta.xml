@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ValidarPlazoMaximoVehiculo</fullName>
+    <active>true</active>
+    <description>Valida ambos plazos según la antigüedad del vehículo. Antes de guardar las garantías, el plazo solicitado no puede superar el máximo absoluto parametrizado.</description>
+    <errorConditionFormula>AND(
+    RecordType.DeveloperName = &quot;FSC_Solicitud_Credito_Vehiculo&quot;,
+    OR(
+        AND(
+            OR(FSC_AnioVehiculoMasAntiguo__c &gt; 0, NOT(ISBLANK(FSC_PlazoMesesAprobado__c))),
+            FSC_PlazoMaximoPermitido__c &lt; 1
+        ),
+        IF(
+            ISBLANK(TEXT(FSC_Plazo_meses__c)),
+            FALSE,
+            VALUE(TEXT(FSC_Plazo_meses__c)) &gt; IF(
+                FSC_AnioVehiculoMasAntiguo__c &gt; 0,
+                FSC_PlazoMaximoPermitido__c,
+                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_PlazoMaximo__c
+            )
+        ),
+        FSC_PlazoMesesAprobado__c &gt; FSC_PlazoMaximoPermitido__c
+    )
+)</errorConditionFormula>
+    <errorMessage>El plazo solicitado o aprobado supera el máximo permitido para la antigüedad del vehículo, o no existe un vehículo con antigüedad admitida. Revise las garantías y el plazo máximo permitido.</errorMessage>
+</ValidationRule>

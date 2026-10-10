@@ -9,21 +9,9 @@ private class FSC_ApprovalHistoryControllerTest {
             : null;
     }
 
-    private static Account createNeutralAccount(String name) {
-        Account acc = new Account(
-            RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Juridica').getRecordTypeId(),
-            Name = name,
-            ACC_RNC__c = String.valueOf(Math.abs(Crypto.getRandomInteger())).leftPad(9, '0').substring(0, 9),
-            ACC_Condicion__c = 'PROSPECTO',
-            ACC_Estado__c = 'INICIADO',
-            ACC_TipoIdentificacion__c = 'RNC'
-        );
-        insert acc;
-        return acc;
-    }
-
     private static ResidentialLoanApplication createRlaForApprovalHistory() {
-        Account acc = createNeutralAccount('Cuenta Approval History ' + System.now().getTime());
+        Account acc = new Account(Name = 'Cuenta Approval History ' + System.now().getTime());
+        insert acc;
 
         ResidentialLoanApplication rla = new ResidentialLoanApplication(
             Name = 'RLA Approval History',
@@ -58,7 +46,8 @@ private class FSC_ApprovalHistoryControllerTest {
 
     @IsTest
     static void testGetApprovalHistory_SinProceso() {
-        Account acc = createNeutralAccount('Cuenta Sin Proceso');
+        Account acc = new Account(Name = 'Cuenta Sin Proceso');
+        insert acc;
 
         ResidentialLoanApplication rla = new ResidentialLoanApplication(Name = 'RLA Sin Proceso', AccountId = acc.Id);
         insert rla;

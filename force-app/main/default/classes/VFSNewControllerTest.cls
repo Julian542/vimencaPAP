@@ -26,12 +26,94 @@ private class VFSNewControllerTest {
 
     @IsTest
     static void loadsNewKycVisualforceController() {
+        Test.setMock(HttpCalloutMock.class, new INT007TestMock('PF'));
         Account account = [
-            SELECT Id
+            SELECT Id, PersonContactId
             FROM Account
             WHERE FirstName = 'Visualforce' AND LastName = 'Coverage'
             LIMIT 1
         ];
+
+        Account spouse = new Account(
+            RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName()
+                .get('PersonAccount').getRecordTypeId(),
+            FirstName = 'Spouse',
+            LastName = 'Coverage',
+            ACC_TipoIdentificacion__c = 'Cédula',
+            ACC_NumIdentificacion__c = '00108803887'
+        );
+        insert spouse;
+        spouse = [SELECT Id, PersonContactId FROM Account WHERE Id = :spouse.Id];
+
+        insert new List<ContactPointAddress>{
+            new ContactPointAddress(
+                ParentId = account.Id,
+                Name = 'Residencia FATCA',
+                AddressType = 'RESIDENCIA',
+                Street = 'Main Street 10',
+                City = 'Miami',
+                State = 'Florida',
+                Country = 'United States',
+                IsPrimary = true
+            ),
+            new ContactPointAddress(
+                ParentId = account.Id,
+                Name = 'Dirección laboral',
+                AddressType = 'LABORAL',
+                Street = 'Calle Trabajo 20'
+            ),
+            new ContactPointAddress(
+                ParentId = spouse.Id,
+                Name = 'Trabajo cónyuge',
+                AddressType = 'LABORAL',
+                Street = 'Calle Cónyuge 30'
+            )
+        };
+        insert new List<ContactPointPhone>{
+            new ContactPointPhone(
+                ParentId = account.Id,
+                TelephoneNumber = '8095550201',
+                CPP_Tipo__c = 'TELÉFONO FIJO',
+                CPP_Telefonica__c = 'Claro',
+                IsPrimary = true
+            ),
+            new ContactPointPhone(
+                ParentId = account.Id,
+                TelephoneNumber = '8095550202',
+                CPP_Tipo__c = 'TELÉFONO MÓVIL',
+                CPP_Telefonica__c = 'Claro'
+            )
+        };
+        insert new ContactPointEmail(
+            ParentId = account.Id,
+            EmailAddress = 'visualforce.coverage@example.test',
+            IsPrimary = true
+        );
+        insert new List<FinServ__Employment__c>{
+            new FinServ__Employment__c(
+                Name = 'Empleo titular',
+                FinServ__Contact__c = account.PersonContactId
+            ),
+            new FinServ__Employment__c(
+                Name = 'Empleo cónyuge',
+                FinServ__Contact__c = spouse.PersonContactId
+            )
+        };
+        insert new Informacion_Financiera__c(
+            INF_Cuenta__c = account.Id,
+            Otros_Ingresos__c = 1000,
+            INF_Fuente_de_ingresos__c = 'Herencia'
+        );
+        insert new Productos_y_Servicios__c(
+            Cliente__c = account.Id,
+            Name = 'Producto de cobertura'
+        );
+        insert new AccountContactRelation(
+            AccountId = account.Id,
+            ContactId = spouse.PersonContactId,
+            Parentesco__c = 'Cónyuge',
+            Tipo_de_relacion__c = 'Familiar'
+        );
 
         Test.startTest();
         VFS_nKYCFisica_Controller controller = new VFS_nKYCFisica_Controller(
@@ -43,6 +125,13 @@ private class VFSNewControllerTest {
         System.assertEquals(12, controller.lstParticipantes.size());
         System.assertEquals(8, controller.lstAccionistas.size());
         System.assertEquals(8, controller.lstMiembros.size());
+        System.assertNotEquals(null, controller.dirResidencia.Id);
+        System.assertNotEquals(null, controller.direccion.Id);
+        System.assertNotEquals(null, controller.historial.Id);
+        System.assertNotEquals(null, controller.accConyuge.Id);
+        System.assertNotEquals(null, controller.dirConyugeLaboral.Id);
+        System.assertNotEquals(null, controller.historialConyuge.Id);
+        System.assertEquals('8095550202', controller.telefonoUSATxt);
         System.assertEquals('', controller.formatearDireccion(null));
     }
 
@@ -179,12 +268,11 @@ private class VFSNewControllerTest {
         System.assertEquals(null, controller.getPrimeraFirmaConjunta());
         System.assertEquals(null, controller.getSegundaFirmaConjunta());
 
-        Direccion__c address = new Direccion__c(
-            DIR_Calle__c = 'Principal',
-            DIR_Numero__c = '10',
-            DIR_Edificio__c = 'A',
-            DIR_N_Apartamento__c = '2B',
-            DIR_Provincia_texto__c = 'Distrito'
+        ContactPointAddress address = new ContactPointAddress(
+            Street = 'Calle Principal No. 10',
+            City = 'Edif. A',
+            State = 'Apt. 2B',
+            Country = 'Distrito'
         );
         String formatted = controller.formatearDireccion(address);
         System.assert(formatted.contains('Calle Principal No. 10'));
@@ -233,6 +321,22 @@ private class VFSNewControllerTest {
                 DIR_Tipo_Direccion__c = 'LABORAL',
                 DIR_Calle__c = 'Trabajo',
                 DIR_Numero__c = '22'
+            )
+        };
+        insert new List<ContactPointAddress>{
+            new ContactPointAddress(
+                ParentId = titular.Id,
+                Name = 'Residencia titular',
+                AddressType = 'RESIDENCIA',
+                Street = 'Calle Principal No. 101',
+                IsPrimary = true
+            ),
+            new ContactPointAddress(
+                ParentId = jointHolder.Id,
+                Name = 'Trabajo firma conjunta',
+                AddressType = 'RESIDENCIA',
+                Street = 'Calle Trabajo No. 22',
+                IsPrimary = true
             )
         };
 
@@ -348,7 +452,9 @@ private class VFSNewControllerTest {
             'Vinculo' => 'AUTORIZADO',
             'NumeroDocumento' => signer.ACC_NumIdentificacion__c,
             'NombreCompleto' => signer.Name,
-            'DarGarantia' => 'Y'
+            'DarGarantia' => 'Y',
+            'TipoPoder' => 'Y',
+            'TipoDocumento' => 'Cédula'
         });
         VFS_nAperturaCuentasController.testResponse = response;
 
@@ -358,7 +464,7 @@ private class VFSNewControllerTest {
 
         System.assertEquals('Conjunta Y', controller.tipoFirma);
         System.assertEquals(1, controller.lstAccountFirmaConjunta.size());
-        System.assertEquals('Autorizado', controller.lstAccountFirmaConjunta[0].ACC_Ejecutivo__c);
+        System.assertEquals('AUTORIZADO', controller.lstAccountFirmaConjunta[0].ACC_Ejecutivo__c);
         System.assertEquals(12, controller.lstFirmantesAutorizados.size());
         System.assertEquals('8095550190', controller.lstFirmantesAutorizados[0].Phone);
     }

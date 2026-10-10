@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CPP_Tipo__c</fullName>
+    <label>Tipo</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>TELÉFONO FIJO</fullName>
+                <default>false</default>
+                <label>TELÉFONO FIJO</label>
+            </value>
+            <value>
+                <fullName>TELÉFONO MÓVIL</fullName>
+                <default>false</default>
+                <label>TELÉFONO MÓVIL</label>
+            </value>
+            <value>
+                <fullName>TELÉFONO FAX</fullName>
+                <default>false</default>
+                <label>TELÉFONO FAX</label>
+            </value>
+            <value>
+                <fullName>TELÉFONO EN EL EXTERIOR</fullName>
+                <default>false</default>
+                <label>TELÉFONO EN EL EXTERIOR</label>
+            </value>
+            <value>
+                <fullName>MÓVIL EN EL EXTERIOR</fullName>
+                <default>false</default>
+                <label>MÓVIL EN EL EXTERIOR</label>
+            </value>
+            <value>
+                <fullName>TELÉFONO TRABAJO</fullName>
+                <default>false</default>
+                <label>TELÉFONO TRABAJO</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -2,11 +2,9 @@
 private class FSC_ContentVersionTrigger_Test {
 	@TestSetup
 	static void setupData() {
-		Test.setMock(HttpCalloutMock.class, new FSC_EsignHttpMock());
 		Account a = new Account();
-		a.RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('PersonAccount').getRecordTypeId();
-		a.FirstName = 'Cliente';
-		a.LastName = 'PDF';
+		a.LastName = 'Cliente PDF';
+		a.RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Fisica').getRecordTypeId();
 		a.ACC_NumIdentificacion__c = '00298765432';
 		a.ACC_TipoIdentificacion__c = 'Cédula';
 		a.ACC_Nacionalidad__c = 'AFGANISTÁN';
@@ -138,7 +136,8 @@ private class FSC_ContentVersionTrigger_Test {
 
 	@IsTest
 	static void testHandler_validacionDocumentosFirmados_devuelveNull_siNoEsRLA() {
-		Account acc = getTestAccount();
+		Account acc = new Account(Name = 'Cuenta Test');
+		insert acc;
 
 		ContentVersion cv = createFileLinkedToRecord(acc.Id, 'Archivo ligado a Account', true, true);
 
@@ -147,14 +146,6 @@ private class FSC_ContentVersionTrigger_Test {
 		Test.stopTest();
 
 		System.assertEquals(null, result, 'Debe devolver null cuando el LinkedEntityId no corresponde a ResidentialLoanApplication');
-	}
-
-	private static Account getTestAccount() {
-		return [
-			SELECT Id
-			FROM Account
-			LIMIT 1
-		];
 	}
 
 	@IsTest

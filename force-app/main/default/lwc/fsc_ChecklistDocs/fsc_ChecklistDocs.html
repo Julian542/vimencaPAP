@@ -1,0 +1,228 @@
+<template>
+	<lightning-card title="">
+		<div class="slds-p-around_small">
+			<template if:true={loading}>
+				<lightning-spinner alternative-text="Cargando"></lightning-spinner>
+			</template>
+
+			<template if:true={errorMessage}>
+				<div class="slds-text-color_error slds-m-bottom_small">{errorMessage}</div>
+			</template>
+
+			<template if:true={hasRows}>
+				<template if:true={canSave}>
+					<div class="slds-m-bottom_small slds-grid slds-grid_align-end">
+						<lightning-button
+							label="Guardar"
+							variant="brand"
+							onclick={handleSave}
+							disabled={isSaveDisabled}>
+						</lightning-button>
+						<template if:true={canApproveAll}>
+							<lightning-button
+								class="slds-m-left_x-small"
+								label="Aprobar todos"
+								onclick={handleApproveAll}
+								disabled={isApproveAllDisabled}>
+							</lightning-button>
+						</template>
+					</div>
+				</template>
+
+				<lightning-accordion
+					active-section-name={activeSectionName}
+					onsectiontoggle={handleAccordionToggle}
+					allow-multiple-sections-open="false">
+					<template
+						for:each={groupedSections}
+						for:item="sec">
+						<lightning-accordion-section
+							key={sec.key}
+							name={sec.key}
+							label={sec.label}>
+							<div class="table-wrapper">
+								<table class="slds-table slds-table_cell-buffer slds-table_bordered checklist-table">
+									<colgroup>
+										<col class="col-doc" />
+										<col class="col-archivo" />
+										<col class="col-no-aplica" />
+										<col class="col-estado" />
+										<col class="col-comentario-oficial" />
+										<col class="col-comentario" />
+										<col class="col-modifica" />
+										<col class="col-fecha" />
+									</colgroup>
+
+									<thead>
+										<tr class="slds-line-height_reset">
+											<th scope="col">
+												<div class="slds-truncate">Nombre del documento</div>
+											</th>
+											<th scope="col">
+												<div class="slds-truncate">Archivo</div>
+											</th>
+											<th scope="col">
+												<div class="slds-truncate">No aplica</div>
+											</th>
+											<th scope="col">
+												<div class="slds-truncate">Estado revisión</div>
+											</th>
+											<th scope="col">
+												<div class="slds-truncate">Comentario oficial</div>
+											</th>
+											<th scope="col">
+												<div class="slds-truncate">Comentario validación</div>
+											</th>
+											<th scope="col">
+												<div class="slds-truncate">Modificado por</div>
+											</th>
+											<th scope="col">
+												<div class="slds-truncate">Última modificación</div>
+											</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<template
+											for:each={sec.rows}
+											for:item="r">
+											<tr key={r.joinId}>
+												<td>
+													<div
+														class="doc-wrap"
+														title={r.nombreDocumento}>
+														<template if:true={r.nroDocumento}>
+															<span class="slds-text-color_weak">{r.nroDocumento} - </span>
+														</template>
+														{r.nombreDocumento}
+													</div>
+
+													<template if:true={r.categoria}>
+														<div class="slds-text-body_small slds-text-color_weak">{r.categoria}</div>
+													</template>
+												</td>
+
+												<td>
+													<template if:true={r.joinId}>
+														<lightning-file-upload
+															label="Subir archivo"
+															name="uploader"
+																	record-id={r.joinId}
+																	data-joinid={r.joinId}
+																	onuploadfinished={handleUploadFinished}
+																	accept={acceptedFormats}
+																	multiple={isMultiple}
+															disabled={r.uploadDisabled}>
+														</lightning-file-upload>
+
+														<template if:true={r.uploadHint}>
+															<div class="slds-text-body_small slds-text-color_weak slds-m-top_xx-small">
+																{r.uploadHint}
+															</div>
+														</template>
+
+														<template if:true={r.files.length}>
+															<div class="slds-m-top_x-small">
+																<template
+																	for:each={r.files}
+																	for:item="f">
+																	<div
+																		key={f.contentDocumentId}
+																		class="file-row">
+																		<a
+																			href={f.url}
+																			target="_blank"
+																			title={f.title}
+																			class="file-name">
+																			{f.shortTitle}
+																		</a>
+																		<span class="slds-text-color_weak"> ({f.fileType})</span>
+																	</div>
+																</template>
+															</div>
+														</template>
+													</template>
+
+													<template if:false={r.joinId}>
+														<span class="slds-text-color_error">Sin joinId</span>
+													</template>
+												</td>
+
+												<td>
+													<lightning-input
+														type="checkbox"
+														data-joinid={r.joinId}
+														checked={r.noAplica}
+														onchange={handleNoAplicaChange}
+														disabled={r.noAplicaDisabled}>
+													</lightning-input>
+												</td>
+
+												<td>
+													<lightning-combobox
+														data-joinid={r.joinId}
+														value={r.estadoRevisionValue}
+														options={estadoRevisionOptions}
+														onchange={handleEstadoRevisionChange}
+														disabled={r.estadoRevisionDisabled}>
+													</lightning-combobox>
+												</td>
+
+												<td>
+													<lightning-input
+														type="text"
+														data-joinid={r.joinId}
+														value={r.comentarioOficial}
+														onchange={handleComentarioOficialChange}
+														disabled={r.comentarioOficialDisabled}>
+													</lightning-input>
+												</td>
+
+												<td>
+													<lightning-input
+														type="text"
+														data-joinid={r.joinId}
+														value={r.comentario}
+														onchange={handleComentarioChange}
+														disabled={r.comentarioDisabled}>
+													</lightning-input>
+												</td>
+
+												<td>
+													<div
+														class="cell-wrap"
+														title={r.ultimaModificacionPor}>
+														{r.ultimaModificacionPor}
+													</div>
+												</td>
+
+												<td>
+													<div class="cell-wrap">
+														<lightning-formatted-date-time
+															value={r.fechaUltimaModificacion}
+															year="numeric"
+															month="2-digit"
+															day="2-digit"
+															hour="2-digit"
+															minute="2-digit">
+														</lightning-formatted-date-time>
+													</div>
+												</td>
+											</tr>
+										</template>
+									</tbody>
+								</table>
+							</div>
+						</lightning-accordion-section>
+					</template>
+				</lightning-accordion>
+			</template>
+
+			<template if:false={hasRows}>
+				<template if:false={loading}>
+					<div class="slds-text-color_weak">No hay documentos configurados para este tipo de solicitud.</div>
+				</template>
+			</template>
+		</div>
+	</lightning-card>
+</template>

@@ -2,14 +2,7 @@
 private class FSC_CallAPIsTest {
 
     private static Account createAccount() {
-        Test.setMock(HttpCalloutMock.class, new INT007TestMock('PF'));
-        Account acc = new Account(
-            RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('PersonAccount').getRecordTypeId(),
-            FirstName = 'Cuenta',
-            LastName = 'Test',
-            ACC_TipoIdentificacion__c = 'Cédula',
-            ACC_NumIdentificacion__c = '00108803610'
-        );
+        Account acc = new Account(Name = 'Cuenta Test');
         insert acc;
         return acc;
     }

@@ -1,0 +1,1202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Modelo_Vehiculo__c</fullName>
+    <label>Modelo Vehiculo</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>FSC_Marca_Vehiculo__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>100</fullName>
+                <default>false</default>
+                <label>100</label>
+            </value>
+            <value>
+                <fullName>80</fullName>
+                <default>false</default>
+                <label>80</label>
+            </value>
+            <value>
+                <fullName>A3</fullName>
+                <default>false</default>
+                <label>A3</label>
+            </value>
+            <value>
+                <fullName>A4 SW</fullName>
+                <default>false</default>
+                <label>A4 SW</label>
+            </value>
+            <value>
+                <fullName>A4</fullName>
+                <default>false</default>
+                <label>A4</label>
+            </value>
+            <value>
+                <fullName>A6</fullName>
+                <default>false</default>
+                <label>A6</label>
+            </value>
+            <value>
+                <fullName>A6 SW</fullName>
+                <default>false</default>
+                <label>A6 SW</label>
+            </value>
+            <value>
+                <fullName>A8</fullName>
+                <default>false</default>
+                <label>A8</label>
+            </value>
+            <value>
+                <fullName>A8 SW</fullName>
+                <default>false</default>
+                <label>A8 SW</label>
+            </value>
+            <value>
+                <fullName>CABRIOLET</fullName>
+                <default>false</default>
+                <label>CABRIOLET</label>
+            </value>
+            <value>
+                <fullName>S2 COUPE</fullName>
+                <default>false</default>
+                <label>S2 COUPE</label>
+            </value>
+            <value>
+                <fullName>S2 SEDAN</fullName>
+                <default>false</default>
+                <label>S2 SEDAN</label>
+            </value>
+            <value>
+                <fullName>S2 SW</fullName>
+                <default>false</default>
+                <label>S2 SW</label>
+            </value>
+            <value>
+                <fullName>S6</fullName>
+                <default>false</default>
+                <label>S6</label>
+            </value>
+            <value>
+                <fullName>S6 SW</fullName>
+                <default>false</default>
+                <label>S6 SW</label>
+            </value>
+            <value>
+                <fullName>S8</fullName>
+                <default>false</default>
+                <label>S8</label>
+            </value>
+            <value>
+                <fullName>A5</fullName>
+                <default>false</default>
+                <label>A5</label>
+            </value>
+            <value>
+                <fullName>S3</fullName>
+                <default>false</default>
+                <label>S3</label>
+            </value>
+            <value>
+                <fullName>Q7</fullName>
+                <default>false</default>
+                <label>Q7</label>
+            </value>
+            <value>
+                <fullName>Q7 3.0 TDI</fullName>
+                <default>false</default>
+                <label>Q7 3.0 TDI</label>
+            </value>
+            <value>
+                <fullName>Jolion</fullName>
+                <default>false</default>
+                <label>Jolion</label>
+            </value>
+            <value>
+                <fullName>316i COMPACTO</fullName>
+                <default>false</default>
+                <label>316i COMPACTO</label>
+            </value>
+            <value>
+                <fullName>318I COMPACTO</fullName>
+                <default>false</default>
+                <label>318I COMPACTO</label>
+            </value>
+            <value>
+                <fullName>318I</fullName>
+                <default>false</default>
+                <label>318I</label>
+            </value>
+            <value>
+                <fullName>318IS</fullName>
+                <default>false</default>
+                <label>318IS</label>
+            </value>
+            <value>
+                <fullName>CENTURY CUSTON L-4</fullName>
+                <default>false</default>
+                <label>CENTURY CUSTON L-4</label>
+            </value>
+            <value>
+                <fullName>CENTURY CUSTON V6</fullName>
+                <default>false</default>
+                <label>CENTURY CUSTON V6</label>
+            </value>
+            <value>
+                <fullName>CENTURY LIMITED L-4</fullName>
+                <default>false</default>
+                <label>CENTURY LIMITED L-4</label>
+            </value>
+            <value>
+                <fullName>CENTURY LIMITED V6</fullName>
+                <default>false</default>
+                <label>CENTURY LIMITED V6</label>
+            </value>
+            <value>
+                <fullName>ALLANTE V8 CONVERTIBLE</fullName>
+                <default>false</default>
+                <label>ALLANTE V8 CONVERTIBLE</label>
+            </value>
+            <value>
+                <fullName>BROWG HAM V8</fullName>
+                <default>false</default>
+                <label>BROWG HAM V8</label>
+            </value>
+            <value>
+                <fullName>CATERA 6VR69</fullName>
+                <default>false</default>
+                <label>CATERA 6VR69</label>
+            </value>
+            <value>
+                <fullName>DEVILLE 6KD69</fullName>
+                <default>false</default>
+                <label>DEVILLE 6KD69</label>
+            </value>
+            <value>
+                <fullName>Escalade SUV</fullName>
+                <default>false</default>
+                <label>Escalade SUV</label>
+            </value>
+            <value>
+                <fullName>DE GOLF</fullName>
+                <default>false</default>
+                <label>DE GOLF</label>
+            </value>
+            <value>
+                <fullName>uni-t</fullName>
+                <default>false</default>
+                <label>uni-t</label>
+            </value>
+            <value>
+                <fullName>STAR 5 VAN CARGO</fullName>
+                <default>false</default>
+                <label>STAR 5 VAN CARGO</label>
+            </value>
+            <value>
+                <fullName>CS 35 Elite Plus</fullName>
+                <default>false</default>
+                <label>CS 35 Elite Plus</label>
+            </value>
+            <value>
+                <fullName>145</fullName>
+                <default>false</default>
+                <label>145</label>
+            </value>
+            <value>
+                <fullName>146</fullName>
+                <default>false</default>
+                <label>146</label>
+            </value>
+            <value>
+                <fullName>164</fullName>
+                <default>false</default>
+                <label>164</label>
+            </value>
+            <value>
+                <fullName>GTV</fullName>
+                <default>false</default>
+                <label>GTV</label>
+            </value>
+            <value>
+                <fullName>ASTRO (1/2+)</fullName>
+                <default>false</default>
+                <label>ASTRO (1/2+)</label>
+            </value>
+            <value>
+                <fullName>BERETA V6</fullName>
+                <default>false</default>
+                <label>BERETA V6</label>
+            </value>
+            <value>
+                <fullName>BERETTA L4</fullName>
+                <default>false</default>
+                <label>BERETTA L4</label>
+            </value>
+            <value>
+                <fullName>Spider</fullName>
+                <default>false</default>
+                <label>Spider</label>
+            </value>
+            <value>
+                <fullName>156</fullName>
+                <default>false</default>
+                <label>156</label>
+            </value>
+            <value>
+                <fullName>159</fullName>
+                <default>false</default>
+                <label>159</label>
+            </value>
+            <value>
+                <fullName>GIULIETTA TCT</fullName>
+                <default>false</default>
+                <label>GIULIETTA TCT</label>
+            </value>
+            <value>
+                <fullName>COLORADO</fullName>
+                <default>false</default>
+                <label>COLORADO</label>
+            </value>
+            <value>
+                <fullName>AVEO</fullName>
+                <default>false</default>
+                <label>AVEO</label>
+            </value>
+            <value>
+                <fullName>CAMARO</fullName>
+                <default>false</default>
+                <label>CAMARO</label>
+            </value>
+            <value>
+                <fullName>CAPTIVA</fullName>
+                <default>false</default>
+                <label>CAPTIVA</label>
+            </value>
+            <value>
+                <fullName>CORVETTE</fullName>
+                <default>false</default>
+                <label>CORVETTE</label>
+            </value>
+            <value>
+                <fullName>SPARK</fullName>
+                <default>false</default>
+                <label>SPARK</label>
+            </value>
+            <value>
+                <fullName>TRAX</fullName>
+                <default>false</default>
+                <label>TRAX</label>
+            </value>
+            <value>
+                <fullName>TAHOE</fullName>
+                <default>false</default>
+                <label>TAHOE</label>
+            </value>
+            <value>
+                <fullName>MALIBU</fullName>
+                <default>false</default>
+                <label>MALIBU</label>
+            </value>
+            <value>
+                <fullName>SILVERADO</fullName>
+                <default>false</default>
+                <label>SILVERADO</label>
+            </value>
+            <value>
+                <fullName>COLORADO LT 2CAB 4X4 2.8 TD 200 HP 6MT</fullName>
+                <default>false</default>
+                <label>COLORADO LT 2CAB 4X4 2.8 TD 200 HP 6MT</label>
+            </value>
+            <value>
+                <fullName>CAPTIVA LT7</fullName>
+                <default>false</default>
+                <label>CAPTIVA LT7</label>
+            </value>
+            <value>
+                <fullName>TAHOE PREMIER 4WD</fullName>
+                <default>false</default>
+                <label>TAHOE PREMIER 4WD</label>
+            </value>
+            <value>
+                <fullName>CAOTIVA LT FWD</fullName>
+                <default>false</default>
+                <label>CAOTIVA LT FWD</label>
+            </value>
+            <value>
+                <fullName>TAHOE HIGH COUNTRY 4WD</fullName>
+                <default>false</default>
+                <label>TAHOE HIGH COUNTRY 4WD</label>
+            </value>
+            <value>
+                <fullName>CIRRUS</fullName>
+                <default>false</default>
+                <label>CIRRUS</label>
+            </value>
+            <value>
+                <fullName>CONCORDE</fullName>
+                <default>false</default>
+                <label>CONCORDE</label>
+            </value>
+            <value>
+                <fullName>CONQUEST</fullName>
+                <default>false</default>
+                <label>CONQUEST</label>
+            </value>
+            <value>
+                <fullName>IMPERIAL</fullName>
+                <default>false</default>
+                <label>IMPERIAL</label>
+            </value>
+            <value>
+                <fullName>AX 1100</fullName>
+                <default>false</default>
+                <label>AX 1100</label>
+            </value>
+            <value>
+                <fullName>AX 954</fullName>
+                <default>false</default>
+                <label>AX 954</label>
+            </value>
+            <value>
+                <fullName>SAXO X</fullName>
+                <default>false</default>
+                <label>SAXO X</label>
+            </value>
+            <value>
+                <fullName>1310 CT</fullName>
+                <default>false</default>
+                <label>1310 CT</label>
+            </value>
+            <value>
+                <fullName>1310 T</fullName>
+                <default>false</default>
+                <label>1310 T</label>
+            </value>
+            <value>
+                <fullName>NOVA 524</fullName>
+                <default>false</default>
+                <label>NOVA 524</label>
+            </value>
+            <value>
+                <fullName>APLAUSSE A101LSGHMS</fullName>
+                <default>false</default>
+                <label>APLAUSSE A101LSGHMS</label>
+            </value>
+            <value>
+                <fullName>MIRA</fullName>
+                <default>false</default>
+                <label>MIRA</label>
+            </value>
+            <value>
+                <fullName>210</fullName>
+                <default>false</default>
+                <label>210</label>
+            </value>
+            <value>
+                <fullName>510</fullName>
+                <default>false</default>
+                <label>510</label>
+            </value>
+            <value>
+                <fullName>810</fullName>
+                <default>false</default>
+                <label>810</label>
+            </value>
+            <value>
+                <fullName>DURANGO</fullName>
+                <default>false</default>
+                <label>DURANGO</label>
+            </value>
+            <value>
+                <fullName>SUMMIT</fullName>
+                <default>false</default>
+                <label>SUMMIT</label>
+            </value>
+            <value>
+                <fullName>4</fullName>
+                <default>false</default>
+                <label>4</label>
+            </value>
+            <value>
+                <fullName>TESTAROSA F110</fullName>
+                <default>false</default>
+                <label>TESTAROSA F110</label>
+            </value>
+            <value>
+                <fullName>500</fullName>
+                <default>false</default>
+                <label>500</label>
+            </value>
+            <value>
+                <fullName>F-150</fullName>
+                <default>false</default>
+                <label>F-150</label>
+            </value>
+            <value>
+                <fullName>EXPLORER XLT 4X4</fullName>
+                <default>false</default>
+                <label>EXPLORER XLT 4X4</label>
+            </value>
+            <value>
+                <fullName>T5 evo</fullName>
+                <default>false</default>
+                <label>T5 evo</label>
+            </value>
+            <value>
+                <fullName>Coolray</fullName>
+                <default>false</default>
+                <label>Coolray</label>
+            </value>
+            <value>
+                <fullName>METRO LSI</fullName>
+                <default>false</default>
+                <label>METRO LSI</label>
+            </value>
+            <value>
+                <fullName>METRO XFI</fullName>
+                <default>false</default>
+                <label>METRO XFI</label>
+            </value>
+            <value>
+                <fullName>PRIZM</fullName>
+                <default>false</default>
+                <label>PRIZM</label>
+            </value>
+            <value>
+                <fullName>STORN</fullName>
+                <default>false</default>
+                <label>STORN</label>
+            </value>
+            <value>
+                <fullName>TRACKER</fullName>
+                <default>false</default>
+                <label>TRACKER</label>
+            </value>
+            <value>
+                <fullName>JIMMY</fullName>
+                <default>false</default>
+                <label>JIMMY</label>
+            </value>
+            <value>
+                <fullName>SAFARI</fullName>
+                <default>false</default>
+                <label>SAFARI</label>
+            </value>
+            <value>
+                <fullName>Accord</fullName>
+                <default>false</default>
+                <label>Accord</label>
+            </value>
+            <value>
+                <fullName>CRV</fullName>
+                <default>false</default>
+                <label>CRV</label>
+            </value>
+            <value>
+                <fullName>Santa Fe Sport.</fullName>
+                <default>false</default>
+                <label>Santa Fe Sport.</label>
+            </value>
+            <value>
+                <fullName>Tucson</fullName>
+                <default>false</default>
+                <label>Tucson</label>
+            </value>
+            <value>
+                <fullName>CANTUX SEMI FULL</fullName>
+                <default>false</default>
+                <label>CANTUX SEMI FULL</label>
+            </value>
+            <value>
+                <fullName>Soluto</fullName>
+                <default>false</default>
+                <label>Soluto</label>
+            </value>
+            <value>
+                <fullName>Santa Fe</fullName>
+                <default>false</default>
+                <label>Santa Fe</label>
+            </value>
+            <value>
+                <fullName>ELANTRA</fullName>
+                <default>false</default>
+                <label>ELANTRA</label>
+            </value>
+            <value>
+                <fullName>Accent</fullName>
+                <default>false</default>
+                <label>Accent</label>
+            </value>
+            <value>
+                <fullName>Sonata LF</fullName>
+                <default>false</default>
+                <label>Sonata LF</label>
+            </value>
+            <value>
+                <fullName>X70</fullName>
+                <default>false</default>
+                <label>X70</label>
+            </value>
+            <value>
+                <fullName>T2</fullName>
+                <default>false</default>
+                <label>T2</label>
+            </value>
+            <value>
+                <fullName>VANDEN</fullName>
+                <default>false</default>
+                <label>VANDEN</label>
+            </value>
+            <value>
+                <fullName>XJ6</fullName>
+                <default>false</default>
+                <label>XJ6</label>
+            </value>
+            <value>
+                <fullName>XJS</fullName>
+                <default>false</default>
+                <label>XJS</label>
+            </value>
+            <value>
+                <fullName>Picanto</fullName>
+                <default>false</default>
+                <label>Picanto</label>
+            </value>
+            <value>
+                <fullName>SORRENTO</fullName>
+                <default>false</default>
+                <label>SORRENTO</label>
+            </value>
+            <value>
+                <fullName>Sportage</fullName>
+                <default>false</default>
+                <label>Sportage</label>
+            </value>
+            <value>
+                <fullName>Seltos</fullName>
+                <default>false</default>
+                <label>Seltos</label>
+            </value>
+            <value>
+                <fullName>RIO</fullName>
+                <default>false</default>
+                <label>RIO</label>
+            </value>
+            <value>
+                <fullName>CX-5 GS4X2</fullName>
+                <default>false</default>
+                <label>CX-5 GS4X2</label>
+            </value>
+            <value>
+                <fullName>C Class 300.</fullName>
+                <default>false</default>
+                <label>C Class 300.</label>
+            </value>
+            <value>
+                <fullName>A200</fullName>
+                <default>false</default>
+                <label>A200</label>
+            </value>
+            <value>
+                <fullName>GLC300</fullName>
+                <default>false</default>
+                <label>GLC300</label>
+            </value>
+            <value>
+                <fullName>Frontier</fullName>
+                <default>false</default>
+                <label>Frontier</label>
+            </value>
+            <value>
+                <fullName>SENTRA</fullName>
+                <default>false</default>
+                <label>SENTRA</label>
+            </value>
+            <value>
+                <fullName>3008</fullName>
+                <default>false</default>
+                <label>3008</label>
+            </value>
+            <value>
+                <fullName>Cayenne Coupe 4WD</fullName>
+                <default>false</default>
+                <label>Cayenne Coupe 4WD</label>
+            </value>
+            <value>
+                <fullName>Forester</fullName>
+                <default>false</default>
+                <label>Forester</label>
+            </value>
+            <value>
+                <fullName>JIMNY GLX</fullName>
+                <default>false</default>
+                <label>JIMNY GLX</label>
+            </value>
+            <value>
+                <fullName>RAIZE</fullName>
+                <default>false</default>
+                <label>RAIZE</label>
+            </value>
+            <value>
+                <fullName>Passo</fullName>
+                <default>false</default>
+                <label>Passo</label>
+            </value>
+            <value>
+                <fullName>HILUX</fullName>
+                <default>false</default>
+                <label>HILUX</label>
+            </value>
+            <value>
+                <fullName>RAV-4</fullName>
+                <default>false</default>
+                <label>RAV-4</label>
+            </value>
+            <value>
+                <fullName>Townace</fullName>
+                <default>false</default>
+                <label>Townace</label>
+            </value>
+            <value>
+                <fullName>TERAMONT</fullName>
+                <default>false</default>
+                <label>TERAMONT</label>
+            </value>
+            <value>
+                <fullName>XC60 RECHAGE</fullName>
+                <default>false</default>
+                <label>XC60 RECHAGE</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Aval</controllingFieldValue>
+            <valueName>Jolion</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Porsche</controllingFieldValue>
+            <valueName>Cayenne Coupe 4WD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>JETOUR</controllingFieldValue>
+            <valueName>X70</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>JETOUR</controllingFieldValue>
+            <valueName>T2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GEELY</controllingFieldValue>
+            <valueName>Coolray</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Forthing</controllingFieldValue>
+            <valueName>T5 evo</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Daihatsu</controllingFieldValue>
+            <valueName>APLAUSSE A101LSGHMS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Daihatsu</controllingFieldValue>
+            <valueName>MIRA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Datsun</controllingFieldValue>
+            <valueName>210</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Datsun</controllingFieldValue>
+            <valueName>510</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Datsun</controllingFieldValue>
+            <valueName>810</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Subaru</controllingFieldValue>
+            <valueName>Forester</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dodge</controllingFieldValue>
+            <valueName>DURANGO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Suzuki</controllingFieldValue>
+            <valueName>JIMNY GLX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Eagle</controllingFieldValue>
+            <valueName>SUMMIT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Toyota</controllingFieldValue>
+            <valueName>RAIZE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Toyota</controllingFieldValue>
+            <valueName>Passo</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Toyota</controllingFieldValue>
+            <valueName>HILUX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Toyota</controllingFieldValue>
+            <valueName>RAV-4</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Toyota</controllingFieldValue>
+            <valueName>Townace</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ferrari</controllingFieldValue>
+            <valueName>TESTAROSA F110</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Volkswagen</controllingFieldValue>
+            <valueName>TERAMONT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Fiat</controllingFieldValue>
+            <valueName>500</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ford</controllingFieldValue>
+            <valueName>F-150</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Ford</controllingFieldValue>
+            <valueName>EXPLORER XLT 4X4</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FSO</controllingFieldValue>
+            <valueName>4</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GEO</controllingFieldValue>
+            <valueName>METRO LSI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GEO</controllingFieldValue>
+            <valueName>METRO XFI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GEO</controllingFieldValue>
+            <valueName>PRIZM</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GEO</controllingFieldValue>
+            <valueName>STORN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GEO</controllingFieldValue>
+            <valueName>TRACKER</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>145</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>146</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>164</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>GTV</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>ASTRO (1/2+)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>BERETA V6</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>BERETTA L4</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>Spider</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>156</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>159</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>GIULIETTA TCT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>COLORADO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>AVEO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>CAMARO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>CAPTIVA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>CORVETTE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>SPARK</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>TRAX</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>TAHOE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>MALIBU</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>SILVERADO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>COLORADO LT 2CAB 4X4 2.8 TD 200 HP 6MT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>CAPTIVA LT7</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>TAHOE PREMIER 4WD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>CAOTIVA LT FWD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chevrolet</controllingFieldValue>
+            <valueName>TAHOE HIGH COUNTRY 4WD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>100</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>80</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>A3</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>A4 SW</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>A4</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>A6</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>A6 SW</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>A8</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>A8 SW</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>CABRIOLET</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>S2 COUPE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>S2 SEDAN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>S2 SW</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>S6</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>S6 SW</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>S8</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>A5</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>S3</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>Q7</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Audi</controllingFieldValue>
+            <valueName>Q7 3.0 TDI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BMW</controllingFieldValue>
+            <valueName>316i COMPACTO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BMW</controllingFieldValue>
+            <valueName>318I COMPACTO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BMW</controllingFieldValue>
+            <valueName>318I</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>BMW</controllingFieldValue>
+            <valueName>318IS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Buick</controllingFieldValue>
+            <valueName>CENTURY CUSTON L-4</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Buick</controllingFieldValue>
+            <valueName>CENTURY CUSTON V6</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Buick</controllingFieldValue>
+            <valueName>CENTURY LIMITED L-4</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Buick</controllingFieldValue>
+            <valueName>CENTURY LIMITED V6</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cadillac</controllingFieldValue>
+            <valueName>ALLANTE V8 CONVERTIBLE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cadillac</controllingFieldValue>
+            <valueName>BROWG HAM V8</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cadillac</controllingFieldValue>
+            <valueName>CATERA 6VR69</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cadillac</controllingFieldValue>
+            <valueName>DEVILLE 6KD69</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cadillac</controllingFieldValue>
+            <valueName>Escalade SUV</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Carritos de Golf</controllingFieldValue>
+            <valueName>DE GOLF</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chrysler</controllingFieldValue>
+            <valueName>CIRRUS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chrysler</controllingFieldValue>
+            <valueName>CONCORDE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chrysler</controllingFieldValue>
+            <valueName>CONQUEST</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Chrysler</controllingFieldValue>
+            <valueName>IMPERIAL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Citroen</controllingFieldValue>
+            <valueName>AX 1100</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Citroen</controllingFieldValue>
+            <valueName>AX 954</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Citroen</controllingFieldValue>
+            <valueName>SAXO X</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dacia</controllingFieldValue>
+            <valueName>1310 CT</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dacia</controllingFieldValue>
+            <valueName>1310 T</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dacia</controllingFieldValue>
+            <valueName>NOVA 524</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Volvo</controllingFieldValue>
+            <valueName>XC60 RECHAGE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GMC</controllingFieldValue>
+            <valueName>JIMMY</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>GMC</controllingFieldValue>
+            <valueName>SAFARI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Honda</controllingFieldValue>
+            <valueName>Accord</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Honda</controllingFieldValue>
+            <valueName>CRV</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hyundai</controllingFieldValue>
+            <valueName>Santa Fe Sport.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hyundai</controllingFieldValue>
+            <valueName>Tucson</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hyundai</controllingFieldValue>
+            <valueName>CANTUX SEMI FULL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hyundai</controllingFieldValue>
+            <valueName>Soluto</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hyundai</controllingFieldValue>
+            <valueName>Santa Fe</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hyundai</controllingFieldValue>
+            <valueName>ELANTRA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hyundai</controllingFieldValue>
+            <valueName>Accent</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Hyundai</controllingFieldValue>
+            <valueName>Sonata LF</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Jaguar</controllingFieldValue>
+            <valueName>VANDEN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Jaguar</controllingFieldValue>
+            <valueName>XJ6</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Jaguar</controllingFieldValue>
+            <valueName>XJS</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>KIA</controllingFieldValue>
+            <valueName>Picanto</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>KIA</controllingFieldValue>
+            <valueName>SORRENTO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>KIA</controllingFieldValue>
+            <valueName>Sportage</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>KIA</controllingFieldValue>
+            <valueName>Seltos</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>KIA</controllingFieldValue>
+            <valueName>RIO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mazda</controllingFieldValue>
+            <valueName>CX-5 GS4X2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mercedes Benz</controllingFieldValue>
+            <valueName>C Class 300.</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mercedes Benz</controllingFieldValue>
+            <valueName>A200</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Mercedes Benz</controllingFieldValue>
+            <valueName>GLC300</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Changan</controllingFieldValue>
+            <valueName>uni-t</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Changan</controllingFieldValue>
+            <valueName>STAR 5 VAN CARGO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Changan</controllingFieldValue>
+            <valueName>CS 35 Elite Plus</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nissan</controllingFieldValue>
+            <valueName>Frontier</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Nissan</controllingFieldValue>
+            <valueName>SENTRA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Peugeot</controllingFieldValue>
+            <valueName>3008</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

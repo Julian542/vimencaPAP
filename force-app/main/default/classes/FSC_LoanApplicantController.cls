@@ -1,5 +1,278 @@
 public with sharing class FSC_LoanApplicantController {
+	static final String NOMBRE_CONFIGURACION_FACILIDADES_OTRAS_INSTITUCIONES = 'FSC_LimiteFacilidadesOtrasInstituciones';
+
+	@AuraEnabled
+	public static void updateDebtorAccount(Id contextId, String applicantJson) {
+		Savepoint savepoint = Database.setSavepoint();
+		try {
+			Id accountId = getAccountIdFromContext(contextId);
+			if (accountId == null) {
+				throw new AuraHandledException('No se pudo identificar el Account asociado a la solicitud.');
+			}
+
+			Map<String, Object> applicant = (Map<String, Object>) JSON.deserializeUntyped(applicantJson);
+			if (applicant == null || normalizeText(stringValue(applicant.get('FSC_TipoSolicitante__c'))) != 'deudor') {
+				throw new AuraHandledException('Solo se permite actualizar el Account desde el Deudor.');
+			}
+
+			Account account = [SELECT Id, IsPersonAccount, PersonContactId FROM Account WHERE Id = :accountId FOR UPDATE];
+			// Actualiza todos los datos del Deudor en una sola transaccion.
+			updateAccountData(account, applicant);
+			updateEmploymentData(account, applicant);
+			syncPhones(account.Id, collectionRows(applicant, 'ContactPointPhone'));
+			syncAddresses(account.Id, collectionRows(applicant, 'ContactPointAddress'));
+			syncEmails(account.Id, collectionRows(applicant, 'ContactPointEmail'));
+		} catch (AuraHandledException e) {
+			Database.rollback(savepoint);
+			throw e;
+		} catch (Exception e) {
+			Database.rollback(savepoint);
+			throw new AuraHandledException('No se pudo actualizar la informacion del Deudor: ' + e.getMessage());
+		}
+	}
+
+	private static void updateAccountData(Account account, Map<String, Object> applicant) {
+		String firstName = stringValue(applicant.get('FSC_Nombre__c'));
+		String lastName = joinNonBlank(
+			new List<String>{ stringValue(applicant.get('FSC_PrimerApellido__c')), stringValue(applicant.get('FSC_SegundoApellido__c')) }
+		);
+
+		Account accountUpdate = new Account(
+			Id = account.Id,
+			ACC_TipoIdentificacion__c = stringValue(applicant.get('FSC_TipoIdentificacion__c')),
+			ACC_NumIdentificacion__c = stringValue(applicant.get('FSC_NumIdentificacion__c')),
+			ACC_Nacionalidad__c = stringValue(applicant.get('FSC_Nacionalidad__c')),
+			ACC_Estado_Civil__c = stringValue(applicant.get('FSC_EstadoCivil__c')),
+			Tipo_de_vivienda__c = mapApplicantTipoVivienda(stringValue(applicant.get('FSC_TipoVivienda__c'))),
+			Tiempo_en_Vivienda__c = stringValue(applicant.get('FSC_TiempoVivienda__c')),
+			ACC_N_Dependientes__c = decimalValue(applicant.get('FSC_NumeroDependientes__c')),
+			ACC_Categoria_Riesgo_Cliente__c = stringValue(applicant.get('FSC_ClasificacionSIB__c')),
+			ACC_Ventas_Ingresos_Anuales__c = annualIncome(decimalValue(applicant.get('FSC_IngresosMensuales__c'))),
+			Industry = stringValue(applicant.get('FSC_TipoNegocio__c'))
+		);
+
+		if (account.IsPersonAccount) {
+			accountUpdate.FirstName = firstName;
+			accountUpdate.LastName = lastName;
+			accountUpdate.PersonBirthdate = dateValue(applicant.get('FSC_FechaNacimiento__c'));
+		} else {
+			accountUpdate.Name = joinNonBlank(new List<String>{ firstName, lastName });
+		}
+
+		update accountUpdate;
+	}
+
+	private static void updateEmploymentData(Account account, Map<String, Object> applicant) {
+		// Reutiliza los empleos actual y anterior para conservar sus relaciones.
+		List<FinServ__Employment__c> employments = [
+			SELECT Id, EMP_Empleo__c, EMP_Principal__c
+			FROM FinServ__Employment__c
+			WHERE Cliente__c = :account.Id
+			ORDER BY EMP_Principal__c DESC, CreatedDate DESC
+		];
+
+		FinServ__Employment__c currentEmployment;
+		FinServ__Employment__c previousEmployment;
+		for (FinServ__Employment__c employment : employments) {
+			if (currentEmployment == null && (employment.EMP_Principal__c || employment.EMP_Empleo__c == 'Actual')) {
+				currentEmployment = employment;
+			}
+			if (previousEmployment == null && employment.EMP_Empleo__c == 'Anterior') {
+				previousEmployment = employment;
+			}
+		}
+
+		if (currentEmployment == null) {
+			currentEmployment = new FinServ__Employment__c(Cliente__c = account.Id, FinServ__Contact__c = account.PersonContactId);
+		}
+		currentEmployment.EMP_Empleo__c = 'Actual';
+		currentEmployment.EMP_Principal__c = true;
+		currentEmployment.EMP_Empresa__c = stringValue(applicant.get('FSC_LugarFondeLabora__c'));
+		currentEmployment.EMP_Tipo_de_empleado__c = mapEmployeeType(stringValue(applicant.get('FSC_FuenteIngreso__c')));
+		currentEmployment.FinServ__AnnualIncome__c = annualIncome(decimalValue(applicant.get('FSC_IngresosMensuales__c')));
+		// Se comenta hasta que se haga el merge de campos de la Account y el LoanApplicant BV-1023
+		// currentEmployment.FinServ__Occupation__c = stringValue(applicant.get('FSC_Ocupacion__c'));
+		currentEmployment.FinServ__StartDate__c = dateValue(applicant.get('FSC_TiempoLaborando__c'));
+		FSC_LoanApplicantEmploymentWriter.save(account.Id, currentEmployment);
+
+		String previousCompany = stringValue(applicant.get('FSC_EmpresaAnteriorLaboro__c'));
+		if (previousEmployment != null || String.isNotBlank(previousCompany)) {
+			if (previousEmployment == null) {
+				previousEmployment = new FinServ__Employment__c(Cliente__c = account.Id, FinServ__Contact__c = account.PersonContactId);
+			}
+			previousEmployment.EMP_Empleo__c = 'Anterior';
+			previousEmployment.EMP_Principal__c = false;
+			previousEmployment.EMP_Empresa__c = previousCompany;
+			FSC_LoanApplicantEmploymentWriter.save(account.Id, previousEmployment);
+		}
+	}
+
+	private static void syncPhones(Id accountId, List<Map<String, Object>> rows) {
+		List<ContactPointPhone> existingRows = [
+			SELECT Id, FSC_TipoContacto__c, TelephoneNumber
+			FROM ContactPointPhone
+			WHERE ParentId = :accountId
+			ORDER BY CreatedDate
+		];
+		List<ContactPointPhone> rowsToSave = new List<ContactPointPhone>();
+		for (Integer index = 0; index < rows.size(); index++) {
+			ContactPointPhone phone = index < existingRows.size() ? existingRows[index] : new ContactPointPhone(ParentId = accountId);
+			phone.FSC_TipoContacto__c = stringValue(rows[index].get('FSC_TipoContacto__c'));
+			phone.TelephoneNumber = stringValue(rows[index].get('TelephoneNumber'));
+			rowsToSave.add(phone);
+		}
+		if (!rowsToSave.isEmpty()) {
+			upsert rowsToSave;
+		}
+		List<ContactPointPhone> rowsToDelete = new List<ContactPointPhone>();
+		for (Integer index = rows.size(); index < existingRows.size(); index++) {
+			rowsToDelete.add(existingRows[index]);
+		}
+		if (!rowsToDelete.isEmpty()) {
+			delete rowsToDelete;
+		}
+	}
+
+	private static void syncAddresses(Id accountId, List<Map<String, Object>> rows) {
+		List<ContactPointAddress> existingRows = [
+			SELECT Id, Name, Street, City, State, PostalCode, Country
+			FROM ContactPointAddress
+			WHERE ParentId = :accountId
+			ORDER BY CreatedDate
+		];
+		List<ContactPointAddress> rowsToSave = new List<ContactPointAddress>();
+		for (Integer index = 0; index < rows.size(); index++) {
+			ContactPointAddress address = index < existingRows.size() ? existingRows[index] : new ContactPointAddress(ParentId = accountId);
+			address.Name = stringValue(rows[index].get('Name'));
+			address.Street = stringValue(rows[index].get('Street'));
+			address.City = stringValue(rows[index].get('City'));
+			address.State = stringValue(rows[index].get('State'));
+			address.PostalCode = stringValue(rows[index].get('PostalCode'));
+			address.Country = stringValue(rows[index].get('Country'));
+			rowsToSave.add(address);
+		}
+		if (!rowsToSave.isEmpty()) {
+			upsert rowsToSave;
+		}
+		List<ContactPointAddress> rowsToDelete = new List<ContactPointAddress>();
+		for (Integer index = rows.size(); index < existingRows.size(); index++) {
+			rowsToDelete.add(existingRows[index]);
+		}
+		if (!rowsToDelete.isEmpty()) {
+			delete rowsToDelete;
+		}
+	}
+
+	private static void syncEmails(Id accountId, List<Map<String, Object>> rows) {
+		List<ContactPointEmail> existingRows = [
+			SELECT Id, EmailAddress
+			FROM ContactPointEmail
+			WHERE ParentId = :accountId
+			ORDER BY CreatedDate
+		];
+		List<ContactPointEmail> rowsToSave = new List<ContactPointEmail>();
+		for (Integer index = 0; index < rows.size(); index++) {
+			ContactPointEmail email = index < existingRows.size() ? existingRows[index] : new ContactPointEmail(ParentId = accountId);
+			email.EmailAddress = stringValue(rows[index].get('EmailAddress'));
+			rowsToSave.add(email);
+		}
+		if (!rowsToSave.isEmpty()) {
+			upsert rowsToSave;
+		}
+		List<ContactPointEmail> rowsToDelete = new List<ContactPointEmail>();
+		for (Integer index = rows.size(); index < existingRows.size(); index++) {
+			rowsToDelete.add(existingRows[index]);
+		}
+		if (!rowsToDelete.isEmpty()) {
+			delete rowsToDelete;
+		}
+	}
+
+	private static List<Map<String, Object>> collectionRows(Map<String, Object> applicant, String fieldName) {
+		List<Map<String, Object>> rows = new List<Map<String, Object>>();
+		Object value = applicant.get(fieldName);
+		if (!(value instanceof List<Object>)) {
+			return rows;
+		}
+
+		for (Object row : (List<Object>) value) {
+			if (row instanceof Map<String, Object>) {
+				rows.add((Map<String, Object>) row);
+			}
+		}
+		return rows;
+	}
+
+	private static String stringValue(Object value) {
+		return value == null || String.isBlank(String.valueOf(value)) ? null : String.valueOf(value).trim();
+	}
+
+	private static Decimal decimalValue(Object value) {
+		String text = stringValue(value);
+		if (text == null) {
+			return null;
+		}
+		try {
+			return Decimal.valueOf(text);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	private static Date dateValue(Object value) {
+		String text = stringValue(value);
+		if (text == null) {
+			return null;
+		}
+		try {
+			return Date.valueOf(text);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	private static Decimal annualIncome(Decimal monthlyIncomeValue) {
+		return monthlyIncomeValue == null ? null : monthlyIncomeValue * 12;
+	}
+
+	private static String mapEmployeeType(String source) {
+		Map<String, String> sourceToEmployment = new Map<String, String>{
+			'independiente' => '0',
+			'empleado privado' => '1',
+			'empleado publico' => '2'
+		};
+		return sourceToEmployment.get(normalizeText(source));
+	}
+
+	private static String mapApplicantTipoVivienda(String applicantTipoVivienda) {
+		Map<String, String> applicantToAccount = new Map<String, String>{ '2' => '1', '4' => '2', '1' => '3' };
+		return applicantToAccount.containsKey(applicantTipoVivienda) ? applicantToAccount.get(applicantTipoVivienda) : applicantTipoVivienda;
+	}
+
+	private static String normalizeText(String value) {
+		return String.isBlank(value)
+			? ''
+			: value.toLowerCase().replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u').trim();
+	}
+
+	private static String joinNonBlank(List<String> values) {
+		List<String> parts = new List<String>();
+		for (String value : values) {
+			if (String.isNotBlank(value)) {
+				parts.add(value.trim());
+			}
+		}
+		return parts.isEmpty() ? null : String.join(parts, ' ');
+	}
+
 	@AuraEnabled(cacheable=true)
+	public static Integer obtenerLimiteFacilidadesOtrasInstituciones() {
+		Decimal limiteConfigurado = FSC_LimiteSolicitudCredito__mdt.getInstance(NOMBRE_CONFIGURACION_FACILIDADES_OTRAS_INSTITUCIONES)?.FSC_Limite__c;
+		Integer limiteNormalizado = limiteConfigurado?.intValue();
+		return limiteNormalizado;
+	}
+
+	@AuraEnabled
 	public static Map<String, Object> getLoanApplicant(String tipoId, String numId) {
 		Map<String, Object> accountApplicant = getLoanApplicantFromAccount(tipoId, numId);
 		if (accountApplicant != null) {
@@ -10,7 +283,7 @@ public with sharing class FSC_LoanApplicantController {
 		return getExistingLoanApplicant(tipoId, numId);
 	}
 
-	@AuraEnabled(cacheable=true)
+	@AuraEnabled
 	public static Map<String, Object> getAccountLoanApplicant(Id contextId) {
 		Id accountId = getAccountIdFromContext(contextId);
 		if (accountId == null) {
@@ -47,6 +320,7 @@ public with sharing class FSC_LoanApplicantController {
 				ACC_Categoria_Riesgo_Cliente__c,
 				ACC_Ventas_Ingresos_Anuales__c,
 				ACC_Correo_Electronico_Cliente__c,
+				ACC_Tipo_Actividad__c,
 				Industry
 			FROM Account
 			WHERE Id = :accountId
@@ -86,6 +360,7 @@ public with sharing class FSC_LoanApplicantController {
 				ACC_Categoria_Riesgo_Cliente__c,
 				ACC_Ventas_Ingresos_Anuales__c,
 				ACC_Correo_Electronico_Cliente__c,
+				ACC_Tipo_Actividad__c,
 				Industry
 			FROM Account
 			WHERE ACC_TipoIdentificacion__c = :tipoId AND ACC_NumIdentificacion__c = :numId
@@ -101,13 +376,15 @@ public with sharing class FSC_LoanApplicantController {
 	}
 
 	private static Map<String, Object> accountToApplicantMap(Account account) {
+		List<String> lastNames = splitLastNames(account.LastName);
 		Map<String, Object> applicant = new Map<String, Object>{
 			'Name' => account.Name,
 			'FSC_TipoSolicitante__c' => 'Deudor',
 			'FSC_TipoIdentificacion__c' => account.ACC_TipoIdentificacion__c,
 			'FSC_NumIdentificacion__c' => account.ACC_NumIdentificacion__c,
 			'FSC_Nombre__c' => firstNonBlank(new List<String>{ account.FirstName, account.Name }),
-			'FSC_PrimerApellido__c' => account.LastName,
+			'FSC_PrimerApellido__c' => lastNames[0],
+			'FSC_SegundoApellido__c' => lastNames[1],
 			'FSC_FechaNacimiento__c' => account.PersonBirthdate,
 			'FSC_Nacionalidad__c' => account.ACC_Nacionalidad__c,
 			'FSC_EstadoCivil__c' => account.ACC_Estado_Civil__c,
@@ -115,6 +392,7 @@ public with sharing class FSC_LoanApplicantController {
 			'FSC_TiempoVivienda__c' => parseDate(account.Tiempo_en_Vivienda__c),
 			'FSC_IngresosMensuales__c' => monthlyIncome(account.ACC_Ventas_Ingresos_Anuales__c),
 			'FSC_NumeroDependientes__c' => account.ACC_N_Dependientes__c,
+			'FSC_Ocupacion__c' => account.ACC_Tipo_Actividad__c,
 			'FSC_TipoNegocio__c' => account.Industry,
 			'FSC_ClasificacionSIB__c' => account.ACC_Categoria_Riesgo_Cliente__c,
 			'Contact_Point_Phones__r' => phoneRowsToMaps(accountPhones(account)),
@@ -533,5 +811,14 @@ public with sharing class FSC_LoanApplicantController {
 			}
 		}
 		return null;
+	}
+
+	private static List<String> splitLastNames(String lastNames) {
+		String value = String.isBlank(lastNames) ? '' : lastNames.trim();
+		Integer separatorIndex = value.indexOf(' ');
+		if (separatorIndex < 0) {
+			return new List<String>{ value, null };
+		}
+		return new List<String>{ value.substring(0, separatorIndex), value.substring(separatorIndex + 1).trim() };
 	}
 }

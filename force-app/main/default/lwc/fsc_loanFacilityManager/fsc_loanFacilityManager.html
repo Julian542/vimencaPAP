@@ -1,0 +1,793 @@
+<template>
+	<div class="slds-m-around_large">
+		<div class="slds-box slds-theme_default">
+			<div class="slds-text-heading_small slds-m-bottom_medium">Informacion de las Facilidades</div>
+
+			<div class="slds-box slds-theme_default slds-m-bottom_medium">
+				<div class="slds-text-heading_small slds-m-bottom_medium">Informacion de la facilidad</div>
+				<div class="slds-grid slds-wrap slds-gutters">
+					<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+						<lightning-combobox
+							name="tipoFacilidad"
+							label="Tipo de Facilidad"
+							value={tipoFacilidad}
+							options={tipoFacilidadOptions}
+							required
+							data-facility-input
+							onchange={handleValueChange}>
+						</lightning-combobox>
+					</div>
+					<template if:true={showFacilidadField}>
+						<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+							<lightning-combobox
+								name="facilidad"
+								label="Facilidad"
+								value={facilidad}
+								options={facilidadOptions}
+								required
+								data-facility-input
+								onchange={handleValueChange}>
+							</lightning-combobox>
+						</div>
+					</template>
+					<template if:true={hasFacilidadSelected}>
+						<div
+							class="slds-col slds-size_1-of-1 slds-large-size_1-of-2"
+							if:false={isEstadoDelVehiculoDisabled}>
+							<lightning-combobox
+								name="estadoDelVehiculo"
+								label="Estado del Vehiculo"
+								value={estadoDelVehiculo}
+								options={estadoDelVehiculoOptions}
+								data-facility-input
+								onchange={handleValueChange}>
+							</lightning-combobox>
+						</div>
+						<template if:true={showPrestamoConvenioFields}>
+							<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+								<lightning-radio-group
+									name="prestamoConvenio"
+									label="Prestamo de Convenio?"
+									options={yesNoOptions}
+									type="radio"
+									value={prestamoConvenioValue}
+									required
+									data-facility-input
+									onchange={handleBooleanChange}>
+								</lightning-radio-group>
+							</div>
+						</template>
+					</template>
+					<template if:true={hasPrestamoConvenioSelected}>
+						<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+							<lightning-combobox
+								name="tipoModalidad"
+								label="Tipo de Modalidad"
+								value={tipoModalidad}
+								options={tipoModalidadOptions}
+								required
+								data-facility-input
+								onchange={handleValueChange}>
+							</lightning-combobox>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+							<div class="slds-combobox_container">
+								<div
+									class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open"
+									role="combobox"
+									aria-expanded={showLineasFinancierasOptions}
+									aria-haspopup="listbox">
+									<lightning-input
+										name="lineasFinancierasEmpresasSearch"
+										label="Lineas Financieras Empresas"
+										value={lineasFinancierasSearchTerm}
+										required
+										data-facility-input
+										autocomplete="off"
+										onfocus={handleLineasFinancierasFocus}
+										oninput={handleLineasFinancierasInput}
+										onkeyup={handleLineasFinancierasInput}
+										onpaste={handleLineasFinancierasPaste}
+										onblur={handleLineasFinancierasBlur}>
+									</lightning-input>
+
+									<template if:true={showLineasFinancierasOptions}>
+										<div
+											class="slds-dropdown slds-dropdown_length-7 slds-dropdown_fluid"
+											role="listbox">
+											<ul
+												class="slds-listbox slds-listbox_vertical"
+												role="presentation">
+												<template if:true={hasFilteredLineasFinancierasOptions}>
+													<template
+														for:each={filteredLineasFinancierasOptions}
+														for:item="option">
+														<li
+															key={option.value}
+															role="presentation"
+															class="slds-listbox__item">
+															<button
+																type="button"
+																class="slds-button slds-button_reset slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_center"
+																data-value={option.value}
+																onmousedown={handleLineasFinancierasSelect}>
+																<span class="slds-media__body">
+																	<span class="slds-truncate">{option.label}</span>
+																</span>
+															</button>
+														</li>
+													</template>
+												</template>
+												<template if:false={hasFilteredLineasFinancierasOptions}>
+													<li
+														role="presentation"
+														class="slds-listbox__item">
+														<div
+															class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_center">
+															<span class="slds-media__body">
+																<span class="slds-truncate">No hay opciones disponibles.</span>
+															</span>
+														</div>
+													</li>
+												</template>
+											</ul>
+										</div>
+									</template>
+								</div>
+							</div>
+						</div>
+					</template>
+					<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+						<lightning-radio-group
+							name="prestamoConGarantia"
+							label="Prestamo con Garantia?"
+							options={yesNoOptions}
+							type="radio"
+							value={prestamoConGarantiaValue}
+							disabled={isPrestamoConGarantiaDisabled}
+							required
+							data-facility-input
+							onchange={handleBooleanChange}>
+						</lightning-radio-group>
+					</div>
+					<template if:true={hasFacilidadSelected}>
+						<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+							<lightning-radio-group
+								name="requiereContratoPagareNotarial"
+								label={requiereContratoLabel}
+								options={yesNoOptions}
+								type="radio"
+								value={requiereContratoValue}
+								disabled={isRequiereContratoDisabled}
+								required
+								data-facility-input
+								onchange={handleBooleanChange}>
+							</lightning-radio-group>
+						</div>
+					</template>
+					<div class="slds-col slds-size_1-of-1">
+						<lightning-textarea
+							name="descripcionPropositoFacilidad"
+							label="Descripcion Proposito de la Facilidad"
+							value={descripcionPropositoFacilidad}
+							required
+							data-facility-input
+							onchange={handleValueChange}>
+						</lightning-textarea>
+					</div>
+				</div>
+			</div>
+
+			<div class="slds-box slds-theme_default slds-m-bottom_medium">
+				<div class="slds-text-heading_small slds-m-bottom_medium">Calcular cuota</div>
+				<div class="slds-grid slds-wrap slds-gutters">
+					<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+						<lightning-input
+							name="montoSolicitado"
+							type="number"
+							step="0.01"
+							label="Monto Solicitado"
+							value={montoSolicitado}
+							required
+							data-facility-input
+							data-numeric-mode="decimal-dot"
+							onkeydown={handleNumericKeyDown}
+							oninput={handleNumericInput}
+							onpaste={handleNumericPaste}
+							onchange={handleValueChange}>
+						</lightning-input>
+					</div>
+					<template if:true={hasTipoFacilidadSelected}>
+						<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+							<lightning-input
+								name="plazoMeses"
+								data-plazo-meses
+								type="text"
+								inputmode="numeric"
+								pattern="[0-9]+"
+								maxlength="3"
+								label="Plazo (Meses)"
+								value={plazoMeses}
+								message-when-pattern-mismatch="Ingrese solo numeros enteros."
+								required
+								data-facility-input
+								data-numeric-mode="integer"
+								onkeydown={handleNumericKeyDown}
+								oninput={handlePlazoMesesInput}
+								onpaste={handlePlazoMesesPaste}
+								onchange={handleValueChange}>
+							</lightning-input>
+							<template if:false={loanTermValidationMessage}>
+								<div class="slds-form-element__help" role="status">{loanTermHelpText}</div>
+							</template>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+							<lightning-input
+								name="tasaInteres"
+								type="number"
+								step="0.01"
+								label="Tasa Interes"
+								value={tasaInteres}
+								required
+								data-facility-input
+								data-numeric-mode="decimal-dot"
+								onkeydown={handleNumericKeyDown}
+								oninput={handleNumericInput}
+								onpaste={handleNumericPaste}
+								onchange={handleValueChange}>
+							</lightning-input>
+						</div>
+					</template>
+					<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+						<lightning-radio-group
+							name="tasaFija"
+							label="Tasa Fija"
+							options={yesNoOptions}
+							type="radio"
+							value={tasaFijaValue}
+							required
+							data-facility-input
+							onchange={handleBooleanChange}>
+						</lightning-radio-group>
+					</div>
+					<template if:true={showTiempoTasaFija}>
+						<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+							<lightning-input
+								name="tiempoTasaFija"
+								type="number"
+								max={plazoMeses}
+								label="Tiempo Tasa Fija (Meses)"
+								value={tiempoTasaFija}
+								message-when-range-overflow="El tiempo de tasa fija no puede ser mayor al plazo del credito."
+								required
+								data-facility-input
+								data-numeric-mode="integer"
+								onkeydown={handleNumericKeyDown}
+								oninput={handleTiempoTasaFijaInput}
+								onpaste={handleTiempoTasaFijaPaste}
+								onchange={handleValueChange}>
+							</lightning-input>
+						</div>
+					</template>
+					<template if:true={hasTipoFacilidadSelected}>
+						<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+							<lightning-combobox
+								name="formaPago"
+								label="Forma de Pago"
+								value={formaPagoValue}
+								options={formaPagoOptions}
+								disabled={isFormaPagoDisabled}
+								required
+								data-facility-input
+								onchange={handleValueChange}>
+							</lightning-combobox>
+						</div>
+						<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+							<lightning-input
+								name="montoCuota"
+								type="number"
+								step="0.01"
+								label="Monto de la Cuota"
+								value={montoCuota}
+								readonly>
+							</lightning-input>
+						</div>
+					</template>
+				</div>
+			</div>
+
+			<template if:true={hasTipoFacilidadSelected}>
+				<div class="slds-box slds-theme_default slds-m-bottom_medium">
+					<div class="slds-grid slds-wrap slds-grid_align-spread slds-m-bottom_medium">
+						<div class="slds-text-heading_small">Garantias</div>
+						<lightning-button
+							label="Agregar garantia"
+							onclick={handleAddGuarantee}
+							disabled={isAddGuaranteeDisabled}>
+						</lightning-button>
+					</div>
+
+					<template if:true={guaranteeConfigurationError}>
+						<div
+							class="slds-text-color_error slds-m-top_small"
+							role="alert">
+							{guaranteeConfigurationError}
+						</div>
+					</template>
+					<template if:true={hasGuarantees}>
+						<lightning-datatable
+							key-field="__key"
+							data={guaranteeRows}
+							columns={guaranteeColumns}
+							onrowaction={handleGuaranteeRowAction}
+							hide-checkbox-column>
+						</lightning-datatable>
+					</template>
+
+					<template if:false={hasGuarantees}>
+						<div class="slds-text-body_small slds-text-color_weak">No hay garantias agregadas.</div>
+					</template>
+
+					<template if:true={showRequiredGuaranteeError}>
+						<div class="slds-text-color_error slds-m-top_small">{requiredGuaranteeMessage}</div>
+					</template>
+
+					<template if:true={showGuaranteeEditor}>
+						<div class="slds-border_top slds-m-top_medium slds-p-top_medium">
+							<div class="slds-text-title_bold slds-m-bottom_small">{guaranteeEditorTitle}</div>
+							<div class="slds-grid slds-wrap slds-gutters">
+								<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+									<lightning-combobox
+										name="FSC_Clase_de_Garantia__c"
+										label="Clase de Garantia"
+										value={guaranteeDraft.FSC_Clase_de_Garantia__c}
+										options={garantiaClaseOptions}
+										required
+										data-guarantee-input
+										onchange={handleGuaranteeDraftChange}>
+									</lightning-combobox>
+								</div>
+								<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+									<lightning-combobox
+										name="FSC_Tipo_de_Garantia__c"
+										label="Tipo de Garantia"
+										value={guaranteeDraft.FSC_Tipo_de_Garantia__c}
+										options={guaranteeTypeOptions}
+										disabled={isGuaranteeTypeDisabled}
+										required
+										data-guarantee-input
+										onchange={handleGuaranteeDraftChange}>
+									</lightning-combobox>
+								</div>
+								<template if:true={showGuaranteeDescription}>
+									<div class="slds-col slds-size_1-of-1">
+										<lightning-textarea
+											name="FSC_Descripcion_de_la_Garantia__c"
+											label="Descripcion de la Garantia"
+											value={guaranteeDraft.FSC_Descripcion_de_la_Garantia__c}
+											required
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-textarea>
+									</div>
+								</template>
+								<template if:true={isRealEstateGuarantee}>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-combobox
+											name="FSC_Proposito_Garantia_Hipotecario__c"
+											label="Proposito Garantia Hipotecario"
+											value={guaranteeDraft.FSC_Proposito_Garantia_Hipotecario__c}
+											options={propositoGarantiaOptions}
+											required
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-combobox>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Valor_Tasado__c"
+											type="text"
+											inputmode="decimal"
+											pattern="[0-9]+([.][0-9]{0,2})?"
+											message-when-pattern-mismatch="Ingrese solo numeros con hasta dos decimales."
+											label="Valor Tasado"
+											value={guaranteeDraft.FSC_Valor_Tasado__c}
+											required
+											data-guarantee-input
+											data-numeric-mode="decimal"
+											data-numeric-target="guarantee"
+											onkeydown={handleNumericKeyDown}
+											oninput={handleNumericInput}
+											onpaste={handleNumericPaste}
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-radio-group
+											name="FSC_EsTasadorExterno__c"
+											label="Tasador externo"
+											options={tasadorExternoOptions}
+											type="radio"
+											value={tasadorExternoValue}
+											required
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-radio-group>
+									</div>
+									<template if:true={isInternalAppraiser}>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-combobox
+												name="FSC_Tasado_Por__c"
+												label="Tasado por"
+												value={guaranteeDraft.FSC_Tasado_Por__c}
+												options={tasadoPorOptions}
+												required
+												data-guarantee-input
+												onchange={handleGuaranteeDraftChange}>
+											</lightning-combobox>
+										</div>
+									</template>
+									<template if:true={isExternalAppraiser}>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												name="FSC_NombreTasadorExterno__c"
+												label="Nombre tasador externo"
+												value={guaranteeDraft.FSC_NombreTasadorExterno__c}
+												maxlength="100"
+												required
+												data-guarantee-input
+												onchange={handleGuaranteeDraftChange}>
+											</lightning-input>
+										</div>
+									</template>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Fecha_Tasacion__c"
+											type="date"
+											label="Fecha Tasacion"
+											value={guaranteeDraft.FSC_Fecha_Tasacion__c}
+											max={fechaTasacionMaxima}
+											message-when-range-overflow="La fecha de tasacion no puede ser posterior a hoy."
+											required
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Monto_Inicial_Avance_Pagado__c"
+											type="number"
+											step="0.01"
+											label="Monto del Inicial / Avance Pagado"
+											value={guaranteeDraft.FSC_Monto_Inicial_Avance_Pagado__c}
+											required
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Precio_de_Venta__c"
+											type="number"
+											step="0.01"
+											label="Precio de Venta"
+											value={guaranteeDraft.FSC_Precio_de_Venta__c}
+											required
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Metros_Cuadrados_de_Construccion__c"
+											type="text"
+											inputmode="decimal"
+											pattern="[0-9]+([.][0-9]{0,2})?"
+											message-when-pattern-mismatch="Ingrese solo numeros con hasta dos decimales."
+											label="Metros Cuadrados de Construccion"
+											value={guaranteeDraft.FSC_Metros_Cuadrados_de_Construccion__c}
+											required
+											data-guarantee-input
+											data-numeric-mode="decimal"
+											data-numeric-target="guarantee"
+											onkeydown={handleNumericKeyDown}
+											oninput={handleNumericInput}
+											onpaste={handleNumericPaste}
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Ubicacion__c"
+											label="Ubicacion"
+											value={guaranteeDraft.FSC_Ubicacion__c}
+											required
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Tipo_de_Inmueble__c"
+											label="Tipo de Inmueble"
+											value={guaranteeDraft.FSC_Tipo_de_Inmueble__c}
+											required
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+								</template>
+								<template if:true={isVehicleGuarantee}>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-radio-group
+											name="FSC_Es_Concesionario_Dealer__c"
+											label="Es Concesionario-Dealer O Particular? (Si: Concesionario-Dealer No: Particular)"
+											options={yesNoOptions}
+											type="radio"
+											value={dealerValue}
+											required
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-radio-group>
+									</div>
+									<template if:true={isDealerGuarantee}>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-combobox
+												name="FSC_Concesionario__c"
+												label="Concesionario"
+												value={guaranteeDraft.FSC_Concesionario__c}
+												options={concesionarioOptions}
+												required
+												data-guarantee-input
+												onchange={handleGuaranteeDraftChange}>
+											</lightning-combobox>
+										</div>
+									</template>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-combobox
+											name="FSC_Marca_Vehiculo__c"
+											label="Marca Vehiculo"
+											value={guaranteeDraft.FSC_Marca_Vehiculo__c}
+											options={marcaVehiculoOptions}
+											required
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-combobox>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-combobox
+											name="FSC_Modelo_Vehiculo__c"
+											label="Modelo Vehiculo"
+											value={guaranteeDraft.FSC_Modelo_Vehiculo__c}
+											options={modeloVehiculoOptions}
+											disabled={isModeloVehiculoDisabled}
+											required
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-combobox>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Ano_Vehiculo__c"
+											type="text"
+											inputmode="numeric"
+											pattern="[0-9]{4}"
+											maxlength="4"
+											message-when-pattern-mismatch="Ingrese un año válido de cuatro dígitos."
+											label="Año vehículo"
+											value={guaranteeDraft.FSC_Ano_Vehiculo__c}
+											required
+											data-numeric-mode="integer"
+											data-numeric-target="guarantee"
+											data-guarantee-input
+											onkeydown={handleNumericKeyDown}
+											oninput={handleVehicleYearInput}
+											onpaste={handleVehicleYearPaste}
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Color_Vehiculo__c"
+											label="Color Vehiculo"
+											value={guaranteeDraft.FSC_Color_Vehiculo__c}
+											required
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Numero_Chasis_Vehiculo__c"
+											label="Numero Chasis Vehiculo"
+											value={guaranteeDraft.FSC_Numero_Chasis_Vehiculo__c}
+											required
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Serial_Motor_Vehiculo__c"
+											label="Serial Motor Vehiculo"
+											value={guaranteeDraft.FSC_Serial_Motor_Vehiculo__c}
+											required
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Numero_Placa_Vehiculo__c"
+											label="Numero Placa Vehiculo"
+											value={guaranteeDraft.FSC_Numero_Placa_Vehiculo__c}
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Numero_Matricula__c"
+											label="Numero de Matricula"
+											value={guaranteeDraft.FSC_Numero_Matricula__c}
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Fecha_Expedicion_Vehiculo__c"
+											type="date"
+											label="Fecha Expedicion Vehiculo"
+											value={guaranteeDraft.FSC_Fecha_Expedicion_Vehiculo__c}
+											max={fechaTasacionMaxima}
+											message-when-range-overflow="La fecha de expedición del vehículo no puede ser posterior a hoy."
+											required
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Valor_Vehiculo__c"
+											type="number"
+											step="0.01"
+											label="Valor Vehiculo"
+											value={guaranteeDraft.FSC_Valor_Vehiculo__c}
+											required
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+								</template>
+							</div>
+							<div class="slds-text-align_right slds-m-top_medium">
+								<lightning-button
+									label="Cancelar"
+									onclick={closeGuaranteeEditor}></lightning-button>
+								<lightning-button
+									class="slds-m-left_small"
+									label="Guardar"
+									variant="brand"
+									onclick={saveGuarantee}></lightning-button>
+							</div>
+						</div>
+					</template>
+				</div>
+
+				<div class="slds-box slds-theme_default">
+					<div class="slds-grid slds-wrap slds-grid_align-spread slds-m-bottom_medium">
+						<div class="slds-text-heading_small">Seguros</div>
+						<lightning-button
+							label="Agregar seguro"
+							onclick={handleAddInsurance}></lightning-button>
+					</div>
+
+					<template if:true={hasInsurances}>
+						<lightning-datatable
+							key-field="__key"
+							data={insuranceRows}
+							columns={insuranceColumns}
+							onrowaction={handleInsuranceRowAction}
+							hide-checkbox-column>
+						</lightning-datatable>
+					</template>
+
+					<template if:false={hasInsurances}>
+						<div class="slds-text-body_small slds-text-color_weak">No hay seguros agregados.</div>
+					</template>
+
+					<template if:true={showRequiredInsuranceError}>
+						<div class="slds-text-color_error slds-m-top_small">{requiredInsuranceMessage}</div>
+					</template>
+
+					<template if:true={showInsuranceEditor}>
+						<div class="slds-border_top slds-m-top_medium slds-p-top_medium">
+							<div class="slds-text-title_bold slds-m-bottom_small">{insuranceEditorTitle}</div>
+							<div class="slds-grid slds-wrap slds-gutters">
+								<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+									<lightning-combobox
+										name="FSC_Tipo_de_Seguro__c"
+										label="Tipo de Seguro"
+										value={insuranceDraft.FSC_Tipo_de_Seguro__c}
+										options={tipoSeguroOptions}
+										onchange={handleInsuranceDraftChange}>
+									</lightning-combobox>
+								</div>
+								<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+									<lightning-input
+										name="FSC_Monto_de_la_Prima__c"
+										type="number"
+										step=".01"
+										label="Monto de la Prima"
+										value={insuranceDraft.FSC_Monto_de_la_Prima__c}
+										readonly>
+									</lightning-input>
+									<template if:true={insurancePremiumStatusMessage}>
+										<div
+											class="slds-form-element__help"
+											role="status">
+											{insurancePremiumStatusMessage}
+										</div>
+									</template>
+								</div>
+								<template if:true={isLifeInsuranceSelected}>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-radio-group
+											name="FSC_Seguro_Desempleo__c"
+											label="Seguro Desempleo?"
+											options={yesNoOptions}
+											type="radio"
+											value={seguroDesempleoValue}
+											required
+											onchange={handleInsuranceBooleanChange}>
+										</lightning-radio-group>
+									</div>
+								</template>
+								<template if:true={showInsuranceUnemploymentFields}>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Monto_Prima_Desempleo__c"
+											type="number"
+											step="0.01"
+											label="Monto Prima Desempleo"
+											value={insuranceDraft.FSC_Monto_Prima_Desempleo__c}
+											readonly>
+										</lightning-input>
+										<template if:true={unemploymentPremiumStatusMessage}>
+											<div
+												class="slds-text-body_small slds-text-color_weak slds-m-top_xx-small"
+												role="status">
+												{unemploymentPremiumStatusMessage}
+											</div>
+										</template>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-combobox
+											name="FSC_Fuente_de_Ingresos__c"
+											label="Fuente de Ingresos"
+											value={insuranceDraft.FSC_Fuente_de_Ingresos__c}
+											options={fuenteIngresosOptions}
+											required
+											onchange={handleInsuranceDraftChange}>
+										</lightning-combobox>
+									</div>
+								</template>
+							</div>
+							<div class="slds-text-align_right slds-m-top_medium">
+								<lightning-button
+									label="Cancelar"
+									onclick={closeInsuranceEditor}></lightning-button>
+								<lightning-button
+									class="slds-m-left_small"
+									label="Guardar"
+									variant="brand"
+									onclick={saveInsurance}></lightning-button>
+							</div>
+						</div>
+					</template>
+				</div>
+			</template>
+		</div>
+	</div>
+</template>

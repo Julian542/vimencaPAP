@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_DatosEditadosAnalisis__c</fullName>
+    <description>Valores editados por el analista que pertenecen únicamente a esta versión del PDF de análisis.</description>
+    <encryptionScheme>None</encryptionScheme>
+    <label>Datos editados documento análisis</label>
+    <length>131072</length>
+    <trackHistory>false</trackHistory>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

@@ -193,7 +193,7 @@ private class VFSNewEnvelopeTest {
             VFS_ComprobanteCasoEnvelope.CreateSigns(String.valueOf(receiptCase.Id));
         Test.stopTest();
 
-        System.assertEquals(1, actions.size());
+        System.assertEquals(2, actions.size());
         System.assertEquals(
             'firma.envelope@example.com',
             actions[0].Sign.RecipientConfiguration.ContactInformation.Email
@@ -242,6 +242,61 @@ private class VFSNewEnvelopeTest {
         new VFS_SubirComprobanteCasoEsignQueueable(null, null).execute(null);
         Test.stopTest();
 
-        System.assertEquals(3, rejected);
+        System.assertEquals(2, rejected);
+    }
+
+    @IsTest
+    static void validatesTransactionCasesAndRegistersTheEnvelope() {
+        Case receiptCase = new Case(
+            AccountId = signer().Id,
+            Status = 'New',
+            Origin = 'Phone',
+            Subject = 'Comprobante con transacciones',
+            Type = 'R1'
+        );
+        insert receiptCase;
+
+        Integer rejected = 0;
+        try {
+            VFS_ComprobanteCasoAction.validar(receiptCase.Id);
+        } catch (AuraHandledException expected) {
+            rejected++;
+        }
+        try {
+            VFS_ComprobanteCasoAction.registrarEnvioFirma(null, null);
+        } catch (AuraHandledException expected) {
+            rejected++;
+        }
+
+        ContentVersion version = new ContentVersion(
+            Title = 'comprobante-registrado',
+            PathOnClient = 'comprobante-registrado.pdf',
+            VersionData = Blob.valueOf('contenido')
+        );
+        insert version;
+        Id contentDocumentId = [
+            SELECT ContentDocumentId
+            FROM ContentVersion
+            WHERE Id = :version.Id
+        ].ContentDocumentId;
+
+        Test.startTest();
+        VFS_ComprobanteCasoAction.registrarEnvioFirma(
+            contentDocumentId,
+            'envelope-test-001'
+        );
+        Test.stopTest();
+
+        ContentVersion updatedVersion = [
+            SELECT FSC_EnvelopeId__c, FSC_EnviarDocumento__c,
+                   FSC_FechaEnvioFirma__c, FSC_Firmado__c
+            FROM ContentVersion
+            WHERE Id = :version.Id
+        ];
+        System.assertEquals(2, rejected);
+        System.assertEquals('envelope-test-001', updatedVersion.FSC_EnvelopeId__c);
+        System.assertEquals(true, updatedVersion.FSC_EnviarDocumento__c);
+        System.assertNotEquals(null, updatedVersion.FSC_FechaEnvioFirma__c);
+        System.assertEquals(false, updatedVersion.FSC_Firmado__c);
     }
 }

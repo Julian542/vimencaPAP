@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Tipo_de_solicitud__c</fullName>
+    <label>Tipo de solicitud</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Nueva</fullName>
+                <default>false</default>
+                <label>Nueva</label>
+            </value>
+            <value>
+                <fullName>Renovación</fullName>
+                <default>false</default>
+                <label>Renovación</label>
+            </value>
+            <value>
+                <fullName>Aumento</fullName>
+                <default>false</default>
+                <label>Aumento</label>
+            </value>
+            <value>
+                <fullName>Sustitución de Garantía</fullName>
+                <default>false</default>
+                <label>Sustitución de Garantía</label>
+            </value>
+            <value>
+                <fullName>Revisión Anual</fullName>
+                <default>false</default>
+                <label>Revisión Anual</label>
+            </value>
+            <value>
+                <fullName>Disminución de Garantía</fullName>
+                <default>false</default>
+                <label>Disminución de Garantía</label>
+            </value>
+            <value>
+                <fullName>Liquidación / Plan de Pagos</fullName>
+                <default>false</default>
+                <label>Liquidación / Plan de Pagos</label>
+            </value>
+            <value>
+                <fullName>Liberación de Garantía</fullName>
+                <default>false</default>
+                <label>Liberación de Garantía</label>
+            </value>
+            <value>
+                <fullName>Otro, Especifique</fullName>
+                <default>false</default>
+                <label>Otro, Especifique</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

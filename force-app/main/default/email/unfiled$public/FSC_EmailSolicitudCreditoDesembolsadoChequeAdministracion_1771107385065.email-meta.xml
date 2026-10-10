@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>FSC_EmailSolicitudCreditoDesembolsadoChequeAdministracion</name>
+    <relatedEntityType>ResidentialLoanApplication</relatedEntityType>
+    <style>none</style>
+    <subject>Solicitud de crédito desembolsada</subject>
+    <textOnly>Hola {{{ResidentialLoanApplication.FSC_Nombre_Cliente__c}}},
+
+Nos complace comunicarte que el cheque de tu préstamo desembolsado con nosotros para fines de consumo ya fue enviado a la sucursal {{{ResidentialLoanApplication.FSC_Sucursal__c}}}, de acuerdo con lo conversado. Puedes pasar a retirarlo a partir del día de mañana.
+
+Si tienes alguna inquietud, puedes escribirnos a bv_preaprobados@bv.com.do &lt; mailto:bv_preaprobados@bv.com.do &gt; o comunicarte con nosotros al 809.533.1400. Nuestro equipo está disponible para asistirte de lunes a domingo de 7AM a 12AM, y en días feriados de 7AM a 8PM.
+
+Para nosotros, es un privilegio servirte.
+
+Equipo Banca Personal 
+
+Banco Vimenca 
+
+Cuéntanos tu experiencia con nosotros en miexperiencia@bv.com.do &lt; mailto:miexperiencia@bv.com.do &gt; . ¡Queremos escucharte!</textOnly>
+    <type>custom</type>
+    <uiType>SFX</uiType>
+</EmailTemplate>

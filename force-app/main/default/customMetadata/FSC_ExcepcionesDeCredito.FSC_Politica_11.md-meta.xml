@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Politica 11</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_Detalle__c</field>
+        <value xsi:type="xsd:string">Créditos de consumo con montos superiores a los RD$2.00MM sin contar con el respaldo de una garantía real</value>
+    </values>
+    <values>
+        <field>FSC_Tipo__c</field>
+        <value xsi:type="xsd:string">Excepciones a las Políticas de Créditos</value>
+    </values>
+</CustomMetadata>

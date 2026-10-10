@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_AnioVehiculoMasAntiguo__c</fullName>
+    <description>Consolida el menor año de los vehículos en garantía para aplicar el plazo más restrictivo en solicitudes con varias garantías.</description>
+    <inlineHelpText>Se calcula desde las garantías. Corrija el año en la garantía correspondiente.</inlineHelpText>
+    <label>Año del vehículo más antiguo</label>
+    <summarizedField>FSC_Garantia__c.FSC_Ano_Vehiculo__c</summarizedField>
+    <summaryForeignKey>FSC_Garantia__c.FSC_Residential_Loan_Application__c</summaryForeignKey>
+    <summaryOperation>min</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

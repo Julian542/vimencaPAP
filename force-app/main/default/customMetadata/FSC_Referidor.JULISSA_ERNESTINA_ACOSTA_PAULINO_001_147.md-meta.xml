@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>JULISSA ERNESTINA ACOSTA PAULINO (001-18</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_CodigoReferidor__c</field>
+        <value xsi:type="xsd:string">147</value>
+    </values>
+    <values>
+        <field>FSC_NombreReferidor__c</field>
+        <value xsi:type="xsd:string">JULISSA ERNESTINA ACOSTA PAULINO (001-1860715-9)</value>
+    </values>
+</CustomMetadata>

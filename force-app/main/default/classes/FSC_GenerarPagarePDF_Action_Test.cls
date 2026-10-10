@@ -1,15 +1,23 @@
 @IsTest
 private class FSC_GenerarPagarePDF_Action_Test {
+    @TestSetup
+    static void asignarPermisosAdministrador() {
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            PermissionSet permiso = [SELECT Id FROM PermissionSet WHERE Name = 'FSC_PS_Administrador' LIMIT 1];
+            // El usuario que ejecuta los tests puede tener ya el permission set asignado.
+            if ([SELECT COUNT() FROM PermissionSetAssignment WHERE AssigneeId = :UserInfo.getUserId() AND PermissionSetId = :permiso.Id] == 0) {
+                insert new PermissionSetAssignment(AssigneeId = UserInfo.getUserId(), PermissionSetId = permiso.Id);
+            }
+        }
+    }
+
 
     private static Account buildAccount() {
         Account a = new Account();
-        a.RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Juridica').getRecordTypeId();
-        a.Name = 'Cliente PDF';
-        a.ACC_RNC__c = String.valueOf(Math.abs(Crypto.getRandomInteger())).leftPad(9, '0').substring(0, 9);
+        a.LastName = 'Cliente PDF';
+        a.RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Fisica').getRecordTypeId();
         a.ACC_NumIdentificacion__c = '00298765432';
-        a.ACC_TipoIdentificacion__c = 'RNC';
-        a.ACC_Condicion__c = 'PROSPECTO';
-        a.ACC_Estado__c = 'INICIADO';
+        a.ACC_TipoIdentificacion__c = 'Cédula';
         a.ACC_Nacionalidad__c = 'AFGANISTÁN';
         a.ACC_Estado_Civil__c = 'SOLTERO/A';
         a.BillingStreet = 'Av. Siempre Viva';
@@ -49,6 +57,7 @@ private class FSC_GenerarPagarePDF_Action_Test {
 
     @IsTest
     static void testInvocable_GeneratesFileAndLink() {
+        FSC_GenerarPagarePDF_Action.testBypassValidation = true;
         Account a = buildAccount();
         ResidentialLoanApplication rla = buildRLA(a.Id);
 

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <decisions>
+        <name>Categoria_de_Cantidad_Maxima_Empleados_es_Mayor_que_Ventas_Brutas</name>
+        <label>Categoria de Cantidad Maxima Empleados es Mayor que Ventas Brutas?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Actualizar_Clasificaci_n_MIPYMES_RLA_2</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No, o es Igual</defaultConnectorLabel>
+        <rules>
+            <name>Si</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Obtener_Clasificaci_n_MIPYMES_Cantidad_Maxima_Empleados.FSC_Codigo__c</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <elementReference>Clasificaci_n_MIPYMES_Ventas_Brutas_Anuales_Maximas.FSC_Codigo__c</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Actualizar_Clasificacion_MIPYMES_RLA</targetReference>
+            </connector>
+            <label>Si</label>
+        </rules>
+    </decisions>
+    <description>Dev: FR.
+HU/BUG: CC1.
+Description: Se agrega la formula para el campo Clasificación MIPYMES.
+Version Cloning: 0.</description>
+    <environments>Default</environments>
+    <interviewLabel>FSC - Formula Clasificación MIPYMES {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>FSC - Formula Clasificación MIPYMES</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Clasificaci_n_MIPYMES_Ventas_Brutas_Anuales_Maximas</name>
+        <label>Clasificación MIPYMES - Ventas Brutas Anuales Maximas</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Categoria_de_Cantidad_Maxima_Empleados_es_Mayor_que_Ventas_Brutas</targetReference>
+        </connector>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>FSC_VentasBrutasAnualesMaximas__c</field>
+            <operator>GreaterThanOrEqualTo</operator>
+            <value>
+                <elementReference>$Record.FSC_VentasBrutasAnuales__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>FSC_MatrizClasificacionMIPYMES__mdt</object>
+        <sortField>FSC_Codigo__c</sortField>
+        <sortOrder>Asc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Obtener_Clasificaci_n_MIPYMES_Cantidad_Maxima_Empleados</name>
+        <label>Obtener Clasificación MIPYMES - Cantidad Maxima Empleados</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Clasificaci_n_MIPYMES_Ventas_Brutas_Anuales_Maximas</targetReference>
+        </connector>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>FSC_CantidadMaximaEmpleados__c</field>
+            <operator>GreaterThanOrEqualTo</operator>
+            <value>
+                <elementReference>$Record.FSC_Cantidad_de_empleados__c</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>FSC_MatrizClasificacionMIPYMES__mdt</object>
+        <sortField>FSC_Codigo__c</sortField>
+        <sortOrder>Asc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Actualizar_Clasificaci_n_MIPYMES_RLA_2</name>
+        <label>Actualizar Clasificación MIPYMES RLA</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>FSC_ClasificacionMIPYMES__c</field>
+            <value>
+                <elementReference>Clasificaci_n_MIPYMES_Ventas_Brutas_Anuales_Maximas.Label</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Actualizar_Clasificacion_MIPYMES_RLA</name>
+        <label>Actualizar Clasificación MIPYMES RLA</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>FSC_ClasificacionMIPYMES__c</field>
+            <value>
+                <elementReference>Obtener_Clasificaci_n_MIPYMES_Cantidad_Maxima_Empleados.Label</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Obtener_Clasificaci_n_MIPYMES_Cantidad_Maxima_Empleados</targetReference>
+        </connector>
+        <filterFormula>AND(
+    {!$Record.RecordType.DeveloperName} = &apos;FSC_Solicitud_Credito_PYME&apos;,
+    OR(
+        ISNEW(),
+        ISCHANGED({!$Record.FSC_Cantidad_de_empleados__c}),
+        ISCHANGED({!$Record.FSC_VentasBrutasAnuales__c})
+    )
+)</filterFormula>
+        <object>ResidentialLoanApplication</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

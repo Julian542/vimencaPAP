@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Facilidad__c</fullName>
+    <label>Facilidad</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CONSUMO - 401</fullName>
+                <default>true</default>
+                <label>CONSUMO - 401</label>
+            </value>
+            <value>
+                <fullName>CONSUMO VINCULADA - 404</fullName>
+                <default>false</default>
+                <label>CONSUMO VINCULADA - 404</label>
+            </value>
+            <value>
+                <fullName>HIPOTECARIOS PARA LA VIVIENDA - 402</fullName>
+                <default>false</default>
+                <label>HIPOTECARIOS PARA LA VIVIENDA - 402</label>
+            </value>
+            <value>
+                <fullName>HIPOTECARIO PARA LA VIVIENDA DOLARES - 453</fullName>
+                <default>false</default>
+                <label>HIPOTECARIO PARA LA VIVIENDA DOLARES - 453</label>
+            </value>
+            <value>
+                <fullName>Ahorros Simplificado en US$ - 257</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Ahorros Simplificado en US$ - 257</label>
+            </value>
+            <value>
+                <fullName>BENACERH CLASICO - 52</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>BENACERH CLASICO - 52</label>
+            </value>
+            <value>
+                <fullName>BENACERH CLASICO INTERNACIONAL - 53</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>BENACERH CLASICO INTERNACIONAL - 53</label>
+            </value>
+            <value>
+                <fullName>BENACERH CLASICO INTERNACIONAL - 54</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>BENACERH CLASICO INTERNACIONAL - 54</label>
+            </value>
+            <value>
+                <fullName>COORPORATIVA - 36</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>COORPORATIVA - 36</label>
+            </value>
+            <value>
+                <fullName>CORPORATIVA - 38</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CORPORATIVA - 38</label>
+            </value>
+            <value>
+                <fullName>Clasica Local - 34</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Clasica Local - 34</label>
+            </value>
+            <value>
+                <fullName>DEPOSITO A PLAZO DE EMPLEADO VIMENCA - 318</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>DEPOSITO A PLAZO DE EMPLEADO VIMENCA - 318</label>
+            </value>
+            <value>
+                <fullName>GOLD INTERNACIONAL - 35</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>GOLD INTERNACIONAL - 35</label>
+            </value>
+            <value>
+                <fullName>Gold Internacional us - 37</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Gold Internacional us - 37</label>
+            </value>
+            <value>
+                <fullName>PLATINUM - 50</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>PLATINUM - 50</label>
+            </value>
+            <value>
+                <fullName>PLATINUM - 51</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>PLATINUM - 51</label>
+            </value>
+            <value>
+                <fullName>PLAZO FIJO PERSONALES - 300</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>PLAZO FIJO PERSONALES - 300</label>
+            </value>
+            <value>
+                <fullName>PLAZO FIJO PERSONALES EN DOLARES - 351</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>PLAZO FIJO PERSONALES EN DOLARES - 351</label>
+            </value>
+            <value>
+                <fullName>VIMENPAQ - 56</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VIMENPAQ - 56</label>
+            </value>
+            <value>
+                <fullName>VISA BLACK GOLD - 39</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA BLACK GOLD - 39</label>
+            </value>
+            <value>
+                <fullName>VISA BLACK GOLD - 40</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA BLACK GOLD - 40</label>
+            </value>
+            <value>
+                <fullName>VISA CLASICA - 61</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA CLASICA - 61</label>
+            </value>
+            <value>
+                <fullName>VISA CLASICA EXTRAFINANC - 43</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA CLASICA EXTRAFINANC - 43</label>
+            </value>
+            <value>
+                <fullName>VISA CLASICA INTERNACIONAL - 48</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA CLASICA INTERNACIONAL - 48</label>
+            </value>
+            <value>
+                <fullName>VISA CLASICA INTERNACIONAL - 49</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA CLASICA INTERNACIONAL - 49</label>
+            </value>
+            <value>
+                <fullName>VISA CLASICA LOCAL - 47</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA CLASICA LOCAL - 47</label>
+            </value>
+            <value>
+                <fullName>VISA CLASICA TODO PAGO - 44</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA CLASICA TODO PAGO - 44</label>
+            </value>
+            <value>
+                <fullName>VISA GOLD EXTRAFINANCIAM - 41</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA GOLD EXTRAFINANCIAM - 41</label>
+            </value>
+            <value>
+                <fullName>VISA GOLD EXTRAFINANCIAM US - 42</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA GOLD EXTRAFINANCIAM US - 42</label>
+            </value>
+            <value>
+                <fullName>VISA GOLD TODO PAGO - 45</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA GOLD TODO PAGO - 45</label>
+            </value>
+            <value>
+                <fullName>VISA GOLD TODO PAGO - 46</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA GOLD TODO PAGO - 46</label>
+            </value>
+            <value>
+                <fullName>VISA MAS - 57</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA MAS - 57</label>
+            </value>
+            <value>
+                <fullName>VISA MAS - 58</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA MAS - 58</label>
+            </value>
+            <value>
+                <fullName>VISA MAS - 62</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA MAS - 62</label>
+            </value>
+            <value>
+                <fullName>VISA MAS - 63</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA MAS - 63</label>
+            </value>
+            <value>
+                <fullName>VISA PLATINUM EXPERIENCE - 55</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA PLATINUM EXPERIENCE - 55</label>
+            </value>
+            <value>
+                <fullName>VISA PLATINUM EXPERIENCE - 60</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>VISA PLATINUM EXPERIENCE - 60</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

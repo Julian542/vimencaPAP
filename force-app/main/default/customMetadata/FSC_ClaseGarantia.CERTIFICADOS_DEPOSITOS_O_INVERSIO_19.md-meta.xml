@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>CERTIFICADOS DEPOSITOS O INVERSIONES OTR</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_Codigo__c</field>
+        <value xsi:type="xsd:double">5.0</value>
+    </values>
+    <values>
+        <field>FSC_Grupo__c</field>
+        <value xsi:type="xsd:string">general</value>
+    </values>
+    <values>
+        <field>FSC_Valor__c</field>
+        <value xsi:type="xsd:string">CERTIFICADOS DEPOSITOS O INVERSIONES OTRAS ENTIDADES</value>
+    </values>
+</CustomMetadata>

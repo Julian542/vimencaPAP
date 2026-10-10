@@ -44,6 +44,15 @@ public class VFS_EsignUploadDocumentTest {
             return res;
         }
     }
+    private class BlankFileIdMock implements HttpCalloutMock {
+        public HttpResponse respond(HttpRequest req) {
+            HttpResponse res = new HttpResponse();
+            res.setHeader('Content-Type', 'application/json');
+            res.setStatusCode(200);
+            res.setBody('{"FileId":""}');
+            return res;
+        }
+    }
 
     // Utilidad para obtener un Blob PDF válido
     private static Blob buildValidPdfBlob() {
@@ -154,9 +163,33 @@ public class VFS_EsignUploadDocumentTest {
         Id contentDocumentId = createContentDocument(acc.Id, 'QueueableDoc', false);
 
         Test.startTest();
-        new VFS_SubirComprobanteCasoEsignQueueable(null, contentDocumentId).execute(null);
+        new VFS_SubirComprobanteCasoEsignQueueable(acc.Id, contentDocumentId).execute(null);
         Test.stopTest();
 
-        System.assert(true, 'La cola debe completar el camino exitoso sin excepciones.');
+        ContentVersion updatedVersion = [
+            SELECT FSC_EnvelopeId__c, FSC_EnviarDocumento__c
+            FROM ContentVersion
+            WHERE ContentDocumentId = :contentDocumentId AND IsLatest = true
+        ];
+        System.assertEquals('test-envelope-id', updatedVersion.FSC_EnvelopeId__c);
+        System.assertEquals(true, updatedVersion.FSC_EnviarDocumento__c);
+    }
+
+    @isTest
+    static void testUploadQueueableHandlesEnvelopeFailure() {
+        Test.setMock(HttpCalloutMock.class, new BlankFileIdMock());
+        Account acc = createNeutralAccount('Queueable Blank File Account');
+        Id contentDocumentId = createContentDocument(acc.Id, 'QueueableBlankFile', false);
+
+        Test.startTest();
+        new VFS_SubirComprobanteCasoEsignQueueable(acc.Id, contentDocumentId).execute(null);
+        Test.stopTest();
+
+        System.assertEquals(
+            null,
+            [SELECT FSC_EnvelopeId__c FROM ContentVersion
+             WHERE ContentDocumentId = :contentDocumentId AND IsLatest = true]
+                .FSC_EnvelopeId__c
+        );
     }
 }

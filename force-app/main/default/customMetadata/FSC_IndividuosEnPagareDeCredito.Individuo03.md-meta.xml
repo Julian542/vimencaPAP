@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>CINTHIA MERCEDES HIDALGO LORENZO</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_Cedula__c</field>
+        <value xsi:type="xsd:double">4.022346867E9</value>
+    </values>
+    <values>
+        <field>FSC_Direccion__c</field>
+        <value xsi:type="xsd:string">esta ciudad de Santo Domingo de Guzmán, Distrito Nacional, capital de la República Dominicana</value>
+    </values>
+    <values>
+        <field>FSC_Nombre__c</field>
+        <value xsi:type="xsd:string">CINTHIA MERCEDES HIDALGO LORENZO</value>
+    </values>
+    <values>
+        <field>FSC_NumeroElectoral__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

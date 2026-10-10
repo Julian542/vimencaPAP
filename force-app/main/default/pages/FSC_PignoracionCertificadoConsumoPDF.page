@@ -1,0 +1,75 @@
+<apex:page standardController="ResidentialLoanApplication"
+    extensions="FSC_PignoracionCertificadoConsumoCtrl"
+    applyBodyTag="false" applyHtmlTag="false" showHeader="false" sidebar="false"
+    standardStylesheets="false" cache="false" language="es" renderAs="pdf">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <style type="text/css">
+                @page { size: letter; margin: 0.75in 1.25in 1in 1.25in; }
+                body { margin: 0; padding: 0; color: #000; font-family: 'Century Gothic', Arial, sans-serif; font-size: 11pt; line-height: 1.2; }
+                .salutation { margin: 0 0 11pt; text-align: left; }
+                .paragraph { margin: 0 0 11pt; text-align: justify; }
+                .signature-table { width: 100%; border-collapse: collapse; margin-top: 28pt; table-layout: fixed; page-break-inside: avoid; }
+                .signature-cell { width: 50%; padding: 0 10pt 14pt; text-align: center; vertical-align: top; }
+                .signature-line { height: 12pt; border-top: 1px solid #000; margin-bottom: 3pt; }
+                .certification { margin-top: 15pt; page-break-inside: avoid; }
+                .executive-table { width: 100%; border-collapse: collapse; margin-top: 25pt; table-layout: fixed; }
+                .executive-table td { width: 50%; padding: 0 8pt; text-align: center; vertical-align: top; }
+                .authorized { width: 55%; margin: 32pt auto 0; text-align: center; page-break-inside: avoid; }
+            </style>
+        </head>
+        <body>
+            <p class="salutation">Estimados señores Banco Múltiple Vimenca, S. A.:</p>
+
+            <p class="paragraph">Como es de su conocimiento, mantengo con ustedes un Depósito a Plazo identificado con el número <strong>{!numeroCertificado}</strong>, físico No. <strong>{!numeroFisico}</strong>, a nombre de <strong>{!nombreTitularCertificado}</strong>, portador(a) del documento de identidad No. <strong>{!identificacionTitularCertificado}</strong>, por un monto de <strong>{!montoCertificadoLetras} CON 00/100 ({!simboloCertificado}{!montoCertificadoNumero})</strong>, sin incluir intereses, comisiones y demás accesorios producidos a esta fecha.</p>
+
+            <p class="paragraph">Tal como había convenido con ustedes, Banco Múltiple Vimenca, S. A., le ha prestado al señor(a) <strong>{!nombreTitularPrestamo}</strong>, portador(a) del documento de identidad No. <strong>{!identificacionTitularPrestamo}</strong>, un Préstamo Personal, por valor de <strong>{!montoPrestamoLetras} CON 00/100 ({!simboloPrestamo}{!montoPrestamoNumero})</strong>, bajo la condición formal de que mediante esta carta se comprometiera a cumplir con ciertos requisitos o exigencias de este Banco, a los cuales da su conformidad y son los que se indican a continuación:</p>
+
+            <p class="paragraph">Nos obligamos frente a BANCO MÚLTIPLE VIMENCA, S. A., a no realizar respecto a la indicada cuenta de Depósito a Plazo ningún tipo de extracción de fondos, ni a realizar ninguna actuación frente al Banco ni frente a terceras personas, que reduzcan, disminuyan o supriman los valores que tenemos depositados en ese Banco.</p>
+
+            <p class="paragraph">Autorizamos por este medio, de manera formal y expresa al BANCO MÚLTIPLE VIMENCA, S. A., a que, como consecuencia de lo anterior, mantenga congelados o bloqueados los valores por nosotros depositados en el mencionado Certificado de Depósito a Plazo.</p>
+
+            <p class="paragraph">La obligación y autorización que se indican en las letras precedentes, se mantendrán vigentes, hasta que los montos adeudados correspondientes a la tarjeta de crédito antes indicada, junto con todos sus intereses, comisiones y gastos relacionados, sea cancelado en su totalidad, así como cualquier otra obligación que contraiga en el futuro con dicha institución bancaria.</p>
+
+            <p class="paragraph">En caso de que se produjera una falta en el cumplimiento de pago de una cualquiera de las sumas adeudadas en virtud de la tarjeta de crédito arriba mencionada, ya sea por concepto de capital o de intereses, se hará exigible de pleno derecho la totalidad de la deuda, sin el beneficio del término, y sin la necesidad de recurrir a ningún procedimiento judicial o extrajudicial, por lo que, autorizamos formalmente a BANCO MÚLTIPLE VIMENCA, S. A., a debitar a su discreción, de nuestra cuenta de Depósito a Plazo la totalidad del capital e intereses acumulados al momento de producirse el incumplimiento a fin de dejar la Tarjeta Crédito debidamente cancelada.</p>
+
+            <p class="paragraph">Hecho y firmado, de buena fe, hoy día {!diaLetras} ({!diaNumero}), del mes de {!mes} del año {!anoLetras} ({!anoNumero}), en la ciudad de {!lugarOtorgamiento}.</p>
+
+            <apex:outputPanel rendered="{!NOT(propietarioDistinto)}" layout="block">
+                <table class="signature-table"><tr><td class="signature-cell">
+                    <div class="signature-line"></div>
+                    <div>{!nombreTitularCertificado}</div>
+                    <div>{!identificacionTitularCertificado}</div>
+                </td></tr></table>
+            </apex:outputPanel>
+
+            <apex:outputPanel rendered="{!propietarioDistinto}" layout="block">
+                <table class="signature-table"><tr>
+                    <td class="signature-cell">
+                        <div class="signature-line"></div>
+                        <div>{!nombreTitularPrestamo}</div><div>{!identificacionTitularPrestamo}</div>
+                    </td>
+                    <td class="signature-cell">
+                        <div class="signature-line"></div>
+                        <div>{!nombreTitularCertificado}</div><div>{!identificacionTitularCertificado}</div>
+                    </td>
+                </tr></table>
+            </apex:outputPanel>
+
+            <div class="certification">
+                <p class="paragraph">La cuenta de Depósito a Plazo número <strong>{!numeroCertificado}</strong>, físico No. <strong>{!numeroFisico}</strong>, arriba indicada, tiene un balance de <strong>{!montoCertificadoLetras} CON 00/100 ({!simboloCertificado}{!montoCertificadoNumero})</strong>, a los {!diaLetras} ({!diaNumero}), del mes de {!mes} del año {!anoLetras} ({!anoNumero}) y la firma está conforme con nuestros registros.</p>
+                <table class="executive-table"><tr>
+                    <td><div class="signature-line"></div><div>{!fechaNumero}</div><div>FECHA</div></td>
+                    <td><div class="signature-line"></div><div>{!nombreEjecutivo}</div><div>{!cargoEjecutivo}</div></td>
+                </tr></table>
+            </div>
+
+            <p class="paragraph">Sírvanse tomar nota de que la Cuenta de Depósito a Plazo identificada con el número <strong>{!numeroCertificado}</strong>, físico No. <strong>{!numeroFisico}</strong>, a nombre de <strong>{!nombreTitularCertificado}</strong>, portador(a) del documento de identidad No. <strong>{!identificacionTitularCertificado}</strong>, ha sido puesta en garantía de un Préstamo Personal otorgado al señor(a) <strong>{!nombreTitularPrestamo}</strong>, portador(a) del documento de identidad No. <strong>{!identificacionTitularPrestamo}</strong>, por valor de <strong>{!montoPrestamoLetras} CON 00/100 ({!simboloPrestamo}{!montoPrestamoNumero})</strong>, en fecha {!diaLetras} ({!diaNumero}), del mes de {!mes} del año {!anoLetras} ({!anoNumero}). Por lo que, deberán inmovilizarse inmediatamente dichos fondos hasta la total cancelación del préstamo antes indicado.</p>
+
+            <p class="paragraph"><strong>Nota:</strong> Antes de efectuar cualquier transacción en esta cuenta, se deberá consultar previamente a los siguientes departamentos según el caso: Mantenimiento de Operaciones, Análisis de Créditos Personales y Formalización.</p>
+
+            <div class="authorized"><div class="signature-line"></div><div>FIRMA AUTORIZADA</div></div>
+        </body>
+    </html>
+</apex:page>

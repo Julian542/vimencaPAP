@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Acto_Garantia_Generado__c</fullName>
+    <defaultValue>false</defaultValue>
+    <label>Acto de garantía solidaria generado</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

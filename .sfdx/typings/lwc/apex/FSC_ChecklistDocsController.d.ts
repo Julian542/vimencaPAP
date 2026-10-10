@@ -7,6 +7,9 @@ declare module "@salesforce/apex/FSC_ChecklistDocsController.saveRows" {
 declare module "@salesforce/apex/FSC_ChecklistDocsController.markDocumentAsPending" {
   export default function markDocumentAsPending(param: {joinId: any}): Promise<any>;
 }
+declare module "@salesforce/apex/FSC_ChecklistDocsController.processUploadedFiles" {
+  export default function processUploadedFiles(param: {residentialLoanApplicationId: any, joinId: any, contentDocumentIds: any}): Promise<any>;
+}
 declare module "@salesforce/apex/FSC_ChecklistDocsController.enforceSingleFileOnJoin" {
   export default function enforceSingleFileOnJoin(param: {joinId: any, keepContentDocumentId: any}): Promise<any>;
 }

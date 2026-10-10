@@ -1,0 +1,1284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniDataTransform xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <assignmentRulesUsed>false</assignmentRulesUsed>
+    <deletedOnSuccess>false</deletedOnSuccess>
+    <errorIgnored>false</errorIgnored>
+    <expectedInputJson>{
+  &quot;LoanApplicant&quot; : {
+    &quot;ContactPointAddress&quot; : [ {
+      &quot;City&quot; : &quot;Las Heras&quot;,
+      &quot;Country&quot; : &quot;Argentina&quot;,
+      &quot;Name&quot; : &quot;Jacinto Suarez 1212&quot;,
+      &quot;PostalCode&quot; : &quot;5539&quot;,
+      &quot;State&quot; : &quot;Mendoza&quot;,
+      &quot;Street&quot; : &quot;Jacinto Suarez 1212&quot;
+    } ],
+    &quot;ContactPointEmail&quot; : [ {
+      &quot;EmailAddress&quot; : &quot;asbury@gmail.com&quot;
+    } ],
+    &quot;ContactPointPhone&quot; : [ {
+      &quot;FSC_TipoContacto__c&quot; : &quot;Personal&quot;,
+      &quot;TelephoneNumber&quot; : &quot;4300381&quot;
+    } ],
+    &quot;FSC_ClasificacionSIB__c&quot; : &quot;A&quot;,
+    &quot;FSC_DescripcionOtrosIngresos__c&quot; : &quot;n&quot;,
+    &quot;FSC_EmpresaAnteriorLaboro__c&quot; : &quot;&quot;,
+    &quot;FSC_EstadoCivil__c&quot; : &quot;CASADO/A&quot;,
+    &quot;FSC_Facilidad_Otra_Institucion__c&quot; : [ ],
+    &quot;FSC_FechaNacimiento__c&quot; : &quot;1999-06-16&quot;,
+    &quot;FSC_FuenteIngreso__c&quot; : &quot;Empleado Privado&quot;,
+    &quot;FSC_IngresosMensuales__c&quot; : &quot;10&quot;,
+    &quot;FSC_LugarFondeLabora__c&quot; : &quot;NN&quot;,
+    &quot;FSC_MontoPrestacionesLaborales__c&quot; : &quot;1&quot;,
+    &quot;FSC_Nacionalidad__c&quot; : &quot;ARGENTINA&quot;,
+    &quot;FSC_Nombre__c&quot; : &quot;Juan&quot;,
+    &quot;FSC_NumIdentificacion__c&quot; : &quot;123123&quot;,
+    &quot;FSC_NumeroDependientes__c&quot; : &quot;1&quot;,
+    &quot;FSC_Ocupacion__c&quot; : &quot;ABOGADO&quot;,
+    &quot;FSC_OtrosIngresos__c&quot; : &quot;0&quot;,
+    &quot;FSC_PrimerApellido__c&quot; : &quot;Perez&quot;,
+    &quot;FSC_Referencias__c&quot; : [ {
+      &quot;FSC_Direccion__c&quot; : &quot;Jacinto J 123&quot;,
+      &quot;FSC_Email__c&quot; : &quot;cadbus@gmail.com&quot;,
+      &quot;FSC_FirstName__c&quot; : &quot;Fernando&quot;,
+      &quot;FSC_Identificacion__c&quot; : &quot;1212222&quot;,
+      &quot;FSC_LastName__c&quot; : &quot;Rocha&quot;,
+      &quot;FSC_LoanApplicant__c&quot; : &quot;&quot;,
+      &quot;FSC_LugarTrabajo__c&quot; : &quot;Keystone&quot;,
+      &quot;FSC_Parentesco__c&quot; : &quot;AMIGO (A)&quot;,
+      &quot;FSC_Telefono__c&quot; : &quot;222222.0&quot;,
+      &quot;FSC_TipoIdentificacion__c&quot; : &quot;Cedula&quot;,
+      &quot;Name&quot; : &quot;Fernando Rocha&quot;
+    }, {
+      &quot;FSC_Direccion__c&quot; : &quot;JSC&quot;,
+      &quot;FSC_Email__c&quot; : &quot;spm@gmail.com&quot;,
+      &quot;FSC_FirstName__c&quot; : &quot;Samuel&quot;,
+      &quot;FSC_Identificacion__c&quot; : &quot;31329&quot;,
+      &quot;FSC_LastName__c&quot; : &quot;Perez Millos&quot;,
+      &quot;FSC_LoanApplicant__c&quot; : &quot;&quot;,
+      &quot;FSC_LugarTrabajo__c&quot; : &quot;Keystone&quot;,
+      &quot;FSC_Parentesco__c&quot; : &quot;AMIGO (A)&quot;,
+      &quot;FSC_Telefono__c&quot; : &quot;123123&quot;,
+      &quot;FSC_TipoIdentificacion__c&quot; : &quot;Cedula&quot;,
+      &quot;Name&quot; : &quot;Samuel Perez Millos&quot;
+    } ],
+    &quot;FSC_SegundoApellido__c&quot; : &quot;Perez&quot;,
+    &quot;FSC_TiempoLaborando__c&quot; : &quot;2026-06-02&quot;,
+    &quot;FSC_TiempoVivienda__c&quot; : &quot;1&quot;,
+    &quot;FSC_TipoIdentificacion__c&quot; : &quot;Cédula&quot;,
+    &quot;FSC_TipoNegocio__c&quot; : &quot;as&quot;,
+    &quot;FSC_TipoSolicitante__c&quot; : &quot;Co-Deudor&quot;,
+    &quot;FSC_TipoVivienda__c&quot; : &quot;4&quot;,
+    &quot;Name&quot; : &quot;Juan Perez Perez&quot;
+  },
+  &quot;ResidentialLoanApplicationId&quot; : &quot;0cdVC000000LP53YAG&quot;
+}</expectedInputJson>
+    <fieldLevelSecurityEnabled>true</fieldLevelSecurityEnabled>
+    <inputType>JSON</inputType>
+    <isManagedUsingStdDesigner>true</isManagedUsingStdDesigner>
+    <name>FSCCrearLoanApplicant</name>
+    <nullInputsIncludedInOutput>false</nullInputsIncludedInOutput>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>11ef946e-fe76-46e9-bead-e05c7f7bd5d4</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Referencias__c:FSC_TipoIdentificacion__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HA</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HA</omniDataTransformationId>
+        <outputCreationSequence>6.0</outputCreationSequence>
+        <outputFieldName>FSC_TipoIdentificacion__c</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>a38ae64d-80aa-4f19-a3f8-2ffeeb5ea2b5</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Facilidad_Otra_Institucion__c:FSC_Moneda__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Ga</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Ga</omniDataTransformationId>
+        <outputCreationSequence>5.0</outputCreationSequence>
+        <outputFieldName>FSC_Moneda__c</outputFieldName>
+        <outputObjectName>FSC_Facilidad_Otra_Institucion__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>77498f41-885e-4d05-855c-1cd9f964ea65</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedFieldName>Id</linkedFieldName>
+        <linkedObjectSequence>1.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HB</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HB</omniDataTransformationId>
+        <outputCreationSequence>2.0</outputCreationSequence>
+        <outputFieldName>FSC_Solicitante__c</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>a20c8efe-d350-4a55-a248-deb2d6f5306c</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedFieldName>Id</linkedFieldName>
+        <linkedObjectSequence>1.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gd</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gd</omniDataTransformationId>
+        <outputCreationSequence>5.0</outputCreationSequence>
+        <outputFieldName>FSC_LoanApplicant__c</outputFieldName>
+        <outputObjectName>FSC_Facilidad_Otra_Institucion__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>45560591-f178-478c-8f69-48f6827ec5f3</globalKey>
+        <inputFieldName>LoanApplicant:ContactPointAddress:State</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HE</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HE</omniDataTransformationId>
+        <outputCreationSequence>2.0</outputCreationSequence>
+        <outputFieldName>State</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>95da0433-c24d-487b-9c8e-45f261eb2a16</globalKey>
+        <inputFieldName>LoanApplicant:FSC_NumeroDependientes__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Ge</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Ge</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_NumeroDependientes__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>c9b56c40-9598-485e-8ec6-dfda92e3dcfd</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HF</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HF</omniDataTransformationId>
+        <outputCreationSequence>6.0</outputCreationSequence>
+        <outputFieldName>Id</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>894ed853-0072-4bd7-a53d-b379defb20c7</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Nacionalidad__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gb</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gb</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Nacionalidad__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>6353f4b9-1084-49b0-bdfc-5bba84971784</globalKey>
+        <inputFieldName>LoanApplicant:ContactPointAddress:Street</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HC</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HC</omniDataTransformationId>
+        <outputCreationSequence>2.0</outputCreationSequence>
+        <outputFieldName>Street</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>7c79e816-e9c6-42f5-9420-487ddb959ecd</globalKey>
+        <inputFieldName>LoanApplicant:ContactPointAddress:Name</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gc</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gc</omniDataTransformationId>
+        <outputCreationSequence>2.0</outputCreationSequence>
+        <outputFieldName>Name</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>true</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>a48239a8-6dce-4774-873c-58ff143562d7</globalKey>
+        <inputFieldName>ResidentialLoanApplicationId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HD</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HD</omniDataTransformationId>
+        <outputCreationSequence>4.0</outputCreationSequence>
+        <outputFieldName>FSC_ResidentialLoanApplicationId__c</outputFieldName>
+        <outputObjectName>ContactPointEmail</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>ee2bf139-0073-4331-8ba6-fc81baa286b9</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4GX</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4GX</omniDataTransformationId>
+        <outputCreationSequence>5.0</outputCreationSequence>
+        <outputFieldName>Id</outputFieldName>
+        <outputObjectName>FSC_Facilidad_Otra_Institucion__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>15add50d-13f9-4abe-aece-386be320bf1d</globalKey>
+        <inputFieldName>LoanApplicant:ContactPointAddress:City</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4H9</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4H9</omniDataTransformationId>
+        <outputCreationSequence>2.0</outputCreationSequence>
+        <outputFieldName>City</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>a85540e2-6961-458c-89ae-42d04a750812</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Facilidad_Otra_Institucion__c:Name</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4GY</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4GY</omniDataTransformationId>
+        <outputCreationSequence>5.0</outputCreationSequence>
+        <outputFieldName>Name</outputFieldName>
+        <outputObjectName>FSC_Facilidad_Otra_Institucion__c</outputObjectName>
+        <requiredForUpsert>true</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>3cf30138-c5f3-4dc3-b171-86bdd6bca634</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Referencias__c:FSC_Direccion__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4GV</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4GV</omniDataTransformationId>
+        <outputCreationSequence>6.0</outputCreationSequence>
+        <outputFieldName>FSC_Direccion__c</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>dc4d19af-c710-4eb7-a45d-1cd8ab26a238</globalKey>
+        <inputFieldName>LoanApplicant:Id</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4H7</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4H7</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Id</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>true</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>b3f434c4-a311-448e-8db4-543724e8a00e</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Ocupacion__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4GW</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4GW</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Ocupacion__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>38c02aa9-76b6-47ea-a389-44957d5d3aea</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4H8</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4H8</omniDataTransformationId>
+        <outputCreationSequence>2.0</outputCreationSequence>
+        <outputFieldName>Id</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>1abab94a-26ea-46ea-9926-57287e096ce3</globalKey>
+        <inputFieldName>LoanApplicant:FSC_SegundoApellido__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4GZ</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4GZ</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_SegundoApellido__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>b92d4775-f626-47fc-8dc6-75b8333900f4</globalKey>
+        <inputFieldName>LoanApplicant:FSC_TiempoVivienda__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4H1</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4H1</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_TiempoVivienda__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>71226175-bd7f-43c1-a990-80eab80778c2</globalKey>
+        <inputFieldName>LoanApplicant:FSC_LugarFondeLabora__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4H2</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4H2</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_LugarFondeLabora__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>6e9e1044-0823-4793-91f2-8b8cf54a8371</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Referencias__c:FSC_Email__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4H0</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4H0</omniDataTransformationId>
+        <outputCreationSequence>6.0</outputCreationSequence>
+        <outputFieldName>FSC_Email__c</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>eceb9dd6-9615-4459-9acb-50ac0e514f56</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Facilidad_Otra_Institucion__c:FSC_TipoFacilidad__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4GT</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4GT</omniDataTransformationId>
+        <outputCreationSequence>5.0</outputCreationSequence>
+        <outputFieldName>FSC_TipoFacilidad__c</outputFieldName>
+        <outputObjectName>FSC_Facilidad_Otra_Institucion__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>e7996d45-a692-4c10-961b-532e6a8e6a0e</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Referencias__c:FSC_Telefono__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4H5</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4H5</omniDataTransformationId>
+        <outputCreationSequence>6.0</outputCreationSequence>
+        <outputFieldName>FSC_Telefono__c</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>7531e0e8-05b8-4b2c-b07a-860a8f8bdaa7</globalKey>
+        <inputFieldName>LoanApplicant:FSC_OtrosIngresos__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4GU</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4GU</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_OtrosIngresos__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>4f2e805f-a911-4985-a83a-1c3cbd077c91</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4H6</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4H6</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Id</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>50c85df5-34b2-4b93-a058-36fdfb1f8af7</globalKey>
+        <inputFieldName>LoanApplicant:ContactPointAddress:Country</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4H3</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4H3</omniDataTransformationId>
+        <outputCreationSequence>2.0</outputCreationSequence>
+        <outputFieldName>Country</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0fd71665-a117-4fc3-b018-69f2f9a1c8cf</globalKey>
+        <inputFieldName>LoanApplicant:FSC_TipoDeudor__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4H4</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4H4</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_TipoDeudor__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>90f0b0b3-3ca3-4c90-a0ac-119f6e384e65</globalKey>
+        <inputFieldName>LoanApplicant:FSC_TipoIdentificacion__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gx</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gx</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_TipoIdentificacion__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>d137ef37-a827-4caf-ac28-4e29f4e01791</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Facilidad_Otra_Institucion__c:FSC_Balance__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HY</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HY</omniDataTransformationId>
+        <outputCreationSequence>5.0</outputCreationSequence>
+        <outputFieldName>FSC_Balance__c</outputFieldName>
+        <outputObjectName>FSC_Facilidad_Otra_Institucion__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>d5b4f6b2-70f0-446a-9990-a109bb528f2f</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Referencias__c:FSC_FirstName__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gy</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gy</omniDataTransformationId>
+        <outputCreationSequence>6.0</outputCreationSequence>
+        <outputFieldName>FSC_FirstName__c</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>25c248d0-2a1d-4e95-8926-5dc6aa58b6ee</globalKey>
+        <inputFieldName>LoanApplicant:FSC_TiempoLaborando__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gv</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gv</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_TiempoLaborando__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>764001dd-a9a7-4d74-91a5-13f00321e276</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HW</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HW</omniDataTransformationId>
+        <outputCreationSequence>3.0</outputCreationSequence>
+        <outputFieldName>Id</outputFieldName>
+        <outputObjectName>ContactPointPhone</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>10a39d65-5cd5-4091-8d5d-55fc0977cd7b</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Referencias__c:FSC_Identificacion__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gw</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gw</omniDataTransformationId>
+        <outputCreationSequence>6.0</outputCreationSequence>
+        <outputFieldName>FSC_Identificacion__c</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>7793f400-8fad-4f43-9735-dcee303ed9b0</globalKey>
+        <inputFieldName>LoanApplicant:FSC_EmpresaAnteriorLaboro__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HX</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HX</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_EmpresaAnteriorLaboro__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>c1258b47-81a6-4af7-bc98-5ff9a4a73f9e</globalKey>
+        <inputFieldName>LoanApplicant:FSC_TipoVivienda__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gz</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gz</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_TipoVivienda__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>aced7330-5289-4bf4-b49d-f337662e89f9</globalKey>
+        <inputFieldName>LoanApplicant:FSC_TotalIngresos__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gp</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gp</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_TotalIngresos__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>4bec0ded-c551-426f-aaf3-e954f0f383a2</globalKey>
+        <inputFieldName>ResidentialLoanApplicationId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HQ</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HQ</omniDataTransformationId>
+        <outputCreationSequence>3.0</outputCreationSequence>
+        <outputFieldName>FSC_ResidentialLoanApplicationId__c</outputFieldName>
+        <outputObjectName>ContactPointPhone</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>96acca46-d4f6-4697-9e9f-db408c98d65a</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Referencias__c:FSC_LugarTrabajo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gq</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gq</omniDataTransformationId>
+        <outputCreationSequence>6.0</outputCreationSequence>
+        <outputFieldName>FSC_LugarTrabajo__c</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>cc82be91-3ffd-45f9-93d5-200e8c3efe14</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HR</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HR</omniDataTransformationId>
+        <outputCreationSequence>4.0</outputCreationSequence>
+        <outputFieldName>Id</outputFieldName>
+        <outputObjectName>ContactPointEmail</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>973ed03c-4086-4c6b-a0a9-9e74706ffc43</globalKey>
+        <inputFieldName>LoanApplicant:FSC_TipoNegocio__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gn</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gn</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_TipoNegocio__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>c42c132c-5e32-42aa-92aa-6647fd2fb6e1</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedFieldName>Id</linkedFieldName>
+        <linkedObjectSequence>1.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HO</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HO</omniDataTransformationId>
+        <outputCreationSequence>4.0</outputCreationSequence>
+        <outputFieldName>FSC_Solicitante__c</outputFieldName>
+        <outputObjectName>ContactPointEmail</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>b1a2f42c-c031-4f1f-8024-7300066f6d6d</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Referencias__c:FSC_Parentesco__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Go</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Go</omniDataTransformationId>
+        <outputCreationSequence>6.0</outputCreationSequence>
+        <outputFieldName>FSC_Parentesco__c</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>9c6c8c48-3e4f-4292-8e00-ce2a89345671</globalKey>
+        <inputFieldName>LoanApplicant:FSC_EstadoCivil__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HP</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HP</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_EstadoCivil__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>7dcc33a7-4a30-4383-b3ee-268ec6e90460</globalKey>
+        <inputFieldName>LoanApplicant:FSC_TipoSolicitante__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gt</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gt</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_TipoSolicitante__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>083f2208-e67f-497d-9ca4-fe56316f7273</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Facilidad_Otra_Institucion__c:FSC_DescripcionFacilidad__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HU</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HU</omniDataTransformationId>
+        <outputCreationSequence>5.0</outputCreationSequence>
+        <outputFieldName>FSC_DescripcionFacilidad__c</outputFieldName>
+        <outputObjectName>FSC_Facilidad_Otra_Institucion__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>eaaf380e-b9d2-4f99-973e-be968a406cba</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Referencias__c:FSC_LastName__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gu</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gu</omniDataTransformationId>
+        <outputCreationSequence>6.0</outputCreationSequence>
+        <outputFieldName>FSC_LastName__c</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>a0b0a944-400a-4095-ad91-6f82a27c53d2</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedFieldName>Id</linkedFieldName>
+        <linkedObjectSequence>1.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HV</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HV</omniDataTransformationId>
+        <outputCreationSequence>3.0</outputCreationSequence>
+        <outputFieldName>FSC_Solicitante__c</outputFieldName>
+        <outputObjectName>ContactPointPhone</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>9388ed65-d7b0-42dc-b029-0b6a823435af</globalKey>
+        <inputFieldName>LoanApplicant:FSC_NumIdentificacion__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gr</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gr</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_NumIdentificacion__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>d546e85d-c7f2-4258-a1bd-68f0c237ef48</globalKey>
+        <inputFieldName>LoanApplicant:FSC_DescripcionOtrosIngresos__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HS</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HS</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_DescripcionOtrosIngresos__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>92ca924f-4491-422e-aa8d-c7d38435da31</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedFieldName>Id</linkedFieldName>
+        <linkedObjectSequence>1.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gs</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gs</omniDataTransformationId>
+        <outputCreationSequence>6.0</outputCreationSequence>
+        <outputFieldName>FSC_LoanApplicant__c</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>68a31577-0b6d-4d83-bd13-b60d92ad0a19</globalKey>
+        <inputFieldName>LoanApplicant:FSC_MontoPrestacionesLaborales__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HT</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HT</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_MontoPrestacionesLaborales__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>2c935ef0-3eea-4bcc-a5cb-a11e94ccd078</globalKey>
+        <inputFieldName>LoanApplicant:FSC_PrimerApellido__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gh</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gh</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_PrimerApellido__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>ac1ca245-b1a1-4825-99a5-afbdbe2b1ce9</globalKey>
+        <inputFieldName>ResidentialLoanApplicationId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HI</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HI</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>LoanApplicationId</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>571c9536-3370-4af4-b030-9b6d04402752</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Facilidad_Otra_Institucion__c:FSC_EntidadFinanciera__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gi</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gi</omniDataTransformationId>
+        <outputCreationSequence>5.0</outputCreationSequence>
+        <outputFieldName>FSC_EntidadFinanciera__c</outputFieldName>
+        <outputObjectName>FSC_Facilidad_Otra_Institucion__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>b4374500-72dc-4820-a052-86bccf0277d7</globalKey>
+        <inputFieldName>LoanApplicant:FSC_FuenteIngreso__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HJ</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HJ</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_FuenteIngreso__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>b0ed77f9-3b8f-43de-b797-59edb48dcf3c</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Facilidad_Otra_Institucion__c:FSC_Facilidad__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gf</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gf</omniDataTransformationId>
+        <outputCreationSequence>5.0</outputCreationSequence>
+        <outputFieldName>FSC_Facilidad__c</outputFieldName>
+        <outputObjectName>FSC_Facilidad_Otra_Institucion__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>e4ceac27-a688-4b9a-af88-25732f6a0b7d</globalKey>
+        <inputFieldName>LoanApplicant:Name</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HG</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HG</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Name</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>6a3c4320-5aaa-4eaa-8393-a335f26790f9</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Referencias__c:Name</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gg</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gg</omniDataTransformationId>
+        <outputCreationSequence>6.0</outputCreationSequence>
+        <outputFieldName>Name</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>true</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>041091ad-0a31-47a1-b882-41afb590a6f0</globalKey>
+        <inputFieldName>LoanApplicant:ContactPointAddress:PostalCode</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HH</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HH</omniDataTransformationId>
+        <outputCreationSequence>2.0</outputCreationSequence>
+        <outputFieldName>PostalCode</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>e613035d-4551-41aa-8f11-5a3562364997</globalKey>
+        <inputFieldName>LoanApplicant:ContactPointEmail:EmailAddress</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gl</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gl</omniDataTransformationId>
+        <outputCreationSequence>4.0</outputCreationSequence>
+        <outputFieldName>EmailAddress</outputFieldName>
+        <outputObjectName>ContactPointEmail</outputObjectName>
+        <requiredForUpsert>true</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>1b731405-4007-4b5e-b1ec-e329f16850f7</globalKey>
+        <inputFieldName>LoanApplicant:ContactPointPhone:FSC_TipoContacto__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HM</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HM</omniDataTransformationId>
+        <outputCreationSequence>3.0</outputCreationSequence>
+        <outputFieldName>FSC_TipoContacto__c</outputFieldName>
+        <outputObjectName>ContactPointPhone</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>9e6b107a-c2ee-4ff3-955b-7d42ca357180</globalKey>
+        <inputFieldName>ResidentialLoanApplicationId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gm</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gm</omniDataTransformationId>
+        <outputCreationSequence>6.0</outputCreationSequence>
+        <outputFieldName>FSC_Residential_Loan_Application__c</outputFieldName>
+        <outputObjectName>FSC_Referencias__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>bd40a1f0-4bed-42c4-8e30-59ff15c3ff91</globalKey>
+        <inputFieldName>LoanApplicant:FSC_FechaNacimiento__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HN</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HN</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_FechaNacimiento__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>4c117be7-34d5-4667-86d6-a139c2c033b2</globalKey>
+        <inputFieldName>LoanApplicant:ContactPointPhone:TelephoneNumber</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gj</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gj</omniDataTransformationId>
+        <outputCreationSequence>3.0</outputCreationSequence>
+        <outputFieldName>TelephoneNumber</outputFieldName>
+        <outputObjectName>ContactPointPhone</outputObjectName>
+        <requiredForUpsert>true</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>98869829-9ec9-46be-9b85-73d6d9201a56</globalKey>
+        <inputFieldName>LoanApplicant:FSC_IngresosMensuales__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HK</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HK</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_IngresosMensuales__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>c47b638a-19c7-4276-a0ed-bc5956d640d8</globalKey>
+        <inputFieldName>LoanApplicant:FSC_Nombre__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4Gk</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4Gk</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Nombre__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>e4b08891-aacb-4889-a353-549ca09e515c</globalKey>
+        <inputFieldName>LoanApplicant:FSC_ClasificacionSIB__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicant</name>
+        <omniDataTransformation>0kdVC000000I4HL</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000I4HL</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_ClasificacionSIB__c</outputFieldName>
+        <outputObjectName>LoanApplicant</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <outputType>SObject</outputType>
+    <previewJsonData>{
+  &quot;LoanApplicant&quot; : {
+    &quot;ContactPointAddress&quot; : [ {
+      &quot;City&quot; : &quot;Las Heras&quot;,
+      &quot;Country&quot; : &quot;Argentina&quot;,
+      &quot;Name&quot; : &quot;Jacinto Suarez 1212&quot;,
+      &quot;PostalCode&quot; : &quot;5539&quot;,
+      &quot;State&quot; : &quot;Mendoza&quot;,
+      &quot;Street&quot; : &quot;Jacinto Suarez 1212&quot;
+    } ],
+    &quot;ContactPointEmail&quot; : [ {
+      &quot;EmailAddress&quot; : &quot;asbury@gmail.com&quot;
+    } ],
+    &quot;ContactPointPhone&quot; : [ {
+      &quot;FSC_TipoContacto__c&quot; : &quot;Personal&quot;,
+      &quot;TelephoneNumber&quot; : &quot;4300381&quot;
+    } ],
+    &quot;FSC_ClasificacionSIB__c&quot; : &quot;A&quot;,
+    &quot;FSC_DescripcionOtrosIngresos__c&quot; : &quot;n&quot;,
+    &quot;FSC_EmpresaAnteriorLaboro__c&quot; : &quot;&quot;,
+    &quot;FSC_EstadoCivil__c&quot; : &quot;CASADO/A&quot;,
+    &quot;FSC_Facilidad_Otra_Institucion__c&quot; : [ ],
+    &quot;FSC_FechaNacimiento__c&quot; : &quot;1999-06-16&quot;,
+    &quot;FSC_FuenteIngreso__c&quot; : &quot;Empleado Privado&quot;,
+    &quot;FSC_IngresosMensuales__c&quot; : &quot;10&quot;,
+    &quot;FSC_LugarFondeLabora__c&quot; : &quot;NN&quot;,
+    &quot;FSC_MontoPrestacionesLaborales__c&quot; : &quot;1&quot;,
+    &quot;FSC_Nacionalidad__c&quot; : &quot;ARGENTINA&quot;,
+    &quot;FSC_Nombre__c&quot; : &quot;Juan&quot;,
+    &quot;FSC_NumIdentificacion__c&quot; : &quot;123123&quot;,
+    &quot;FSC_NumeroDependientes__c&quot; : &quot;1&quot;,
+    &quot;FSC_Ocupacion__c&quot; : &quot;ABOGADO&quot;,
+    &quot;FSC_OtrosIngresos__c&quot; : &quot;0&quot;,
+    &quot;FSC_PrimerApellido__c&quot; : &quot;Perez&quot;,
+    &quot;FSC_Referencias__c&quot; : [ {
+      &quot;FSC_Direccion__c&quot; : &quot;Jacinto J 123&quot;,
+      &quot;FSC_Email__c&quot; : &quot;cadbus@gmail.com&quot;,
+      &quot;FSC_FirstName__c&quot; : &quot;Fernando&quot;,
+      &quot;FSC_Identificacion__c&quot; : &quot;1212222&quot;,
+      &quot;FSC_LastName__c&quot; : &quot;Rocha&quot;,
+      &quot;FSC_LoanApplicant__c&quot; : &quot;&quot;,
+      &quot;FSC_LugarTrabajo__c&quot; : &quot;Keystone&quot;,
+      &quot;FSC_Parentesco__c&quot; : &quot;AMIGO (A)&quot;,
+      &quot;FSC_Telefono__c&quot; : &quot;222222.0&quot;,
+      &quot;FSC_TipoIdentificacion__c&quot; : &quot;Cedula&quot;,
+      &quot;Name&quot; : &quot;Fernando Rocha&quot;
+    }, {
+      &quot;FSC_Direccion__c&quot; : &quot;JSC&quot;,
+      &quot;FSC_Email__c&quot; : &quot;spm@gmail.com&quot;,
+      &quot;FSC_FirstName__c&quot; : &quot;Samuel&quot;,
+      &quot;FSC_Identificacion__c&quot; : &quot;31329&quot;,
+      &quot;FSC_LastName__c&quot; : &quot;Perez Millos&quot;,
+      &quot;FSC_LoanApplicant__c&quot; : &quot;&quot;,
+      &quot;FSC_LugarTrabajo__c&quot; : &quot;Keystone&quot;,
+      &quot;FSC_Parentesco__c&quot; : &quot;AMIGO (A)&quot;,
+      &quot;FSC_Telefono__c&quot; : &quot;123123&quot;,
+      &quot;FSC_TipoIdentificacion__c&quot; : &quot;Cedula&quot;,
+      &quot;Name&quot; : &quot;Samuel Perez Millos&quot;
+    } ],
+    &quot;FSC_SegundoApellido__c&quot; : &quot;Perez&quot;,
+    &quot;FSC_TiempoLaborando__c&quot; : &quot;2026-06-02&quot;,
+    &quot;FSC_TiempoVivienda__c&quot; : &quot;1&quot;,
+    &quot;FSC_TipoIdentificacion__c&quot; : &quot;Cédula&quot;,
+    &quot;FSC_TipoNegocio__c&quot; : &quot;as&quot;,
+    &quot;FSC_TipoSolicitante__c&quot; : &quot;Co-Deudor&quot;,
+    &quot;FSC_TipoVivienda__c&quot; : &quot;4&quot;,
+    &quot;Name&quot; : &quot;Juan Perez Perez&quot;
+  },
+  &quot;ResidentialLoanApplicationId&quot; : &quot;0cdVC000000LP53YAG&quot;
+}</previewJsonData>
+    <processSuperBulk>false</processSuperBulk>
+    <responseCacheTtlMinutes>0.0</responseCacheTtlMinutes>
+    <rollbackOnError>false</rollbackOnError>
+    <sourceObjectDefault>false</sourceObjectDefault>
+    <synchronousProcessThreshold>0.0</synchronousProcessThreshold>
+    <type>Load</type>
+    <uniqueName>FSCCrearLoanApplicant_1</uniqueName>
+    <versionNumber>1.0</versionNumber>
+    <xmlDeclarationRemoved>false</xmlDeclarationRemoved>
+</OmniDataTransform>

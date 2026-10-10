@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Solicitudes_PYME_en_captura</fullName>
+    <columns>Name</columns>
+    <columns>Opportunity</columns>
+    <columns>MortgageProgramType</columns>
+    <columns>LotOriginalCost</columns>
+    <columns>InterestRate</columns>
+    <columns>AmortizationTerm</columns>
+    <filterScope>Mine</filterScope>
+    <filters>
+        <field>Status</field>
+        <operation>equals</operation>
+        <value>Borrador</value>
+    </filters>
+    <filters>
+        <field>FSC_Subestado__c</field>
+        <operation>equals</operation>
+        <value>Completando información</value>
+    </filters>
+    <label>Solicitudes PYME en captura</label>
+</ListView>

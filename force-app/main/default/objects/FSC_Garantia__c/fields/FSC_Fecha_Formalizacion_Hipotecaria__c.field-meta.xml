@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Fecha_Formalizacion_Hipotecaria__c</fullName>
+    <description>Registra la fecha en que se completó la formalización de la garantía hipotecaria.</description>
+    <encryptionScheme>None</encryptionScheme>
+    <inlineHelpText>Seleccione la fecha efectiva de formalización de la garantía hipotecaria.</inlineHelpText>
+    <label>Fecha de formalización</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

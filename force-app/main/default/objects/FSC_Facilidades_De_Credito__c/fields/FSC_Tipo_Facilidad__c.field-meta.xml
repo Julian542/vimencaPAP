@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Tipo_Facilidad__c</fullName>
+    <label>Tipo de Facilidad</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CONTROL DE PRESTAMOS - BPR</fullName>
+                <default>true</default>
+                <label>CONTROL DE PRESTAMOS - BPR</label>
+            </value>
+            <value>
+                <fullName>CUENTAS CORRIENTES - BCC</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CUENTAS CORRIENTES - BCC</label>
+            </value>
+            <value>
+                <fullName>CUENTAS DE AHORRO - BCA</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>CUENTAS DE AHORRO - BCA</label>
+            </value>
+            <value>
+                <fullName>DEPOSITOS A PLAZO - BDP</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>DEPOSITOS A PLAZO - BDP</label>
+            </value>
+            <value>
+                <fullName>GARANTIAS DE CREDITOS - BGA</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>GARANTIAS DE CREDITOS - BGA</label>
+            </value>
+            <value>
+                <fullName>LINEAS DE CREDITOS - BLC</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>LINEAS DE CREDITOS - BLC</label>
+            </value>
+            <value>
+                <fullName>TARJETA CREDITO - BTC</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>TARJETA CREDITO - BTC</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

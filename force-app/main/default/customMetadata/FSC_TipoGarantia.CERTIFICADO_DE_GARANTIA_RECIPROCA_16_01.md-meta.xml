@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>CERTIFICADO DE GARANTIA RECIPROCA EN (MN</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_Clase__c</field>
+        <value xsi:type="xsd:string">CERTIFICADO_DE_GARANTIA_RECIPROCA_16</value>
+    </values>
+    <values>
+        <field>FSC_Orden__c</field>
+        <value xsi:type="xsd:double">1.0</value>
+    </values>
+    <values>
+        <field>FSC_Valor__c</field>
+        <value xsi:type="xsd:string">CERTIFICADO DE GARANTIA RECIPROCA EN (MN)-V10</value>
+    </values>
+</CustomMetadata>

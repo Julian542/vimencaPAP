@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>AVALES O FIANZAS, CARTA DE CR. EXP. E IM</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_Codigo__c</field>
+        <value xsi:type="xsd:double">30.0</value>
+    </values>
+    <values>
+        <field>FSC_Grupo__c</field>
+        <value xsi:type="xsd:string">general</value>
+    </values>
+    <values>
+        <field>FSC_Valor__c</field>
+        <value xsi:type="xsd:string">AVALES O FIANZAS, CARTA DE CR. EXP. E IMP. IRR. Y CC STAND-B</value>
+    </values>
+</CustomMetadata>

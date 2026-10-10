@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Carlos Leonidas Ramirez Perez (001-01392</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_CodigoReferidor__c</field>
+        <value xsi:type="xsd:string">53</value>
+    </values>
+    <values>
+        <field>FSC_NombreReferidor__c</field>
+        <value xsi:type="xsd:string">Carlos Leonidas Ramirez Perez (001-0139238-9)</value>
+    </values>
+</CustomMetadata>

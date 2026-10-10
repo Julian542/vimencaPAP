@@ -105,14 +105,6 @@ public class INT003 {
     public  INT003.Response returnResponse() {
         return response;
     }
-
-    public static void validatePF(Id idClient) {
-        validatePF(String.valueOf(idClient), null);
-    }
-
-    public static void validatePF(String idClient) {
-        validatePF(idClient, null);
-    }
     
     @future(callout=true)
     // public static INT003.Response validatePF(String idClient) {  

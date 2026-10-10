@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Tipo_de_Seguro__c</fullName>
+    <label>Tipo de Seguro</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Seguro_de_Vida_Unit</fullName>
+                <default>true</default>
+                <label>Seguro de Vida Unit</label>
+            </value>
+            <value>
+                <fullName>Seguro_de_Vida_Universal_Hipotecario</fullName>
+                <default>false</default>
+                <label>Seguro de Vida Universal (Hipotecario)</label>
+            </value>
+            <value>
+                <fullName>Seguro_de_Vida_Mapfre_Hipotecario</fullName>
+                <default>false</default>
+                <label>Seguro de Vida Mapfre (Hipotecario)</label>
+            </value>
+            <value>
+                <fullName>Seguro_de_Vida_Sura_Hipotecario</fullName>
+                <default>false</default>
+                <label>Seguro de Vida Sura (Hipotecario)</label>
+            </value>
+            <value>
+                <fullName>Seguro_Incendio_Sura</fullName>
+                <default>false</default>
+                <label>Seguro Incendio Sura</label>
+            </value>
+            <value>
+                <fullName>Seguro_Incendio_Mapfre</fullName>
+                <default>false</default>
+                <label>Seguro Incendio Mapfre</label>
+            </value>
+            <value>
+                <fullName>Seguro_de_Incendio_Humano</fullName>
+                <default>false</default>
+                <label>Seguro de Incendio Humano</label>
+            </value>
+            <value>
+                <fullName>Seguro_de_Incendio_Universal</fullName>
+                <default>false</default>
+                <label>Seguro de Incendio Universal</label>
+            </value>
+            <value>
+                <fullName>Seguro_de_Incendio_Sura</fullName>
+                <default>false</default>
+                <label>Seguro de Incendio Sura</label>
+            </value>
+            <value>
+                <fullName>Seguro_de_Incendio_Mafre</fullName>
+                <default>false</default>
+                <label>Seguro de Incendio Mafre</label>
+            </value>
+            <value>
+                <fullName>Seguro_SURA_AUTOMOVILES</fullName>
+                <default>false</default>
+                <label>Seguro SURA AUTOMOVILES</label>
+            </value>
+            <value>
+                <fullName>Seguro_Sura_JEEPS</fullName>
+                <default>false</default>
+                <label>Seguro Sura JEEPS</label>
+            </value>
+            <value>
+                <fullName>Seguro_Sura_Camionetas</fullName>
+                <default>false</default>
+                <label>Seguro Sura Camionetas</label>
+            </value>
+            <value>
+                <fullName>Seguro_Universal_Nuevo</fullName>
+                <default>false</default>
+                <label>Seguro Universal (Nuevo)</label>
+            </value>
+            <value>
+                <fullName>Seguro_Universal_Usado</fullName>
+                <default>false</default>
+                <label>Seguro Universal (Usado)</label>
+            </value>
+            <value>
+                <fullName>Seguro_Humano_AJC_2024_2019</fullName>
+                <default>false</default>
+                <label>Seguro Humano (AUTOMOVILES-JEEPS-CAMIONETAS) 2024-2019</label>
+            </value>
+            <value>
+                <fullName>Seguro_Humano_C_A_2024_2019</fullName>
+                <default>false</default>
+                <label>Seguro Humano (CAMIONES- AUTOBUS) 2024-2019</label>
+            </value>
+            <value>
+                <fullName>Seguro_Humano_AJC_2018_2017</fullName>
+                <default>false</default>
+                <label>Seguro Humano (AUTOMOVILES-JEEPS-CAMIONETAS) 2018-2017</label>
+            </value>
+            <value>
+                <fullName>Seguro_Humano_CA_2018_2017</fullName>
+                <default>false</default>
+                <label>Seguro Humano (CAMIONES- AUTOBUS) 2018-2017</label>
+            </value>
+            <value>
+                <fullName>Seguro_Humano_AJC_2016_2015</fullName>
+                <default>false</default>
+                <label>Seguro Humano (AUTOMOVILES-JEEPS-CAMIONETAS) 2016-2015</label>
+            </value>
+            <value>
+                <fullName>Seguro_Humano_CA_2016_2015</fullName>
+                <default>false</default>
+                <label>Seguro Humano (CAMIONES- AUTOBUS) 2016-2015</label>
+            </value>
+            <value>
+                <fullName>Seguro_Humano_AJC_2014_2013</fullName>
+                <default>false</default>
+                <label>Seguro Humano (AUTOMOVILES-JEEPS-CAMIONETAS) -2014-2013</label>
+            </value>
+            <value>
+                <fullName>Seguro_Humano_CA_2014_2013</fullName>
+                <default>false</default>
+                <label>Seguro Humano (CAMIONES- AUTOBUS) 2014-2013</label>
+            </value>
+            <value>
+                <fullName>Seguro_de_Vida_Universal_Hipotecario_D</fullName>
+                <default>false</default>
+                <label>Seguro de Vida Universal (Hipotecario Dólares)</label>
+            </value>
+            <value>
+                <fullName>Seguro_de_Incendio_Humano_Hipotecario_D</fullName>
+                <default>false</default>
+                <label>Seguro de Incendio Humano (Hipotecario Dólares)</label>
+            </value>
+            <value>
+                <fullName>Seguro_Incendio_Universal_Hipotecario_D</fullName>
+                <default>false</default>
+                <label>Seguro Incendio Universal (Hipotecario Dólares)</label>
+            </value>
+            <value>
+                <fullName>Seguro_de_Vida_Humano</fullName>
+                <default>false</default>
+                <label>Seguro de Vida Humano</label>
+            </value>
+            <value>
+                <fullName>Seguro_de_Vida_Humano_Hipotecario</fullName>
+                <default>false</default>
+                <label>Seguro de Vida Humano (Hipotecario)</label>
+            </value>
+            <value>
+                <fullName>Seguro_de_Vida_Humano_Hipotecario_D_lar</fullName>
+                <default>false</default>
+                <label>Seguro de Vida Humano (Hipotecario Dólares)</label>
+            </value>
+            <value>
+                <fullName>Seguro_de_Vida_MAPFRE</fullName>
+                <default>false</default>
+                <label>Seguro de Vida MAPFRE</label>
+            </value>
+            <value>
+                <fullName>Seguro_de_Vida_SURA</fullName>
+                <default>false</default>
+                <label>Seguro de Vida SURA</label>
+            </value>
+            <value>
+                <fullName>Seguro_Incendio_Universal</fullName>
+                <default>false</default>
+                <label>Seguro Incendio Universal</label>
+            </value>
+            <value>
+                <fullName>Seguros_de_Vehiculos_Universal</fullName>
+                <default>false</default>
+                <label>Seguros de Vehiculos Universal</label>
+            </value>
+            <value>
+                <fullName>Universal_SVC_2938_Dominicano_en_el_Exte</fullName>
+                <default>false</default>
+                <label>Universal SVC-2938 Dominicano en el Exterior</label>
+            </value>
+            <value>
+                <fullName>TEST</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>TEST</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

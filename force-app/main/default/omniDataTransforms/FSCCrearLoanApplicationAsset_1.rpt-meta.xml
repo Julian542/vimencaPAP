@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniDataTransform xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <assignmentRulesUsed>false</assignmentRulesUsed>
+    <deletedOnSuccess>false</deletedOnSuccess>
+    <errorIgnored>false</errorIgnored>
+    <expectedInputJson>{
+  &quot;ResidentialLoanApplicationId&quot; : &quot;0cdVC000000JjZLYA0&quot;,
+  &quot;LoanApplicationAsset&quot; : [ {
+    &quot;FSC_Numero_Facilidades__c&quot; : 23123,
+    &quot;FSC_Descripcion_de_la_Garantia__c&quot; : &quot;123123&quot;,
+    &quot;CashOrMarketValue&quot; : 12312,
+    &quot;FSC_Porcentaje_Admisibilidad__c&quot; : 31232
+  } ]
+}</expectedInputJson>
+    <fieldLevelSecurityEnabled>true</fieldLevelSecurityEnabled>
+    <inputType>JSON</inputType>
+    <isManagedUsingStdDesigner>true</isManagedUsingStdDesigner>
+    <name>FSCCrearLoanApplicationAsset</name>
+    <nullInputsIncludedInOutput>false</nullInputsIncludedInOutput>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>bb47006b-6736-4933-8f88-f50a58dbadac</globalKey>
+        <inputFieldName>LoanApplicationAsset:FSC_Descripcion_de_la_Garantia__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicationAsset</name>
+        <omniDataTransformation>0kdVC000000Gx03</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx03</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Descripcion_de_la_Garantia__c</outputFieldName>
+        <outputObjectName>LoanApplicationAsset</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>bdbda1f8-ccb5-459a-8062-87b895c3835e</globalKey>
+        <inputFieldName>LoanApplicationAsset:FSC_Numero_Facilidades__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicationAsset</name>
+        <omniDataTransformation>0kdVC000000Gx04</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx04</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Numero_Facilidades__c</outputFieldName>
+        <outputObjectName>LoanApplicationAsset</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>353baa68-0fb3-41ae-8efb-129ff319622f</globalKey>
+        <inputFieldName>LoanApplicationAsset:FSC_Porcentaje_Admisibilidad__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicationAsset</name>
+        <omniDataTransformation>0kdVC000000Gx01</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx01</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Porcentaje_Admisibilidad__c</outputFieldName>
+        <outputObjectName>LoanApplicationAsset</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>b101bc17-d247-4032-9bd7-f6b308c593ee</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearLoanApplicationAsset</name>
+        <omniDataTransformation>0kdVC000000Gx02</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx02</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Id</outputFieldName>
+        <outputObjectName>LoanApplicationAsset</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>d5b9347f-8f26-40de-98f8-2c1b740d5c07</globalKey>
+        <inputFieldName>LoanApplicationAsset:CashOrMarketValue</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicationAsset</name>
+        <omniDataTransformation>0kdVC000000Gx05</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx05</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>CashOrMarketValue</outputFieldName>
+        <outputObjectName>LoanApplicationAsset</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>a92846e7-3c00-47f5-8dd1-33bc77fb13f8</globalKey>
+        <inputFieldName>ResidentialLoanApplicationId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicationAsset</name>
+        <omniDataTransformation>0kdVC000000Gwzz</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gwzz</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>LoanApplicationId</outputFieldName>
+        <outputObjectName>LoanApplicationAsset</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>2288ba16-5370-45f1-8171-e94a60ddc65c</globalKey>
+        <inputFieldName>LoanApplicationAsset:FSC_Descripcion_de_la_Garantia__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearLoanApplicationAsset</name>
+        <omniDataTransformation>0kdVC000000Gx00</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx00</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Name</outputFieldName>
+        <outputObjectName>LoanApplicationAsset</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <outputType>SObject</outputType>
+    <previewJsonData>{
+  &quot;ResidentialLoanApplicationId&quot; : &quot;0cdVC000000JjZLYA0&quot;,
+  &quot;LoanApplicationAsset&quot; : [ {
+    &quot;FSC_Numero_Facilidades__c&quot; : 23123,
+    &quot;FSC_Descripcion_de_la_Garantia__c&quot; : &quot;123123&quot;,
+    &quot;CashOrMarketValue&quot; : 12312,
+    &quot;FSC_Porcentaje_Admisibilidad__c&quot; : 31232
+  } ]
+}</previewJsonData>
+    <processSuperBulk>false</processSuperBulk>
+    <responseCacheTtlMinutes>0.0</responseCacheTtlMinutes>
+    <rollbackOnError>false</rollbackOnError>
+    <sourceObjectDefault>false</sourceObjectDefault>
+    <synchronousProcessThreshold>0.0</synchronousProcessThreshold>
+    <type>Load</type>
+    <uniqueName>FSCCrearLoanApplicationAsset_1</uniqueName>
+    <versionNumber>1.0</versionNumber>
+    <xmlDeclarationRemoved>false</xmlDeclarationRemoved>
+</OmniDataTransform>

@@ -16,8 +16,8 @@ private class FSC_ContratoPrestamoComercialGCDCtrlTest {
         System.assertEquals('[p001]', ctrl.getPlaceholderValue('p001'));
         System.assertEquals('[p083]', ctrl.getPlaceholderValue('p083'));
         System.assertEquals('', ctrl.getPlaceholderValue('missing'));
-        System.assertEquals(true, ctrl.hasAnnexImage, 'Debe indicar que hay anexo.');
-        System.assertEquals('/resource/FSC_ContratoPrestamoComercial_Anexo', ctrl.annexImageUrl);
+        System.assertEquals(true, ctrl.getHasAnnexImage(), 'Debe indicar que hay anexo.');
+        System.assertEquals('/resource/FSC_ContratoPrestamoComercial_Anexo', ctrl.getAnnexImageUrl());
     }
 
     @IsTest

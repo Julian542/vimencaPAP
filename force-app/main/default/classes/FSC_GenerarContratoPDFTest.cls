@@ -1,16 +1,7 @@
 @IsTest
 private class FSC_GenerarContratoPDFTest {
-	private static Integer accountSequence = 13;
-
 	private static Account createAccount() {
-		Account acc = new Account(
-			RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Juridica').getRecordTypeId(),
-			Name = 'Cuenta Test Enqueue ' + System.now().getTime(),
-			ACC_RNC__c = '1310000' + String.valueOf(accountSequence++),
-			ACC_TipoIdentificacion__c = 'RNC',
-			ACC_Condicion__c = 'PROSPECTO',
-			ACC_Estado__c = 'INICIADO'
-		);
+		Account acc = new Account(Name = 'Cuenta Test Enqueue ' + System.now().getTime());
 		insert acc;
 		return acc;
 	}
@@ -66,9 +57,9 @@ private class FSC_GenerarContratoPDFTest {
 			'El registro elegible debe ser procesado por la queueable encolada.'
 		);
 		System.assertEquals(
-			true,
+			false,
 			rlaMap.get(eligibleRla.Id).FSC_Contrato_Generado__c,
-			'El registro elegible debe quedar marcado con contrato generado.'
+			'Un consumo sin contrato aplicable sólo debe avanzar de etapa.'
 		);
 
 		System.assertEquals(

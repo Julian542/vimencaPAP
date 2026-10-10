@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Limite_Maximo_Excepciones</fullName>
+    <active>true</active>
+    <description>Impide crear una excepción que supere el límite histórico configurado, sin considerar el estado de las excepciones existentes.</description>
+    <errorConditionFormula>AND(
+    ISNEW(),
+    FSC_Solicitud_Prestamo__r.FSC_Cantidad_Excepciones__c &gt;=
+        IF(
+            OR(
+                ISBLANK($CustomMetadata.FSC_Configuracion_Excepciones__mdt.FSC_Limite_Global.FSC_Maximo_Excepciones__c),
+                $CustomMetadata.FSC_Configuracion_Excepciones__mdt.FSC_Limite_Global.FSC_Maximo_Excepciones__c &lt; 1
+            ),
+            3,
+            $CustomMetadata.FSC_Configuracion_Excepciones__mdt.FSC_Limite_Global.FSC_Maximo_Excepciones__c
+        )
+)</errorConditionFormula>
+    <errorDisplayField>FSC_Solicitud_Prestamo__c</errorDisplayField>
+    <errorMessage>Se ha alcanzado el límite máximo de excepciones configurado para esta solicitud.</errorMessage>
+</ValidationRule>

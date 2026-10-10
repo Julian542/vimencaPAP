@@ -1,38 +1,28 @@
 @IsTest
 private class FSC_LoanDecisionAPITest {
-	private static void configureTestConfig() {
-		FSC_LoanDecisionAPI.testConfigValues = new Map<String, String>{
-			'URL' => 'https://loan-decision.test/interconnect/precon',
-			'Credentials' => 'test-token'
-		};
-	}
-
-	private static Boolean callApiSkippedForMissingConfig(List<Id> rlaIds) {
-		configureTestConfig();
-		try {
-			FSC_LoanDecisionAPI.callAPI(rlaIds);
-			return false;
-		} catch (CalloutException e) {
-			if (isMissingLoanDecisionConfig(e)) {
-				return true;
-			}
-			throw e;
-		}
-	}
-
-	private static Boolean isMissingLoanDecisionConfig(Exception e) {
-		return e != null &&
-			e.getMessage() != null &&
-			e.getMessage().contains('Configuración faltante: no se encontró ConfigLoanDecisionAPI__mdt.URL');
-	}
+    @TestSetup
+    static void asignarPermisosAdministrador() {
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            PermissionSet permiso = [SELECT Id FROM PermissionSet WHERE Name = 'FSC_PS_Administrador' LIMIT 1];
+            // El usuario que ejecuta los tests puede tener ya el permission set asignado.
+            if ([SELECT COUNT() FROM PermissionSetAssignment WHERE AssigneeId = :UserInfo.getUserId() AND PermissionSetId = :permiso.Id] == 0) {
+                insert new PermissionSetAssignment(AssigneeId = UserInfo.getUserId(), PermissionSetId = permiso.Id);
+            }
+        }
+    }
 
 	private static Account createDecisionAccount(String tipoIdentificacion) {
 		Account acc = new Account(
-			RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('IndustriesHousehold').getRecordTypeId(),
-			Name = 'Cuenta API Test ' + System.now().getTime(),
 			ACC_NumIdentificacion__c = '00108803610',
 			ACC_TipoIdentificacion__c = tipoIdentificacion
 		);
+		if (tipoIdentificacion == 'RNC') {
+			acc.RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Juridica').getRecordTypeId();
+			acc.Name = 'Cuenta API Test ' + System.now().getTime();
+		} else {
+			acc.RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Fisica').getRecordTypeId();
+			acc.LastName = 'Cuenta API Test ' + System.now().getTime();
+		}
 		insert acc;
 		return acc;
 	}
@@ -67,6 +57,10 @@ private class FSC_LoanDecisionAPITest {
 		Id recordTypeId = getRlaRecordTypeId(recordTypeDeveloperName);
 		if (recordTypeId != null) {
 			rla.RecordTypeId = recordTypeId;
+		}
+		// Un crédito vehicular sin garantías no admite plazo aprobado (regla FSC_ValidarPlazoMaximoVehiculo).
+		if (recordTypeDeveloperName == 'FSC_Solicitud_Credito_Vehiculo') {
+			rla.FSC_PlazoMesesAprobado__c = null;
 		}
 		insert rla;
 		return rla;
@@ -130,16 +124,11 @@ private class FSC_LoanDecisionAPITest {
 		return guarantee;
 	}
 
-	private static LoanApplicant createCoDebtor(
-		Id rlaId,
-		String identificationNumber,
-		Decimal totalIncome,
-		String riskClassification
-	) {
+	private static LoanApplicant createCoDebtor(Id rlaId, String identificationNumber, Decimal totalIncome, String riskClassification) {
 		LoanApplicant coDebtor = new LoanApplicant(
-			Name = 'Codeudor API Test ' + System.now().getTime(),
+			Name = 'Co-Debtor ' + identificationNumber,
+			FSC_Nombre__c = 'Co-Debtor Test',
 			LoanApplicationId = rlaId,
-			FSC_Nombre__c = 'Codeudor API Test',
 			FSC_TipoSolicitante__c = 'Co-Deudor',
 			FSC_TipoIdentificacion__c = 'Cédula',
 			FSC_NumIdentificacion__c = identificationNumber,
@@ -190,6 +179,30 @@ private class FSC_LoanDecisionAPITest {
 
 	private static void assertNumberStringEquals(String expected, Object actual, String message) {
 		Assert.areEqual(Decimal.valueOf(expected), Decimal.valueOf(String.valueOf(actual)), message);
+	}
+
+	private static void assertSingleIntegrationLog(Integer expectedStatusCode, String expectedResponseText) {
+		List<INT_Request__c> savedRequests = [
+			SELECT Id, Integraci_n__c, Funci_n__c, Trama_de_env_o__c
+			FROM INT_Request__c
+			WHERE Integraci_n__c = 'FSC_LoanDecisionAPI'
+		];
+		Assert.areEqual(1, savedRequests.size(), 'Exactly one Loan Decision API request should be logged.');
+		Assert.areEqual('callAPI', savedRequests[0].Funci_n__c, 'The executed API operation should be logged.');
+		Assert.isTrue(savedRequests[0].Trama_de_env_o__c.contains('applicants'), 'The complete API request should be logged.');
+
+		List<INT_Response__c> savedResponses = [
+			SELECT INT_Request__c, Http_Status_Code__c, Trama_de_respuesta__c
+			FROM INT_Response__c
+			WHERE INT_Request__c = :savedRequests[0].Id
+		];
+		Assert.areEqual(1, savedResponses.size(), 'Exactly one Loan Decision API response should be logged.');
+		Assert.areEqual(
+			Decimal.valueOf(String.valueOf(expectedStatusCode)),
+			savedResponses[0].Http_Status_Code__c,
+			'The service HTTP status code should be logged.'
+		);
+		Assert.isTrue(savedResponses[0].Trama_de_respuesta__c.contains(expectedResponseText), 'The complete API response should be logged.');
 	}
 
 	private class ApprovedMock implements HttpCalloutMock {
@@ -492,6 +505,27 @@ private class FSC_LoanDecisionAPITest {
 		}
 	}
 
+	private class ConfigurableResponseMock implements HttpCalloutMock {
+		private Integer statusCode;
+		private String status;
+		private String responseBody;
+
+		public ConfigurableResponseMock(Integer statusCode, String status, String responseBody) {
+			this.statusCode = statusCode;
+			this.status = status;
+			this.responseBody = responseBody;
+		}
+
+		public HTTPResponse respond(HTTPRequest request) {
+			HttpResponse response = new HttpResponse();
+			response.setStatusCode(statusCode);
+			response.setStatus(status);
+			response.setHeader('Content-Type', 'application/json');
+			response.setBody(responseBody);
+			return response;
+		}
+	}
+
 	@IsTest
 	static void testCallApi_Aprobado_ActualizaCamposYMapeaRequest() {
 		Account acc = createDecisionAccount('Cédula');
@@ -501,10 +535,7 @@ private class FSC_LoanDecisionAPITest {
 		Test.setMock(HttpCalloutMock.class, new ApprovedMock());
 
 		Test.startTest();
-		if (callApiSkippedForMissingConfig(new List<Id>{ rla.Id })) {
-			Test.stopTest();
-			return;
-		}
+		FSC_LoanDecisionAPI.callAPI(new List<Id>{ rla.Id });
 		Test.stopTest();
 
 		ResidentialLoanApplication refreshed = [
@@ -516,13 +547,42 @@ private class FSC_LoanDecisionAPITest {
 		System.assertEquals('Aprobado', refreshed.FSC_Resultado_Buro__c);
 		System.assertEquals(Decimal.valueOf('745'), refreshed.FSC_XCore_Buro__c);
 		System.assert(
-			refreshed.FSC_Subestado__c == 'Generación de pagarés y plantillas' || refreshed.FSC_Subestado__c == 'Gestionar firmas',
+			refreshed.FSC_Subestado__c == 'Generación de pagarés y plantillas' || refreshed.FSC_Subestado__c == 'Gestionar firmas' || refreshed.FSC_Subestado__c == 'Banca Seguro',
 			'Subestado inesperado: ' + refreshed.FSC_Subestado__c
 		);
 		System.assertEquals('En proceso', refreshed.Status);
 		System.assertNotEquals(null, refreshed.FSC_Mensajes_Buro__c);
 		System.assert(refreshed.FSC_Mensajes_Buro__c.contains('code: A1'));
 		System.assert(refreshed.FSC_Mensajes_Buro__c.contains('description: Aprobado por score'));
+		assertSingleIntegrationLog(200, 'trx-approved');
+	}
+
+	@IsTest
+	static void shouldPersistTwoLogsWithoutPendingDml_WhenCallingApiInBulk() {
+		Account account = createDecisionAccount('Cédula');
+		createHistorial(account.Id, '1');
+		ResidentialLoanApplication firstRla = createDecisionRla(account.Id, 'En Motor Buró');
+		ResidentialLoanApplication secondRla = createDecisionRla(account.Id, 'En Motor Buró');
+		Test.setMock(HttpCalloutMock.class, new ApprovedMock());
+
+		Test.startTest();
+		FSC_LoanDecisionAPI.callAPI(new List<Id>{ firstRla.Id, secondRla.Id });
+		Test.stopTest();
+
+		Assert.areEqual(
+			2,
+			[SELECT COUNT() FROM INT_Request__c WHERE Integraci_n__c = 'FSC_LoanDecisionAPI'],
+			'Both requests should be logged after all callouts finish.'
+		);
+		Assert.areEqual(
+			2,
+			[
+				SELECT COUNT()
+				FROM INT_Response__c
+				WHERE INT_Request__r.Integraci_n__c = 'FSC_LoanDecisionAPI'
+			],
+			'Both responses should be linked and logged.'
+		);
 	}
 
 	@IsTest
@@ -541,10 +601,7 @@ private class FSC_LoanDecisionAPITest {
 		Test.setMock(HttpCalloutMock.class, new SecondaryConsumerMock());
 
 		Test.startTest();
-		if (callApiSkippedForMissingConfig(new List<Id>{ rla.Id })) {
-			Test.stopTest();
-			return;
-		}
+		FSC_LoanDecisionAPI.callAPI(new List<Id>{ rla.Id });
 		Test.stopTest();
 
 		Assert.areEqual(
@@ -563,18 +620,22 @@ private class FSC_LoanDecisionAPITest {
 		update rla;
 
 		createDecisionFacility(rla.Id);
-		FSC_Garantia__c guarantee = createDecisionGuarantee(rla.Id);
-		guarantee.FSC_Valor_Inmueble__c = 2500000;
-		guarantee.FSC_Precio_de_Venta__c = 2400000;
-		update guarantee;
+		FSC_Garantia__c guarantee = new FSC_Garantia__c(
+			Name = 'Garantia API Test ' + System.now().getTime(),
+			FSC_Residential_Loan_Application__c = rla.Id,
+			FSC_Tipo_de_Garantia__c = 'Hipotecaria',
+			FSC_Valor_Inmueble__c = 2500000,
+			FSC_Precio_de_Venta__c = 2400000,
+			FSC_Ano_Vehiculo__c = Date.today().year() - 1
+		);
+		insert guarantee;
+		// El plazo aprobado de un crédito vehicular se valida contra el año del vehículo, así que va después de la garantía.
+		update new ResidentialLoanApplication(Id = rla.Id, FSC_PlazoMesesAprobado__c = 60);
 
 		Test.setMock(HttpCalloutMock.class, new VehicularMock());
 
 		Test.startTest();
-		if (callApiSkippedForMissingConfig(new List<Id>{ rla.Id })) {
-			Test.stopTest();
-			return;
-		}
+		FSC_LoanDecisionAPI.callAPI(new List<Id>{ rla.Id });
 		Test.stopTest();
 
 		ResidentialLoanApplication refreshed = [
@@ -586,7 +647,7 @@ private class FSC_LoanDecisionAPITest {
 		System.assertEquals('Aprobado', refreshed.FSC_Resultado_Buro__c);
 		System.assertEquals(Decimal.valueOf('746'), refreshed.FSC_XCore_Buro__c);
 		System.assert(
-			refreshed.FSC_Subestado__c == 'Generación de pagarés y plantillas' || refreshed.FSC_Subestado__c == 'Gestionar firmas',
+			refreshed.FSC_Subestado__c == 'Generación de pagarés y plantillas' || refreshed.FSC_Subestado__c == 'Gestionar firmas' || refreshed.FSC_Subestado__c == 'Banca Seguro',
 			'Subestado inesperado: ' + refreshed.FSC_Subestado__c
 		);
 	}
@@ -605,10 +666,7 @@ private class FSC_LoanDecisionAPITest {
 		Test.setMock(HttpCalloutMock.class, new HipotecarioMock());
 
 		Test.startTest();
-		if (callApiSkippedForMissingConfig(new List<Id>{ rla.Id })) {
-			Test.stopTest();
-			return;
-		}
+		FSC_LoanDecisionAPI.callAPI(new List<Id>{ rla.Id });
 		Test.stopTest();
 
 		ResidentialLoanApplication refreshed = [
@@ -620,7 +678,7 @@ private class FSC_LoanDecisionAPITest {
 		System.assertEquals('Aprobado', refreshed.FSC_Resultado_Buro__c);
 		System.assertEquals(Decimal.valueOf('856'), refreshed.FSC_XCore_Buro__c);
 		System.assert(
-			refreshed.FSC_Subestado__c == 'Generación de pagarés y plantillas' || refreshed.FSC_Subestado__c == 'Gestionar firmas',
+			refreshed.FSC_Subestado__c == 'Generación de pagarés y plantillas' || refreshed.FSC_Subestado__c == 'Gestionar firmas' || refreshed.FSC_Subestado__c == 'Banca Seguro',
 			'Subestado inesperado: ' + refreshed.FSC_Subestado__c
 		);
 	}
@@ -632,18 +690,10 @@ private class FSC_LoanDecisionAPITest {
 		ResidentialLoanApplication rla = createDecisionRla(acc.Id, 'En Motor Buró');
 
 		Test.setMock(HttpCalloutMock.class, new ReferredFallbackXcoreMock());
-		configureTestConfig();
 
 		Test.startTest();
 		System.enqueueJob(new FSC_LoanDecisionAPIQueueable(new List<Id>{ rla.Id }));
-		try {
-			Test.stopTest();
-		} catch (CalloutException e) {
-			if (isMissingLoanDecisionConfig(e)) {
-				return;
-			}
-			throw e;
-		}
+		Test.stopTest();
 
 		ResidentialLoanApplication refreshed = [
 			SELECT FSC_Resultado_Buro__c, FSC_XCore_Buro__c, FSC_Mensajes_Buro__c, FSC_Subestado__c, Status
@@ -666,25 +716,20 @@ private class FSC_LoanDecisionAPITest {
 
 		Test.setMock(HttpCalloutMock.class, new RejectedMock());
 
-		Boolean threwExpectedException = false;
-
 		Test.startTest();
-		try {
-			if (callApiSkippedForMissingConfig(new List<Id>{ rla.Id })) {
-				Test.stopTest();
-				return;
-			}
-		} catch (DmlException e) {
-			threwExpectedException = true;
-			System.assert(
-				e.getMessage().contains('FSC - Notificaciones por Email RLA') ||
-				e.getMessage().contains('Recipient ID is required when using templates'),
-				'Se esperaba el error del flow/email. Error actual: ' + e.getMessage()
-			);
-		}
+		FSC_LoanDecisionAPI.callAPI(new List<Id>{ rla.Id });
 		Test.stopTest();
 
-		System.assert(threwExpectedException, 'Se esperaba una excepción producida por la automatización de email.');
+		ResidentialLoanApplication refreshed = [
+			SELECT FSC_Resultado_Buro__c, FSC_Subestado__c, FSC_MotivosDeRechazo__c, Status
+			FROM ResidentialLoanApplication
+			WHERE Id = :rla.Id
+		];
+		Assert.areEqual('Rechazado', refreshed.FSC_Resultado_Buro__c, 'The rejected decision should be stored.');
+		Assert.isTrue(refreshed.FSC_Subestado__c.startsWith('Rechazado por'), 'The rejected substatus should be assigned.');
+		Assert.areEqual('9', refreshed.FSC_MotivosDeRechazo__c, 'The bureau rejection reason should be assigned.');
+		Assert.areEqual('Cerrada Perdida', refreshed.Status, 'A rejected application should be closed as lost.');
+		assertSingleIntegrationLog(200, 'trx-rejected');
 	}
 
 	@IsTest
@@ -696,10 +741,7 @@ private class FSC_LoanDecisionAPITest {
 		Test.setMock(HttpCalloutMock.class, new ErrorResponseMock());
 
 		Test.startTest();
-		if (callApiSkippedForMissingConfig(new List<Id>{ rla.Id })) {
-			Test.stopTest();
-			return;
-		}
+		FSC_LoanDecisionAPI.callAPI(new List<Id>{ rla.Id });
 		Test.stopTest();
 
 		ResidentialLoanApplication refreshed = [
@@ -720,6 +762,7 @@ private class FSC_LoanDecisionAPITest {
 		System.assertEquals(null, refreshed.FSC_Resultado_Buro__c);
 		System.assertEquals(null, refreshed.FSC_XCore_Buro__c);
 		System.assertEquals('En Motor Buró', refreshed.FSC_Subestado__c);
+		assertSingleIntegrationLog(400, 'CC_ERROR_003');
 	}
 
 	@IsTest
@@ -731,10 +774,7 @@ private class FSC_LoanDecisionAPITest {
 		Test.setMock(HttpCalloutMock.class, new ExceptionMock());
 
 		Test.startTest();
-		if (callApiSkippedForMissingConfig(new List<Id>{ rla.Id })) {
-			Test.stopTest();
-			return;
-		}
+		FSC_LoanDecisionAPI.callAPI(new List<Id>{ rla.Id });
 		FSC_LoanDecisionAPI.callAPI(new List<Id>{ rla.Id });
 		FSC_LoanDecisionAPI.callAPI(null);
 		FSC_LoanDecisionAPI.callAPI(new List<Id>());
@@ -754,6 +794,114 @@ private class FSC_LoanDecisionAPITest {
 			refreshed.FSC_LogErrores__c.lastIndexOf('Excepcion al consultar Buro')
 		);
 		System.assertEquals('En Motor Buró', refreshed.FSC_Subestado__c);
+		Assert.areEqual(
+			2,
+			[SELECT COUNT() FROM INT_Request__c WHERE Integraci_n__c = 'FSC_LoanDecisionAPI'],
+			'Each timed-out callout attempt should retain its request log.'
+		);
+		Assert.areEqual(
+			0,
+			[
+				SELECT COUNT()
+				FROM INT_Response__c
+				WHERE INT_Request__r.Integraci_n__c = 'FSC_LoanDecisionAPI'
+			],
+			'A timeout has no HTTP response, so no status code should be fabricated.'
+		);
+	}
+
+	@IsTest
+	static void shouldReturnWithoutLogs_WhenIdsDoNotMatchApplications() {
+		Test.startTest();
+		FSC_LoanDecisionAPI.callAPI(new List<Id>{ UserInfo.getUserId() });
+		Test.stopTest();
+
+		Assert.areEqual(
+			0,
+			[SELECT COUNT() FROM INT_Request__c WHERE Integraci_n__c = 'FSC_LoanDecisionAPI'],
+			'No integration request should be logged when no loan application matches the supplied IDs.'
+		);
+	}
+
+	@IsTest
+	static void shouldStoreBusinessErrorWithoutCallout_WhenApplicationHasNoAccount() {
+		Boolean rejectedByRequiredAccountRule = false;
+		Test.startTest();
+		try {
+			createDecisionRla(null, 'En Motor Buró');
+		} catch (DmlException exceptionRecord) {
+			rejectedByRequiredAccountRule = true;
+		}
+		Test.stopTest();
+
+		Assert.isTrue(rejectedByRequiredAccountRule, 'La configuración actual debe impedir crear una solicitud sin Account.');
+	}
+
+	@IsTest
+	static void shouldPreservePlainTextBody_WhenHttpErrorIsNotJson() {
+		Account account = createDecisionAccount('Cédula');
+		createHistorial(account.Id, '1');
+		ResidentialLoanApplication rla = createDecisionRla(account.Id, 'En Motor Buró');
+		Test.setMock(HttpCalloutMock.class, new ConfigurableResponseMock(502, 'Bad Gateway', 'Gateway failure without JSON'));
+
+		Test.startTest();
+		FSC_LoanDecisionAPI.callAPI(new List<Id>{ rla.Id });
+		Test.stopTest();
+
+		String errorLog = [SELECT FSC_LogErrores__c FROM ResidentialLoanApplication WHERE Id = :rla.Id].FSC_LogErrores__c;
+		Assert.isTrue(errorLog.contains('Gateway failure without JSON'), 'The plain-text service error should be retained in the application log.');
+		assertSingleIntegrationLog(502, 'Gateway failure without JSON');
+	}
+
+	@IsTest
+	static void shouldIgnoreMalformedJsonWithoutFailing_WhenHttpStatusIsSuccessful() {
+		Account account = createDecisionAccount('Cédula');
+		createHistorial(account.Id, '1');
+		ResidentialLoanApplication rla = createDecisionRla(account.Id, 'En Motor Buró');
+		Test.setMock(HttpCalloutMock.class, new ConfigurableResponseMock(200, 'OK', '{invalid-json}'));
+
+		Test.startTest();
+		FSC_LoanDecisionAPI.callAPI(new List<Id>{ rla.Id });
+		Test.stopTest();
+
+		ResidentialLoanApplication refreshed = [
+			SELECT FSC_Resultado_Buro__c, FSC_XCore_Buro__c, FSC_Subestado__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :rla.Id
+		];
+		Assert.isNull(refreshed.FSC_Resultado_Buro__c, 'Malformed JSON must not fabricate a bureau decision.');
+		Assert.isNull(refreshed.FSC_XCore_Buro__c, 'Malformed JSON must not fabricate an XCore score.');
+		Assert.areEqual('En Motor Buró', refreshed.FSC_Subestado__c, 'The application substatus should remain unchanged.');
+		assertSingleIntegrationLog(200, '{invalid-json}');
+	}
+
+	@IsTest
+	static void shouldUseVehicularNodeAsFallback_WhenConsumptionNodeIsMissing() {
+		Account account = createDecisionAccount('Cédula');
+		createHistorial(account.Id, '1');
+		ResidentialLoanApplication rla = createDecisionRla(account.Id, 'En Motor Buró');
+		String responseBody =
+			'{' +
+			'"transactionId":"trx-fallback-node",' +
+			'"applicants":{"primaryConsumer":{"interconnectResponse":{' +
+			'"Filtro_BcoVimencaVhi":{"Generales":{"Dictamen":"Referido","Xcore":"601"}}' +
+			'}}}' +
+			'}';
+		Test.setMock(HttpCalloutMock.class, new ConfigurableResponseMock(200, 'OK', responseBody));
+
+		Test.startTest();
+		FSC_LoanDecisionAPI.callAPI(new List<Id>{ rla.Id });
+		Test.stopTest();
+
+		ResidentialLoanApplication refreshed = [
+			SELECT FSC_Resultado_Buro__c, FSC_XCore_Buro__c, FSC_Subestado__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :rla.Id
+		];
+		Assert.areEqual('Referido', refreshed.FSC_Resultado_Buro__c, 'The fallback decision should be stored.');
+		Assert.areEqual(Decimal.valueOf('601'), refreshed.FSC_XCore_Buro__c, 'The fallback XCore score should be stored.');
+		Assert.areEqual('Recepción de documentos – Análisis', refreshed.FSC_Subestado__c, 'The referred substatus should be assigned.');
+		assertSingleIntegrationLog(200, 'trx-fallback-node');
 	}
 
 	@IsTest
@@ -771,18 +919,61 @@ private class FSC_LoanDecisionAPITest {
 		Test.startTest();
 
 		Test.setMock(HttpCalloutMock.class, new TipoIdentificacionAssertMock('R'));
-		if (callApiSkippedForMissingConfig(new List<Id>{ rlaRnc.Id })) {
-			Test.stopTest();
-			return;
-		}
+		FSC_LoanDecisionAPI.callAPI(new List<Id>{ rlaRnc.Id });
 
 		Test.setMock(HttpCalloutMock.class, new TipoIdentificacionAssertMock('P'));
-		if (callApiSkippedForMissingConfig(new List<Id>{ rlaPasaporte.Id })) {
-			Test.stopTest();
-			return;
-		}
+		FSC_LoanDecisionAPI.callAPI(new List<Id>{ rlaPasaporte.Id });
 
 		Test.stopTest();
+	}
+
+	@IsTest
+	static void cubreDesgloseDeTarjetaYPrestamo() {
+		Account cuenta = createDecisionAccount('Cédula');
+		createHistorial(cuenta.Id, '1');
+		ResidentialLoanApplication rla = createDecisionRla(cuenta.Id, 'En Motor Buró', 'FSC_Solicitud_Credito_Consumo', null);
+		Map<String, Object> desglose = new Map<String, Object>{
+			'Producto' => new List<Object>{
+				new Map<String, Object>{
+					'Cod' => 'TCR',
+					'Cuenta' => new List<Object>{ new Map<String, Object>{
+						'VecesAtraso30' => 1, 'VecesAtraso60' => 2, 'VecesAtraso90' => 3,
+						'TotalAdeudado' => 1000, 'Cuota' => 100,
+						'Moneda' => new Map<String, Object>{ 'content' => 'DOP' },
+						'Estatus' => new Map<String, Object>{ 'content' => 1 }
+					} }
+				},
+				new Map<String, Object>{
+					'Cod' => 'PRE',
+					'Cuenta' => new List<Object>{ new Map<String, Object>{
+						'VecesAtraso30' => 4, 'VecesAtraso60' => 5, 'VecesAtraso90' => 6,
+						'TotalAdeudado' => 2000, 'Cuota' => 200,
+						'Moneda' => new Map<String, Object>{ 'content' => 'USD' },
+						'Estatus' => new Map<String, Object>{ 'content' => 1 }
+					} }
+				}
+			}
+		};
+		Map<String, Object> cuerpo = new Map<String, Object>{
+			'applicants' => new Map<String, Object>{
+				'primaryConsumer' => new Map<String, Object>{
+					'interconnectResponse' => new Map<String, Object>{
+						'Filtro_BcoVimencaPre' => new Map<String, Object>{
+							'Generales' => new Map<String, Object>{ 'Dictamen' => 'Referido', 'Xcore' => '601' }
+						},
+						'DesgloseCreditos' => desglose,
+						'DesgloseCreditosAbiertos' => desglose
+					}
+				}
+			}
+		};
+		Test.setMock(HttpCalloutMock.class,
+			new ConfigurableResponseMock(200, 'OK', JSON.serialize(cuerpo)));
+		Test.startTest();
+		FSC_LoanDecisionAPI.callAPI(new List<Id>{ rla.Id });
+		Test.stopTest();
+		System.assertEquals('Referido',
+			[SELECT FSC_Resultado_Buro__c FROM ResidentialLoanApplication WHERE Id = :rla.Id].FSC_Resultado_Buro__c);
 	}
 
 	private class TipoIdentificacionAssertMock implements HttpCalloutMock {

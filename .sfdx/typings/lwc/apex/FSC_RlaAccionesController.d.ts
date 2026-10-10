@@ -1,3 +1,9 @@
+declare module "@salesforce/apex/FSC_RlaAccionesController.getDatosDocumentoAnalisis" {
+  export default function getDatosDocumentoAnalisis(param: {residentialLoanApplicationId: any, tipoDocumento: any}): Promise<any>;
+}
+declare module "@salesforce/apex/FSC_RlaAccionesController.guardarYRegenerarDocumentoAnalisis" {
+  export default function guardarYRegenerarDocumentoAnalisis(param: {residentialLoanApplicationId: any, tipoDocumento: any, cambiosJson: any}): Promise<any>;
+}
 declare module "@salesforce/apex/FSC_RlaAccionesController.validarClasificacionMIPYMES" {
   export default function validarClasificacionMIPYMES(param: {residentialLoanApplicationId: any}): Promise<any>;
 }
@@ -6,6 +12,15 @@ declare module "@salesforce/apex/FSC_RlaAccionesController.getApprovalContext" {
 }
 declare module "@salesforce/apex/FSC_RlaAccionesController.getAssignableUsers" {
   export default function getAssignableUsers(): Promise<any>;
+}
+declare module "@salesforce/apex/FSC_RlaAccionesController.getDocumentacionContratosContext" {
+  export default function getDocumentacionContratosContext(param: {residentialLoanApplicationId: any}): Promise<any>;
+}
+declare module "@salesforce/apex/FSC_RlaAccionesController.enviarDocumentacionContratos" {
+  export default function enviarDocumentacionContratos(param: {residentialLoanApplicationId: any}): Promise<any>;
+}
+declare module "@salesforce/apex/FSC_RlaAccionesController.solicitarDocumentacionContratos" {
+  export default function solicitarDocumentacionContratos(param: {residentialLoanApplicationId: any, pedido: any}): Promise<any>;
 }
 declare module "@salesforce/apex/FSC_RlaAccionesController.getPagaresContext" {
   export default function getPagaresContext(param: {residentialLoanApplicationId: any}): Promise<any>;
@@ -22,6 +37,9 @@ declare module "@salesforce/apex/FSC_RlaAccionesController.guardarFormaDesembols
 declare module "@salesforce/apex/FSC_RlaAccionesController.guardarDatosPagare" {
   export default function guardarDatosPagare(param: {residentialLoanApplicationId: any, actoNumeroPagare: any, numeroFolioPagare: any}): Promise<any>;
 }
+declare module "@salesforce/apex/FSC_RlaAccionesController.guardarDatosPagareComplementario" {
+  export default function guardarDatosPagareComplementario(param: {residentialLoanApplicationId: any, numeroPrestamoPagare: any}): Promise<any>;
+}
 declare module "@salesforce/apex/FSC_RlaAccionesController.validateChecklistApprovalReadiness" {
   export default function validateChecklistApprovalReadiness(param: {residentialLoanApplicationId: any}): Promise<any>;
 }
@@ -30,6 +48,9 @@ declare module "@salesforce/apex/FSC_RlaAccionesController.validarDocumentacionA
 }
 declare module "@salesforce/apex/FSC_RlaAccionesController.aprobarProcesoActual" {
   export default function aprobarProcesoActual(param: {residentialLoanApplicationId: any, comentario: any}): Promise<any>;
+}
+declare module "@salesforce/apex/FSC_RlaAccionesController.aprobarProcesoActualConHistorial" {
+  export default function aprobarProcesoActualConHistorial(param: {residentialLoanApplicationId: any, comentario: any, historialPago: any}): Promise<any>;
 }
 declare module "@salesforce/apex/FSC_RlaAccionesController.rechazarProcesoActual" {
   export default function rechazarProcesoActual(param: {residentialLoanApplicationId: any, motivo: any, motivoDeRechazo: any}): Promise<any>;
@@ -42,6 +63,9 @@ declare module "@salesforce/apex/FSC_RlaAccionesController.reintentarListas" {
 }
 declare module "@salesforce/apex/FSC_RlaAccionesController.reintentarBuro" {
   export default function reintentarBuro(param: {residentialLoanApplicationId: any}): Promise<any>;
+}
+declare module "@salesforce/apex/FSC_RlaAccionesController.validarCreacionEnAbanks" {
+  export default function validarCreacionEnAbanks(param: {residentialLoanApplicationId: any}): Promise<any>;
 }
 declare module "@salesforce/apex/FSC_RlaAccionesController.reintentarCreacionPrestamo" {
   export default function reintentarCreacionPrestamo(param: {residentialLoanApplicationId: any}): Promise<any>;
@@ -84,6 +108,24 @@ declare module "@salesforce/apex/FSC_RlaAccionesController.marcarCreadoEnAbanks"
 }
 declare module "@salesforce/apex/FSC_RlaAccionesController.marcarDesembolsado" {
   export default function marcarDesembolsado(param: {residentialLoanApplicationId: any}): Promise<any>;
+}
+declare module "@salesforce/apex/FSC_RlaAccionesController.getCapturaOperacionesContext" {
+  export default function getCapturaOperacionesContext(param: {residentialLoanApplicationId: any}): Promise<any>;
+}
+declare module "@salesforce/apex/FSC_RlaAccionesController.guardarCapturaAbanks" {
+  export default function guardarCapturaAbanks(param: {residentialLoanApplicationId: any, numeroPrestamo: any, credito: any, garantias: any, seguros: any}): Promise<any>;
+}
+declare module "@salesforce/apex/FSC_RlaAccionesController.confirmarDesembolsoManual" {
+  export default function confirmarDesembolsoManual(param: {residentialLoanApplicationId: any, amortizacion: any, recibos: any}): Promise<any>;
+}
+declare module "@salesforce/apex/FSC_RlaAccionesController.getUsuariosCapturaOperaciones" {
+  export default function getUsuariosCapturaOperaciones(param: {residentialLoanApplicationId: any}): Promise<any>;
+}
+declare module "@salesforce/apex/FSC_RlaAccionesController.reasignarCapturaOperaciones" {
+  export default function reasignarCapturaOperaciones(param: {residentialLoanApplicationId: any, usuarioId: any, etapa: any}): Promise<any>;
+}
+declare module "@salesforce/apex/FSC_RlaAccionesController.descartarArchivosDesembolso" {
+  export default function descartarArchivosDesembolso(param: {documentosIds: any}): Promise<any>;
 }
 declare module "@salesforce/apex/FSC_RlaAccionesController.enviarAArchivoYCustodia" {
   export default function enviarAArchivoYCustodia(param: {residentialLoanApplicationId: any, motivo: any}): Promise<any>;

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Codigo_Moneda__c</fullName>
+    <description>Solo para Tipo: moneda del tipo de garantia en el core (1 RD, 2 US).</description>
+    <externalId>false</externalId>
+    <label>Codigo moneda</label>
+    <precision>9</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Activo__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Falso cuando el registro dejo de venir en el API. Nunca se borra para no perder historicos.</description>
+    <label>Activo</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

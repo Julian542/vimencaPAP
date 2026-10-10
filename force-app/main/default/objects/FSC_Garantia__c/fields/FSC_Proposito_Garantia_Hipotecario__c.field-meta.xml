@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Proposito_Garantia_Hipotecario__c</fullName>
+    <label>Proposito Garantia Hipotecario</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Compra Vivienda – Residencial o Turística (Moneda Nacional)</fullName>
+                <default>false</default>
+                <label>Compra Vivienda – Residencial o Turística (Moneda Nacional)</label>
+            </value>
+            <value>
+                <fullName>Traslado Préstamo Hipotecario (Moneda Nacional)</fullName>
+                <default>false</default>
+                <label>Traslado Préstamo Hipotecario (Moneda Nacional)</label>
+            </value>
+            <value>
+                <fullName>Compra Vivienda – Residencial o Turística (Moneda Extranjera)</fullName>
+                <default>false</default>
+                <label>Compra Vivienda – Residencial o Turística (Moneda Extranjera)</label>
+            </value>
+            <value>
+                <fullName>Traslado Préstamo Hipotecario (Moneda Extranjera)</fullName>
+                <default>false</default>
+                <label>Traslado Préstamo Hipotecario (Moneda Extranjera)</label>
+            </value>
+            <value>
+                <fullName>Segunda Hipoteca (Adicional al Hipotecario) - para Remodelación o ampliación de bienes inmuebles residenciales</fullName>
+                <default>false</default>
+                <label>Segunda Hipoteca (Adicional al Hipotecario) - para Remodelación o ampliación de bienes inmuebles residenciales</label>
+            </value>
+            <value>
+                <fullName>Reestructuración de deudas de préstamos hipotecarios (Moneda Nacional o Extranjera)</fullName>
+                <default>false</default>
+                <label>Reestructuración de deudas de préstamos hipotecarios (Moneda Nacional o Extranjera)</label>
+            </value>
+            <value>
+                <fullName>Remodelación, ampliación, reconstrucción o terminación de bienes inmuebles residenciales</fullName>
+                <default>false</default>
+                <label>Remodelación, ampliación, reconstrucción o terminación de bienes inmuebles residenciales</label>
+            </value>
+            <value>
+                <fullName>Construcción de viviendas</fullName>
+                <default>false</default>
+                <label>Construcción de viviendas</label>
+            </value>
+            <value>
+                <fullName>Consolidación Deudas (Prestamos y TC’s)</fullName>
+                <default>false</default>
+                <label>Consolidación Deudas (Prestamos y TC’s)</label>
+            </value>
+            <value>
+                <fullName>Compra de Solar para fines residenciales</fullName>
+                <default>false</default>
+                <label>Compra de Solar para fines residenciales</label>
+            </value>
+            <value>
+                <fullName>Segunda Hipoteca (Adicional al Hipotecario) - para otros consumos u otros fines a solicitud del cliente</fullName>
+                <default>false</default>
+                <label>Segunda Hipoteca (Adicional al Hipotecario) - para otros consumos u otros fines a solicitud del cliente</label>
+            </value>
+            <value>
+                <fullName>Traslado Deuda Hipotecaria + Cantidad adicional para otros gastos de Uso Personal</fullName>
+                <default>false</default>
+                <label>Traslado Deuda Hipotecaria + Cantidad adicional para otros gastos de Uso Personal</label>
+            </value>
+            <value>
+                <fullName>Adquisición vehículo nuevo.</fullName>
+                <default>false</default>
+                <label>Adquisición vehículo nuevo.</label>
+            </value>
+            <value>
+                <fullName>Adquisición vehículo usado</fullName>
+                <default>false</default>
+                <label>Adquisición vehículo usado</label>
+            </value>
+            <value>
+                <fullName>Traslado de deuda de vehículo.</fullName>
+                <default>false</default>
+                <label>Traslado de deuda de vehículo.</label>
+            </value>
+            <value>
+                <fullName>Consolidacion Deudas (Prestamos y TC&apos;s)</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Consolidacion Deudas (Prestamos y TC&apos;s)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,10 +1,29 @@
 global with sharing class FSC_GenerarPDF implements omnistudio.VlocityOpenInterface, Callable {
 	private static final String RT_CREDITO_PYME = 'FSC_Solicitud_Credito_PYME';
 	private static final String RT_CREDITO_CONSUMO = 'FSC_Solicitud_Credito_Consumo';
-	private static final String DOC_PREFIX_CREDITO = 'Crédito ';
+	private static final String RT_CREDITO_VEHICULO = 'FSC_Solicitud_Credito_Vehiculo';
+	private static final String RT_CREDITO_HIPOTECARIO = 'FSC_Solicitud_Credito_Hipotecario';
 	private static final String DOC_TIPO_PYME = 'PyMe';
 	private static final String DOC_TIPO_CONSUMO = 'Consumo';
-	private static final String LEGACY_DOC_PREFIX_CREDITO_PYME = '(Crédito PyMe - ';
+	private static final String DOC_TIPO_VEHICULO = 'Vehiculo';
+	private static final String DOC_TIPO_HIPOTECARIO = 'Hipotecario';
+	private static final Map<String, String> CREDIT_LABELS = new Map<String, String>{
+		RT_CREDITO_PYME => DOC_TIPO_PYME,
+		RT_CREDITO_CONSUMO => DOC_TIPO_CONSUMO,
+		RT_CREDITO_VEHICULO => DOC_TIPO_VEHICULO,
+		RT_CREDITO_HIPOTECARIO => DOC_TIPO_HIPOTECARIO
+	};
+	private static final String DOC_PREFIX_CREDITO = 'Crédito ';
+	private static final String TITLE_PREFIX_CREDITO_PYME_NORMALIZED = 'credito pyme - ';
+	private static final String TITLE_PREFIX_CREDITO_CONSUMO_NORMALIZED = 'credito consumo - ';
+	private static final String TITLE_PREFIX_CREDITO_VEHICULO_NORMALIZED = 'credito vehiculo - ';
+	private static final String TITLE_PREFIX_CREDITO_VEHICULAR_NORMALIZED = 'credito vehicular - ';
+	private static final String TITLE_PREFIX_CREDITO_HIPOTECARIO_NORMALIZED = 'credito hipotecario - ';
+	private static final String LEGACY_TITLE_SOLICITUD_CONSUMO_NORMALIZED = 'solicitud de credito consumo';
+	private static final String METHOD_GENERAR_PDF_PLANILLA_DESEMBOLSO = 'generarPDFPlanillaDesembolso';
+	private static final String METHOD_GENERAR_PDF_SOLICITUD_PYME = 'generarPDFSolicitudPYME';
+	private static final String METHOD_GENERAR_PDF_SOLICITUD_CONSUMO = 'generarPDFSolicitudConsumo';
+	private static final String METHOD_REGENERAR_PDF_SOLICITUD_CREDITO = 'regenerarPDFSolicitudCredito';
 
 	global Boolean invokeMethod(String methodName, Map<String, Object> inputMap, Map<String, Object> outputMap, Map<String, Object> options) {
 		try {
@@ -12,16 +31,16 @@ global with sharing class FSC_GenerarPDF implements omnistudio.VlocityOpenInterf
 				throw new AuraHandledException('methodName is required.');
 			}
 
-			if (methodName == 'generarPDFPlanillaDesembolso') {
+			if (methodName == METHOD_GENERAR_PDF_PLANILLA_DESEMBOLSO) {
 				generarPDFPlanillaDesembolso(inputMap, outputMap);
 				return true;
-			} else if (methodName == 'generarPDFSolicitudPYME') {
+			} else if (methodName == METHOD_GENERAR_PDF_SOLICITUD_PYME) {
 				generarPDFSolicitudPYME(inputMap, outputMap);
 				return true;
-			} else if (methodName == 'generarPDFSolicitudConsumo') {
+			} else if (methodName == METHOD_GENERAR_PDF_SOLICITUD_CONSUMO) {
 				generarPDFSolicitudConsumo(inputMap, outputMap);
 				return true;
-			} else if (methodName == 'regenerarPDFSolicitudCredito') {
+			} else if (methodName == METHOD_REGENERAR_PDF_SOLICITUD_CREDITO) {
 				regenerarPDFSolicitudCredito(inputMap, outputMap);
 				return true;
 			}
@@ -115,7 +134,6 @@ global with sharing class FSC_GenerarPDF implements omnistudio.VlocityOpenInterf
 
 		insert cdl;
 
-		// Guarda la planilla aunque el DataRaptor respete permisos del perfil.
 		FSC_PlanillaDesembolsoSaver.save(loanAppId, inputMap);
 
 		outputMap.put('success', true);
@@ -163,10 +181,27 @@ global with sharing class FSC_GenerarPDF implements omnistudio.VlocityOpenInterf
 	}
 
 	private static void generarPDFSolicitudPYME(Map<String, Object> inputMap, Map<String, Object> outputMap) {
-		Id rlaId = (Id) String.valueOf(inputMap.get('Id'));
-		String title = (String) String.valueOf(inputMap.get('Title'));
+		generarPDFSolicitudCredito(inputMap, outputMap);
+	}
 
-		PageReference pr = Page.FSC_PYMESolicitudPDF;
+	private static void generarPDFSolicitudConsumo(Map<String, Object> inputMap, Map<String, Object> outputMap) {
+		generarPDFSolicitudCredito(inputMap, outputMap);
+	}
+
+	private static void regenerarPDFSolicitudCredito(Map<String, Object> inputMap, Map<String, Object> outputMap) {
+		generarPDFSolicitudCredito(inputMap, outputMap);
+	}
+
+	private static void generarPDFSolicitudCredito(Map<String, Object> inputMap, Map<String, Object> outputMap) {
+		Id rlaId = inputMap == null ? null : (Id) inputMap.get('Id');
+		if (rlaId == null) {
+			throw new AuraHandledException('Se requiere el Id de la solicitud de credito.');
+		}
+		validateGenerationPermissions();
+		ResidentialLoanApplication rla = selectSolicitudCredito(rlaId);
+		String recordTypeDeveloperName = rla.RecordType != null ? rla.RecordType.DeveloperName : null;
+		String title = buildSolicitudCreditoTitle(rla, recordTypeDeveloperName);
+		PageReference pr = recordTypeDeveloperName == RT_CREDITO_PYME ? Page.FSC_PYMESolicitudPDF : Page.FSC_ConsumoSolicitudPDF;
 		pr.getParameters().put('id', String.valueOf(rlaId));
 
 		Blob pdfBody;
@@ -175,72 +210,42 @@ global with sharing class FSC_GenerarPDF implements omnistudio.VlocityOpenInterf
 		} else {
 			pdfBody = pr.getContentAsPDF();
 		}
-
-		ContentVersion cv = new ContentVersion();
-		cv.Title = title;
-		cv.PathOnClient = title + '.pdf';
-		cv.VersionData = pdfBody;
-		cv.FSC_EnviarDocumento__c = true;
-		insert cv;
-
-		ContentVersion cv2 = [
-			SELECT Id, ContentDocumentId
-			FROM ContentVersion
-			WHERE Id = :cv.Id
-			LIMIT 1
-		];
-
-		ContentDocumentLink cdl = new ContentDocumentLink();
-		cdl.LinkedEntityId = rlaId;
-		cdl.ContentDocumentId = cv2.ContentDocumentId;
-		cdl.ShareType = 'V';
-		cdl.Visibility = 'AllUsers';
-		insert cdl;
-
-		outputMap.put('success', true);
-		outputMap.put('ContentVersionId', cv2.Id);
-		outputMap.put('ContentDocumentId', cv2.ContentDocumentId);
-		outputMap.put('LinkedEntityId', rlaId);
+		if (pdfBody == null || pdfBody.size() == 0) {
+			throw new AuraHandledException('No se pudo generar el PDF de la solicitud.');
+		}
+		lockSolicitudCredito(rla, title);
+		Savepoint checkpoint = Database.setSavepoint();
+		try {
+			Integer deletedDocumentCount = deleteSolicitudCreditoDocument(rlaId);
+			guardarPDFSolicitudCredito(rlaId, title, pdfBody, outputMap);
+			outputMap.put('deletedDocumentCount', deletedDocumentCount);
+		} catch (Exception error) {
+			Database.rollback(checkpoint);
+			throw error;
+		}
 	}
 
-	private static void generarPDFSolicitudConsumo(Map<String, Object> inputMap, Map<String, Object> outputMap) {
-		Id rlaId = (Id) String.valueOf(inputMap.get('Id'));
-		String title = String.valueOf(inputMap.get('Title'));
-		if (String.isBlank(title)) {
-			title = 'Solicitud de credito consumo';
-		}
-
-		PageReference pr = Page.FSC_ConsumoSolicitudPDF;
-		pr.getParameters().put('id', String.valueOf(rlaId));
-
-		Blob pdfBody;
-		if (Test.isRunningTest()) {
-			pdfBody = Blob.valueOf('TEST_PDF_CONSUMO');
-		} else {
-			pdfBody = pr.getContentAsPDF();
-		}
-
+	private static void guardarPDFSolicitudCredito(Id rlaId, String title, Blob pdfBody, Map<String, Object> outputMap) {
 		ContentVersion cv = new ContentVersion();
 		cv.Title = title;
 		cv.PathOnClient = title + '.pdf';
 		cv.VersionData = pdfBody;
 		cv.FSC_EnviarDocumento__c = true;
-		insert cv;
-
+		cv.FSC_ClaveTecnicaPrecarga__c = FSC_ChecklistDocsPrecargaService.SOLICITUD_CREDITO;
+		Database.insert(cv, AccessLevel.SYSTEM_MODE);
 		ContentVersion cv2 = [
 			SELECT Id, ContentDocumentId
 			FROM ContentVersion
 			WHERE Id = :cv.Id
+			WITH USER_MODE
 			LIMIT 1
 		];
-
 		ContentDocumentLink cdl = new ContentDocumentLink();
 		cdl.LinkedEntityId = rlaId;
 		cdl.ContentDocumentId = cv2.ContentDocumentId;
 		cdl.ShareType = 'V';
 		cdl.Visibility = 'AllUsers';
-		insert cdl;
-
+		Database.insert(cdl, AccessLevel.USER_MODE);
 		outputMap.put('success', true);
 		outputMap.put('ContentVersionId', cv2.Id);
 		outputMap.put('ContentDocumentId', cv2.ContentDocumentId);
@@ -248,52 +253,64 @@ global with sharing class FSC_GenerarPDF implements omnistudio.VlocityOpenInterf
 		outputMap.put('title', title);
 	}
 
-	private static void regenerarPDFSolicitudCredito(Map<String, Object> inputMap, Map<String, Object> outputMap) {
-		if (inputMap == null) {
-			inputMap = new Map<String, Object>();
-		}
-
-		Id rlaId = (Id) String.valueOf(inputMap.get('Id'));
-		if (rlaId == null) {
-			throw new AuraHandledException('Missing residencialLoanApplicationId (or recordId).');
-		}
-
-		ResidentialLoanApplication rla = [
-			SELECT Id, RecordType.DeveloperName, Account.FirstName, Account.LastName, Account.ACC_NumIdentificacion__c
+	private static ResidentialLoanApplication selectSolicitudCredito(Id rlaId) {
+		return [
+			SELECT
+				Id,
+				AccountId,
+				RecordTypeId,
+				RecordType.DeveloperName,
+				Account.Name,
+				Account.FirstName,
+				Account.LastName,
+				Account.ACC_NumIdentificacion__c
 			FROM ResidentialLoanApplication
 			WHERE Id = :rlaId
+			WITH USER_MODE
 			LIMIT 1
 		];
+	}
 
-		String recordTypeDeveloperName = rla.RecordType != null ? rla.RecordType.DeveloperName : null;
-		String title = buildSolicitudCreditoTitle(rla, recordTypeDeveloperName);
-		Integer deletedDocumentCount = deleteSolicitudCreditoDocument(rlaId, title, recordTypeDeveloperName);
-
-		Map<String, Object> generationInput = new Map<String, Object>(inputMap);
-		generationInput.put('Id', rlaId);
-		generationInput.put('Title', title);
-
-		if (recordTypeDeveloperName == RT_CREDITO_PYME) {
-			generarPDFSolicitudPYME(generationInput, outputMap);
-		} else if (recordTypeDeveloperName == RT_CREDITO_CONSUMO) {
-			generarPDFSolicitudConsumo(generationInput, outputMap);
-		} else {
-			throw new AuraHandledException('RecordType no soportado para regenerar la solicitud de credito: ' + recordTypeDeveloperName);
+	private static void lockSolicitudCredito(ResidentialLoanApplication rla, String title) {
+		ResidentialLoanApplication lockedRla = [
+			SELECT Id, AccountId, RecordTypeId
+			FROM ResidentialLoanApplication
+			WHERE Id = :rla.Id
+			WITH USER_MODE
+			FOR UPDATE
+		];
+		// La cuenta puede estar siendo actualizada por las integraciones.
+		Account currentAccount = [SELECT Id FROM Account WHERE Id = :rla.AccountId WITH USER_MODE];
+		ResidentialLoanApplication currentRla = selectSolicitudCredito(rla.Id);
+		if (
+			lockedRla.AccountId != currentAccount.Id ||
+			lockedRla.RecordTypeId != rla.RecordTypeId ||
+			!title.equals(buildSolicitudCreditoTitle(currentRla, currentRla.RecordType.DeveloperName))
+		) {
+			throw new AuraHandledException('La cuenta cambio durante la generacion. Regenera la solicitud.');
 		}
+	}
 
-		outputMap.put('deletedDocumentCount', deletedDocumentCount);
-		outputMap.put('title', title);
+	private static void validateGenerationPermissions() {
+		if (
+			!Schema.sObjectType.ContentVersion.isCreateable() ||
+			!Schema.sObjectType.ContentVersion.fields.Title.isCreateable() ||
+			!Schema.sObjectType.ContentVersion.fields.PathOnClient.isCreateable() ||
+			!Schema.sObjectType.ContentVersion.fields.VersionData.isCreateable() ||
+			!Schema.sObjectType.ContentDocumentLink.isCreateable()
+		) {
+			throw new AuraHandledException('No tienes permisos para generar la solicitud de credito.');
+		}
 	}
 
 	private static String buildSolicitudCreditoTitle(ResidentialLoanApplication rla, String recordTypeDeveloperName) {
 		if (rla == null) {
 			throw new AuraHandledException('No se encontro la solicitud de credito.');
 		}
-
-		if (recordTypeDeveloperName != RT_CREDITO_PYME && recordTypeDeveloperName != RT_CREDITO_CONSUMO) {
+		String tipoCredito = CREDIT_LABELS.get(recordTypeDeveloperName);
+		if (tipoCredito == null) {
 			throw new AuraHandledException('La solicitud de credito no pertenece a un RecordType soportado.');
 		}
-
 		List<String> accountNameParts = new List<String>();
 		if (rla.Account != null) {
 			if (!String.isBlank(rla.Account.FirstName)) {
@@ -303,54 +320,114 @@ global with sharing class FSC_GenerarPDF implements omnistudio.VlocityOpenInterf
 				accountNameParts.add(rla.Account.LastName);
 			}
 		}
-
 		String accountFullName = String.join(accountNameParts, ' ');
-		if (String.isBlank(accountFullName)) {
-			throw new AuraHandledException('La solicitud de credito no tiene FirstName y LastName en la cuenta asociada.');
+		if (String.isBlank(accountFullName) && rla.Account != null) {
+			accountFullName = rla.Account.Name;
 		}
-
 		String documentNumber = rla.Account != null ? rla.Account.ACC_NumIdentificacion__c : null;
-		if (String.isBlank(documentNumber)) {
-			throw new AuraHandledException('La cuenta asociada no tiene ACC_NumIdentificacion__c para regenerar el PDF.');
+		if (String.isBlank(accountFullName) || String.isBlank(documentNumber)) {
+			throw new AuraHandledException('La Account del RLA debe tener nombre y numero de identificacion.');
 		}
-
-		String tipoCredito = recordTypeDeveloperName == RT_CREDITO_PYME ? DOC_TIPO_PYME : DOC_TIPO_CONSUMO;
 		return DOC_PREFIX_CREDITO + tipoCredito + ' - ' + accountFullName + ' - ' + documentNumber;
 	}
 
-	private static Integer deleteSolicitudCreditoDocument(Id rlaId, String title, String recordTypeDeveloperName) {
+	private static Integer deleteSolicitudCreditoDocument(Id rlaId) {
 		Set<Id> contentDocumentIds = new Set<Id>();
-		for (ContentDocumentLink link : [
-			SELECT ContentDocumentId
-			FROM ContentDocumentLink
-			WHERE LinkedEntityId = :rlaId AND ContentDocument.Title = :title
-		]) {
+		List<ContentDocumentLink> files = selectSolicitudFiles(new Set<Id>{ rlaId }).get(rlaId);
+		for (ContentDocumentLink link : files) {
 			contentDocumentIds.add(link.ContentDocumentId);
 		}
-
-		if (contentDocumentIds.isEmpty() && recordTypeDeveloperName == RT_CREDITO_PYME) {
-			for (ContentDocumentLink link : [
-				SELECT ContentDocumentId, ContentDocument.Title
-				FROM ContentDocumentLink
-				WHERE LinkedEntityId = :rlaId
-			]) {
-				String documentTitle = link.ContentDocument != null ? link.ContentDocument.Title : null;
-				if (!String.isBlank(documentTitle) && documentTitle.contains('(' + DOC_PREFIX_CREDITO + DOC_TIPO_PYME + ' - ')) {
-					contentDocumentIds.add(link.ContentDocumentId);
-				}
-			}
-		}
-
 		if (contentDocumentIds.isEmpty()) {
 			return 0;
 		}
-
-		delete [
-			SELECT Id
-			FROM ContentDocument
-			WHERE Id IN :contentDocumentIds
+		List<ContentDocumentLink> sharedLinks = [
+			SELECT LinkedEntityId
+			FROM ContentDocumentLink
+			WHERE ContentDocumentId IN :contentDocumentIds
+			WITH USER_MODE
 		];
-
+		for (ContentDocumentLink link : sharedLinks) {
+			if (link.LinkedEntityId.getSObjectType() == ResidentialLoanApplication.SObjectType && link.LinkedEntityId != rlaId) {
+				throw new AuraHandledException('Una planilla esta vinculada a otra solicitud. Corrige sus vinculos antes de regenerar.');
+			}
+		}
+		List<ContentDocument> documentsToDelete = [SELECT Id FROM ContentDocument WHERE Id IN :contentDocumentIds WITH USER_MODE];
+		Database.delete(documentsToDelete, true, AccessLevel.USER_MODE);
 		return contentDocumentIds.size();
+	}
+
+	@TestVisible
+	private static Boolean isSolicitudCreditoFile(String title, String technicalKey) {
+		if (technicalKey == FSC_ChecklistDocsPrecargaService.SOLICITUD_CREDITO) {
+			return true;
+		}
+		if (String.isBlank(title)) {
+			return false;
+		}
+		String normalized = title.trim().toLowerCase().replace('é', 'e');
+		if (normalized.startsWith('(')) {
+			normalized = normalized.substring(1);
+		}
+		return normalized.startsWith(TITLE_PREFIX_CREDITO_PYME_NORMALIZED) ||
+			normalized.startsWith(TITLE_PREFIX_CREDITO_CONSUMO_NORMALIZED) ||
+			normalized.startsWith(TITLE_PREFIX_CREDITO_VEHICULO_NORMALIZED) ||
+			normalized.startsWith(TITLE_PREFIX_CREDITO_VEHICULAR_NORMALIZED) ||
+			normalized.startsWith(TITLE_PREFIX_CREDITO_HIPOTECARIO_NORMALIZED) ||
+			normalized == LEGACY_TITLE_SOLICITUD_CONSUMO_NORMALIZED;
+	}
+
+	private static Map<Id, List<ContentDocumentLink>> selectSolicitudFiles(Set<Id> rlaIds) {
+		Map<Id, List<ContentDocumentLink>> files = new Map<Id, List<ContentDocumentLink>>();
+		for (Id rlaId : rlaIds) {
+			files.put(rlaId, new List<ContentDocumentLink>());
+		}
+		List<ContentDocumentLink> links = [
+			SELECT Id, LinkedEntityId, ContentDocumentId, ContentDocument.Title
+			FROM ContentDocumentLink
+			WHERE LinkedEntityId IN :rlaIds
+			WITH USER_MODE
+		];
+		Set<Id> documentIds = new Set<Id>();
+		for (ContentDocumentLink link : links) {
+			documentIds.add(link.ContentDocumentId);
+		}
+		Map<Id, String> keysByDocument = new Map<Id, String>();
+		if (!documentIds.isEmpty()) {
+			if (!Schema.sObjectType.ContentVersion.isAccessible()) {
+				throw new AuraHandledException('No tienes permisos para consultar los archivos de la solicitud.');
+			}
+			List<ContentVersion> latestVersions = [
+				SELECT ContentDocumentId, FSC_ClaveTecnicaPrecarga__c
+				FROM ContentVersion
+				WHERE ContentDocumentId IN :documentIds AND IsLatest = TRUE
+				WITH SYSTEM_MODE
+			];
+			for (ContentVersion version : latestVersions) {
+				keysByDocument.put(version.ContentDocumentId, version.FSC_ClaveTecnicaPrecarga__c);
+			}
+		}
+		for (ContentDocumentLink link : links) {
+			if (isSolicitudCreditoFile(link.ContentDocument.Title, keysByDocument.get(link.ContentDocumentId))) {
+				files.get(link.LinkedEntityId).add(link);
+			}
+		}
+		return files;
+	}
+
+	public static void validarSolicitudParaFirma(Id rlaId) {
+		if (rlaId == null) {
+			throw new AuraHandledException('Se requiere el Id de la solicitud de credito.');
+		}
+		List<ContentDocumentLink> files = selectSolicitudFiles(new Set<Id>{ rlaId }).get(rlaId);
+		if (files.isEmpty()) {
+			return;
+		}
+		ResidentialLoanApplication rla = selectSolicitudCredito(rlaId);
+		String expectedTitle = buildSolicitudCreditoTitle(rla, rla.RecordType.DeveloperName);
+		if (files.size() != 1 || !expectedTitle.equals(files[0].ContentDocument.Title)) {
+			throw new AuraHandledException(
+				'Regenera la solicitud de credito: debe existir una sola planilla con la identificacion actual de la Account.'
+			);
+		}
 	}
 }

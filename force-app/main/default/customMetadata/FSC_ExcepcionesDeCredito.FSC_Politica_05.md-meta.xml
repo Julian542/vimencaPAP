@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Politica 05</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_Detalle__c</field>
+        <value xsi:type="xsd:string">Reporte de Buró de crédito Internacional solicitantes dominicanos y/o extranjeros residentes en países en los cuales se demuestre que no se emite dicha documentación.</value>
+    </values>
+    <values>
+        <field>FSC_Tipo__c</field>
+        <value xsi:type="xsd:string">Excepciones a las Políticas de Créditos</value>
+    </values>
+</CustomMetadata>

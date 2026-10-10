@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_VPNegociosBancaEmpresarial_ResidentialLoanApplication</fullName>
+    <filterScope>Queue</filterScope>
+    <label>VP de Negocios Banca Empresarial</label>
+    <queue>FSC_VPNegociosBancaEmpresarial</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

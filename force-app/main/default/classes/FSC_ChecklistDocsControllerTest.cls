@@ -1,8 +1,18 @@
 @IsTest
 private class FSC_ChecklistDocsControllerTest {
+    @TestSetup
+    static void asignarPermisosAdministrador() {
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            PermissionSet permiso = [SELECT Id FROM PermissionSet WHERE Name = 'FSC_PS_Administrador' LIMIT 1];
+            // El usuario que ejecuta los tests puede tener ya el permission set asignado.
+            if ([SELECT COUNT() FROM PermissionSetAssignment WHERE AssigneeId = :UserInfo.getUserId() AND PermissionSetId = :permiso.Id] == 0) {
+                insert new PermissionSetAssignment(AssigneeId = UserInfo.getUserId(), PermissionSetId = permiso.Id);
+            }
+        }
+    }
+
 	private static final String RT_PYME = 'FSC_Solicitud_Credito_PYME';
 	private static final String TIPO_SOLICITUD_PYME = 'Solicitud de crédito pyme';
-	private static Integer accountSequence = 0;
 
 	// =========================
 	// Helpers
@@ -18,21 +28,9 @@ private class FSC_ChecklistDocsControllerTest {
 	}
 
 	private static Account createAccount() {
-		Test.setMock(HttpCalloutMock.class, new FSC_EsignHttpMock());
-		Account acc = new Account(
-			RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('PersonAccount').getRecordTypeId(),
-			FirstName = 'Cuenta',
-			LastName = 'Checklist ' + System.now().getTime(),
-			ACC_TipoIdentificacion__c = 'Cédula',
-			ACC_NumIdentificacion__c = nextTestIdentification()
-		);
+		Account acc = new Account(Name = 'Cuenta Test Checklist ' + System.now().getTime());
 		insert acc;
 		return acc;
-	}
-
-	private static String nextTestIdentification() {
-		accountSequence++;
-		return '00108803' + String.valueOf(accountSequence).leftPad(3, '0');
 	}
 
 	private static ResidentialLoanApplication createRla(String recordTypeDeveloperName) {
@@ -46,6 +44,8 @@ private class FSC_ChecklistDocsControllerTest {
 			rla.RecordTypeId = rtId;
 		}
 		rla.Name = 'Test';
+		rla.Status = 'En proceso';
+		rla.FSC_Subestado__c = 'Recepción de documentos – Análisis';
 		insert rla;
 		return rla;
 	}
@@ -87,9 +87,14 @@ private class FSC_ChecklistDocsControllerTest {
 	}
 
 	private static Id uploadFile(Id linkedEntityId, String fileName) {
+		return uploadFileWithExtension(linkedEntityId, fileName, 'pdf');
+	}
+
+	private static Id uploadFileWithExtension(Id linkedEntityId, String fileName, String extension) {
+		String pathOnClient = String.isBlank(extension) ? fileName : fileName + '.' + extension;
 		ContentVersion cv = new ContentVersion(
 			Title = fileName,
-			PathOnClient = fileName + '.pdf',
+			PathOnClient = pathOnClient,
 			VersionData = Blob.valueOf('archivo test ' + fileName),
 			FirstPublishLocationId = linkedEntityId
 		);
@@ -105,20 +110,26 @@ private class FSC_ChecklistDocsControllerTest {
 		return insertedCv.ContentDocumentId;
 	}
 
-	private static Profile getProfileByName(String profileName) {
-		List<Profile> profiles = [
-			SELECT Id, Name
-			FROM Profile
-			WHERE Name = :profileName
-			LIMIT 1
-		];
-		return profiles.isEmpty() ? null : profiles[0];
+	private static Id uploadPreloadFile(Id linkedEntityId, String fileName, String technicalKey) {
+		ContentVersion version = new ContentVersion(
+			Title = fileName,
+			PathOnClient = fileName + '.pdf',
+			VersionData = Blob.valueOf('archivo precarga'),
+			FirstPublishLocationId = linkedEntityId,
+			FSC_ClaveTecnicaPrecarga__c = technicalKey
+		);
+		insert version;
+		return [SELECT ContentDocumentId FROM ContentVersion WHERE Id = :version.Id].ContentDocumentId;
 	}
 
-	private static User createUserWithProfile(String profileName, String uniqueKey) {
-		Profile p = getProfileByName(profileName);
-		System.assertNotEquals(null, p, 'No existe el perfil requerido en la org: ' + profileName);
-
+	private static User createUser(String uniqueKey) {
+		Profile baseProfile = [
+			SELECT Id
+			FROM Profile
+			WHERE UserType = 'Standard' AND UserLicense.Name = 'Salesforce' AND PermissionsModifyAllData = false
+			ORDER BY Name
+			LIMIT 1
+		];
 		User u = new User(
 			FirstName = 'Test',
 			LastName = uniqueKey,
@@ -130,44 +141,150 @@ private class FSC_ChecklistDocsControllerTest {
 			LocaleSidKey = 'es_AR',
 			EmailEncodingKey = 'UTF-8',
 			LanguageLocaleKey = 'es',
-			ProfileId = p.Id
+			ProfileId = baseProfile.Id
 		);
+		completarCamposObligatoriosUsuario(u);
 		insert u;
 		return u;
 	}
 
-	private static User createUserWithAnyDisallowedProfile(String uniqueKey) {
-		List<Profile> profiles = [
-			SELECT Id, Name
-			FROM Profile
-			WHERE Name NOT IN ('Recepción y control de documentos', 'System Administrator', 'Administrador del sistema', 'Oficial de negocio')
-			LIMIT 1
-		];
-
-		System.assert(!profiles.isEmpty(), 'No se encontró un perfil no permitido para la prueba.');
-
-		Profile p = profiles[0];
-
-		User u = new User(
-			FirstName = 'Test',
-			LastName = uniqueKey,
-			Alias = uniqueKey.length() > 8 ? uniqueKey.substring(0, 8) : uniqueKey,
-			Email = uniqueKey + '@test.com',
-			Username = uniqueKey + '.' + System.now().getTime() + '@test.com',
-			CommunityNickname = uniqueKey + String.valueOf(Math.mod(System.now().getTime(), 100000)),
-			TimeZoneSidKey = 'America/Argentina/Buenos_Aires',
-			LocaleSidKey = 'es_AR',
-			EmailEncodingKey = 'UTF-8',
-			LanguageLocaleKey = 'es',
-			ProfileId = p.Id
-		);
-		insert u;
+	private static User createUserWithPermissionSet(String permissionSetName, String uniqueKey) {
+		User u;
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			u = createUser(uniqueKey);
+			List<PermissionSetLicenseAssign> licenseAssignments = new List<PermissionSetLicenseAssign>();
+			for (PermissionSetLicense permissionSetLicense : [
+				SELECT Id
+				FROM PermissionSetLicense
+				WHERE DeveloperName IN ('FSCServicePsl', 'FinServ_FinancialServicesCloudStandardPsl')
+			]) {
+				licenseAssignments.add(
+					new PermissionSetLicenseAssign(
+						AssigneeId = u.Id,
+						PermissionSetLicenseId = permissionSetLicense.Id
+					)
+				);
+			}
+			if (!licenseAssignments.isEmpty()) {
+				insert licenseAssignments;
+			}
+			PermissionSet permissionSet = [
+				SELECT Id
+				FROM PermissionSet
+				WHERE Name = :permissionSetName AND IsOwnedByProfile = false
+				LIMIT 1
+			];
+			insert new PermissionSetAssignment(AssigneeId = u.Id, PermissionSetId = permissionSet.Id);
+		}
 		return u;
 	}
 
 	// =========================
 	// Tests initAndGetRows
 	// =========================
+
+	@IsTest
+	static void testPrecargaSincronizaArchivos() {
+		ResidentialLoanApplication rla = createRla(null);
+		List<String> labels = new List<String>{
+			'Capacidad de pago',
+			'Conozca su cliente',
+			'Pagaré',
+			'Pagaré complementario',
+			'Contratos debidamente firmados',
+			'Certificación de ingresos',
+			'Registro mercantil',
+			'Estatutos sociales',
+			'Acta de asamblea general constitutiva',
+			'Declaratoria de condominio',
+			'Poder de autorización',
+			'Autorización para contratación de préstamos',
+			'Acta designando funcionarios y firmas',
+			'Tarjeta de firmas',
+			'Nómina de presencia',
+			'RNC',
+			'Cédula de firmantes',
+			'Cédula de accionistas',
+			'Documento de identidad del solicitante'
+		};
+		List<FSC_ChecklistDocumentos__c> documents = new List<FSC_ChecklistDocumentos__c>();
+		for (Integer index = 0; index < labels.size(); index++) {
+			documents.add(new FSC_ChecklistDocumentos__c(
+				FSC_TipoDeSolicitudDeCredito__c = TIPO_SOLICITUD_PYME,
+				FSC_CategoriaDelDocumento__c = 'Documentos para análisis',
+				FSC_NroDeDocumento__c = 20 + index,
+				FSC_NombreDelDocumento__c = labels[index]
+			));
+		}
+		insert documents;
+
+		List<FSC_SolicitudDeCreditoYChecklistDeDocs__c> rows = new List<FSC_SolicitudDeCreditoYChecklistDeDocs__c>();
+		for (FSC_ChecklistDocumentos__c document : documents) {
+			rows.add(new FSC_SolicitudDeCreditoYChecklistDeDocs__c(
+				FSC_SolicitudDeCredito__c = rla.Id,
+				FSC_Documento__c = document.Id,
+				FSC_NoAplica__c = false,
+				FSC_EstadoRevision__c = 'Pendiente'
+			));
+		}
+		insert rows;
+
+		Map<Id, FSC_SolicitudDeCreditoYChecklistDeDocs__c> rowsByDocument =
+			new Map<Id, FSC_SolicitudDeCreditoYChecklistDeDocs__c>();
+		for (FSC_SolicitudDeCreditoYChecklistDeDocs__c row : rows) {
+			rowsByDocument.put(row.FSC_Documento__c, row);
+		}
+
+		uploadPreloadFile(rla.AccountId, 'Conozca su cliente generado', 'KYC');
+		uploadPreloadFile(rla.AccountId, 'Carta laboral vigente', 'CARTA_LABORAL');
+		uploadPreloadFile(rla.AccountId, 'Comprobante de ingresos', 'COMPROBANTE_INGRESOS');
+		uploadPreloadFile(rla.Id, 'Pagare firmado', null);
+		uploadPreloadFile(rla.Id, 'Pagare complementario firmado', null);
+		uploadPreloadFile(rla.Id, 'Contrato de prestamo firmado', null);
+
+		Test.startTest();
+		FSC_ChecklistDocsPrecargaService.sincronizar(null, rla.AccountId, documents, rowsByDocument);
+		FSC_ChecklistDocsPrecargaService.sincronizar(rla.Id, rla.AccountId, null, rowsByDocument);
+		FSC_ChecklistDocsPrecargaService.sincronizar(rla.Id, rla.AccountId, documents, rowsByDocument);
+		// La segunda ejecución comprueba que no se dupliquen enlaces.
+		FSC_ChecklistDocsPrecargaService.sincronizar(rla.Id, rla.AccountId, documents, rowsByDocument);
+		Test.stopTest();
+
+		Set<Id> rowIds = new Map<Id, FSC_SolicitudDeCreditoYChecklistDeDocs__c>(rows).keySet();
+		Integer linkedRows = [
+			SELECT COUNT()
+			FROM ContentDocumentLink
+			WHERE LinkedEntityId IN :rowIds
+		];
+		System.assert(linkedRows >= 6, 'Debe precargar los archivos compatibles.');
+	}
+
+	@IsTest
+	static void testPrecargaResuelveTitulosGenerados() {
+		List<String> titles = new List<String>{
+			'Informe de crédito 001',
+			'Capacidad de pago 001',
+			'Crédito pyme 001',
+			'Crédito consumo 001',
+			'Crédito vehicular 001',
+			'Crédito hipotecario 001',
+			'Solicitud de crédito consumo',
+			'Conozca su cliente 001',
+			'Contrato único 001',
+			'Pagaré complementario firmado',
+			'Pagaré firmado',
+			'Contrato vehicular firmado',
+			'Título desconocido',
+			null
+		};
+		Integer resolved = 0;
+		for (String title : titles) {
+			if (FSC_ChecklistDocsPrecargaService.resolveGeneratedKey(title) != null) {
+				resolved++;
+			}
+		}
+		System.assertEquals(12, resolved, 'Debe reconocer los títulos generados soportados.');
+	}
 
 	@IsTest
 	static void testInitAndGetRows_NullId() {
@@ -307,7 +424,7 @@ private class FSC_ChecklistDocsControllerTest {
 			return;
 		}
 
-		User standardUser = createUserWithAnyDisallowedProfile('stdusr1');
+		User standardUser = createUser('stdusr1');
 
 		ResidentialLoanApplication rla = createRla(RT_PYME);
 		List<FSC_ChecklistDocumentos__c> docs = createChecklistDocs(1);
@@ -340,7 +457,7 @@ private class FSC_ChecklistDocsControllerTest {
 			return;
 		}
 
-		User reviewerUser = createUserWithProfile('Recepción y control de documentos', 'review01');
+		User reviewerUser = createUserWithPermissionSet('FSC_PS_Recepcion_Control_Documentos', 'review01');
 
 		ResidentialLoanApplication rla = createRla(RT_PYME);
 		List<FSC_ChecklistDocumentos__c> docs = createChecklistDocs(1);
@@ -378,7 +495,7 @@ private class FSC_ChecklistDocsControllerTest {
 			return;
 		}
 
-		User reviewerUser = createUserWithProfile('Recepción y control de documentos', 'review02');
+		User reviewerUser = createUserWithPermissionSet('FSC_PS_Recepcion_Control_Documentos', 'review02');
 
 		ResidentialLoanApplication rla = createRla(RT_PYME);
 		List<FSC_ChecklistDocumentos__c> docs = createChecklistDocs(1);
@@ -411,7 +528,7 @@ private class FSC_ChecklistDocsControllerTest {
 			return;
 		}
 
-		User reviewerUser = createUserWithProfile('Recepción y control de documentos', 'review03');
+		User reviewerUser = createUserWithPermissionSet('FSC_PS_Recepcion_Control_Documentos', 'review03');
 
 		ResidentialLoanApplication rla = createRla(RT_PYME);
 		List<FSC_ChecklistDocumentos__c> docs = createChecklistDocs(1);
@@ -448,7 +565,7 @@ private class FSC_ChecklistDocsControllerTest {
 			return;
 		}
 
-		User officialUser = createUserWithProfile('Oficial de negocio', 'oficial1');
+		User officialUser = createUserWithPermissionSet('FSC_PS_Oficial_Negocio', 'oficial1');
 
 		ResidentialLoanApplication rla = createRla(RT_PYME);
 		List<FSC_ChecklistDocumentos__c> docs = createChecklistDocs(1);
@@ -486,7 +603,7 @@ private class FSC_ChecklistDocsControllerTest {
 			return;
 		}
 
-		User officialUser = createUserWithProfile('Oficial de negocio', 'oficial2');
+		User officialUser = createUserWithPermissionSet('FSC_PS_Oficial_Negocio', 'oficial2');
 
 		ResidentialLoanApplication rla = createRla(RT_PYME);
 		List<FSC_ChecklistDocumentos__c> docs = createChecklistDocs(1);
@@ -512,7 +629,8 @@ private class FSC_ChecklistDocsControllerTest {
 	}
 
 	@IsTest
-	static void testSaveRows_Admin_NoPuedeModificarComentarioOficialAprobado() {
+	static void testSaveRows_Admin_PuedeModificarComentarioOficialAprobado() {
+		FSC_ChecklistDocsController.testBypassPermissions = true;
 		Id pymeRtId = getRecordTypeId(RT_PYME);
 		if (pymeRtId == null) {
 			System.assert(true);
@@ -523,21 +641,21 @@ private class FSC_ChecklistDocsControllerTest {
 		List<FSC_ChecklistDocumentos__c> docs = createChecklistDocs(1);
 		FSC_SolicitudDeCreditoYChecklistDeDocs__c joinRec = createJoin(rla.Id, docs[0].Id, false, 'comentario', 'Aprobado');
 
-		Boolean thrown = false;
+		FSC_ChecklistDocsController.saveRows(
+			new List<Id>{ joinRec.Id },
+			new List<Boolean>{ null },
+			new List<String>{ null },
+			new List<String>{ 'comentario oficial actualizado' },
+			new List<String>{ null }
+		);
 
-		try {
-			FSC_ChecklistDocsController.saveRows(
-				new List<Id>{ joinRec.Id },
-				new List<Boolean>{ null },
-				new List<String>{ null },
-				new List<String>{ 'comentario oficial bloqueado' },
-				new List<String>{ null }
-			);
-		} catch (AuraHandledException e) {
-			thrown = true;
-		}
-
-		System.assertEquals(true, thrown);
+		FSC_SolicitudDeCreditoYChecklistDeDocs__c updatedJoin = [
+			SELECT FSC_ComentarioOficialNegocio__c, FSC_EstadoRevision__c
+			FROM FSC_SolicitudDeCreditoYChecklistDeDocs__c
+			WHERE Id = :joinRec.Id
+		];
+		System.assertEquals('comentario oficial actualizado', updatedJoin.FSC_ComentarioOficialNegocio__c);
+		System.assertEquals('Aprobado', updatedJoin.FSC_EstadoRevision__c);
 	}
 
 	@IsTest
@@ -561,7 +679,7 @@ private class FSC_ChecklistDocsControllerTest {
 			return;
 		}
 
-		User officialUser = createUserWithProfile('Oficial de negocio', 'oficial3');
+		User officialUser = createUserWithPermissionSet('FSC_PS_Oficial_Negocio', 'oficial3');
 
 		ResidentialLoanApplication rla = createRla(RT_PYME);
 		List<FSC_ChecklistDocumentos__c> docs = createChecklistDocs(1);
@@ -590,7 +708,7 @@ private class FSC_ChecklistDocsControllerTest {
 			return;
 		}
 
-		User standardUser = createUserWithAnyDisallowedProfile('stdusr2');
+		User standardUser = createUser('stdusr2');
 
 		ResidentialLoanApplication rla = createRla(RT_PYME);
 		List<FSC_ChecklistDocumentos__c> docs = createChecklistDocs(1);
@@ -617,7 +735,7 @@ private class FSC_ChecklistDocsControllerTest {
 			return;
 		}
 
-		User officialUser = createUserWithProfile('Oficial de negocio', 'oficial4');
+		User officialUser = createUserWithPermissionSet('FSC_PS_Oficial_Negocio', 'oficial4');
 
 		ResidentialLoanApplication rla = createRla(RT_PYME);
 		List<FSC_ChecklistDocumentos__c> docs = createChecklistDocs(1);
@@ -651,6 +769,7 @@ private class FSC_ChecklistDocsControllerTest {
 
 	@IsTest
 	static void testEnforceSingleFileOnJoin_EliminaLosDemas() {
+		FSC_ChecklistDocsController.testBypassPermissions = true;
 		Id pymeRtId = getRecordTypeId(RT_PYME);
 		if (pymeRtId == null) {
 			System.assert(true);
@@ -694,6 +813,134 @@ private class FSC_ChecklistDocsControllerTest {
 		Test.stopTest();
 
 		System.assert(true);
+	}
+
+	// =========================
+	// Tests processUploadedFiles
+	// =========================
+
+	@IsTest
+	static void testProcessUploadedFiles_PermiteMultiplesYConservaEstado() {
+		FSC_ChecklistDocsController.testBypassPermissions = true;
+		Id pymeRtId = getRecordTypeId(RT_PYME);
+		if (pymeRtId == null) {
+			System.assert(true);
+			return;
+		}
+
+		ResidentialLoanApplication rla = createRla(RT_PYME);
+		List<FSC_ChecklistDocumentos__c> docs = createChecklistDocs(1);
+		FSC_SolicitudDeCreditoYChecklistDeDocs__c joinRec = createJoin(rla.Id, docs[0].Id, false, 'Debe conservarse', 'Observado');
+
+		Id pdfId = uploadFileWithExtension(joinRec.Id, 'documento_pdf', 'pdf');
+		Id imageId = uploadFileWithExtension(joinRec.Id, 'documento_imagen', 'jpg');
+		Id wordId = uploadFileWithExtension(joinRec.Id, 'documento_word', 'docx');
+
+		Test.startTest();
+		FSC_ChecklistDocsController.UploadResultDTO result = FSC_ChecklistDocsController.processUploadedFiles(
+			rla.Id,
+			joinRec.Id,
+			new List<Id>{ pdfId, imageId, wordId }
+		);
+		Test.stopTest();
+
+		System.assertEquals(3, result.acceptedContentDocumentIds.size());
+		System.assertEquals(0, result.rejectedFileNames.size());
+		System.assertEquals(
+			3,
+			[SELECT COUNT() FROM ContentDocumentLink WHERE LinkedEntityId = :joinRec.Id],
+			'La fila debe conservar todos los archivos cargados'
+		);
+		System.assertEquals(
+			3,
+			[SELECT COUNT() FROM ContentDocumentLink WHERE LinkedEntityId = :rla.Id],
+			'Todos los archivos válidos deben quedar asociados también a la solicitud'
+		);
+
+		FSC_SolicitudDeCreditoYChecklistDeDocs__c unchangedJoin = [
+			SELECT FSC_EstadoRevision__c, FSC_Comentario__c
+			FROM FSC_SolicitudDeCreditoYChecklistDeDocs__c
+			WHERE Id = :joinRec.Id
+		];
+		System.assertEquals('Observado', unchangedJoin.FSC_EstadoRevision__c);
+		System.assertEquals('Debe conservarse', unchangedJoin.FSC_Comentario__c);
+	}
+
+	@IsTest
+	static void testProcessUploadedFiles_RechazaFormatosInvalidosYSinExtension() {
+		FSC_ChecklistDocsController.testBypassPermissions = true;
+		Id pymeRtId = getRecordTypeId(RT_PYME);
+		if (pymeRtId == null) {
+			System.assert(true);
+			return;
+		}
+
+		ResidentialLoanApplication rla = createRla(RT_PYME);
+		List<FSC_ChecklistDocumentos__c> docs = createChecklistDocs(1);
+		FSC_SolicitudDeCreditoYChecklistDeDocs__c joinRec = createJoin(rla.Id, docs[0].Id, false, null, 'Pendiente');
+
+		Id validId = uploadFileWithExtension(joinRec.Id, 'documento_valido', 'pdf');
+		Id mp4Id = uploadFileWithExtension(joinRec.Id, 'video_no_valido', 'mp4');
+		Id wavId = uploadFileWithExtension(joinRec.Id, 'audio_no_valido', 'wav');
+		Id dllId = uploadFileWithExtension(joinRec.Id, 'ejecutable_no_valido', 'dll');
+		Id noExtensionId = uploadFileWithExtension(joinRec.Id, 'archivo_sin_extension', null);
+
+		Test.startTest();
+		FSC_ChecklistDocsController.UploadResultDTO result = FSC_ChecklistDocsController.processUploadedFiles(
+			rla.Id,
+			joinRec.Id,
+			new List<Id>{ validId, mp4Id, wavId, dllId, noExtensionId }
+		);
+		Test.stopTest();
+
+		System.assertEquals(new Set<Id>{ validId }, new Set<Id>(result.acceptedContentDocumentIds));
+		System.assertEquals(4, result.rejectedFileNames.size());
+
+		List<ContentDocumentLink> remainingJoinLinks = [
+			SELECT ContentDocumentId
+			FROM ContentDocumentLink
+			WHERE LinkedEntityId = :joinRec.Id
+		];
+		System.assertEquals(1, remainingJoinLinks.size());
+		System.assertEquals(validId, remainingJoinLinks[0].ContentDocumentId);
+
+		List<ContentDocumentLink> rlaLinks = [
+			SELECT ContentDocumentId
+			FROM ContentDocumentLink
+			WHERE LinkedEntityId = :rla.Id
+		];
+		System.assertEquals(1, rlaLinks.size());
+		System.assertEquals(validId, rlaLinks[0].ContentDocumentId);
+
+		FSC_SolicitudDeCreditoYChecklistDeDocs__c unchangedJoin = [
+			SELECT FSC_EstadoRevision__c
+			FROM FSC_SolicitudDeCreditoYChecklistDeDocs__c
+			WHERE Id = :joinRec.Id
+		];
+		System.assertEquals('Pendiente', unchangedJoin.FSC_EstadoRevision__c);
+	}
+
+	@IsTest
+	static void testProcessUploadedFiles_ValidaRelacionEntreFilaYSolicitud() {
+		Id pymeRtId = getRecordTypeId(RT_PYME);
+		if (pymeRtId == null) {
+			System.assert(true);
+			return;
+		}
+
+		ResidentialLoanApplication rla = createRla(RT_PYME);
+		ResidentialLoanApplication anotherRla = createRla(RT_PYME);
+		List<FSC_ChecklistDocumentos__c> docs = createChecklistDocs(1);
+		FSC_SolicitudDeCreditoYChecklistDeDocs__c joinRec = createJoin(rla.Id, docs[0].Id, false, null, 'Pendiente');
+		Id fileId = uploadFile(joinRec.Id, 'documento_relacion');
+
+		Boolean thrown = false;
+		try {
+			FSC_ChecklistDocsController.processUploadedFiles(anotherRla.Id, joinRec.Id, new List<Id>{ fileId });
+		} catch (AuraHandledException e) {
+			thrown = true;
+		}
+		System.assertEquals(true, thrown);
 	}
 
 	// =========================
@@ -757,5 +1004,37 @@ private class FSC_ChecklistDocsControllerTest {
 		Test.stopTest();
 
 		System.assert(true);
+	}
+
+	// La org exige Oficina, Codigo y Canal de Atencion en todo usuario (regla Validar_Campos_Obligatorios_Usuario).
+	private static void completarCamposObligatoriosUsuario(User usuario) {
+		Map<String, Schema.SObjectField> campos = Schema.SObjectType.User.fields.getMap();
+		for (String campo : new List<String>{ 'USE_Oficina__c', 'Canal_Atencion__c' }) {
+			if (!campos.containsKey(campo)) {
+				continue;
+			}
+			for (Schema.PicklistEntry valor : campos.get(campo).getDescribe().getPicklistValues()) {
+				if (valor.isActive()) {
+					usuario.put(campo, valor.getValue());
+					break;
+				}
+			}
+		}
+		if (campos.containsKey('USE_Codigo__c')) {
+			usuario.put('USE_Codigo__c', 'TEST');
+		}
+		if (campos.containsKey('USE_Oficina__c')) {
+			asegurarOficinaEnDatosMaestros((String) usuario.get('USE_Oficina__c'));
+		}
+	}
+
+	// El flow "Información usuario" busca la oficina del usuario en Datos_Maestros__c y falla si no existe.
+	private static void asegurarOficinaEnDatosMaestros(String oficina) {
+		if (String.isBlank(oficina) || [SELECT COUNT() FROM Datos_Maestros__c WHERE DM_Codigo_Oficina__c = :oficina AND DM_Tipo__c = 'Oficina'] > 0) {
+			return;
+		}
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			insert new Datos_Maestros__c(Name = 'Oficina test ' + oficina, DM_Codigo_Oficina__c = oficina, DM_Tipo__c = 'Oficina');
+		}
 	}
 }

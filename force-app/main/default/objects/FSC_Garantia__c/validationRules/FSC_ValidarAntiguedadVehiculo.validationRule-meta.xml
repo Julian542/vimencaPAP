@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ValidarAntiguedadVehiculo</fullName>
+    <active>true</active>
+    <description>Impide guardar vehículos con antigüedad fuera de las franjas configuradas en solicitudes de crédito de vehículo.</description>
+    <errorConditionFormula>AND(
+    FSC_Residential_Loan_Application__r.RecordType.DeveloperName = &quot;FSC_Solicitud_Credito_Vehiculo&quot;,
+    OR(
+        ISBLANK(FSC_Ano_Vehiculo__c),
+        YEAR(TODAY()) - FSC_Ano_Vehiculo__c &lt; $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioDesde__c,
+        YEAR(TODAY()) - FSC_Ano_Vehiculo__c &gt; $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioHasta__c
+    )
+)</errorConditionFormula>
+    <errorDisplayField>FSC_Ano_Vehiculo__c</errorDisplayField>
+    <errorMessage>Indique un año del vehículo dentro del rango permitido. No se admiten años futuros ni vehículos más antiguos que el límite configurado en Plazos de crédito.</errorMessage>
+</ValidationRule>

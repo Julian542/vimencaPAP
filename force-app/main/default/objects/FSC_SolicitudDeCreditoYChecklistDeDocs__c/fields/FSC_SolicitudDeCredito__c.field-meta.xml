@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_SolicitudDeCredito__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Solicitud de crédito</label>
+    <referenceTo>ResidentialLoanApplication</referenceTo>
+    <relationshipLabel>Solicitud de crédito y checklist de docs</relationshipLabel>
+    <relationshipName>Solicitud_de_credito_y_checklist_de_docs</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

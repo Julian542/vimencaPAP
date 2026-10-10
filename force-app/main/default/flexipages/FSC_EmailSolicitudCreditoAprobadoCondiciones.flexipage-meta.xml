@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>allowChanges</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>alternativeText</name>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>left</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>imgPath</name>
+                    <value>{[devName:VimencaLogo]}</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>marginBottom</name>
+                    <value>0</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>marginLeft</name>
+                    <value>0</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>marginRight</name>
+                    <value>0</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>marginTop</name>
+                    <value>0</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>objectFit</name>
+                    <value>fill</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>width</name>
+                    <value>25</value>
+                </componentInstanceProperties>
+                <componentName>contentbuilder:image</componentName>
+                <identifier>contentbuilder_image3</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>allowChanges</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>htmlValue</name>
+                    <value>&lt;br&gt;
+&lt;div style=&quot;font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #000000; line-height: 1.5;&quot;&gt;
+  &lt;p style=&quot;margin: 0 0 14px 0;&quot;&gt;
+    Hola {{{ResidentialLoanApplication.FSC_Nombre_Cliente__c}}},
+  &lt;/p&gt;
+  &lt;p style=&quot;margin: 0 0 14px 0;&quot;&gt;
+    Como parte de nuestro compromiso de acompañarte para alcanzar tus metas, al evaluar tu capacidad crediticia, en esta oportunidad tu solicitud de préstamo {{{ResidentialLoanApplication.Name}}} fue aprobada por un monto de {{{ResidentialLoanApplication.FSC_MontoAprobado__c}}}, a un plazo de {{{ResidentialLoanApplication.FSC_PlazoMesesAprobado__c}}} meses, con una cuota mensual de {{{ResidentialLoanApplication.FSC_MontoTotalCuotaMensual__c}}}, a una tasa de {{{ResidentialLoanApplication.FSC_TasaInteresAprobada__c}}} destinado para {{{ResidentialLoanApplication.FSC_Destino_del_Prestamo__c}}}.
+  &lt;/p&gt;
+  &lt;p style=&quot;margin: 0 0 14px 0;&quot;&gt;
+    Confírmanos tu aprobación a esta propuesta respondiendo a
+    &lt;a href=&quot;mailto:{{{ResidentialLoanApplication.FSC_CreatedBy_Email__c}}}&quot; style=&quot;color: blue; text-decoration: underline;&quot;&gt;{{{ResidentialLoanApplication.FSC_CreatedBy_Email__c}}}&lt;/a&gt;.
+    También puedes comunicarte con nosotros al 809.533.1400.
+    Nuestro equipo está disponible para asistirte de lunes a domingo de 7AM a 12AM, y en días feriados de 7AM a 8PM.
+    Esperamos escucharte muy pronto.
+  &lt;/p&gt;
+  &lt;p style=&quot;margin: 0 0 14px 0;&quot;&gt;
+    Para nosotros, es un privilegio servirte.
+  &lt;/p&gt;
+  &lt;p style=&quot;margin: 0;&quot;&gt;
+    Equipo Banca Personal
+    &lt;br/&gt;
+    &lt;b&gt;Banco Vimenca
+    &lt;/b&gt;
+  &lt;/p&gt;
+  &lt;div style=&quot;margin-top: 16px;&quot;&gt;
+    &lt;p style=&quot;margin: 0;&quot;&gt;Cuéntanos tu experiencia con nosotros en
+      &lt;a href=&quot;mailto:miexperiencia@bv.com.do&quot; style=&quot;color: blue; text-decoration: underline;&quot;&gt;miexperiencia@bv.com.do&lt;/a&gt;.
+      ¡Queremos escucharte!
+    &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</value>
+                </componentInstanceProperties>
+                <componentName>contentbuilder:html</componentName>
+                <identifier>contentbuilder_html5</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-68f331ef-15da-43e5-862b-001d8ee59bdb</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columnBody</name>
+                    <value>Facet-68f331ef-15da-43e5-862b-001d8ee59bdb</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>columnCount</name>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>columnIndex</name>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>columnSpacer</name>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>padding</name>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>verticalAlign</name>
+                    <value>top</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>width</name>
+                    <value>100%</value>
+                </componentInstanceProperties>
+                <componentName>contentbuilder:column</componentName>
+                <identifier>contentbuilder_column5</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-ead1ab56-48de-429a-afee-73109ad526ba</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>backgroundColor</name>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>backgroundImageUrl</name>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>Facet-ead1ab56-48de-429a-afee-73109ad526ba</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>verticalAlignment</name>
+                    <value>top</value>
+                </componentInstanceProperties>
+                <componentName>contentbuilder:row</componentName>
+                <identifier>contentbuilder_row5</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>main</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <masterLabel>FSC_EmailSolicitudCreditoAprobadoCondiciones</masterLabel>
+    <template>
+        <name>contentpage:defaultEmailTemplatePageTemplate</name>
+        <properties>
+            <name>backgroundColor</name>
+            <value>#E9EAEC</value>
+        </properties>
+        <properties>
+            <name>backgroundImageUrl</name>
+        </properties>
+        <properties>
+            <name>bodyColor</name>
+            <value>#FFFFFF</value>
+        </properties>
+        <properties>
+            <name>paddingBottom</name>
+            <value>10</value>
+        </properties>
+        <properties>
+            <name>paddingLeft</name>
+            <value>10</value>
+        </properties>
+        <properties>
+            <name>paddingRight</name>
+            <value>10</value>
+        </properties>
+        <properties>
+            <name>paddingTop</name>
+            <value>10</value>
+        </properties>
+        <properties>
+            <name>preheader</name>
+        </properties>
+    </template>
+    <type>EmailTemplatePage</type>
+</FlexiPage>

@@ -31,27 +31,16 @@ private class FSC_NuevoDocumentoEnvelope_Test {
 		}
 	}
 
-	private static Integer accountSequence = 0;
-
 	@TestSetup
 	static void setupData() {
-		Test.setMock(HttpCalloutMock.class, new FSC_EsignHttpMock());
-		Account acc = new Account(
-			RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('PersonAccount').getRecordTypeId(),
-			FirstName = 'Cuenta',
-			LastName = 'Test',
-			ACC_TipoIdentificacion__c = 'Cédula',
-			ACC_NumIdentificacion__c = nextTestIdentification(),
-			ACC_Correo_Electronico_Cliente__c = 'cliente@test.com'
-		);
+		Account acc = new Account(Name = 'Cuenta Test', ACC_Correo_Electronico_Cliente__c = 'cliente@test.com');
 		insert acc;
-		insert new ContactPointEmail(ParentId = acc.Id, EmailAddress = 'cliente@test.com', IsPrimary = true);
 
 		Date actaDate = Date.today();
 		DateTime approvedDt = DateTime.newInstance(actaDate.year(), actaDate.month(), actaDate.day(), 14, 30, 0);
 		ResidentialLoanApplication rla = new ResidentialLoanApplication();
 		rla.AccountId = acc.Id;
-		rla.FSC_SolicitudAprobadaPorComite__c = true;
+		rla.FSC_SolicitudAprobadaPorComite__c = false;
 		rla.FSC_FechaYHoraAprobacionComite__c = approvedDt;
 		rla.Name = 'Test RLA ' + String.valueOf(approvedDt);
 		rla.FSC_Monto__c = 1000;
@@ -64,11 +53,6 @@ private class FSC_NuevoDocumentoEnvelope_Test {
 		rla.FSC_DecisionComite__c = 'Aprobada con condición';
 
 		insert rla;
-	}
-
-	private static String nextTestIdentification() {
-		accountSequence++;
-		return '00108803' + String.valueOf(accountSequence).leftPad(3, '0');
 	}
 
 	private static ResidentialLoanApplication getRla() {

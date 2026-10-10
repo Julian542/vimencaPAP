@@ -1,0 +1,433 @@
+<apex:page controller="FSC_ControladorDocumentosAnalisisCredito"
+	renderAs="pdf"
+	applyBodyTag="false"
+	applyHtmlTag="false"
+	showHeader="false"
+	sidebar="false"
+	standardStylesheets="false">
+	<html>
+		<head>
+			<style type="text/css">
+				@page {
+					size: letter portrait;
+					margin: 0.2in 0.25in;
+				}
+				body {
+					font-family: Arial, Helvetica, sans-serif;
+					font-size: 7pt;
+					color: #000000;
+				}
+				.logo {
+					width: 155px;
+					margin-bottom: 2px;
+				}
+				table {
+					width: 100%;
+					border-collapse: collapse;
+					table-layout: fixed;
+				}
+				td {
+					border: 0.65px solid #000000;
+					padding: 2px 3px;
+					vertical-align: middle;
+				}
+				.sin-borde {
+					border: 0;
+					padding: 0;
+				}
+				.seccion {
+					background: #95b3d7;
+					font-weight: bold;
+					text-align: center;
+					font-size: 8pt;
+				}
+				.subseccion,
+				.etiqueta,
+				.total,
+				.resultado {
+					background: #dce6f1;
+					font-weight: bold;
+				}
+				.subseccion,
+				.centro {
+					text-align: center;
+				}
+				.valor {
+					color: #ff0000;
+				}
+				.formula {
+					color: #000000;
+				}
+				.derecha {
+					text-align: right;
+				}
+				.comentarios {
+					height: 32px;
+					vertical-align: top;
+					white-space: pre-wrap;
+				}
+			</style>
+		</head>
+		<body>
+			<table>
+				<tr>
+					<td class="sin-borde">
+						<apex:image url="{!URLFOR($Resource.VimencaLogo)}"
+							styleClass="logo" />
+					</td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td class="etiqueta">NOMBRE CLIENTE</td>
+					<td
+						colspan="2"
+						class="valor">
+						{!datos.solicitante}
+					</td>
+					<td class="etiqueta">EJECUTIVO</td>
+					<td
+						colspan="2"
+						class="valor">
+						{!datos.oficialNegocios}
+					</td>
+				</tr>
+				<tr>
+					<td
+						colspan="6"
+						class="seccion">
+						DATOS DE LA SOLICITUD
+					</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Tipo préstamo</td>
+					<td class="valor">{!datos.tipoPrestamo}</td>
+					<td></td>
+					<td class="etiqueta">Tasa Cambio</td>
+					<td colspan="2" class="valor derecha">{!datos.tasaCambio}</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Monto</td>
+					<td class="valor derecha">{!datos.montoSolicitado}</td>
+					<td class="etiqueta">Tiempo Tasa Fija</td>
+					<td class="valor">{!datos.tiempoTasaFija}</td>
+					<td class="etiqueta">Valor Garantía</td>
+					<td class="valor derecha">{!datos.garantiaValorTasacion}</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Plazo</td>
+					<td class="valor">{!datos.plazoMeses}</td>
+					<td></td>
+					<td class="etiqueta">Relación Préstamo vs Garantía</td>
+					<td
+						colspan="2"
+						class="formula derecha">
+						{!datos.prestamoSobreTasacion}
+					</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Tasa interés</td>
+					<td class="valor">{!datos.tasaInteres}</td>
+					<td colspan="4"></td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Cuota mensual</td>
+					<td class="valor derecha">{!datos.cuotaEstimada}</td>
+					<td></td>
+					<td class="etiqueta">SCORE PREDICTIVO</td>
+					<td
+						colspan="2"
+						class="valor">
+						{!datos.scorePredictivo}
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3"></td>
+					<td class="etiqueta">SCORE INTERNO</td>
+					<td colspan="2" class="valor">{!datos.scoreInterno}</td>
+				</tr>
+				<tr>
+					<td colspan="3"></td>
+					<td class="etiqueta">PERFIL DE RIESGO</td>
+					<td
+						colspan="2"
+						class="valor">
+						{!datos.perfilRiesgo}
+					</td>
+				</tr>
+				<tr>
+					<td
+						colspan="3"
+						class="etiqueta">
+						No. de Veces
+					</td>
+					<td class="subseccion">30</td>
+					<td class="subseccion">60</td>
+					<td class="subseccion">90</td>
+				</tr>
+				<tr>
+					<td colspan="3">Mora de Tarjetas de Crédito</td>
+					<td class="valor centro">{!datos.moraTc30}</td>
+					<td class="valor centro">{!datos.moraTc60}</td>
+					<td class="valor centro">{!datos.moraTc90}</td>
+				</tr>
+				<tr>
+					<td colspan="3">Mora de Préstamos Consumo</td>
+					<td class="valor centro">{!datos.moraPrestamo30}</td>
+					<td class="valor centro">{!datos.moraPrestamo60}</td>
+					<td class="valor centro">{!datos.moraPrestamo90}</td>
+				</tr>
+
+				<tr>
+					<td
+						colspan="6"
+						class="seccion">
+						CAPACIDAD DE PAGO Y DEUDA
+					</td>
+				</tr>
+				<tr>
+					<td
+						colspan="3"
+						class="subseccion">
+						INGRESOS MENSUALES
+					</td>
+					<td class="subseccion">RD$</td>
+					<td class="subseccion">USD</td>
+					<td class="subseccion">TOTAL RD$</td>
+				</tr>
+				<tr>
+					<td colspan="3">Carta de trabajo o Volantes de pago</td>
+					<td class="valor derecha">{!datos.montosPesos['ingresoCartaTrabajo']}</td>
+					<td class="valor derecha">{!datos.montosDolares['ingresoCartaTrabajo']}</td>
+					<td class="formula derecha">{!datos.totalesPesos['ingresoCartaTrabajo']}</td>
+				</tr>
+				<tr>
+					<td colspan="3">Prom. depósitos Cuentas bancarias últ. 3 meses (si es independiente)</td>
+					<td class="valor derecha">{!datos.montosPesos['ingresoDepositos']}</td>
+					<td class="valor derecha">{!datos.montosDolares['ingresoDepositos']}</td>
+					<td class="formula derecha">{!datos.totalesPesos['ingresoDepositos']}</td>
+				</tr>
+				<tr>
+					<td colspan="3">Contratos de alquiler</td>
+					<td class="valor derecha">{!datos.montosPesos['ingresoAlquiler']}</td>
+					<td class="valor derecha">{!datos.montosDolares['ingresoAlquiler']}</td>
+					<td class="formula derecha">{!datos.totalesPesos['ingresoAlquiler']}</td>
+				</tr>
+				<tr>
+					<td colspan="3">Intereses sobre inversiones</td>
+					<td class="valor derecha">{!datos.montosPesos['ingresoInversiones']}</td>
+					<td class="valor derecha">{!datos.montosDolares['ingresoInversiones']}</td>
+					<td class="formula derecha">{!datos.totalesPesos['ingresoInversiones']}</td>
+				</tr>
+				<tr>
+					<td colspan="3">Otros ingresos mensuales evidenciados (admitidos)</td>
+					<td class="valor derecha">{!datos.montosPesos['ingresoOtros']}</td>
+					<td class="valor derecha">{!datos.montosDolares['ingresoOtros']}</td>
+					<td class="formula derecha">{!datos.totalesPesos['ingresoOtros']}</td>
+				</tr>
+				<tr>
+					<td colspan="3">Estados financieros (excepción autorizada)</td>
+					<td class="valor derecha">{!datos.montosPesos['ingresoEstadosFinancieros']}</td>
+					<td class="valor derecha">{!datos.montosDolares['ingresoEstadosFinancieros']}</td>
+					<td class="formula derecha">{!datos.totalesPesos['ingresoEstadosFinancieros']}</td>
+				</tr>
+				<tr>
+					<td
+						colspan="3"
+						class="total">
+						TOTAL DE INGRESOS BRUTOS
+					</td>
+					<td class="total derecha">{!datos.montosPesos['totalIngresos']}</td>
+					<td class="total derecha">{!datos.montosDolares['totalIngresos']}</td>
+					<td class="total derecha">{!datos.totalesPesos['totalIngresos']}</td>
+				</tr>
+
+				<tr>
+					<td
+						colspan="6"
+						class="seccion">
+						FACILIDADES VIGENTES
+					</td>
+				</tr>
+				<tr>
+					<td
+						colspan="3"
+						class="subseccion">
+						MONTOS ADEUDADOS
+					</td>
+					<td class="subseccion">RD$</td>
+					<td class="subseccion">USD</td>
+					<td class="subseccion">TOTAL RD$</td>
+				</tr>
+				<tr>
+					<td colspan="3">Monto adeudado en TC's</td>
+					<td class="valor derecha">{!datos.montosPesos['deudaTarjetas']}</td>
+					<td class="valor derecha">{!datos.montosDolares['deudaTarjetas']}</td>
+					<td class="formula derecha">{!datos.totalesPesos['deudaTarjetas']}</td>
+				</tr>
+				<tr>
+					<td colspan="3">Monto adeudado en Préstamos de Consumo</td>
+					<td class="valor derecha">{!datos.montosPesos['deudaPrestamos']}</td>
+					<td class="valor derecha">{!datos.montosDolares['deudaPrestamos']}</td>
+					<td class="formula derecha">{!datos.totalesPesos['deudaPrestamos']}</td>
+				</tr>
+				<tr>
+					<td
+						colspan="3"
+						class="total">
+						TOTALES ADEUDADOS
+					</td>
+					<td class="total derecha">{!datos.montosPesos['totalAdeudado']}</td>
+					<td class="total derecha">{!datos.montosDolares['totalAdeudado']}</td>
+					<td class="total derecha">{!datos.totalesPesos['totalAdeudado']}</td>
+				</tr>
+
+				<tr>
+					<td
+						colspan="6"
+						class="seccion">
+						CUOTAS MENSUALES
+					</td>
+				</tr>
+				<tr>
+					<td
+						colspan="3"
+						class="subseccion">
+						CUOTAS MENSUALES
+					</td>
+					<td class="subseccion">RD$</td>
+					<td class="subseccion">USD</td>
+					<td class="subseccion">TOTAL RD$</td>
+				</tr>
+				<tr>
+					<td colspan="3">Pagos mínimos de TC</td>
+					<td class="formula derecha">{!datos.montosPesos['cuotaTarjetas']}</td>
+					<td class="valor derecha">{!datos.montosDolares['cuotaTarjetas']}</td>
+					<td class="formula derecha">{!datos.totalesPesos['cuotaTarjetas']}</td>
+				</tr>
+				<tr>
+					<td colspan="3">Pagos mensuales de préstamos de Consumo</td>
+					<td class="valor derecha">{!datos.montosPesos['cuotaPrestamos']}</td>
+					<td class="valor derecha">{!datos.montosDolares['cuotaPrestamos']}</td>
+					<td class="formula derecha">{!datos.totalesPesos['cuotaPrestamos']}</td>
+				</tr>
+				<tr>
+					<td
+						colspan="3"
+						class="etiqueta">
+						Cuota de Nuevo Préstamo
+					</td>
+					<td class="valor derecha">{!datos.montosPesos['cuotaNuevoPrestamo']}</td>
+					<td class="valor derecha">{!datos.montosDolares['cuotaNuevoPrestamo']}</td>
+					<td class="formula derecha">{!datos.totalesPesos['cuotaNuevoPrestamo']}</td>
+				</tr>
+				<tr>
+					<td colspan="3">Cuotas de Préstamos a cancelar</td>
+					<td class="valor derecha">{!datos.montosPesos['cuotasCancelar']}</td>
+					<td class="valor derecha">{!datos.montosDolares['cuotasCancelar']}</td>
+					<td class="formula derecha">{!datos.totalesPesos['cuotasCancelar']}</td>
+				</tr>
+				<tr>
+					<td colspan="3">Pago mínimo de TC a cancelar</td>
+					<td class="formula derecha">{!datos.montosPesos['deudaTarjetasCancelar']}</td>
+					<td class="valor derecha">{!datos.montosDolares['deudaTarjetasCancelar']}</td>
+					<td class="formula derecha">{!datos.totalesPesos['deudaTarjetasCancelar']}</td>
+				</tr>
+				<tr>
+					<td
+						colspan="3"
+						class="total">
+						TOTAL DE PAGOS MÍNIMOS TC'S Y CRÉDITOS DE CONSUMO
+					</td>
+					<td class="total derecha">{!datos.montosPesos['totalPagosCreditos']}</td>
+					<td class="total derecha">{!datos.montosDolares['totalPagosCreditos']}</td>
+					<td class="total derecha">{!datos.totalesPesos['totalPagosCreditos']}</td>
+				</tr>
+				<tr>
+					<td colspan="3">PAGO MENSUAL DE ALQUILER O DE PRÉSTAMO HIPOTECARIO</td>
+					<td class="valor derecha">{!datos.montosPesos['pagoVivienda']}</td>
+					<td class="valor derecha">{!datos.montosDolares['pagoVivienda']}</td>
+					<td class="formula derecha">{!datos.totalesPesos['pagoVivienda']}</td>
+				</tr>
+				<tr>
+					<td
+						colspan="3"
+						class="total">
+						TOTAL DE PAGOS
+					</td>
+					<td class="total derecha">{!datos.montosPesos['totalPagos']}</td>
+					<td class="total derecha">{!datos.montosDolares['totalPagos']}</td>
+					<td class="total derecha">{!datos.totalesPesos['totalPagos']}</td>
+				</tr>
+				<tr>
+					<td
+						colspan="3"
+						class="resultado">
+						CARGA FINANCIERA MENSUAL TC'S Y CRÉDITOS DE CONSUMO
+					</td>
+					<td class="resultado derecha">{!datos.cargaFinanciera}</td>
+					<td
+						colspan="2"
+						class="resultado centro">
+						{!datos.resultadoCargaFinanciera}
+					</td>
+				</tr>
+				<tr>
+					<td
+						colspan="3"
+						class="resultado">
+						CP INCLUYENDO ALQUILER O PRÉSTAMO HIPOTECARIO
+					</td>
+					<td class="resultado derecha">{!datos.capacidadIncluyendoVivienda}</td>
+					<td
+						colspan="2"
+						class="resultado centro">
+						{!datos.resultadoCapacidadVivienda}
+					</td>
+				</tr>
+
+				<tr>
+					<td class="etiqueta">TOTAL DE ACTIVOS</td>
+					<td class="valor derecha">{!datos.totalActivos}</td>
+					<td class="etiqueta">Índice de Apalancamiento</td>
+					<td class="formula derecha">{!datos.indiceApalancamiento}</td>
+					<td
+						colspan="2"
+						class="formula">
+						{!datos.resultadoApalancamiento}
+					</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">TOTAL DE PASIVOS</td>
+					<td class="valor derecha">{!datos.totalPasivos}</td>
+					<td class="etiqueta">Capacidad de Endeudamiento</td>
+					<td class="formula derecha">{!datos.capacidadEndeudamiento}</td>
+					<td
+						colspan="2"
+						class="formula">
+						{!datos.resultadoEndeudamiento}
+					</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">PATRIMONIO</td>
+					<td class="formula derecha">{!datos.patrimonio}</td>
+					<td colspan="4"></td>
+				</tr>
+				<tr>
+					<td
+						colspan="6"
+						class="seccion">
+						COMENTARIOS
+					</td>
+				</tr>
+				<tr>
+					<td
+						colspan="6"
+						class="comentarios valor">
+						{!datos.comentarios}
+					</td>
+				</tr>
+			</table>
+		</body>
+	</html>
+</apex:page>

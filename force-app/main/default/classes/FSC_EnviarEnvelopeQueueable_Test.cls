@@ -1,22 +1,13 @@
 @IsTest
 private class FSC_EnviarEnvelopeQueueable_Test {
-    private static Account buildNeutralAccount(String name) {
-        return new Account(
-            RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName()
-                .get('Candidato_Persona_Juridica')
-                .getRecordTypeId(),
-            Name = name,
-            ACC_RNC__c = 'ENV' + String.valueOf(System.now().getTime()).right(6),
-            ACC_Condicion__c = 'PROSPECTO',
-            ACC_Estado__c = 'INICIADO',
-            ACC_TipoIdentificacion__c = 'RNC',
-            ACC_Correo_Electronico_Cliente__c = 'queueable@test.com'
-        );
-    }
 
     @TestSetup
     static void setupData() {
-        Account acc = buildNeutralAccount('Cuenta Queueable');
+        Account acc = new Account(
+            Name = 'Cuenta Queueable',
+            ACC_NumIdentificacion__c = '00112345678',
+            ACC_Correo_Electronico_Cliente__c = 'queueable@test.com'
+        );
         insert acc;
 
         Date actaDate = Date.today();
@@ -39,7 +30,8 @@ private class FSC_EnviarEnvelopeQueueable_Test {
         insert rla;
 
         insert new ContentVersion(
-            Title = 'Crédito PyMe - Queueable Test',
+            // Antes de firmar se valida que la planilla tenga el título "Crédito <tipo> - <cliente> - <identificación>".
+            Title = 'Crédito PyMe - Cuenta Queueable - 00112345678',
             PathOnClient = 'credito_queueable.pdf',
             VersionData = Blob.valueOf('PDF CREDITO QUEUEABLE'),
             FirstPublishLocationId = rla.Id,

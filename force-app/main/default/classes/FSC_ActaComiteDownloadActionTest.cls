@@ -1,19 +1,6 @@
 @IsTest
 private class FSC_ActaComiteDownloadActionTest {
 
-    private static Account createAccount(String name) {
-        Account account = new Account(
-            RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Juridica').getRecordTypeId(),
-            Name = name,
-            ACC_RNC__c = '131000001',
-            ACC_TipoIdentificacion__c = 'RNC',
-            ACC_Condicion__c = 'PROSPECTO',
-            ACC_Estado__c = 'INICIADO'
-        );
-        insert account;
-        return account;
-    }
-
     private static ResidentialLoanApplication createRLAApproved(Id accountId, DateTime approvedDt) {
         ResidentialLoanApplication rla = new ResidentialLoanApplication();
         rla.AccountId = accountId;
@@ -72,7 +59,8 @@ private class FSC_ActaComiteDownloadActionTest {
 
     @IsTest
     static void testGenerateUrl_withApplicationsReturnsUrl() {
-        Account acc = createAccount('Cliente Action');
+        Account acc = new Account(Name = 'Cliente Action');
+        insert acc;
 
         Date actaDate = Date.today();
         DateTime approvedDt = DateTime.newInstance(actaDate.year(), actaDate.month(), actaDate.day(), 14, 30, 0);
@@ -97,7 +85,8 @@ private class FSC_ActaComiteDownloadActionTest {
 
     @IsTest
     static void testGenerateUrl_multipleRequests() {
-        Account acc = createAccount('Cliente Multi');
+        Account acc = new Account(Name = 'Cliente Multi');
+        insert acc;
 
         Date d1 = Date.today();
         Date d2 = Date.today().addDays(-1);

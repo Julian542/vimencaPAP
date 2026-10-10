@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>FSC_Tipo_Catalogo__c</columns>
+    <columns>FSC_Codigo__c</columns>
+    <columns>FSC_Codigo_Padre__c</columns>
+    <columns>FSC_Activo__c</columns>
+    <columns>FSC_Fecha_Sincronizacion__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>Todos</label>
+</ListView>

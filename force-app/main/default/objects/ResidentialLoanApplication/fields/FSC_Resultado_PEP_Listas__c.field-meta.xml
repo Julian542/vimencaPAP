@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Resultado_PEP_Listas__c</fullName>
+    <label>Resultado PEP Listas</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sin coincidencias</fullName>
+                <default>false</default>
+                <label>Sin coincidencias</label>
+            </value>
+            <value>
+                <fullName>Coincidencia</fullName>
+                <default>false</default>
+                <label>Coincidencia</label>
+            </value>
+            <value>
+                <fullName>Coincidencia aprobada</fullName>
+                <default>false</default>
+                <label>Coincidencia aprobada</label>
+            </value>
+            <value>
+                <fullName>Coincidencia no aprobada</fullName>
+                <default>false</default>
+                <label>Coincidencia no aprobada</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

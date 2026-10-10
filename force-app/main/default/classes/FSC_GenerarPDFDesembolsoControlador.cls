@@ -1,4 +1,7 @@
 public with sharing class FSC_GenerarPDFDesembolsoControlador {
+	public List<FSC_RlaGarantiasTablaController.GarantiaRow> garantias { get; private set; }
+	public Boolean tieneGarantias { get { return !garantias.isEmpty(); } }
+	public Boolean esPyme { get { return tieneGarantias && garantias[0].esPyme; } }
 	public String FormulaCedula { get; private set; }
 	public String FormulaFecha { get; private set; }
 	public String FormulaMontoAprobado { get; private set; }
@@ -47,6 +50,9 @@ public with sharing class FSC_GenerarPDFDesembolsoControlador {
 
 	public FSC_GenerarPDFDesembolsoControlador() {
 		Map<String, String> p = ApexPages.currentPage().getParameters();
+		// El generador ya envía el Id de la solicitud a esta página.
+		String solicitudId = String.isBlank(p.get('Id')) ? p.get('id') : p.get('Id');
+		garantias = FSC_RlaGarantiasTablaController.getGarantias(String.isBlank(solicitudId) ? null : (Id) solicitudId);
 		FormulaCedula = p.get('FormulaCedula');
 		if (p.get('FormulaFecha') != null) {
 			FormulaFecha = ((Datetime) JSON.deserialize('"' + p.get('FormulaFecha') + '"', Datetime.class)).formatGMT('dd-MM-yyyy');

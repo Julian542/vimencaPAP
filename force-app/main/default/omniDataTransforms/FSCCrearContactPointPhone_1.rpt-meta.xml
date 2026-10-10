@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniDataTransform xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <assignmentRulesUsed>false</assignmentRulesUsed>
+    <deletedOnSuccess>false</deletedOnSuccess>
+    <errorIgnored>false</errorIgnored>
+    <expectedInputJson>{
+  &quot;ContactPointPhone&quot; : [ {
+    &quot;FSC_TipoContacto__c&quot; : &quot;Personal&quot;,
+    &quot;TelephoneNumber&quot; : &quot;1122334455&quot;
+  } ]
+}</expectedInputJson>
+    <fieldLevelSecurityEnabled>true</fieldLevelSecurityEnabled>
+    <inputType>JSON</inputType>
+    <isManagedUsingStdDesigner>true</isManagedUsingStdDesigner>
+    <name>FSCCrearContactPointPhone</name>
+    <nullInputsIncludedInOutput>false</nullInputsIncludedInOutput>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>842d4c1c-c477-46cc-b089-af48fbbb8f0a</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearContactPointPhone</name>
+        <omniDataTransformation>0kdVC000000Gwx4</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gwx4</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Id</outputFieldName>
+        <outputObjectName>ContactPointPhone</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>4ac7da9f-86b0-4787-98c4-f8c804869c08</globalKey>
+        <inputFieldName>ContactPointPhone:TelephoneNumber</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearContactPointPhone</name>
+        <omniDataTransformation>0kdVC000000Gwx5</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gwx5</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>TelephoneNumber</outputFieldName>
+        <outputObjectName>ContactPointPhone</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>d7ed60cf-8db3-439d-b986-57a497844338</globalKey>
+        <inputFieldName>ContactPointPhone:ParentId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearContactPointPhone</name>
+        <omniDataTransformation>0kdVC000000Gwx3</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gwx3</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ParentId</outputFieldName>
+        <outputObjectName>ContactPointPhone</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>2ed6b3b2-d79e-4ac1-a68a-a83f382796f0</globalKey>
+        <inputFieldName>ContactPointPhone:FSC_TipoContacto__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearContactPointPhone</name>
+        <omniDataTransformation>0kdVC000000Gwx6</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gwx6</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_TipoContacto__c</outputFieldName>
+        <outputObjectName>ContactPointPhone</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>e112d86b-2a63-446e-9209-a62dba65bac4</globalKey>
+        <inputFieldName>ResidentialLoanApplicationId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearContactPointPhone</name>
+        <omniDataTransformation>0kdVC000000Gwx7</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gwx7</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_ResidentialLoanApplicationId__c</outputFieldName>
+        <outputObjectName>ContactPointPhone</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <outputType>SObject</outputType>
+    <previewJsonData>{
+  &quot;ContactPointPhone&quot; : [ {
+    &quot;ParentId&quot; : &quot;XXXX&quot;,
+    &quot;PhoneType&quot; : &quot;XXXX&quot;,
+    &quot;TelephoneNumber&quot; : &quot;XXXX&quot;
+  } ]
+}</previewJsonData>
+    <processSuperBulk>false</processSuperBulk>
+    <responseCacheTtlMinutes>0.0</responseCacheTtlMinutes>
+    <rollbackOnError>false</rollbackOnError>
+    <sourceObjectDefault>false</sourceObjectDefault>
+    <synchronousProcessThreshold>0.0</synchronousProcessThreshold>
+    <type>Load</type>
+    <uniqueName>FSCCrearContactPointPhone_1</uniqueName>
+    <versionNumber>1.0</versionNumber>
+    <xmlDeclarationRemoved>false</xmlDeclarationRemoved>
+</OmniDataTransform>

@@ -34,18 +34,31 @@ global with sharing class FSC_ActaComiteDownloadAction {
             Datetime endDt   = Datetime.newInstance(req.actaDate, Time.newInstance(23,59,59,999)).addHours(-4);
             System.debug('End Dt: ' + endDt);
 
+            Set<Id> rlaIdsDecidedByProcess = new Set<Id>();
+            for (ProcessInstance process : [
+                SELECT TargetObjectId
+                FROM ProcessInstance
+                WHERE ProcessDefinition.DeveloperName = 'FSC_ComiteDeCredito'
+                  AND Status IN ('Approved', 'Rejected')
+                  AND CompletedDate >= :startDt
+                  AND CompletedDate <= :endDt
+            ]) {
+                rlaIdsDecidedByProcess.add(process.TargetObjectId);
+            }
+
             Integer cnt = [
                 SELECT COUNT()
                 FROM ResidentialLoanApplication
-                WHERE FSC_SolicitudAprobadaPorComite__c = true
-                  AND FSC_FechaYHoraAprobacionComite__c >= :startDt
-                  AND FSC_FechaYHoraAprobacionComite__c <= :endDt
+                WHERE (
+                    (FSC_FechaYHoraAprobacionComite__c >= :startDt AND FSC_FechaYHoraAprobacionComite__c <= :endDt)
+                    OR Id IN :rlaIdsDecidedByProcess
+                )
             ];
             res.totalApplications = cnt;
 
             if (cnt == 0) {
                 res.success = true;
-                res.message = 'No hay solicitudes aprobadas por comité para la fecha seleccionada.';
+                res.message = 'No hay solicitudes decididas por comité para la fecha seleccionada.';
                 res.pdfUrl = null;
                 return res;
             }

@@ -1,25 +1,15 @@
 @IsTest
 private class FSC_PagComComplCtrlTest {
-	private static Account createNeutralAccount(String name, String identification, String street) {
+	@IsTest
+	static void controller_loadsActoNumeroPagare() {
 		Account acc = new Account(
-			RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Juridica').getRecordTypeId(),
-			Name = name,
-			ACC_RNC__c = identification.substring(0, 9),
-			ACC_NumIdentificacion__c = identification,
-			ACC_Condicion__c = 'PROSPECTO',
-			ACC_Estado__c = 'INICIADO',
-			ACC_TipoIdentificacion__c = 'RNC',
-			BillingStreet = street,
+			Name = 'Cuenta Ctrl Pagare',
+			ACC_NumIdentificacion__c = '00108803610',
+			BillingStreet = 'Calle 1',
 			BillingCity = 'Santo Domingo',
 			BillingCountry = 'DO'
 		);
 		insert acc;
-		return acc;
-	}
-
-	@IsTest
-	static void controller_loadsActoNumeroPagare() {
-		Account acc = createNeutralAccount('Cuenta Ctrl Pagare', '00108803610', 'Calle 1');
 
 		ResidentialLoanApplication rla = new ResidentialLoanApplication(
 			Name = 'RLA Ctrl Pagare',
@@ -34,6 +24,7 @@ private class FSC_PagComComplCtrlTest {
 			FSC_PlazoMesesAprobado__c = 12,
 			FSC_TasaInteres__c = 12,
 			FSC_TasaInteresAprobada__c = 12,
+			FSC_Moneda__c = '1',
 			FSC_Aprobado_con_Condiciones__c = true
 		);
 		insert rla;
@@ -56,7 +47,14 @@ private class FSC_PagComComplCtrlTest {
 
 	@IsTest
 	static void controller_usesRequestedValuesWhenNotApprovedWithConditions() {
-		Account acc = createNeutralAccount('Cuenta Ctrl Sin Condiciones', '00108803611', 'Calle 2');
+		Account acc = new Account(
+			Name = 'Cuenta Ctrl Sin Condiciones',
+			ACC_NumIdentificacion__c = '00108803611',
+			BillingStreet = 'Calle 2',
+			BillingCity = 'Santo Domingo',
+			BillingCountry = 'DO'
+		);
+		insert acc;
 
 		ResidentialLoanApplication rla = new ResidentialLoanApplication(
 			Name = 'RLA Ctrl Sin Condiciones',
@@ -67,6 +65,7 @@ private class FSC_PagComComplCtrlTest {
 			FSC_PlazoMesesAprobado__c = 1,
 			FSC_TasaInteres__c = 15,
 			FSC_TasaInteresAprobada__c = 1,
+			FSC_Moneda__c = '1',
 			FSC_Aprobado_con_Condiciones__c = false
 		);
 		insert rla;

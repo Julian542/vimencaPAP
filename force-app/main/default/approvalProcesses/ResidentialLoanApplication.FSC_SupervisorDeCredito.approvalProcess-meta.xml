@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>allInternalUsers</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>adhoc</type>
+            </approver>
+        </assignedApprover>
+        <label>Supervisor de crédito</label>
+        <name>FSC_StepSupervisorDeCredito</name>
+    </approvalStep>
+    <description>Proceso de aprobación para supervisor de crédito</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>ResidentialLoanApplication.FSC_Resultado_Buro__c</field>
+            <operation>equals</operation>
+            <value>Referido</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ResidentialLoanApplication.FSC_Subestado__c</field>
+            <operation>equals</operation>
+            <value>Análisis de crédito</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ResidentialLoanApplication.FSC_Doc_Completa_Analisis__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ResidentialLoanApplication.FSC_DebeRevisarComite__c</field>
+            <operation>equals</operation>
+            <value>Falso</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ResidentialLoanApplication.FSC_DebeRevisarSupervisor__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ResidentialLoanApplication.FSC_Aprobado_con_Condiciones__c</field>
+            <operation>equals</operation>
+            <value>Falso</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>FSC_DebeRevisarComite</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>FSC_DebeRevisarSupervisorFalse</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>FSC_Asignar_Status_Cerrada_Perdida</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>FSC_SubestadoRechazadoPorSupervisor</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <label>Supervisor de crédito</label>
+    <processOrder>5</processOrder>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>false</showApprovalHistory>
+</ApprovalProcess>

@@ -2,13 +2,10 @@
 private class FSC_PagareComercialComplementario_Test {
 	private static Account buildAccount() {
 		Account a = new Account();
-		a.RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Juridica').getRecordTypeId();
-		a.Name = 'Cliente Prueba';
+		a.LastName = 'Cliente Prueba';
+		a.RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Fisica').getRecordTypeId();
 		a.ACC_NumIdentificacion__c = '00112345678';
-		a.ACC_RNC__c = '131000004';
-		a.ACC_TipoIdentificacion__c = 'RNC';
-		a.ACC_Condicion__c = 'PROSPECTO';
-		a.ACC_Estado__c = 'INICIADO';
+		a.ACC_TipoIdentificacion__c = 'Cédula';
 		a.ACC_Nacionalidad__c = 'AFGANISTÁN';
 		a.ACC_Estado_Civil__c = 'SOLTERO/A';
 		a.BillingStreet = 'Calle 1';

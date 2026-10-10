@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniDataTransform xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <assignmentRulesUsed>false</assignmentRulesUsed>
+    <deletedOnSuccess>false</deletedOnSuccess>
+    <errorIgnored>false</errorIgnored>
+    <expectedInputJson>{
+  &quot;Account&quot; : [ {
+    &quot;ACC_Correo_Electronico_Cliente__c&quot; : &quot;jvalenti@yopmail.com&quot;,
+    &quot;ACC_Estado_Civil__c&quot; : &quot;SOLTERO/A&quot;,
+    &quot;ACC_Genero__c&quot; : &quot;MASCULINO&quot;,
+    &quot;ACC_Nacionalidad__c&quot; : &quot;AFGANISTÁN&quot;,
+    &quot;ACC_Nombre_Corto_Comercial__c&quot; : &quot;Nombre Comercial&quot;,
+    &quot;ACC_NumIdentificacion__c&quot; : 44002431,
+    &quot;ACC_RNC__c&quot; : 564295870,
+    &quot;ACC_Telefono_Movil__c&quot; : &quot;2616266216&quot;,
+    &quot;ACC_TipoIdentificacion__c&quot; : &quot;Cédula&quot;,
+    &quot;Actividad_Economica_Name__c&quot; : &quot;asdasda&quot;,
+    &quot;FinServ__BillingAddress__pc&quot; : &quot;AV GUSTAVO MEJIA RICART, 1, SANTO DOMINGO DE GUZMÁN, BAVARO&lt;br&gt;SANTO DOMINGO DE GUZMÁN, DISTRITO NACIONAL REPUBLICA DOMINICANA&quot;,
+    &quot;FirstName&quot; : &quot;Joel&quot;,
+    &quot;Id&quot; : &quot;001U700000WVxHVIA1&quot;,
+    &quot;IsPersonAccount&quot; : true,
+    &quot;LastName&quot; : &quot;Valenti&quot;,
+    &quot;Tipo_de_vivienda__c&quot; : &quot;2&quot;
+  } ]
+}</expectedInputJson>
+    <fieldLevelSecurityEnabled>true</fieldLevelSecurityEnabled>
+    <inputType>JSON</inputType>
+    <isManagedUsingStdDesigner>true</isManagedUsingStdDesigner>
+    <name>FSCActualizarDatosCuenta</name>
+    <nullInputsIncludedInOutput>false</nullInputsIncludedInOutput>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>6234d394-f2ba-4ec9-84a9-48acac6dfcb9</globalKey>
+        <inputFieldName>Account:ACC_TipoIdentificacion__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ5x</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ5x</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ACC_TipoIdentificacion__c</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>4e87be37-066b-4371-a402-7c3dded9c439</globalKey>
+        <inputFieldName>Account:Actividad_Economica_Name__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ5y</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ5y</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Actividad_Economica_Name__c</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>632f7af4-7dbf-440b-97ef-2fe10d12d29e</globalKey>
+        <inputFieldName>Account:IsPersonAccount</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ5v</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ5v</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>IsPersonAccount</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>ba0ac31d-64c3-4c15-b2e4-4aebe3e686b7</globalKey>
+        <inputFieldName>Account:ACC_Estado_Civil__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ67</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ67</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ACC_Estado_Civil__c</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>45fd6ad4-db8d-4228-ad1c-a142b83a92c4</globalKey>
+        <inputFieldName>Account:LastName</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ5w</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ5w</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>LastName</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>8d3f2a8f-705d-4963-bd58-8f0edb9689c3</globalKey>
+        <inputFieldName>Account:ACC_Nacionalidad__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ5z</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ5z</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ACC_Nacionalidad__c</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>ffa83e33-fa2d-43c0-adc3-b7c67cd149ea</globalKey>
+        <inputFieldName>Account:Id</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ5p</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ5p</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Id</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>f3b2ccd9-6723-4718-8764-0bf8f54523b4</globalKey>
+        <inputFieldName>Account:ACC_Genero__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ61</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ61</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ACC_Genero__c</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>5b670496-6843-48c2-ab43-512a87695953</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ5q</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ5q</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Id</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>5f2f2d59-e2b3-408d-b5e7-b5dcf51bb1b7</globalKey>
+        <inputFieldName>Account:ACC_N_Dependientes__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ62</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ62</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ACC_N_Dependientes__c</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>ebd3babb-d992-4974-9331-76f11769fdf3</globalKey>
+        <inputFieldName>Account:ACC_Nombre_Corto_Comercial__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ60</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ60</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ACC_Nombre_Corto_Comercial__c</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>261a6296-bf84-4628-b9cd-5a9c5d579500</globalKey>
+        <inputFieldName>Account:Tiempo_en_Vivienda__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ5t</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ5t</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Tiempo_en_Vivienda__c</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>e7ef8592-688e-4559-8db3-49173324f7c8</globalKey>
+        <inputFieldName>Account:ACC_RNC__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ65</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ65</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ACC_RNC__c</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>3cd82313-6ebb-4de7-bcf2-1567b7f92d56</globalKey>
+        <inputFieldName>Account:Tipo_de_vivienda__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ5u</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ5u</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Tipo_de_vivienda__c</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>efaf7b73-5112-493b-8db5-969c26553dd1</globalKey>
+        <inputFieldName>Account:ACC_Correo_Electronico_Cliente__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ66</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ66</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ACC_Correo_Electronico_Cliente__c</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>6a34fa60-bf33-48e7-826b-57cc33e91c63</globalKey>
+        <inputFieldName>Account:FinServ__BillingAddress__pc</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ5r</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ5r</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FinServ__BillingAddress__pc</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>9e771a64-1c56-4aa0-bcbb-268711bbd946</globalKey>
+        <inputFieldName>Account:ACC_Telefono_Movil__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ63</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ63</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ACC_Telefono_Movil__c</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>fb4aea0e-ee46-4a22-9f5c-f3bac18e314e</globalKey>
+        <inputFieldName>Account:FirstName</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ5s</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ5s</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FirstName</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>ef5de012-125f-4c5f-8b67-eb6508526d3e</globalKey>
+        <inputFieldName>Account:ACC_NumIdentificacion__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCActualizarDatosCuenta</name>
+        <omniDataTransformation>0kdVC000000IJ64</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IJ64</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ACC_NumIdentificacion__c</outputFieldName>
+        <outputObjectName>Account</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <outputType>SObject</outputType>
+    <previewJsonData>{
+  &quot;Account&quot; : [ {
+    &quot;ACC_Correo_Electronico_Cliente__c&quot; : &quot;jvalenti@yopmail.com&quot;,
+    &quot;ACC_Estado_Civil__c&quot; : &quot;SOLTERO/A&quot;,
+    &quot;ACC_Genero__c&quot; : &quot;MASCULINO&quot;,
+    &quot;ACC_Nacionalidad__c&quot; : &quot;AFGANISTÁN&quot;,
+    &quot;ACC_Nombre_Corto_Comercial__c&quot; : &quot;Nombre Comercial&quot;,
+    &quot;ACC_NumIdentificacion__c&quot; : 44002431,
+    &quot;ACC_RNC__c&quot; : 564295870,
+    &quot;ACC_Telefono_Movil__c&quot; : &quot;2616266216&quot;,
+    &quot;ACC_TipoIdentificacion__c&quot; : &quot;Cédula&quot;,
+    &quot;Actividad_Economica_Name__c&quot; : &quot;asdasda&quot;,
+    &quot;FinServ__BillingAddress__pc&quot; : &quot;AV GUSTAVO MEJIA RICART, 1, SANTO DOMINGO DE GUZMÁN, BAVARO&lt;br&gt;SANTO DOMINGO DE GUZMÁN, DISTRITO NACIONAL REPUBLICA DOMINICANA&quot;,
+    &quot;FirstName&quot; : &quot;Joel&quot;,
+    &quot;Id&quot; : &quot;001U700000WVxHVIA1&quot;,
+    &quot;IsPersonAccount&quot; : true,
+    &quot;LastName&quot; : &quot;Valenti&quot;,
+    &quot;Tipo_de_vivienda__c&quot; : &quot;2&quot;
+  } ]
+}</previewJsonData>
+    <processSuperBulk>false</processSuperBulk>
+    <responseCacheTtlMinutes>0.0</responseCacheTtlMinutes>
+    <rollbackOnError>false</rollbackOnError>
+    <sourceObjectDefault>false</sourceObjectDefault>
+    <synchronousProcessThreshold>0.0</synchronousProcessThreshold>
+    <type>Load</type>
+    <uniqueName>FSCActualizarDatosCuenta_1</uniqueName>
+    <versionNumber>1.0</versionNumber>
+    <xmlDeclarationRemoved>false</xmlDeclarationRemoved>
+</OmniDataTransform>

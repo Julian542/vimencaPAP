@@ -1,0 +1,1205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniIntegrationProcedure xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customJavaScript>{&quot;omniData&quot;:{&quot;ContextId&quot;:&quot;001VC00003Qiu4PYAR&quot;,&quot;IP_GetAccountDetails&quot;:{&quot;Account&quot;:{&quot;FullName&quot;:&quot;LISBETH COLOMO&quot;,&quot;Id&quot;:&quot;001VC00003Qiu4PYAR&quot;,&quot;IdentificationNumber&quot;:-2004540777,&quot;IdentificationType&quot;:&quot;Cédula&quot;,&quot;LastName&quot;:&quot;COLOMO&quot;,&quot;Name&quot;:&quot;LISBETH&quot;}},&quot;IP_GetValidationForPYME&quot;:{&quot;NombreCredito&quot;:&quot;&quot;,&quot;TieneSolicitudCreditoPyme&quot;:false},&quot;LanguageCode&quot;:&quot;en_US&quot;,&quot;StepApplicantDetailsFisica&quot;:{&quot;Address&quot;:&quot;Jacinto Suarez 1212&quot;,&quot;Email&quot;:&quot;waltergc248@gmail.com&quot;,&quot;FormulaTitle&quot;:[&quot;Crédito PyMe - &quot;,&quot;LISBETH&quot;,&quot; COLOMO&quot;,&quot; - &quot;,-2004540777],&quot;FullName&quot;:&quot;LISBETH COLOMO&quot;,&quot;Id&quot;:&quot;001VC00003Qiu4PYAR&quot;,&quot;IdentificationNumber&quot;:-2004540777,&quot;IdentificationType&quot;:&quot;Cédula&quot;,&quot;LastName&quot;:&quot;COLOMO&quot;,&quot;MaritalStatus&quot;:&quot;SOLTERO/A&quot;,&quot;MobilePhone&quot;:&quot;123123&quot;,&quot;Name&quot;:&quot;LISBETH&quot;,&quot;Nationality&quot;:&quot;AFGANISTÁN&quot;,&quot;Phone&quot;:&quot;123123&quot;,&quot;Sex&quot;:&quot;FEMENINO&quot;,&quot;TypeHousing&quot;:&quot;1&quot;},&quot;StepApplicantDetailsJuridica&quot;:null,&quot;StepCompanyDetails&quot;:{&quot;Block2&quot;:{&quot;FSC_Ingresos_Mensuales__c&quot;:123},&quot;Block3&quot;:{&quot;FSC_Monto_de_los_Ingresos__c&quot;:null,&quot;FSC_Origen_de_los_Ingresos__c&quot;:null,&quot;RadioOtrosIngresos&quot;:&quot;No&quot;},&quot;FSC_A_os_de_operacion__c&quot;:12,&quot;FSC_Actividad_economica__c&quot;:&quot;asda&quot;,&quot;FSC_Cantidad_de_empleados__c&quot;:12,&quot;FSC_Cargo__c&quot;:&quot;asd&quot;,&quot;FSC_Correo_Electronico__c&quot;:&quot;waltergc248@gmail.com&quot;,&quot;FSC_Direccion_del_Negocio__c&quot;:&quot;Jacinto Suarez 1212&quot;,&quot;FSC_Emplea_familiares__c&quot;:&quot;true&quot;,&quot;FSC_Local_del_negocio__c&quot;:&quot;Propio&quot;,&quot;FSC_Nombre_Cliente__c&quot;:&quot;LISBETH COLOMO&quot;,&quot;FSC_Nombre_del_negocio__c&quot;:&quot;n&quot;,&quot;FSC_Se_encuentra_en_la_misma_residencia__c&quot;:&quot;false&quot;,&quot;FSC_Se_encuentra_en_zona_comercial__c&quot;:&quot;false&quot;,&quot;FSC_Situacion_Legal__c&quot;:&quot;Unico Dueño&quot;,&quot;FSC_Subestado__c&quot;:&quot;En validación PEP/Listas&quot;,&quot;FSC_Telefono__c&quot;:123,&quot;FSC_Tiempo_del_negocio__c&quot;:&quot;n&quot;,&quot;FSC_Tiempo_en_el_local_actual__c&quot;:&quot;12&quot;,&quot;Status&quot;:&quot;En proceso&quot;},&quot;StepDescripcionFacilidades&quot;:{&quot;FSC_Facilidades_De_Credito__c&quot;:{&quot;FSC_Aumento_Solicitado__c&quot;:31,&quot;FSC_Compromiso_Mensual__c&quot;:31,&quot;FSC_Deuda_Actual__c&quot;:12,&quot;FSC_Facilidades_De_Credito__c_FSC_Moneda__c&quot;:&quot;1&quot;,&quot;FSC_Facilidades_De_Credito__c_FSC_Plazo_meses__c&quot;:12,&quot;FSC_Fecha_Apertura__c&quot;:&quot;2026-04-07&quot;,&quot;FSC_Limite_Autorizado__c&quot;:31,&quot;FSC_Numero__c&quot;:1,&quot;FSC_Posible_Compromiso__c&quot;:31,&quot;FSC_Tasa__c&quot;:31,&quot;FSC_Tipo_de_Facilidad__c&quot;:&quot;LINEAS DE CREDITOS&quot;},&quot;PruebaValidacion&quot;:1},&quot;StepError1&quot;:null,&quot;StepEstadoGananciasPerdidas&quot;:{},&quot;StepEstadoSituacion&quot;:{},&quot;StepEstadosFinancieros&quot;:{},&quot;StepExitoso&quot;:null,&quot;StepFallido&quot;:null,&quot;StepFortalezaDebilidades&quot;:{},&quot;StepHistoria&quot;:{},&quot;StepLoanDetails&quot;:{&quot;FSC_Clasificacion_de_Riesgo__c&quot;:&quot;A&quot;,&quot;FSC_Condiciones_de_la_Facilidad__c&quot;:&quot;123&quot;,&quot;FSC_Descripcion_del_Negocio__c&quot;:&quot;123&quot;,&quot;FSC_Destino_del_Prestamo__c&quot;:&quot;123&quot;,&quot;FSC_Grupo_de_Empresa__c&quot;:&quot;123&quot;,&quot;FSC_Moneda__c&quot;:&quot;1&quot;,&quot;FSC_Monto__c&quot;:123,&quot;FSC_Plazo_meses__c&quot;:&quot;12&quot;,&quot;FSC_Tipo_de_solicitud_Otro__c&quot;:null,&quot;FSC_Tipo_de_solicitud__c&quot;:&quot;Nueva&quot;},&quot;StepReferencias&quot;:{},&quot;StepRelacion&quot;:{},&quot;StepWarrantyDetails&quot;:{&quot;FSC_Descripcion_de_la_Garantia&quot;:null,&quot;FSC_Porcentaje_de_Admisibilidad__c&quot;:null,&quot;FSC_Tipo_de_Garantia__c&quot;:&quot;Sin Garantía&quot;,&quot;FSC_Valor_de_la_Garantia__c&quot;:null},&quot;accountId&quot;:&quot;001VC00003Qiu4PYAR&quot;,&quot;language&quot;:&quot;Spanish&quot;,&quot;localTimeZoneName&quot;:&quot;America/Buenos_Aires&quot;,&quot;message&quot;:&quot;Proceso encolado correctamente.&quot;,&quot;omniProcessId&quot;:&quot;0jNVC0000006nkP2AQ&quot;,&quot;omniscriptId&quot;:&quot;0jNVC0000006nkP2AQ&quot;,&quot;runMode&quot;:&quot;preview&quot;,&quot;sId&quot;:&quot;0jNVC0000006nkP2AQ&quot;,&quot;subType&quot;:&quot;SolicitudCreditoPYME&quot;,&quot;success&quot;:true,&quot;theme&quot;:&quot;lightning&quot;,&quot;timeStamp&quot;:&quot;2026-04-07T02:12:39.931Z&quot;,&quot;type&quot;:&quot;FSC&quot;,&quot;userCurrencyCode&quot;:&quot;DOP&quot;,&quot;userId&quot;:&quot;005VC00000WvwxqYAB&quot;,&quot;userName&quot;:&quot;jvalenti@keystoneadvisors.cl.pruebadev&quot;,&quot;userProfile&quot;:&quot;System Administrator&quot;,&quot;userTimeZone&quot;:&quot;-240&quot;,&quot;userTimeZoneName&quot;:&quot;America/Puerto_Rico&quot;}}</customJavaScript>
+    <description>Dev: FR. HU/BUG: BV-1072. Description: Se ajusta el insert de las Fortalezas y Debilidades. Version Cloning: 13</description>
+    <elementTypeComponentMapping>{&quot;ElementTypeToHTMLTemplateList&quot;:[]}</elementTypeComponentMapping>
+    <isActive>true</isActive>
+    <isIntegProcdSignatureAvl>false</isIntegProcdSignatureAvl>
+    <isIntegrationProcedure>true</isIntegrationProcedure>
+    <isManagedUsingStdDesigner>true</isManagedUsingStdDesigner>
+    <isMetadataCacheDisabled>false</isMetadataCacheDisabled>
+    <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+    <isTestProcedure>false</isTestProcedure>
+    <isWebCompEnabled>false</isWebCompEnabled>
+    <language>Procedure</language>
+    <name>FSC_ActualizarCrearSolicitudCreditoPYME</name>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DMPActualizarDatosCuenta</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : false,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMPActualizarDatosCuenta&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;sendJSONPath&quot; : &quot;DMTDatosParaActualizarCrearSolicitudCreditoPYME:Account&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;id&quot; : &quot;&quot;,
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCActualizarDatosCuenta&quot;,
+  &quot;sendJSONNode&quot; : &quot;Account&quot;
+}</propertySetConfig>
+        <sequenceNumber>8.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DMPCrearClientesYProveedoresPrincipales</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMPCrearClientesYProveedoresPrincipales&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;ISNOTBLANK(%DMTDatosParaActualizarCrearSolicitudCreditoPYME:FSC_Clientes_Y_Proveedores_Principales__c%)&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;FSC_Clientes_Y_Proveedores_Principales__c&quot; : &quot;=LIST(%DMTDatosParaActualizarCrearSolicitudCreditoPYME:FSC_Clientes_Y_Proveedores_Principales__c%)&quot;,
+    &quot;ResidentialLoanApplicationId&quot; : &quot;%DMPCrearResidentialLoanApplication:ResidentialLoanApplication_1|1:Id%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCCrearClientesYProveedoresPrincipales&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>26.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DMPCrearFacilidadesDeCredito</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMPCrearFacilidadesDeCredito&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;ISNOTBLANK(%omniData:StepDescripcionFacilidades:FSC_Facilidades_De_Credito__c%)&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;FSC_Facilidades_De_Credito__c&quot; : &quot;%MergeFacilidadesWithFinServ%&quot;,
+    &quot;ResidentialLoanApplicationId&quot; : &quot;%DMPCrearResidentialLoanApplication:ResidentialLoanApplication_1|1:Id%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCCrearFacilidadesDeCredito&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>16.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DMPCrearFortalezasYDebilidades</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMPCrearFortalezasYDebilidades&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;ISNOTBLANK(%omniData:StepFortalezaDebilidades:FSC_Fortalezas_Y_Debilidades__c_1:FSC_Fortalezas_Y_Debilidades__c_1_Name_1%) || ISNOTBLANK(%omniData:StepFortalezaDebilidades:FSC_Fortalezas_Y_Debilidades__c_2:FSC_Fortalezas_Y_Debilidades__c_2_Name_2%)&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;ResidentialLoanApplicationId&quot; : &quot;%DMPCrearResidentialLoanApplication:ResidentialLoanApplication_1|1:Id%&quot;,
+    &quot;FSC_Fortalezas_Y_Debilidades__c&quot; : &quot;=LIST(%DMTDatosParaActualizarCrearSolicitudCreditoPYME:FSC_Fortalezas_Y_Debilidades__c%)&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCCrearFortalezasYDebilidades&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>28.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DMPCrearLoanApplicationAsset</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMPCrearLoanApplicationAsset&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;ISNOTBLANK(%omniData:StepDescripcionFacilidades:LoanApplicationAsset%)&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;ResidentialLoanApplicationId&quot; : &quot;%DMPCrearResidentialLoanApplication:ResidentialLoanApplication_1|1:Id%&quot;,
+    &quot;LoanApplicationAsset&quot; : &quot;=LIST(%omniData:StepDescripcionFacilidades:LoanApplicationAsset%)&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCCrearLoanApplicationAsset&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>20.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DMPCrearPropositoYUsoDeFondos</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMPCrearPropositoYUsoDeFondos&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;ISNOTBLANK(%omniData:StepDescripcionFacilidades:FSC_Proposito_Y_Uso_De_Fondos__c%)&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;ResidentialLoanApplicationId&quot; : &quot;%DMPCrearResidentialLoanApplication:ResidentialLoanApplication_1|1:Id%&quot;,
+    &quot;FSC_Proposito_Y_Uso_De_Fondos__c&quot; : &quot;=LIST(%omniData:StepDescripcionFacilidades:FSC_Proposito_Y_Uso_De_Fondos__c%)&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCCrearPropositoYUsoDeFondos&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>18.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DMPCrearReferencias</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMPCrearReferencias&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;ISNOTBLANK(%DMTDatosParaActualizarCrearSolicitudCreditoPYME:FSC_Referencias__c%)&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;ResidentialLoanApplicationId&quot; : &quot;%DMPCrearResidentialLoanApplication:ResidentialLoanApplication_1|1:Id%&quot;,
+    &quot;FSC_Referencias__c&quot; : &quot;=LIST(%DMTDatosParaActualizarCrearSolicitudCreditoPYME:FSC_Referencias__c%)&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCCrearReferencias&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>24.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DMPCrearRelacionNegociosColaterales</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMPCrearRelacionNegociosColaterales&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;ISNOTBLANK(%DMTDatosParaActualizarCrearSolicitudCreditoPYME:FSC_Relacion_Negocios_Colaterales__c%)&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;FSC_Relacion_Negocios_Colaterales__c&quot; : &quot;=LIST(%DMTDatosParaActualizarCrearSolicitudCreditoPYME:FSC_Relacion_Negocios_Colaterales__c%)&quot;,
+    &quot;ResidentialLoanApplicationId&quot; : &quot;%DMPCrearResidentialLoanApplication:ResidentialLoanApplication_1|1:Id%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCCrearRelacionNegociosColaterales&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>22.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DMPCrearResidentialLoanApplication</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : false,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : &quot;&quot;,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMPCrearResidentialLoanApplication&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;sendJSONPath&quot; : &quot;DMTDatosParaActualizarCrearSolicitudCreditoPYME:ResidentialLoanApplication&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;id&quot; : &quot;&quot;,
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCCrearResidentialLoanApplication&quot;,
+  &quot;sendJSONNode&quot; : &quot;ResidentialLoanApplication&quot;
+}</propertySetConfig>
+        <sequenceNumber>10.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DMPCrearSociosPrincipalesYAccionistas</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMPCrearSociosPrincipalesYAccionistas&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;ISNOTBLANK(%omniData:StepApplicantDetailsJuridica:FSC_Socios_Principales_Y_Accionistas__c%)&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;FSC_Socios_Principales_Y_Accionistas__c&quot; : &quot;%omniData:StepApplicantDetailsJuridica:FSC_Socios_Principales_Y_Accionistas__c%&quot;,
+    &quot;ResidentialLoanApplicationId&quot; : &quot;%DMPCrearResidentialLoanApplication:ResidentialLoanApplication_1|1:Id%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCCrearSociosPrincipalesYAccionistas&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>14.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Transform Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DMTDatosParaActualizarCrearSolicitudCreditoPYME</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : &quot;&quot;,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;ignoreCache&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMTDatosParaActualizarCrearSolicitudCreditoPYME&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;StepApplicantDetailsJuridica&quot; : &quot;%omniData:StepApplicantDetailsJuridica%&quot;,
+    &quot;StepDescripcionFacilidades&quot; : &quot;%omniData:StepDescripcionFacilidades%&quot;,
+    &quot;StepEstadoSituacion&quot; : &quot;%omniData:StepEstadoSituacion%&quot;,
+    &quot;StepCompanyDetails&quot; : &quot;%omniData:StepCompanyDetails%&quot;,
+    &quot;StepPersonType&quot; : &quot;%omniData:StepPersonType%&quot;,
+    &quot;StepReferencias&quot; : &quot;%ListMergeReferencias%&quot;,
+    &quot;StepLoanDetails&quot; : &quot;%omniData:StepLoanDetails%&quot;,
+    &quot;FSC_Recomendaciones__c&quot; : &quot;%omniData:StepFortalezaDebilidades:FSC_Recomendaciones__c%&quot;,
+    &quot;StepDatosSolicitante&quot; : &quot;%omniData:StepDatosSolicitante%&quot;,
+    &quot;StepWarrantyDetails&quot; : &quot;%omniData:StepWarrantyDetails%&quot;,
+    &quot;StepEstadosFinancieros&quot; : &quot;%omniData:StepEstadosFinancieros%&quot;,
+    &quot;StepApplicantDetailsFisica&quot; : &quot;%omniData:StepApplicantDetailsFisica%&quot;,
+    &quot;StepRelacion&quot; : &quot;%ListMergeRelacionNegociosColaterales%&quot;,
+    &quot;StepHistoria&quot; : &quot;%omniData:StepHistoria%&quot;,
+    &quot;StepClientesYProveedoresPrincipales&quot; : &quot;%ListMergeClientesYProveedoresPrincipales%&quot;,
+    &quot;StepFortalezaDebilidades&quot; : &quot;%ListMergeFortalezasYDebilidades%&quot;,
+    &quot;ContextId&quot; : &quot;%omniData:ContextId%&quot;,
+    &quot;StepEstadoGananciasPerdidas&quot; : &quot;%omniData:StepEstadoGananciasPerdidas%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCTranformDatosParaActualizarCrearSolicitudCreditoPYME&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>6.0</sequenceNumber>
+        <type>DataRaptor Transform Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Transform Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DRT_MapFinServRecords_To_Facilidades</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;ignoreCache&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;ISNOTBLANK(%omniData:FinServRecords%)&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;FinServRecords&quot; : &quot;%omniData:FinServRecords%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCMapFinServRecordsToFacilidades&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>5.0</sequenceNumber>
+        <type>DataRaptor Transform Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <childElements>
+            <description>Data Mapper Post Action</description>
+            <isActive>true</isActive>
+            <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+            <level>1.0</level>
+            <name>DMPCrearLoanApplicant</name>
+            <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+            <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMPCrearLoanApplicant&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;LoanApplicant&quot; : &quot;%DMTDatosParaActualizarCrearSolicitudCreditoPYME:LoanApplicant%&quot;,
+    &quot;ResidentialLoanApplicationId&quot; : &quot;%DMPCrearResidentialLoanApplication:ResidentialLoanApplication_1|1:Id%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCCrearLoanApplicant&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+            <sequenceNumber>1.0</sequenceNumber>
+            <type>DataRaptor Post Action</type>
+        </childElements>
+        <description>Loop Block</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LBCreateLoanApplicant</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : false,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;loopList&quot; : &quot;DMTDatosParaActualizarCrearSolicitudCreditoPYME:LoanApplicant&quot;,
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : &quot;&quot;,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;ignoreCache&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;ISNOTBLANK(%DMTDatosParaActualizarCrearSolicitudCreditoPYME:LoanApplicant%)&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;id&quot; : &quot;&quot;,
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>12.0</sequenceNumber>
+        <type>Loop Block</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>List Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>ListMergeClientesYProveedoresPrincipales</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;preventIntraListMerge&quot; : false,
+  &quot;isActive&quot; : true,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;mergeListsOrder&quot; : [ &quot;omniData:StepReferencias:FSC_Clientes_Y_Proveedores_Principales__c_1&quot;, &quot;omniData:StepReferencias:FSC_Clientes_Y_Proveedores_Principales__c_2&quot; ],
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;filterListFormula&quot; : &quot;&quot;,
+  &quot;primaryListKey&quot; : &quot;&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : { },
+  &quot;advancedMerge&quot; : false,
+  &quot;sendJSONNode&quot; : &quot;&quot;,
+  &quot;sortInDescendingOrder&quot; : false,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;hasPrimary&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;postActionLogging&quot; : &quot;&quot;,
+  &quot;preActionLogging&quot; : &quot;&quot;,
+  &quot;chainOnStep&quot; : false,
+  &quot;dynamicOutputFields&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;ListMergeClientesYProveedoresPrincipales:FSC_Clientes_Y_Proveedores_Principales__c&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;allowMergeNulls&quot; : false,
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;restOptions&quot; : { }
+}</propertySetConfig>
+        <sequenceNumber>3.0</sequenceNumber>
+        <type>List Merge Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>List Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>ListMergeFortalezasYDebilidades</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;preventIntraListMerge&quot; : false,
+  &quot;isActive&quot; : true,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;mergeListsOrder&quot; : [ &quot;omniData:StepFortalezaDebilidades:FSC_Fortalezas_Y_Debilidades__c_1&quot;, &quot;omniData:StepFortalezaDebilidades:FSC_Fortalezas_Y_Debilidades__c_2&quot; ],
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;filterListFormula&quot; : &quot;FSC_Fortalezas_Y_Debilidades__c_1_Name_1 != &apos;&apos; || FSC_Fortalezas_Y_Debilidades__c_2_Name_2 != &apos;&apos;&quot;,
+  &quot;primaryListKey&quot; : &quot;&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : { },
+  &quot;bundle&quot; : &quot;&quot;,
+  &quot;advancedMerge&quot; : false,
+  &quot;sendJSONNode&quot; : &quot;&quot;,
+  &quot;sortInDescendingOrder&quot; : false,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;hasPrimary&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;postActionLogging&quot; : &quot;&quot;,
+  &quot;preActionLogging&quot; : &quot;&quot;,
+  &quot;chainOnStep&quot; : false,
+  &quot;ignoreCache&quot; : false,
+  &quot;dynamicOutputFields&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;ListMergeFortalezasYDebilidades:FSC_Fortalezas_Y_Debilidades__c&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;allowMergeNulls&quot; : false,
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;restOptions&quot; : { }
+}</propertySetConfig>
+        <sequenceNumber>4.0</sequenceNumber>
+        <type>List Merge Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>List Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>ListMergeReferencias</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;preventIntraListMerge&quot; : false,
+  &quot;isActive&quot; : true,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;mergeListsOrder&quot; : [ &quot;omniData:StepReferencias:FSC_Referencias__c_1&quot;, &quot;omniData:StepReferencias:FSC_Referencias__c_2&quot;, &quot;omniData:StepReferencias:FSC_Referencias__c_3&quot; ],
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;filterListFormula&quot; : &quot;&quot;,
+  &quot;primaryListKey&quot; : &quot;&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : { },
+  &quot;advancedMerge&quot; : false,
+  &quot;sendJSONNode&quot; : &quot;&quot;,
+  &quot;sortInDescendingOrder&quot; : false,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;hasPrimary&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;postActionLogging&quot; : &quot;&quot;,
+  &quot;preActionLogging&quot; : &quot;&quot;,
+  &quot;chainOnStep&quot; : false,
+  &quot;dynamicOutputFields&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;ListMergeReferencias:FSC_Referencias__c&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;allowMergeNulls&quot; : false,
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;restOptions&quot; : { }
+}</propertySetConfig>
+        <sequenceNumber>2.0</sequenceNumber>
+        <type>List Merge Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>List Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>ListMergeRelacionNegociosColaterales</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;preventIntraListMerge&quot; : false,
+  &quot;isActive&quot; : true,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;mergeListsOrder&quot; : [ &quot;omniData:StepRelacion:FSC_Relacion_Negocios_Colaterales__c_1&quot;, &quot;omniData:StepRelacion:FSC_Relacion_Negocios_Colaterales__c_2&quot;, &quot;omniData:StepRelacion:FSC_Relacion_Negocios_Colaterales__c_3&quot; ],
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;filterListFormula&quot; : &quot;&quot;,
+  &quot;primaryListKey&quot; : &quot;&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;id&quot; : &quot;&quot;,
+  &quot;advancedMerge&quot; : false,
+  &quot;sendJSONNode&quot; : &quot;&quot;,
+  &quot;sortInDescendingOrder&quot; : false,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;hasPrimary&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;postActionLogging&quot; : &quot;&quot;,
+  &quot;preActionLogging&quot; : &quot;&quot;,
+  &quot;chainOnStep&quot; : false,
+  &quot;dynamicOutputFields&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;ListMergeRelacionNegociosColaterales&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;allowMergeNulls&quot; : false,
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;restOptions&quot; : { }
+}</propertySetConfig>
+        <sequenceNumber>1.0</sequenceNumber>
+        <type>List Merge Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LogErrorAccount</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;DMPActualizarDatosCuenta:success == false&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;objects&quot; : &quot;Account&quot;,
+    &quot;sourceName&quot; : &quot;DMPActualizarDatosCuenta  en IP FSC_ActualizarCrearSolicitudCreditoPYME&quot;,
+    &quot;error&quot; : &quot;%DMPActualizarDatosCuenta:error%&quot;,
+    &quot;title&quot; : &quot;Error al crear o actualizar Account&quot;,
+    &quot;errors&quot; : &quot;%DMPActualizarDatosCuenta:errors%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCLogErrors&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>9.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LogErrorClientesYProveedoresPrincipales</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;DMPCrearClientesYProveedoresPrincipales:success == false&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;objects&quot; : &quot;FSC_Clientes_Y_Proveedores_Principales__c&quot;,
+    &quot;sourceName&quot; : &quot;DMPCrearClientesYProveedoresPrincipales  en IP FSC_ActualizarCrearSolicitudCreditoPYME&quot;,
+    &quot;error&quot; : &quot;%DMPCrearClientesYProveedoresPrincipales:error%&quot;,
+    &quot;title&quot; : &quot;Error al crear FSC_Clientes_Y_Proveedores_Principales__c&quot;,
+    &quot;errors&quot; : &quot;%DMPCrearClientesYProveedoresPrincipales:errors%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCLogErrors&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>27.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LogErrorFacilidadesDeCredito</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;DMPCrearFacilidadesDeCredito:success == false&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;objects&quot; : &quot;FSC_Facilidades_De_Credito__c&quot;,
+    &quot;sourceName&quot; : &quot;DMPCrearFacilidadesDeCredito  en IP FSC_ActualizarCrearSolicitudCreditoPYME&quot;,
+    &quot;error&quot; : &quot;%DMPCrearFacilidadesDeCredito:error%&quot;,
+    &quot;title&quot; : &quot;Error al crear FSC_Facilidades_De_Credito__c&quot;,
+    &quot;errors&quot; : &quot;%DMPCrearFacilidadesDeCredito:errors%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCLogErrors&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>17.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LogErrorFortalezasYDebilidades</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;DMPCrearFortalezasYDebilidades:success == false&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;objects&quot; : &quot;FSC_Fortalezas_Y_Debilidades__c&quot;,
+    &quot;sourceName&quot; : &quot;DMPCrearFortalezasYDebilidades  en IP FSC_ActualizarCrearSolicitudCreditoPYME&quot;,
+    &quot;error&quot; : &quot;%DMPCrearFortalezasYDebilidades:error%&quot;,
+    &quot;title&quot; : &quot;Error al crear FSC_Fortalezas_Y_Debilidades__c&quot;,
+    &quot;errors&quot; : &quot;%DMPCrearFortalezasYDebilidades:errors%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCLogErrors&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>29.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LogErrorLoanApplicant</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;DMPCrearLoanApplicant:success == false&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;objects&quot; : &quot;LoanApplicant&quot;,
+    &quot;sourceName&quot; : &quot;DMPCrearLoanApplicant  en IP FSC_ActualizarCrearSolicitudCreditoPYME&quot;,
+    &quot;error&quot; : &quot;%DMPCrearLoanApplicant:error%&quot;,
+    &quot;title&quot; : &quot;Error al crear LoanApplicant&quot;,
+    &quot;errors&quot; : &quot;%DMPCrearLoanApplicant:errors%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCLogErrors&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>13.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LogErrorLoanApplicationAsset</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;DMPCrearLoanApplicationAsset:success == false&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;objects&quot; : &quot;LoanApplicationAsset&quot;,
+    &quot;sourceName&quot; : &quot;DMPCrearLoanApplicationAsset  en IP FSC_ActualizarCrearSolicitudCreditoPYME&quot;,
+    &quot;error&quot; : &quot;%DMPCrearLoanApplicationAsset:error%&quot;,
+    &quot;title&quot; : &quot;Error al crear LoanApplicationAsset&quot;,
+    &quot;errors&quot; : &quot;%DMPCrearLoanApplicationAsset:errors%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCLogErrors&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>21.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LogErrorPropositoYUsoDeFondos</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;DMPCrearPropositoYUsoDeFondos:success == false&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;objects&quot; : &quot;FSC_Proposito_Y_Uso_De_Fondos__c&quot;,
+    &quot;sourceName&quot; : &quot;DMPCrearPropositoYUsoDeFondos  en IP FSC_ActualizarCrearSolicitudCreditoPYME&quot;,
+    &quot;error&quot; : &quot;%DMPCrearPropositoYUsoDeFondos:error%&quot;,
+    &quot;title&quot; : &quot;Error al crear FSC_Proposito_Y_Uso_De_Fondos__c&quot;,
+    &quot;errors&quot; : &quot;%DMPCrearPropositoYUsoDeFondos:errors%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCLogErrors&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>19.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LogErrorReferencias</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;DMPCrearReferencias:success == false&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;objects&quot; : &quot;FSC_Referencias__c&quot;,
+    &quot;sourceName&quot; : &quot;DMPCrearReferencias  en IP FSC_ActualizarCrearSolicitudCreditoPYME&quot;,
+    &quot;error&quot; : &quot;%DMPCrearReferencias:error%&quot;,
+    &quot;title&quot; : &quot;Error al crear FSC_Referencias__c&quot;,
+    &quot;errors&quot; : &quot;%DMPCrearReferencias:errors%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCLogErrors&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>25.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LogErrorRelacionNegociosColaterales</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;DMPCrearRelacionNegociosColaterales:success == false&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;objects&quot; : &quot;FSC_Relacion_Negocios_Colaterales__c&quot;,
+    &quot;sourceName&quot; : &quot;DMPCrearRelacionNegociosColaterales  en IP FSC_ActualizarCrearSolicitudCreditoPYME&quot;,
+    &quot;error&quot; : &quot;%DMPCrearRelacionNegociosColaterales:error%&quot;,
+    &quot;title&quot; : &quot;Error al crear FSC_Relacion_Negocios_Colaterales__c&quot;,
+    &quot;errors&quot; : &quot;%DMPCrearRelacionNegociosColaterales:errors%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCLogErrors&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>23.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LogErrorResidentialLoanApplication</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;DMPCrearResidentialLoanApplication:success == false&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;objects&quot; : &quot;ResidentialLoanApplication&quot;,
+    &quot;sourceName&quot; : &quot;DMPCrearResidentialLoanApplication  en IP FSC_ActualizarCrearSolicitudCreditoPYME&quot;,
+    &quot;error&quot; : &quot;%DMPCrearResidentialLoanApplication:error%&quot;,
+    &quot;title&quot; : &quot;Error al crear ResidentialLoanApplication&quot;,
+    &quot;errors&quot; : &quot;%DMPCrearResidentialLoanApplication:errors%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCLogErrors&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>11.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LogErrorSociosPrincipalesYAccionistas</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;DMPCrearSociosPrincipalesYAccionistas:success == false&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;objects&quot; : &quot;FSC_Socios_Principales_Y_Accionistas__c&quot;,
+    &quot;sourceName&quot; : &quot;DMPCrearSociosPrincipalesYAccionistas  en IP FSC_ActualizarCrearSolicitudCreditoPYME&quot;,
+    &quot;error&quot; : &quot;%DMPCrearSociosPrincipalesYAccionistas:error%&quot;,
+    &quot;title&quot; : &quot;Error al crear FSC_Socios_Principales_Y_Accionistas__c&quot;,
+    &quot;errors&quot; : &quot;%DMPCrearSociosPrincipalesYAccionistas:errors%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCLogErrors&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>15.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>List Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>MergeFacilidadesWithFinServ</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;preventIntraListMerge&quot; : false,
+  &quot;isActive&quot; : true,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;mergeListsOrder&quot; : [ &quot;omniData:StepDescripcionFacilidades:FSC_Facilidades_De_Credito__c&quot;, &quot;DRT_MapFinServRecords_To_Facilidades:FSC_Facilidades_De_Credito__c&quot; ],
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;filterListFormula&quot; : &quot;&quot;,
+  &quot;primaryListKey&quot; : &quot;&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : { },
+  &quot;advancedMerge&quot; : false,
+  &quot;sendJSONNode&quot; : &quot;&quot;,
+  &quot;sortInDescendingOrder&quot; : false,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;hasPrimary&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;postActionLogging&quot; : &quot;&quot;,
+  &quot;preActionLogging&quot; : &quot;&quot;,
+  &quot;chainOnStep&quot; : false,
+  &quot;dynamicOutputFields&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;allowMergeNulls&quot; : false,
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;restOptions&quot; : { }
+}</propertySetConfig>
+        <sequenceNumber>7.0</sequenceNumber>
+        <type>List Merge Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Response Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>Response</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;vlcResponseHeaders&quot; : { },
+  &quot;returnFullDataJSON&quot; : false,
+  &quot;returnOnlyAdditionalOutput&quot; : true,
+  &quot;elementValueMap&quot; : { },
+  &quot;responseFormat&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : {
+    &quot;ResidentialLoanApplicationId&quot; : &quot;%DMPCrearResidentialLoanApplication:ResidentialLoanApplication_1|1:Id%&quot;,
+    &quot;DMPCrearResidentialLoanApplication&quot; : &quot;%DMPCrearResidentialLoanApplication%&quot;,
+    &quot;CreacionExitosa&quot; : &quot;%DMPCrearResidentialLoanApplicationStatus%&quot;
+  },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;id&quot; : &quot;&quot;,
+  &quot;restOptions&quot; : { },
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>30.0</sequenceNumber>
+        <type>Response Action</type>
+    </omniProcessElements>
+    <omniProcessKey>FSC_ActualizarCrearSolicitudCreditoPYME</omniProcessKey>
+    <omniProcessType>Integration Procedure</omniProcessType>
+    <propertySetConfig>{
+  &quot;transientValues&quot; : {
+    &quot;activateOrDeactivateConsent&quot; : false
+  }
+}</propertySetConfig>
+    <subType>ActualizarCrearSolicitudCreditoPYME</subType>
+    <type>FSC</type>
+    <uniqueName>FSC_ActualizarCrearSolicitudCreditoPYME_Procedure_14</uniqueName>
+    <versionNumber>14.0</versionNumber>
+</OmniIntegrationProcedure>

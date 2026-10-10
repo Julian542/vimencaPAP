@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_TipoSolicitud__c</fullName>
+    <label>Tipo de solicitud</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>BPR</fullName>
+                <default>false</default>
+                <label>CONTROL DE PRESTAMOS</label>
+            </value>
+            <value>
+                <fullName>BCC</fullName>
+                <default>false</default>
+                <label>CUENTAS CORRIENTES</label>
+            </value>
+            <value>
+                <fullName>BCA</fullName>
+                <default>false</default>
+                <label>CUENTAS DE AHORRO</label>
+            </value>
+            <value>
+                <fullName>BDP</fullName>
+                <default>false</default>
+                <label>DEPOSITOS A PLAZO</label>
+            </value>
+            <value>
+                <fullName>BGA</fullName>
+                <default>false</default>
+                <label>GARANTIAS DE CREDITOS</label>
+            </value>
+            <value>
+                <fullName>BLC</fullName>
+                <default>false</default>
+                <label>LINEAS DE CREDITOS</label>
+            </value>
+            <value>
+                <fullName>BTC</fullName>
+                <default>false</default>
+                <label>TARJETA CREDITO</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

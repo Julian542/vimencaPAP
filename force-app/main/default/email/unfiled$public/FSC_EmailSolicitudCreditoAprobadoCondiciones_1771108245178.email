@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initialscale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <style type="text/css">@media screen and (max-width: 480px) {slot[style] {margin-right: 0 !important;}.columnDiv {margin-right: 0 !important;}}@media screen and (min-width: 480px) {slot[style] {margin-bottom: 0 !important;}.columnDiv {margin-bottom: 0 !important;}}</style>
+  <style type="text/css">@media screen and (max-width: 480px) {.contentbuilderBaseColumnRow .columnCell {display:inline-block;width:100%}}</style>
+  <style type="text/css">.contentpageDefaultEmailTemplatePageTemplate .contentRoot {width: 600px;}@media only screen and (max-width: 480px) {.contentpageDefaultEmailTemplatePageTemplate .contentRoot {width: 320px;}}</style>
+ </head>
+ <body>
+  <table class="contentpageDefaultEmailTemplatePageTemplate" style="background-color: #E9EAEC;" role="presentation" id="contentpage_emailTemplateBodyContent" width="100%" cellpadding="0" cellspacing="0">
+   <tbody>
+    <tr>
+     <td width="100%" align="center">
+      <table class="contentRoot" style="background-color: #FFFFFF;" role="presentation" width="600" cellpadding="0" cellspacing="0">
+       <tbody>
+        <tr>
+         <td style="padding-top: 10px; padding-bottom: 10px; padding-left: 10px; padding-right: 10px;">
+          <table class="contentbuilderBaseColumnRow" style="align-items: flex-start; width: 100%; background-color:;" role="presentation" width="100%" cellpadding="0" cellspacing="0">
+           <tbody>
+            <tr valign="top">
+             <td width="100%" class="columnCell" style="vertical-align: top;display: inline-block; float:left">
+              <table cellpadding="0" cellspacing="0" style="width: 100%; border-collapse: collapse; word-break:break-word;">
+               <tbody>
+                <tr>
+                 <td>
+                  <table style="width:100%; border-collapse: collapse; word-break:break-word;" id="contentRegion" role="presentation" cellspacing="0" cellpadding="0" locked="0">
+                   <tbody>
+                    <tr>
+                     <td align="left"><img src="{[devName:VimencaLogo]}" alt="" width="150" style="width: 100%; display: block; border: none; max-width: 25%; object-fit: fill;" /></td>
+                    </tr>
+                   </tbody>
+                  </table></td>
+                </tr>
+                <tr>
+                 <td>
+                  <table style="font-size:14px; width: 100%; border-collapse: collapse; word-break: break-word;" role="presentation" cellspacing="0" cellpadding="0" id="contentregion" locked="0">
+                   <tbody>
+                    <tr>
+                     <td class="contentbuilder-html" style="padding: 0;"><br />
+                      <div style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #000000; line-height: 1.5;">
+                       <p style="margin: 0 0 14px 0;">Hola {{{ResidentialLoanApplication.FSC_Nombre_Cliente__c}}},</p>
+                       <p style="margin: 0 0 14px 0;">Como parte de nuestro compromiso de acompañarte para alcanzar tus metas, al evaluar tu capacidad crediticia, en esta oportunidad tu solicitud de préstamo {{{ResidentialLoanApplication.Name}}} fue aprobada por un monto de {{{ResidentialLoanApplication.FSC_MontoAprobado__c}}}, a un plazo de {{{ResidentialLoanApplication.FSC_PlazoMesesAprobado__c}}} meses, con una cuota mensual de {{{ResidentialLoanApplication.FSC_MontoTotalCuotaMensual__c}}}, a una tasa de {{{ResidentialLoanApplication.FSC_TasaInteresAprobada__c}}} destinado para {{{ResidentialLoanApplication.FSC_Destino_del_Prestamo__c}}}.</p>
+                       <p style="margin: 0 0 14px 0;">Confírmanos tu aprobación a esta propuesta respondiendo a <a href="mailto:{{{ResidentialLoanApplication.FSC_CreatedBy_Email__c}}} " style="color: blue; text-decoration: underline;">{{{ResidentialLoanApplication.FSC_CreatedBy_Email__c}}}</a>. También puedes comunicarte con nosotros al 809.533.1400. Nuestro equipo está disponible para asistirte de lunes a domingo de 7AM a 12AM, y en días feriados de 7AM a 8PM. Esperamos escucharte muy pronto.</p>
+                       <p style="margin: 0 0 14px 0;">Para nosotros, es un privilegio servirte.</p>
+                       <p style="margin: 0;">Equipo Banca Personal <br /><b>Banco Vimenca </b></p>
+                       <div style="margin-top: 16px;">
+                        <p style="margin: 0;">Cuéntanos tu experiencia con nosotros en <a href="mailto:miexperiencia@bv.com.do" style="color: blue; text-decoration: underline;">miexperiencia@bv.com.do</a>. ¡Queremos escucharte!</p>
+                       </div>
+                      </div></td>
+                    </tr>
+                   </tbody>
+                  </table></td>
+                </tr>
+               </tbody>
+              </table></td>
+            </tr>
+           </tbody>
+          </table></td>
+        </tr>
+       </tbody>
+      </table></td>
+    </tr>
+   </tbody>
+  </table>
+ </body>
+</html>

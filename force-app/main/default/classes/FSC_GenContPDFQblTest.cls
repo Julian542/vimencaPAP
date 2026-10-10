@@ -1,16 +1,7 @@
 @IsTest
 private class FSC_GenContPDFQblTest {
 	private static Account createAccount() {
-		Account acc = new Account(
-			RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName()
-				.get('Candidato_Persona_Juridica')
-				.getRecordTypeId(),
-			Name = 'Cuenta Test PDF Queueable ' + System.now().getTime(),
-			ACC_RNC__c = 'QBL' + String.valueOf(System.now().getTime()).right(6),
-			ACC_Condicion__c = 'PROSPECTO',
-			ACC_Estado__c = 'INICIADO',
-			ACC_TipoIdentificacion__c = 'RNC'
-		);
+		Account acc = new Account(Name = 'Cuenta Test PDF Queueable ' + System.now().getTime());
 		insert acc;
 		return acc;
 	}
@@ -50,7 +41,7 @@ private class FSC_GenContPDFQblTest {
 		];
 
 		System.assertEquals('Gestionar firmas', updatedRla.FSC_Subestado__c, 'El subestado debe actualizarse luego de generar el PDF.');
-		System.assertEquals(true, updatedRla.FSC_Contrato_Generado__c, 'El indicador de contrato generado debe quedar en true.');
+		System.assertEquals(false, updatedRla.FSC_Contrato_Generado__c, 'Un consumo sin contrato aplicable sólo debe avanzar de etapa.');
 		System.assertEquals(null, updatedRla.FSC_LogErrores__c, 'No debe guardarse log de error cuando la generación fue exitosa.');
 
 		List<ContentDocumentLink> links = [
@@ -59,12 +50,7 @@ private class FSC_GenContPDFQblTest {
 			WHERE LinkedEntityId = :eligibleRla.Id
 		];
 
-		System.assertEquals(1, links.size(), 'Debe existir un archivo vinculado al ResidentialLoanApplication elegible.');
-		System.assertEquals(
-			'Contrato_RLA_' + String.valueOf(eligibleRla.Id),
-			links[0].ContentDocument.Title,
-			'El título del archivo debe seguir la convención esperada.'
-		);
+		System.assertEquals(0, links.size(), 'No debe generarse contrato cuando el resolver indica que no aplica.');
 	}
 
 	@IsTest
@@ -117,7 +103,7 @@ private class FSC_GenContPDFQblTest {
 		);
 
 		System.assertEquals('Gestionar firmas', rlaMap.get(eligibleRla.Id).FSC_Subestado__c, 'El elegible debe avanzar de subestado.');
-		System.assertEquals(true, rlaMap.get(eligibleRla.Id).FSC_Contrato_Generado__c, 'El elegible debe quedar con contrato generado.');
+		System.assertEquals(false, rlaMap.get(eligibleRla.Id).FSC_Contrato_Generado__c, 'El consumo sin contrato aplicable no debe marcarse como generado.');
 		System.assertEquals(null, rlaMap.get(eligibleRla.Id).FSC_LogErrores__c, 'El elegible no debe registrar error si todo sale bien.');
 
 		System.assertEquals(
@@ -139,7 +125,7 @@ private class FSC_GenContPDFQblTest {
 			WHERE LinkedEntityId = :nonEligibleRla.Id
 		];
 
-		System.assertEquals(1, eligibleLinkCount, 'Debe haber un archivo para el registro elegible.');
+		System.assertEquals(0, eligibleLinkCount, 'No debe haber archivo si el contrato no aplica.');
 		System.assertEquals(0, nonEligibleLinkCount, 'No debe haber archivos para el registro no elegible.');
 	}
 
@@ -169,7 +155,7 @@ private class FSC_GenContPDFQblTest {
 		System.assertNotEquals(null, failedRla.FSC_LogErrores__c, 'Debe guardarse el error de generación en el log.');
 		System.assert(failedRla.FSC_LogErrores__c.contains('Log anterior'), 'Debe preservarse el contenido previo del log.');
 		System.assert(failedRla.FSC_LogErrores__c.contains('--------------------'), 'Debe agregarse el separador entre errores.');
-		System.assert(failedRla.FSC_LogErrores__c.contains('Error generando contrato PDF'), 'Debe guardarse un mensaje de error claro.');
+		System.assert(failedRla.FSC_LogErrores__c.contains('Error generando documento PDF'), 'Debe guardarse un mensaje de error claro.');
 		System.assert(
 			failedRla.FSC_LogErrores__c.contains('Error de generación forzado para prueba.'),
 			'Debe guardar el detalle del error ocurrido.'

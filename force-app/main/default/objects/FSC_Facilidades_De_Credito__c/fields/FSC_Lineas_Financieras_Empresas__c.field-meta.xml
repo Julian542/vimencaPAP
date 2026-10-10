@@ -1,0 +1,1040 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Lineas_Financieras_Empresas__c</fullName>
+    <label>Lineas Financieras Empresas</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>PRESTA PRONTO</fullName>
+                <default>true</default>
+                <label>PRESTA PRONTO</label>
+            </value>
+            <value>
+                <fullName>BARRICK GOLD</fullName>
+                <default>false</default>
+                <label>BARRICK GOLD</label>
+            </value>
+            <value>
+                <fullName>MALLEN VETERINARIA S. A.</fullName>
+                <default>false</default>
+                <label>MALLEN VETERINARIA S. A.</label>
+            </value>
+            <value>
+                <fullName>UNICARIBE</fullName>
+                <default>false</default>
+                <label>UNICARIBE</label>
+            </value>
+            <value>
+                <fullName>BMI COMPAÑIA DE SEGUROS</fullName>
+                <default>false</default>
+                <label>BMI COMPAÑIA DE SEGUROS</label>
+            </value>
+            <value>
+                <fullName>MULTI ASSITANCE SERVICES INC</fullName>
+                <default>false</default>
+                <label>MULTI ASSITANCE SERVICES INC</label>
+            </value>
+            <value>
+                <fullName>FONT GAMUNDI</fullName>
+                <default>false</default>
+                <label>FONT GAMUNDI</label>
+            </value>
+            <value>
+                <fullName>DITEK S.A.S. (Grupo Font Gdy)</fullName>
+                <default>false</default>
+                <label>DITEK S.A.S. (Grupo Font Gdy)</label>
+            </value>
+            <value>
+                <fullName>PROMOTORA RDC</fullName>
+                <default>false</default>
+                <label>PROMOTORA RDC</label>
+            </value>
+            <value>
+                <fullName>CORAZONES UNIDOS</fullName>
+                <default>false</default>
+                <label>CORAZONES UNIDOS</label>
+            </value>
+            <value>
+                <fullName>FUNDACION CORAZONES UNIDOS</fullName>
+                <default>false</default>
+                <label>FUNDACION CORAZONES UNIDOS</label>
+            </value>
+            <value>
+                <fullName>ICDA( INST DOM. A)</fullName>
+                <default>false</default>
+                <label>ICDA( INST DOM. A)</label>
+            </value>
+            <value>
+                <fullName>ARS RENACER, S. A.</fullName>
+                <default>false</default>
+                <label>ARS RENACER, S. A.</label>
+            </value>
+            <value>
+                <fullName>ANFITRIONES SAS</fullName>
+                <default>false</default>
+                <label>ANFITRIONES SAS</label>
+            </value>
+            <value>
+                <fullName>LEAR INVESTMENTS</fullName>
+                <default>false</default>
+                <label>LEAR INVESTMENTS</label>
+            </value>
+            <value>
+                <fullName>CARIBE CARGO, SRL.</fullName>
+                <default>false</default>
+                <label>CARIBE CARGO, SRL.</label>
+            </value>
+            <value>
+                <fullName>CEDIMAT</fullName>
+                <default>false</default>
+                <label>CEDIMAT</label>
+            </value>
+            <value>
+                <fullName>BONA, S. A.</fullName>
+                <default>false</default>
+                <label>BONA, S. A.</label>
+            </value>
+            <value>
+                <fullName>BELL DOMINICANA</fullName>
+                <default>false</default>
+                <label>BELL DOMINICANA</label>
+            </value>
+            <value>
+                <fullName>AUTONEXT</fullName>
+                <default>false</default>
+                <label>AUTONEXT</label>
+            </value>
+            <value>
+                <fullName>A.S. INTERIORES</fullName>
+                <default>false</default>
+                <label>A.S. INTERIORES</label>
+            </value>
+            <value>
+                <fullName>TERRACHEM, S.A.</fullName>
+                <default>false</default>
+                <label>TERRACHEM, S.A.</label>
+            </value>
+            <value>
+                <fullName>SALUD BUCAL, SRL</fullName>
+                <default>false</default>
+                <label>SALUD BUCAL, SRL</label>
+            </value>
+            <value>
+                <fullName>KHERSUN, S. A.</fullName>
+                <default>false</default>
+                <label>KHERSUN, S. A.</label>
+            </value>
+            <value>
+                <fullName>PROMED DOMINICANA</fullName>
+                <default>false</default>
+                <label>PROMED DOMINICANA</label>
+            </value>
+            <value>
+                <fullName>RED MEDICA DOM.</fullName>
+                <default>false</default>
+                <label>RED MEDICA DOM.</label>
+            </value>
+            <value>
+                <fullName>PASEK LABORATORIO</fullName>
+                <default>false</default>
+                <label>PASEK LABORATORIO</label>
+            </value>
+            <value>
+                <fullName>VELAS HISPANIOLA</fullName>
+                <default>false</default>
+                <label>VELAS HISPANIOLA</label>
+            </value>
+            <value>
+                <fullName>FARMA CARD</fullName>
+                <default>false</default>
+                <label>FARMA CARD</label>
+            </value>
+            <value>
+                <fullName>MADE</fullName>
+                <default>false</default>
+                <label>MADE</label>
+            </value>
+            <value>
+                <fullName>INESA</fullName>
+                <default>false</default>
+                <label>INESA</label>
+            </value>
+            <value>
+                <fullName>CASA PACO</fullName>
+                <default>false</default>
+                <label>CASA PACO</label>
+            </value>
+            <value>
+                <fullName>SECURITY FORCE</fullName>
+                <default>false</default>
+                <label>SECURITY FORCE</label>
+            </value>
+            <value>
+                <fullName>WEST</fullName>
+                <default>false</default>
+                <label>WEST</label>
+            </value>
+            <value>
+                <fullName>GEOTRACK SOLUTIONS (GRUPO SECURITY FORCE)</fullName>
+                <default>false</default>
+                <label>GEOTRACK SOLUTIONS (GRUPO SECURITY FORCE)</label>
+            </value>
+            <value>
+                <fullName>POINT TELEMATIC</fullName>
+                <default>false</default>
+                <label>POINT TELEMATIC</label>
+            </value>
+            <value>
+                <fullName>GRUPO EGO</fullName>
+                <default>false</default>
+                <label>GRUPO EGO</label>
+            </value>
+            <value>
+                <fullName>HUMANO</fullName>
+                <default>false</default>
+                <label>HUMANO</label>
+            </value>
+            <value>
+                <fullName>PRIMERA ARS HUMANO</fullName>
+                <default>false</default>
+                <label>PRIMERA ARS HUMANO</label>
+            </value>
+            <value>
+                <fullName>GEINCO</fullName>
+                <default>false</default>
+                <label>GEINCO</label>
+            </value>
+            <value>
+                <fullName>LA INNOVACION</fullName>
+                <default>false</default>
+                <label>LA INNOVACION</label>
+            </value>
+            <value>
+                <fullName>NUTRIFARMA</fullName>
+                <default>false</default>
+                <label>NUTRIFARMA</label>
+            </value>
+            <value>
+                <fullName>LETERAGO</fullName>
+                <default>false</default>
+                <label>LETERAGO</label>
+            </value>
+            <value>
+                <fullName>DR. KITCHEN SERVICES</fullName>
+                <default>false</default>
+                <label>DR. KITCHEN SERVICES</label>
+            </value>
+            <value>
+                <fullName>INDUSMETAL LISTER</fullName>
+                <default>false</default>
+                <label>INDUSMETAL LISTER</label>
+            </value>
+            <value>
+                <fullName>DINAFA</fullName>
+                <default>false</default>
+                <label>DINAFA</label>
+            </value>
+            <value>
+                <fullName>LABORATORIOS AMADITA</fullName>
+                <default>false</default>
+                <label>LABORATORIOS AMADITA</label>
+            </value>
+            <value>
+                <fullName>LOS HIDALGOS FARMACIAS</fullName>
+                <default>false</default>
+                <label>LOS HIDALGOS FARMACIAS</label>
+            </value>
+            <value>
+                <fullName>FERNANDO GIRALDEZ</fullName>
+                <default>false</default>
+                <label>FERNANDO GIRALDEZ</label>
+            </value>
+            <value>
+                <fullName>NEMUNAS, SRL.</fullName>
+                <default>false</default>
+                <label>NEMUNAS, SRL.</label>
+            </value>
+            <value>
+                <fullName>ETHEINSEN</fullName>
+                <default>false</default>
+                <label>ETHEINSEN</label>
+            </value>
+            <value>
+                <fullName>TERMINAL CONTENEDORES DEL ATLANTICO</fullName>
+                <default>false</default>
+                <label>TERMINAL CONTENEDORES DEL ATLANTICO</label>
+            </value>
+            <value>
+                <fullName>AMERICAN SCHOOL</fullName>
+                <default>false</default>
+                <label>AMERICAN SCHOOL</label>
+            </value>
+            <value>
+                <fullName>GRUPO VIAMAR, S. A.</fullName>
+                <default>false</default>
+                <label>GRUPO VIAMAR, S. A.</label>
+            </value>
+            <value>
+                <fullName>HACIENDA LA CORTINA</fullName>
+                <default>false</default>
+                <label>HACIENDA LA CORTINA</label>
+            </value>
+            <value>
+                <fullName>ECO MOTORS</fullName>
+                <default>false</default>
+                <label>ECO MOTORS</label>
+            </value>
+            <value>
+                <fullName>VIAPAINT TALLER PINT</fullName>
+                <default>false</default>
+                <label>VIAPAINT TALLER PINT</label>
+            </value>
+            <value>
+                <fullName>CEDE (GRUPO VIAMAR)</fullName>
+                <default>false</default>
+                <label>CEDE (GRUPO VIAMAR)</label>
+            </value>
+            <value>
+                <fullName>JOB, BAEZ, SOTO &amp; AS</fullName>
+                <default>false</default>
+                <label>JOB, BAEZ, SOTO &amp; AS</label>
+            </value>
+            <value>
+                <fullName>KIDS CREATE</fullName>
+                <default>false</default>
+                <label>KIDS CREATE</label>
+            </value>
+            <value>
+                <fullName>ANIMAL FOOD LINE</fullName>
+                <default>false</default>
+                <label>ANIMAL FOOD LINE</label>
+            </value>
+            <value>
+                <fullName>3G SOLUTIONS</fullName>
+                <default>false</default>
+                <label>3G SOLUTIONS</label>
+            </value>
+            <value>
+                <fullName>PROM GRAPHIC SOLUC</fullName>
+                <default>false</default>
+                <label>PROM GRAPHIC SOLUC</label>
+            </value>
+            <value>
+                <fullName>DANIEL NIVAR Y ASOCIADOS</fullName>
+                <default>false</default>
+                <label>DANIEL NIVAR Y ASOCIADOS</label>
+            </value>
+            <value>
+                <fullName>CARGO TEC VN, SRL</fullName>
+                <default>false</default>
+                <label>CARGO TEC VN, SRL</label>
+            </value>
+            <value>
+                <fullName>LABORATORIO SAN LUIS</fullName>
+                <default>false</default>
+                <label>LABORATORIO SAN LUIS</label>
+            </value>
+            <value>
+                <fullName>COND. PLAZA LAS AMERICAS</fullName>
+                <default>false</default>
+                <label>COND. PLAZA LAS AMERICAS</label>
+            </value>
+            <value>
+                <fullName>REMODELACIONES DEL ATLANTICO</fullName>
+                <default>false</default>
+                <label>REMODELACIONES DEL ATLANTICO</label>
+            </value>
+            <value>
+                <fullName>AGENCIA BELLA</fullName>
+                <default>false</default>
+                <label>AGENCIA BELLA</label>
+            </value>
+            <value>
+                <fullName>AUTOBRITANICA LTD</fullName>
+                <default>false</default>
+                <label>AUTOBRITANICA LTD</label>
+            </value>
+            <value>
+                <fullName>HONDA RENT CAR</fullName>
+                <default>false</default>
+                <label>HONDA RENT CAR</label>
+            </value>
+            <value>
+                <fullName>FUND. QUIEREME COMO SOY</fullName>
+                <default>false</default>
+                <label>FUND. QUIEREME COMO SOY</label>
+            </value>
+            <value>
+                <fullName>ACROMAX DOMINICANA</fullName>
+                <default>false</default>
+                <label>ACROMAX DOMINICANA</label>
+            </value>
+            <value>
+                <fullName>COLEGIO LUX MUNDI</fullName>
+                <default>false</default>
+                <label>COLEGIO LUX MUNDI</label>
+            </value>
+            <value>
+                <fullName>CONDOMINIO CENTRO COMERCIAL ACROPOLIS</fullName>
+                <default>false</default>
+                <label>CONDOMINIO CENTRO COMERCIAL ACROPOLIS</label>
+            </value>
+            <value>
+                <fullName>HATUEY ALMACENES</fullName>
+                <default>false</default>
+                <label>HATUEY ALMACENES</label>
+            </value>
+            <value>
+                <fullName>TRANSPORTE IMPALA</fullName>
+                <default>false</default>
+                <label>TRANSPORTE IMPALA</label>
+            </value>
+            <value>
+                <fullName>PLASTIFAR</fullName>
+                <default>false</default>
+                <label>PLASTIFAR</label>
+            </value>
+            <value>
+                <fullName>QUISQUEYA COMERCIAL</fullName>
+                <default>false</default>
+                <label>QUISQUEYA COMERCIAL</label>
+            </value>
+            <value>
+                <fullName>GRUPO COMETA</fullName>
+                <default>false</default>
+                <label>GRUPO COMETA</label>
+            </value>
+            <value>
+                <fullName>LABORATORIO DE REFERENCIA</fullName>
+                <default>false</default>
+                <label>LABORATORIO DE REFERENCIA</label>
+            </value>
+            <value>
+                <fullName>SUNIX PETROLEUM SRL</fullName>
+                <default>false</default>
+                <label>SUNIX PETROLEUM SRL</label>
+            </value>
+            <value>
+                <fullName>TROPIGAS DOM.</fullName>
+                <default>false</default>
+                <label>TROPIGAS DOM.</label>
+            </value>
+            <value>
+                <fullName>VV AUTOS SAS</fullName>
+                <default>false</default>
+                <label>VV AUTOS SAS</label>
+            </value>
+            <value>
+                <fullName>PALMA DEL SOL</fullName>
+                <default>false</default>
+                <label>PALMA DEL SOL</label>
+            </value>
+            <value>
+                <fullName>SC SALUD CORPORAL</fullName>
+                <default>false</default>
+                <label>SC SALUD CORPORAL</label>
+            </value>
+            <value>
+                <fullName>ESTACION TOTAL &quot;LA MACORISANA&quot;</fullName>
+                <default>false</default>
+                <label>ESTACION TOTAL &quot;LA MACORISANA&quot;</label>
+            </value>
+            <value>
+                <fullName>OPERADORA DE SERVICIOS MACAJO-MC DONALD&apos;S</fullName>
+                <default>false</default>
+                <label>OPERADORA DE SERVICIOS MACAJO-MC DONALD&apos;S</label>
+            </value>
+            <value>
+                <fullName>MOVIL PORT, S. R. L.</fullName>
+                <default>false</default>
+                <label>MOVIL PORT, S. R. L.</label>
+            </value>
+            <value>
+                <fullName>VIBRAS - ESTACION TOTAL &quot; JUAN DOLIO&quot;</fullName>
+                <default>false</default>
+                <label>VIBRAS - ESTACION TOTAL &quot; JUAN DOLIO&quot;</label>
+            </value>
+            <value>
+                <fullName>A.V. BLANDINO</fullName>
+                <default>false</default>
+                <label>A.V. BLANDINO</label>
+            </value>
+            <value>
+                <fullName>GUEST SERVICE, S. R. L.</fullName>
+                <default>false</default>
+                <label>GUEST SERVICE, S. R. L.</label>
+            </value>
+            <value>
+                <fullName>AJFA</fullName>
+                <default>false</default>
+                <label>AJFA</label>
+            </value>
+            <value>
+                <fullName>LUIS E BETANCES R&amp;CO</fullName>
+                <default>false</default>
+                <label>LUIS E BETANCES R&amp;CO</label>
+            </value>
+            <value>
+                <fullName>ABAXA CORPORATION</fullName>
+                <default>false</default>
+                <label>ABAXA CORPORATION</label>
+            </value>
+            <value>
+                <fullName>GAR 210, S. R. L.</fullName>
+                <default>false</default>
+                <label>GAR 210, S. R. L.</label>
+            </value>
+            <value>
+                <fullName>FABREGAS SERVICES</fullName>
+                <default>false</default>
+                <label>FABREGAS SERVICES</label>
+            </value>
+            <value>
+                <fullName>INCUBE, SRL.</fullName>
+                <default>false</default>
+                <label>INCUBE, SRL.</label>
+            </value>
+            <value>
+                <fullName>COFACA</fullName>
+                <default>false</default>
+                <label>COFACA</label>
+            </value>
+            <value>
+                <fullName>FARACH, S.A.</fullName>
+                <default>false</default>
+                <label>FARACH, S.A.</label>
+            </value>
+            <value>
+                <fullName>SEGUROS CRECER</fullName>
+                <default>false</default>
+                <label>SEGUROS CRECER</label>
+            </value>
+            <value>
+                <fullName>AFP CRECER</fullName>
+                <default>false</default>
+                <label>AFP CRECER</label>
+            </value>
+            <value>
+                <fullName>RECAUCHADORA DEL CARIBE SRL</fullName>
+                <default>false</default>
+                <label>RECAUCHADORA DEL CARIBE SRL</label>
+            </value>
+            <value>
+                <fullName>CKTRANS MOTORS</fullName>
+                <default>false</default>
+                <label>CKTRANS MOTORS</label>
+            </value>
+            <value>
+                <fullName>FARBEL S,A</fullName>
+                <default>false</default>
+                <label>FARBEL S,A</label>
+            </value>
+            <value>
+                <fullName>MEDITERRANEO INTER.</fullName>
+                <default>false</default>
+                <label>MEDITERRANEO INTER.</label>
+            </value>
+            <value>
+                <fullName>ROFASA FARMA, EIRL</fullName>
+                <default>false</default>
+                <label>ROFASA FARMA, EIRL</label>
+            </value>
+            <value>
+                <fullName>INPROCA</fullName>
+                <default>false</default>
+                <label>INPROCA</label>
+            </value>
+            <value>
+                <fullName>Fernandez de Jesus y Asociados</fullName>
+                <default>false</default>
+                <label>Fernandez de Jesus y Asociados</label>
+            </value>
+            <value>
+                <fullName>Fuentes Fernandez Srl</fullName>
+                <default>false</default>
+                <label>Fuentes Fernandez Srl</label>
+            </value>
+            <value>
+                <fullName>LECHE FRESCA, SRL.</fullName>
+                <default>false</default>
+                <label>LECHE FRESCA, SRL.</label>
+            </value>
+            <value>
+                <fullName>REMESAS VIMENCA</fullName>
+                <default>false</default>
+                <label>REMESAS VIMENCA</label>
+            </value>
+            <value>
+                <fullName>DATA-VIMENCA</fullName>
+                <default>false</default>
+                <label>DATA-VIMENCA</label>
+            </value>
+            <value>
+                <fullName>TODO PAGO</fullName>
+                <default>false</default>
+                <label>TODO PAGO</label>
+            </value>
+            <value>
+                <fullName>VIMENCA SA. (VIMENPAQ)</fullName>
+                <default>false</default>
+                <label>VIMENCA SA. (VIMENPAQ)</label>
+            </value>
+            <value>
+                <fullName>VISION FUND RD. SAS</fullName>
+                <default>false</default>
+                <label>VISION FUND RD. SAS</label>
+            </value>
+            <value>
+                <fullName>MERCORP, SAS.</fullName>
+                <default>false</default>
+                <label>MERCORP, SAS.</label>
+            </value>
+            <value>
+                <fullName>AVANT AUTO</fullName>
+                <default>false</default>
+                <label>AVANT AUTO</label>
+            </value>
+            <value>
+                <fullName>VLOI VIA SMART AUTO PAINT SRL</fullName>
+                <default>false</default>
+                <label>VLOI VIA SMART AUTO PAINT SRL</label>
+            </value>
+            <value>
+                <fullName>MERCAPLAS, SRL.</fullName>
+                <default>false</default>
+                <label>MERCAPLAS, SRL.</label>
+            </value>
+            <value>
+                <fullName>-----</fullName>
+                <default>false</default>
+                <label>-----</label>
+            </value>
+            <value>
+                <fullName>ALARMA 24, S. A.</fullName>
+                <default>false</default>
+                <label>ALARMA 24, S. A.</label>
+            </value>
+            <value>
+                <fullName>NUTRIFARMA, S. A</fullName>
+                <default>false</default>
+                <label>NUTRIFARMA, S. A</label>
+            </value>
+            <value>
+                <fullName>PLAZA LAMA</fullName>
+                <default>false</default>
+                <label>PLAZA LAMA</label>
+            </value>
+            <value>
+                <fullName>ARS-SDS</fullName>
+                <default>false</default>
+                <label>ARS-SDS</label>
+            </value>
+            <value>
+                <fullName>RAMON L. BAEZ, S.A.S</fullName>
+                <default>false</default>
+                <label>RAMON L. BAEZ, S.A.S</label>
+            </value>
+            <value>
+                <fullName>PERAVIA MOTORS</fullName>
+                <default>false</default>
+                <label>PERAVIA MOTORS</label>
+            </value>
+            <value>
+                <fullName>LABORATORIOS LAM</fullName>
+                <default>false</default>
+                <label>LABORATORIOS LAM</label>
+            </value>
+            <value>
+                <fullName>DOCTORES MALLEN GUERRA, CXA</fullName>
+                <default>false</default>
+                <label>DOCTORES MALLEN GUERRA, CXA</label>
+            </value>
+            <value>
+                <fullName>LABORATORIOS MALLEN, S.A.</fullName>
+                <default>false</default>
+                <label>LABORATORIOS MALLEN, S.A.</label>
+            </value>
+            <value>
+                <fullName>SEGUROS PEPIN</fullName>
+                <default>false</default>
+                <label>SEGUROS PEPIN</label>
+            </value>
+            <value>
+                <fullName>CASA DEL ACERO INOX.</fullName>
+                <default>false</default>
+                <label>CASA DEL ACERO INOX.</label>
+            </value>
+            <value>
+                <fullName>GRUPO NEW HORIZONS</fullName>
+                <default>false</default>
+                <label>GRUPO NEW HORIZONS</label>
+            </value>
+            <value>
+                <fullName>BASANTA FILMS, SRL</fullName>
+                <default>false</default>
+                <label>BASANTA FILMS, SRL</label>
+            </value>
+            <value>
+                <fullName>AVÁNZAME DOMINICANA</fullName>
+                <default>false</default>
+                <label>AVÁNZAME DOMINICANA</label>
+            </value>
+            <value>
+                <fullName>TELE-MARKETING</fullName>
+                <default>false</default>
+                <label>TELE-MARKETING</label>
+            </value>
+            <value>
+                <fullName>BANCO LOPEZ DE ARO</fullName>
+                <default>false</default>
+                <label>BANCO LOPEZ DE ARO</label>
+            </value>
+            <value>
+                <fullName>OUTSORSING ENSERROS EIRL</fullName>
+                <default>false</default>
+                <label>OUTSORSING ENSERROS EIRL</label>
+            </value>
+            <value>
+                <fullName>POOL DE BANCOS</fullName>
+                <default>false</default>
+                <label>POOL DE BANCOS</label>
+            </value>
+            <value>
+                <fullName>MOTOPLEX</fullName>
+                <default>false</default>
+                <label>MOTOPLEX</label>
+            </value>
+            <value>
+                <fullName>EDITORIAL CM SRL</fullName>
+                <default>false</default>
+                <label>EDITORIAL CM SRL</label>
+            </value>
+            <value>
+                <fullName>AMERICAPITAL SRL</fullName>
+                <default>false</default>
+                <label>AMERICAPITAL SRL</label>
+            </value>
+            <value>
+                <fullName>MARTICA COMERCIA SRL</fullName>
+                <default>false</default>
+                <label>MARTICA COMERCIA SRL</label>
+            </value>
+            <value>
+                <fullName>ALIAS FINANCING, SRL</fullName>
+                <default>false</default>
+                <label>ALIAS FINANCING, SRL</label>
+            </value>
+            <value>
+                <fullName>RIVERWIND INVESTMENT</fullName>
+                <default>false</default>
+                <label>RIVERWIND INVESTMENT</label>
+            </value>
+            <value>
+                <fullName>GBM</fullName>
+                <default>false</default>
+                <label>GBM</label>
+            </value>
+            <value>
+                <fullName>YAO</fullName>
+                <default>false</default>
+                <label>YAO</label>
+            </value>
+            <value>
+                <fullName>MAGNA MOTORS</fullName>
+                <default>false</default>
+                <label>MAGNA MOTORS</label>
+            </value>
+            <value>
+                <fullName>INDUSMETAL BLANCO LISTER, SRL.</fullName>
+                <default>false</default>
+                <label>INDUSMETAL BLANCO LISTER, SRL.</label>
+            </value>
+            <value>
+                <fullName>GRAFIFLEX, SRL.</fullName>
+                <default>false</default>
+                <label>GRAFIFLEX, SRL.</label>
+            </value>
+            <value>
+                <fullName>CORDERO SALADIN ABOG Y CONSUL.</fullName>
+                <default>false</default>
+                <label>CORDERO SALADIN ABOG Y CONSUL.</label>
+            </value>
+            <value>
+                <fullName>GRUPO ALASKA</fullName>
+                <default>false</default>
+                <label>GRUPO ALASKA</label>
+            </value>
+            <value>
+                <fullName>FUERZA DE VENTA EXTERNA</fullName>
+                <default>false</default>
+                <label>FUERZA DE VENTA EXTERNA</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES RIBAMAR,  SRL</fullName>
+                <default>false</default>
+                <label>INVERSIONES RIBAMAR,  SRL</label>
+            </value>
+            <value>
+                <fullName>SERVIKARTON</fullName>
+                <default>false</default>
+                <label>SERVIKARTON</label>
+            </value>
+            <value>
+                <fullName>EXCEL CONSULTORES</fullName>
+                <default>false</default>
+                <label>EXCEL CONSULTORES</label>
+            </value>
+            <value>
+                <fullName>CAMSOFT (GRUPO MALLEN)</fullName>
+                <default>false</default>
+                <label>CAMSOFT (GRUPO MALLEN)</label>
+            </value>
+            <value>
+                <fullName>UNICARIBE VP.</fullName>
+                <default>false</default>
+                <label>UNICARIBE VP.</label>
+            </value>
+            <value>
+                <fullName>ALUMINIO ARZENO,S.A.</fullName>
+                <default>false</default>
+                <label>ALUMINIO ARZENO,S.A.</label>
+            </value>
+            <value>
+                <fullName>CAMORUCO GROUP</fullName>
+                <default>false</default>
+                <label>CAMORUCO GROUP</label>
+            </value>
+            <value>
+                <fullName>AMIGO LEAL SRL.</fullName>
+                <default>false</default>
+                <label>AMIGO LEAL SRL.</label>
+            </value>
+            <value>
+                <fullName>MERCADO MEDIA NETWORK</fullName>
+                <default>false</default>
+                <label>MERCADO MEDIA NETWORK</label>
+            </value>
+            <value>
+                <fullName>BTRD OPERATIONS</fullName>
+                <default>false</default>
+                <label>BTRD OPERATIONS</label>
+            </value>
+            <value>
+                <fullName>TOKMAKJIAN INTERNATIONAL INC.</fullName>
+                <default>false</default>
+                <label>TOKMAKJIAN INTERNATIONAL INC.</label>
+            </value>
+            <value>
+                <fullName>BTDR OPERATIONS, S.A.S</fullName>
+                <default>false</default>
+                <label>BTDR OPERATIONS, S.A.S</label>
+            </value>
+            <value>
+                <fullName>EMPLEADOS ARS YUNEN</fullName>
+                <default>false</default>
+                <label>EMPLEADOS ARS YUNEN</label>
+            </value>
+            <value>
+                <fullName>TOKMAKJIAN INTERNATIONAL INC</fullName>
+                <default>false</default>
+                <label>TOKMAKJIAN INTERNATIONAL INC</label>
+            </value>
+            <value>
+                <fullName>VENTAS EXTERNAS EE SOLUTIONS</fullName>
+                <default>false</default>
+                <label>VENTAS EXTERNAS EE SOLUTIONS</label>
+            </value>
+            <value>
+                <fullName>IQTEK SOLUCIONES SRL</fullName>
+                <default>false</default>
+                <label>IQTEK SOLUCIONES SRL</label>
+            </value>
+            <value>
+                <fullName>Punta Vista S.R.L.</fullName>
+                <default>false</default>
+                <label>Punta Vista S.R.L.</label>
+            </value>
+            <value>
+                <fullName>Coral Hospitality Corp</fullName>
+                <default>false</default>
+                <label>Coral Hospitality Corp</label>
+            </value>
+            <value>
+                <fullName>Afinity Marketing Ser</fullName>
+                <default>false</default>
+                <label>Afinity Marketing Ser</label>
+            </value>
+            <value>
+                <fullName>ABTX DOMINICANA</fullName>
+                <default>false</default>
+                <label>ABTX DOMINICANA</label>
+            </value>
+            <value>
+                <fullName>Cervecería Nacional Dominicana</fullName>
+                <default>false</default>
+                <label>Cervecería Nacional Dominicana</label>
+            </value>
+            <value>
+                <fullName>AMIPHARMA DOMINICANA S.R.L .</fullName>
+                <default>false</default>
+                <label>AMIPHARMA DOMINICANA S.R.L .</label>
+            </value>
+            <value>
+                <fullName>VENTAS EXTERNA COLONY, SRL.</fullName>
+                <default>false</default>
+                <label>VENTAS EXTERNA COLONY, SRL.</label>
+            </value>
+            <value>
+                <fullName>COLONY, S.R.L.</fullName>
+                <default>false</default>
+                <label>COLONY, S.R.L.</label>
+            </value>
+            <value>
+                <fullName>DATA CREDITO</fullName>
+                <default>false</default>
+                <label>DATA CREDITO</label>
+            </value>
+            <value>
+                <fullName>Women&apos;s Care Center</fullName>
+                <default>false</default>
+                <label>Women&apos;s Care Center</label>
+            </value>
+            <value>
+                <fullName>DCBM-GRUPO TEMPLARIS</fullName>
+                <default>false</default>
+                <label>DCBM-GRUPO TEMPLARIS</label>
+            </value>
+            <value>
+                <fullName>MICROPORT CRM SORIN</fullName>
+                <default>false</default>
+                <label>MICROPORT CRM SORIN</label>
+            </value>
+            <value>
+                <fullName>GROB PHARMA CORP</fullName>
+                <default>false</default>
+                <label>GROB PHARMA CORP</label>
+            </value>
+            <value>
+                <fullName>LA CASA DEL RESTAURANT</fullName>
+                <default>false</default>
+                <label>LA CASA DEL RESTAURANT</label>
+            </value>
+            <value>
+                <fullName>CMP (PORTAL)</fullName>
+                <default>false</default>
+                <label>CMP (PORTAL)</label>
+            </value>
+            <value>
+                <fullName>Hire Horatio</fullName>
+                <default>false</default>
+                <label>Hire Horatio</label>
+            </value>
+            <value>
+                <fullName>El Dinero (Grupo Marti)</fullName>
+                <default>false</default>
+                <label>El Dinero (Grupo Marti)</label>
+            </value>
+            <value>
+                <fullName>DESCUENTOS MEDICOS</fullName>
+                <default>false</default>
+                <label>DESCUENTOS MEDICOS</label>
+            </value>
+            <value>
+                <fullName>OPTIMA TALENTO S.R.L</fullName>
+                <default>false</default>
+                <label>OPTIMA TALENTO S.R.L</label>
+            </value>
+            <value>
+                <fullName>Naves del Atlántico NDA. S.R.L</fullName>
+                <default>false</default>
+                <label>Naves del Atlántico NDA. S.R.L</label>
+            </value>
+            <value>
+                <fullName>.</fullName>
+                <default>false</default>
+                <label>.</label>
+            </value>
+            <value>
+                <fullName>Agencia De Cambio Extranjero</fullName>
+                <default>false</default>
+                <label>Agencia De Cambio Extranjero</label>
+            </value>
+            <value>
+                <fullName>Condominio Malecon Center</fullName>
+                <default>false</default>
+                <label>Condominio Malecon Center</label>
+            </value>
+            <value>
+                <fullName>KTM IMPORT</fullName>
+                <default>false</default>
+                <label>KTM IMPORT</label>
+            </value>
+            <value>
+                <fullName>H&amp;H Solutions</fullName>
+                <default>false</default>
+                <label>H&amp;H Solutions</label>
+            </value>
+            <value>
+                <fullName>Gold&apos;s Gym RD</fullName>
+                <default>false</default>
+                <label>Gold&apos;s Gym RD</label>
+            </value>
+            <value>
+                <fullName>DELICIEL</fullName>
+                <default>false</default>
+                <label>DELICIEL</label>
+            </value>
+            <value>
+                <fullName>Farma Extra</fullName>
+                <default>false</default>
+                <label>Farma Extra</label>
+            </value>
+            <value>
+                <fullName>DATA CREDITO AN EQUIFAX COMPANY</fullName>
+                <default>false</default>
+                <label>DATA CREDITO AN EQUIFAX COMPANY</label>
+            </value>
+            <value>
+                <fullName>LABORATORIOS CHEMPROD S.R.L.</fullName>
+                <default>false</default>
+                <label>LABORATORIOS CHEMPROD S.R.L.</label>
+            </value>
+            <value>
+                <fullName>CK TRANS MOTORS</fullName>
+                <default>false</default>
+                <label>CK TRANS MOTORS</label>
+            </value>
+            <value>
+                <fullName>GUARDIANES MAXIMO DE SEGURIDAD, SRL.</fullName>
+                <default>false</default>
+                <label>GUARDIANES MAXIMO DE SEGURIDAD, SRL.</label>
+            </value>
+            <value>
+                <fullName>Universidad APEC (UNAPEC)</fullName>
+                <default>false</default>
+                <label>Universidad APEC (UNAPEC)</label>
+            </value>
+            <value>
+                <fullName>Ilumel</fullName>
+                <default>false</default>
+                <label>Ilumel</label>
+            </value>
+            <value>
+                <fullName>Antolin, S.A</fullName>
+                <default>false</default>
+                <label>Antolin, S.A</label>
+            </value>
+            <value>
+                <fullName>Empresa 1</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Empresa 1</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

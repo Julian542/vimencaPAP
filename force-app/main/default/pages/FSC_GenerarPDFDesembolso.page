@@ -1,0 +1,274 @@
+<apex:page controller="FSC_GenerarPDFDesembolsoControlador"
+           renderAs="pdf"
+           applyHtmlTag="false"
+           applyBodyTag="false"
+           showHeader="false"
+           sidebar="false"
+           standardStylesheets="false">
+  <html>
+    <head>
+      <style type="text/css">
+        @page { size: A4; margin: 11mm 10mm; }
+        body { font-family: Arial, Helvetica, sans-serif; font-size: 9px; line-height:1.2; color:#1f2933; }
+        .header { width:100%; margin:0 0 8px 0; border-collapse:collapse; }
+        .header td { border:0; text-align:center; padding:0; }
+        .brand-logo { width:220px; height:auto; margin:0 auto 4px auto; }
+        .title { text-align:center; font-weight:bold; font-size:12px; color:#0b3f91; margin:2px 0 7px 0; }
+        .small { font-size: 8px; }
+        .spacer { height: 6px; }
+        .grid { width:100%; border-collapse: collapse; margin-bottom:5px; }
+        .grid td { border:0.7px solid #8f98a3; padding:4px 5px; vertical-align:top; }
+        .gray { background:#eef2f6; color:#111827; font-weight:bold; }
+        .section-title { background:#0b3f91; color:#fff; font-weight:bold; text-align:center; padding:4px 5px; }
+        .center { text-align:center; }
+        .right { text-align:right; }
+        .nowrap { white-space:nowrap; }
+        .box-title { font-weight:bold; background:#0b3f91; color:#fff; padding:4px 5px; border:0.7px solid #0b3f91; }
+        .box { border:0.7px solid #8f98a3; padding:0; margin-top:4px; }
+        .box-body { min-height:78px; padding:7px; }
+        .strong-value { font-weight:bold; color:#0b3f91; }
+        .chk { font-family: Arial, Helvetica, sans-serif; font-size: 11px; }
+        .guarantees { -fs-table-paginate:paginate; }
+        .guarantees th { border:0.7px solid #8f98a3; padding:4px 5px; text-align:left; }
+        .guarantees thead { display:table-header-group; }
+        .guarantees td { white-space:normal; word-wrap:break-word; }
+        .guarantee-detail { margin-bottom:3px; }
+      </style>
+    </head>
+
+    <body>
+<table class="header">
+    <tr>
+        <td>
+            <apex:image url="{!$Resource.VimencaLogo}"
+                        styleClass="brand-logo"
+                        style="width:220px; height:auto; margin-bottom:4px;" />
+        </td>
+    </tr>
+    <tr>
+        <td class="title">
+            SOLICITUD DE DESEMBOLSO DE PRÉSTAMO
+        </td>
+    </tr>
+</table>
+
+      <table class="grid">
+        <tr>
+          <td style="width:50%;" class="small"><b>A:</b> GERENCIA DE EJECUCIÓN DE OPERACIONES</td>
+          <td style="width:50%;" class="small"><b>DE:</b> GERENCIA DE VALIDACIÓN Y FORMALIZACIÓN</td>
+        </tr>
+      </table>
+      
+      <div class="spacer"></div>
+
+      <table class="grid">
+        <tr>
+          <td class="gray">FECHA:</td>
+          <td>{!FormulaFecha}</td>
+          <td class="gray">SUCURSAL:</td>
+          <td>{!FSCSucursal}</td>
+          <td class="gray">OFICIAL ACTUANTE:</td>
+          <td>{!FormulaOficialActuante}</td>
+        </tr>
+        <tr>
+          <td class="gray">NOMBRE DEL(LOS) CLIENTE(S)</td>
+          <td colspan="5">{!FormulaNombreCliente}</td>
+        </tr>
+        <tr>
+          <td class="gray">NÚMERO DE CLIENTE</td>
+          <td>{!FSCNumeroCliente}</td>
+          <td class="gray">CÉDULA / RNC NO.</td>
+          <td>{!FormulaCedula}</td>
+          <td class="gray">TIPO DE CRÉDITO</td>
+          <td>{!FSCTipoCredito}</td>
+        </tr>
+        <tr>
+          <td class="gray">FECHA APROBACIÓN</td>
+          <td>{!FSCFechaAprobacion}</td>
+          <td class="gray">CÓDIGO APROBACIÓN</td>
+          <td>{!FSCCodigoAprobacion}</td>
+          <td class="gray">CLASIFICACIÓN SIB</td>
+          <td>{!FSCClasificacionSib}</td>
+        </tr>
+      </table>
+      <table class="grid">
+        <tr>
+          <td class="gray">MONTO A DESEMBOLSAR</td>
+          <td class="strong-value">{!FSCMontoDesembolsar}</td>
+          <td class="gray">MONTO APROBADO</td>
+          <td class="strong-value">{!FormulaMontoAprobado}</td>
+          <td class="gray">LÍNEA FINANCIERA</td>
+          <td>{!FSCLineaFinanciera}</td>
+          <td class="gray">SUB - APLICACIÓN</td>
+          <td>{!FSCSubAplicacion}</td>
+          <td class="gray">PRODUCTO BANCO</td>
+          <td>{!FSCProductoBanco}</td>
+        </tr>
+      </table>
+      
+      <div class="spacer"></div>
+
+      <table class="grid">
+        <tr class="center">
+          <td class="section-title" style="width:50%;">TIPO DE DESEMBOLSO SOLICITADO</td>
+          <td class="section-title" style="width:50%;">FORMA DE DESEMBOLSO</td>
+        </tr>
+        <tr>
+          <td class="center">{!FSCTipoDesembolsoSolicitado}</td>
+          <td class="center">{!FSCFormaDesembolso}</td>
+        </tr>
+      </table>
+        <table class="grid">
+            <tr>
+                <td class="gray" style="width:40%;">MONTO DEL DESEMBOLSO</td>
+                <td class="strong-value" style="width:60%;">{!FSCMontoDesembolso}</td>
+            </tr>
+        </table>
+        <table class="grid">
+            <tr>
+                <td style="padding:0;">
+                <table class="grid" style="border-left:0;border-right:0;border-bottom:0; width:100%;">
+                    <tr class="center">
+                    <td class="gray">MONTO DE LA CUOTA REGULAR</td>
+                    <td class="gray">NO. POLIZA SEGURO DE VIDA</td>
+                    <td class="gray">MONTO POLIZA SEGURO DE VIDA</td>
+                    <td class="gray">COMISION ADMINISTRACION DE SEGURO</td>
+                    <td class="gray">SEGURO DE PROPIEDAD (SI APLICA)</td>
+                    <td class="gray">MONTO TOTAL CUOTA MENSUAL</td>
+                    <td class="gray">TASA DE INTERÉS</td>
+                    </tr>
+                    <tr class="center">
+                    <td>{!FSCMontoCuotaRegular}</td>
+                    <td>{!FSCNumeroPolizaSeguroVida}</td>
+                    <td>{!FSCSeguroVidaMonto}</td>
+                    <td>{!FSCComisionAdminSeguroMonto}</td>
+                    <td>{!FSCSeguroPropiedadMonto}</td>
+                    <td>{!FSCMontoTotalCuotaMensual}</td>
+                    <td>{!FSCTasaInteres}</td>
+                    </tr>
+                </table>
+                </td>
+            </tr>
+        </table>
+      <table class="grid">
+        <tr>
+          <td style="width:50%; padding:0;">
+            <div class="box-title center">DESCUENTOS APLICABLES AL PRÉSTAMO</div>
+            <table class="grid" style="border-left:0;border-right:0;border-bottom:0;">
+              <tr><td class="gray">GASTOS TRAMITACIÓN</td><td class="right">{!FSCGastosTramitacion}</td></tr>
+              <tr><td class="gray">3% TRANSFERENCIA INMOBILIARIA</td><td class="right">{!FSCTransferenciaInmobiliaria}</td></tr>
+              <tr><td class="gray">2% INSCRIPCIÓN DE HIPOTECA</td><td class="right">{!FSCInscripcionHipoteca}</td></tr>
+              <tr><td class="gray">COMISIÓN POR ENDOSO PÓLIZA</td><td class="right">{!FSCComisionEndosoPoliza}</td></tr>
+              <tr><td class="gray">HONORARIOS LEGALIZACION CONTRATOS / PAGARE NOTARIAL</td><td class="right">{!FSCHonorariosLegalizacion}</td></tr>
+              <tr><td class="gray">TASAS POR SERVICIOS</td><td class="right">{!FSCTasasServicios}</td></tr>
+              <tr><td class="gray">AYUNTAMIENTO / REG. CIVIL</td><td class="right">{!FSCAyuntamientoRegistroCivil}</td></tr>
+              <tr><td class="gray">OTROS GASTOS LEGALES</td><td class="right">{!FSCOtrosGastosLegales}</td></tr>
+              <tr><td class="gray">CONF. CHEQUE IMP. (0.15%)</td><td class="right">{!FSCConfeccionCheque}</td></tr>
+              <tr><td class="gray">TOTAL DESCUENTOS</td><td class="right strong-value">{!FSCTotalDescuentos}</td></tr>
+              <tr><td class="gray">DESEMBOLSO NETO</td><td class="right strong-value">{!FSCDesembolsoNeto}</td></tr>
+            </table>
+          </td>
+          <td style="width:50%; padding:0;">
+            <table class="grid" style="border-left:0;border-right:0;border-bottom:0;">
+                <tr>
+                <td class="gray" style="width:40%;">FORMA DE PAGO</td>
+                <td style="width:60%;">{!FSCFormaPago}</td>
+                </tr>
+            </table>
+            <table class="grid" style="border-left:0;border-right:0;border-bottom:0;">
+                <tr class="center">
+                <td class="gray" style="width:20%;">PLAZO (MESES)</td>
+                <td class="gray" style="width:20%;">TASA DE INTERÉS</td>
+                <td class="gray" style="width:20%;">TASA FIJA POR</td>
+                <td class="gray" style="width:20%;">MORA</td>
+                <td class="gray" style="width:20%;">FECHA VENCIMIENTO</td>
+                </tr>
+                <tr class="center">
+                <td>{!FSCPlazoMeses}</td>
+                <td>{!FSCTasaInteres}</td>
+                <td>{!FSCTasaFijaPor}</td>
+                <td>{!FSCMora}</td>
+                <td>{!FSCFechaVencimiento}</td>
+                </tr>
+            </table>
+            <table class="grid">
+                <tr class="center">
+                    <td class="gray" style="width:40%;">TIPO DE GARANTÍA</td>
+                </tr>
+                <tr class="center">
+                    <td style="width:60%;">{!FSCTipoGarantia}</td>
+                </tr>
+            </table>
+            <div class="box-title center">DESCRIPCION DE LA GARANTIA</div>
+            <table class="grid" style="border-top:0;">
+                <tr>
+                    <td class="gray">LINEA CREDITO NO.</td>
+                    <td class="right">{!FSCLineaCreditoNumero}</td>
+                    <td class="gray">FECHA VENCIMIENTO DEL CONTRATO</td>
+                    <td class="right">{!FSCFechaVencimientoContrato}</td>
+                </tr>
+            </table>
+            </td>
+        </tr>
+      </table>
+
+      <div class="spacer"></div>
+
+      <div class="box-title">GARANTÍAS RELACIONADAS</div>
+      <!-- Las condiciones quedan dentro de las celdas para conservar una tabla válida. -->
+      <apex:outputPanel layout="block" rendered="{!tieneGarantias}">
+        <table class="grid guarantees">
+          <thead>
+            <tr class="gray">
+              <th style="width:24%;">Garantía</th>
+              <th style="width:46%;">Detalle de la garantía</th>
+              <th style="width:30%;">Valores</th>
+            </tr>
+          </thead>
+          <tbody>
+            <apex:repeat value="{!garantias}" var="garantia">
+              <tr>
+                <td>
+                  <div><apex:outputText value="{!garantia.nombre}" /></div>
+                  <div><apex:outputText value="{!garantia.descripcionGarantia}" rendered="{!garantia.nombre != garantia.descripcionGarantia}" /></div>
+                  <apex:outputPanel layout="block" rendered="{!esPyme}">
+                    <b>No. Facilidad: </b><apex:outputText value="{!garantia.numeroFacilidad}" />
+                  </apex:outputPanel>
+                </td>
+                <td>
+                  <apex:repeat value="{!garantia.detalles}" var="detalle">
+                    <div class="guarantee-detail"><apex:outputText value="{!detalle}" /></div>
+                  </apex:repeat>
+                </td>
+                <td>
+                  <apex:repeat value="{!garantia.importes}" var="importe">
+                    <div class="guarantee-detail">
+                      <b><apex:outputText value="{!importe.etiqueta}: " /></b>
+                      <apex:outputText value="{!importe.monedaTexto} " />
+                      <apex:outputText value="{0,number,###,##0.00}">
+                        <apex:param value="{!importe.valor}" />
+                      </apex:outputText>
+                    </div>
+                  </apex:repeat>
+                  <apex:outputPanel layout="block" rendered="{!esPyme}">
+                    <apex:outputText value="Admisibilidad: {0,number,0.##}%" rendered="{!NOT(ISBLANK(garantia.porcentajeAdmisibilidad))}">
+                      <apex:param value="{!garantia.porcentajeAdmisibilidad}" />
+                    </apex:outputText>
+                  </apex:outputPanel>
+                </td>
+              </tr>
+            </apex:repeat>
+          </tbody>
+        </table>
+      </apex:outputPanel>
+      <apex:outputPanel layout="block" rendered="{!NOT(tieneGarantias)}" styleClass="box-body">
+        No se encontraron garantías relacionadas.
+      </apex:outputPanel>
+
+      <div class="box">
+        <div class="box-title">OBSERVACIONES Y ESPECIFICACIONES</div>
+        <div class="box-body">{!FSCObservaciones}</div>
+      </div>
+    </body>
+  </html>
+</apex:page>

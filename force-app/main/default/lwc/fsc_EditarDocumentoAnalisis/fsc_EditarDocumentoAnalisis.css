@@ -1,0 +1,57 @@
+.modalContainer {
+	width: 92%;
+	max-width: 78rem;
+}
+
+.modalContent {
+	position: relative;
+	min-height: 12rem;
+	max-height: 72vh;
+	padding: 1rem 1.25rem 1.5rem;
+	overflow-y: auto;
+}
+
+.documentSection {
+	margin-bottom: 1rem;
+	border: 1px solid #c9c9c9;
+	border-radius: 0.25rem;
+	overflow: hidden;
+}
+
+.sectionTitle {
+	padding: 0.65rem 0.9rem;
+	background: #1f497d;
+	color: #fff;
+	font-size: 0.875rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+}
+
+.fieldsGrid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.85rem 1rem;
+	padding: 1rem;
+}
+
+.fieldsGrid_threeColumns {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.field_wide {
+	grid-column: 1 / -1;
+}
+
+@media (max-width: 48rem) {
+	.modalContainer {
+		width: 96%;
+	}
+
+	.fieldsGrid {
+		grid-template-columns: 1fr;
+	}
+
+	.field_wide {
+		grid-column: auto;
+	}
+}

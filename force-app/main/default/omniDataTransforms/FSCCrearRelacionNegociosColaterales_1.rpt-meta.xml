@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniDataTransform xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <assignmentRulesUsed>false</assignmentRulesUsed>
+    <deletedOnSuccess>false</deletedOnSuccess>
+    <errorIgnored>false</errorIgnored>
+    <expectedInputJson>{
+  &quot;ResidentialLoanApplicationId&quot; : &quot;&quot;,
+  &quot;FSC_Relacion_Negocios_Colaterales__c&quot; : [ {
+    &quot;FSC_Fecha_de_Apertura__c&quot; : &quot;2026-01-06&quot;,
+    &quot;FSC_Numero__c&quot; : 12312,
+    &quot;FSC_Periodo__c&quot; : &quot;23232&quot;,
+    &quot;FSC_Tipo_de_Producto__c&quot; : &quot;3123&quot;,
+    &quot;FSC_Flujo_Prom_Dep__c&quot; : &quot;3213&quot;,
+    &quot;FSC_Balance_Promedio__c&quot; : 1232
+  }, {
+    &quot;FSC_Monto_Apertura__c&quot; : 23131,
+    &quot;FSC_Fecha_de_Apertura__c&quot; : &quot;2026-01-08&quot;,
+    &quot;FSC_Numero__c&quot; : 2323,
+    &quot;FSC_Balance_Actual__c&quot; : 123123,
+    &quot;FSC_Tasa_Pasiva__c&quot; : &quot;2323&quot;,
+    &quot;FSC_Tipo_de_Producto__c&quot; : &quot;323&quot;
+  }, {
+    &quot;FSC_Monto_Minimo__c&quot; : 23232,
+    &quot;FSC_Fecha_de_Apertura__c&quot; : &quot;2026-01-07&quot;,
+    &quot;FSC_Numero__c&quot; : 2323,
+    &quot;FSC_Balance_Actual__c&quot; : 23232,
+    &quot;FSC_Tipo_de_Producto__c&quot; : &quot;2323&quot;,
+    &quot;FSC_Limite_de_Credito__c&quot; : 23232
+  } ]
+}</expectedInputJson>
+    <fieldLevelSecurityEnabled>true</fieldLevelSecurityEnabled>
+    <inputType>JSON</inputType>
+    <isManagedUsingStdDesigner>true</isManagedUsingStdDesigner>
+    <name>FSCCrearRelacionNegociosColaterales</name>
+    <nullInputsIncludedInOutput>false</nullInputsIncludedInOutput>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>52c34661-792d-493e-ab36-66e9df7955e9</globalKey>
+        <inputFieldName>FSC_Relacion_Negocios_Colaterales__c:FSC_Monto_Minimo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearRelacionNegociosColaterales</name>
+        <omniDataTransformation>0kdVC000000Gx0G</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0G</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Monto_Minimo__c</outputFieldName>
+        <outputObjectName>FSC_Relacion_Negocios_Colaterales__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>6e6fc9fe-de15-49a2-a872-71ba427a1c52</globalKey>
+        <inputFieldName>ResidentialLoanApplicationId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearRelacionNegociosColaterales</name>
+        <omniDataTransformation>0kdVC000000Gx0H</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0H</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Residential_Loan_Application__c</outputFieldName>
+        <outputObjectName>FSC_Relacion_Negocios_Colaterales__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>6188e87a-3040-4aba-8ba4-0f7e986aea22</globalKey>
+        <inputFieldName>FSC_Relacion_Negocios_Colaterales__c:FSC_Fecha_de_Apertura__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearRelacionNegociosColaterales</name>
+        <omniDataTransformation>0kdVC000000Gx0S</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0S</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Fecha_de_Apertura__c</outputFieldName>
+        <outputObjectName>FSC_Relacion_Negocios_Colaterales__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>403472f4-9d84-48c0-943a-9baae8ddc6db</globalKey>
+        <inputFieldName>FSC_Relacion_Negocios_Colaterales__c:FSC_Monto_Apertura__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearRelacionNegociosColaterales</name>
+        <omniDataTransformation>0kdVC000000Gx0Q</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0Q</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Monto_Apertura__c</outputFieldName>
+        <outputObjectName>FSC_Relacion_Negocios_Colaterales__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>0a2887f5-d478-47a7-83a2-ceb60bb2dce6</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearRelacionNegociosColaterales</name>
+        <omniDataTransformation>0kdVC000000Gx0R</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0R</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Id</outputFieldName>
+        <outputObjectName>FSC_Relacion_Negocios_Colaterales__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>bda16cd1-44d9-4e39-bfd6-eefeb57d1ac0</globalKey>
+        <inputFieldName>FSC_Relacion_Negocios_Colaterales__c:FSC_Flujo_Prom_Dep__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearRelacionNegociosColaterales</name>
+        <omniDataTransformation>0kdVC000000Gx0K</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0K</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Flujo_Prom_Dep__c</outputFieldName>
+        <outputObjectName>FSC_Relacion_Negocios_Colaterales__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>19908d3c-4a26-409a-b629-8ceec38c373f</globalKey>
+        <inputFieldName>FSC_Relacion_Negocios_Colaterales__c:FSC_Limite_de_Credito__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearRelacionNegociosColaterales</name>
+        <omniDataTransformation>0kdVC000000Gx0L</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0L</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Limite_de_Credito__c</outputFieldName>
+        <outputObjectName>FSC_Relacion_Negocios_Colaterales__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>65458d23-da8a-4853-a0bb-b429bbf1a53d</globalKey>
+        <inputFieldName>FSC_Relacion_Negocios_Colaterales__c:FSC_Numero__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearRelacionNegociosColaterales</name>
+        <omniDataTransformation>0kdVC000000Gx0I</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0I</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Numero__c</outputFieldName>
+        <outputObjectName>FSC_Relacion_Negocios_Colaterales__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>c2230255-829b-462c-b4dd-b2dee0169c44</globalKey>
+        <inputFieldName>FSC_Relacion_Negocios_Colaterales__c:FSC_Tipo_de_Producto__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearRelacionNegociosColaterales</name>
+        <omniDataTransformation>0kdVC000000Gx0J</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0J</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Tipo_de_Producto__c</outputFieldName>
+        <outputObjectName>FSC_Relacion_Negocios_Colaterales__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>ac36aa8a-0bc9-4696-8395-11d01ccfc5ab</globalKey>
+        <inputFieldName>FSC_Relacion_Negocios_Colaterales__c:FSC_Periodo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearRelacionNegociosColaterales</name>
+        <omniDataTransformation>0kdVC000000Gx0O</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0O</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Periodo__c</outputFieldName>
+        <outputObjectName>FSC_Relacion_Negocios_Colaterales__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>d2972629-14e7-45d6-8a81-5c206b1f21c3</globalKey>
+        <inputFieldName>FSC_Relacion_Negocios_Colaterales__c:FSC_Balance_Promedio__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearRelacionNegociosColaterales</name>
+        <omniDataTransformation>0kdVC000000Gx0P</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0P</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Balance_Promedio__c</outputFieldName>
+        <outputObjectName>FSC_Relacion_Negocios_Colaterales__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>ebd88d73-9e24-4e68-bddf-1c48b6a2f308</globalKey>
+        <inputFieldName>FSC_Relacion_Negocios_Colaterales__c:FSC_Tasa_Pasiva__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearRelacionNegociosColaterales</name>
+        <omniDataTransformation>0kdVC000000Gx0M</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0M</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Tasa_Pasiva__c</outputFieldName>
+        <outputObjectName>FSC_Relacion_Negocios_Colaterales__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>da769608-d922-42e7-b746-8376deb9cd38</globalKey>
+        <inputFieldName>FSC_Relacion_Negocios_Colaterales__c:FSC_Balance_Actual__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearRelacionNegociosColaterales</name>
+        <omniDataTransformation>0kdVC000000Gx0N</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gx0N</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Balance_Actual__c</outputFieldName>
+        <outputObjectName>FSC_Relacion_Negocios_Colaterales__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <outputType>SObject</outputType>
+    <previewJsonData>{
+  &quot;ResidentialLoanApplicationId&quot; : &quot;0cdVC000000JjZLYA0&quot;,
+  &quot;FSC_Relacion_Negocios_Colaterales__c&quot; : [ {
+    &quot;FSC_Fecha_de_Apertura__c&quot; : &quot;2026-01-06&quot;,
+    &quot;FSC_Numero__c&quot; : 12312,
+    &quot;FSC_Periodo__c&quot; : &quot;23232&quot;,
+    &quot;FSC_Tipo_de_Producto__c&quot; : &quot;3123&quot;,
+    &quot;FSC_Flujo_Prom_Dep__c&quot; : &quot;3213&quot;,
+    &quot;FSC_Balance_Promedio__c&quot; : 1232
+  }, {
+    &quot;FSC_Monto_Apertura__c&quot; : 23131,
+    &quot;FSC_Fecha_de_Apertura__c&quot; : &quot;2026-01-08&quot;,
+    &quot;FSC_Numero__c&quot; : 2323,
+    &quot;FSC_Balance_Actual__c&quot; : 123123,
+    &quot;FSC_Tasa_Pasiva__c&quot; : &quot;2323&quot;,
+    &quot;FSC_Tipo_de_Producto__c&quot; : &quot;323&quot;
+  }, {
+    &quot;FSC_Monto_Minimo__c&quot; : 23232,
+    &quot;FSC_Fecha_de_Apertura__c&quot; : &quot;2026-01-07&quot;,
+    &quot;FSC_Numero__c&quot; : 2323,
+    &quot;FSC_Balance_Actual__c&quot; : 23232,
+    &quot;FSC_Tipo_de_Producto__c&quot; : &quot;2323&quot;,
+    &quot;FSC_Limite_de_Credito__c&quot; : 23232
+  } ]
+}</previewJsonData>
+    <processSuperBulk>false</processSuperBulk>
+    <responseCacheTtlMinutes>0.0</responseCacheTtlMinutes>
+    <rollbackOnError>false</rollbackOnError>
+    <sourceObjectDefault>false</sourceObjectDefault>
+    <synchronousProcessThreshold>0.0</synchronousProcessThreshold>
+    <type>Load</type>
+    <uniqueName>FSCCrearRelacionNegociosColaterales_1</uniqueName>
+    <versionNumber>1.0</versionNumber>
+    <xmlDeclarationRemoved>false</xmlDeclarationRemoved>
+</OmniDataTransform>

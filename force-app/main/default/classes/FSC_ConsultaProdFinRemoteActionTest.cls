@@ -3,12 +3,7 @@ private class FSC_ConsultaProdFinRemoteActionTest {
 
     private static Account createAccount() {
         Account acc = new Account(
-            RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Juridica').getRecordTypeId(),
-            Name = 'Cuenta Remote Action ' + System.now().getTime(),
-            ACC_RNC__c = String.valueOf(Math.abs(Crypto.getRandomInteger())).leftPad(9, '0').substring(0, 9),
-            ACC_Condicion__c = 'PROSPECTO',
-            ACC_Estado__c = 'INICIADO',
-            ACC_TipoIdentificacion__c = 'RNC'
+            Name = 'Cuenta Remote Action ' + System.now().getTime()
         );
         insert acc;
         return acc;

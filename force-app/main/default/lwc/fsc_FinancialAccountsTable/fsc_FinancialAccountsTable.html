@@ -1,0 +1,48 @@
+<template>
+    <div class="os-table-wrapper">
+        <div class="slds-text-heading_small slds-m-bottom_small">{title}</div>
+
+        <!-- <div class="slds-text-body_small slds-text-color_weak slds-m-bottom_small">
+            Registros encontrados: {rowCount}
+        </div> -->
+
+        <template if:true={hasRows}>
+            <div class="slds-scrollable_x">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th scope="col">
+                                <div class="slds-truncate" title="Tipo">Tipo</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Nombre">Nombre</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={rows} for:item="row">
+                            <tr key={row.key}>
+                                <td>
+                                    <div class="slds-truncate" title={row.RecordTypeLabel}>
+                                        {row.RecordTypeLabel}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate" title={row.Name}>
+                                        {row.Name}
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+
+        <template if:false={hasRows}>
+            <div class="slds-text-color_weak slds-p-vertical_small">
+                No se encontraron facilidades de crédito existentes.
+            </div>
+        </template>
+    </div>
+</template>

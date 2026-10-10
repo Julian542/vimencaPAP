@@ -1,0 +1,778 @@
+<apex:page controller="FSC_ConsumoSolicitudPDFController"
+	renderAs="pdf"
+	applyHtmlTag="false"
+	applyBodyTag="false"
+	showHeader="false"
+	standardStylesheets="false">
+	<html>
+		<head>
+			<style>
+				@page {
+					size: A4;
+					margin: 8mm 9mm;
+				}
+				body {
+					font-family: Arial, sans-serif;
+					font-size: 8px;
+					color: #000;
+				}
+				table {
+					width: 100%;
+					border-collapse: collapse;
+					table-layout: fixed;
+					margin-bottom: 5px;
+				}
+				td,
+				th {
+					border: 1px solid #7ea6cf;
+					padding: 3px 4px;
+					vertical-align: top;
+					word-wrap: break-word;
+				}
+				.no-border td,
+				.no-border th {
+					border: none;
+					padding: 0;
+				}
+				.header {
+					margin-bottom: 8px;
+				}
+				.logo-cell {
+					width: 26%;
+				}
+				.logo {
+					width: 92%;
+				}
+				.section {
+					background: #0b4e9b;
+					color: #fff;
+					font-weight: bold;
+					font-size: 8.3px;
+					text-align: center;
+				}
+				.column-head {
+					background: #dfeaf7;
+					color: #0b4e9b;
+					font-weight: bold;
+					text-align: center;
+				}
+				.field-label {
+					display: block;
+					font-size: 6.9px;
+					font-weight: bold;
+					color: #0f4175;
+					line-height: 1.1;
+					margin-bottom: 2px;
+				}
+				.field-value {
+					min-height: 11px;
+					line-height: 1.2;
+				}
+				.wide-value {
+					min-height: 13px;
+				}
+				.blank-row td {
+					height: 16px;
+				}
+				.legal {
+					border: 1px solid #7ea6cf;
+					padding: 7px;
+					line-height: 1.3;
+					text-align: center;
+					margin-top: 3px;
+				}
+				.page-break {
+					page-break-before: always;
+				}
+				.signature-table {
+					margin-top: 18px;
+				}
+				.signature-table td {
+					border: none;
+					padding-top: 22px;
+					text-align: center;
+					vertical-align: top;
+				}
+				.signature-line {
+					border-top: 1px solid #000;
+					padding-top: 4px;
+					font-family: Arial, sans-serif;
+					font-size: 7.6px;
+					font-weight: bold;
+					line-height: 1.15;
+					text-transform: uppercase;
+				}
+				.signature-text {
+					font-family: Arial, sans-serif;
+					font-size: 7.6px;
+					font-weight: bold;
+					line-height: 1.15;
+					text-transform: uppercase;
+				}
+				.sig-marker {
+					color: #fff;
+					font-family: Arial, sans-serif;
+					font-size: 4pt;
+					white-space: nowrap;
+				}
+			</style>
+		</head>
+		<body>
+			<table class="no-border header">
+				<tr>
+					<td class="logo-cell">
+						<apex:image url="{!$Resource.VimencaLogo}"
+							styleClass="logo" />
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+
+			<table>
+				<colgroup>
+					<col style="width: 25%" />
+					<col style="width: 25%" />
+					<col style="width: 25%" />
+					<col style="width: 25%" />
+				</colgroup>
+				<tr>
+					<td
+						colspan="4"
+						class="section">
+						Tramitación de Préstamos
+					</td>
+				</tr>
+				<tr>
+					<td
+						colspan="4"
+						class="section">
+						Datos Generales de la Solicitud
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="field-label">Número Solicitud</span>
+						<div class="field-value">{!numeroSolicitud}</div>
+					</td>
+					<td>
+						<span class="field-label">Usuario Oficial</span>
+						<div class="field-value">{!usuarioOficial}</div>
+					</td>
+					<td>
+						<span class="field-label">Sucursal</span>
+						<div class="field-value">{!sucursal}</div>
+					</td>
+					<td>
+						<span class="field-label">Fecha Solicitud</span>
+						<div class="field-value">{!fechaSolicitudDetalleFmt}</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="field-label">Tipo de Solicitud</span>
+						<div class="field-value">{!tipoSolicitudGeneral}</div>
+					</td>
+					<td>
+						<span class="field-label">Estado Actual Solicitud</span>
+						<div class="field-value">{!estadoActualSolicitud}</div>
+					</td>
+					<td>
+						<span class="field-label">¿Es Consolidación de Deuda?</span>
+						<div class="field-value">{!esConsolidacionSimple}</div>
+					</td>
+					<td>
+						<span class="field-label">Es Refinanciamiento?</span>
+						<div class="field-value">{!esRefinanciamientoSimple}</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<span class="field-label">Tipo Deuda a Cancelar</span>
+						<div class="field-value wide-value">{!deudaCancelar}</div>
+					</td>
+				</tr>
+			</table>
+
+			<table>
+				<colgroup>
+					<col style="width: 25%" />
+					<col style="width: 25%" />
+					<col style="width: 25%" />
+					<col style="width: 25%" />
+				</colgroup>
+				<tr>
+					<td
+						colspan="4"
+						class="section">
+						Información Solicitante
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="field-label">Tipo de Solicitante</span>
+						<div class="field-value">{!solicitanteTipo}</div>
+					</td>
+					<td>
+						<span class="field-label">Tipo de Identificación</span>
+						<div class="field-value">{!solicitanteTipoIdentificacion}</div>
+					</td>
+					<td>
+						<span class="field-label">Número de Identificación</span>
+						<div class="field-value">{!solicitanteNumeroIdentificacion}</div>
+					</td>
+					<td>
+						<span class="field-label">Código de Cliente</span>
+						<div class="field-value">{!solicitanteCodigoCliente}</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="field-label">Nombre</span>
+						<div class="field-value">{!solicitanteNombres}</div>
+					</td>
+					<td>
+						<span class="field-label">Primer Apellido</span>
+						<div class="field-value">{!solicitantePrimerApellido}</div>
+					</td>
+					<td>
+						<span class="field-label">Segundo Apellido</span>
+						<div class="field-value">{!solicitanteSegundoApellido}</div>
+					</td>
+					<td>
+						<span class="field-label">Nacionalidad</span>
+						<div class="field-value">{!solicitanteNacionalidad}</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="field-label">Fecha de Nacimiento</span>
+						<div class="field-value">{!solicitanteFechaNacimiento}</div>
+					</td>
+					<td>
+						<span class="field-label">Estado Civil</span>
+						<div class="field-value">{!solicitanteEstadoCivil}</div>
+					</td>
+					<td>
+						<span class="field-label">Número de Dependientes</span>
+						<div class="field-value">{!solicitanteNumeroDependientes}</div>
+					</td>
+					<td>
+						<span class="field-label">Clasificación SIB</span>
+						<div class="field-value">{!solicitanteClasificacionSib}</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<span class="field-label">Estado Vivienda</span>
+						<div class="field-value wide-value">{!solicitanteEstadoVivienda}</div>
+					</td>
+				</tr>
+			</table>
+
+			<apex:outputPanel rendered="{!mostrarCoSolicitante}"
+				layout="none">
+				<table>
+					<colgroup>
+						<col style="width: 25%" />
+						<col style="width: 25%" />
+						<col style="width: 25%" />
+						<col style="width: 25%" />
+					</colgroup>
+					<tr>
+						<td
+							colspan="4"
+							class="section">
+							Información del Co-Solicitante
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="field-label">Tipo de Solicitante</span>
+							<div class="field-value">{!coSolicitanteTipo}</div>
+						</td>
+						<td>
+							<span class="field-label">Tipo de Identificación</span>
+							<div class="field-value">{!coSolicitanteTipoIdentificacion}</div>
+						</td>
+						<td>
+							<span class="field-label">Número de Identificación</span>
+							<div class="field-value">{!coSolicitanteNumeroIdentificacion}</div>
+						</td>
+						<td>
+							<span class="field-label">Código de Cliente</span>
+							<div class="field-value">{!coSolicitanteCodigoCliente}</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="field-label">Nombre</span>
+							<div class="field-value">{!coSolicitanteNombres}</div>
+						</td>
+						<td>
+							<span class="field-label">Primer Apellido</span>
+							<div class="field-value">{!coSolicitantePrimerApellido}</div>
+						</td>
+						<td>
+							<span class="field-label">Segundo Apellido</span>
+							<div class="field-value">{!coSolicitanteSegundoApellido}</div>
+						</td>
+						<td>
+							<span class="field-label">Nacionalidad</span>
+							<div class="field-value">{!coSolicitanteNacionalidad}</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="field-label">Fecha de Nacimiento</span>
+							<div class="field-value">{!coSolicitanteFechaNacimiento}</div>
+						</td>
+						<td>
+							<span class="field-label">Estado Civil</span>
+							<div class="field-value">{!coSolicitanteEstadoCivil}</div>
+						</td>
+						<td>
+							<span class="field-label">Número de Dependientes</span>
+							<div class="field-value">{!coSolicitanteNumeroDependientes}</div>
+						</td>
+						<td>
+							<span class="field-label">Clasificación SIB</span>
+							<div class="field-value">{!coSolicitanteClasificacionSib}</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<span class="field-label">Estado Vivienda</span>
+							<div class="field-value wide-value">{!coSolicitanteEstadoVivienda}</div>
+						</td>
+					</tr>
+				</table>
+			</apex:outputPanel>
+
+			<apex:outputPanel rendered="{!mostrarGarante}"
+				layout="none">
+				<table>
+					<colgroup>
+						<col style="width: 25%" />
+						<col style="width: 25%" />
+						<col style="width: 25%" />
+						<col style="width: 25%" />
+					</colgroup>
+					<tr>
+						<td
+							colspan="4"
+							class="section">
+							Información del Garante
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="field-label">Tipo de Solicitante</span>
+							<div class="field-value">{!garanteTipo}</div>
+						</td>
+						<td>
+							<span class="field-label">Tipo de Identificación</span>
+							<div class="field-value">{!garanteTipoIdentificacion}</div>
+						</td>
+						<td>
+							<span class="field-label">Número de Identificación</span>
+							<div class="field-value">{!garanteNumeroIdentificacion}</div>
+						</td>
+						<td>
+							<span class="field-label">Código de Cliente</span>
+							<div class="field-value">{!garanteCodigoCliente}</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="field-label">Nombre</span>
+							<div class="field-value">{!garanteNombres}</div>
+						</td>
+						<td>
+							<span class="field-label">Primer Apellido</span>
+							<div class="field-value">{!garantePrimerApellido}</div>
+						</td>
+						<td>
+							<span class="field-label">Segundo Apellido</span>
+							<div class="field-value">{!garanteSegundoApellido}</div>
+						</td>
+						<td>
+							<span class="field-label">Nacionalidad</span>
+							<div class="field-value">{!garanteNacionalidad}</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="field-label">Fecha de Nacimiento</span>
+							<div class="field-value">{!garanteFechaNacimiento}</div>
+						</td>
+						<td>
+							<span class="field-label">Estado Civil</span>
+							<div class="field-value">{!garanteEstadoCivil}</div>
+						</td>
+						<td>
+							<span class="field-label">Número de Dependientes</span>
+							<div class="field-value">{!garanteNumeroDependientes}</div>
+						</td>
+						<td>
+							<span class="field-label">Clasificación SIB</span>
+							<div class="field-value">{!garanteClasificacionSib}</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<span class="field-label">Estado Vivienda</span>
+							<div class="field-value wide-value">{!garanteEstadoVivienda}</div>
+						</td>
+					</tr>
+				</table>
+			</apex:outputPanel>
+
+			<table>
+				<tr>
+					<td class="section">Dirección</td>
+				</tr>
+				<apex:repeat value="{!direcciones}"
+					var="direccion">
+					<tr>
+						<td><div class="field-value wide-value">{!direccion}</div></td>
+					</tr>
+				</apex:repeat>
+			</table>
+
+			<table>
+				<tr>
+					<td class="section">Telefonos</td>
+				</tr>
+				<apex:repeat value="{!telefonos}"
+					var="telefono">
+					<tr>
+						<td><div class="field-value wide-value">{!telefono}</div></td>
+					</tr>
+				</apex:repeat>
+			</table>
+
+			<table>
+				<tr>
+					<td class="section">Direcciones Electrónicas</td>
+				</tr>
+				<apex:repeat value="{!correos}"
+					var="correo">
+					<tr>
+						<td><div class="field-value wide-value">{!correo}</div></td>
+					</tr>
+				</apex:repeat>
+			</table>
+
+			<table>
+				<colgroup>
+					<col style="width: 25%" />
+					<col style="width: 25%" />
+					<col style="width: 25%" />
+					<col style="width: 25%" />
+				</colgroup>
+				<tr>
+					<td
+						colspan="4"
+						class="section">
+						Datos Laborales
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="field-label">Ocupación</span>
+						<div class="field-value">{!laborOcupacion}</div>
+					</td>
+					<td>
+						<span class="field-label">Fuente de Ingreso</span>
+						<div class="field-value">{!laborFuenteIngreso}</div>
+					</td>
+					<td>
+						<span class="field-label">Lugar Donde Labora</span>
+						<div class="field-value">{!laborLugarDondeLabora}</div>
+					</td>
+					<td>
+						<span class="field-label">Tipo de Negocio</span>
+						<div class="field-value">{!laborTipoNegocio}</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="field-label">Cargo Actual</span>
+						<div class="field-value">{!laborCargoActual}</div>
+					</td>
+					<td>
+						<span class="field-label">Tiempo Laborando</span>
+						<div class="field-value">{!laborTiempoLaborando}</div>
+					</td>
+					<td>
+						<span class="field-label">Ingresos Mensuales</span>
+						<div class="field-value">{!laborIngresosMensuales}</div>
+					</td>
+					<td>
+						<span class="field-label">Otros Ingresos</span>
+						<div class="field-value">{!laborOtrosIngresos}</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="field-label">Empresa Anterior Laboró (Si ha estado por menos de seis meses)</span>
+						<div class="field-value">{!laborEmpresaAnterior}</div>
+					</td>
+					<td>
+						<span class="field-label">Total Ingresos</span>
+						<div class="field-value">{!laborTotalIngresos}</div>
+					</td>
+					<td>
+						<span class="field-label">Prestaciones Laborales</span>
+						<div class="field-value">{!laborPrestaciones}</div>
+					</td>
+					<td>
+						<span class="field-label">Descripción Otros Ingresos</span>
+						<div class="field-value">{!laborDescripcionOtrosIngresos}</div>
+					</td>
+				</tr>
+			</table>
+
+			<table>
+				<colgroup>
+					<col style="width: 22%" />
+					<col style="width: 39%" />
+					<col style="width: 39%" />
+				</colgroup>
+				<tr>
+					<td
+						colspan="3"
+						class="section">
+						Referencias
+					</td>
+				</tr>
+				<tr class="column-head">
+					<td>Parentesco</td>
+					<td>Nombres</td>
+					<td>Apellidos</td>
+				</tr>
+				<apex:repeat value="{!referencias}"
+					var="ref">
+					<tr>
+						<td>{!ref.parentesco}</td>
+						<td>{!ref.nombres}</td>
+						<td>{!ref.apellidos}</td>
+					</tr>
+				</apex:repeat>
+				<apex:repeat value="{!emptyReferenciaRows}"
+					var="emptyRef">
+					<tr class="blank-row">
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+				</apex:repeat>
+			</table>
+
+			<div class="page-break"></div>
+
+			<table>
+				<colgroup>
+					<col style="width: 25%" />
+					<col style="width: 25%" />
+					<col style="width: 25%" />
+					<col style="width: 25%" />
+				</colgroup>
+				<tr>
+					<td
+						colspan="4"
+						class="section">
+						Información de la Facilidad
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="field-label">Tipo de Facilidad</span>
+						<div class="field-value">{!resumenTipoFacilidad}</div>
+					</td>
+					<td>
+						<span class="field-label">Facilidad</span>
+						<div class="field-value">{!resumenFacilidad}</div>
+					</td>
+					<td>
+						<span class="field-label">Préstamo con Garantía?</span>
+						<div class="field-value">{!resumenPrestamoConGarantia}</div>
+					</td>
+					<td>
+						<span class="field-label">Monto Solicitado</span>
+						<div class="field-value">{!resumenMontoSolicitado}</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="field-label">Forma de Pago</span>
+						<div class="field-value">{!resumenFormaPago}</div>
+					</td>
+					<td>
+						<span class="field-label">Plazo (Meses) Actual</span>
+						<div class="field-value">{!resumenPlazoActual}</div>
+					</td>
+					<td>
+						<span class="field-label">Tasa de Interés Actual</span>
+						<div class="field-value">{!resumenTasaInteresActual}</div>
+					</td>
+					<td>
+						<span class="field-label">Tasa Fija</span>
+						<div class="field-value">{!resumenTasaFija}</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="field-label">Monto de la Cuota</span>
+						<div class="field-value">{!resumenMontoCuota}</div>
+					</td>
+					<td>
+						<span class="field-label">Tiempo Tasa Fija</span>
+						<div class="field-value">{!resumenTiempoTasaFija}</div>
+					</td>
+					<td colspan="2">
+						<span class="field-label">Deuda Consolidada (BancoVimenca)</span>
+						<div class="field-value">{!resumenDeudaConsolidada}</div>
+					</td>
+				</tr>
+			</table>
+
+			<table>
+				<tr>
+					<td class="section">Propósito de la Facilidad</td>
+				</tr>
+				<tr>
+					<td><div class="field-value wide-value">{!propositoFacilidad}</div></td>
+				</tr>
+			</table>
+
+			<table>
+				<colgroup>
+					<col style="width: 25%" />
+					<col style="width: 25%" />
+					<col style="width: 25%" />
+					<col style="width: 25%" />
+				</colgroup>
+				<tr>
+					<td
+						colspan="4"
+						class="section">
+						Listado de Garantías
+					</td>
+				</tr>
+				<apex:repeat value="{!garantiasPdf}"
+					var="garantiaPdf">
+					<tr class="column-head">
+						<td colspan="4">{!garantiaPdf.titulo}</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="field-label">Clase de Garantía</span>
+							<div class="field-value">{!garantiaPdf.clase}</div>
+						</td>
+						<td>
+							<span class="field-label">Tipo de Garantía</span>
+							<div class="field-value">{!garantiaPdf.tipo}</div>
+						</td>
+						<td>
+							<span class="field-label">Descripción de la Garantía</span>
+							<div class="field-value">{!garantiaPdf.descripcion}</div>
+						</td>
+						<td>
+							<span class="field-label">Propósito Garantía Hipotecario</span>
+							<div class="field-value">{!garantiaPdf.propositoHipotecario}</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="field-label">Tipo de Inmueble</span>
+							<div class="field-value">{!garantiaPdf.tipoInmueble}</div>
+						</td>
+						<td>
+							<span class="field-label">Ubicación</span>
+							<div class="field-value">{!garantiaPdf.ubicacion}</div>
+						</td>
+						<td>
+							<span class="field-label">Valor Tasado</span>
+							<div class="field-value">{!garantiaPdf.valorTasado}</div>
+						</td>
+						<td>
+							<span class="field-label">Fecha Tasación</span>
+							<div class="field-value">{!garantiaPdf.fechaTasacion}</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="field-label">Precio de Venta</span>
+							<div class="field-value">{!garantiaPdf.precioVenta}</div>
+						</td>
+						<td>
+							<span class="field-label">Valor Inmueble</span>
+							<div class="field-value">{!garantiaPdf.valorInmueble}</div>
+						</td>
+						<td>
+							<span class="field-label">Monto del Inicial / Avance Pagado</span>
+							<div class="field-value">{!garantiaPdf.montoInicialAvance}</div>
+						</td>
+						<td>
+							<span class="field-label">Tasador</span>
+							<div class="field-value">{!garantiaPdf.tasador}</div>
+						</td>
+					</tr>
+				</apex:repeat>
+			</table>
+
+			<div class="legal">
+				<apex:outputText value="{!textoAutorizacion}"
+					escape="false" />
+			</div>
+
+			<table class="no-border signature-table">
+				<apex:repeat value="{!signatureRows}"
+					var="signatureRow">
+					<tr>
+						<td style="width: 50%">
+							<div class="signature-line">
+								<span class="sig-marker">{!signatureRow.left.markerToken}</span><br />
+								<span class="signature-text"><apex:outputText value="{!signatureRow.left.label}" /></span>
+								<apex:outputPanel rendered="{!signatureRow.left.hasSecondaryLabel}"
+									layout="none">
+									<br />
+									<span class="signature-text"><apex:outputText value="{!signatureRow.left.secondaryLabel}" /></span>
+								</apex:outputPanel>
+							</div>
+						</td>
+						<td style="width: 50%">
+							<apex:outputPanel rendered="{!signatureRow.hasRight}"
+								layout="none">
+								<div class="signature-line">
+									<span class="sig-marker">{!signatureRow.right.markerToken}</span><br />
+									<span class="signature-text"><apex:outputText value="{!signatureRow.right.label}" /></span>
+									<apex:outputPanel rendered="{!signatureRow.right.hasSecondaryLabel}"
+										layout="none">
+										<br />
+										<span class="signature-text"><apex:outputText value="{!signatureRow.right.secondaryLabel}" /></span>
+									</apex:outputPanel>
+								</div>
+							</apex:outputPanel>
+						</td>
+					</tr>
+				</apex:repeat>
+			</table>
+
+			<table class="no-border signature-table">
+				<tr>
+					<td style="width: 25%">&nbsp;</td>
+					<td style="width: 50%">
+						<div class="signature-line">
+							<span class="sig-marker">[[!FIRMAOFICIALNEGOCIO:signer1:signature:size(width=160,height=60)]]</span><br />
+							<span class="signature-text"><apex:outputText value="{!oficialNegociosFirma}" /></span><br />
+							<span class="signature-text">OFICIAL DE NEGOCIOS/SUBGERENTE DE NEGOCIOS/GERENTE DE NEGOCIOS</span>
+						</div>
+					</td>
+					<td style="width: 25%">&nbsp;</td>
+				</tr>
+			</table>
+		</body>
+	</html>
+</apex:page>

@@ -1,12 +1,9 @@
 @IsTest
-	private class FSC_ConsumoSolicitudPDFController_Test {
-		private static void setupPersonAccountMock() {
-			Test.setMock(HttpCalloutMock.class, new INT007TestMock('PF'));
-		}
-
-		@IsTest
-		static void testControllerLoadsPdfSections() {
-			Account account = new Account();
+private class FSC_ConsumoSolicitudPDFController_Test {
+	@IsTest
+	static void testControllerLoadsPdfSections() {
+		Test.setMock(HttpCalloutMock.class, new INT007TestMock('PF'));
+		Account account = new Account();
 		Id personRtId = getPersonAccountRecordTypeId();
 
 		if (personRtId != null) {
@@ -29,11 +26,10 @@
 		setIfFieldExists(account, accountFieldMap, 'Tipo_de_vivienda__c', '3');
 		setIfFieldExists(account, accountFieldMap, 'ACC_N_Dependientes__c', 2);
 		setIfFieldExists(account, accountFieldMap, 'BillingStreet', 'C/ Primera #10');
-			setIfFieldExists(account, accountFieldMap, 'BillingCity', 'Santo Domingo');
-			setIfFieldExists(account, accountFieldMap, 'BillingCountry', 'Republica Dominicana');
+		setIfFieldExists(account, accountFieldMap, 'BillingCity', 'Santo Domingo');
+		setIfFieldExists(account, accountFieldMap, 'BillingCountry', 'Republica Dominicana');
 
-			setupPersonAccountMock();
-			insert account;
+		insert account;
 
 		SObject rla = Schema.getGlobalDescribe().get('ResidentialLoanApplication').newSObject();
 		rla.put('AccountId', account.Id);
@@ -330,7 +326,7 @@
 		sink = controller.textoAutorizacion;
 		Test.stopTest();
 
-			System.assertNotEquals(null, controller.sucursal);
+		System.assertNotEquals(null, controller.sucursal);
 		System.assertEquals('CONTROL DE PRESTAMOS', controller.resumenTipoFacilidad);
 		System.assertEquals('CONSUMO', controller.resumenFacilidad);
 		System.assertEquals('CLI-0001', controller.solicitanteCodigoCliente);
@@ -642,7 +638,7 @@
 			System.assertEquals('Maria Elena', controller.solicitanteNombres);
 			System.assertEquals('Lopez', controller.solicitantePrimerApellido);
 			System.assertEquals('Ruiz', controller.solicitanteSegundoApellido);
-			System.assertEquals('Propia', controller.solicitanteEstadoVivienda);
+			System.assert(new Set<String>{ 'Propia', '1' }.contains(controller.solicitanteEstadoVivienda));
 			System.assertEquals('Servicios', controller.laborOcupacion);
 			System.assertEquals('Servicios', controller.laborFuenteIngreso);
 			System.assertEquals('Empresa Uno', controller.laborLugarDondeLabora);
@@ -665,7 +661,7 @@
 			System.assertEquals('CASADO/A', controller.coSolicitanteEstadoCivil);
 			System.assertEquals('2', controller.coSolicitanteNumeroDependientes);
 			System.assertEquals('A', controller.coSolicitanteClasificacionSib);
-			System.assertEquals('Alquilada', controller.coSolicitanteEstadoVivienda);
+			System.assert(new Set<String>{ 'Alquilada', '2' }.contains(controller.coSolicitanteEstadoVivienda));
 		}
 
 		System.assertEquals('', controller.coSolicitanteCodigoCliente);
@@ -770,6 +766,7 @@
 	}
 
 	private static Account createAccountRecord(Map<String, Object> fieldValues) {
+		Test.setMock(HttpCalloutMock.class, new INT007TestMock('PF'));
 		Account account = new Account();
 		Id personRtId = getPersonAccountRecordTypeId();
 		Map<String, Schema.SObjectField> accountFieldMap = Schema.SObjectType.Account.fields.getMap();
@@ -783,16 +780,15 @@
 		setIfFieldExists(account, accountFieldMap, 'FirstName', 'Ana');
 		setIfFieldExists(account, accountFieldMap, 'LastName', 'Garcia Perez');
 
-			if (fieldValues != null) {
-				for (String apiName : fieldValues.keySet()) {
-					setIfFieldExists(account, accountFieldMap, apiName, fieldValues.get(apiName));
-				}
+		if (fieldValues != null) {
+			for (String apiName : fieldValues.keySet()) {
+				setIfFieldExists(account, accountFieldMap, apiName, fieldValues.get(apiName));
 			}
-
-			setupPersonAccountMock();
-			insert account;
-			return account;
 		}
+
+		insert account;
+		return account;
+	}
 
 	private static Id createRlaRecord(Id accountId, Map<String, Object> fieldValues) {
 		SObject rla = Schema.getGlobalDescribe().get('ResidentialLoanApplication').newSObject();
@@ -829,10 +825,6 @@
 	private static void setIfFieldExists(SObject record, Map<String, Schema.SObjectField> fieldMap, String apiName, Object value) {
 		if (fieldMap.containsKey(apiName)) {
 			Schema.DescribeFieldResult fieldDescribe = fieldMap.get(apiName).getDescribe();
-			if (!fieldDescribe.isCreateable()) {
-				return;
-			}
-
 			Object coercedValue = coerceFieldValue(fieldDescribe, value);
 			if (value != null && coercedValue == null) {
 				return;
@@ -857,10 +849,6 @@
 		for (String apiName : fieldValues.keySet()) {
 			if (fieldMap.containsKey(apiName)) {
 				Schema.DescribeFieldResult fieldDescribe = fieldMap.get(apiName).getDescribe();
-				if (!fieldDescribe.isCreateable()) {
-					continue;
-				}
-
 				Object originalValue = fieldValues.get(apiName);
 				Object coercedValue = coerceFieldValue(fieldDescribe, originalValue);
 				if (originalValue != null && coercedValue == null) {

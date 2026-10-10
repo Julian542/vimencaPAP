@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniDataTransform xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <assignmentRulesUsed>false</assignmentRulesUsed>
+    <deletedOnSuccess>false</deletedOnSuccess>
+    <errorIgnored>false</errorIgnored>
+    <expectedInputJson>{
+  &quot;ResidentialLoanApplicationId&quot; : &quot;0cdVC000000JjZLYA0&quot;,
+  &quot;FSC_Fortalezas_Y_Debilidades__c&quot; : [ {
+    &quot;FSC_Tipo__c&quot; : &quot;Fortaleza&quot;,
+    &quot;Name&quot; : &quot;sdfsdfsdf&quot;
+  }, {
+    &quot;Name&quot; : &quot;dfsdfsdfsd&quot;
+  }, {
+    &quot;FSC_Tipo__c&quot; : &quot;Debilidad&quot;,
+    &quot;Name&quot; : &quot;sfsdfsdfsd&quot;
+  }, {
+    &quot;Name&quot; : &quot;sdfsdfsdfs&quot;
+  } ]
+}</expectedInputJson>
+    <fieldLevelSecurityEnabled>true</fieldLevelSecurityEnabled>
+    <inputType>JSON</inputType>
+    <isManagedUsingStdDesigner>true</isManagedUsingStdDesigner>
+    <name>FSCCrearFortalezasYDebilidades</name>
+    <nullInputsIncludedInOutput>false</nullInputsIncludedInOutput>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>9279300d-0b88-44a8-9c7e-2be396754b5f</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearFortalezasYDebilidades</name>
+        <omniDataTransformation>0kdVC000000GwyQ</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000GwyQ</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Id</outputFieldName>
+        <outputObjectName>FSC_Fortalezas_Y_Debilidades__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>05e2a20d-fe66-40d0-92d9-22686c6e12bf</globalKey>
+        <inputFieldName>FSC_Fortalezas_Y_Debilidades__c:Name</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearFortalezasYDebilidades</name>
+        <omniDataTransformation>0kdVC000000GwyR</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000GwyR</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Name</outputFieldName>
+        <outputObjectName>FSC_Fortalezas_Y_Debilidades__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>c3322780-22a0-4eee-80c4-a6b96f3822b7</globalKey>
+        <inputFieldName>ResidentialLoanApplicationId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearFortalezasYDebilidades</name>
+        <omniDataTransformation>0kdVC000000GwyP</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000GwyP</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Residential_Loan_Application__c</outputFieldName>
+        <outputObjectName>FSC_Fortalezas_Y_Debilidades__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>c781ff79-ba39-401d-9564-2b6805491fb2</globalKey>
+        <inputFieldName>FSC_Fortalezas_Y_Debilidades__c:FSC_Tipo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearFortalezasYDebilidades</name>
+        <omniDataTransformation>0kdVC000000GwyS</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000GwyS</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Tipo__c</outputFieldName>
+        <outputObjectName>FSC_Fortalezas_Y_Debilidades__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <outputType>SObject</outputType>
+    <previewJsonData>{
+  &quot;ResidentialLoanApplicationId&quot; : &quot;0cdVC000000KC53YAG&quot;,
+  &quot;FSC_Fortalezas_Y_Debilidades__c&quot; : [ {
+    &quot;FSC_Tipo__c&quot; : &quot;Fortaleza&quot;,
+    &quot;Name&quot; : &quot;sdadas&quot;
+  }, {
+    &quot;FSC_Tipo__c&quot; : &quot;Fortaleza&quot;,
+    &quot;Name&quot; : &quot;adasd323&quot;
+  }, {
+    &quot;FSC_Tipo__c&quot; : &quot;Debilidad&quot;,
+    &quot;Name&quot; : &quot;231asdasd&quot;
+  } ]
+}</previewJsonData>
+    <processSuperBulk>false</processSuperBulk>
+    <responseCacheTtlMinutes>0.0</responseCacheTtlMinutes>
+    <rollbackOnError>false</rollbackOnError>
+    <sourceObjectDefault>false</sourceObjectDefault>
+    <synchronousProcessThreshold>0.0</synchronousProcessThreshold>
+    <type>Load</type>
+    <uniqueName>FSCCrearFortalezasYDebilidades_1</uniqueName>
+    <versionNumber>1.0</versionNumber>
+    <xmlDeclarationRemoved>false</xmlDeclarationRemoved>
+</OmniDataTransform>

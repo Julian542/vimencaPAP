@@ -1,0 +1,14 @@
+<template>
+	<lightning-input
+		class="date-input"
+		type="date"
+		label={label}
+		value={value}
+		min={minimumDate}
+		required={isRequired}
+		message-when-range-underflow={minimumDateErrorMessage}
+		oninput={handleChange}
+		onchange={handleChange}
+		onblur={handleChange}>
+	</lightning-input>
+</template>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Registrar_Eventos</name>
+        <label>Registrar eventos</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.FSC_EventosNotificacion__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Token_Eventos</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Validar_Tipo_Credito</name>
+        <label>Validar tipo de crédito</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>Tipo no soportado</defaultConnectorLabel>
+        <rules>
+            <name>Tipo_Credito_Soportado</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>FSC_Solicitud_Credito_PYME</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>FSC_Solicitud_Credito_Consumo</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>FSC_Solicitud_Credito_Hipotecario</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.RecordType.DeveloperName</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>FSC_Solicitud_Credito_Vehiculo</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Registrar_Eventos</targetReference>
+            </connector>
+            <label>Tipo de crédito soportado</label>
+        </rules>
+    </decisions>
+    <description>Detecta antes de guardar qué cambios requieren una notificación y registra un token único. El flow de correo consume ese token después del commit, sin depender de $Record__Prior en la ruta asíncrona.</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>Token_Eventos</name>
+        <dataType>String</dataType>
+        <expression>{!$Flow.InterviewGuid}
+&amp; IF(ISCHANGED({!$Record.FSC_Subestado__c}), &quot;|SUBESTADO|&quot;, &quot;&quot;)
+&amp; IF(
+    AND(
+        ISCHANGED({!$Record.FSC_Subestado__c}),
+        ISPICKVAL({!$Record__Prior.FSC_Subestado__c}, &quot;Documentación para contratos&quot;),
+        OR(
+            ISPICKVAL({!$Record.FSC_Subestado__c}, &quot;Generación de pagarés y plantillas&quot;),
+            ISPICKVAL({!$Record.FSC_Subestado__c}, &quot;Generación de contrato&quot;)
+        )
+    ),
+    &quot;|CONTRATOS_ENVIADA|&quot;,
+    &quot;&quot;
+)
+&amp; IF(ISCHANGED({!$Record.FSC_Aprobado_con_Condiciones__c}), &quot;|APROBACION|&quot;, &quot;&quot;)
+&amp; IF(ISCHANGED({!$Record.FSC_Doc_Incompleta_Analisis__c}), &quot;|INFO_ANALISIS|&quot;, &quot;&quot;)
+&amp; IF(ISCHANGED({!$Record.FSC_Doc_Incompleta_Desembolso__c}), &quot;|INFO_DESEMBOLSO|&quot;, &quot;&quot;)
+&amp; IF(ISCHANGED({!$Record.FSC_Doc_Incompleta_Post_Desembolso__c}), &quot;|INFO_POST_DESEMBOLSO|&quot;, &quot;&quot;)
+&amp; IF(
+    OR(
+        ISCHANGED({!$Record.FSC_UsuarioCaptura__c}),
+        ISCHANGED({!$Record.FSC_Subestado__c}),
+        ISCHANGED({!$Record.FSC_FormaDeDesembolso__c})
+    ),
+    &quot;|CAPTURA|&quot;,
+    &quot;&quot;
+)
+&amp; IF(
+    OR(
+        ISCHANGED({!$Record.FSC_UsuarioOperaciones__c}),
+        ISCHANGED({!$Record.FSC_Subestado__c}),
+        ISCHANGED({!$Record.FSC_FormaDeDesembolso__c})
+    ),
+    &quot;|OPERACIONES|&quot;,
+    &quot;&quot;
+)</expression>
+    </formulas>
+    <interviewLabel>FSC - Preparar Notificaciones RLA {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>FSC - Preparar Notificaciones RLA</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Validar_Tipo_Credito</targetReference>
+        </connector>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>FSC_Subestado__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>FSC_Aprobado_con_Condiciones__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>FSC_Doc_Incompleta_Analisis__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>FSC_Doc_Incompleta_Desembolso__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>FSC_Doc_Incompleta_Post_Desembolso__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>FSC_UsuarioCaptura__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>FSC_UsuarioOperaciones__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>FSC_FormaDeDesembolso__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>ResidentialLoanApplication</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

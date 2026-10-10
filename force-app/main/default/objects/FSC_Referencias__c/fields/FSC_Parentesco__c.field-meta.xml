@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Parentesco__c</fullName>
+    <label>Parentesco</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>AMIGO (A)</fullName>
+                <default>false</default>
+                <label>AMIGO (A)</label>
+            </value>
+            <value>
+                <fullName>COMPADRE</fullName>
+                <default>false</default>
+                <label>COMPADRE</label>
+            </value>
+            <value>
+                <fullName>COMADRE</fullName>
+                <default>false</default>
+                <label>COMADRE</label>
+            </value>
+            <value>
+                <fullName>HERMANO (A)</fullName>
+                <default>false</default>
+                <label>HERMANO (A)</label>
+            </value>
+            <value>
+                <fullName>CONYUGE</fullName>
+                <default>false</default>
+                <label>CONYUGE</label>
+            </value>
+            <value>
+                <fullName>HIJO (A)</fullName>
+                <default>false</default>
+                <label>HIJO (A)</label>
+            </value>
+            <value>
+                <fullName>PRIMO (A)</fullName>
+                <default>false</default>
+                <label>PRIMO (A)</label>
+            </value>
+            <value>
+                <fullName>ESPOSO (A)</fullName>
+                <default>false</default>
+                <label>ESPOSO (A)</label>
+            </value>
+            <value>
+                <fullName>NUERA</fullName>
+                <default>false</default>
+                <label>NUERA</label>
+            </value>
+            <value>
+                <fullName>YERNO</fullName>
+                <default>false</default>
+                <label>YERNO</label>
+            </value>
+            <value>
+                <fullName>MADRE</fullName>
+                <default>false</default>
+                <label>MADRE</label>
+            </value>
+            <value>
+                <fullName>PADRE</fullName>
+                <default>false</default>
+                <label>PADRE</label>
+            </value>
+            <value>
+                <fullName>ABUELO (A)</fullName>
+                <default>false</default>
+                <label>ABUELO (A)</label>
+            </value>
+            <value>
+                <fullName>NIETO (A)</fullName>
+                <default>false</default>
+                <label>NIETO (A)</label>
+            </value>
+            <value>
+                <fullName>TIO (A)</fullName>
+                <default>false</default>
+                <label>TIO (A)</label>
+            </value>
+            <value>
+                <fullName>PADRINO</fullName>
+                <default>false</default>
+                <label>PADRINO</label>
+            </value>
+            <value>
+                <fullName>MADRINA</fullName>
+                <default>false</default>
+                <label>MADRINA</label>
+            </value>
+            <value>
+                <fullName>CONOCIDO</fullName>
+                <default>false</default>
+                <label>CONOCIDO</label>
+            </value>
+            <value>
+                <fullName>REPRESENTADA POR PRESIDENTE</fullName>
+                <default>false</default>
+                <label>REPRESENTADA POR PRESIDENTE</label>
+            </value>
+            <value>
+                <fullName>REPRESENTADA POR VICEPRESIDENTE</fullName>
+                <default>false</default>
+                <label>REPRESENTADA POR VICEPRESIDENTE</label>
+            </value>
+            <value>
+                <fullName>REPRESENTADA POR SECRETARIO</fullName>
+                <default>false</default>
+                <label>REPRESENTADA POR SECRETARIO</label>
+            </value>
+            <value>
+                <fullName>REPRESENTADA POR GTE. GENERAL</fullName>
+                <default>false</default>
+                <label>REPRESENTADA POR GTE. GENERAL</label>
+            </value>
+            <value>
+                <fullName>VECINO(A)</fullName>
+                <default>false</default>
+                <label>VECINO(A)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

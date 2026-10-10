@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniDataTransform xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <assignmentRulesUsed>false</assignmentRulesUsed>
+    <deletedOnSuccess>false</deletedOnSuccess>
+    <errorIgnored>false</errorIgnored>
+    <expectedInputJson>{
+  &quot;ContactPointAddress&quot; : [ {
+    &quot;ParentId&quot; : &quot;XXXX&quot;,
+    &quot;State&quot; : &quot;XXXX&quot;,
+    &quot;PostalCode&quot; : &quot;XXXX&quot;,
+    &quot;Country&quot; : &quot;XXXX&quot;,
+    &quot;Street&quot; : &quot;XXXX&quot;,
+    &quot;City&quot; : &quot;XXXX&quot;,
+    &quot;Name&quot; : &quot;XXXX&quot;
+  } ]
+}</expectedInputJson>
+    <fieldLevelSecurityEnabled>true</fieldLevelSecurityEnabled>
+    <inputType>JSON</inputType>
+    <isManagedUsingStdDesigner>true</isManagedUsingStdDesigner>
+    <name>FSCCrearCrearContactPointAddress</name>
+    <nullInputsIncludedInOutput>false</nullInputsIncludedInOutput>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>36e5587d-4f1c-4286-986c-9d2e99d8ac80</globalKey>
+        <inputFieldName>ContactPointAddress:Street</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearCrearContactPointAddress</name>
+        <omniDataTransformation>0kdVC000000GwxA</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000GwxA</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Street</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>2ee71f33-808f-435d-a922-335f34e5a1d2</globalKey>
+        <inputFieldName>ContactPointAddress:Name</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearCrearContactPointAddress</name>
+        <omniDataTransformation>0kdVC000000GwxD</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000GwxD</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Name</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>2f45116a-c766-41f8-bfa3-3f8615b2a43f</globalKey>
+        <inputFieldName>ContactPointAddress:City</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearCrearContactPointAddress</name>
+        <omniDataTransformation>0kdVC000000GwxE</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000GwxE</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>City</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>8844dd98-ae1c-4fd0-918c-7ff76ae1e0a9</globalKey>
+        <inputFieldName>ResidentialLoanApplicationId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearCrearContactPointAddress</name>
+        <omniDataTransformation>0kdVC000000GwxB</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000GwxB</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_ResidentialLoanApplicationId__c</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>7777e324-1d44-4125-959e-c330970f5a80</globalKey>
+        <inputFieldName>ContactPointAddress:Country</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearCrearContactPointAddress</name>
+        <omniDataTransformation>0kdVC000000GwxC</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000GwxC</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Country</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>true</disabled>
+        <filterGroup>0.0</filterGroup>
+        <filterOperator>=</filterOperator>
+        <globalKey>41faecc2-82e8-451b-b90b-777d33af1bac</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <migrationValue>FAKEMAPPING</migrationValue>
+        <name>FSCCrearCrearContactPointAddress</name>
+        <omniDataTransformation>0kdVC000000Gwx8</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gwx8</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Id</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>f18d8999-ed9a-481c-b681-c2c318668fca</globalKey>
+        <inputFieldName>ContactPointAddress:ParentId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearCrearContactPointAddress</name>
+        <omniDataTransformation>0kdVC000000Gwx9</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Gwx9</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ParentId</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>72766305-fe98-4594-81e9-2562cd36fb79</globalKey>
+        <inputFieldName>ContactPointAddress:State</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearCrearContactPointAddress</name>
+        <omniDataTransformation>0kdVC000000GwxF</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000GwxF</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>State</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>8fa1f5e8-82d1-4b2a-9b41-84b542c8d335</globalKey>
+        <inputFieldName>ContactPointAddress:PostalCode</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearCrearContactPointAddress</name>
+        <omniDataTransformation>0kdVC000000GwxG</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000GwxG</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>PostalCode</outputFieldName>
+        <outputObjectName>ContactPointAddress</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <outputType>SObject</outputType>
+    <previewJsonData>{
+  &quot;ContactPointAddress&quot; : [ {
+    &quot;ParentId&quot; : &quot;XXXX&quot;,
+    &quot;State&quot; : &quot;XXXX&quot;,
+    &quot;PostalCode&quot; : &quot;XXXX&quot;,
+    &quot;Country&quot; : &quot;XXXX&quot;,
+    &quot;Street&quot; : &quot;XXXX&quot;,
+    &quot;City&quot; : &quot;XXXX&quot;,
+    &quot;Name&quot; : &quot;XXXX&quot;
+  } ]
+}</previewJsonData>
+    <processSuperBulk>false</processSuperBulk>
+    <responseCacheTtlMinutes>0.0</responseCacheTtlMinutes>
+    <rollbackOnError>false</rollbackOnError>
+    <sourceObjectDefault>false</sourceObjectDefault>
+    <synchronousProcessThreshold>0.0</synchronousProcessThreshold>
+    <type>Load</type>
+    <uniqueName>FSCCrearCrearContactPointAddress_1</uniqueName>
+    <versionNumber>1.0</versionNumber>
+    <xmlDeclarationRemoved>false</xmlDeclarationRemoved>
+</OmniDataTransform>

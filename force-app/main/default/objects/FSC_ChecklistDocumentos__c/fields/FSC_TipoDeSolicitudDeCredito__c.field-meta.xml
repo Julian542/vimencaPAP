@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_TipoDeSolicitudDeCredito__c</fullName>
+    <label>Tipo de solicitud de crédito</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Solicitud de crédito pyme</fullName>
+                <default>false</default>
+                <label>Solicitud de crédito pyme</label>
+            </value>
+            <value>
+                <fullName>Solicitud de crédito consumo</fullName>
+                <default>false</default>
+                <label>Solicitud de crédito consumo</label>
+            </value>
+            <value>
+                <fullName>Solicitud de crédito consumo a sola firma</fullName>
+                <default>false</default>
+                <label>Solicitud de crédito consumo a sola firma</label>
+            </value>
+            <value>
+                <fullName>Solicitud de crédito consumo con garantía hipotecaria</fullName>
+                <default>false</default>
+                <label>Solicitud de crédito consumo con garantía hipotecaria</label>
+            </value>
+            <value>
+                <fullName>Solicitud de crédito consumo con garantía de CD</fullName>
+                <default>false</default>
+                <label>Solicitud de crédito consumo con garantía de CD</label>
+            </value>
+            <value>
+                <fullName>Solicitud de crédito consumo con garantía solidaria</fullName>
+                <default>false</default>
+                <label>Solicitud de crédito consumo con garantía solidaria</label>
+            </value>
+            <value>
+                <fullName>Solicitud de crédito consumo con garantía de vehículo</fullName>
+                <default>false</default>
+                <label>Solicitud de crédito consumo con garantía de vehículo</label>
+            </value>
+            <value>
+                <fullName>Solicitud de crédito hipotecario</fullName>
+                <default>false</default>
+                <label>Solicitud de crédito hipotecario</label>
+            </value>
+            <value>
+                <fullName>Solicitud de crédito vehicular</fullName>
+                <default>false</default>
+                <label>Solicitud de crédito vehicular</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

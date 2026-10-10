@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Enviar_a_Aprobacion_PLA_Consumo</name>
+        <label>Enviar a Aprobacion PLA Consumo</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>submit</actionName>
+        <actionType>submit</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>objectId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>nextApproverIds</name>
+            <value>
+                <elementReference>ListaDeUsuariosAprobadores</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>processDefinitionNameOrId</name>
+            <value>
+                <stringValue>FSC_Aprobacion_PLA_CHV</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>submit</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>Enviar_a_Aprobacion_PLA_General</name>
+        <label>Enviar a Aprobacion PLA</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>submit</actionName>
+        <actionType>submit</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>objectId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>nextApproverIds</name>
+            <value>
+                <elementReference>ListaDeUsuariosAprobadores</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>processDefinitionNameOrId</name>
+            <value>
+                <stringValue>FSC_Aprobacion_PLA</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>submit</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <name>ObtenerUsuarioPLADesdeCola</name>
+        <label>Obtener usuario PLA desde cola</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FSC_RandomQueueApproverAction</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>SeEncontroUsuarioPLA</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>groupId</name>
+            <value>
+                <elementReference>GetColaPLA.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>FSC_RandomQueueApproverAction</nameSegment>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>AsignacionUsuarioPLADesdeCola</name>
+        <label>Asignar usuario PLA desde cola</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>ListaDeUsuariosAprobadores</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>ObtenerUsuarioPLADesdeCola.userId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Que_tipo_de_Credito_es</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Que_tipo_de_Credito_es</name>
+        <label>Que tipo de Credito es?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Enviar_a_Aprobacion_PLA_Consumo</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Otro</defaultConnectorLabel>
+        <rules>
+            <name>En_validacion_PEP_Listas</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.FSC_Subestado__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>En validación PEP/Listas</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Enviar_a_Aprobacion_PLA_General</targetReference>
+            </connector>
+            <label>En validacion PEP/Listas</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>SeEncontroUsuarioPLA</name>
+        <label>Se encontró usuario PLA</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>UsuarioPLAEncontrado</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>ObtenerUsuarioPLADesdeCola.userId</leftValueReference>
+                <operator>IsBlank</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>AsignacionUsuarioPLADesdeCola</targetReference>
+            </connector>
+            <label>Sí</label>
+        </rules>
+    </decisions>
+    <description>Dev: FR.
+HU/BUG: BV-629.
+Description: Se actualiza el Flow para el escenario de una solicitud de credito para Consumo que encuentre Coincidencia en listas.
+Version Cloning: 9.</description>
+    <environments>Default</environments>
+    <interviewLabel>Aprobación PLA {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Aprobación PLA</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>GetColaPLA</name>
+        <label>Obtener cola PLA</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>ObtenerUsuarioPLADesdeCola</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>FSC_Cola_PLA</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Group</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>GetColaPLA</targetReference>
+        </connector>
+        <filterFormula>AND(
+    ISPICKVAL({!$Record.FSC_Resultado_PEP_Listas__c}, &apos;Coincidencia&apos;), 
+    {!$Record.RecordType.DeveloperName} != &apos;FSC_Solicitud_Credito_PYME&apos;,
+    OR(
+        AND(
+            OR(
+                ISCHANGED({!$Record.FSC_Subestado__c}),
+                ISCHANGED({!$Record.FSC_Resultado_PEP_Listas__c})
+            ),
+            ISPICKVAL({!$Record.Status}, &apos;En proceso&apos;), 
+            ISPICKVAL({!$Record.FSC_Subestado__c}, &apos;En validación PEP/Listas&apos;)
+        ), 
+        AND(
+            ISNEW(), 
+            ISPICKVAL({!$Record.Status}, &apos;Borrador&apos;), 
+            ISPICKVAL({!$Record.FSC_Subestado__c}, &apos;Completando información&apos;)
+        )
+    )
+)</filterFormula>
+        <object>ResidentialLoanApplication</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <triggerOrder>101</triggerOrder>
+    <variables>
+        <name>ListaDeUsuariosAprobadores</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

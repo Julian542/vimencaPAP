@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ValidarPlazoMaximoConsumo</fullName>
+    <active>true</active>
+    <description>Limita los plazos solicitado y aprobado de consumo al registro Consumo de FSC_PlazoCredito.</description>
+    <errorConditionFormula>AND(
+    RecordType.DeveloperName = &quot;FSC_Solicitud_Credito_Consumo&quot;,
+    OR(
+        FSC_PlazoMaximoPermitido__c &lt; 1,
+        IF(
+            ISBLANK(TEXT(FSC_Plazo_meses__c)),
+            FALSE,
+            VALUE(TEXT(FSC_Plazo_meses__c)) &gt; FSC_PlazoMaximoPermitido__c
+        ),
+        FSC_PlazoMesesAprobado__c &gt; FSC_PlazoMaximoPermitido__c
+    )
+)</errorConditionFormula>
+    <errorMessage>El plazo solicitado o aprobado de un crédito de consumo supera el máximo permitido.</errorMessage>
+</ValidationRule>

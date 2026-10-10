@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Negocio 06</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_Detalle__c</field>
+        <value xsi:type="xsd:string">Monto del Financiamiento superior a RD$5.00MM en casos de préstamos para adquisición de vehículos</value>
+    </values>
+    <values>
+        <field>FSC_Tipo__c</field>
+        <value xsi:type="xsd:string">Excepciones de Negocios</value>
+    </values>
+</CustomMetadata>

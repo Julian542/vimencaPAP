@@ -1,0 +1,2047 @@
+﻿<template>
+	<lightning-card class="actionsCard">
+		<template if:true={showSpinner}>
+			<lightning-spinner alternative-text="Procesando"></lightning-spinner>
+		</template>
+
+		<div class="cardTitle">Acciones disponibles</div>
+
+		<template if:true={clasificacionMIPYMESInvalida}>
+			<div class="validationMessage">
+				<div
+					class="banner error"
+					role="alert">
+					<span class="icon">⛔</span>
+					<span class="text">{mensajeClasificacionMIPYMESInvalida}</span>
+				</div>
+			</div>
+		</template>
+
+		<template if:true={clasificacionMIPYMESError}>
+			<div class="validationMessage">
+				<div
+					class="banner error"
+					role="alert">
+					<span class="icon">⛔</span>
+					<span class="text">{clasificacionMIPYMESError}</span>
+				</div>
+			</div>
+		</template>
+
+		<div class={containerClass}>
+			<div class="messagesSection">
+				<template if:true={showResponsableManual}>
+					<div class="banner warning">
+						<span class="text">Responsable de {contextoManual.etapa}: <strong>{responsableManual}</strong></span>
+					</div>
+				</template>
+				<template if:true={showEnviarDocumentacionContratos}>
+					<div class="banner warning">
+						<span class="text"
+							>Debe cargar documentación para confección de contrato en pestaña Checklist de Documentos, luego presionar el botón para
+							enviar a revisión.</span
+						>
+					</div>
+				</template>
+				<template if:true={showRevisionDocumentacionContratos}>
+					<div class="banner warning">
+						<span class="text"
+							>Debe aprobar todos los documentos de la categoría Documentos para confección de contrato en la pestaña Checklist de
+							Documentos para habilitar la generación.</span
+						>
+					</div>
+				</template>
+				<template if:true={showPedidoDocumentacionContratos}>
+					<div class="banner warning">
+						<div class="text">
+							<strong>Pedido de documentación extra</strong>
+							<lightning-formatted-text value={pedidoDocumentacionContratos}></lightning-formatted-text>
+							<p>
+								Para completar o corregir documentos del checklist, utilice esa pestaña. La documentación adicional que no corresponda
+								al checklist debe cargarse en Relacionados &gt; Archivos.
+							</p>
+						</div>
+					</div>
+				</template>
+				<template if:true={showErrorDocumentacionContratos}>
+					<div
+						class="banner error"
+						role="alert">
+						<span class="text">No se pudo consultar la documentación para contratos. Actualice la página para reintentar.</span>
+					</div>
+				</template>
+				<!-- BLOQUE NUEVO: Proceso de aprobación activo -->
+				<template if:true={showApprovalSection}>
+					<template if:true={showActiveApprovalBanner}>
+						<div class="banner warning">
+							<span class="icon">⚠️</span>
+							<span class="text">
+								Hay un proceso de verificación activo
+								<template if:true={currentApproverName}> &nbsp;asignado a: <strong>{currentApproverName}</strong> </template>
+							</span>
+						</div>
+					</template>
+
+					<template if:true={showMensajeValidacionAbanks}>
+						<div class="banner warning">
+							<span class="icon">⚠️</span>
+							<span class="text">
+								Por favor, validar que el crédito se haya creado correctamente en el core de Abanks y presionar el botón Validado solo
+								si todo está correcto, también puede volver a enviar la creación del crédito a Abanks.
+							</span>
+						</div>
+					</template>
+
+					<template if:true={showAnalystValidationStage}>
+						<div class="banner warning">
+							<span class="icon">⚠️</span>
+							<span class="text">
+								Debe validar la documentación en pestaña Checklist de Documentos, luego podrá Recomendar o Enviar a Supervisor la
+								solicitud si lo desea.
+							</span>
+						</div>
+					</template>
+
+					<template if:true={showApproveRejectButtons}>
+						<div class="banner warning">
+							<span class="icon">⚠️</span>
+							<span class="text">Puede {mensajeParaAprobar} o {rejectButtonLabel} la solicitud actual.</span>
+						</div>
+					</template>
+
+					<template if:true={showEdicionDocumentosAnalisis}>
+						<div class="banner warning">
+							<span class="icon">✏️</span>
+							<span class="text">{mensajeEdicionDocumentosAnalisis}</span>
+						</div>
+					</template>
+
+					<template if:true={showReassignButton}>
+						<div class="banner warning">
+							<span class="icon">⚠️</span>
+							<span class="text">Como administrador puede reasignar el proceso de aprobación actual.</span>
+						</div>
+					</template>
+				</template>
+
+				<!-- Enviar a archivo y custodia de valores -->
+				<template if:true={showEnviarAArchivoYCustodia}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">Documentación post desembolso incompleta.</span>
+					</div>
+				</template>
+
+				<!-- Enviar a firmar -->
+				<template if:true={showEnviarAFirmar}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">Pendiente gestionar firmas.</span>
+					</div>
+				</template>
+
+				<template if:true={showConsultarEstadoFirma}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text"
+							>Puede consultar el estado de firma de los documentos enviados, si dicho botón sigue apareciendo significa que el cliente
+							aún no firma todos los documentos requeridos.</span
+						>
+					</div>
+				</template>
+
+				<template if:true={showPreguntaFormalizacion}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">¿Desembolsar sin registrar garantía?</span>
+					</div>
+				</template>
+
+				<template if:true={showFormalizarGarantiasPendientes}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">
+							Hay {formalizacionContext.cantidadPendientes} garantía(s) pendiente(s) de formalización. La solicitud no podrá cerrarse.
+						</span>
+					</div>
+				</template>
+
+				<!-- Doc desembolso -->
+				<template if:true={showDocDesembolso}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">
+							Debe cargar documentación para desembolso en pestaña Checklist de Documentos, luego presionar el botón para enviar a
+							revisión.
+						</span>
+					</div>
+				</template>
+
+				<!-- Cliente acepta condición -->
+				<template if:true={showClienteAceptaCondicion}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">¿Cliente acepta condición?</span>
+					</div>
+				</template>
+
+				<!-- Solicitar excepción buró -->
+				<template if:true={showSolicitarExcepcionBuro}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">Aplica excepción de buró.</span>
+					</div>
+				</template>
+
+				<!-- Recepción Documentos -->
+				<template if:true={showRecepcionDocs}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">
+							Debe cargar documentación para análisis en pestaña Checklist de Documentos, luego presionar el botón para enviar a
+							revisión.
+						</span>
+					</div>
+				</template>
+
+				<!-- Reintentar Listas -->
+				<template if:true={showReintentarListas}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">{mensajeValidacionListas}</span>
+					</div>
+				</template>
+
+				<!-- Reintentar Buró -->
+				<template if:true={showReintentarBuro}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">Validación de buró pendiente.</span>
+					</div>
+				</template>
+
+				<template if:true={showErrorAPIPrestamos}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">No se pudo crear el crédito en ABANKS</span>
+					</div>
+				</template>
+
+				<template if:true={showErrorAPIDesembolso}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">Falló la conexión con el servicio de desembolso</span>
+					</div>
+				</template>
+
+				<!-- Planilla desembolso -->
+				<template if:true={showGestionPlanillaAssignedBanner}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text"> Hay un proceso de verificación activo asignado a: <strong>{usuarioGestionPlanillaName}</strong> </span>
+					</div>
+				</template>
+
+				<template if:true={showPagaresAssignedBanner}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text"> Hay un proceso de verificación activo asignado a: <strong>{usuarioPagaresYContratosName}</strong> </span>
+					</div>
+				</template>
+
+				<template if:true={showPlanillaDesembolso}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">Pendiente completar planilla de desembolso.</span>
+					</div>
+				</template>
+
+				<template if:true={showCreadoEnAbanks}>
+					<div class="banner warning">
+						<span class="icon">&#9888;&#65039;</span>
+						<span class="text">Debe crear el crédito, seguro y garantías en core de Abanks, cuando esté listo, presionar botón.</span>
+					</div>
+				</template>
+
+				<template if:true={showDesembolsado}>
+					<div class="banner warning">
+						<span class="icon">&#9888;&#65039;</span>
+						<span class="text">Debe desembolsar el crédito en core de Abanks, cuando esté listo, presionar botón.</span>
+					</div>
+				</template>
+
+				<template if:true={showCompletarInformacion}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">Aprobado por PLA, puede continuar completando solicitud de crédito.</span>
+					</div>
+				</template>
+
+				<!-- Devolver a Oficial de Negocio -->
+				<template if:true={showDevolverAOficial}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">Puede devolver la solicitud al Oficial de negocio.</span>
+					</div>
+				</template>
+
+				<template if:true={showEnviarRevisionSupervisor}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">Puede enviar la solicitud a revisión a Supervisor.</span>
+					</div>
+				</template>
+
+				<template if:true={showGenerarPagareMessage}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text"
+							>Debe completar los campos "Acto número pagaré" y "Número de folio pagaré" en la sección "Datos del crédito" para generar
+							el pagaré.</span
+						>
+					</div>
+				</template>
+
+				<!-- Aprobar con condición -->
+				<template if:true={showAccionesComite}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">Puede aprobar con condición.</span>
+					</div>
+				</template>
+
+				<template if:true={showSolicitarExcepcionCredito}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">Puede solicitar una excepción de crédito antes de continuar el análisis.</span>
+					</div>
+				</template>
+
+				<template if:true={showAccionesAprobacionExcepcion}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">Tiene una excepción de crédito pendiente de decisión.</span>
+					</div>
+				</template>
+
+				<template if:true={showRespuestaCondicionExcepcion}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">La excepción fue aprobada con condición. Registre la respuesta del cliente.</span>
+					</div>
+				</template>
+
+				<!-- Sin acciones -->
+				<template if:true={showEmpty}>
+					<div class="banner success">
+						<span class="icon">✅</span>
+						<span class="text">Sin acciones disponibles</span>
+					</div>
+				</template>
+			</div>
+
+			<template if:false={showEmpty}>
+				<div class="buttonsSection">
+					<template if:true={showReasignarManual}>
+						<div class="btnRow center">
+							<lightning-button
+								label="Reasignar"
+								onclick={handleReasignarManual}
+								disabled={loading}></lightning-button>
+						</div>
+					</template>
+
+					<template if:true={showEnviarDocumentacionContratos}>
+						<div class="btnRow center">
+							<lightning-button
+								variant="brand"
+								label="Documentación para contratos cargada, enviar a revisión"
+								onclick={handleEnviarDocumentacionContratos}
+								disabled={loading}></lightning-button>
+						</div>
+					</template>
+
+					<template if:true={showSolicitarExcepcionCredito}>
+						<div class="btnRow center">
+							<lightning-button
+								variant="brand"
+								label="Solicitar excepción"
+								onclick={openModalSolicitarExcepcionCredito}>
+							</lightning-button>
+						</div>
+					</template>
+
+					<template if:true={showAccionesAprobacionExcepcion}>
+						<div class="btnRow center">
+							<lightning-button
+								variant="brand"
+								label="Aprobar"
+								onclick={handleAprobarExcepcionCredito}>
+							</lightning-button>
+							<lightning-button
+								variant="neutral"
+								label="Aprobar con condición"
+								onclick={openModalCondicionExcepcion}>
+							</lightning-button>
+							<lightning-button
+								variant="destructive"
+								label="Rechazar excepción"
+								onclick={openModalRechazoExcepcion}>
+							</lightning-button>
+						</div>
+					</template>
+
+					<template if:true={showRespuestaCondicionExcepcion}>
+						<div class="btnRow center">
+							<lightning-button
+								variant="brand"
+								label="Cliente aprueba condición"
+								onclick={handleClienteApruebaCondicionExcepcion}>
+							</lightning-button>
+							<lightning-button
+								variant="destructive"
+								label="Cliente no aprueba condición"
+								onclick={handleClienteNoApruebaCondicionExcepcion}>
+							</lightning-button>
+						</div>
+					</template>
+
+					<template if:false={excepcionBloqueaAccionesOrdinarias}>
+						<template if:true={showEdicionDocumentosAnalisis}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="neutral"
+									label="Editar informe de crédito"
+									onclick={openModalEditarInformeCredito}>
+								</lightning-button>
+
+								<template if:true={showBotonEditarCapacidadPago}>
+									<lightning-button
+										variant="neutral"
+										label="Editar capacidad de pago"
+										onclick={openModalEditarCapacidadPago}>
+									</lightning-button>
+								</template>
+							</div>
+						</template>
+
+						<template if:true={showValidacionAbanks}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Validado"
+									onclick={handleValidarCreacionAbanks}>
+								</lightning-button>
+
+								<lightning-button
+									variant="neutral"
+									label="Volver a intentar creación"
+									onclick={handleReintentarAPIPrestamos}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showAnalystValidationStage}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Validado"
+									onclick={handleValidarDocumentacionAnalista}>
+								</lightning-button>
+
+								<lightning-button
+									variant="neutral"
+									label="Devolver a Oficial de Negocio"
+									onclick={openModalDevolver}>
+								</lightning-button>
+
+								<lightning-button
+									variant="destructive"
+									label="Desestimar"
+									onclick={openModalRechazo}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showApproveRejectButtons}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label={approveButtonLabel}
+									onclick={openModalAprobacion}>
+								</lightning-button>
+
+								<lightning-button
+									variant="destructive"
+									label={rejectButtonLabel}
+									onclick={openModalRechazo}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showReassignButton}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="neutral"
+									label="Reasignar"
+									onclick={openModalReasignar}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showEnviarAArchivoYCustodia}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Enviar a archivo y custodia de valores"
+									onclick={handleEnviarAArchivoYCustodia}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showEnviarAFirmar}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Enviar a firmar"
+									onclick={handleEnviarAFirmar}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showConsultarEstadoFirma}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Validar firmas"
+									onclick={handleConsultarEstadoFirma}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showPreguntaFormalizacion}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Sí"
+									onclick={handleDesembolsarSinRegistrarGarantias}>
+								</lightning-button>
+								<lightning-button
+									variant="neutral"
+									label="No"
+									onclick={openModalFormalizacionGarantias}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showFormalizarGarantiasPendientes}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Formalizar garantías"
+									onclick={openModalFormalizacionGarantias}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showDocDesembolso}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Documentación de desembolso cargada, enviar a revisión"
+									onclick={handleDocDesembolsoCargadaEnviarRevision}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showClienteAceptaCondicion}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Acepta"
+									onclick={handleAceptaCondicion}>
+								</lightning-button>
+
+								<lightning-button
+									variant="destructive"
+									label="No acepta"
+									onclick={handleNoAceptaCondicion}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showSolicitarExcepcionBuro}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Solicitar excepción buró"
+									onclick={handleSolicitarExcepcionBuro}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showRecepcionDocs}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Documentación cargada, enviar a revisión"
+									onclick={handleDocCargadaEnviarRevision}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showReintentarListas}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Reintentar servicio validar listas"
+									onclick={handleReintentarListas}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showReintentarBuro}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Reintentar buró de crédito"
+									onclick={handleReintentarBuro}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showErrorAPIPrestamos}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Reintentar"
+									onclick={handleReintentarAPIPrestamos}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showErrorAPIDesembolso}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Reintentar"
+									onclick={handleReintentarAPIDesembolso}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showPlanillaDesembolso}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Completar planilla de desembolso"
+									onclick={handlePlanillaDesembolso}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showCreadoEnAbanks}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Creado en Abanks"
+									onclick={handleMarcarCreadoEnAbanks}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showDesembolsado}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Desembolsado"
+									onclick={handleMarcarDesembolsado}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showCompletarInformacion}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Completar información"
+									onclick={handleCompletarInformacion}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showEnviarRevisionSupervisor}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Enviar a revisión a Supervisor"
+									onclick={handleEnviarRevisionSupervisor}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showGenerarPagareButton}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Generar pagarés y contratos"
+									onclick={handleGenerarPagare}
+									disabled={disableGenerarPagareButton}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showSolicitarDocumentacionContratos}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="neutral"
+									label="Solicitar más documentación"
+									onclick={openModalPedidoDocumentacion}
+									disabled={loading}></lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showGenerarActoGarantiaButton}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Generar acto de garantía solidaria"
+									onclick={handleGenerarActoGarantia}
+									disabled={loading}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showDevolverAOficial}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="neutral"
+									label="Devolver a Oficial de Negocio"
+									onclick={openModalDevolver}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showDevolverAAnalistaAction}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="neutral"
+									label="Devolver a Analista de Crédito"
+									onclick={openModalDevolverAAnalista}>
+								</lightning-button>
+							</div>
+						</template>
+
+						<template if:true={showAccionesComite}>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Aprobar con condición"
+									onclick={openModalCondiciones}>
+								</lightning-button>
+							</div>
+						</template>
+					</template>
+				</div>
+			</template>
+		</div>
+	</lightning-card>
+
+	<template if:true={showModalEdicionDocumentoAnalisis}>
+		<c-fsc_-editar-documento-analisis
+			record-id={recordId}
+			tipo-documento={documentoAnalisisEnEdicion}
+			oncancel={closeModalEdicionDocumentoAnalisis}
+			onsaved={handleDocumentoAnalisisGuardado}>
+		</c-fsc_-editar-documento-analisis>
+	</template>
+
+	<template if:true={showModalSolicitarExcepcionCredito}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			aria-modal="true"
+			aria-labelledby="titulo-solicitar-excepcion"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2
+						id="titulo-solicitar-excepcion"
+						class="slds-text-heading_medium">
+						Solicitar excepción
+					</h2>
+				</header>
+				<div class="slds-modal__content slds-p-around_medium">
+					<p class="slds-text-body_small slds-text-color_weak slds-m-bottom_small">{resumenCapacidadExcepciones}</p>
+					<lightning-combobox
+						name="tipoExcepcion"
+						label="Tipo de excepción"
+						value={tipoExcepcionSeleccionado}
+						options={tipoExcepcionOptions}
+						onchange={handleTipoExcepcionChange}
+						required>
+					</lightning-combobox>
+					<lightning-combobox
+						class="slds-m-top_small"
+						name="detalleExcepcion"
+						label="Detalle de excepción"
+						value={detalleExcepcionSeleccionado}
+						options={detalleExcepcionOptions}
+						onchange={handleDetalleExcepcionChange}
+						disabled={isDetalleExcepcionDisabled}
+						required>
+					</lightning-combobox>
+					<lightning-textarea
+						class="slds-m-top_small"
+						name="descripcionExcepcion"
+						label="Descripción de la excepción"
+						value={descripcionExcepcion}
+						onchange={handleDescripcionExcepcionChange}
+						max-length="32768"
+						required>
+					</lightning-textarea>
+				</div>
+				<footer class="slds-modal__footer">
+					<lightning-button
+						variant="neutral"
+						label="Cancelar"
+						onclick={closeModalSolicitarExcepcionCredito}>
+					</lightning-button>
+					<lightning-button
+						class="slds-m-left_x-small"
+						variant="brand"
+						label="Guardar"
+						onclick={handleGuardarSolicitudExcepcion}>
+					</lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+
+	<template if:true={showModalCondicionExcepcion}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			aria-modal="true"
+			aria-labelledby="titulo-condicion-excepcion"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2
+						id="titulo-condicion-excepcion"
+						class="slds-text-heading_medium">
+						Aprobar excepción con condición
+					</h2>
+				</header>
+				<div class="slds-modal__content slds-p-around_medium">
+					<lightning-textarea
+						name="condicionExcepcion"
+						label="Condición"
+						value={condicionExcepcionInput}
+						onchange={handleCondicionExcepcionChange}
+						max-length="32768"
+						required>
+					</lightning-textarea>
+				</div>
+				<footer class="slds-modal__footer">
+					<lightning-button
+						variant="neutral"
+						label="Cancelar"
+						onclick={closeModalCondicionExcepcion}>
+					</lightning-button>
+					<lightning-button
+						class="slds-m-left_x-small"
+						variant="brand"
+						label="Aprobar con condición"
+						onclick={handleAprobarExcepcionConCondicion}>
+					</lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+
+	<template if:true={showModalRechazoExcepcion}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			aria-modal="true"
+			aria-labelledby="titulo-rechazo-excepcion"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2
+						id="titulo-rechazo-excepcion"
+						class="slds-text-heading_medium">
+						Rechazar excepción
+					</h2>
+				</header>
+				<div class="slds-modal__content slds-p-around_medium">
+					<lightning-textarea
+						name="motivoRechazoExcepcion"
+						label="Motivo"
+						value={motivoRechazoExcepcion}
+						onchange={handleMotivoRechazoExcepcionChange}
+						max-length="255"
+						required>
+					</lightning-textarea>
+				</div>
+				<footer class="slds-modal__footer">
+					<lightning-button
+						variant="neutral"
+						label="Cancelar"
+						onclick={closeModalRechazoExcepcion}>
+					</lightning-button>
+					<lightning-button
+						class="slds-m-left_x-small"
+						variant="destructive"
+						label="Rechazar excepción"
+						onclick={handleRechazarExcepcionCredito}>
+					</lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+
+	<!-- MODAL: Forma de desembolso -->
+	<template if:true={showModalPlanillaDesembolso}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2 class="slds-text-heading_medium">Forma de desembolso</h2>
+				</header>
+
+				<div class="slds-modal__content slds-p-around_medium">
+					<lightning-combobox
+						label="Forma de desembolso"
+						value={formaDesembolsoSeleccionada}
+						options={formaDesembolsoOptions}
+						onchange={handleFormaDesembolsoChange}
+						required>
+					</lightning-combobox>
+
+					<template if:true={isCuentaDeAhorroSeleccionada}>
+						<lightning-combobox
+							class="slds-m-top_medium"
+							label="Cuenta de desembolso"
+							value={cuentaDesembolsoSeleccionada}
+							options={cuentaDesembolsoOptions}
+							onchange={handleCuentaDesembolsoChange}
+							required={isCuentaDesembolsoRequired}
+							message-when-value-missing="Cuenta de desembolso requerida.">
+						</lightning-combobox>
+					</template>
+
+					<template if:true={showCuentaDesembolsoSinOpciones}>
+						<div class="slds-text-color_weak slds-m-top_x-small">No hay cuentas de ahorro o corrientes disponibles.</div>
+					</template>
+				</div>
+
+				<footer class="slds-modal__footer">
+					<lightning-button
+						variant="neutral"
+						label="Cancelar"
+						onclick={closeModalPlanillaDesembolso}>
+					</lightning-button>
+					<lightning-button
+						variant="brand"
+						label="Guardar y continuar"
+						onclick={handleGuardarFormaDesembolsoYContinuar}>
+					</lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+
+	<!-- MODAL: Datos para generar pagaré y contrato -->
+	<template if:true={showModalDatosPagare}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			class="slds-modal slds-fade-in-open slds-modal_large">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2 class="slds-text-heading_medium">{tituloModalGeneracion}</h2>
+				</header>
+
+				<div class="slds-modal__content slds-p-around_medium">
+					<template if:true={mostrarSeccionPagareGeneracion}>
+						<h3 class="slds-text-heading_small">Datos obligatorios para pagaré</h3>
+						<p class="slds-text-body_small slds-text-color_weak slds-m-bottom_small">{tipoPagareGeneracion}</p>
+						<template if:true={mostrarSeleccionExcepcionContrato}>
+							<lightning-input
+								type="checkbox"
+								label={etiquetaExcepcionContrato}
+								checked={generarContratoConPagareNotarial}
+								onchange={handleExcepcionContratoNotarialChange}>
+							</lightning-input>
+							<p class="slds-text-body_small slds-text-color_weak slds-m-bottom_medium">{ayudaExcepcionContrato}</p>
+						</template>
+						<template if:true={mostrarDatosPagareNotarial}>
+							<lightning-input
+								type="text"
+								inputmode="numeric"
+								pattern="[0-9]*"
+								label="Acto número pagaré"
+								value={actoNumeroPagareInput}
+								onchange={handleActoNumeroPagareChange}
+								message-when-pattern-mismatch="Ingrese únicamente números."
+								required>
+							</lightning-input>
+
+							<lightning-input
+								type="text"
+								inputmode="numeric"
+								pattern="[0-9]*"
+								label="Número de folio pagaré"
+								value={numeroFolioPagareInput}
+								onchange={handleNumeroFolioPagareChange}
+								message-when-pattern-mismatch="Ingrese únicamente números."
+								required>
+							</lightning-input>
+						</template>
+
+						<template if:true={mostrarNumeroPrestamoPagare}>
+							<lightning-input
+								type="text"
+								label="Número de préstamo"
+								value={numeroPrestamoPagareInput}
+								onchange={handleNumeroPrestamoPagareChange}
+								required>
+							</lightning-input>
+						</template>
+
+						<template if:true={mostrarSeccionesPagareGeneracion}>
+							<template
+								for:each={seccionesPagareGeneracion}
+								for:item="seccion">
+								<div
+									key={seccion.titulo}
+									class="slds-m-top_medium slds-m-bottom_large">
+									<h4 class="slds-text-title_bold slds-m-bottom_small">{seccion.titulo}</h4>
+									<div class="slds-grid slds-wrap slds-gutters_small">
+										<template
+											for:each={seccion.campos}
+											for:item="campo">
+											<div
+												key={campo.clave}
+												class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-bottom_small">
+												<lightning-input
+													if:true={campo.esTexto}
+													type="text"
+													data-clave={campo.clave}
+													label={campo.etiqueta}
+													value={campo.valor}
+													onchange={handleDatoContratoChange}
+													required={campo.requerido}></lightning-input>
+												<lightning-textarea
+													if:true={campo.esAreaTexto}
+													data-clave={campo.clave}
+													label={campo.etiqueta}
+													value={campo.valor}
+													onchange={handleDatoContratoChange}
+													required={campo.requerido}></lightning-textarea>
+												<lightning-input
+													if:true={campo.esFecha}
+													type="date"
+													data-clave={campo.clave}
+													label={campo.etiqueta}
+													value={campo.valor}
+													max={campo.fechaMaxima}
+													message-when-range-overflow={campo.mensajeFechaFueraRango}
+													onchange={handleDatoContratoChange}
+													required={campo.requerido}></lightning-input>
+												<lightning-input
+													if:true={campo.esNumero}
+													type="number"
+													step={campo.paso}
+													min={campo.minimo}
+													data-clave={campo.clave}
+													label={campo.etiqueta}
+													value={campo.valor}
+													onchange={handleDatoContratoChange}
+													required={campo.requerido}></lightning-input>
+												<lightning-combobox
+													if:true={campo.esLista}
+													data-clave={campo.clave}
+													label={campo.etiqueta}
+													value={campo.valor}
+													options={campo.opciones}
+													onchange={handleDatoContratoChange}
+													disabled={campo.deshabilitado}
+													required={campo.requerido}></lightning-combobox>
+											</div>
+										</template>
+									</div>
+								</div>
+							</template>
+						</template>
+					</template>
+
+					<template if:true={mostrarDatosContratoGeneracion}>
+						<hr class="slds-m-vertical_large" />
+						<h3 class="slds-text-heading_small">Datos obligatorios para contrato</h3>
+						<p class="slds-text-body_small slds-text-color_weak slds-m-bottom_medium">{nombreContratoGeneracion}</p>
+
+						<template if:true={tieneErroresConfiguracionContrato}>
+							<div
+								class="slds-notify slds-notify_alert slds-alert_error slds-m-bottom_medium"
+								role="alert">
+								<div>
+									<template
+										for:each={erroresConfiguracionContrato}
+										for:item="errorConfiguracion">
+										<p key={errorConfiguracion}>{errorConfiguracion}</p>
+									</template>
+								</div>
+							</div>
+						</template>
+
+						<template
+							for:each={seccionesContratoGeneracion}
+							for:item="seccion">
+							<div
+								if:true={seccion.visible}
+								key={seccion.titulo}
+								class="slds-m-bottom_large">
+								<h4 class="slds-text-title_bold slds-m-bottom_small">{seccion.titulo}</h4>
+								<div class="slds-grid slds-wrap slds-gutters_small">
+									<template
+										for:each={seccion.campos}
+										for:item="campo">
+										<div
+											if:true={campo.visible}
+											key={campo.clave}
+											class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-bottom_small">
+											<lightning-input
+												if:true={campo.esTexto}
+												type="text"
+												data-clave={campo.clave}
+												label={campo.etiqueta}
+												value={campo.valor}
+												onchange={handleDatoContratoChange}
+												required={campo.requerido}>
+											</lightning-input>
+											<lightning-textarea
+												if:true={campo.esAreaTexto}
+												data-clave={campo.clave}
+												label={campo.etiqueta}
+												value={campo.valor}
+												onchange={handleDatoContratoChange}
+												required={campo.requerido}>
+											</lightning-textarea>
+											<lightning-input
+												if:true={campo.esFecha}
+												type="date"
+												data-clave={campo.clave}
+												label={campo.etiqueta}
+												value={campo.valor}
+												max={campo.fechaMaxima}
+												message-when-range-overflow={campo.mensajeFechaFueraRango}
+												onchange={handleDatoContratoChange}
+												required={campo.requerido}>
+											</lightning-input>
+											<lightning-input
+												if:true={campo.esNumero}
+												type="number"
+												step={campo.paso}
+												min={campo.minimo}
+												data-clave={campo.clave}
+												label={campo.etiqueta}
+												value={campo.valor}
+												onchange={handleDatoContratoChange}
+												required={campo.requerido}>
+											</lightning-input>
+											<lightning-combobox
+												if:true={campo.esLista}
+												data-clave={campo.clave}
+												label={campo.etiqueta}
+												value={campo.valor}
+												options={campo.opciones}
+												onchange={handleDatoContratoChange}
+												disabled={campo.deshabilitado}
+												required={campo.requerido}>
+											</lightning-combobox>
+										</div>
+									</template>
+								</div>
+							</div>
+						</template>
+					</template>
+
+					<template if:true={mostrarGastosHipotecarios}>
+						<hr class="slds-m-vertical_large" />
+						<template
+							for:each={seccionesGastosHipotecarios}
+							for:item="seccion">
+							<div
+								key={seccion.titulo}
+								class="slds-m-bottom_large">
+								<h3 class="slds-text-heading_small slds-m-bottom_medium">{seccion.titulo}</h3>
+								<div class="slds-grid slds-wrap slds-gutters_small">
+									<template
+										for:each={seccion.campos}
+										for:item="campo">
+										<div
+											key={campo.clave}
+											class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-bottom_small">
+											<lightning-input
+												type="number"
+												step={campo.paso}
+												min={campo.minimo}
+												data-clave={campo.clave}
+												label={campo.etiqueta}
+												value={campo.valor}
+												onchange={handleDatoContratoChange}>
+											</lightning-input>
+										</div>
+									</template>
+								</div>
+							</div>
+						</template>
+					</template>
+
+					<template if:true={mostrarDatosActoGarantia}>
+						<hr class="slds-m-vertical_large" />
+						<h3 class="slds-text-heading_small">Datos obligatorios para acto de garantía solidaria</h3>
+						<p class="slds-text-body_small slds-text-color_weak slds-m-bottom_medium">
+							Revise especialmente las generales de todos los fiadores y la forma de pago aprobada.
+						</p>
+
+						<template if:true={tieneErroresConfiguracionActo}>
+							<div
+								class="slds-notify slds-notify_alert slds-alert_error slds-m-bottom_medium"
+								role="alert">
+								<template
+									for:each={erroresConfiguracionActo}
+									for:item="errorConfiguracion">
+									<p key={errorConfiguracion}>{errorConfiguracion}</p>
+								</template>
+							</div>
+						</template>
+
+						<template
+							for:each={seccionesActoGarantiaGeneracion}
+							for:item="seccion">
+							<div
+								key={seccion.titulo}
+								class="slds-m-bottom_large">
+								<h4 class="slds-text-title_bold slds-m-bottom_small">{seccion.titulo}</h4>
+								<div class="slds-grid slds-wrap slds-gutters_small">
+									<template
+										for:each={seccion.campos}
+										for:item="campo">
+										<div
+											key={campo.clave}
+											class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-bottom_small">
+											<lightning-input
+												if:true={campo.esTexto}
+												type="text"
+												data-clave={campo.clave}
+												label={campo.etiqueta}
+												value={campo.valor}
+												onchange={handleDatoContratoChange}
+												required={campo.requerido}></lightning-input>
+											<lightning-textarea
+												if:true={campo.esAreaTexto}
+												data-clave={campo.clave}
+												label={campo.etiqueta}
+												value={campo.valor}
+												onchange={handleDatoContratoChange}
+												required={campo.requerido}></lightning-textarea>
+											<lightning-input
+												if:true={campo.esFecha}
+												type="date"
+												data-clave={campo.clave}
+												label={campo.etiqueta}
+												value={campo.valor}
+												max={campo.fechaMaxima}
+												message-when-range-overflow={campo.mensajeFechaFueraRango}
+												onchange={handleDatoContratoChange}
+												required={campo.requerido}></lightning-input>
+											<lightning-input
+												if:true={campo.esNumero}
+												type="number"
+												step={campo.paso}
+												min={campo.minimo}
+												data-clave={campo.clave}
+												label={campo.etiqueta}
+												value={campo.valor}
+												onchange={handleDatoContratoChange}
+												required={campo.requerido}></lightning-input>
+											<lightning-combobox
+												if:true={campo.esLista}
+												data-clave={campo.clave}
+												label={campo.etiqueta}
+												value={campo.valor}
+												options={campo.opciones}
+												onchange={handleDatoContratoChange}
+												disabled={campo.deshabilitado}
+												required={campo.requerido}></lightning-combobox>
+										</div>
+									</template>
+								</div>
+							</div>
+						</template>
+					</template>
+
+					<template if:true={mostrarDatosPignoracion}>
+						<hr class="slds-m-vertical_large" />
+						<h3 class="slds-text-heading_small">Datos obligatorios para documento de pignoración</h3>
+						<p class="slds-text-body_small slds-text-color_weak slds-m-bottom_medium">
+							La variante del documento se determina según si el titular del préstamo también es el dueño del certificado.
+						</p>
+						<template
+							for:each={seccionesPignoracionGeneracion}
+							for:item="seccion">
+							<div
+								key={seccion.titulo}
+								class="slds-m-bottom_large">
+								<h4 class="slds-text-title_bold slds-m-bottom_small">{seccion.titulo}</h4>
+								<div class="slds-grid slds-wrap slds-gutters_small">
+									<template
+										for:each={seccion.campos}
+										for:item="campo">
+										<div
+											key={campo.clave}
+											class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-bottom_small">
+											<lightning-input
+												if:true={campo.esTexto}
+												type="text"
+												data-clave={campo.clave}
+												label={campo.etiqueta}
+												value={campo.valor}
+												onchange={handleDatoContratoChange}
+												required={campo.requerido}></lightning-input>
+											<lightning-textarea
+												if:true={campo.esAreaTexto}
+												data-clave={campo.clave}
+												label={campo.etiqueta}
+												value={campo.valor}
+												onchange={handleDatoContratoChange}
+												required={campo.requerido}></lightning-textarea>
+											<lightning-input
+												if:true={campo.esFecha}
+												type="date"
+												data-clave={campo.clave}
+												label={campo.etiqueta}
+												value={campo.valor}
+												max={campo.fechaMaxima}
+												message-when-range-overflow={campo.mensajeFechaFueraRango}
+												onchange={handleDatoContratoChange}
+												required={campo.requerido}></lightning-input>
+											<lightning-input
+												if:true={campo.esNumero}
+												type="number"
+												step={campo.paso}
+												min={campo.minimo}
+												data-clave={campo.clave}
+												label={campo.etiqueta}
+												value={campo.valor}
+												onchange={handleDatoContratoChange}
+												required={campo.requerido}></lightning-input>
+											<lightning-combobox
+												if:true={campo.esLista}
+												data-clave={campo.clave}
+												label={campo.etiqueta}
+												value={campo.valor}
+												options={campo.opciones}
+												onchange={handleDatoContratoChange}
+												disabled={campo.deshabilitado}
+												required={campo.requerido}></lightning-combobox>
+										</div>
+									</template>
+								</div>
+							</div>
+						</template>
+					</template>
+				</div>
+
+				<footer class="slds-modal__footer">
+					<lightning-button
+						variant="neutral"
+						label="Cancelar"
+						onclick={closeModalDatosPagare}>
+					</lightning-button>
+					<lightning-button
+						variant="brand"
+						label={etiquetaBotonGeneracion}
+						disabled={deshabilitarGuardarGeneracion}
+						onclick={handleGuardarDatosPagareYGenerar}>
+					</lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+
+	<template if:true={showModalFormalizacionGarantias}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			aria-modal="true"
+			aria-labelledby="formalizacion-garantias-title"
+			aria-describedby="formalizacion-garantias-description"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2
+						id="formalizacion-garantias-title"
+						class="slds-text-heading_medium">
+						Formalización de garantías
+					</h2>
+				</header>
+
+				<div
+					id="formalizacion-garantias-description"
+					class="slds-modal__content slds-p-around_medium">
+					<p class="slds-m-bottom_large">
+						Complete cada garantía. Los títulos no registrados y las garantías no constituidas quedan pendientes y bloquean el cierre de
+						la solicitud.
+					</p>
+					<template
+						for:each={garantiasFormalizacion}
+						for:item="garantia">
+						<article
+							key={garantia.id}
+							class="slds-m-bottom_large">
+							<h3 class="slds-text-title_bold">{garantia.nombre}</h3>
+							<p class="slds-m-bottom_medium">{garantia.claseGarantia}</p>
+
+							<template if:true={garantia.esHipotecaria}>
+								<lightning-radio-group
+									data-formalizacion-input
+									data-id={garantia.id}
+									label="Título registrado"
+									options={formalizacionSiNoOptions}
+									value={garantia.tituloRegistrado}
+									type="button"
+									required
+									onchange={handleTituloRegistradoChange}
+									disabled={loading}></lightning-radio-group>
+								<template if:true={garantia.tituloRegistradoSi}>
+									<lightning-input
+										class="slds-m-top_small"
+										data-formalizacion-input
+										data-id={garantia.id}
+										data-field="fechaFormalizacionHipotecaria"
+										type="date"
+										label="Fecha de formalización"
+										value={garantia.fechaFormalizacionHipotecaria}
+										max={fechaGarantiaMaxima}
+										required
+										onchange={handleFormalizacionFieldChange}
+										disabled={loading}></lightning-input>
+								</template>
+							</template>
+
+							<template if:true={garantia.esVehiculo}>
+								<lightning-radio-group
+									data-formalizacion-input
+									data-id={garantia.id}
+									name={garantia.id}
+									label="Garantía constituida"
+									options={formalizacionSiNoOptions}
+									value={garantia.garantiaConstituida}
+									type="button"
+									required
+									onchange={handleGarantiaConstituidaChange}
+									disabled={loading}></lightning-radio-group>
+								<lightning-textarea
+									class="slds-m-top_small"
+									data-formalizacion-input
+									data-id={garantia.id}
+									data-field="comentarioVehiculo"
+									label="Comentario"
+									value={garantia.comentarioVehiculo}
+									maxlength="1000"
+									required
+									onchange={handleFormalizacionFieldChange}
+									disabled={loading}></lightning-textarea>
+								<template if:true={garantia.garantiaConstituidaSi}>
+									<lightning-input
+										class="slds-m-top_small"
+										data-formalizacion-input
+										data-id={garantia.id}
+										data-field="fechaConstitucionGarantia"
+										type="date"
+										label="Fecha constitución de garantía"
+										value={garantia.fechaConstitucionGarantia}
+										max={fechaGarantiaMaxima}
+										required
+										onchange={handleFormalizacionFieldChange}
+										disabled={loading}></lightning-input>
+								</template>
+							</template>
+						</article>
+					</template>
+				</div>
+
+				<footer class="slds-modal__footer">
+					<lightning-button
+						variant="neutral"
+						label="Cancelar"
+						onclick={closeModalFormalizacionGarantias}
+						disabled={loading}></lightning-button>
+					<lightning-button
+						class="slds-m-left_small"
+						variant="brand"
+						label="Guardar formalización"
+						onclick={handleGuardarFormalizacionGarantias}
+						disabled={loading}></lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+
+	<!-- MODAL: Firma física -->
+	<template if:true={showModalFirmaFisica}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2 class="slds-text-heading_medium">Validar documentos físicos</h2>
+				</header>
+
+				<div class="slds-modal__content slds-p-around_medium">
+					<p>La firma digital ya fue completada. ¿Los documentos físicos también fueron firmados por todas las partes intervinientes?</p>
+				</div>
+
+				<footer class="slds-modal__footer">
+					<lightning-button
+						variant="neutral"
+						label="No"
+						onclick={closeModalFirmaFisica}>
+					</lightning-button>
+					<lightning-button
+						class="slds-m-left_small"
+						variant="brand"
+						label="Sí"
+						onclick={handleConfirmarFirmaFisica}>
+					</lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+
+	<!-- MODAL: Aprobación de proceso -->
+	<template if:true={showModalAprobacion}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2 class="slds-text-heading_medium">{approveButtonLabel}</h2>
+				</header>
+
+				<div class="slds-modal__content slds-p-around_medium">
+					<lightning-textarea
+						label="Comentario"
+						value={comentarioAprobacion}
+						onchange={handleComentarioAprobacionChange}
+						maxlength="255"
+						required>
+					</lightning-textarea>
+					<div class="slds-text-body_small slds-text-color_weak slds-m-top_x-small">Máximo 255 caracteres.</div>
+
+					<template if:true={isBancaSeguroApproval}>
+						<lightning-textarea
+							class="slds-m-top_medium"
+							label="Comentario"
+							value={comentarioRechazoBancaSeguro}
+							onchange={handleComentarioRechazoBancaSeguroChange}
+							maxlength="2000"
+							required>
+						</lightning-textarea>
+						<div class="slds-text-body_small slds-text-color_weak slds-m-top_x-small">Máximo 2.000 caracteres.</div>
+					</template>
+				</div>
+
+				<footer class="slds-modal__footer">
+					<lightning-button
+						variant="neutral"
+						label="Cancelar"
+						onclick={closeModalAprobacion}>
+					</lightning-button>
+					<lightning-button
+						variant="brand"
+						label={approveButtonLabel}
+						onclick={handleAprobarProcesoActual}>
+					</lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+
+	<!-- MODAL: Aprobar con condición -->
+	<template if:true={showModalCondiciones}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2 class="slds-text-heading_medium">Condiciones de aprobación</h2>
+				</header>
+
+				<div class="slds-modal__content slds-p-around_medium">
+					<lightning-input
+						type="number"
+						label="Monto"
+						value={monto}
+						disabled></lightning-input>
+					<lightning-input
+						type="number"
+						label="Plazo (meses)"
+						value={plazoMeses}
+						disabled></lightning-input>
+					<lightning-input
+						type="number"
+						label="Tasa de interés"
+						value={tasaInteres}
+						disabled></lightning-input>
+
+					<div class="slds-m-top_medium"></div>
+
+					<lightning-input
+						type="number"
+						label="Monto aprobado"
+						value={montoAprobado}
+						onchange={handleMontoAprobadoChange}
+						required>
+					</lightning-input>
+
+					<lightning-input
+						type="number"
+						label="Plazo meses aprobado"
+						field-level-help={approvedLoanTermOverflowMessage}
+						data-approved-loan-term
+						value={plazoAprobado}
+						onchange={handlePlazoAprobadoChange}
+						step="1"
+						max={maxApprovedLoanTermMonths}
+						message-when-range-overflow={approvedLoanTermOverflowMessage}
+						required>
+					</lightning-input>
+					<template if:true={approvedLoanTermPolicyMessage}>
+						<div class="slds-text-color_error slds-m-top_x-small" role="alert">{approvedLoanTermPolicyMessage}</div>
+					</template>
+
+					<lightning-input
+						type="text"
+						label="Tasa interés aprobada (%)"
+						value={tasaAprobada}
+						onchange={handleTasaAprobadaChange}
+						oninput={handleTasaAprobadaChange}
+						inputmode="decimal"
+						pattern="[0-9]{0,2}(\.[0-9]{0,2})?"
+						required>
+					</lightning-input>
+
+					<lightning-textarea
+						label="Otras condiciones"
+						value={otrasCondicionesComite}
+						onchange={handleOtrasCondicionesComiteChange}
+						maxlength="2000">
+					</lightning-textarea>
+				</div>
+
+				<footer class="slds-modal__footer">
+					<lightning-button
+						variant="neutral"
+						label="Cancelar"
+						onclick={closeModalCondiciones}>
+					</lightning-button>
+					<lightning-button
+						variant="brand"
+						label="Guardar"
+						onclick={handleGuardarCondiciones}
+						disabled={disableGuardarCondicionesButton}>
+					</lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+
+	<!-- MODAL: Devolver a Oficial -->
+	<template if:true={showModalDevolver}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2 class="slds-text-heading_medium">{devolverModalTitleSafe}</h2>
+				</header>
+
+				<div class="slds-modal__content slds-p-around_medium">
+					<lightning-textarea
+						label={motivoDevolverLabel}
+						value={motivoDevolver}
+						onchange={handleMotivoChange}
+						maxlength={motivoDevolverMaxLength}
+						required>
+					</lightning-textarea>
+					<div class="slds-text-body_small slds-text-color_weak slds-m-top_x-small">{motivoDevolverHelpText}</div>
+				</div>
+
+				<footer class="slds-modal__footer">
+					<lightning-button
+						variant="neutral"
+						label="Cancelar"
+						onclick={closeModalDevolver}>
+					</lightning-button>
+					<lightning-button
+						variant="brand"
+						label={devolverButtonLabelSafe}
+						onclick={handleGuardarDevolver}>
+					</lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+
+	<!-- MODAL: Reasignar aprobación -->
+	<template if:true={showModalReasignar}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2 class="slds-text-heading_medium">Reasignar proceso de aprobación</h2>
+				</header>
+
+				<div class="slds-modal__content slds-p-around_medium">
+					<lightning-combobox
+						name="usuarioReasignado"
+						label="Usuario"
+						value={usuarioReasignadoId}
+						placeholder="Seleccione un usuario"
+						options={usuariosOptions}
+						onchange={handleUsuarioReasignadoChange}>
+					</lightning-combobox>
+				</div>
+
+				<footer class="slds-modal__footer">
+					<lightning-button
+						variant="neutral"
+						label="Cancelar"
+						onclick={closeModalReasignar}>
+					</lightning-button>
+					<lightning-button
+						variant="brand"
+						label="Guardar"
+						onclick={handleGuardarReasignacion}>
+					</lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+
+	<!-- MODAL: Rechazo -->
+	<template if:true={showModalRechazo}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2 class="slds-text-heading_medium">{rejectModalTitle}</h2>
+				</header>
+
+				<div class="slds-modal__content slds-p-around_medium">
+					<template if:true={isPymeRla}>
+						<lightning-combobox
+							label="Motivos de rechazo"
+							value={motivoRechazoPicklist}
+							options={motivosRechazoOptions}
+							onchange={handleMotivoRechazoPicklistChange}
+							message-when-value-missing="Motivo de rechazo requerido."
+							required>
+						</lightning-combobox>
+					</template>
+
+					<lightning-textarea
+						class="slds-m-top_medium"
+						label="Motivo"
+						value={motivoRechazo}
+						onchange={handleMotivoRechazoChange}
+						maxlength="255"
+						required>
+					</lightning-textarea>
+					<div class="slds-text-body_small slds-text-color_weak slds-m-top_x-small">Máximo 255 caracteres.</div>
+				</div>
+
+				<footer class="slds-modal__footer">
+					<lightning-button
+						variant="neutral"
+						label="Cancelar"
+						onclick={closeModalRechazo}>
+					</lightning-button>
+					<lightning-button
+						variant="destructive"
+						label={rejectButtonLabel}
+						onclick={handleRechazarProcesoActual}>
+					</lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+	<template if:true={showModalCaptura}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			aria-modal="true"
+			aria-labelledby="captura-title"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2
+						id="captura-title"
+						class="slds-text-heading_medium">
+						Creado en Abanks
+					</h2>
+				</header>
+				<div class="slds-modal__content slds-p-around_medium">
+					<lightning-input
+						type="checkbox"
+						label="Crédito creado en Abanks"
+						data-campo="creditoConfirmado"
+						checked={creditoConfirmado}
+						onchange={handleCapturaChange}
+						required
+						disabled={loading}></lightning-input>
+					<template if:true={requiereGarantiasCaptura}>
+						<lightning-input
+							class="slds-m-top_small"
+							type="checkbox"
+							label="Garantías creadas en Abanks"
+							data-campo="garantiasConfirmadas"
+							checked={garantiasConfirmadas}
+							onchange={handleCapturaChange}
+							required
+							disabled={loading}></lightning-input>
+					</template>
+					<template if:true={requiereSegurosCaptura}>
+						<lightning-input
+							class="slds-m-top_small"
+							type="checkbox"
+							label="Seguros creados en Abanks"
+							data-campo="segurosConfirmados"
+							checked={segurosConfirmados}
+							onchange={handleCapturaChange}
+							required
+							disabled={loading}></lightning-input>
+					</template>
+					<lightning-input
+						class="slds-m-top_medium"
+						label="Nro. de crédito creado en Abanks"
+						data-campo="numeroCaptura"
+						value={numeroCaptura}
+						onchange={handleCapturaChange}
+						maxlength="255"
+						required
+						disabled={loading}></lightning-input>
+				</div>
+				<footer class="slds-modal__footer">
+					<lightning-button
+						label="Cancelar"
+						onclick={closeModalCaptura}
+						disabled={loading}></lightning-button>
+					<lightning-button
+						class="slds-m-left_small"
+						variant="brand"
+						label="Guardar"
+						onclick={handleGuardarCaptura}
+						disabled={disableGuardarCaptura}></lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+	<template if:true={showModalDesembolsoManual}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			aria-modal="true"
+			aria-labelledby="desembolso-manual-title"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2
+						id="desembolso-manual-title"
+						class="slds-text-heading_medium">
+						Desembolsado
+					</h2>
+				</header>
+				<div class="slds-modal__content slds-p-around_medium">
+					<p>Cargue al menos un archivo en cada sección. Puede quitar un archivo y cargar su reemplazo antes de confirmar.</p>
+					<lightning-file-upload
+						class="slds-m-top_medium"
+						label="Hoja de amortización"
+						data-tipo="amortizacion"
+						accept={formatosDesembolso}
+						multiple
+						onuploadfinished={handleArchivosDesembolso}
+						disabled={loading}></lightning-file-upload>
+					<template
+						for:each={archivosAmortizacion}
+						for:item="archivo">
+						<div
+							key={archivo.id}
+							class="slds-grid slds-grid_align-spread slds-m-top_x-small">
+							<span>{archivo.nombre}</span
+							><lightning-button-icon
+								icon-name="utility:delete"
+								alternative-text="Quitar archivo de amortización"
+								title="Quitar archivo"
+								data-id={archivo.id}
+								onclick={handleQuitarArchivoDesembolso}
+								disabled={loading}></lightning-button-icon>
+						</div>
+					</template>
+					<lightning-file-upload
+						class="slds-m-top_medium"
+						label="Recibo de desembolso"
+						data-tipo="recibo"
+						accept={formatosDesembolso}
+						multiple
+						onuploadfinished={handleArchivosDesembolso}
+						disabled={loading}></lightning-file-upload>
+					<template
+						for:each={archivosRecibo}
+						for:item="archivo">
+						<div
+							key={archivo.id}
+							class="slds-grid slds-grid_align-spread slds-m-top_x-small">
+							<span>{archivo.nombre}</span
+							><lightning-button-icon
+								icon-name="utility:delete"
+								alternative-text="Quitar recibo de desembolso"
+								title="Quitar archivo"
+								data-id={archivo.id}
+								onclick={handleQuitarArchivoDesembolso}
+								disabled={loading}></lightning-button-icon>
+						</div>
+					</template>
+					<p class="slds-text-body_small slds-m-top_medium">Formatos permitidos: Word, PDF, Excel, JPG y PNG.</p>
+				</div>
+				<footer class="slds-modal__footer">
+					<lightning-button
+						label="Cancelar"
+						onclick={closeModalDesembolsoManual}
+						disabled={loading}></lightning-button>
+					<lightning-button
+						class="slds-m-left_small"
+						variant="brand"
+						label="Confirmar desembolso"
+						onclick={handleConfirmarDesembolsoManual}
+						disabled={disableConfirmarDesembolsoManual}></lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+	<template if:true={showModalReasignacionManual}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			aria-modal="true"
+			aria-labelledby="reasignacion-manual-title"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2
+						id="reasignacion-manual-title"
+						class="slds-text-heading_medium">
+						Reasignar responsable
+					</h2>
+				</header>
+				<div class="slds-modal__content slds-p-around_medium">
+					<lightning-combobox
+						data-usuario-manual
+						label="Usuario de la cola"
+						value={usuarioManualSeleccionado}
+						options={usuariosManuales}
+						onchange={handleUsuarioManualChange}
+						required
+						disabled={loading}></lightning-combobox>
+				</div>
+				<footer class="slds-modal__footer">
+					<lightning-button
+						label="Cancelar"
+						onclick={closeModalReasignacionManual}
+						disabled={loading}></lightning-button>
+					<lightning-button
+						class="slds-m-left_small"
+						variant="brand"
+						label="Guardar"
+						onclick={handleGuardarReasignacionManual}
+						disabled={loading}></lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+	<template if:true={showModalPedidoDocumentacion}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			aria-modal="true"
+			aria-labelledby="pedido-documentacion-title"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2
+						id="pedido-documentacion-title"
+						class="slds-text-heading_medium">
+						Solicitar más documentación
+					</h2>
+				</header>
+				<div class="slds-modal__content slds-p-around_medium">
+					<lightning-textarea
+						data-pedido-documentacion
+						label="Documentación requerida"
+						value={pedidoDocumentacionInput}
+						onchange={handlePedidoDocumentacionChange}
+						maxlength="500"
+						required
+						disabled={loading}></lightning-textarea>
+					<p class="slds-text-body_small slds-m-top_small">
+						Máximo 500 caracteres por pedido. Se agrega a los anteriores, hasta 2.000 caracteres en total.
+					</p>
+				</div>
+				<footer class="slds-modal__footer">
+					<lightning-button
+						label="Cancelar"
+						onclick={closeModalPedidoDocumentacion}
+						disabled={loading}></lightning-button>
+					<lightning-button
+						class="slds-m-left_small"
+						variant="brand"
+						label="Solicitar documentación"
+						onclick={handleSolicitarDocumentacionContratos}
+						disabled={loading}></lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+</template>

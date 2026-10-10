@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>FSC_EmailSolicitudCreditoAprobadoCondiciones</name>
+    <relatedEntityType>ResidentialLoanApplication</relatedEntityType>
+    <style>none</style>
+    <subject>Solicitud de crédito aprobado con condiciones</subject>
+    <textOnly>Hola {{{ResidentialLoanApplication.FSC_Nombre_Cliente__c}}},
+
+Como parte de nuestro compromiso de acompañarte para alcanzar tus metas, al evaluar tu capacidad crediticia, en esta oportunidad tu solicitud de préstamo {{{ResidentialLoanApplication.Name}}} fue aprobada por un monto de {{{ResidentialLoanApplication.FSC_MontoAprobado__c}}}, a un plazo de {{{ResidentialLoanApplication.FSC_PlazoMesesAprobado__c}}} meses, con una cuota mensual de {{{ResidentialLoanApplication.FSC_MontoTotalCuotaMensual__c}}}, a una tasa de {{{ResidentialLoanApplication.FSC_TasaInteresAprobada__c}}} destinado para {{{ResidentialLoanApplication.FSC_Destino_del_Prestamo__c}}}.
+
+Confírmanos tu aprobación a esta propuesta respondiendo a {{{ResidentialLoanApplication.FSC_CreatedBy_Email__c}}} &lt; mailto:{{{ResidentialLoanApplication.FSC_CreatedBy_Email__c}}}  &gt; . También puedes comunicarte con nosotros al 809.533.1400. Nuestro equipo está disponible para asistirte de lunes a domingo de 7AM a 12AM, y en días feriados de 7AM a 8PM. Esperamos escucharte muy pronto.
+
+Para nosotros, es un privilegio servirte.
+
+Equipo Banca Personal 
+
+Banco Vimenca 
+
+Cuéntanos tu experiencia con nosotros en miexperiencia@bv.com.do &lt; mailto:miexperiencia@bv.com.do &gt; . ¡Queremos escucharte!</textOnly>
+    <type>custom</type>
+    <uiType>SFX</uiType>
+</EmailTemplate>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniIntegrationProcedure xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customJavaScript>{&quot;ResidentialLoanApplication&quot;:{&quot;Id&quot;:&quot;0cdVC000000JpwTYAS&quot;,&quot;FormulaNombrePDF&quot;:&quot;Hoja de desembolso - 44002431 - Sat Jan 31 2026 16:42:46 GMT-0300 (Argentina Standard Time)&quot;,&quot;FormulaFecha&quot;:&quot;2026-01-31T19:42:46.000Z&quot;,&quot;FormulaOficialActuante&quot;:&quot;Fernando Rocha&quot;,&quot;FormulaNombreCliente&quot;:&quot;Joel Valenti&quot;,&quot;FormulaCedula&quot;:&quot;44002431&quot;,&quot;FormulaMontoDesembolsar&quot;:null,&quot;FSC_MontoDesembolsar__c&quot;:32323,&quot;FormulaMontoAprobado&quot;:10000,&quot;FSC_MontoCuotaRegular__c&quot;:2708.1958577182936,&quot;FSC_SeguroVidaMonto__c&quot;:19.07057,&quot;FSC_MontoTotalCuotaMensual__c&quot;:49191.26642771829,&quot;FSC_GastosTramitacion__c&quot;:1000,&quot;FSC_Mora__c&quot;:&quot;5%&quot;,&quot;FSC_FechaVencimiento__c&quot;:&quot;2027-01-31T03:00:00.000Z&quot;,&quot;FSC_TotalDescuentos__c&quot;:7515,&quot;FSC_DesembolsoNeto__c&quot;:24808,&quot;FSC_Sucursal__c&quot;:&quot;asda&quot;,&quot;FSC_NumeroCliente__c&quot;:&quot;1312&quot;,&quot;FSC_TipoCredito__c&quot;:&quot;01 - CONSUMO&quot;,&quot;FSC_FechaAprobacion__c&quot;:&quot;2026-01-31&quot;,&quot;FSC_ClasificacionSib__c&quot;:&quot;asdas&quot;,&quot;FSC_CodigoAprobacion__c&quot;:&quot;00&quot;,&quot;CurrencyMontoDesembolsar&quot;:32323,&quot;FSC_LineaFinanciera__c&quot;:&quot;01 - COMERCIAL VEHICULOS USADOS&quot;,&quot;FSC_SubAplicacion__c&quot;:&quot;400 - COMERCIALES PERSONA JURIDICA&quot;,&quot;FSC_ProductoBanco__c&quot;:&quot;12312321&quot;,&quot;FSC_TipoDesembolsoSolicitado__c&quot;:&quot;TOTAL&quot;,&quot;FSC_FormaDesembolso__c&quot;:&quot;Parcial&quot;,&quot;FSC_MontoDesembolso__c&quot;:12312323,&quot;FSC_ComisionAdminSeguroMonto__c&quot;:23232,&quot;FSC_SeguroPropiedadMonto__c&quot;:23232,&quot;FSC_TransferenciaInmobiliaria__c&quot;:232,&quot;FSC_InscripcionHipoteca__c&quot;:232,&quot;FSC_ComisionEndosoPoliza__c&quot;:123,&quot;FSC_HonorariosLegalizacion__c&quot;:232,&quot;FSC_AyuntamientoRegistroCivil__c&quot;:4556,&quot;FSC_TasasServicios__c&quot;:343,&quot;FSC_OtrosGastosLegales__c&quot;:454,&quot;FSC_ConfeccionCheque__c&quot;:343,&quot;FSC_Observaciones__c&quot;:&quot;asdasdasd&quot;,&quot;FSC_FormaPago__c&quot;:&quot;FASDAS&quot;,&quot;FSC_PlazoMeses__c&quot;:12,&quot;FSC_TasaInteres__c&quot;:1,&quot;FSC_TipoGarantia__c&quot;:&quot;HIPOTECARIA&quot;,&quot;FSC_LineaCreditoNumero__c&quot;:12132,&quot;FSC_FechaVencimientoContrato__c&quot;:&quot;2026-01-31&quot;}}</customJavaScript>
+    <elementTypeComponentMapping>{&quot;ElementTypeToHTMLTemplateList&quot;:[]}</elementTypeComponentMapping>
+    <isActive>true</isActive>
+    <isIntegProcdSignatureAvl>false</isIntegProcdSignatureAvl>
+    <isIntegrationProcedure>true</isIntegrationProcedure>
+    <isManagedUsingStdDesigner>true</isManagedUsingStdDesigner>
+    <isMetadataCacheDisabled>false</isMetadataCacheDisabled>
+    <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+    <isTestProcedure>false</isTestProcedure>
+    <isWebCompEnabled>false</isWebCompEnabled>
+    <language>Procedure</language>
+    <name>FSC_CrearDocumentoDesembolso</name>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DataMapperPost</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : false,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;ISNOTBLANK(%FSC_GenerarPDF:contentVersionId%)&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;ResidentialLoanApplication&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : { },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCCrearResidentialLoanApplication&quot;,
+  &quot;sendJSONNode&quot; : &quot;ResidentialLoanApplication&quot;
+}</propertySetConfig>
+        <sequenceNumber>2.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Remote Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>FSC_GenerarPDF</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : false,
+  &quot;remoteOptions&quot; : { },
+  &quot;remoteMethod&quot; : &quot;generarPDFPlanillaDesembolso&quot;,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;FSC_GenerarPDF&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;remoteClass&quot; : &quot;FSC_GenerarPDF&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;ResidentialLoanApplication&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : { },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>1.0</sequenceNumber>
+        <type>Remote Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Response Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>Response</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;returnFullDataJSON&quot; : false,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;sendJSONPath&quot; : &quot;FSC_GenerarPDF&quot;,
+  &quot;elementValueMap&quot; : { },
+  &quot;responseFormat&quot; : &quot;&quot;,
+  &quot;id&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;restOptions&quot; : { },
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>3.0</sequenceNumber>
+        <type>Response Action</type>
+    </omniProcessElements>
+    <omniProcessKey>FSC_CrearDocumentoDesembolso</omniProcessKey>
+    <omniProcessType>Integration Procedure</omniProcessType>
+    <propertySetConfig>{
+  &quot;linkToExternalObject&quot; : &quot;&quot;,
+  &quot;trackingCustomData&quot; : { },
+  &quot;includeAllActionsInResponse&quot; : false,
+  &quot;columnsPropertyMap&quot; : [ ],
+  &quot;relationshipFieldsMap&quot; : [ ],
+  &quot;labelSingular&quot; : &quot;&quot;,
+  &quot;labelPlural&quot; : &quot;&quot;,
+  &quot;description&quot; : &quot;&quot;,
+  &quot;nameColumn&quot; : &quot;&quot;,
+  &quot;rollbackOnError&quot; : false,
+  &quot;chainableQueriesLimit&quot; : 50,
+  &quot;chainableDMLStatementsLimit&quot; : null,
+  &quot;chainableCpuLimit&quot; : 2000,
+  &quot;chainableHeapSizeLimit&quot; : null,
+  &quot;chainableDMLRowsLimit&quot; : null,
+  &quot;chainableQueryRowsLimit&quot; : null,
+  &quot;chainableSoslQueriesLimit&quot; : null,
+  &quot;additionalChainableResponse&quot; : { },
+  &quot;chainableActualTimeLimit&quot; : null,
+  &quot;transientValues&quot; : {
+    &quot;activateOrDeactivateConsent&quot; : false
+  }
+}</propertySetConfig>
+    <subType>CrearDocumentoDesembolso</subType>
+    <type>FSC</type>
+    <uniqueName>FSC_CrearDocumentoDesembolso_Procedure_2</uniqueName>
+    <versionNumber>2.0</versionNumber>
+</OmniIntegrationProcedure>

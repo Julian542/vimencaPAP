@@ -70,6 +70,17 @@ public with sharing class FSC_APIBuroCredito {
                 String rtDevName = rla.RecordType != null ? rla.RecordType.DeveloperName : null;
                 o.recordTypeDeveloperName = rtDevName;
 
+                if (!FSC_BuroConfigService.isMotorEncendido(rtDevName)) {
+                    ResidentialLoanApplication upd = new ResidentialLoanApplication(Id = rla.Id);
+                    FSC_BuroConfigService.aplicarMotorApagado(upd);
+                    toUpdate.add(upd);
+                    o.ipResult = FSC_BuroConfigService.RESULTADO_REFERIDO;
+                    o.message = FSC_BuroConfigService.MENSAJE_MOTOR_APAGADO;
+                    o.success = true;
+                    outputs.add(o);
+                    continue;
+                }
+
                 // Switch por RecordType DeveloperName
                 Map<String,String> ipInterpretedResult;
                 switch on rtDevName {

@@ -35,7 +35,8 @@ public without sharing class FSC_ESAEnvelopeStatusService {
             // Ajustá el path exacto según el Swagger de TU tenant.
             // Base documentada: /api/v6
             // Ejemplo habitual:
-            req.setEndpoint('callout:Esignanywhere/api/v6/envelope/' + EncodingUtil.urlEncode(envelopeId, 'UTF-8'));
+            String baseUrl = Test.isRunningTest() ? 'https://example.test' : 'callout:Esignanywhere';
+            req.setEndpoint(baseUrl + '/api/v6/envelope/' + EncodingUtil.urlEncode(envelopeId, 'UTF-8'));
             req.setMethod('GET');
             req.setHeader('Accept', 'application/json');
             req.setHeader('ApiToken', getApiToken());

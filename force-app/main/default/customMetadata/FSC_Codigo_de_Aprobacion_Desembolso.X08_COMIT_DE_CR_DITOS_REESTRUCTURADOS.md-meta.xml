@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>08 - COMITÉ DE CRÉDITOS REESTRUCTURADOS</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_Codigo_de_Aprobacion__c</field>
+        <value xsi:type="xsd:string">08</value>
+    </values>
+    <values>
+        <field>FSC_Descripcion__c</field>
+        <value xsi:type="xsd:string">08 - COMITÉ DE CRÉDITOS REESTRUCTURADOS</value>
+    </values>
+</CustomMetadata>

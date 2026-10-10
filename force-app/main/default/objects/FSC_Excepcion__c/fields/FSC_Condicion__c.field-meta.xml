@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Condicion__c</fullName>
+    <description>Registra la condición impuesta por el aprobador cuando la excepción requiere compromisos adicionales.</description>
+    <encryptionScheme>None</encryptionScheme>
+    <inlineHelpText>Indique las condiciones que deben cumplirse para mantener la aprobación.</inlineHelpText>
+    <label>Condición de la Excepción</label>
+    <length>32768</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

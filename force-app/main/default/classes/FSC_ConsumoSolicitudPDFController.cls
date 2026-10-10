@@ -266,7 +266,7 @@ public with sharing class FSC_ConsumoSolicitudPDFController {
 			'SELECT FSC_Clase_de_Garantia__c, FSC_Tipo_de_Garantia__c, FSC_Descripcion_de_la_Garantia__c, ' +
 			'FSC_Proposito_Garantia_Hipotecario__c, FSC_Tipo_de_Inmueble__c, FSC_Ubicacion__c, ' +
 			'FSC_Valor_Tasado__c, FSC_Fecha_Tasacion__c, FSC_Precio_de_Venta__c, FSC_Valor_Inmueble__c, ' +
-			'FSC_Monto_Inicial_Avance_Pagado__c, FSC_Tasado_Por__c ' +
+			'FSC_Monto_Inicial_Avance_Pagado__c, FSC_EsTasadorExterno__c, FSC_NombreTasadorExterno__c, FSC_Tasado_Por__c ' +
 			'FROM FSC_Garantia__c' +
 			whereClause +
 			' ORDER BY CreatedDate, Id';
@@ -1664,7 +1664,9 @@ public with sharing class FSC_ConsumoSolicitudPDFController {
 		item.precioVenta = fmtPdfMoney(tryDec(record == null ? null : record.get('FSC_Precio_de_Venta__c')));
 		item.valorInmueble = fmtPdfMoney(tryDec(record == null ? null : record.get('FSC_Valor_Inmueble__c')));
 		item.montoInicialAvance = fmtPdfMoney(tryDec(record == null ? null : record.get('FSC_Monto_Inicial_Avance_Pagado__c')));
-		item.tasador = sobjectVal(record, 'FSC_Tasado_Por__c');
+		item.tasador = record != null && (Boolean) record.get('FSC_EsTasadorExterno__c') == true
+			? sobjectVal(record, 'FSC_NombreTasadorExterno__c')
+			: sobjectVal(record, 'FSC_Tasado_Por__c');
 		return item;
 	}
 

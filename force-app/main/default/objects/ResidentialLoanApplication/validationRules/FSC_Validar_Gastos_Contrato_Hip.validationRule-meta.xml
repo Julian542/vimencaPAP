@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Validar_Gastos_Contrato_Hip</fullName>
+    <active>true</active>
+    <description>Valida que los gastos hipotecarios solo se utilicen en créditos hipotecarios y que no se informen simultáneamente los porcentajes 2% y 3%.</description>
+    <errorConditionFormula>OR(
+    AND(
+        NOT(ISBLANK(FSC_GastosGarantiasHip2__c)),
+        NOT(ISBLANK(FSC_GastosGarantiasHip3__c))
+    ),
+    AND(
+        $RecordType.DeveloperName &lt;&gt; &quot;FSC_Solicitud_Credito_Hipotecario&quot;,
+        OR(
+            NOT(ISBLANK(FSC_GastosLegalesContratos__c)),
+            NOT(ISBLANK(FSC_GastosGarantiasHip2__c)),
+            NOT(ISBLANK(FSC_GastosGarantiasHip3__c))
+        )
+    )
+)</errorConditionFormula>
+    <errorMessage>Los gastos de contrato solo aplican a créditos hipotecarios y debe indicar únicamente uno entre garantía hipotecaria 2% y 3%.</errorMessage>
+</ValidationRule>

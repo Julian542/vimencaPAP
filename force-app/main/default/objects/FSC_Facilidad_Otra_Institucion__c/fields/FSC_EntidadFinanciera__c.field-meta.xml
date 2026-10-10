@@ -1,0 +1,1022 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_EntidadFinanciera__c</fullName>
+    <label>Entidad Financiera</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>BANCO DE RESERVAS DE LA REPUBLICA DOMINICANA</fullName>
+                <default>false</default>
+                <label>BANCO DE RESERVAS DE LA REPUBLICA DOMINICANA</label>
+            </value>
+            <value>
+                <fullName>THE BANK OF NOVA SCOTIA</fullName>
+                <default>false</default>
+                <label>THE BANK OF NOVA SCOTIA</label>
+            </value>
+            <value>
+                <fullName>BANCO CITIBANK</fullName>
+                <default>false</default>
+                <label>BANCO CITIBANK</label>
+            </value>
+            <value>
+                <fullName>BANCO POPULAR DOMINICANO</fullName>
+                <default>false</default>
+                <label>BANCO POPULAR DOMINICANO</label>
+            </value>
+            <value>
+                <fullName>BANCO DOMINICANO DEL PROGRESO</fullName>
+                <default>false</default>
+                <label>BANCO DOMINICANO DEL PROGRESO</label>
+            </value>
+            <value>
+                <fullName>BANO MULTIPLE BHD LEON, S. A.</fullName>
+                <default>false</default>
+                <label>BANO MULTIPLE BHD LEON, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO MULTIPLE REPUBLIC BANK</fullName>
+                <default>false</default>
+                <label>BANCO MULTIPLE REPUBLIC BANK</label>
+            </value>
+            <value>
+                <fullName>BANCO BHD</fullName>
+                <default>false</default>
+                <label>BANCO BHD</label>
+            </value>
+            <value>
+                <fullName>BANCO INTERCONTINENTAL</fullName>
+                <default>false</default>
+                <label>BANCO INTERCONTINENTAL</label>
+            </value>
+            <value>
+                <fullName>BANCO GLOBAL</fullName>
+                <default>false</default>
+                <label>BANCO GLOBAL</label>
+            </value>
+            <value>
+                <fullName>BANCO MULTIPLE SANTA CRUZ, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO MULTIPLE SANTA CRUZ, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO MULTIPLE CARIBE INTERNACIONAL, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO MULTIPLE CARIBE INTERNACIONAL, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO MULTIPLE BDI, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO MULTIPLE BDI, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO VIMENCA</fullName>
+                <default>false</default>
+                <label>BANCO VIMENCA</label>
+            </value>
+            <value>
+                <fullName>BANCO MULTIPLE ACTIVO DOMINICANA, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO MULTIPLE ACTIVO DOMINICANA, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO MULTIPLE BELLBANK, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO MULTIPLE BELLBANK, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO MULTIPLE ADEMI, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO MULTIPLE ADEMI, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO MULTIPLE LAFISE, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO MULTIPLE LAFISE, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANESCO BANCO MULTIPLE, S. A.</fullName>
+                <default>false</default>
+                <label>BANESCO BANCO MULTIPLE, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO MULTIPLE PROMERICA DE LA REPUBLICA DOMINICANA, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO MULTIPLE PROMERICA DE LA REPUBLICA DOMINICANA, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO MULTIPLE DE LAS AMERICAS, S. A. (BANCAMERICA)</fullName>
+                <default>false</default>
+                <label>BANCO MULTIPLE DE LAS AMERICAS, S. A. (BANCAMERICA)</label>
+            </value>
+            <value>
+                <fullName>BANCO MULTIPLE LOPEZ DE HARO, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO MULTIPLE LOPEZ DE HARO, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO DE AHORRO Y CREDITO FONDESA, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO DE AHORRO Y CREDITO FONDESA, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO DE AHORRO Y CREDITO UNION, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO DE AHORRO Y CREDITO UNION, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO DE AHORRO Y CREDITO FIHOGAR, S. A</fullName>
+                <default>false</default>
+                <label>BANCO DE AHORRO Y CREDITO FIHOGAR, S. A</label>
+            </value>
+            <value>
+                <fullName>BONANZA BANCO DE AHORRO Y CREDITO, S. A.</fullName>
+                <default>false</default>
+                <label>BONANZA BANCO DE AHORRO Y CREDITO, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO DE AHORRO Y CREDITO COFACI, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO DE AHORRO Y CREDITO COFACI, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO DE AHORRO Y CREDITO GRUFICORP, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO DE AHORRO Y CREDITO GRUFICORP, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO DE AHORRO Y CREDITO DEL CARIBE, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO DE AHORRO Y CREDITO DEL CARIBE, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO DE AHORRO Y CREDITO JMMB BANK, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO DE AHORRO Y CREDITO JMMB BANK, S. A.</label>
+            </value>
+            <value>
+                <fullName>MOTOR CREDITO, S. A. BANCO DE AHORRO Y CREDITO</fullName>
+                <default>false</default>
+                <label>MOTOR CREDITO, S. A. BANCO DE AHORRO Y CREDITO</label>
+            </value>
+            <value>
+                <fullName>BANCO DE AHORRO Y CREDITO EMPIRE, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO DE AHORRO Y CREDITO EMPIRE, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO DE AHORRO Y CREDITO CONFISA, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO DE AHORRO Y CREDITO CONFISA, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO DE AHORRO Y CREDITO ADOPEM, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO DE AHORRO Y CREDITO ADOPEM, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO DE AHORRO Y CREDITO BANCOTUI, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO DE AHORRO Y CREDITO BANCOTUI, S. A.</label>
+            </value>
+            <value>
+                <fullName>BANCO ATLANTICO DE AHORRO Y CREDITO, S. A.</fullName>
+                <default>false</default>
+                <label>BANCO ATLANTICO DE AHORRO Y CREDITO, S. A.</label>
+            </value>
+            <value>
+                <fullName>CORPORACION DE CREDITO PREINDESA, S. A.</fullName>
+                <default>false</default>
+                <label>CORPORACION DE CREDITO PREINDESA, S. A.</label>
+            </value>
+            <value>
+                <fullName>CORPORACION DE CREDITO NORDESTANA DE PRESTAMOS, S. A.</fullName>
+                <default>false</default>
+                <label>CORPORACION DE CREDITO NORDESTANA DE PRESTAMOS, S. A.</label>
+            </value>
+            <value>
+                <fullName>CORPORACION DE CREDITO MONUMENTAL, S. A.</fullName>
+                <default>false</default>
+                <label>CORPORACION DE CREDITO MONUMENTAL, S. A.</label>
+            </value>
+            <value>
+                <fullName>CORPORACION DE CREDITO REIDCO, S. A.</fullName>
+                <default>false</default>
+                <label>CORPORACION DE CREDITO REIDCO, S. A.</label>
+            </value>
+            <value>
+                <fullName>CORPORACION DE CREDITO LEASING CONFISA, S.A.</fullName>
+                <default>false</default>
+                <label>CORPORACION DE CREDITO LEASING CONFISA, S.A.</label>
+            </value>
+            <value>
+                <fullName>CORPORACION DE CREDITO OFICORP, S. A.</fullName>
+                <default>false</default>
+                <label>CORPORACION DE CREDITO OFICORP, S. A.</label>
+            </value>
+            <value>
+                <fullName>ASOCIACION LA NACIONAL DE AHORROS Y PRESTAMOS</fullName>
+                <default>false</default>
+                <label>ASOCIACION LA NACIONAL DE AHORROS Y PRESTAMOS</label>
+            </value>
+            <value>
+                <fullName>ASOCIACION BONAO DE AHORROS Y PRESTAMOS</fullName>
+                <default>false</default>
+                <label>ASOCIACION BONAO DE AHORROS Y PRESTAMOS</label>
+            </value>
+            <value>
+                <fullName>ASOCIACION MOCANA DE AHORROS Y PRESTAMOS</fullName>
+                <default>false</default>
+                <label>ASOCIACION MOCANA DE AHORROS Y PRESTAMOS</label>
+            </value>
+            <value>
+                <fullName>ASOCIACION MAGUANA DE AHORROS Y PRESTAMOS</fullName>
+                <default>false</default>
+                <label>ASOCIACION MAGUANA DE AHORROS Y PRESTAMOS</label>
+            </value>
+            <value>
+                <fullName>ASOCIACION DUARTE DE AHORROS Y PRESTAMOS</fullName>
+                <default>false</default>
+                <label>ASOCIACION DUARTE DE AHORROS Y PRESTAMOS</label>
+            </value>
+            <value>
+                <fullName>ASOCIACION LA VEGA REAL DE AHORROS Y PRESTAMOS</fullName>
+                <default>false</default>
+                <label>ASOCIACION LA VEGA REAL DE AHORROS Y PRESTAMOS</label>
+            </value>
+            <value>
+                <fullName>ASOCIACION ROMANA DE AHORROS Y PRESTAMOS</fullName>
+                <default>false</default>
+                <label>ASOCIACION ROMANA DE AHORROS Y PRESTAMOS</label>
+            </value>
+            <value>
+                <fullName>ASOCIACION PERAVIA DE AHORROS Y PRESTAMOS</fullName>
+                <default>false</default>
+                <label>ASOCIACION PERAVIA DE AHORROS Y PRESTAMOS</label>
+            </value>
+            <value>
+                <fullName>ASOCIACION CIBAO DE AHORROS Y PRESTAMOS</fullName>
+                <default>false</default>
+                <label>ASOCIACION CIBAO DE AHORROS Y PRESTAMOS</label>
+            </value>
+            <value>
+                <fullName>ASOCIACION POPULAR DE AHORROS Y PRESTAMOS</fullName>
+                <default>false</default>
+                <label>ASOCIACION POPULAR DE AHORROS Y PRESTAMOS</label>
+            </value>
+            <value>
+                <fullName>BANCO SCOTIBANK</fullName>
+                <default>false</default>
+                <label>BANCO SCOTIBANK</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE AHORRO, CREDITO Y SERVICIOS MULTIPLE ASPIRE</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE AHORRO, CREDITO Y SERVICIOS MULTIPLE ASPIRE</label>
+            </value>
+            <value>
+                <fullName>LUGOZMOVIL SRL</fullName>
+                <default>false</default>
+                <label>LUGOZMOVIL SRL</label>
+            </value>
+            <value>
+                <fullName>INMOBILIARIA E INVERSIONES ANABEL</fullName>
+                <default>false</default>
+                <label>INMOBILIARIA E INVERSIONES ANABEL</label>
+            </value>
+            <value>
+                <fullName>CREDI CEFI</fullName>
+                <default>false</default>
+                <label>CREDI CEFI</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA EMPRESARIAL DE AHORRO, CREDITO LA CONCEPCIÓN</fullName>
+                <default>false</default>
+                <label>COOPERATIVA EMPRESARIAL DE AHORRO, CREDITO LA CONCEPCIÓN</label>
+            </value>
+            <value>
+                <fullName>CORPORACION DE CREDITO OFICORP</fullName>
+                <default>false</default>
+                <label>CORPORACION DE CREDITO OFICORP</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE LOS  MICROS, PEQUENOS Y MEDIANOS EMPRESARIOS AZUANOS</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE LOS  MICROS, PEQUENOS Y MEDIANOS EMPRESARIOS AZUANOS</label>
+            </value>
+            <value>
+                <fullName>COMPAÑÍA DE INVERSIONES YAMEL, C.POR.A</fullName>
+                <default>false</default>
+                <label>COMPAÑÍA DE INVERSIONES YAMEL, C.POR.A</label>
+            </value>
+            <value>
+                <fullName>SERVICIOS FINANCIEROS DOMINICANOS</fullName>
+                <default>false</default>
+                <label>SERVICIOS FINANCIEROS DOMINICANOS</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA CLOF</fullName>
+                <default>false</default>
+                <label>COOPERATIVA CLOF</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA NACIONAL DE SERVICIOS MÚLTIPLES DE LOS MAESTROS, INC.</fullName>
+                <default>false</default>
+                <label>COOPERATIVA NACIONAL DE SERVICIOS MÚLTIPLES DE LOS MAESTROS, INC.</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA NACIONAL DE SERVICIOS MULTIPLES DE LOS MEDICOS</fullName>
+                <default>false</default>
+                <label>COOPERATIVA NACIONAL DE SERVICIOS MULTIPLES DE LOS MEDICOS</label>
+            </value>
+            <value>
+                <fullName>VISION FUND REPUBLICA DOMINICANA, SAS</fullName>
+                <default>false</default>
+                <label>VISION FUND REPUBLICA DOMINICANA, SAS</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA  DE AHORRO Y CRÉDITO DE TRABAJADORES DEL PAIS, INC</fullName>
+                <default>false</default>
+                <label>COOPERATIVA  DE AHORRO Y CRÉDITO DE TRABAJADORES DEL PAIS, INC</label>
+            </value>
+            <value>
+                <fullName>Inversiones Multiples S.A Invermusa</fullName>
+                <default>false</default>
+                <label>Inversiones Multiples S.A Invermusa</label>
+            </value>
+            <value>
+                <fullName>CORPORACION DE CREDITO REIDCO, C. POR A</fullName>
+                <default>false</default>
+                <label>CORPORACION DE CREDITO REIDCO, C. POR A</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE AHORROS Y CREDITOS DE HERRERA</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE AHORROS Y CREDITOS DE HERRERA</label>
+            </value>
+            <value>
+                <fullName>CONSEJO NACIONAL PROMIPYME</fullName>
+                <default>false</default>
+                <label>CONSEJO NACIONAL PROMIPYME</label>
+            </value>
+            <value>
+                <fullName>Cooperativa Nacional de Servicios Múltiples de Los Maestros, Inc</fullName>
+                <default>false</default>
+                <label>Cooperativa Nacional de Servicios Múltiples de Los Maestros, Inc</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE  MAIMÓN</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE  MAIMÓN</label>
+            </value>
+            <value>
+                <fullName>BAUGIL INVERSIONES Y  PRÉSTAMOS, SRL</fullName>
+                <default>false</default>
+                <label>BAUGIL INVERSIONES Y  PRÉSTAMOS, SRL</label>
+            </value>
+            <value>
+                <fullName>MUJERES EN DESARROLLO DOMINICANO</fullName>
+                <default>false</default>
+                <label>MUJERES EN DESARROLLO DOMINICANO</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE AHORRO, CREDITO Y SERVICIOS MULTIPLES DE LOS TRABAJADORES DE ZONA  FRANCA</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE AHORRO, CREDITO Y SERVICIOS MULTIPLES DE LOS TRABAJADORES DE ZONA  FRANCA</label>
+            </value>
+            <value>
+                <fullName>FUNDACION DE CREDITO EDUCATIVO</fullName>
+                <default>false</default>
+                <label>FUNDACION DE CREDITO EDUCATIVO</label>
+            </value>
+            <value>
+                <fullName>SUAREZ AUTO INVERSIONES ,S.R.L</fullName>
+                <default>false</default>
+                <label>SUAREZ AUTO INVERSIONES ,S.R.L</label>
+            </value>
+            <value>
+                <fullName>INMOBILIARIA E INVERSIONES ANABEL, S.R.L. (CARRETERA MELLA LENERNA)</fullName>
+                <default>false</default>
+                <label>INMOBILIARIA E INVERSIONES ANABEL, S.R.L. (CARRETERA MELLA LENERNA)</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE AHORROS, CREDITOS Y SERVICIOS (MULTIPLES CENTRAL)</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE AHORROS, CREDITOS Y SERVICIOS (MULTIPLES CENTRAL)</label>
+            </value>
+            <value>
+                <fullName>AUTO CREDITO DIRECTO GARCIA MARMOLEJOS,S.R.L</fullName>
+                <default>false</default>
+                <label>AUTO CREDITO DIRECTO GARCIA MARMOLEJOS,S.R.L</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES PAEZ ESPINAL, S.R.L</fullName>
+                <default>false</default>
+                <label>INVERSIONES PAEZ ESPINAL, S.R.L</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA POPULAR</fullName>
+                <default>false</default>
+                <label>COOPERATIVA POPULAR</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES MARI LUZ PEGUERO SRL</fullName>
+                <default>false</default>
+                <label>INVERSIONES MARI LUZ PEGUERO SRL</label>
+            </value>
+            <value>
+                <fullName>ATLÁNTICO BANCO DE AHORRO Y CRÉDITO, S.A.</fullName>
+                <default>false</default>
+                <label>ATLÁNTICO BANCO DE AHORRO Y CRÉDITO, S.A.</label>
+            </value>
+            <value>
+                <fullName>OPTIMA CORPORACION DE CREDITO, S.A.</fullName>
+                <default>false</default>
+                <label>OPTIMA CORPORACION DE CREDITO, S.A.</label>
+            </value>
+            <value>
+                <fullName>PANACREDITO, S.A.S.- CREDIGO</fullName>
+                <default>false</default>
+                <label>PANACREDITO, S.A.S.- CREDIGO</label>
+            </value>
+            <value>
+                <fullName>TECICORP S.A.S</fullName>
+                <default>false</default>
+                <label>TECICORP S.A.S</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE AHORRO Y CREDITO MAMONCITO</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE AHORRO Y CREDITO MAMONCITO</label>
+            </value>
+            <value>
+                <fullName>COOP. DE AHORRO CREDITO Y SERV. MULT. CAMINO AL PROGRESO</fullName>
+                <default>false</default>
+                <label>COOP. DE AHORRO CREDITO Y SERV. MULT. CAMINO AL PROGRESO</label>
+            </value>
+            <value>
+                <fullName>FINANCIAMIENTOS B&amp;H</fullName>
+                <default>false</default>
+                <label>FINANCIAMIENTOS B&amp;H</label>
+            </value>
+            <value>
+                <fullName>SOLUCIONES DE NEGOCIOS AM Y C S.R.L.</fullName>
+                <default>false</default>
+                <label>SOLUCIONES DE NEGOCIOS AM Y C S.R.L.</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES 3R</fullName>
+                <default>false</default>
+                <label>INVERSIONES 3R</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE AHORROS Y PRESTAMOS MANOGUAYABO</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE AHORROS Y PRESTAMOS MANOGUAYABO</label>
+            </value>
+            <value>
+                <fullName>FUNDACION DOMINICANA DE DESARROLLO</fullName>
+                <default>false</default>
+                <label>FUNDACION DOMINICANA DE DESARROLLO</label>
+            </value>
+            <value>
+                <fullName>CREDIMASTER, SRL</fullName>
+                <default>false</default>
+                <label>CREDIMASTER, SRL</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES MATIAS ROSADO SRL.</fullName>
+                <default>false</default>
+                <label>INVERSIONES MATIAS ROSADO SRL.</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA SAN JOSE</fullName>
+                <default>false</default>
+                <label>COOPERATIVA SAN JOSE</label>
+            </value>
+            <value>
+                <fullName>CREDIFACIL</fullName>
+                <default>false</default>
+                <label>CREDIFACIL</label>
+            </value>
+            <value>
+                <fullName>CREDINORTE Y OVIEDO Y BURDIEZ, S.R.L</fullName>
+                <default>false</default>
+                <label>CREDINORTE Y OVIEDO Y BURDIEZ, S.R.L</label>
+            </value>
+            <value>
+                <fullName>CORPORACION DE CREDITO NORDESTANA DE PRESTAMOS, S.A.</fullName>
+                <default>false</default>
+                <label>CORPORACION DE CREDITO NORDESTANA DE PRESTAMOS, S.A.</label>
+            </value>
+            <value>
+                <fullName>GESTION DE DESARROLLO MICRO COMERCIAL MORENO ROJAS GEDEMOR S.R.L</fullName>
+                <default>false</default>
+                <label>GESTION DE DESARROLLO MICRO COMERCIAL MORENO ROJAS GEDEMOR S.R.L</label>
+            </value>
+            <value>
+                <fullName>NSP MYCREDIMEDIA SRL</fullName>
+                <default>false</default>
+                <label>NSP MYCREDIMEDIA SRL</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA SABANETA Y NOVILLO</fullName>
+                <default>false</default>
+                <label>COOPERATIVA SABANETA Y NOVILLO</label>
+            </value>
+            <value>
+                <fullName>SOLUCIONES DE NEGOCIOS CEPEDA DOTEL, S.R.L</fullName>
+                <default>false</default>
+                <label>SOLUCIONES DE NEGOCIOS CEPEDA DOTEL, S.R.L</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES SULY SRL</fullName>
+                <default>false</default>
+                <label>INVERSIONES SULY SRL</label>
+            </value>
+            <value>
+                <fullName>NICOLAS RAFAEL RODRIGUEZ GOMEZ</fullName>
+                <default>false</default>
+                <label>NICOLAS RAFAEL RODRIGUEZ GOMEZ</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE AHORROS Y CREDITOS Y SERVICIOS MULTIPLES VICTORIA DE JESUS Y AMIGOS, INC.</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE AHORROS Y CREDITOS Y SERVICIOS MULTIPLES VICTORIA DE JESUS Y AMIGOS, INC.</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA MOMON BUENO</fullName>
+                <default>false</default>
+                <label>COOPERATIVA MOMON BUENO</label>
+            </value>
+            <value>
+                <fullName>CAONA CAPITAL SRL</fullName>
+                <default>false</default>
+                <label>CAONA CAPITAL SRL</label>
+            </value>
+            <value>
+                <fullName>INTERPRESTAMOS, S.R.L.</fullName>
+                <default>false</default>
+                <label>INTERPRESTAMOS, S.R.L.</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES DOMINICANA RANTO S.R.L</fullName>
+                <default>false</default>
+                <label>INVERSIONES DOMINICANA RANTO S.R.L</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA LA ALTAGRACIA, INC</fullName>
+                <default>false</default>
+                <label>COOPERATIVA LA ALTAGRACIA, INC</label>
+            </value>
+            <value>
+                <fullName>Lesmon Servcies S.R.L.</fullName>
+                <default>false</default>
+                <label>Lesmon Servcies S.R.L.</label>
+            </value>
+            <value>
+                <fullName>CREDITOS GUIMANFER S.R.L.</fullName>
+                <default>false</default>
+                <label>CREDITOS GUIMANFER S.R.L.</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA 26 DE ABRIL, INC.</fullName>
+                <default>false</default>
+                <label>COOPERATIVA 26 DE ABRIL, INC.</label>
+            </value>
+            <value>
+                <fullName>MICROPRE S.A</fullName>
+                <default>false</default>
+                <label>MICROPRE S.A</label>
+            </value>
+            <value>
+                <fullName>CONSORCIO EMPRESARIAL AIRES DEL NORTE</fullName>
+                <default>false</default>
+                <label>CONSORCIO EMPRESARIAL AIRES DEL NORTE</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE AHORRO, CREDITO Y SERVICIOS MULTIPLES GLOBAL</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE AHORRO, CREDITO Y SERVICIOS MULTIPLES GLOBAL</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES JR &amp; L, S.R.L (PRESTAMOS)</fullName>
+                <default>false</default>
+                <label>INVERSIONES JR &amp; L, S.R.L (PRESTAMOS)</label>
+            </value>
+            <value>
+                <fullName>INVERSIONESS RUDDY FERNANDEZ SANCHEZ, S.R.L</fullName>
+                <default>false</default>
+                <label>INVERSIONESS RUDDY FERNANDEZ SANCHEZ, S.R.L</label>
+            </value>
+            <value>
+                <fullName>SOLUCIONES TA QUI, S.R.L.</fullName>
+                <default>false</default>
+                <label>SOLUCIONES TA QUI, S.R.L.</label>
+            </value>
+            <value>
+                <fullName>ACRESA GROUP, S.R.L</fullName>
+                <default>false</default>
+                <label>ACRESA GROUP, S.R.L</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES VICTOR FERNANDEZ, S.R.L.</fullName>
+                <default>false</default>
+                <label>INVERSIONES VICTOR FERNANDEZ, S.R.L.</label>
+            </value>
+            <value>
+                <fullName>FINERYSA, SRL</fullName>
+                <default>false</default>
+                <label>FINERYSA, SRL</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE AHORRO Y CRÉDITO COOTRALCOA</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE AHORRO Y CRÉDITO COOTRALCOA</label>
+            </value>
+            <value>
+                <fullName>ALEJANDRO DE OLEO MONTERO</fullName>
+                <default>false</default>
+                <label>ALEJANDRO DE OLEO MONTERO</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE AHORROS Y PRESTAMO NEYBA</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE AHORROS Y PRESTAMO NEYBA</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES CASTILLO CASTILLO, E.I.R.L</fullName>
+                <default>false</default>
+                <label>INVERSIONES CASTILLO CASTILLO, E.I.R.L</label>
+            </value>
+            <value>
+                <fullName>CECOMSA FINANCIAL, SRL</fullName>
+                <default>false</default>
+                <label>CECOMSA FINANCIAL, SRL</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE AHORROS Y PRESTAMOS EL PROGRESO, INC</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE AHORROS Y PRESTAMOS EL PROGRESO, INC</label>
+            </value>
+            <value>
+                <fullName>RAMON RIVAS &amp; INVERSIONES, S.R.L.</fullName>
+                <default>false</default>
+                <label>RAMON RIVAS &amp; INVERSIONES, S.R.L.</label>
+            </value>
+            <value>
+                <fullName>JMMB</fullName>
+                <default>false</default>
+                <label>JMMB</label>
+            </value>
+            <value>
+                <fullName>MOTO PRESTAMOS F Y F</fullName>
+                <default>false</default>
+                <label>MOTO PRESTAMOS F Y F</label>
+            </value>
+            <value>
+                <fullName>SOLUCIONES FIX &amp; MEDINA, SRL.</fullName>
+                <default>false</default>
+                <label>SOLUCIONES FIX &amp; MEDINA, SRL.</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE LOS CERVECEROS</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE LOS CERVECEROS</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE AHORROS CREDITOS Y SERVICIOS MULTIPLES PARA EL DES</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE AHORROS CREDITOS Y SERVICIOS MULTIPLES PARA EL DES</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA MANO SOLIDARIA</fullName>
+                <default>false</default>
+                <label>COOPERATIVA MANO SOLIDARIA</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA FAMILIAR SERVICIOS MULTIPLES ELADIO FELIZ(VIVITO), INC.</fullName>
+                <default>false</default>
+                <label>COOPERATIVA FAMILIAR SERVICIOS MULTIPLES ELADIO FELIZ(VIVITO), INC.</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES TRONILO, S.R.L..</fullName>
+                <default>false</default>
+                <label>INVERSIONES TRONILO, S.R.L..</label>
+            </value>
+            <value>
+                <fullName>COOPROSERVICIOS, INC</fullName>
+                <default>false</default>
+                <label>COOPROSERVICIOS, INC</label>
+            </value>
+            <value>
+                <fullName>NEGOCIOS Y SERVICIOS GBM.</fullName>
+                <default>false</default>
+                <label>NEGOCIOS Y SERVICIOS GBM.</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES NUEVA SALIDA S.A</fullName>
+                <default>false</default>
+                <label>INVERSIONES NUEVA SALIDA S.A</label>
+            </value>
+            <value>
+                <fullName>COOP.DE SERV.MULT. DE PROFES. EMP.Y A FINES DE LA UNIV.TECN. DE STGO. UTESA</fullName>
+                <default>false</default>
+                <label>COOP.DE SERV.MULT. DE PROFES. EMP.Y A FINES DE LA UNIV.TECN. DE STGO. UTESA</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES Y MOTOPRESTAMOS PION, S.A</fullName>
+                <default>false</default>
+                <label>INVERSIONES Y MOTOPRESTAMOS PION, S.A</label>
+            </value>
+            <value>
+                <fullName>NEGOCIOS Y SERVICIOS GBM</fullName>
+                <default>false</default>
+                <label>NEGOCIOS Y SERVICIOS GBM</label>
+            </value>
+            <value>
+                <fullName>VEGAMOVIL</fullName>
+                <default>false</default>
+                <label>VEGAMOVIL</label>
+            </value>
+            <value>
+                <fullName>EOCALA CONSORCIO FINANCIERO SRL</fullName>
+                <default>false</default>
+                <label>EOCALA CONSORCIO FINANCIERO SRL</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES JIMERIVER Y ASOCIADOS</fullName>
+                <default>false</default>
+                <label>INVERSIONES JIMERIVER Y ASOCIADOS</label>
+            </value>
+            <value>
+                <fullName>GRUPO FINANCIERO M&amp;J, SRL</fullName>
+                <default>false</default>
+                <label>GRUPO FINANCIERO M&amp;J, SRL</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES TRONILO SRL</fullName>
+                <default>false</default>
+                <label>INVERSIONES TRONILO SRL</label>
+            </value>
+            <value>
+                <fullName>CREDI HERNANDEZ, S.R.L.</fullName>
+                <default>false</default>
+                <label>CREDI HERNANDEZ, S.R.L.</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE AHORRO, CREDITO Y SERVICIOS MULTIPLES CONACADO.</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE AHORRO, CREDITO Y SERVICIOS MULTIPLES CONACADO.</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE AHORRO, CREDITO Y SERV. MULTIPLES DE MONS. NOUEL</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE AHORRO, CREDITO Y SERV. MULTIPLES DE MONS. NOUEL</label>
+            </value>
+            <value>
+                <fullName>AUTOCRAFT DOMINICANA S.A</fullName>
+                <default>false</default>
+                <label>AUTOCRAFT DOMINICANA S.A</label>
+            </value>
+            <value>
+                <fullName>SOLUCIONES EMPRESARIALES MACORISANA. S.R.L..</fullName>
+                <default>false</default>
+                <label>SOLUCIONES EMPRESARIALES MACORISANA. S.R.L..</label>
+            </value>
+            <value>
+                <fullName>SOLUCIONES  TA QUI, S.R.L</fullName>
+                <default>false</default>
+                <label>SOLUCIONES  TA QUI, S.R.L</label>
+            </value>
+            <value>
+                <fullName>VICO, S.R.L.</fullName>
+                <default>false</default>
+                <label>VICO, S.R.L.</label>
+            </value>
+            <value>
+                <fullName>CENTRO FINANCIERO E HIPOTECARIO EL ALEMAN, E.I.R.L.</fullName>
+                <default>false</default>
+                <label>CENTRO FINANCIERO E HIPOTECARIO EL ALEMAN, E.I.R.L.</label>
+            </value>
+            <value>
+                <fullName>Cooperativa de Ahorro, cred. Y serv. Mult. Cooptaveras</fullName>
+                <default>false</default>
+                <label>Cooperativa de Ahorro, cred. Y serv. Mult. Cooptaveras</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE AHORROS, CRÉDITOS Y SERVICIOS MÚLTIPLES CREER, COOPCREER</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE AHORROS, CRÉDITOS Y SERVICIOS MÚLTIPLES CREER, COOPCREER</label>
+            </value>
+            <value>
+                <fullName>Compañía de Inversiones Yamel C por A</fullName>
+                <default>false</default>
+                <label>Compañía de Inversiones Yamel C por A</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA SAN ANTONIO</fullName>
+                <default>false</default>
+                <label>COOPERATIVA SAN ANTONIO</label>
+            </value>
+            <value>
+                <fullName>DLS INVERSIONES, S.R.L.</fullName>
+                <default>false</default>
+                <label>DLS INVERSIONES, S.R.L.</label>
+            </value>
+            <value>
+                <fullName>Asociación Esperanza Internacional</fullName>
+                <default>false</default>
+                <label>Asociación Esperanza Internacional</label>
+            </value>
+            <value>
+                <fullName>NSP MYCREDIMEDIA</fullName>
+                <default>false</default>
+                <label>NSP MYCREDIMEDIA</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES E INMOBILIARIA CABRAL GUERRERO, SRL</fullName>
+                <default>false</default>
+                <label>INVERSIONES E INMOBILIARIA CABRAL GUERRERO, SRL</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE CONSUMO Y SERV. MULTIPLES LA AURORA</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE CONSUMO Y SERV. MULTIPLES LA AURORA</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES  PINIEL S.R.L</fullName>
+                <default>false</default>
+                <label>INVERSIONES  PINIEL S.R.L</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE CONSUMO Y SERV. MULT. DE LOS SUP. ECON. UNASE DE LA REP. DOM.</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE CONSUMO Y SERV. MULT. DE LOS SUP. ECON. UNASE DE LA REP. DOM.</label>
+            </value>
+            <value>
+                <fullName>DOMINGO ANTONIO CONCEPCION EDUARDO</fullName>
+                <default>false</default>
+                <label>DOMINGO ANTONIO CONCEPCION EDUARDO</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA DE AHORROS CREDITOS Y SERVICIOS MULTIPLES SUS BENEFICIOS</fullName>
+                <default>false</default>
+                <label>COOPERATIVA DE AHORROS CREDITOS Y SERVICIOS MULTIPLES SUS BENEFICIOS</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES PEFIVIVI</fullName>
+                <default>false</default>
+                <label>INVERSIONES PEFIVIVI</label>
+            </value>
+            <value>
+                <fullName>DIHCOOP</fullName>
+                <default>false</default>
+                <label>DIHCOOP</label>
+            </value>
+            <value>
+                <fullName>COOP. DE AHORROS, CREDITOS Y SERV.MULT. REALTY</fullName>
+                <default>false</default>
+                <label>COOP. DE AHORROS, CREDITOS Y SERV.MULT. REALTY</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVA EMPRESARIAL</fullName>
+                <default>false</default>
+                <label>COOPERATIVA EMPRESARIAL</label>
+            </value>
+            <value>
+                <fullName>COOPMEDICA</fullName>
+                <default>false</default>
+                <label>COOPMEDICA</label>
+            </value>
+            <value>
+                <fullName>Cooperativa de Ahorros, Créditos y Servicios Múltiples Central (Coopcentral)</fullName>
+                <default>false</default>
+                <label>Cooperativa de Ahorros, Créditos y Servicios Múltiples Central (Coopcentral)</label>
+            </value>
+            <value>
+                <fullName>Banco Esperanza Internacional</fullName>
+                <default>false</default>
+                <label>Banco Esperanza Internacional</label>
+            </value>
+            <value>
+                <fullName>Fundación Dominicana de Desarrollo</fullName>
+                <default>false</default>
+                <label>Fundación Dominicana de Desarrollo</label>
+            </value>
+            <value>
+                <fullName>Banco Digital Dominano (Qik)</fullName>
+                <default>false</default>
+                <label>Banco Digital Dominano (Qik)</label>
+            </value>
+            <value>
+                <fullName>Banco Digital (Vana)</fullName>
+                <default>false</default>
+                <label>Banco Digital (Vana)</label>
+            </value>
+            <value>
+                <fullName>DESCUENTOS MEDICOS</fullName>
+                <default>false</default>
+                <label>DESCUENTOS MEDICOS</label>
+            </value>
+            <value>
+                <fullName>Ribo Capital</fullName>
+                <default>false</default>
+                <label>Ribo Capital</label>
+            </value>
+            <value>
+                <fullName>Mello Inmobiliaria e Inversiones</fullName>
+                <default>false</default>
+                <label>Mello Inmobiliaria e Inversiones</label>
+            </value>
+            <value>
+                <fullName>GRUPO INNOVACION FINACIERA INFIGROUP, S.</fullName>
+                <default>false</default>
+                <label>GRUPO INNOVACION FINACIERA INFIGROUP, S.</label>
+            </value>
+            <value>
+                <fullName>Inversiones Fidel Suero, S.R.L</fullName>
+                <default>false</default>
+                <label>Inversiones Fidel Suero, S.R.L</label>
+            </value>
+            <value>
+                <fullName>Yanilsa Inversiones y Soluciones</fullName>
+                <default>false</default>
+                <label>Yanilsa Inversiones y Soluciones</label>
+            </value>
+            <value>
+                <fullName>C.E.D EFECTIVO YA</fullName>
+                <default>false</default>
+                <label>C.E.D EFECTIVO YA</label>
+            </value>
+            <value>
+                <fullName>ZENZIYA</fullName>
+                <default>false</default>
+                <label>ZENZIYA</label>
+            </value>
+            <value>
+                <fullName>Prestamos E Inversiones Tejada LR y EY, SRL</fullName>
+                <default>false</default>
+                <label>Prestamos E Inversiones Tejada LR y EY, SRL</label>
+            </value>
+            <value>
+                <fullName>COOP. DE AHORRO. CRED. Y SERV. MULT. MODERNA</fullName>
+                <default>false</default>
+                <label>COOP. DE AHORRO. CRED. Y SERV. MULT. MODERNA</label>
+            </value>
+            <value>
+                <fullName>Inversiones Matias Rosado</fullName>
+                <default>false</default>
+                <label>Inversiones Matias Rosado</label>
+            </value>
+            <value>
+                <fullName>TRANS AGIL, SRL</fullName>
+                <default>false</default>
+                <label>TRANS AGIL, SRL</label>
+            </value>
+            <value>
+                <fullName>CAPITAL AUTOIMPORT,</fullName>
+                <default>false</default>
+                <label>CAPITAL AUTOIMPORT,</label>
+            </value>
+            <value>
+                <fullName>INVERSIONES A.K.B, SRL</fullName>
+                <default>false</default>
+                <label>INVERSIONES A.K.B, SRL</label>
+            </value>
+            <value>
+                <fullName>SANCHEZ &amp; GONZALEZ PRÉSTAMOS SRL</fullName>
+                <default>false</default>
+                <label>SANCHEZ &amp; GONZALEZ PRÉSTAMOS SRL</label>
+            </value>
+            <value>
+                <fullName>Cooperativa San Miguel</fullName>
+                <default>false</default>
+                <label>Cooperativa San Miguel</label>
+            </value>
+            <value>
+                <fullName>INMOBILIARIA E INVERSIONES ANABEL, S.R.L. (CARRETERA MELLA LENERNA)”</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>INMOBILIARIA E INVERSIONES ANABEL, S.R.L. (CARRETERA MELLA LENERNA)”</label>
+            </value>
+            <value>
+                <fullName>“ACRESA GROUP, S.R.L”</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>“ACRESA GROUP, S.R.L”</label>
+            </value>
+            <value>
+                <fullName>“COOPERATIVA FAMILIAR SERVICIOS MULTIPLES ELADIO FELIZ(VIVITO), INC.</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>“COOPERATIVA FAMILIAR SERVICIOS MULTIPLES ELADIO FELIZ(VIVITO), INC.</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

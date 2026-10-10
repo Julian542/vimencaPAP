@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Comentario_Formalizacion_Vehiculo__c</fullName>
+    <description>Conserva la observación operativa de la formalización de la garantía vehicular.</description>
+    <encryptionScheme>None</encryptionScheme>
+    <inlineHelpText>Explique el resultado de la constitución de la garantía vehicular.</inlineHelpText>
+    <label>Comentario</label>
+    <length>1000</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

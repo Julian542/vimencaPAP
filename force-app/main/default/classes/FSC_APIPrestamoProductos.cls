@@ -10,6 +10,9 @@ public with sharing class FSC_APIPrestamoProductos {
 
 		@InvocableVariable(label='FSC_subAplicacion__c' required=true)
 		public String subAplicacion;
+
+		@InvocableVariable(label='FSC_ClaveProducto__c')
+		public String claveProducto;
 	}
 
 	public class Output {
@@ -88,6 +91,12 @@ public with sharing class FSC_APIPrestamoProductos {
 
 		if (normalizedResponse instanceof Map<String, Object>) {
 			Map<String, Object> responseMap = (Map<String, Object>) normalizedResponse;
+			String errorMessage = responseMap.get('error') == null ? null : String.valueOf(responseMap.get('error'));
+			Boolean failedResponse = String.valueOf(responseMap.get('success')).toLowerCase() == 'false';
+			if (failedResponse || !String.isBlank(errorMessage)) {
+				throw new CalloutException(String.isBlank(errorMessage) ? 'La consulta de productos no fue exitosa.' : errorMessage);
+			}
+
 			if (!responseMap.containsKey('productos')) {
 				return new List<Object>();
 			}
@@ -100,16 +109,35 @@ public with sharing class FSC_APIPrestamoProductos {
 
 	@TestVisible
 	private static Map<String, Object> findProducto(List<Object> productos, String lineaFinanciera, String subAplicacion) {
+		return findProducto(productos, lineaFinanciera, subAplicacion, null);
+	}
+
+	private static Map<String, Object> findProducto(
+		List<Object> productos,
+		String lineaFinanciera,
+		String subAplicacion,
+		String claveProducto
+	) {
 		if (productos == null) {
 			return null;
 		}
 
 		String targetLineaFinanciera = normalizeFilterValue(lineaFinanciera);
 		String targetSubAplicacion = normalizeFilterValue(subAplicacion);
+		String targetClaveProducto = normalizeFilterValue(claveProducto);
+		Map<String, Object> matchedProduct;
 
 		for (Object productoItem : productos) {
 			Map<String, Object> productoMap = toMap(productoItem);
-			if (productoMap == null) {
+			if (productoMap == null || !isSelectableProduct(productoMap)) {
+				continue;
+			}
+
+			String currentClaveProducto = normalizeFilterValue(productoMap.get('CLAVE_PRODUCTO'));
+			if (!String.isBlank(targetClaveProducto)) {
+				if (currentClaveProducto == targetClaveProducto) {
+					return productoMap;
+				}
 				continue;
 			}
 
@@ -117,21 +145,32 @@ public with sharing class FSC_APIPrestamoProductos {
 			String codigoSubAplicacion = normalizeFilterValue(productoMap.get('CODIGO_SUB_APLICACION'));
 
 			if (codigoLineaFinanciera == targetLineaFinanciera && codigoSubAplicacion == targetSubAplicacion) {
-				return productoMap;
+				// Sin clave solo se acepta una coincidencia activa.
+				if (matchedProduct != null) {
+					return null;
+				}
+				matchedProduct = productoMap;
 			}
 		}
 
-		return null;
+		return matchedProduct;
 	}
 
 	private static Output buildFilteredOutput(List<Object> productos, Input inputItem) {
 		Output outputItem = new Output();
-		Map<String, Object> producto = findProducto(productos, inputItem.lineaFinanciera, inputItem.subAplicacion);
+		Map<String, Object> producto = findProducto(
+			productos,
+			inputItem.lineaFinanciera,
+			inputItem.subAplicacion,
+			inputItem.claveProducto
+		);
 
 		if (producto == null) {
 			outputItem.success = true;
 			outputItem.found = false;
-			outputItem.message = 'No se encontro producto para la linea financiera y sub aplicacion indicadas.';
+			outputItem.message = String.isBlank(inputItem.claveProducto)
+				? 'No se encontro un unico producto activo para la linea financiera y sub aplicacion indicadas.'
+				: 'No se encontro un producto activo para la clave de producto indicada.';
 			return outputItem;
 		}
 
@@ -161,7 +200,15 @@ public with sharing class FSC_APIPrestamoProductos {
 	}
 
 	private static Boolean isValidInput(Input inputItem) {
-		return inputItem != null && !String.isBlank(inputItem.lineaFinanciera) && !String.isBlank(inputItem.subAplicacion);
+		return inputItem != null && (
+			!String.isBlank(inputItem.claveProducto) ||
+			(!String.isBlank(inputItem.lineaFinanciera) && !String.isBlank(inputItem.subAplicacion))
+		);
+	}
+
+	private static Boolean isSelectableProduct(Map<String, Object> producto) {
+		String nombre = valueToString(producto.get('NOMBRE')).toUpperCase();
+		return !nombre.contains('SIN USO') && !nombre.contains('MIGRACI');
 	}
 
 	private static String normalizeFilterValue(Object value) {
@@ -170,8 +217,17 @@ public with sharing class FSC_APIPrestamoProductos {
 		}
 
 		String normalizedValue = String.valueOf(value).trim();
+		// Los campos del RLA guardan el codigo junto con su descripcion.
+		Integer descriptionSeparator = normalizedValue.indexOf(' - ');
+		if (descriptionSeparator > 0) {
+			normalizedValue = normalizedValue.substring(0, descriptionSeparator).trim();
+		}
+
 		if (normalizedValue.endsWith('.0')) {
 			normalizedValue = normalizedValue.substring(0, normalizedValue.length() - 2);
+		}
+		if (!String.isBlank(normalizedValue) && normalizedValue.replaceAll('[0-9]', '') == '') {
+			normalizedValue = String.valueOf(Decimal.valueOf(normalizedValue).setScale(0));
 		}
 
 		return normalizedValue;
@@ -192,6 +248,10 @@ public with sharing class FSC_APIPrestamoProductos {
 		}
 
 		return null;
+	}
+
+	private static String valueToString(Object value) {
+		return value == null ? '' : String.valueOf(value).trim();
 	}
 
 	private static Object normalizeResponse(Object response) {

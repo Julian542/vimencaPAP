@@ -10,8 +10,18 @@ private class LeadDocumentsControllerTest {
             new LeadDocumentsController.SimplePick('id', 'Documento');
         LeadDocumentsController.FieldInfo field =
             new LeadDocumentsController.FieldInfo('DOC_Estado__c', true);
+        LeadDocumentsController.FileRow file = new LeadDocumentsController.FileRow();
+        LeadDocumentsController.DocRow row = new LeadDocumentsController.DocRow();
         System.assertEquals('Documento', pick.name);
         System.assert(field.required);
+        System.assertEquals(null, file.contentDocumentId);
+        System.assertEquals(null, row.id);
+        System.assertEquals(
+            0,
+            LeadDocumentsController.searchDocTypes(UserInfo.getUserId(), 'x').size()
+        );
+        System.assertEquals(false,
+            LeadDocumentsController.hasAllRequiredDocumentsUploaded(null));
     }
 
     @IsTest
@@ -191,6 +201,10 @@ private class LeadDocumentsControllerTest {
             })
         );
         LeadDocumentsController.approveDocuments(new List<Id>{ legalDocumentId });
+        List<LeadDocumentsController.DocRow> rows =
+            LeadDocumentsController.getDocuments(candidate.Id);
+        Boolean allRequiredDocumentsUploaded =
+            LeadDocumentsController.hasAllRequiredDocumentsUploaded(candidate.Id);
         Test.stopTest();
 
         Documentacion_Legal__c legalDocument = [
@@ -203,6 +217,9 @@ private class LeadDocumentsControllerTest {
         System.assertEquals(UserInfo.getUserId(), legalDocument.DOC_Aprobado_Por__c);
         System.assertEquals(1, documentTypes.size());
         System.assertEquals('Comprobante de prueba', documentTypes[0].name);
+        System.assertEquals(1, rows.size());
+        System.assertEquals(1, rows[0].files.size());
+        System.assertNotEquals(null, allRequiredDocumentsUploaded);
         System.assertEquals(
             1,
             [SELECT COUNT() FROM ContentDocumentLink WHERE LinkedEntityId = :legalDocumentId]
