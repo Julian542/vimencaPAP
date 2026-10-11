@@ -1,8 +1,8 @@
 {
   "version": 2,
   "orgId": "00DVC000009qkJJ2AY",
-  "writtenAt": "2026-10-10T19:33:58.900Z",
-  "generation": 631,
+  "writtenAt": "2026-10-11T19:18:16.512Z",
+  "generation": 766,
   "inventory": [],
   "sobjects": {
     "descriptions": []
@@ -46,7 +46,7 @@
     {
       "xmlName": "AiAuthoringBundle",
       "fullName": "Soporte_Empleados_Vimenca_6",
-      "signature": "add\u0000[331806,\"2026-09-29T22:08:51.000+0000\",\"1bZVC0000001OLF2A2\",false,false]"
+      "signature": "add\u0000[331806,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -146,27 +146,27 @@
     {
       "xmlName": "ApexClass",
       "fullName": "AccountContactPointEmailSyncTriggerTest",
-      "signature": "modify\u0000[368474,\"2026-10-09T17:27:01.000+0000\",\"01pVC000004V0XhYAK\",false,true]"
+      "signature": "add\u0000[368474,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "AccountDocumentsController",
-      "signature": "modify\u0000[368537,\"2026-10-10T04:37:21.000+0000\",\"01pVC000004TuJ3YAK\",false,true]"
+      "signature": "add\u0000[375892,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "AccountDocumentsControllerTest",
-      "signature": "modify\u0000[368538,\"2026-10-10T04:37:22.000+0000\",\"01pVC000004TuJ4YAK\",false,true]"
+      "signature": "add\u0000[375893,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "AccountLookupController",
-      "signature": "modify\u0000[366286,\"2026-10-08T19:58:30.000+0000\",\"01pVC000003EC1BYAW\",false,true]"
+      "signature": "modify\u0000[366286,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "AccountLookupControllerTest",
-      "signature": "modify\u0000[366305,\"2026-10-08T20:53:09.000+0000\",\"01pVC0000045NphYAE\",false,true]"
+      "signature": "modify\u0000[366305,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -176,7 +176,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "AccountValidationController",
-      "signature": "modify\u0000[101499,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[376063,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AccountValidationController_Test",
+      "signature": "modify\u0000[376064,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -201,12 +206,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "BatchMigrarFirmantesPJ",
-      "signature": "modify\u0000[368486,\"2026-10-09T18:33:46.000+0000\",\"01pVC000004V29hYAC\",false,true]"
+      "signature": "add\u0000[368486,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "BatchMigrarFirmantesPJTest",
-      "signature": "modify\u0000[368487,\"2026-10-09T18:33:46.000+0000\",\"01pVC000004V29iYAC\",false,true]"
+      "signature": "add\u0000[368487,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -226,32 +231,32 @@
     {
       "xmlName": "ApexClass",
       "fullName": "CaseFinancialTransactionController",
-      "signature": "modify\u0000[366220,\"2026-10-08T13:00:48.000+0000\",\"01pVC000003rO45YAE\",false,true]"
+      "signature": "modify\u0000[366220,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "CaseFinancialTransactionControllerTest",
-      "signature": "modify\u0000[366226,\"2026-10-08T13:11:01.000+0000\",\"01pVC0000045NsvYAE\",false,true]"
+      "signature": "modify\u0000[366226,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "CaseFinancialTransactionRow",
-      "signature": "modify\u0000[366229,\"2026-10-08T13:14:51.000+0000\",\"01pVC000004UQCTYA4\",false,true]"
+      "signature": "add\u0000[366229,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "CaseRequiredDocumentsValidator",
-      "signature": "modify\u0000[366320,\"2026-10-08T22:54:21.000+0000\",\"01pVC000004B08rYAC\",false,true]"
+      "signature": "add\u0000[366320,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "CaseRequiredDocumentsValidatorTest",
-      "signature": "modify\u0000[352950,\"2026-10-05T22:51:38.000+0000\",\"01pVC000004B08sYAC\",false,true]"
+      "signature": "modify\u0000[352950,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "CaseRoundRobin",
-      "signature": "modify\u0000[350577,\"2026-10-03T10:16:44.000+0000\",\"01pVC000003teMjYAI\",false,true]"
+      "signature": "modify\u0000[350577,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -261,12 +266,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "CaseTriggerHandler",
-      "signature": "modify\u0000[281530,\"2026-09-25T15:48:34.000+0000\",\"01pDo000000jQ3yIAE\",false,true]"
+      "signature": "modify\u0000[281530,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "CaseTriggerHandlerTest",
-      "signature": "modify\u0000[352527,\"2026-10-04T17:14:31.000+0000\",\"01pDo000000jQ3zIAE\",false,true]"
+      "signature": "modify\u0000[352527,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -326,12 +331,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "ComprobanteReclamoExtension",
-      "signature": "modify\u0000[367753,\"2026-10-09T00:06:53.000+0000\",\"01p3i00000AD1cBAAT\",false,true]"
+      "signature": "modify\u0000[367753,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "ComprobanteReclamoExtensionTest",
-      "signature": "modify\u0000[366279,\"2026-10-08T17:39:57.000+0000\",\"01p3i00000AD1cCAAT\",false,true]"
+      "signature": "modify\u0000[366279,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -361,22 +366,22 @@
     {
       "xmlName": "ApexClass",
       "fullName": "ContactPointAccountSyncService",
-      "signature": "modify\u0000[368478,\"2026-10-09T17:35:46.000+0000\",\"01pVC000003uyCfYAI\",false,true]"
+      "signature": "modify\u0000[368478,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "ContactPointAccountSyncServiceTest",
-      "signature": "modify\u0000[368479,\"2026-10-09T17:35:46.000+0000\",\"01pVC000004V0kbYAC\",false,true]"
+      "signature": "add\u0000[368479,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "ConvertDuplicatesBatch",
-      "signature": "modify\u0000[352961,\"2026-10-06T02:40:42.000+0000\",\"01pVC000004TG0fYAG\",false,true]"
+      "signature": "add\u0000[352961,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "ConvertDuplicatesBatchTest",
-      "signature": "modify\u0000[352962,\"2026-10-06T02:40:42.000+0000\",\"01pVC000004TG0gYAG\",false,true]"
+      "signature": "add\u0000[352962,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -422,6 +427,16 @@
       "xmlName": "ApexClass",
       "fullName": "ExchangeRateServiceTest",
       "signature": "add\u0000[171950,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSCOmniSearchController",
+      "signature": "add\u0000[376095,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSCOmniSearchControllerTest",
+      "signature": "add\u0000[376105,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -531,17 +546,17 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_CaseWrapUpController",
-      "signature": "modify\u0000[354542,\"2026-10-06T22:34:01.000+0000\",\"01pVC000003MLqTYAW\",false,true]"
+      "signature": "modify\u0000[354542,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_NewCaseComponent_Controller",
-      "signature": "modify\u0000[365489,\"2026-10-07T22:44:18.000+0000\",\"01pVC000003KvMzYAK\",false,true]"
+      "signature": "modify\u0000[365489,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_NewCaseComponent_Controller_Test",
-      "signature": "modify\u0000[365490,\"2026-10-07T22:54:39.000+0000\",\"01pVC000004U6TuYAK\",false,true]"
+      "signature": "add\u0000[365490,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -561,7 +576,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FinAccountCoreValidationTest",
-      "signature": "modify\u0000[375733,\"2026-10-10T16:12:56.000+0000\",\"01pVC0000047TpNYAU\",false,true]"
+      "signature": "modify\u0000[375733,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -576,7 +591,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FinancialAccountCoreValidationService",
-      "signature": "modify\u0000[375721,\"2026-10-10T15:55:22.000+0000\",\"01pVC000003rO4BYAU\",false,true]"
+      "signature": "modify\u0000[375721,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -621,7 +636,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "INT001_LEAD_VAER_Controller_FSC",
-      "signature": "modify\u0000[368563,\"2026-10-10T14:10:28.000+0000\",\"01pVC000003ESVlYAO\",false,true]"
+      "signature": "modify\u0000[368563,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -631,12 +646,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "INT002_LEAD_VARNC_Controller_FSC",
-      "signature": "modify\u0000[368564,\"2026-10-10T14:10:28.000+0000\",\"01pVC000003MIxRYAW\",false,true]"
+      "signature": "modify\u0000[368564,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "INT002_LEAD_VARNC_Controller_FSC_Test",
-      "signature": "modify\u0000[375713,\"2026-10-10T15:00:00.000+0000\",\"01pVC000003MJBxYAO\",false,true]"
+      "signature": "modify\u0000[375713,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -676,12 +691,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "INT007_FSC",
-      "signature": "modify\u0000[352954,\"2026-10-05T23:37:51.000+0000\",\"01pVC000003DqblYAC\",false,true]"
+      "signature": "modify\u0000[352954,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "INT008_FSC",
-      "signature": "modify\u0000[352955,\"2026-10-05T23:37:51.000+0000\",\"01pVC000003QzMHYA0\",false,true]"
+      "signature": "modify\u0000[352955,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -696,22 +711,22 @@
     {
       "xmlName": "ApexClass",
       "fullName": "INT013TCDTO",
-      "signature": "modify\u0000[352584,\"2026-10-04T20:04:00.000+0000\",\"01p3i00000ADSfOAAX\",false,true]"
+      "signature": "modify\u0000[352584,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "INT013_FSC",
-      "signature": "modify\u0000[357412,\"2026-10-07T10:13:11.000+0000\",\"01pVC000003CCV7YAO\",false,true]"
+      "signature": "modify\u0000[357412,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "INT013_FSC_Test",
-      "signature": "modify\u0000[357413,\"2026-10-07T10:13:11.000+0000\",\"01pVC000003CCWjYAO\",false,true]"
+      "signature": "modify\u0000[357413,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "INT013_LC_Controller_FSC",
-      "signature": "modify\u0000[357414,\"2026-10-07T10:13:11.000+0000\",\"01pVC000003CG8vYAG\",false,true]"
+      "signature": "modify\u0000[357414,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -721,12 +736,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "INT014FinancialTransactionsQueue",
-      "signature": "modify\u0000[368444,\"2026-10-09T14:04:17.000+0000\",\"01pVC000003QuRRYA0\",false,true]"
+      "signature": "modify\u0000[368444,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "INT014FinancialTransactionsQueueTest",
-      "signature": "modify\u0000[366276,\"2026-10-08T17:03:57.000+0000\",\"01pVC0000047TnlYAE\",false,true]"
+      "signature": "modify\u0000[366276,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -801,7 +816,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "LeadAutoQualificationQueue",
-      "signature": "modify\u0000[375714,\"2026-10-10T15:00:00.000+0000\",\"01pVC0000043dlhYAA\",false,true]"
+      "signature": "modify\u0000[375714,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -816,12 +831,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "LeadCandidatePolicy",
-      "signature": "modify\u0000[368566,\"2026-10-10T14:10:28.000+0000\",\"01pVC000004Jb6QYAS\",false,true]"
+      "signature": "add\u0000[376075,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadCandidatePolicyTest",
-      "signature": "add\u0000[222895,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[376084,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -836,42 +851,42 @@
     {
       "xmlName": "ApexClass",
       "fullName": "LeadConversionQueue",
-      "signature": "modify\u0000[368467,\"2026-10-09T15:36:27.000+0000\",\"01pVC000003DoenYAC\",false,true]"
+      "signature": "modify\u0000[376070,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadConversionQueue_Test",
-      "signature": "modify\u0000[361245,\"2026-10-07T18:18:16.000+0000\",\"01pVC000003Lj0PYAS\",false,true]"
+      "signature": "modify\u0000[376071,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadConvertService",
-      "signature": "modify\u0000[368512,\"2026-10-09T20:15:08.000+0000\",\"01pVC000003FD9hYAG\",false,true]"
+      "signature": "modify\u0000[376118,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadConvertService_Test",
-      "signature": "modify\u0000[368513,\"2026-10-09T20:15:08.000+0000\",\"01pVC000003Lfb7YAC\",false,true]"
+      "signature": "modify\u0000[376123,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadDocumentsController",
-      "signature": "modify\u0000[368539,\"2026-10-10T04:37:22.000+0000\",\"01pVC000003Mmc9YAC\",false,true]"
+      "signature": "modify\u0000[375894,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadDocumentsControllerTest",
-      "signature": "modify\u0000[368540,\"2026-10-10T04:37:22.000+0000\",\"01pVC0000046n0YYAQ\",false,true]"
+      "signature": "modify\u0000[375895,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadTriggerHandler",
-      "signature": "modify\u0000[368567,\"2026-10-10T14:10:28.000+0000\",\"01pVC000003FWFZYA4\",false,true]"
+      "signature": "modify\u0000[375878,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadTrigger_Test",
-      "signature": "modify\u0000[357350,\"2026-10-07T05:55:30.000+0000\",\"01pVC000003WgqPYAS\",false,true]"
+      "signature": "modify\u0000[375879,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -966,7 +981,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "ObtenerDocumentosFirmadosTest",
-      "signature": "modify\u0000[352822,\"2026-10-05T03:40:01.000+0000\",\"01pVC000004SqZFYA0\",false,true]"
+      "signature": "add\u0000[352822,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1051,12 +1066,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "PreQualifyLeadFlowHandler_FSC",
-      "signature": "modify\u0000[368502,\"2026-10-09T19:10:16.000+0000\",\"01pVC000003MrqLYAS\",false,true]"
+      "signature": "modify\u0000[375910,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "PreQualifyLeadFlowHandler_FSCTest",
-      "signature": "modify\u0000[368503,\"2026-10-09T19:10:16.000+0000\",\"01pVC000003MxnhYAC\",false,true]"
+      "signature": "modify\u0000[375911,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1131,12 +1146,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "ReclamacionRoutingService",
-      "signature": "modify\u0000[352607,\"2026-10-04T23:46:59.000+0000\",\"01pVC000003UcCbYAK\",false,true]"
+      "signature": "modify\u0000[352607,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "ReclamacionRoutingServiceTest",
-      "signature": "modify\u0000[352820,\"2026-10-05T00:25:39.000+0000\",\"01pVC0000046osfYAA\",false,true]"
+      "signature": "modify\u0000[352820,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1226,7 +1241,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "SolicitudRoutingService",
-      "signature": "modify\u0000[351298,\"2026-10-03T11:02:53.000+0000\",\"01pVC000003teMmYAI\",false,true]"
+      "signature": "modify\u0000[351298,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1326,7 +1341,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "TestDataFactory",
-      "signature": "modify\u0000[352522,\"2026-10-04T17:04:08.000+0000\",\"01p3i00000ADSg6AAH\",false,true]"
+      "signature": "modify\u0000[352522,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1346,7 +1361,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "TestDataFactory_FSC",
-      "signature": "modify\u0000[375729,\"2026-10-10T16:02:35.000+0000\",\"01pVC000003CCBlYAO\",false,true]"
+      "signature": "modify\u0000[375729,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1376,7 +1391,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFSNewEnvelopeTest",
-      "signature": "modify\u0000[357342,\"2026-10-07T02:55:02.000+0000\",\"01pVC0000046nQLYAY\",false,true]"
+      "signature": "modify\u0000[357342,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1396,22 +1411,22 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ComprobanteCasoAction",
-      "signature": "modify\u0000[366311,\"2026-10-08T21:34:45.000+0000\",\"01pVC000003uIbdYAE\",false,true]"
+      "signature": "modify\u0000[366311,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ComprobanteCasoEnvelope",
-      "signature": "modify\u0000[352930,\"2026-10-05T19:03:53.000+0000\",\"01pVC000003w6CzYAI\",false,true]"
+      "signature": "modify\u0000[352930,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ComprobanteCierreTest",
-      "signature": "modify\u0000[273454,\"2026-09-22T01:47:07.000+0000\",\"01pVC000004NorRYAS\",false,true]"
+      "signature": "add\u0000[273454,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ComprobanteVersionController",
-      "signature": "modify\u0000[273455,\"2026-09-22T01:47:07.000+0000\",\"01pVC000004NorSYAS\",false,true]"
+      "signature": "add\u0000[273455,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1431,12 +1446,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_EsignComprobanteDynamicSender",
-      "signature": "modify\u0000[351325,\"2026-10-03T12:46:15.000+0000\",\"01pVC000004RuexYAC\",false,true]"
+      "signature": "add\u0000[351325,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_EsignComprobanteDynamicSenderTest",
-      "signature": "modify\u0000[351327,\"2026-10-03T12:46:31.000+0000\",\"01pVC000004RvCnYAK\",false,true]"
+      "signature": "add\u0000[351327,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1451,7 +1466,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_FirmarDocumentoUtility",
-      "signature": "modify\u0000[339364,\"2026-10-02T22:18:02.000+0000\",\"01pVT0000035fh1YAA\",false,true]"
+      "signature": "modify\u0000[339364,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1461,7 +1476,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_FormActDatosEnvelopeTest",
-      "signature": "modify\u0000[331593,\"2026-09-29T12:57:48.000+0000\",\"01pVC000004MpzFYAS\",false,true]"
+      "signature": "add\u0000[331593,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1476,12 +1491,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_FormularioActualizacionDatosEnvelope",
-      "signature": "modify\u0000[331594,\"2026-09-29T12:57:48.000+0000\",\"01pVC000004MpsnYAC\",false,true]"
+      "signature": "add\u0000[331594,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_GenerarDocumentosUtility",
-      "signature": "modify\u0000[358154,\"2026-10-07T16:20:40.000+0000\",\"01pVT0000035fh3YAA\",false,true]"
+      "signature": "modify\u0000[358154,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1516,22 +1531,22 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_LeadDuplicateAlertController",
-      "signature": "modify\u0000[357353,\"2026-10-07T06:13:37.000+0000\",\"01pVC000004Tl9JYAS\",false,true]"
+      "signature": "add\u0000[357353,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_LeadDuplicateAlertControllerTest",
-      "signature": "modify\u0000[357365,\"2026-10-07T06:24:30.000+0000\",\"01pVC000004Tl9KYAS\",false,true]"
+      "signature": "add\u0000[357365,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ParticipantesBatch",
-      "signature": "modify\u0000[357405,\"2026-10-07T09:43:18.000+0000\",\"01pVC000004TmdFYAS\",false,true]"
+      "signature": "add\u0000[357405,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ParticipantesBatchTest",
-      "signature": "modify\u0000[357406,\"2026-10-07T09:43:18.000+0000\",\"01pVC000004TmdGYAS\",false,true]"
+      "signature": "add\u0000[357406,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1556,22 +1571,22 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_nAperturaCuentasController",
-      "signature": "modify\u0000[360173,\"2026-10-07T16:46:19.000+0000\",\"01pVC000003SfOHYA0\",false,true]"
+      "signature": "modify\u0000[360173,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_nAperturaCuentasTest",
-      "signature": "modify\u0000[361246,\"2026-10-07T18:18:16.000+0000\",\"01pVC000004TyrJYAS\",false,true]"
+      "signature": "add\u0000[361246,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_nKYCEnvelope",
-      "signature": "modify\u0000[357032,\"2026-10-07T02:22:31.000+0000\",\"01pVC000003H5ftYAC\",false,true]"
+      "signature": "modify\u0000[357032,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_nKYCFisica_Controller",
-      "signature": "modify\u0000[354556,\"2026-10-07T01:23:36.000+0000\",\"01pVC000003GdzlYAC\",false,true]"
+      "signature": "modify\u0000[354556,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1586,12 +1601,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "ValidatePreQualifyFlowController_FSC",
-      "signature": "modify\u0000[368507,\"2026-10-09T20:04:56.000+0000\",\"01pVC000003MaPhYAK\",false,true]"
+      "signature": "modify\u0000[375912,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "ValidatePreQualifyFlowController_FSCTest",
-      "signature": "modify\u0000[368508,\"2026-10-09T20:04:56.000+0000\",\"01pVC000003MxcPYAS\",false,true]"
+      "signature": "modify\u0000[375913,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1621,7 +1636,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "fsc_lookup_controller",
-      "signature": "modify\u0000[331571,\"2026-09-29T12:06:01.000+0000\",\"01pVC000003MD9mYAG\",false,true]"
+      "signature": "modify\u0000[331571,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1631,7 +1646,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "wsConsultaProdFinPFPJ_FSC",
-      "signature": "modify\u0000[357389,\"2026-10-07T08:45:48.000+0000\",\"01pVC000003HJSjYAO\",false,true]"
+      "signature": "modify\u0000[357389,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1646,12 +1661,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "wsCreacionProd_FSC",
-      "signature": "modify\u0000[375723,\"2026-10-10T15:55:22.000+0000\",\"01pVC000003ETA5YAO\",false,true]"
+      "signature": "modify\u0000[375723,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "wsCreacionProd_FSC_Test",
-      "signature": "modify\u0000[375734,\"2026-10-10T16:12:56.000+0000\",\"01pVC000003Hol3YAC\",false,true]"
+      "signature": "modify\u0000[375734,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexComponent",
@@ -1676,12 +1691,12 @@
     {
       "xmlName": "ApexComponent",
       "fullName": "VFS_ApCuenta_DatosCuenta",
-      "signature": "modify\u0000[359930,\"2026-10-07T16:39:42.000+0000\",\"099VT0000000imOYAQ\",false,true]"
+      "signature": "add\u0000[359930,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexComponent",
       "fullName": "VFS_ApCuenta_DatosTitular",
-      "signature": "modify\u0000[360179,\"2026-10-07T16:50:50.000+0000\",\"099VT0000000imPYAQ\",false,true]"
+      "signature": "add\u0000[360179,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexComponent",
@@ -1706,12 +1721,12 @@
     {
       "xmlName": "ApexComponent",
       "fullName": "VFS_KYC_InfoEmpresasFiliales",
-      "signature": "modify\u0000[354551,\"2026-10-07T00:52:53.000+0000\",\"099VT0000000imaYAA\",false,true]"
+      "signature": "add\u0000[354551,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexComponent",
       "fullName": "VFS_KYC_InfoMiembrosdelConsejo",
-      "signature": "modify\u0000[354552,\"2026-10-07T00:52:53.000+0000\",\"099VT0000000imbYAA\",false,true]"
+      "signature": "add\u0000[354552,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexComponent",
@@ -1721,12 +1736,12 @@
     {
       "xmlName": "ApexComponent",
       "fullName": "VFS_KYC_PrincipalesClientes",
-      "signature": "modify\u0000[354553,\"2026-10-07T00:52:53.000+0000\",\"099VT0000000imhYAA\",false,true]"
+      "signature": "add\u0000[354553,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexComponent",
       "fullName": "VFS_KYC_PrincipalesProveedores",
-      "signature": "modify\u0000[354554,\"2026-10-07T00:52:53.000+0000\",\"099VT0000000imjYAA\",false,true]"
+      "signature": "add\u0000[354554,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexComponent",
@@ -1807,6 +1822,41 @@
       "xmlName": "ApexPage",
       "fullName": "Exception",
       "signature": "add\u0000[114141,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexPage",
+      "fullName": "FSC_TmpContador",
+      "signature": "add\u0000[375970,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexPage",
+      "fullName": "FSC_TmpFormatoA",
+      "signature": "delete\u0000[375966,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "ApexPage",
+      "fullName": "FSC_TmpFormatoB",
+      "signature": "delete\u0000[375964,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "ApexPage",
+      "fullName": "FSC_TmpFormatoC",
+      "signature": "delete\u0000[375963,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "ApexPage",
+      "fullName": "FSC_TmpFormatoD",
+      "signature": "delete\u0000[375962,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "ApexPage",
+      "fullName": "FSC_TmpFormatoE",
+      "signature": "delete\u0000[375961,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "ApexPage",
+      "fullName": "FSC_TmpFormatoF",
+      "signature": "delete\u0000[375965,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "ApexPage",
@@ -1896,12 +1946,12 @@
     {
       "xmlName": "ApexPage",
       "fullName": "vfComprobanteCierre",
-      "signature": "modify\u0000[334187,\"2026-10-01T20:32:32.000+0000\",\"066VC000000xjqjYAA\",false,true]"
+      "signature": "add\u0000[334187,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexPage",
       "fullName": "vfComprobanteReclamo",
-      "signature": "modify\u0000[366238,\"2026-10-08T15:18:50.000+0000\",\"0663i000002OB7VAAW\",false,true]"
+      "signature": "add\u0000[366238,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexPage",
@@ -1921,22 +1971,22 @@
     {
       "xmlName": "ApexTestSuite",
       "fullName": "FSCCreditos",
-      "signature": "delete\u0000[274506,\"2026-09-23T17:24:40.000+0000\",\"05FVC000000R1o12AC\",true,true]"
+      "signature": "delete\u0000[274506,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "ApexTestSuite",
       "fullName": "FSC_Creditos",
-      "signature": "modify\u0000[274508,\"2026-09-23T17:25:59.000+0000\",\"05FVC000000R6qv2AC\",false,true]"
+      "signature": "add\u0000[274508,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexTestSuite",
       "fullName": "FSC_SolicitudesDeCredito",
-      "signature": "delete\u0000[274505,\"2026-09-23T17:24:36.000+0000\",\"05FVC000000PGnx2AG\",true,true]"
+      "signature": "delete\u0000[274505,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "ApexTrigger",
       "fullName": "AccountContactPointEmailSyncTrigger",
-      "signature": "modify\u0000[368480,\"2026-10-09T17:35:46.000+0000\",\"01qVC000008K3mjYAC\",false,true]"
+      "signature": "add\u0000[368480,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexTrigger",
@@ -2021,7 +2071,7 @@
     {
       "xmlName": "ApprovalProcess",
       "fullName": "Lead.PA_Aprobacion_Tecnologia_LEAD",
-      "signature": "modify\u0000[368576,\"2026-10-10T14:10:28.000+0000\",\"04aVC000001EuxpYAC\",false,true]"
+      "signature": "add\u0000[376082,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApprovalProcess",
@@ -2056,7 +2106,7 @@
     {
       "xmlName": "AuraDefinitionBundle",
       "fullName": "FSC_NewCase",
-      "signature": "add\u0000[302396,\"2026-09-27T22:56:14.000+0000\",\"0AdVC000000xAjJ0AU\",false,false]"
+      "signature": "add\u0000[302396,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "AuraDefinitionBundle",
@@ -2086,7 +2136,7 @@
     {
       "xmlName": "AuraDefinitionBundle",
       "fullName": "lcConsultaProdFinPFPJ",
-      "signature": "modify\u0000[352947,\"2026-10-05T22:35:17.000+0000\",\"0Ad3i000001iW1oCAE\",false,true]"
+      "signature": "add\u0000[352947,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "AuthProvider",
@@ -2106,7 +2156,7 @@
     {
       "xmlName": "BotVersion",
       "fullName": "Agente_Vimenca.v1",
-      "signature": "modify\u0000[368462,\"2026-10-09T15:12:45.000+0000\",\"0X9VC0000008jG50AI\",false,true]"
+      "signature": "add\u0000[368462,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "BotVersion",
@@ -2131,7 +2181,7 @@
     {
       "xmlName": "BotVersion",
       "fullName": "Soporte_Empleados_Vimenca.v5",
-      "signature": "modify\u0000[331805,\"2026-09-29T22:08:47.000+0000\",\"0X9VC000000GakH0AS\",false,true]"
+      "signature": "add\u0000[331805,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "BrandingSet",
@@ -2251,7 +2301,7 @@
     {
       "xmlName": "CustomApplication",
       "fullName": "FSC_Service",
-      "signature": "modify\u0000[340997,\"2026-10-02T23:13:39.000+0000\",\"02uVC00000CTTsYYAX\",false,true]"
+      "signature": "add\u0000[340997,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomApplication",
@@ -2326,7 +2376,7 @@
     {
       "xmlName": "CustomField",
       "fullName": "Account.CIF_R__c",
-      "signature": "modify\u0000[352957,\"2026-10-06T01:34:45.000+0000\",\"00NVC0000076qPh2AI\",false,true]"
+      "signature": "add\u0000[352957,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2351,12 +2401,12 @@
     {
       "xmlName": "CustomField",
       "fullName": "Account.FSC_Origen_Conversion_Lead__c",
-      "signature": "modify\u0000[352973,\"2026-10-06T03:38:41.000+0000\",\"00NVC0000076qj32AA\",false,true]"
+      "signature": "add\u0000[352973,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Account.OBS_R__c",
-      "signature": "modify\u0000[352958,\"2026-10-06T01:34:45.000+0000\",\"00NVC0000076qPi2AI\",false,true]"
+      "signature": "add\u0000[352958,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2566,12 +2616,12 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Balance_Pesos__c",
-      "signature": "add\u0000[366321,\"2026-10-08T23:08:05.000+0000\",\"00NVC000007836L2AQ\",false,false]"
+      "signature": "add\u0000[366321,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Balance_USD__c",
-      "signature": "modify\u0000[366346,\"2026-10-08T23:17:39.000+0000\",\"00NVC0000077fTp2AI\",false,true]"
+      "signature": "add\u0000[366346,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2581,17 +2631,17 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Canal_distribucion__c",
-      "signature": "modify\u0000[330129,\"2026-09-28T21:02:07.000+0000\",\"00NDo000001D6ESMA0\",false,true]"
+      "signature": "add\u0000[330129,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Comentario_Contracargo__c",
-      "signature": "add\u0000[334378,\"2026-10-02T11:01:54.000+0000\",\"00NVC0000075bXZ2AY\",false,false]"
+      "signature": "add\u0000[334378,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Comentarios_Comprobante__c",
-      "signature": "modify\u0000[310350,\"2026-09-28T13:30:33.000+0000\",\"00NVC000006w7or2AA\",false,true]"
+      "signature": "add\u0000[310350,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2606,22 +2656,22 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Credito_Contracargo_RD__c",
-      "signature": "add\u0000[339821,\"2026-10-02T22:54:18.000+0000\",\"00NVC0000075oTB2AY\",false,false]"
+      "signature": "add\u0000[339821,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Credito_Contracargo_USD__c",
-      "signature": "add\u0000[339801,\"2026-10-02T22:53:47.000+0000\",\"00NVC0000075oRZ2AY\",false,false]"
+      "signature": "add\u0000[339801,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Credito_Fraude_Investigacion_RD__c",
-      "signature": "add\u0000[339861,\"2026-10-02T22:55:29.000+0000\",\"00NVC0000075oWP2AY\",false,false]"
+      "signature": "add\u0000[339861,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Credito_Fraude_Investigaciones_USD__c",
-      "signature": "add\u0000[339841,\"2026-10-02T22:54:59.000+0000\",\"00NVC0000075oUn2AI\",false,false]"
+      "signature": "add\u0000[339841,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2631,17 +2681,17 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Debito_Contracargo__c",
-      "signature": "add\u0000[339901,\"2026-10-02T22:56:54.000+0000\",\"00NVC0000075obF2AQ\",false,false]"
+      "signature": "add\u0000[339901,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Debito__c",
-      "signature": "add\u0000[339881,\"2026-10-02T22:56:00.000+0000\",\"00NVC0000075oY12AI\",false,false]"
+      "signature": "add\u0000[339881,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Derivacion_Contracargo__c",
-      "signature": "add\u0000[334769,\"2026-10-02T11:02:54.000+0000\",\"00NVC0000075bZB2AY\",false,false]"
+      "signature": "add\u0000[334769,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2676,7 +2726,7 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Fecha_contracargo__c",
-      "signature": "add\u0000[331813,\"2026-09-29T23:10:21.000+0000\",\"00NVC0000074Pi92AE\",false,false]"
+      "signature": "add\u0000[331813,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2686,32 +2736,32 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Ir_a_Formalizacion__c",
-      "signature": "add\u0000[330130,\"2026-09-28T21:41:40.000+0000\",\"00NVC000007403p2AA\",false,false]"
+      "signature": "add\u0000[330130,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Limite_Aprobado_Comite__c",
-      "signature": "modify\u0000[345440,\"2026-10-03T00:26:36.000+0000\",\"00NVC0000075pHB2AY\",false,true]"
+      "signature": "add\u0000[345440,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Limite_Aprobado_RD_Cambio_Producto__c",
-      "signature": "modify\u0000[345442,\"2026-10-03T00:28:07.000+0000\",\"00NVC0000075p4H2AQ\",false,true]"
+      "signature": "add\u0000[345442,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Limite_Aprobado_USD_Cambio_Producto__c",
-      "signature": "modify\u0000[345443,\"2026-10-03T00:28:37.000+0000\",\"00NVC0000075p7V2AQ\",false,true]"
+      "signature": "add\u0000[345443,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Limite_Aprobado_USD_Comite__c",
-      "signature": "modify\u0000[345441,\"2026-10-03T00:27:36.000+0000\",\"00NVC0000075pIn2AI\",false,true]"
+      "signature": "add\u0000[345441,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Limite_Aprobado__c",
-      "signature": "add\u0000[320701,\"2026-09-28T18:10:09.000+0000\",\"00NVC0000073vH32AI\",false,false]"
+      "signature": "add\u0000[320701,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2721,7 +2771,7 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Limite_aprobado_USD__c",
-      "signature": "add\u0000[320717,\"2026-09-28T18:11:35.000+0000\",\"00NVC0000073vLt2AI\",false,false]"
+      "signature": "add\u0000[320717,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2746,27 +2796,27 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Moneda_Acreditar__c",
-      "signature": "add\u0000[362667,\"2026-10-07T21:52:56.000+0000\",\"00NVC0000077gHp2AI\",false,false]"
+      "signature": "add\u0000[362667,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Monto_Favorable__c",
-      "signature": "delete\u0000[339749,\"2026-10-02T22:52:40.000+0000\",\"00NVC0000075mnx2AA\",true,false]"
+      "signature": "delete\u0000[339749,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Monto_Final_Reversado__c",
-      "signature": "delete\u0000[339775,\"2026-10-02T22:53:02.000+0000\",\"00NVC0000075mmL2AQ\",true,false]"
+      "signature": "delete\u0000[339775,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Monto_a_Acreditar__c",
-      "signature": "add\u0000[365491,\"2026-10-07T23:20:07.000+0000\",\"00NVC0000077hKL2AY\",false,false]"
+      "signature": "add\u0000[365491,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Motivo_de_Rechazo__c",
-      "signature": "modify\u0000[352885,\"2026-10-05T13:28:26.000+0000\",\"00N3i00000D1TMvEAN\",false,true]"
+      "signature": "add\u0000[352885,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2776,17 +2826,17 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_NewCardPaymentNumber__c",
-      "signature": "modify\u0000[290282,\"2026-09-27T13:35:41.000+0000\",\"00NVC000006zCkl2AE\",false,true]"
+      "signature": "add\u0000[290282,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_NewLoanPaymentNumber__c",
-      "signature": "modify\u0000[349875,\"2026-10-03T09:58:50.000+0000\",\"00NVC000006zD3J2AU\",false,true]"
+      "signature": "add\u0000[349875,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_NewSuperLoanPaymentNumber__c",
-      "signature": "modify\u0000[290313,\"2026-09-27T13:36:14.000+0000\",\"00NVC000006zaG12AI\",false,true]"
+      "signature": "add\u0000[290313,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2821,12 +2871,12 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Observaciones_Cambio_Producto__c",
-      "signature": "add\u0000[342384,\"2026-10-02T23:55:46.000+0000\",\"00NVC0000075p972AA\",false,false]"
+      "signature": "add\u0000[342384,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Observaciones_Comite__c",
-      "signature": "add\u0000[345420,\"2026-10-03T00:24:35.000+0000\",\"00NVC0000075pKP2AY\",false,false]"
+      "signature": "add\u0000[345420,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2836,17 +2886,17 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Rango_Certificacion__c",
-      "signature": "add\u0000[289459,\"2026-09-27T11:26:39.000+0000\",\"00NVC0000073fYr2AI\",false,false]"
+      "signature": "add\u0000[289459,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Resultado_Cambio_Producto__c",
-      "signature": "modify\u0000[349654,\"2026-10-03T09:51:54.000+0000\",\"00NVC0000075p2f2AA\",false,true]"
+      "signature": "add\u0000[349654,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Resultado_Comite__c",
-      "signature": "modify\u0000[349717,\"2026-10-03T09:53:34.000+0000\",\"00NVC0000075pFZ2AY\",false,true]"
+      "signature": "add\u0000[349717,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2856,12 +2906,12 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Score_del_Cliente__c",
-      "signature": "add\u0000[342274,\"2026-10-02T23:51:18.000+0000\",\"00NVC0000075p132AA\",false,false]"
+      "signature": "add\u0000[342274,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Solicitud_Interna__c",
-      "signature": "add\u0000[290678,\"2026-09-27T15:07:46.000+0000\",\"00NVC0000073fll2AA\",false,false]"
+      "signature": "add\u0000[290678,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2871,12 +2921,12 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Tasa_de_Cambio__c",
-      "signature": "add\u0000[367037,\"2026-10-08T23:26:04.000+0000\",\"00NVC00000783G12AI\",false,false]"
+      "signature": "add\u0000[367037,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Tiempo_en_cerrar__c",
-      "signature": "modify\u0000[349411,\"2026-10-03T03:37:17.000+0000\",\"00N3i00000D1ZJuEAN\",false,true]"
+      "signature": "add\u0000[349411,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2906,7 +2956,7 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Tipo_de_aplicacion_pago__c",
-      "signature": "modify\u0000[306123,\"2026-09-28T13:00:11.000+0000\",\"00NVC000006s7M12AI\",false,true]"
+      "signature": "add\u0000[306123,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2946,7 +2996,7 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_tipo_de_mantenimiento_actualizacion__c",
-      "signature": "modify\u0000[306092,\"2026-09-28T12:58:44.000+0000\",\"00NVC000006vxzB2AQ\",false,true]"
+      "signature": "add\u0000[306092,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2956,7 +3006,7 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.Descripcion_Detallada__c",
-      "signature": "delete\u0000[316159,\"2026-09-28T16:14:37.000+0000\",\"00NVC0000073g6j2AA\",true,true]"
+      "signature": "delete\u0000[316159,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2981,12 +3031,12 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.Opciones_Cr_dito_no_Procesado__c",
-      "signature": "modify\u0000[320614,\"2026-09-28T17:31:49.000+0000\",\"00NVC0000073dAT2AY\",false,true]"
+      "signature": "add\u0000[320614,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Case.Plazo_de_Gesti_n_Contracargo__c",
-      "signature": "add\u0000[283573,\"2026-09-26T02:28:24.000+0000\",\"00NVC0000073ZgL2AU\",false,false]"
+      "signature": "add\u0000[283573,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2996,7 +3046,7 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.V_a_de_Contracargo__c",
-      "signature": "modify\u0000[282626,\"2026-09-26T01:45:58.000+0000\",\"00NVC0000073VJN2A2\",false,true]"
+      "signature": "add\u0000[282626,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -3036,7 +3086,7 @@
     {
       "xmlName": "CustomField",
       "fullName": "Documentacion_Legal__c.DOC_Cliente__c",
-      "signature": "modify\u0000[368531,\"2026-10-10T04:36:32.000+0000\",\"00NVC0000078RBt2AM\",false,true]"
+      "signature": "add\u0000[368531,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -3296,7 +3346,7 @@
     {
       "xmlName": "CustomField",
       "fullName": "Lead.LEA_Estado_Aprobacion_Tecnologia__c",
-      "signature": "modify\u0000[368561,\"2026-10-10T14:10:28.000+0000\",\"00NVC0000078TGv2AM\",false,true]"
+      "signature": "add\u0000[368561,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -3396,7 +3446,7 @@
     {
       "xmlName": "CustomField",
       "fullName": "Lead.LEA_Validacion_Identidad_Completada__c",
-      "signature": "modify\u0000[368562,\"2026-10-10T14:10:28.000+0000\",\"00NVC0000078TGw2AM\",false,true]"
+      "signature": "add\u0000[368562,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -4141,267 +4191,267 @@
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC001_01",
-      "signature": "modify\u0000[331654,\"2026-09-29T19:46:06.000+0000\",\"m0VVC000009ScdZ2AS\",false,true]"
+      "signature": "add\u0000[331654,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC001_01_COB",
-      "signature": "modify\u0000[331655,\"2026-09-29T19:46:19.000+0000\",\"m0VVC000009a3jp2AA\",false,true]"
+      "signature": "add\u0000[331655,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC001_01_FRA",
-      "signature": "modify\u0000[331662,\"2026-09-29T19:47:01.000+0000\",\"m0VVC000009a3ka2AA\",false,true]"
+      "signature": "add\u0000[331662,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC001_01_TEL",
-      "signature": "modify\u0000[331663,\"2026-09-29T19:47:16.000+0000\",\"m0VVC000009a3lj2AA\",false,true]"
+      "signature": "add\u0000[331663,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC001_01_VIM",
-      "signature": "modify\u0000[331664,\"2026-09-29T19:47:32.000+0000\",\"m0VVC000009a3mB2AQ\",false,true]"
+      "signature": "add\u0000[331664,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC003_01",
-      "signature": "modify\u0000[331837,\"2026-09-30T02:44:32.000+0000\",\"m0VVC000009ScdG2AS\",false,true]"
+      "signature": "add\u0000[331837,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC003_01_COB",
-      "signature": "modify\u0000[331838,\"2026-09-30T02:44:42.000+0000\",\"m0VVC000009a3jq2AA\",false,true]"
+      "signature": "add\u0000[331838,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC003_01_FRA",
-      "signature": "modify\u0000[331839,\"2026-09-30T02:44:51.000+0000\",\"m0VVC000009a3lM2AQ\",false,true]"
+      "signature": "add\u0000[331839,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC003_01_MOT",
-      "signature": "modify\u0000[331840,\"2026-09-30T02:45:01.000+0000\",\"m0VVC000009a3lO2AQ\",false,true]"
+      "signature": "add\u0000[331840,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC003_01_TEL",
-      "signature": "modify\u0000[331841,\"2026-09-30T02:45:25.000+0000\",\"m0VVC000009a3mv2AA\",false,true]"
+      "signature": "add\u0000[331841,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC003_01_VIM",
-      "signature": "modify\u0000[331842,\"2026-09-30T02:45:38.000+0000\",\"m0VVC000009a3mw2AA\",false,true]"
+      "signature": "add\u0000[331842,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC004_01",
-      "signature": "modify\u0000[326264,\"2026-09-28T19:25:05.000+0000\",\"m0VVC000009ScdS2AS\",false,true]"
+      "signature": "add\u0000[326264,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC004_01_COB",
-      "signature": "modify\u0000[326265,\"2026-09-28T19:25:14.000+0000\",\"m0VVC000009a3lT2AQ\",false,true]"
+      "signature": "add\u0000[326265,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC004_01_FRA",
-      "signature": "modify\u0000[326266,\"2026-09-28T19:25:23.000+0000\",\"m0VVC000009a3mZ2AQ\",false,true]"
+      "signature": "add\u0000[326266,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC004_01_MOT",
-      "signature": "modify\u0000[326267,\"2026-09-28T19:25:33.000+0000\",\"m0VVC000009a3mb2AA\",false,true]"
+      "signature": "add\u0000[326267,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC004_01_TEL",
-      "signature": "modify\u0000[326268,\"2026-09-28T19:25:43.000+0000\",\"m0VVC000009a3l32AA\",false,true]"
+      "signature": "add\u0000[326268,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC004_01_VIM",
-      "signature": "modify\u0000[326269,\"2026-09-28T19:26:00.000+0000\",\"m0VVC000009a3l52AA\",false,true]"
+      "signature": "add\u0000[326269,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC012_01",
-      "signature": "modify\u0000[333966,\"2026-10-01T01:02:17.000+0000\",\"m0VVC000009Scd42AC\",false,true]"
+      "signature": "add\u0000[333966,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC012_01_COB",
-      "signature": "modify\u0000[333967,\"2026-10-01T01:02:17.000+0000\",\"m0VVC000009a3md2AA\",false,true]"
+      "signature": "add\u0000[333967,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC012_01_FRA",
-      "signature": "modify\u0000[333968,\"2026-10-01T01:02:17.000+0000\",\"m0VVC000009a3m32AA\",false,true]"
+      "signature": "add\u0000[333968,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC012_01_MOT",
-      "signature": "modify\u0000[333969,\"2026-10-01T01:02:17.000+0000\",\"m0VVC000009a3ly2AA\",false,true]"
+      "signature": "add\u0000[333969,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC012_01_TEL",
-      "signature": "modify\u0000[333970,\"2026-10-01T01:02:17.000+0000\",\"m0VVC000009a3kj2AA\",false,true]"
+      "signature": "add\u0000[333970,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC012_01_VIM",
-      "signature": "modify\u0000[333971,\"2026-10-01T01:02:17.000+0000\",\"m0VVC000009a3kZ2AQ\",false,true]"
+      "signature": "add\u0000[333971,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC012_02",
-      "signature": "add\u0000[333972,\"2026-10-01T01:02:17.000+0000\",\"m0VVC00000B16ug2AB\",false,false]"
+      "signature": "add\u0000[333972,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC012_02_COB",
-      "signature": "add\u0000[333973,\"2026-10-01T01:02:17.000+0000\",\"m0VVC00000B16uh2AB\",false,false]"
+      "signature": "add\u0000[333973,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC012_02_FRA",
-      "signature": "add\u0000[333974,\"2026-10-01T01:02:17.000+0000\",\"m0VVC00000B16ui2AB\",false,false]"
+      "signature": "add\u0000[333974,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC012_02_MOT",
-      "signature": "add\u0000[333975,\"2026-10-01T01:02:17.000+0000\",\"m0VVC00000B16uj2AB\",false,false]"
+      "signature": "add\u0000[333975,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC012_02_TEL",
-      "signature": "add\u0000[333976,\"2026-10-01T01:02:17.000+0000\",\"m0VVC00000B16uk2AB\",false,false]"
+      "signature": "add\u0000[333976,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC012_02_VIM",
-      "signature": "add\u0000[333977,\"2026-10-01T01:02:17.000+0000\",\"m0VVC00000B16ul2AB\",false,false]"
+      "signature": "add\u0000[333977,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC013_01",
-      "signature": "modify\u0000[333978,\"2026-10-01T01:02:17.000+0000\",\"m0VVC000009Scdi2AC\",false,true]"
+      "signature": "add\u0000[333978,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC013_01_COB",
-      "signature": "modify\u0000[333979,\"2026-10-01T01:02:17.000+0000\",\"m0VVC000009a3li2AA\",false,true]"
+      "signature": "add\u0000[333979,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC013_01_FRA",
-      "signature": "modify\u0000[333980,\"2026-10-01T01:02:17.000+0000\",\"m0VVC000009a3mV2AQ\",false,true]"
+      "signature": "add\u0000[333980,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC013_01_MOT",
-      "signature": "modify\u0000[333981,\"2026-10-01T01:02:17.000+0000\",\"m0VVC000009a3mS2AQ\",false,true]"
+      "signature": "add\u0000[333981,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC013_01_TEL",
-      "signature": "modify\u0000[333982,\"2026-10-01T01:02:17.000+0000\",\"m0VVC000009a3l02AA\",false,true]"
+      "signature": "add\u0000[333982,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC013_01_VIM",
-      "signature": "modify\u0000[333983,\"2026-10-01T01:02:17.000+0000\",\"m0VVC000009a3l12AA\",false,true]"
+      "signature": "add\u0000[333983,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC017_01",
-      "signature": "add\u0000[331668,\"2026-09-29T19:51:27.000+0000\",\"m0VVC00000Azcgv2AB\",false,false]"
+      "signature": "add\u0000[331668,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC017_01_COB",
-      "signature": "add\u0000[331669,\"2026-09-29T19:51:27.000+0000\",\"m0VVC00000Azcgw2AB\",false,false]"
+      "signature": "add\u0000[331669,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC017_01_FRA",
-      "signature": "add\u0000[331670,\"2026-09-29T19:51:27.000+0000\",\"m0VVC00000Azcgx2AB\",false,false]"
+      "signature": "add\u0000[331670,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC017_01_MOT",
-      "signature": "add\u0000[331671,\"2026-09-29T19:51:27.000+0000\",\"m0VVC00000Azcgy2AB\",false,false]"
+      "signature": "add\u0000[331671,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC017_01_TEL",
-      "signature": "add\u0000[331672,\"2026-09-29T19:51:27.000+0000\",\"m0VVC00000Azcgz2AB\",false,false]"
+      "signature": "add\u0000[331672,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC017_01_VIM",
-      "signature": "add\u0000[331673,\"2026-09-29T19:51:27.000+0000\",\"m0VVC00000Azch02AB\",false,false]"
+      "signature": "add\u0000[331673,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC018_01",
-      "signature": "add\u0000[331656,\"2026-09-29T19:46:33.000+0000\",\"m0VVC00000AzcSP2AZ\",false,false]"
+      "signature": "add\u0000[331656,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC018_01_COB",
-      "signature": "add\u0000[331657,\"2026-09-29T19:46:33.000+0000\",\"m0VVC00000AzcSQ2AZ\",false,false]"
+      "signature": "add\u0000[331657,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC018_01_FRA",
-      "signature": "add\u0000[331658,\"2026-09-29T19:46:33.000+0000\",\"m0VVC00000AzcSR2AZ\",false,false]"
+      "signature": "add\u0000[331658,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC018_01_MOT",
-      "signature": "add\u0000[331659,\"2026-09-29T19:46:33.000+0000\",\"m0VVC00000AzcSS2AZ\",false,false]"
+      "signature": "add\u0000[331659,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC018_01_TEL",
-      "signature": "add\u0000[331660,\"2026-09-29T19:46:33.000+0000\",\"m0VVC00000AzcST2AZ\",false,false]"
+      "signature": "add\u0000[331660,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC018_01_VIM",
-      "signature": "add\u0000[331661,\"2026-09-29T19:46:33.000+0000\",\"m0VVC00000AzcSU2AZ\",false,false]"
+      "signature": "add\u0000[331661,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC019_01",
-      "signature": "modify\u0000[331843,\"2026-09-30T02:47:28.000+0000\",\"m0VVC000009ScdD2AS\",false,true]"
+      "signature": "add\u0000[331843,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC019_01_COB",
-      "signature": "modify\u0000[331844,\"2026-09-30T02:47:36.000+0000\",\"m0VVC000009a3l92AA\",false,true]"
+      "signature": "add\u0000[331844,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC019_01_FRA",
-      "signature": "modify\u0000[331845,\"2026-09-30T02:47:45.000+0000\",\"m0VVC000009a3kz2AA\",false,true]"
+      "signature": "add\u0000[331845,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC019_01_MOT",
-      "signature": "modify\u0000[331846,\"2026-09-30T02:47:55.000+0000\",\"m0VVC000009a3ky2AA\",false,true]"
+      "signature": "add\u0000[331846,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC019_01_TEL",
-      "signature": "modify\u0000[331847,\"2026-09-30T02:48:03.000+0000\",\"m0VVC000009a3mQ2AQ\",false,true]"
+      "signature": "add\u0000[331847,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC019_01_VIM",
-      "signature": "modify\u0000[331848,\"2026-09-30T02:48:10.000+0000\",\"m0VVC000009a3mP2AQ\",false,true]"
+      "signature": "add\u0000[331848,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
@@ -4411,162 +4461,162 @@
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC047_01",
-      "signature": "modify\u0000[331616,\"2026-09-29T16:30:37.000+0000\",\"m0VVC000009ScdY2AS\",false,true]"
+      "signature": "add\u0000[331616,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC047_01_COB",
-      "signature": "modify\u0000[331617,\"2026-09-29T16:30:47.000+0000\",\"m0VVC000009a3o12AA\",false,true]"
+      "signature": "add\u0000[331617,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC047_01_FRA",
-      "signature": "modify\u0000[331618,\"2026-09-29T16:30:56.000+0000\",\"m0VVC000009a3nI2AQ\",false,true]"
+      "signature": "add\u0000[331618,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC047_01_MOT",
-      "signature": "modify\u0000[331621,\"2026-09-29T16:32:36.000+0000\",\"m0VVC000009a3mz2AA\",false,true]"
+      "signature": "add\u0000[331621,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC047_01_TEL",
-      "signature": "modify\u0000[331622,\"2026-09-29T16:32:45.000+0000\",\"m0VVC000009a3nD2AQ\",false,true]"
+      "signature": "add\u0000[331622,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC047_01_VIM",
-      "signature": "modify\u0000[331620,\"2026-09-29T16:32:08.000+0000\",\"m0VVC000009a3n72AA\",false,true]"
+      "signature": "add\u0000[331620,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC054_01",
-      "signature": "modify\u0000[337547,\"2026-10-02T13:26:41.000+0000\",\"m0VVC000009Scdt2AC\",false,true]"
+      "signature": "add\u0000[337547,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC054_01_COB",
-      "signature": "modify\u0000[337548,\"2026-10-02T13:27:18.000+0000\",\"m0VVC000009a3ny2AA\",false,true]"
+      "signature": "add\u0000[337548,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC054_01_FRA",
-      "signature": "modify\u0000[337549,\"2026-10-02T13:27:49.000+0000\",\"m0VVC000009a3nh2AA\",false,true]"
+      "signature": "add\u0000[337549,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC054_01_MOT",
-      "signature": "modify\u0000[337550,\"2026-10-02T13:28:21.000+0000\",\"m0VVC000009a3ni2AA\",false,true]"
+      "signature": "add\u0000[337550,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC054_01_TEL",
-      "signature": "modify\u0000[337551,\"2026-10-02T13:28:53.000+0000\",\"m0VVC000009a3nQ2AQ\",false,true]"
+      "signature": "add\u0000[337551,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC054_01_VIM",
-      "signature": "modify\u0000[337552,\"2026-10-02T13:29:22.000+0000\",\"m0VVC000009a3nP2AQ\",false,true]"
+      "signature": "add\u0000[337552,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC055_01",
-      "signature": "modify\u0000[337191,\"2026-10-02T12:48:17.000+0000\",\"m0VVC000009ScdH2AS\",false,true]"
+      "signature": "add\u0000[337191,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC055_01_COB",
-      "signature": "modify\u0000[337192,\"2026-10-02T12:49:01.000+0000\",\"m0VVC000009a3nV2AQ\",false,true]"
+      "signature": "add\u0000[337192,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC055_01_FRA",
-      "signature": "modify\u0000[337199,\"2026-10-02T12:56:41.000+0000\",\"m0VVC000009a3nj2AA\",false,true]"
+      "signature": "add\u0000[337199,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC055_01_MOT",
-      "signature": "modify\u0000[337194,\"2026-10-02T12:50:13.000+0000\",\"m0VVC000009a3nl2AA\",false,true]"
+      "signature": "add\u0000[337194,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC055_01_TEL",
-      "signature": "modify\u0000[337195,\"2026-10-02T12:51:42.000+0000\",\"m0VVC000009a3ns2AA\",false,true]"
+      "signature": "add\u0000[337195,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Reclamacion_Routing_Config.REC055_01_VIM",
-      "signature": "modify\u0000[337196,\"2026-10-02T12:52:22.000+0000\",\"m0VVC000009a3nu2AA\",false,true]"
+      "signature": "add\u0000[337196,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_001_ACTIVACION_MONEDA_TARJETA",
-      "signature": "modify\u0000[316591,\"2026-09-28T17:05:10.000+0000\",\"m0fVC000006MpQcYAK\",false,true]"
+      "signature": "add\u0000[316591,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_001_ACTIVACION_MONEDA_TARJETA_MOT",
-      "signature": "modify\u0000[316592,\"2026-09-28T17:05:17.000+0000\",\"m0fVC000006R0TgYAK\",false,true]"
+      "signature": "add\u0000[316592,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_001_ACTIVACION_MONEDA_TARJETA_TEL",
-      "signature": "modify\u0000[316593,\"2026-09-28T17:05:20.000+0000\",\"m0fVC000006R0UEYA0\",false,true]"
+      "signature": "add\u0000[316593,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_002_ACTUALIZACION_DATOS",
-      "signature": "modify\u0000[352457,\"2026-10-04T07:40:34.000+0000\",\"m0fVC000006MpQWYA0\",false,true]"
+      "signature": "add\u0000[352457,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_002_ACTUALIZACION_DATOS_VIM",
-      "signature": "modify\u0000[352455,\"2026-10-04T07:35:18.000+0000\",\"m0fVC000006R0UQYA0\",false,true]"
+      "signature": "add\u0000[352455,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_003_TRASLADO_BALANCE",
-      "signature": "modify\u0000[316596,\"2026-09-28T17:06:01.000+0000\",\"m0fVC000006MpQdYAK\",false,true]"
+      "signature": "add\u0000[316596,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_003_TRASLADO_BALANCE_MOT",
-      "signature": "modify\u0000[316595,\"2026-09-28T17:05:59.000+0000\",\"m0fVC000006R0UAYA0\",false,true]"
+      "signature": "add\u0000[316595,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_003_TRASLADO_BALANCE_TEL",
-      "signature": "modify\u0000[316594,\"2026-09-28T17:05:56.000+0000\",\"m0fVC000006R0U9YAK\",false,true]"
+      "signature": "add\u0000[316594,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_004_CAMBIO_PRODUCTO",
-      "signature": "modify\u0000[316609,\"2026-09-28T17:06:53.000+0000\",\"m0fVC000006MpQNYA0\",false,true]"
+      "signature": "add\u0000[316609,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_004_CAMBIO_PRODUCTO_MOT",
-      "signature": "modify\u0000[316614,\"2026-09-28T17:06:57.000+0000\",\"m0fVC000006R0UCYA0\",false,true]"
+      "signature": "add\u0000[316614,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_004_CAMBIO_PRODUCTO_TEL",
-      "signature": "modify\u0000[316616,\"2026-09-28T17:07:00.000+0000\",\"m0fVC000006R0USYA0\",false,true]"
+      "signature": "add\u0000[316616,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_005_CAMBIO_FECHA",
-      "signature": "modify\u0000[316618,\"2026-09-28T17:07:03.000+0000\",\"m0fVC000006MpQXYA0\",false,true]"
+      "signature": "add\u0000[316618,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_005_CAMBIO_FECHA_MOT",
-      "signature": "modify\u0000[316619,\"2026-09-28T17:07:05.000+0000\",\"m0fVC000006R0UUYA0\",false,true]"
+      "signature": "add\u0000[316619,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_005_CAMBIO_FECHA_TEL",
-      "signature": "modify\u0000[316620,\"2026-09-28T17:07:08.000+0000\",\"m0fVC000006R0U6YAK\",false,true]"
+      "signature": "add\u0000[316620,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
@@ -4576,12 +4626,12 @@
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_006_CANJE_PUNTOS_MOT",
-      "signature": "modify\u0000[316621,\"2026-09-28T17:07:13.000+0000\",\"m0fVC000006R0TeYAK\",false,true]"
+      "signature": "add\u0000[316621,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_006_CANJE_PUNTOS_TEL",
-      "signature": "modify\u0000[316622,\"2026-09-28T17:07:16.000+0000\",\"m0fVC000006R0TVYA0\",false,true]"
+      "signature": "add\u0000[316622,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
@@ -4591,157 +4641,157 @@
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_007_CANCELACION_PRODUCTOS_SERVICIOS",
-      "signature": "modify\u0000[316627,\"2026-09-28T17:07:32.000+0000\",\"m0fVC000006MpQZYA0\",false,true]"
+      "signature": "add\u0000[316627,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_007_CANC_PRODUCTOS_SERVICIOS_COB",
-      "signature": "modify\u0000[316623,\"2026-09-28T17:07:20.000+0000\",\"m0fVC000006R1FtYAK\",false,true]"
+      "signature": "add\u0000[316623,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_007_CANC_PRODUCTOS_SERVICIOS_MOT",
-      "signature": "modify\u0000[316624,\"2026-09-28T17:07:23.000+0000\",\"m0fVC000006R1FyYAK\",false,true]"
+      "signature": "add\u0000[316624,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_007_CANC_PRODUCTOS_SERVICIOS_TEL",
-      "signature": "modify\u0000[316625,\"2026-09-28T17:07:26.000+0000\",\"m0fVC000006R1FwYAK\",false,true]"
+      "signature": "add\u0000[316625,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_007_CANC_PRODUCTOS_SERVICIOS_VIM",
-      "signature": "modify\u0000[316626,\"2026-09-28T17:07:30.000+0000\",\"m0fVC000006R1FvYAK\",false,true]"
+      "signature": "add\u0000[316626,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_008_AUT_CANCELACION_HIPOTECA",
-      "signature": "modify\u0000[316628,\"2026-09-28T17:07:35.000+0000\",\"m0fVC000006MpQIYA0\",false,true]"
+      "signature": "add\u0000[316628,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_008_AUT_CANCELACION_HIPOTECA_MOT",
-      "signature": "modify\u0000[316629,\"2026-09-28T17:07:37.000+0000\",\"m0fVC000006R0U0YAK\",false,true]"
+      "signature": "add\u0000[316629,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_009_CARTA_SALDO",
-      "signature": "modify\u0000[350583,\"2026-10-03T10:32:58.000+0000\",\"m0fVC000006MpQFYA0\",false,true]"
+      "signature": "add\u0000[350583,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_009_CARTA_SALDO_COB",
-      "signature": "modify\u0000[350584,\"2026-10-03T10:33:01.000+0000\",\"m0fVC000006R0TZYA0\",false,true]"
+      "signature": "add\u0000[350584,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_009_CARTA_SALDO_MOT",
-      "signature": "modify\u0000[350585,\"2026-10-03T10:33:04.000+0000\",\"m0fVC000006R0TuYAK\",false,true]"
+      "signature": "add\u0000[350585,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_009_CARTA_SALDO_TEL",
-      "signature": "modify\u0000[350586,\"2026-10-03T10:33:07.000+0000\",\"m0fVC000006R0TpYAK\",false,true]"
+      "signature": "add\u0000[350586,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_010_AUT_LEVANTAMIENTO_OPOSICION",
-      "signature": "modify\u0000[316634,\"2026-09-28T17:08:59.000+0000\",\"m0fVC000006MpQKYA0\",false,true]"
+      "signature": "add\u0000[316634,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_010_AUT_LEVANTAMIENTO_OPOSICION_MOT",
-      "signature": "modify\u0000[316635,\"2026-09-28T17:09:02.000+0000\",\"m0fVC000006R0UHYA0\",false,true]"
+      "signature": "add\u0000[316635,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_010_AUT_LEVANTAMIENTO_OPOSICION_TEL",
-      "signature": "modify\u0000[316636,\"2026-09-28T17:09:05.000+0000\",\"m0fVC000006R0UDYA0\",false,true]"
+      "signature": "add\u0000[316636,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_011_CERTIFICACION",
-      "signature": "modify\u0000[350594,\"2026-10-03T10:36:26.000+0000\",\"m0fVC000006MpQaYAK\",false,true]"
+      "signature": "add\u0000[350594,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_011_CERTIFICACION_MOT",
-      "signature": "modify\u0000[350595,\"2026-10-03T10:36:33.000+0000\",\"m0fVC000006R0TnYAK\",false,true]"
+      "signature": "add\u0000[350595,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_011_CERTIFICACION_TEL",
-      "signature": "modify\u0000[350596,\"2026-10-03T10:36:39.000+0000\",\"m0fVC000006R0TWYA0\",false,true]"
+      "signature": "add\u0000[350596,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_012_CORRECCION_PAGO",
-      "signature": "modify\u0000[316640,\"2026-09-28T17:09:15.000+0000\",\"m0fVC000006MpQDYA0\",false,true]"
+      "signature": "add\u0000[316640,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_012_CORRECCION_PAGO_MOT",
-      "signature": "modify\u0000[316641,\"2026-09-28T17:09:19.000+0000\",\"m0fVC000006R0UGYA0\",false,true]"
+      "signature": "add\u0000[316641,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_012_CORRECCION_PAGO_TEL",
-      "signature": "modify\u0000[316642,\"2026-09-28T17:09:21.000+0000\",\"m0fVC000006R0UKYA0\",false,true]"
+      "signature": "add\u0000[316642,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_013_CREDITO_NO_PROCESADO",
-      "signature": "modify\u0000[350597,\"2026-10-03T10:38:54.000+0000\",\"m0fVC000006MpQJYA0\",false,true]"
+      "signature": "add\u0000[350597,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_013_CREDITO_NO_PROCESADO_COB",
-      "signature": "modify\u0000[350598,\"2026-10-03T10:39:12.000+0000\",\"m0fVC000006R0UOYA0\",false,true]"
+      "signature": "add\u0000[350598,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_013_CREDITO_NO_PROCESADO_MOT",
-      "signature": "modify\u0000[350599,\"2026-10-03T10:39:29.000+0000\",\"m0fVC000006R0ToYAK\",false,true]"
+      "signature": "add\u0000[350599,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_013_CREDITO_NO_PROCESADO_TEL",
-      "signature": "modify\u0000[350600,\"2026-10-03T10:39:45.000+0000\",\"m0fVC000006R0TrYAK\",false,true]"
+      "signature": "add\u0000[350600,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_014_DISMINUCION_LIMITE",
-      "signature": "modify\u0000[350601,\"2026-10-03T10:42:53.000+0000\",\"m0fVC000006MpQeYAK\",false,true]"
+      "signature": "add\u0000[350601,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_014_DISMINUCION_LIMITE_MOT",
-      "signature": "modify\u0000[350602,\"2026-10-03T10:42:59.000+0000\",\"m0fVC000006R0TvYAK\",false,true]"
+      "signature": "add\u0000[350602,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_014_DISMINUCION_LIMITE_TEL",
-      "signature": "modify\u0000[350603,\"2026-10-03T10:43:04.000+0000\",\"m0fVC000006R0TqYAK\",false,true]"
+      "signature": "add\u0000[350603,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_015_REPOSICION_TARJETA",
-      "signature": "modify\u0000[316650,\"2026-09-28T17:09:43.000+0000\",\"m0fVC000006MpQVYA0\",false,true]"
+      "signature": "add\u0000[316650,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_015_REPOSICION_TARJETA_FRA",
-      "signature": "modify\u0000[316651,\"2026-09-28T17:09:46.000+0000\",\"m0fVC000006R0TyYAK\",false,true]"
+      "signature": "add\u0000[316651,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_015_REPOSICION_TARJETA_MOT",
-      "signature": "modify\u0000[316652,\"2026-09-28T17:09:48.000+0000\",\"m0fVC000006R0TfYAK\",false,true]"
+      "signature": "add\u0000[316652,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_015_REPOSICION_TARJETA_TEL",
-      "signature": "modify\u0000[316653,\"2026-09-28T17:09:51.000+0000\",\"m0fVC000006R0U1YAK\",false,true]"
+      "signature": "add\u0000[316653,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
@@ -4751,142 +4801,142 @@
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_016_CAMBIO_VALOR_CUOTA_TEL",
-      "signature": "modify\u0000[316656,\"2026-09-28T17:11:09.000+0000\",\"m0fVC000006R0U2YAK\",false,true]"
+      "signature": "add\u0000[316656,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_017_Mantenimiento_Actualizacion",
-      "signature": "modify\u0000[351313,\"2026-10-03T11:41:34.000+0000\",\"m0fVC000007H0h7YAC\",false,true]"
+      "signature": "add\u0000[351313,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_017_Mantenimiento_Actualizacion_MOT",
-      "signature": "modify\u0000[351314,\"2026-10-03T11:41:36.000+0000\",\"m0fVC000007H0kLYAS\",false,true]"
+      "signature": "add\u0000[351314,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_017_Mantenimiento_Actualizacion_Prod",
-      "signature": "delete\u0000[351311,\"2026-10-03T11:37:44.000+0000\",\"m0fVC000007H0h7YAC\",true,false]"
+      "signature": "delete\u0000[351311,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_017_Mantenimiento_Actualizacion_TEL",
-      "signature": "modify\u0000[351315,\"2026-10-03T11:41:39.000+0000\",\"m0fVC000007H0ijYAC\",false,true]"
+      "signature": "add\u0000[351315,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_018_REVISION_PODERES_ESPECIALES",
-      "signature": "modify\u0000[316657,\"2026-09-28T17:11:12.000+0000\",\"m0fVC000006MpQEYA0\",false,true]"
+      "signature": "add\u0000[316657,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_018_REVISION_PODERES_ESPECIALES_COB",
-      "signature": "modify\u0000[316658,\"2026-09-28T17:11:15.000+0000\",\"m0fVC000006R0UBYA0\",false,true]"
+      "signature": "add\u0000[316658,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_018_REVISION_PODERES_ESPECIALES_MOT",
-      "signature": "modify\u0000[316659,\"2026-09-28T17:11:18.000+0000\",\"m0fVC000006R0TmYAK\",false,true]"
+      "signature": "add\u0000[316659,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_018_REVISION_PODERES_ESPECIALES_TEL",
-      "signature": "modify\u0000[316660,\"2026-09-28T17:11:20.000+0000\",\"m0fVC000006R0TYYA0\",false,true]"
+      "signature": "add\u0000[316660,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_019_TRANSFERENCIA_ASISTIDA",
-      "signature": "modify\u0000[316661,\"2026-09-28T17:11:23.000+0000\",\"m0fVC000006MpQbYAK\",false,true]"
+      "signature": "add\u0000[316661,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_019_TRANSFERENCIA_ASISTIDA_MOT",
-      "signature": "modify\u0000[316662,\"2026-09-28T17:11:25.000+0000\",\"m0fVC000006R0TzYAK\",false,true]"
+      "signature": "add\u0000[316662,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_019_TRANSFERENCIA_ASISTIDA_TEL",
-      "signature": "modify\u0000[316663,\"2026-09-28T17:11:28.000+0000\",\"m0fVC000006R0U4YAK\",false,true]"
+      "signature": "add\u0000[316663,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_020_DEVOLUCION_TRANSFERENCIA",
-      "signature": "modify\u0000[316664,\"2026-09-28T17:11:30.000+0000\",\"m0fVC000006MpQOYA0\",false,true]"
+      "signature": "add\u0000[316664,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_020_DEVOLUCION_TRANSFERENCIA_MOT",
-      "signature": "modify\u0000[316665,\"2026-09-28T17:11:33.000+0000\",\"m0fVC000006R0TlYAK\",false,true]"
+      "signature": "add\u0000[316665,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_020_DEVOLUCION_TRANSFERENCIA_TEL",
-      "signature": "modify\u0000[316711,\"2026-09-28T17:11:35.000+0000\",\"m0fVC000006R0TtYAK\",false,true]"
+      "signature": "add\u0000[316711,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_021_TARJETA_ADICIONAL",
-      "signature": "modify\u0000[316845,\"2026-09-28T17:11:38.000+0000\",\"m0fVC000006MpQRYA0\",false,true]"
+      "signature": "add\u0000[316845,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_021_TARJETA_ADICIONAL_MOT",
-      "signature": "modify\u0000[316985,\"2026-09-28T17:11:41.000+0000\",\"m0fVC000006R0U3YAK\",false,true]"
+      "signature": "add\u0000[316985,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_021_TARJETA_ADICIONAL_TEL",
-      "signature": "modify\u0000[316986,\"2026-09-28T17:11:44.000+0000\",\"m0fVC000006R0U5YAK\",false,true]"
+      "signature": "add\u0000[316986,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_022_REVISION_TRANSACCION_RECURRENTE",
-      "signature": "modify\u0000[316989,\"2026-09-28T17:11:52.000+0000\",\"m0fVC000006MpQMYA0\",false,true]"
+      "signature": "add\u0000[316989,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_022_REV_TRANSAC_RECURRENTE_MOT",
-      "signature": "modify\u0000[316987,\"2026-09-28T17:11:47.000+0000\",\"m0fVC000006R1FuYAK\",false,true]"
+      "signature": "add\u0000[316987,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_022_REV_TRANSAC_RECURRENTE_TEL",
-      "signature": "modify\u0000[316988,\"2026-09-28T17:11:49.000+0000\",\"m0fVC000006R1FxYAK\",false,true]"
+      "signature": "add\u0000[316988,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_023_DOCUMENTACION_INFORMACION",
-      "signature": "modify\u0000[316990,\"2026-09-28T17:11:55.000+0000\",\"m0fVC000006MpQYYA0\",false,true]"
+      "signature": "add\u0000[316990,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_023_DOCUMENTACION_INFORMACION_MOT",
-      "signature": "modify\u0000[316991,\"2026-09-28T17:11:57.000+0000\",\"m0fVC000006R0TiYAK\",false,true]"
+      "signature": "add\u0000[316991,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_023_DOCUMENTACION_INFORMACION_TEL",
-      "signature": "modify\u0000[316992,\"2026-09-28T17:12:01.000+0000\",\"m0fVC000006R0TbYAK\",false,true]"
+      "signature": "add\u0000[316992,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_024_ACTIVACION_TARJETA",
-      "signature": "modify\u0000[316993,\"2026-09-28T17:12:03.000+0000\",\"m0fVC000006MpQQYA0\",false,true]"
+      "signature": "add\u0000[316993,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_025_NOTIFICACION_FALLECIDO",
-      "signature": "modify\u0000[316994,\"2026-09-28T17:12:08.000+0000\",\"m0fVC000006MpQSYA0\",false,true]"
+      "signature": "add\u0000[316994,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_025_NOTIFICACION_FALLECIDO_MOT",
-      "signature": "modify\u0000[316995,\"2026-09-28T17:12:10.000+0000\",\"m0fVC000006R0U7YAK\",false,true]"
+      "signature": "add\u0000[316995,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_025_NOTIFICACION_FALLECIDO_TEL",
-      "signature": "modify\u0000[316996,\"2026-09-28T17:12:13.000+0000\",\"m0fVC000006R0ULYA0\",false,true]"
+      "signature": "add\u0000[316996,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
@@ -4896,62 +4946,62 @@
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_026_REVERSO_CARGOS_COB",
-      "signature": "modify\u0000[317313,\"2026-09-28T17:12:54.000+0000\",\"m0fVC000006R0URYA0\",false,true]"
+      "signature": "add\u0000[317313,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_026_REVERSO_CARGOS_MOT",
-      "signature": "modify\u0000[317314,\"2026-09-28T17:12:57.000+0000\",\"m0fVC000006R0TcYAK\",false,true]"
+      "signature": "add\u0000[317314,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_026_REVERSO_CARGOS_TEL",
-      "signature": "modify\u0000[317315,\"2026-09-28T17:13:00.000+0000\",\"m0fVC000006R0TjYAK\",false,true]"
+      "signature": "add\u0000[317315,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_027_1_CAMBIO_EJECUTIVO",
-      "signature": "modify\u0000[350571,\"2026-10-03T10:12:42.000+0000\",\"m0fVC000006MpQHYA0\",false,true]"
+      "signature": "add\u0000[350571,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_027_1_CAMBIO_EJECUTIVO_COB",
-      "signature": "modify\u0000[350572,\"2026-10-03T10:12:54.000+0000\",\"m0fVC000006R0U8YAK\",false,true]"
+      "signature": "add\u0000[350572,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_027_1_CAMBIO_EJECUTIVO_FRA",
-      "signature": "modify\u0000[350573,\"2026-10-03T10:13:03.000+0000\",\"m0fVC000006R0UIYA0\",false,true]"
+      "signature": "add\u0000[350573,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_027_1_CAMBIO_EJECUTIVO_MOT",
-      "signature": "modify\u0000[350574,\"2026-10-03T10:13:13.000+0000\",\"m0fVC000006R0UFYA0\",false,true]"
+      "signature": "add\u0000[350574,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_027_1_CAMBIO_EJECUTIVO_TEL",
-      "signature": "modify\u0000[350575,\"2026-10-03T10:13:23.000+0000\",\"m0fVC000006R0UJYA0\",false,true]"
+      "signature": "add\u0000[350575,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_027_1_CAMBIO_EJECUTIVO_VIM",
-      "signature": "modify\u0000[350576,\"2026-10-03T10:13:32.000+0000\",\"m0fVC000006R0UMYA0\",false,true]"
+      "signature": "add\u0000[350576,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_027_AUMENTO_LIMITE",
-      "signature": "modify\u0000[317621,\"2026-09-28T17:13:18.000+0000\",\"m0fVC000006MpQTYA0\",false,true]"
+      "signature": "add\u0000[317621,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_027_AUMENTO_LIMITE_MOT",
-      "signature": "modify\u0000[317622,\"2026-09-28T17:13:20.000+0000\",\"m0fVC000006R0TaYAK\",false,true]"
+      "signature": "add\u0000[317622,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "Solicitud_Routing_Config.SOL_027_AUMENTO_LIMITE_TEL",
-      "signature": "modify\u0000[317623,\"2026-09-28T17:13:23.000+0000\",\"m0fVC000006R0TkYAK\",false,true]"
+      "signature": "add\u0000[317623,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
@@ -5016,7 +5066,7 @@
     {
       "xmlName": "CustomObject",
       "fullName": "Documentacion_Legal__c",
-      "signature": "modify\u0000[368532,\"2026-10-10T04:36:32.000+0000\",\"01I3i000001M6MTEA0\",false,true]"
+      "signature": "add\u0000[368532,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomObject",
@@ -5111,7 +5161,7 @@
     {
       "xmlName": "CustomObjectTranslation",
       "fullName": "Account-es",
-      "signature": "modify\u0000[352794,\"2026-10-04T23:52:10.000+0000\",\"Account-es\",false,true]"
+      "signature": "add\u0000[352794,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomObjectTranslation",
@@ -5126,22 +5176,22 @@
     {
       "xmlName": "CustomObjectTranslation",
       "fullName": "FinServ__FinancialAccount__c-en_GB",
-      "signature": "modify\u0000[339115,\"2026-10-02T21:46:19.000+0000\",\"01IVT000002VL91-en_GB\",false,true]"
+      "signature": "add\u0000[339115,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomObjectTranslation",
       "fullName": "FinServ__FinancialAccount__c-en_US",
-      "signature": "modify\u0000[339086,\"2026-10-02T21:19:07.000+0000\",\"01IVT000002VL91-en_US\",false,true]"
+      "signature": "add\u0000[339086,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomObjectTranslation",
       "fullName": "FinServ__FinancialAccount__c-es",
-      "signature": "modify\u0000[339110,\"2026-10-02T21:45:05.000+0000\",\"01IVT000002VL91-es\",false,true]"
+      "signature": "add\u0000[339110,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomObjectTranslation",
       "fullName": "FinServ__FinancialAccount__c-es_MX",
-      "signature": "modify\u0000[339116,\"2026-10-02T21:47:02.000+0000\",\"01IVT000002VL91-es_MX\",false,true]"
+      "signature": "add\u0000[339116,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomObjectTranslation",
@@ -5151,7 +5201,7 @@
     {
       "xmlName": "CustomObjectTranslation",
       "fullName": "Lead-es",
-      "signature": "modify\u0000[352811,\"2026-10-04T23:52:10.000+0000\",\"Lead-es\",false,true]"
+      "signature": "add\u0000[352811,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomObjectTranslation",
@@ -5221,7 +5271,7 @@
     {
       "xmlName": "Dashboard",
       "fullName": "FinServ__Public_Dashboards/bKFDwBexwNADweyiFvqWxbiBbRgiRg",
-      "signature": "modify\u0000[334071,\"2026-10-01T15:22:09.000+0000\",\"01ZVC000003M3vB2AS\",false,true]"
+      "signature": "add\u0000[334071,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "DigitalExperience",
@@ -5286,7 +5336,7 @@
     {
       "xmlName": "DigitalExperience",
       "fullName": "next_gen_agent_project/sfdc_nextGenAuthoringPrototypeContentSpace.next_gen_agent_authoring__resource/a1790719731444_0ZuVC0000003hej0AA",
-      "signature": "modify\u0000[331808,\"2026-09-29T22:08:52.000+0000\",\"20ZVC00000CkRr72AF\",false,true]"
+      "signature": "add\u0000[331808,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "DigitalExperience",
@@ -5471,12 +5521,12 @@
     {
       "xmlName": "EmailTemplate",
       "fullName": "FSC_Email_Templates/FSC_Cierre_Caso_Cliente2",
-      "signature": "modify\u0000[281526,\"2026-09-25T15:33:49.000+0000\",\"00XVC000009Bfyk2AC\",false,true]"
+      "signature": "add\u0000[281526,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "EmailTemplate",
       "fullName": "FSC_Email_Templates/FSC_Cierre_solicitud_Cliente2",
-      "signature": "modify\u0000[289458,\"2026-09-27T11:20:51.000+0000\",\"00XVC000009Bfyl2AC\",false,true]"
+      "signature": "add\u0000[289458,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "EmailTemplate",
@@ -5486,7 +5536,7 @@
     {
       "xmlName": "EmailTemplate",
       "fullName": "FSC_Email_Templates/FSC_Creaci_n_solicitud_Cliente1",
-      "signature": "modify\u0000[352376,\"2026-10-03T20:35:49.000+0000\",\"00XVC000009Bfym2AC\",false,true]"
+      "signature": "add\u0000[352376,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "EmailTemplate",
@@ -5526,7 +5576,7 @@
     {
       "xmlName": "EmailTemplate",
       "fullName": "all/Creaci_n_solicitud_Cliente1",
-      "signature": "modify\u0000[334188,\"2026-10-01T20:48:58.000+0000\",\"00X3i000000QkHJEA0\",false,true]"
+      "signature": "add\u0000[334188,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "EmailTemplate",
@@ -5636,7 +5686,7 @@
     {
       "xmlName": "EntitlementProcess",
       "fullName": "ep_rec_008_operaciones_cuentas_productos_30d v2",
-      "signature": "modify\u0000[331638,\"2026-09-29T18:59:12.000+0000\",\"552VC00000VYorpYAD\",false,true]"
+      "signature": "add\u0000[331638,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "EntitlementProcess",
@@ -5784,24 +5834,39 @@
       "signature": "add\u0000[114407,\"unknown\",\"unknown\",false,false]"
     },
     {
+      "xmlName": "ExternalCredential",
+      "fullName": "CallMeBack",
+      "signature": "modify\u0000[375781,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ExtlClntAppConfigurablePolicies",
+      "fullName": "FSC_Rla_Approval_Admin_App_plcy",
+      "signature": "modify\u0000[375768,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ExtlClntAppGlobalOauthSettings",
+      "fullName": "FSC_Rla_Approval_Admin_App_glbloauth",
+      "signature": "modify\u0000[375767,\"unknown\",\"unknown\",false,false]"
+    },
+    {
       "xmlName": "FieldRestrictionRule",
       "fullName": "Rule0df961a43cb8c794181e782b9499a82d98702b0de8270f392267bbcff695fa99",
-      "signature": "modify\u0000[366204,\"2026-10-08T08:02:46.000+0000\",\"0lrVC0000000idlYAA\",false,true]"
+      "signature": "add\u0000[366204,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FieldRestrictionRule",
       "fullName": "Rule92afc8e7e9f344c28f911772ca3f528e15ad208c150f126a3d1367ddab01caa5",
-      "signature": "modify\u0000[366210,\"2026-10-08T08:02:46.000+0000\",\"0lrVC0000000idoYAA\",false,true]"
+      "signature": "add\u0000[366210,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FieldRestrictionRule",
       "fullName": "Ruleb3c2066a9de71cdbddfe3b3a0ca031bddaf8630964b0dd3c39a82f099c73d0e0",
-      "signature": "modify\u0000[366206,\"2026-10-08T08:02:46.000+0000\",\"0lrVC0000000idmYAA\",false,true]"
+      "signature": "add\u0000[366206,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FieldRestrictionRule",
       "fullName": "Rulef80adffcc544ce3bea72dfc814a3cf5a37d0ae635286e90663ae3ba4e7330f42",
-      "signature": "modify\u0000[366208,\"2026-10-08T08:02:46.000+0000\",\"0lrVC0000000idnYAA\",false,true]"
+      "signature": "add\u0000[366208,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
@@ -5821,62 +5886,67 @@
     {
       "xmlName": "FlexiPage",
       "fullName": "Cuenta_financiera_P_gina_de_registro",
-      "signature": "modify\u0000[357415,\"2026-10-07T10:13:11.000+0000\",\"0M0U7000000HQ7lKAG\",false,true]"
+      "signature": "add\u0000[357415,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "FSC_Case_Solicitud_Activacion_Tarjeta",
-      "signature": "modify\u0000[327849,\"2026-09-28T19:45:05.000+0000\",\"0M0VC000000SMyT0AW\",false,true]"
+      "signature": "add\u0000[327849,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "FSC_Case_Solicitud_Analisis_5_Etapas",
-      "signature": "modify\u0000[367751,\"2026-10-08T23:30:04.000+0000\",\"0M0VC000000SHsM0AW\",false,true]"
+      "signature": "add\u0000[367751,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "FSC_Case_Solicitud_Evaluacion_5_Etapas",
-      "signature": "modify\u0000[328830,\"2026-09-28T19:45:41.000+0000\",\"0M0VC000000SHsN0AW\",false,true]"
+      "signature": "add\u0000[328830,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "FSC_Case_Solicitud_Procesamiento_Directo",
-      "signature": "modify\u0000[349213,\"2026-10-03T00:57:53.000+0000\",\"0M0VC000000SHsO0AW\",false,true]"
+      "signature": "add\u0000[349213,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "FSC_Case_Solicitud_Seis_Etapas",
-      "signature": "modify\u0000[329474,\"2026-09-28T19:46:05.000+0000\",\"0M0VC000000SHsP0AW\",false,true]"
+      "signature": "add\u0000[329474,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "FSC_Case_Solicitud_Validacion_Doble",
-      "signature": "modify\u0000[329780,\"2026-09-28T19:46:18.000+0000\",\"0M0VC000000SHsQ0AW\",false,true]"
+      "signature": "add\u0000[329780,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "FSC_FinancialAccount",
-      "signature": "modify\u0000[357416,\"2026-10-07T10:13:12.000+0000\",\"0M0U7000000GlarKAC\",false,true]"
+      "signature": "add\u0000[357416,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "FSC_Sales_Home",
-      "signature": "modify\u0000[339361,\"2026-10-02T22:10:41.000+0000\",\"0M0U7000000HAW1KAO\",false,true]"
+      "signature": "add\u0000[339361,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "FSC_Sales_Home1",
-      "signature": "delete\u0000[340513,\"2026-10-02T23:00:11.000+0000\",\"0M0VC000000WcGf0AK\",true,true]"
+      "signature": "delete\u0000[340513,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "FSC_Service_Home1",
-      "signature": "modify\u0000[349490,\"2026-10-03T03:51:10.000+0000\",\"0M0VC000000WcGf0AK\",false,true]"
+      "signature": "add\u0000[349490,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "FlexiPage",
+      "fullName": "FSC_Servicio_UtilityBar",
+      "signature": "add\u0000[376102,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "Financial_Services_Lightning_Console_UtilityBar",
-      "signature": "add\u0000[259040,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[376103,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
@@ -5891,7 +5961,7 @@
     {
       "xmlName": "FlexiPage",
       "fullName": "Home_Page_Default",
-      "signature": "modify\u0000[349614,\"2026-10-03T05:39:01.000+0000\",\"0M03i0000006wfHCAQ\",false,true]"
+      "signature": "add\u0000[349614,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
@@ -5906,7 +5976,7 @@
     {
       "xmlName": "FlexiPage",
       "fullName": "Inicio_FSC_Servicio",
-      "signature": "delete\u0000[339921,\"2026-10-02T22:58:14.000+0000\",\"0M0VC000000WcDR0A0\",true,true]"
+      "signature": "delete\u0000[339921,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "FlexiPage",
@@ -5946,37 +6016,37 @@
     {
       "xmlName": "FlexiPage",
       "fullName": "Record_Page_Reclamaciones_Contracargo",
-      "signature": "modify\u0000[326602,\"2026-09-28T19:39:41.000+0000\",\"0M0VC000000OvGT0A0\",false,true]"
+      "signature": "add\u0000[326602,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "Record_Page_Reclamaciones_Contracargo_Invest",
-      "signature": "modify\u0000[340511,\"2026-10-02T22:59:45.000+0000\",\"0M0VC000000OvLJ0A0\",false,true]"
+      "signature": "add\u0000[340511,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "Record_Page_Reclamaciones_Datacredito",
-      "signature": "modify\u0000[327222,\"2026-09-28T19:44:40.000+0000\",\"0M0VC000000OvJh0AK\",false,true]"
+      "signature": "add\u0000[327222,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "Record_Page_Reclamaciones_Estandar",
-      "signature": "modify\u0000[330100,\"2026-09-28T19:55:07.000+0000\",\"0M0VC000000OvBd0AK\",false,true]"
+      "signature": "add\u0000[330100,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "Record_Page_Reclamaciones_Investigacion_Contr",
-      "signature": "modify\u0000[327543,\"2026-09-28T19:44:52.000+0000\",\"0M0VC000000OvMv0AK\",false,true]"
+      "signature": "add\u0000[327543,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "Record_Page_Solicitudes_Estandar",
-      "signature": "modify\u0000[319599,\"2026-09-28T17:17:08.000+0000\",\"0M0VC000000SHsR0AW\",false,true]"
+      "signature": "add\u0000[319599,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "Record_Page_Soporte_TI",
-      "signature": "modify\u0000[316158,\"2026-09-28T16:14:31.000+0000\",\"0M0VC000000SHsS0AW\",false,true]"
+      "signature": "add\u0000[316158,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
@@ -5996,27 +6066,27 @@
     {
       "xmlName": "FlexiPage",
       "fullName": "candidato_pagina_de_registro_PF",
-      "signature": "modify\u0000[360171,\"2026-10-07T16:39:46.000+0000\",\"0M0U7000000HEEfKAO\",false,true]"
+      "signature": "add\u0000[360171,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "candidato_pagina_de_registro_PJ",
-      "signature": "modify\u0000[361224,\"2026-10-07T17:32:23.000+0000\",\"0M0VC000000MWIz0AO\",false,true]"
+      "signature": "add\u0000[361224,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "cliente_pagina_de_registro_BUSINESS",
-      "signature": "modify\u0000[368361,\"2026-10-09T01:40:06.000+0000\",\"0M0U7000000HaofKAC\",false,true]"
+      "signature": "add\u0000[376060,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "cliente_pagina_de_registro_PERSONA",
-      "signature": "modify\u0000[368080,\"2026-10-09T01:38:17.000+0000\",\"0M0U7000000HBQTKA4\",false,true]"
+      "signature": "add\u0000[368080,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Flow",
       "fullName": "AF_Obtener_Rol_Usuario_Preembosada",
-      "signature": "modify\u0000[331803,\"2026-09-29T22:04:41.000+0000\",\"301VC00003dqpMUYAY\",false,true]"
+      "signature": "add\u0000[331803,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Flow",
@@ -6186,7 +6256,7 @@
     {
       "xmlName": "Flow",
       "fullName": "Correo_Electr_nico_a_Cliente",
-      "signature": "modify\u0000[334353,\"2026-10-01T20:58:17.000+0000\",\"301VC00003dygUQYAY\",false,true]"
+      "signature": "add\u0000[334353,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Flow",
@@ -6216,7 +6286,7 @@
     {
       "xmlName": "Flow",
       "fullName": "LEA_Precalificacion",
-      "signature": "modify\u0000[352369,\"2026-10-03T19:29:52.000+0000\",\"301VC00003duZKsYAM\",false,true]"
+      "signature": "add\u0000[352369,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Flow",
@@ -6226,7 +6296,7 @@
     {
       "xmlName": "Flow",
       "fullName": "ReintentarCreaci_nCorePFPJ",
-      "signature": "modify\u0000[352956,\"2026-10-05T23:37:52.000+0000\",\"301VC00003eD1SOYA0\",false,true]"
+      "signature": "add\u0000[352956,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Flow",
@@ -6291,7 +6361,7 @@
     {
       "xmlName": "Flow",
       "fullName": "Tipo_de_cuenta_paraPF",
-      "signature": "modify\u0000[354538,\"2026-10-06T20:22:17.000+0000\",\"3013i000000MNFaAAO\",false,true]"
+      "signature": "add\u0000[354538,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "GenAiPlannerBundle",
@@ -6336,7 +6406,7 @@
     {
       "xmlName": "Group",
       "fullName": "FSC_AprobadoresAnalistasDeCredito_Consum",
-      "signature": "modify\u0000[273014,\"2026-09-21T17:30:16.000+0000\",\"00GVC00000BKqZ72AL\",false,true]"
+      "signature": "add\u0000[273014,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Group",
@@ -6346,7 +6416,7 @@
     {
       "xmlName": "Group",
       "fullName": "FSC_AprobadoresAnalistasDeCredito_Hipote",
-      "signature": "modify\u0000[273038,\"2026-09-21T19:59:11.000+0000\",\"00GVC00000BKqZ82AL\",false,true]"
+      "signature": "add\u0000[273038,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Group",
@@ -6356,7 +6426,7 @@
     {
       "xmlName": "Group",
       "fullName": "FSC_AprobadoresAnalistasDeCredito_Vehicu",
-      "signature": "modify\u0000[336153,\"2026-10-02T12:06:36.000+0000\",\"00GVC00000BKqZA2A1\",false,true]"
+      "signature": "add\u0000[336153,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Group",
@@ -6364,9 +6434,14 @@
       "signature": "delete\u0000[272704,\"unknown\",\"unknown\",true,false]"
     },
     {
+      "xmlName": "Group",
+      "fullName": "FSC_GestionDePagaresYContratos",
+      "signature": "modify\u0000[375839,\"unknown\",\"unknown\",false,false]"
+    },
+    {
       "xmlName": "Layout",
       "fullName": "Account-Cliente (Jurídico) Layout",
-      "signature": "modify\u0000[354889,\"2026-10-07T01:46:44.000+0000\",\"00hU7000003Ai1FIAS\",false,true]"
+      "signature": "add\u0000[354889,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Layout",
@@ -6381,22 +6456,22 @@
     {
       "xmlName": "Layout",
       "fullName": "Case-Case Layout",
-      "signature": "modify\u0000[367040,\"2026-10-08T23:26:04.000+0000\",\"00h3i000002ldayAAA\",false,true]"
+      "signature": "add\u0000[367040,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Layout",
       "fullName": "Case-FinServ__Case (FSC) Layout",
-      "signature": "modify\u0000[367038,\"2026-10-08T23:26:04.000+0000\",\"00hVT000005XPdUYAW\",false,true]"
+      "signature": "add\u0000[367038,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Layout",
       "fullName": "CaseClose-Close Case Layout",
-      "signature": "modify\u0000[367041,\"2026-10-08T23:26:04.000+0000\",\"00h3i000002ldbEAAQ\",false,true]"
+      "signature": "add\u0000[367041,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Layout",
       "fullName": "CaseInteraction-Case Feed Layout",
-      "signature": "modify\u0000[367039,\"2026-10-08T23:26:04.000+0000\",\"00h3i000002ldavAAA\",false,true]"
+      "signature": "add\u0000[367039,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Layout",
@@ -6466,7 +6541,7 @@
     {
       "xmlName": "Layout",
       "fullName": "PersonAccount-Clientes físicos",
-      "signature": "modify\u0000[337593,\"2026-10-02T13:50:59.000+0000\",\"00hU700000336YbIAI\",false,true]"
+      "signature": "add\u0000[337593,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Layout",
@@ -6486,7 +6561,7 @@
     {
       "xmlName": "Layout",
       "fullName": "Solicitud_Routing_Config__mdt-Configuración de Ruteo de Solicitudes Layout",
-      "signature": "modify\u0000[352918,\"2026-10-05T18:14:36.000+0000\",\"00hVC000006lNXBYA2\",false,true]"
+      "signature": "add\u0000[352918,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Layout",
@@ -6501,7 +6576,7 @@
     {
       "xmlName": "Layout",
       "fullName": "User-User Layout",
-      "signature": "modify\u0000[281499,\"2026-09-25T02:10:36.000+0000\",\"00h3i000002ldbLAAQ\",false,true]"
+      "signature": "add\u0000[281499,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Layout",
@@ -6521,12 +6596,12 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "accountDocumentsPicker",
-      "signature": "modify\u0000[368545,\"2026-10-10T04:37:22.000+0000\",\"0RdVC0000010SDU0A2\",false,true]"
+      "signature": "add\u0000[375900,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "caseFinancialTransactionSelector",
-      "signature": "modify\u0000[366309,\"2026-10-08T21:27:08.000+0000\",\"0RdVC000000rmwH0AQ\",false,true]"
+      "signature": "add\u0000[366309,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -6541,7 +6616,7 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "caseStatusLinearNavigator",
-      "signature": "modify\u0000[341965,\"2026-10-02T23:43:26.000+0000\",\"0RdVC000000rmwO0AQ\",false,true]"
+      "signature": "add\u0000[341965,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -6551,7 +6626,7 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "enviarComprobanteFirma",
-      "signature": "modify\u0000[273444,\"2026-09-21T23:38:44.000+0000\",\"0RdVC000000rmwB0AQ\",false,true]"
+      "signature": "add\u0000[273444,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -6561,12 +6636,12 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "fSC_NewLead",
-      "signature": "add\u0000[165321,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[376089,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "financialAccountCustomCreate",
-      "signature": "modify\u0000[337614,\"2026-10-02T14:05:54.000+0000\",\"0RdVC000000sBTA0A2\",false,true]"
+      "signature": "add\u0000[337614,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -6581,17 +6656,22 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "fscNewCaseReclamo",
-      "signature": "modify\u0000[352562,\"2026-10-04T18:59:05.000+0000\",\"0RdVC000000jKCJ0A2\",false,true]"
+      "signature": "add\u0000[352562,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "fscNewCaseSolicitud",
-      "signature": "modify\u0000[367060,\"2026-10-08T23:28:57.000+0000\",\"0RdVC000000jKAh0AM\",false,true]"
+      "signature": "add\u0000[367060,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "fscNewCaseSoporteTi",
       "signature": "add\u0000[166501,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "LightningComponentBundle",
+      "fullName": "fscOmniSearch",
+      "signature": "add\u0000[376101,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -6601,7 +6681,7 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "fsc_caso_cierre_guiado",
-      "signature": "modify\u0000[352895,\"2026-10-05T13:42:14.000+0000\",\"0RdVC000000ikjv0AA\",false,true]"
+      "signature": "add\u0000[352895,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -6645,8 +6725,13 @@
     },
     {
       "xmlName": "LightningComponentBundle",
+      "fullName": "leadConvertControlled",
+      "signature": "add\u0000[376114,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "LightningComponentBundle",
       "fullName": "leadDocumentsPicker",
-      "signature": "modify\u0000[368550,\"2026-10-10T04:37:22.000+0000\",\"0RdVC000000irjo0AA\",false,true]"
+      "signature": "add\u0000[375905,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -6681,7 +6766,7 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "vFS_GeneraryfirmarDocs",
-      "signature": "modify\u0000[359497,\"2026-10-07T16:31:14.000+0000\",\"0RdVT0000002hH90AI\",false,true]"
+      "signature": "add\u0000[359497,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -6701,7 +6786,7 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "vfs_LeadDuplicateAlert",
-      "signature": "modify\u0000[357359,\"2026-10-07T06:13:37.000+0000\",\"0RdVC0000010PnU0AU\",false,true]"
+      "signature": "add\u0000[357359,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -6711,17 +6796,17 @@
     {
       "xmlName": "ListView",
       "fullName": "Account.AllAccounts",
-      "signature": "modify\u0000[357445,\"2026-10-07T13:15:05.000+0000\",\"00B3i000004o8ZOEAY\",false,true]"
+      "signature": "add\u0000[357445,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ListView",
       "fullName": "Account.Clientes_Persona_Fisica",
-      "signature": "modify\u0000[337601,\"2026-10-02T13:54:26.000+0000\",\"00B3i000005G24AEAS\",false,true]"
+      "signature": "add\u0000[337601,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ListView",
       "fullName": "Account.Clientes_Persona_Juridica",
-      "signature": "modify\u0000[337604,\"2026-10-02T13:55:39.000+0000\",\"00B3i000005G24BEAS\",false,true]"
+      "signature": "add\u0000[337604,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ListView",
@@ -6746,22 +6831,22 @@
     {
       "xmlName": "ListView",
       "fullName": "Case.Casos_Asignacion_Manual_Reclamaciones_Case",
-      "signature": "delete\u0000[349511,\"2026-10-03T05:15:03.000+0000\",\"00BVC00000AHB2v2AH\",true,true]"
+      "signature": "delete\u0000[349511,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "ListView",
       "fullName": "Case.Casos_a_Soporte_TI",
-      "signature": "modify\u0000[338303,\"2026-10-02T17:01:46.000+0000\",\"00BVC00000AG01W2AT\",false,true]"
+      "signature": "add\u0000[338303,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ListView",
       "fullName": "Case.Mis_Reclamos_Abiertos",
-      "signature": "modify\u0000[349581,\"2026-10-03T05:30:52.000+0000\",\"00B3i000005H0uWEAS\",false,true]"
+      "signature": "add\u0000[349581,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ListView",
       "fullName": "Case.Mis_Solicitudes_Abiertas",
-      "signature": "modify\u0000[349578,\"2026-10-03T05:30:04.000+0000\",\"00B3i000005H0uXEAS\",false,true]"
+      "signature": "add\u0000[349578,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ListView",
@@ -6771,12 +6856,12 @@
     {
       "xmlName": "ListView",
       "fullName": "Case.Todas_las_reclamaciones",
-      "signature": "modify\u0000[349573,\"2026-10-03T05:28:56.000+0000\",\"00BVC00000BTVOg2AP\",false,true]"
+      "signature": "add\u0000[349573,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ListView",
       "fullName": "Case.Todas_las_solicitudes",
-      "signature": "modify\u0000[352921,\"2026-10-05T18:31:10.000+0000\",\"00B3i000005H0uYEAS\",false,true]"
+      "signature": "add\u0000[352921,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ListView",
@@ -6791,7 +6876,7 @@
     {
       "xmlName": "ListView",
       "fullName": "INT_Request__c.Todos_los_registros",
-      "signature": "modify\u0000[334183,\"2026-10-01T20:29:10.000+0000\",\"00BVC00000BRrwL2AT\",false,true]"
+      "signature": "add\u0000[334183,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ListView",
@@ -6811,22 +6896,22 @@
     {
       "xmlName": "ListView",
       "fullName": "Lead.AllOpenLeads",
-      "signature": "modify\u0000[337628,\"2026-10-02T14:16:03.000+0000\",\"00B3i000004o8ZNEAY\",false,true]"
+      "signature": "add\u0000[337628,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ListView",
       "fullName": "Lead.Prospectos_Personas_Fisica",
-      "signature": "modify\u0000[337642,\"2026-10-02T14:18:11.000+0000\",\"00BVC00000BSfJh2AL\",false,true]"
+      "signature": "add\u0000[337642,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ListView",
       "fullName": "Lead.Prospectos_Personas_Juridica",
-      "signature": "modify\u0000[337637,\"2026-10-02T14:17:32.000+0000\",\"00BVC00000BSkBF2A1\",false,true]"
+      "signature": "add\u0000[337637,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ListView",
       "fullName": "Lead.TodaysLeads",
-      "signature": "delete\u0000[337623,\"2026-10-02T14:14:37.000+0000\",\"00B3i000004o8alEAA\",true,true]"
+      "signature": "delete\u0000[337623,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "ListView",
@@ -6926,7 +7011,7 @@
     {
       "xmlName": "ListView",
       "fullName": "User.Oficales_de_Negocio",
-      "signature": "modify\u0000[334373,\"2026-10-02T03:46:05.000+0000\",\"00BVC00000BSAcP2AX\",false,true]"
+      "signature": "add\u0000[334373,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "MilestoneType",
@@ -6991,7 +7076,7 @@
     {
       "xmlName": "MilestoneType",
       "fullName": "SOL_Evaluacion",
-      "signature": "modify\u0000[331536,\"2026-09-29T02:21:17.000+0000\",\"557VC000001U9gbYAC\",false,true]"
+      "signature": "add\u0000[331536,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "MilestoneType",
@@ -7006,7 +7091,7 @@
     {
       "xmlName": "MilestoneType",
       "fullName": "SOL_Resolucion_y_Cierre",
-      "signature": "modify\u0000[281460,\"2026-09-24T16:24:29.000+0000\",\"557VC000001U9geYAC\",false,true]"
+      "signature": "add\u0000[281460,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "MilestoneType",
@@ -7047,6 +7132,11 @@
       "xmlName": "MilestoneType",
       "fullName": "Total_45_Dias",
       "signature": "add\u0000[114376,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "NamedCredential",
+      "fullName": "FSC_RlaApprovalAdmin",
+      "signature": "modify\u0000[375759,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "NavigationMenu",
@@ -7176,12 +7266,12 @@
     {
       "xmlName": "PermissionSet",
       "fullName": "FSC_VIMENCA_EDICION_360_CLIENTE",
-      "signature": "modify\u0000[331528,\"2026-09-29T00:08:26.000+0000\",\"0PSVC000001sweL4AQ\",false,true]"
+      "signature": "add\u0000[331528,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
       "fullName": "FSC_VIMENCA_GESTION_CASOS",
-      "signature": "modify\u0000[316161,\"2026-09-28T16:14:39.000+0000\",\"0PSVC000001aBKX4A2\",false,true]"
+      "signature": "add\u0000[316161,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
@@ -7306,7 +7396,7 @@
     {
       "xmlName": "PermissionSet",
       "fullName": "Reclamacion_Data_Credito_Acceso",
-      "signature": "modify\u0000[331674,\"2026-09-29T19:54:36.000+0000\",\"0PSVC000001t4dV4AQ\",false,true]"
+      "signature": "add\u0000[331674,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
@@ -7321,17 +7411,17 @@
     {
       "xmlName": "PermissionSet",
       "fullName": "VFS_Agentes",
-      "signature": "modify\u0000[339785,\"2026-10-02T22:53:04.000+0000\",\"0PSVT000000Fjfy4AC\",false,true]"
+      "signature": "add\u0000[339785,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
       "fullName": "VFS_AnalisisOps",
-      "signature": "modify\u0000[339783,\"2026-10-02T22:53:04.000+0000\",\"0PSVT000000FxEH4A0\",false,true]"
+      "signature": "add\u0000[339783,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
       "fullName": "VFS_CapturaDatosOps",
-      "signature": "modify\u0000[339796,\"2026-10-02T22:53:05.000+0000\",\"0PSVT000000FxEI4A0\",false,true]"
+      "signature": "add\u0000[339796,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
@@ -7341,37 +7431,37 @@
     {
       "xmlName": "PermissionSet",
       "fullName": "VFS_EjecucionOps",
-      "signature": "modify\u0000[339780,\"2026-10-02T22:53:04.000+0000\",\"0PSVT000000FxEJ4A0\",false,true]"
+      "signature": "add\u0000[339780,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
       "fullName": "VFS_LegalOps",
-      "signature": "modify\u0000[339791,\"2026-10-02T22:53:05.000+0000\",\"0PSVT000000FxEK4A0\",false,true]"
+      "signature": "add\u0000[339791,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
       "fullName": "VFS_MantenimientoOps",
-      "signature": "modify\u0000[339782,\"2026-10-02T22:53:04.000+0000\",\"0PSVT000000FxEL4A0\",false,true]"
+      "signature": "add\u0000[339782,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
       "fullName": "VFS_Negocios",
-      "signature": "modify\u0000[339794,\"2026-10-02T22:53:05.000+0000\",\"0PSVT000000FxEM4A0\",false,true]"
+      "signature": "add\u0000[339794,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
       "fullName": "VFS_Prevencion",
-      "signature": "modify\u0000[339777,\"2026-10-02T22:53:03.000+0000\",\"0PSVT000000FxEN4A0\",false,true]"
+      "signature": "add\u0000[339777,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
       "fullName": "VFS_ProteccionAlUsuario",
-      "signature": "modify\u0000[339787,\"2026-10-02T22:53:05.000+0000\",\"0PSVT000000FxEO4A0\",false,true]"
+      "signature": "add\u0000[339787,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
       "fullName": "VFS_ReadOnly",
-      "signature": "modify\u0000[339776,\"2026-10-02T22:53:03.000+0000\",\"0PSVT000000FxEP4A0\",false,true]"
+      "signature": "add\u0000[339776,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
@@ -7391,7 +7481,7 @@
     {
       "xmlName": "PermissionSet",
       "fullName": "sfdcInternalInt__sfdc_tua_dqa_service",
-      "signature": "modify\u0000[337651,\"2026-10-02T16:29:51.000+0000\",\"0PSVC000001q29G4AQ\",false,true]"
+      "signature": "add\u0000[337651,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
@@ -7401,17 +7491,17 @@
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "PSG_VIMENCA_BACK_OFFICE",
-      "signature": "modify\u0000[311459,\"2026-09-28T14:33:57.000+0000\",\"0PGVC0000007gSL4AY\",false,true]"
+      "signature": "add\u0000[311459,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "PSG_VIMENCA_BACK_OFFICE_MO",
-      "signature": "modify\u0000[331530,\"2026-09-29T00:08:44.000+0000\",\"0PGVC000000924D4AQ\",false,true]"
+      "signature": "add\u0000[375850,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "PSG_VIMENCA_FRONT_OFFICE",
-      "signature": "modify\u0000[311463,\"2026-09-28T14:34:07.000+0000\",\"0PGVC0000007gQj4AI\",false,true]"
+      "signature": "add\u0000[375848,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
@@ -7431,7 +7521,7 @@
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "force__CommerceUsers",
-      "signature": "modify\u0000[357378,\"2026-10-07T07:05:06.000+0000\",\"0PGVC00000078XB4AY\",false,true]"
+      "signature": "add\u0000[357378,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
@@ -7441,7 +7531,7 @@
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "force__GeneralUsers",
-      "signature": "modify\u0000[357386,\"2026-10-07T07:05:07.000+0000\",\"0PGVC00000078XH4AY\",false,true]"
+      "signature": "add\u0000[357386,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
@@ -7451,7 +7541,7 @@
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "force__MarketingUsers",
-      "signature": "modify\u0000[357382,\"2026-10-07T07:05:06.000+0000\",\"0PGVC00000078XE4AY\",false,true]"
+      "signature": "add\u0000[357382,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
@@ -7461,7 +7551,7 @@
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "force__SalesUsers",
-      "signature": "modify\u0000[357380,\"2026-10-07T07:05:06.000+0000\",\"0PGVC00000078XC4AY\",false,true]"
+      "signature": "add\u0000[357380,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
@@ -7476,7 +7566,7 @@
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "force__ServiceUsers",
-      "signature": "modify\u0000[357387,\"2026-10-07T07:05:07.000+0000\",\"0PGVC00000078XD4AY\",false,true]"
+      "signature": "add\u0000[357387,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
@@ -7496,12 +7586,12 @@
     {
       "xmlName": "Profile",
       "fullName": "Admin",
-      "signature": "modify\u0000[375745,\"2026-10-10T19:18:00.000+0000\",\"00e3i000001RR1qAAG\",false,true]"
+      "signature": "add\u0000[376122,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Advisor",
-      "signature": "modify\u0000[367042,\"2026-10-08T23:26:05.000+0000\",\"00eU7000001tk3HIAQ\",false,true]"
+      "signature": "add\u0000[367042,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -7521,7 +7611,7 @@
     {
       "xmlName": "Profile",
       "fullName": "Core",
-      "signature": "modify\u0000[367043,\"2026-10-08T23:26:05.000+0000\",\"00eDo000001AQzXIAW\",false,true]"
+      "signature": "add\u0000[367043,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -7531,12 +7621,12 @@
     {
       "xmlName": "Profile",
       "fullName": "Inteligencia de Negocio",
-      "signature": "modify\u0000[367044,\"2026-10-08T23:26:06.000+0000\",\"00e3i000000uPYvAAM\",false,true]"
+      "signature": "add\u0000[367044,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Legal",
-      "signature": "modify\u0000[367045,\"2026-10-08T23:26:06.000+0000\",\"00e3i000000EbWnAAK\",false,true]"
+      "signature": "add\u0000[367045,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -7546,32 +7636,32 @@
     {
       "xmlName": "Profile",
       "fullName": "Perfil Vimenca",
-      "signature": "modify\u0000[367046,\"2026-10-08T23:26:06.000+0000\",\"00eVT00000FcWvtYAF\",false,true]"
+      "signature": "add\u0000[376124,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Perfil Vimenca - Gerencia - TC Preembosada",
-      "signature": "modify\u0000[367048,\"2026-10-08T23:26:06.000+0000\",\"00eVC000004XDPBYA4\",false,true]"
+      "signature": "add\u0000[367048,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Perfil Vimenca - TC Negocio",
-      "signature": "modify\u0000[367049,\"2026-10-08T23:26:06.000+0000\",\"00eVC000004XDPCYA4\",false,true]"
+      "signature": "add\u0000[367049,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Perfil Vimenca - TC Preembosada",
-      "signature": "modify\u0000[367050,\"2026-10-08T23:26:07.000+0000\",\"00eVC000004XDPDYA4\",false,true]"
+      "signature": "add\u0000[367050,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Perfíl Vimenca - BO",
-      "signature": "modify\u0000[367047,\"2026-10-08T23:26:06.000+0000\",\"00eVC000004NngrYAC\",false,true]"
+      "signature": "add\u0000[367047,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Personal Banker",
-      "signature": "modify\u0000[367051,\"2026-10-08T23:26:07.000+0000\",\"00eU7000001tntxIAA\",false,true]"
+      "signature": "add\u0000[367051,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -7581,7 +7671,7 @@
     {
       "xmlName": "Profile",
       "fullName": "Read Only",
-      "signature": "modify\u0000[367052,\"2026-10-08T23:26:07.000+0000\",\"00e3i000001RR1xAAG\",false,true]"
+      "signature": "add\u0000[367052,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -7591,12 +7681,12 @@
     {
       "xmlName": "Profile",
       "fullName": "Relationship Manager",
-      "signature": "modify\u0000[367053,\"2026-10-08T23:26:07.000+0000\",\"00eU7000001to8TIAQ\",false,true]"
+      "signature": "add\u0000[367053,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Salesforce API Only System Integrations",
-      "signature": "modify\u0000[367054,\"2026-10-08T23:26:07.000+0000\",\"00eDo000000tPodIAE\",false,true]"
+      "signature": "add\u0000[367054,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -7606,7 +7696,7 @@
     {
       "xmlName": "Profile",
       "fullName": "Sólo Lectura Agente",
-      "signature": "modify\u0000[367055,\"2026-10-08T23:26:07.000+0000\",\"00e3i000000EaGcAAK\",false,true]"
+      "signature": "add\u0000[367055,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ProfilePasswordPolicy",
@@ -7627,6 +7717,11 @@
       "xmlName": "Prompt",
       "fullName": "NoticiaFSC",
       "signature": "add\u0000[171043,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Prompt",
+      "fullName": "Nueva_Busqueda_Institucional",
+      "signature": "modify\u0000[376125,\"2026-10-11T18:05:43.000+0000\",\"0bsVC000000A8fRYAS\",false,true]"
     },
     {
       "xmlName": "Queue",
@@ -7661,12 +7756,12 @@
     {
       "xmlName": "Queue",
       "fullName": "Casos_Asignacion_Manual_Reclamaciones",
-      "signature": "modify\u0000[331611,\"2026-09-29T16:21:51.000+0000\",\"00GVC00000AcZQP2A3\",false,true]"
+      "signature": "add\u0000[331611,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
       "fullName": "Casos_Asignacion_Manual_Solicitudes",
-      "signature": "modify\u0000[331612,\"2026-09-29T16:22:49.000+0000\",\"00GVC00000Aca6L2AR\",false,true]"
+      "signature": "add\u0000[331612,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
@@ -7726,7 +7821,7 @@
     {
       "xmlName": "Queue",
       "fullName": "Casos_Ejecucion_Operaciones",
-      "signature": "modify\u0000[326272,\"2026-09-28T19:29:07.000+0000\",\"00GVC000008p2zG2AQ\",false,true]"
+      "signature": "add\u0000[326272,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
@@ -7756,7 +7851,7 @@
     {
       "xmlName": "Queue",
       "fullName": "Casos_Mantenimiento_Calidad_de_Data",
-      "signature": "modify\u0000[351330,\"2026-10-03T12:49:46.000+0000\",\"00GVC00000APf3p2AD\",false,true]"
+      "signature": "add\u0000[351330,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
@@ -7776,7 +7871,7 @@
     {
       "xmlName": "Queue",
       "fullName": "Casos_Megacentro",
-      "signature": "modify\u0000[273027,\"2026-09-21T19:45:00.000+0000\",\"00GVC000008d2q92AA\",false,true]"
+      "signature": "add\u0000[273027,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
@@ -7801,7 +7896,7 @@
     {
       "xmlName": "Queue",
       "fullName": "Casos_Prevencion_de_Fraude",
-      "signature": "modify\u0000[333994,\"2026-10-01T10:40:56.000+0000\",\"00GVC00000AIqf72AD\",false,true]"
+      "signature": "add\u0000[333994,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
@@ -7821,7 +7916,7 @@
     {
       "xmlName": "Queue",
       "fullName": "Casos_Seguridad",
-      "signature": "modify\u0000[331640,\"2026-09-29T19:28:09.000+0000\",\"00G3i000001iBo7EAE\",false,true]"
+      "signature": "add\u0000[331640,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
@@ -7831,7 +7926,7 @@
     {
       "xmlName": "Queue",
       "fullName": "Casos_Tarjeta_de_Credito",
-      "signature": "modify\u0000[326270,\"2026-09-28T19:26:36.000+0000\",\"00GVC00000APesX2AT\",false,true]"
+      "signature": "add\u0000[326270,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
@@ -7856,12 +7951,12 @@
     {
       "xmlName": "Queue",
       "fullName": "Ejecucion_Operaciones",
-      "signature": "modify\u0000[326273,\"2026-09-28T19:29:39.000+0000\",\"00G3i000001iBnqEAE\",false,true]"
+      "signature": "add\u0000[326273,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
       "fullName": "FSC_Cola_Tecnologia",
-      "signature": "modify\u0000[368568,\"2026-10-10T14:10:28.000+0000\",\"00GVC00000Bhczl2AB\",false,true]"
+      "signature": "add\u0000[376078,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
@@ -7871,7 +7966,7 @@
     {
       "xmlName": "Queue",
       "fullName": "FSC_Legal",
-      "signature": "modify\u0000[333993,\"2026-10-01T10:38:08.000+0000\",\"00GVC00000A1WBN2A3\",false,true]"
+      "signature": "add\u0000[333993,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
@@ -7886,7 +7981,7 @@
     {
       "xmlName": "Queue",
       "fullName": "Gerentes_para_Firma",
-      "signature": "modify\u0000[334163,\"2026-10-01T18:40:38.000+0000\",\"00GVC00000BLjQP2A1\",false,true]"
+      "signature": "add\u0000[334163,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
@@ -8126,152 +8221,152 @@
     {
       "xmlName": "RecordType",
       "fullName": "Case.Access_Support_Agent",
-      "signature": "modify\u0000[362684,\"2026-10-07T21:52:57.000+0000\",\"012VC000003IZonYAG\",false,true]"
+      "signature": "add\u0000[362684,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.RT_Solicitud_1_1",
-      "signature": "modify\u0000[362686,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001XBwAAM\",false,true]"
+      "signature": "add\u0000[362686,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.RT_Solicitud_1_2",
-      "signature": "modify\u0000[362688,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001XBxAAM\",false,true]"
+      "signature": "add\u0000[362688,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.RT_Solicitud_2",
-      "signature": "modify\u0000[362689,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001XByAAM\",false,true]"
+      "signature": "add\u0000[362689,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.RT_Solicitud_3",
-      "signature": "modify\u0000[362687,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001XBzAAM\",false,true]"
+      "signature": "add\u0000[362687,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.RT_Solicitud_4",
-      "signature": "modify\u0000[362694,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001XC0AAM\",false,true]"
+      "signature": "add\u0000[362694,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.RT_Solicitud_5",
-      "signature": "modify\u0000[362696,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001XC1AAM\",false,true]"
+      "signature": "add\u0000[362696,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.RT_Solicitud_6",
-      "signature": "modify\u0000[362697,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001XC2AAM\",false,true]"
+      "signature": "add\u0000[362697,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.RT_Soporte_1",
-      "signature": "modify\u0000[362672,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001VacAAE\",false,true]"
+      "signature": "add\u0000[362672,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.RT_Soporte_2",
-      "signature": "modify\u0000[362673,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001VadAAE\",false,true]"
+      "signature": "add\u0000[362673,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.RT_Soporte_3",
-      "signature": "modify\u0000[362678,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001VaeAAE\",false,true]"
+      "signature": "add\u0000[362678,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.RT_Soporte_4",
-      "signature": "modify\u0000[362679,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001VafAAE\",false,true]"
+      "signature": "add\u0000[362679,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.RT_Soporte_5",
-      "signature": "modify\u0000[362675,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001VagAAE\",false,true]"
+      "signature": "add\u0000[362675,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.RT_Soporte_6",
-      "signature": "modify\u0000[362676,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001VahAAE\",false,true]"
+      "signature": "add\u0000[362676,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.RT_Soporte_7",
-      "signature": "modify\u0000[362681,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001VaiAAE\",false,true]"
+      "signature": "add\u0000[362681,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.RT_Soporte_8",
-      "signature": "modify\u0000[362682,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001VajAAE\",false,true]"
+      "signature": "add\u0000[362682,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.Reclamaciones",
-      "signature": "modify\u0000[362680,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001VakAAE\",false,true]"
+      "signature": "add\u0000[362680,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.Reclamo_Contracargo",
-      "signature": "modify\u0000[362683,\"2026-10-07T21:52:57.000+0000\",\"012VC0000039O7pYAE\",false,true]"
+      "signature": "add\u0000[362683,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.Reclamo_Contracargo_Investigacion",
-      "signature": "modify\u0000[362690,\"2026-10-07T21:52:57.000+0000\",\"012VC0000039OB3YAM\",false,true]"
+      "signature": "add\u0000[362690,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.Reclamo_Data_Credito",
-      "signature": "modify\u0000[362691,\"2026-10-07T21:52:57.000+0000\",\"012VC0000039OKjYAM\",false,true]"
+      "signature": "add\u0000[362691,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.Reclamo_Estandar",
-      "signature": "modify\u0000[362670,\"2026-10-07T21:52:56.000+0000\",\"012VC0000039O6DYAU\",false,true]"
+      "signature": "add\u0000[362670,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.Reclamo_Investigacion_Contracargo",
-      "signature": "modify\u0000[362693,\"2026-10-07T21:52:57.000+0000\",\"012VC0000039O9RYAU\",false,true]"
+      "signature": "add\u0000[362693,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.Solicitud_Activacion_Tarjeta",
-      "signature": "modify\u0000[362674,\"2026-10-07T21:52:57.000+0000\",\"012VC000003IheHYAS\",false,true]"
+      "signature": "add\u0000[362674,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.Solicitud_Analisis_5_Etapas",
-      "signature": "modify\u0000[362668,\"2026-10-07T21:52:56.000+0000\",\"012VC000003IhftYAC\",false,true]"
+      "signature": "add\u0000[362668,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.Solicitud_Evaluacion_5_Etapas",
-      "signature": "modify\u0000[362685,\"2026-10-07T21:52:57.000+0000\",\"012VC000003IhhVYAS\",false,true]"
+      "signature": "add\u0000[362685,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.Solicitud_Procesamiento_Directo",
-      "signature": "modify\u0000[362671,\"2026-10-07T21:52:56.000+0000\",\"012VC000003Ihj7YAC\",false,true]"
+      "signature": "add\u0000[362671,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.Solicitud_Seis_Etapas",
-      "signature": "modify\u0000[362669,\"2026-10-07T21:52:56.000+0000\",\"012VC000003IhfuYAC\",false,true]"
+      "signature": "add\u0000[362669,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.Solicitud_Validacion_Doble",
-      "signature": "modify\u0000[362677,\"2026-10-07T21:52:57.000+0000\",\"012VC000003IhkjYAC\",false,true]"
+      "signature": "add\u0000[362677,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.Solicitudes",
-      "signature": "modify\u0000[362695,\"2026-10-07T21:52:57.000+0000\",\"0123i0000001XC3AAM\",false,true]"
+      "signature": "add\u0000[362695,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Case.Soporte_TI",
-      "signature": "modify\u0000[362692,\"2026-10-07T21:52:57.000+0000\",\"012VC000003IgiDYAS\",false,true]"
+      "signature": "add\u0000[362692,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
@@ -8296,12 +8391,12 @@
     {
       "xmlName": "RecordType",
       "fullName": "Lead.Candidato_Persona_Juridica",
-      "signature": "modify\u0000[360181,\"2026-10-07T16:51:40.000+0000\",\"012U7000004CxGXIA0\",false,true]"
+      "signature": "add\u0000[360181,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Lead.Candidato_Persona_Natural",
-      "signature": "modify\u0000[360180,\"2026-10-07T16:51:21.000+0000\",\"012U7000004CxI9IAK\",false,true]"
+      "signature": "add\u0000[360180,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
@@ -8366,7 +8461,7 @@
     {
       "xmlName": "RelationshipGraphDefinition",
       "fullName": "Informacion_Financiera_de_Cliente",
-      "signature": "modify\u0000[272991,\"2026-09-21T16:58:12.000+0000\",\"06JU7000000GAjNMAW\",false,true]"
+      "signature": "add\u0000[272991,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RelationshipGraphDefinition",
@@ -8376,12 +8471,12 @@
     {
       "xmlName": "RelationshipGraphDefinition",
       "fullName": "Referencias",
-      "signature": "modify\u0000[358146,\"2026-10-07T16:01:40.000+0000\",\"06JVC000000iGPF2A2\",false,true]"
+      "signature": "add\u0000[358146,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RelationshipGraphDefinition",
       "fullName": "Relaciones_Persona_Juridca",
-      "signature": "modify\u0000[367759,\"2026-10-09T01:34:32.000+0000\",\"06JVC000001IBNp2AO\",false,true]"
+      "signature": "add\u0000[367759,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RemoteSiteSetting",
@@ -8401,47 +8496,47 @@
     {
       "xmlName": "Report",
       "fullName": "FSCCasos/Copia_de_FSC_Casos_Tiempo_Promedio_Qft",
-      "signature": "delete\u0000[349409,\"2026-10-03T03:30:23.000+0000\",\"00OVC000004qhcr2AA\",true,true]"
+      "signature": "delete\u0000[349409,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "Report",
       "fullName": "FSCCasos/Copia_de_FSC_Mis_Reclamos_por_Etapa_WZ4",
-      "signature": "modify\u0000[349499,\"2026-10-03T04:21:35.000+0000\",\"00OVC000004qiKP2AY\",false,true]"
+      "signature": "add\u0000[349499,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Report",
       "fullName": "FSCCasos/FSC_Casos_Tendencia_WJp",
-      "signature": "modify\u0000[341240,\"2026-10-02T23:28:39.000+0000\",\"00OVC000004qh6b2AA\",false,true]"
+      "signature": "add\u0000[341240,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Report",
       "fullName": "FSCCasos/FSC_Casos_Tiempo_Promedio_Casos",
-      "signature": "modify\u0000[349500,\"2026-10-03T04:24:21.000+0000\",\"00OVC000004qhxp2AA\",false,true]"
+      "signature": "add\u0000[349500,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Report",
       "fullName": "FSCCasos/FSC_Casos_Volumetria_sbK",
-      "signature": "modify\u0000[342272,\"2026-10-02T23:49:10.000+0000\",\"00OVC000004qhHt2AI\",false,true]"
+      "signature": "add\u0000[342272,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Report",
       "fullName": "FSCCasos/FSC_Mis_Casos_Abiertos_Volumetria_1ao",
-      "signature": "modify\u0000[349329,\"2026-10-03T01:03:59.000+0000\",\"00OVC000004qhbF2AQ\",false,true]"
+      "signature": "add\u0000[349329,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Report",
       "fullName": "FSCCasos/FSC_Mis_Casos_por_Etapa_S3K",
-      "signature": "modify\u0000[349498,\"2026-10-03T04:21:04.000+0000\",\"00OVC000004qiIn2AI\",false,true]"
+      "signature": "add\u0000[349498,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Report",
       "fullName": "FSCCasos/Reporte_Contracargo_Asuntos_y_Propieta_acz",
-      "signature": "add\u0000[351337,\"2026-10-03T17:09:51.000+0000\",\"00OVC000004q4wT2AQ\",false,false]"
+      "signature": "add\u0000[351337,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Report",
       "fullName": "FSCCasos/Reporte_Contracargo_SIs",
-      "signature": "add\u0000[351335,\"2026-10-03T17:09:39.000+0000\",\"00OVC000004p8Iz2AI\",false,false]"
+      "signature": "add\u0000[351335,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Report",
@@ -8486,22 +8581,22 @@
     {
       "xmlName": "Report",
       "fullName": "unfiled$public/PU01_RECLAMACIONES_DE_USUARIOS_V3_uYf",
-      "signature": "modify\u0000[334006,\"2026-10-01T14:43:47.000+0000\",\"00ODo000000rJ5ZMAU\",false,true]"
+      "signature": "add\u0000[334006,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Report",
       "fullName": "unfiled$public/Reporte_Contracargo_Asuntos_y_Propieta_acz",
-      "signature": "delete\u0000[351336,\"2026-10-03T17:09:51.000+0000\",\"00OVC000004q4wT2AQ\",true,true]"
+      "signature": "delete\u0000[351336,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "Report",
       "fullName": "unfiled$public/Reporte_Contracargo_SIs",
-      "signature": "delete\u0000[351334,\"2026-10-03T17:09:39.000+0000\",\"00OVC000004p8Iz2AI\",true,true]"
+      "signature": "delete\u0000[351334,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "ReportFolder",
       "fullName": "FSCCasos",
-      "signature": "modify\u0000[349407,\"2026-10-03T03:06:07.000+0000\",\"00lVC00000369enYAA\",false,true]"
+      "signature": "add\u0000[349407,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ReportFolder",
@@ -8571,7 +8666,7 @@
     {
       "xmlName": "Settings",
       "fullName": "Security",
-      "signature": "modify\u0000[333951,\"2026-09-30T18:32:30.000+0000\",\"Security\",false,true]"
+      "signature": "add\u0000[333951,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "StandardValueSet",
@@ -8586,12 +8681,12 @@
     {
       "xmlName": "StandardValueSet",
       "fullName": "CaseStatus",
-      "signature": "modify\u0000[274539,\"2026-09-23T17:31:59.000+0000\",\"CaseStatus\",false,true]"
+      "signature": "add\u0000[274539,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "StandardValueSet",
       "fullName": "CaseType",
-      "signature": "modify\u0000[338694,\"2026-10-02T21:04:42.000+0000\",\"CaseType\",false,true]"
+      "signature": "add\u0000[338694,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "StandardValueSet",
@@ -8607,6 +8702,21 @@
       "xmlName": "StaticResource",
       "fullName": "FSCPymeEditBlockStyles",
       "signature": "delete\u0000[227990,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "StaticResource",
+      "fullName": "FSC_FuenteArialNarrow",
+      "signature": "delete\u0000[375967,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "StaticResource",
+      "fullName": "FSC_TmpFontN",
+      "signature": "delete\u0000[375969,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "StaticResource",
+      "fullName": "FSC_TmpSello",
+      "signature": "delete\u0000[375968,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "StaticResource",
@@ -8626,12 +8736,12 @@
     {
       "xmlName": "Translations",
       "fullName": "es",
-      "signature": "modify\u0000[339102,\"2026-10-02T21:35:56.000+0000\",\"01h3i00000003wNAAQ\",false,true]"
+      "signature": "add\u0000[339102,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
       "fullName": "Case.CAS_Limites_Aprobados_Procesamiento",
-      "signature": "modify\u0000[351295,\"2026-10-03T10:55:28.000+0000\",\"03dVC000001iUWTYA2\",false,true]"
+      "signature": "add\u0000[351295,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -8641,7 +8751,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Case.VR_Case_Description_Max_200",
-      "signature": "modify\u0000[310348,\"2026-09-28T13:28:17.000+0000\",\"03dVC000001iLubYAE\",false,true]"
+      "signature": "add\u0000[310348,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -8661,7 +8771,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Case.Validar_Transaccion_No_Reconoce_Cargo",
-      "signature": "delete\u0000[273372,\"2026-09-21T22:58:54.000+0000\",\"03dVC000001hM7xYAE\",true,true]"
+      "signature": "delete\u0000[273372,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -8711,7 +8821,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Campos_Sin_DEFINIR",
-      "signature": "add\u0000[290319,\"2026-09-27T14:42:52.000+0000\",\"03dVC000001i9obYAA\",false,false]"
+      "signature": "add\u0000[290319,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -8840,18 +8950,23 @@
     },
     {
       "xmlName": "ValidationRule",
+      "fullName": "Lead.VR_LEAD_BloqueoConversionLeadConCIF",
+      "signature": "add\u0000[376115,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Lead_NumIdentificacion_Requerido_PF",
       "signature": "add\u0000[101567,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Lead_PF_BloqueoCamposIdentidad",
-      "signature": "modify\u0000[368569,\"2026-10-10T14:10:28.000+0000\",\"03dVC000001kA0bYAE\",false,true]"
+      "signature": "add\u0000[376079,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Lead_PJ_BloqueoCamposIdentidad",
-      "signature": "modify\u0000[368570,\"2026-10-10T14:10:28.000+0000\",\"03dVC000001kA0cYAE\",false,true]"
+      "signature": "add\u0000[376080,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -8861,7 +8976,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Lead_Vinculacion_Prevencion_Conversio",
-      "signature": "delete\u0000[273019,\"2026-09-21T17:50:21.000+0000\",\"03dVC000001hF9hYAE\",true,true]"
+      "signature": "delete\u0000[273019,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -8886,7 +9001,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Precalificacion",
-      "signature": "modify\u0000[352936,\"2026-10-05T21:31:17.000+0000\",\"03dVC000001IDB7YAO\",false,true]"
+      "signature": "add\u0000[352936,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -8911,7 +9026,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Telefono1_Telefonica",
-      "signature": "modify\u0000[352935,\"2026-10-05T21:13:29.000+0000\",\"03dVC000001jcwbYAA\",false,true]"
+      "signature": "add\u0000[352935,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -8921,7 +9036,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Telefono2_Telefonica",
-      "signature": "modify\u0000[352933,\"2026-10-05T20:46:14.000+0000\",\"03dVC000001jcwcYAA\",false,true]"
+      "signature": "add\u0000[352933,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -8931,7 +9046,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Telefono3_Telefonica",
-      "signature": "modify\u0000[352934,\"2026-10-05T20:46:14.000+0000\",\"03dVC000001jcwdYAA\",false,true]"
+      "signature": "add\u0000[352934,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -8941,12 +9056,12 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Via_de_contacto_en_Prospecto",
-      "signature": "modify\u0000[366318,\"2026-10-08T22:42:36.000+0000\",\"03dVC000001IfddYAC\",false,true]"
+      "signature": "add\u0000[366318,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_VinculacionyPrevencion",
-      "signature": "add\u0000[290320,\"2026-09-27T14:46:08.000+0000\",\"03dVC000001i9qDYAQ\",false,false]"
+      "signature": "add\u0000[290320,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -8991,12 +9106,12 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "User.Validar_Campos_Obligatorios_Usuario",
-      "signature": "add\u0000[281498,\"2026-09-25T02:07:43.000+0000\",\"03dVC000001hwGHYAY\",false,false]"
+      "signature": "add\u0000[281498,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Workflow",
       "fullName": "Account",
-      "signature": "modify\u0000[354537,\"2026-10-06T20:22:17.000+0000\",\"Account\",false,true]"
+      "signature": "add\u0000[354537,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Workflow",
@@ -9006,7 +9121,7 @@
     {
       "xmlName": "Workflow",
       "fullName": "Lead",
-      "signature": "modify\u0000[368575,\"2026-10-10T14:10:28.000+0000\",\"Lead\",false,true]"
+      "signature": "modify\u0000[376081,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Workflow",

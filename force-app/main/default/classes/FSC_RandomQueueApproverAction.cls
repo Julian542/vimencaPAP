@@ -106,8 +106,7 @@ public without sharing class FSC_RandomQueueApproverAction {
         return selectRandomUserId(leastLoadedUserIds);
     }
 
-    @TestVisible
-    private static Set<Id> collectCandidatePrincipalIds(Id rootGroupId) {
+    public static Set<Id> collectCandidatePrincipalIds(Id rootGroupId) {
         Set<Id> candidatePrincipalIds = new Set<Id>();
         Set<Id> visitedGroupIds = new Set<Id>{ rootGroupId };
         Set<Id> groupsToProcess = new Set<Id>{ rootGroupId };

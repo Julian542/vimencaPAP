@@ -53,7 +53,9 @@ public virtual without sharing class FSC_ContratoHipotecarioCompraBaseCtrl exten
         public String periodoTasaFijaNumero { get; set; }
         public Boolean tieneGaranteReal { get; set; }
         public Boolean tieneConyugeInterviniente { get; set; }
-        public String denominacionPropietariosGarantia { get; set; }
+        /** Quien hipoteca el inmueble: los garantes reales o, si no hay, el propio deudor. */
+        public FSC_ContratoParte propietariosGarantia { get; set; }
+        public FSC_ContratoParte conyugeParte { get; set; }
         public String prestatariosGenerales { get; set; }
         public String garantesGenerales { get; set; }
         public String conyugeGenerales { get; set; }
@@ -96,7 +98,8 @@ public virtual without sharing class FSC_ContratoHipotecarioCompraBaseCtrl exten
                 datos.clienteIdentificacion,
                 datos.clienteNacionalidad,
                 datos.clienteEstadoCivil,
-                datos.clienteDomicilio
+                datos.clienteDomicilio,
+                datos.clienteSexo
             )
         };
         List<FSC_ContratoIntervinienteService.Interviniente> coBorrowers = FSC_ContratoIntervinienteService.getApplicants(
@@ -128,12 +131,21 @@ public virtual without sharing class FSC_ContratoHipotecarioCompraBaseCtrl exten
             )
             : new List<FSC_ContratoIntervinienteService.Interviniente>();
         item.garantesGenerales = FSC_ContratoIntervinienteService.joinGenerales(item.garantesReales);
-        item.denominacionPropietariosGarantia = item.tieneGaranteReal ? 'LOS COMPRADORES - GARANTES REALES' : 'EL CLIENTE';
+        deudor = FSC_ContratoParte.crear(
+            'PRESTATARIO - COMPRADOR',
+            FSC_ContratoIntervinienteService.sexes(item.prestatarios),
+            !datos.esPersonaFisica
+        );
+        sujetoGeneral = deudor;
+        item.propietariosGarantia = item.tieneGaranteReal
+            ? FSC_ContratoParte.crear('COMPRADOR - GARANTE REAL', FSC_ContratoIntervinienteService.sexes(item.garantesReales), false)
+            : deudor;
         item.tieneConyugeInterviniente = value(intervenerValues, 'hipotecarioConyugeInterviniente') == 'Sí';
         item.conyuge = item.tieneConyugeInterviniente
             ? FSC_ContratoIntervinienteService.getConyuge(rla.AccountId, intervenerValues)
             : null;
         item.conyugeGenerales = item.conyuge == null ? '' : item.conyuge.generales;
+        item.conyugeParte = FSC_ContratoParte.crear('CÓNYUGE - INTERVINIENTE', item.conyuge == null ? null : item.conyuge.sexo, false);
         item.vendedorNombre = value(values, 'hipotecarioVendedorNombre');
         item.vendedorRnc = value(values, 'hipotecarioVendedorRnc');
         item.vendedorRegistroMercantil = value(values, 'hipotecarioVendedorRegistroMercantil');

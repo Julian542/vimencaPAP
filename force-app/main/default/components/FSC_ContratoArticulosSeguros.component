@@ -1,0 +1,211 @@
+<apex:component layout="none">
+	<apex:attribute name="propietario" type="FSC_ContratoParte" required="true" description="Quien asegura el bien dado en garantía." />
+	<apex:attribute name="asegurado" type="FSC_ContratoParte" required="true" description="Deudor que contrata el seguro de vida." />
+	<apex:attribute name="propiedad" type="FSC_ContratoSeguro" required="true" description="Seguro de incendio o de vehículo." />
+	<apex:attribute name="vida" type="FSC_ContratoSeguro" required="true" description="Seguro de vida." />
+
+	<!-- Seguro de incendio, póliza colectiva de EL BANCO -->
+	<apex:outputPanel layout="none" rendered="{!AND(propiedad.aplica, propiedad.esIncendio, NOT(propiedad.endosado))}">
+		<p class="paragraph">
+			<span class="articulo"></span>SEGURO DE PROPIEDAD INCENDIO. Dentro del listado de compañías aseguradoras aprobadas por EL BANCO (que
+			siempre contará con un mínimo de tres (3) compañías), {!propietario.nombre} ha{!propietario.n} decidido contratar un seguro de
+			protección a la propiedad, del cual EL BANCO es beneficiario irrevocable, conforme a la póliza No. {!propiedad.poliza}, expedida por
+			{!propiedad.aseguradora}, ubicada en {!propiedad.direccion}, quedando EL BANCO obligado a entregar a {!propietario.nombre} los
+			documentos relativos a la contratación de la póliza y su cobertura. {!propietario.nombre} se compromete{!propietario.n} a pagar
+			conjuntamente con las cuotas de capital e intereses, las cuotas correspondientes a la prima de seguro antes mencionada, la cual
+			endosa{!propietario.n} a favor de EL BANCO bajo las siguientes condiciones: a) Será por el presente contrato y será correspondiente al
+			valor de las mejoras asegurables; b) Los riesgos cubiertos bajo la póliza son incendio y/o rayo, daños físicos e incendio a
+			consecuencia de explosión, terremoto y/o temblor de tierra, ciclón y daños por agua a consecuencia de ciclón, cuya cobertura entrará en
+			vigor a partir de la firma del presente contrato; c) La prima mensual a pagar será por la suma de {!propiedad.primaLetras}
+			({!propiedad.simboloMoneda}{!propiedad.primaNumero}), durante la vigencia del presente contrato y en caso de incumplimiento de esta
+			obligación {!propietario.nombre} perderá{!propietario.n} el beneficio de los plazos acordados y en consecuencia, toda la porción del
+			capital adeudado y los intereses, serán inmediatamente exigibles.
+		</p>
+		<p class="paragraph">
+			PÁRRAFO I: La póliza de seguro que {!propietario.nombre} suscriba{!propietario.n} a tales fines, podrá ser aumentada por EL BANCO si
+			en cualquier momento durante la vigencia de la póliza de seguros contratada, la compañía aseguradora decide aumentar la prima de seguro
+			por cualquier causa justificada, previa notificación por escrito o por cualquier medio fehaciente a {!propietario.nombre} antes de su
+			aplicación, con treinta (30) días calendario de anticipación.
+		</p>
+		<p class="paragraph">
+			PÁRRAFO II: {!propietario.nombre} mientras sea{!propietario.n} {!propietario.deudor} de EL BANCO se obliga{!propietario.n} a mantener
+			la póliza de seguro vigente por renovaciones sucesivas, en el entendido de que si dejare{!propietario.n} de hacerlo EL BANCO estará
+			autorizado, sin estar obligado, a hacer dicha renovación por cuenta de {!propietario.nombre}, en cuyo caso {!propietario.le}
+			notificará sobre la renovación realizada, debiendo {!propietario.nombre} cancelar los avances en que incurra EL BANCO por dicho
+			concepto, antes del próximo vencimiento de los intereses convencionales establecidos en el presente contrato. Las sumas que EL BANCO
+			avance por tal concepto, estarán avaladas por la garantía descrita en este acto, acordando que las sumas que por este concepto avance
+			EL BANCO devengarán intereses de acuerdo con la tasa vigente en el mercado, los cuales serán exigibles a opción de EL BANCO.
+		</p>
+		<p class="paragraph">
+			PÁRRAFO III: En caso de que se produjera un siniestro {!propietario.nombre} deberá{!propietario.n} comunicarlo inmediatamente por
+			escrito a EL BANCO dentro de las veinticuatro (24) horas subsiguientes; evaluados los daños reales, el importe será pagado directamente
+			a EL BANCO y se destinará en primer lugar a la cancelación del préstamo, entendiéndose, asimismo, que en caso de insuficiencia del valor
+			percibido para cancelar la totalidad del crédito, EL BANCO podrá perseguir el pago del saldo vencido y exigible a su elección.
+		</p>
+		<p class="paragraph">
+			PÁRRAFO IV: En caso de presentarse, durante el curso del préstamo, una situación ajena a EL BANCO y a {!propietario.nombre} que afecte
+			la póliza de seguro contratada, por lo cual EL BANCO tenga que contratar los servicios de otra compañía de seguros, EL BANCO y
+			{!propietario.nombre} evaluarán y contratarán la póliza de la compañía aseguradora más conveniente dentro del mercado.
+		</p>
+	</apex:outputPanel>
+
+	<!-- Seguro de incendio endosado a EL BANCO -->
+	<apex:outputPanel layout="none" rendered="{!AND(propiedad.aplica, propiedad.esIncendio, propiedad.endosado)}">
+		<p class="paragraph">
+			<span class="articulo"></span>SEGURO DE PROPIEDAD INCENDIO. {!propietario.nombre} cede{!propietario.n} y endosa{!propietario.n} a
+			favor de EL BANCO el cual acepta en calidad de beneficiario irrevocable, la Póliza de Seguro No. {!propiedad.poliza}, que ampara el
+			inmueble puesto en garantía mediante este contrato, los riesgos cubiertos bajo esta póliza son: incendio y/o rayo, daños físicos e
+			incendio a consecuencia de explosión, terremoto y/o temblor de tierra, ciclón y daños por agua a consecuencia de ciclón contra daños a
+			la propiedad ajena, expedida por {!propiedad.aseguradora}, ubicada en {!propiedad.direccion}, cuyos beneficios han sido cedidos a favor
+			de EL BANCO, mediante el endoso de cesión de derechos de fecha {!propiedad.fechaEndoso}, hasta la suma de {!propiedad.montoLetras}
+			({!propiedad.simboloMoneda}{!propiedad.montoNumero}). Asimismo, {!propietario.nombre} autoriza{!propietario.n} a cualquier compañía de
+			seguros que en el futuro tenga asegurado el inmueble objeto del presente contrato a pagar directamente a EL BANCO las reclamaciones que
+			pudieren surgir, previa notificación a la compañía cedida.
+		</p>
+		<p class="paragraph">
+			PÁRRAFO I. VIGENCIA DE LA PÓLIZA. Queda expresamente convenido entre las partes que el seguro indicado en este Artículo es contratado
+			solamente por un período de tiempo igual a la vigencia del contrato de préstamo. {!propietario.nombre} se obliga{!propietario.n} a
+			mantener en vigor por renovaciones sucesivas y mientras sea{!propietario.n} {!propietario.deudor} de EL BANCO la póliza de seguro, en el
+			entendido de que si dejare{!propietario.n} de renovarla EL BANCO estará autorizado, sin estar obligado, a hacer dicha renovación por
+			cuenta de {!propietario.nombre} o contratar una nueva póliza de seguro con una compañía distinta, debiendo {!propietario.nombre}
+			cancelar los avances en que incurra EL BANCO antes del próximo vencimiento de los intereses convencionales establecidos en el presente
+			contrato, acordando que las sumas que por este concepto avance EL BANCO devengarán intereses a la tasa vigente en el mercado y serán
+			exigibles a opción de EL BANCO. Las sumas que EL BANCO avance por tal concepto, estarán avaladas por la garantía descrita en este acto.
+			En caso de que se produjera un siniestro, EL BANCO aplicará el monto del seguro a los intereses, al capital y demás gastos
+			correspondientes al préstamo concedido. EL BANCO reembolsará a {!propietario.nombre} cualquier diferencia que existiere a su favor.
+		</p>
+		<p class="paragraph">
+			PÁRRAFO II. En caso de presentarse, durante el curso del préstamo, una situación ajena a EL BANCO y {!propietario.nombre} que afecte
+			la póliza de seguro contratada, por lo cual EL BANCO tenga que contratar los servicios de otra compañía de seguros, EL BANCO y
+			{!propietario.nombre} evaluarán y contratarán la póliza de la compañía aseguradora más conveniente dentro del mercado.
+		</p>
+	</apex:outputPanel>
+
+	<!-- Seguro de vehículo full 100% comprensivo, póliza colectiva de EL BANCO -->
+	<apex:outputPanel layout="none" rendered="{!AND(propiedad.aplica, propiedad.esVehiculo, NOT(propiedad.endosado))}">
+		<p class="paragraph">
+			<span class="articulo"></span>SEGURO DE PROPIEDAD VEHÍCULO. Dentro del listado de compañías aseguradoras aprobadas por EL BANCO (que
+			siempre contará con un mínimo de tres (3) compañías), {!propietario.nombre} ha{!propietario.n} decidido contratar un seguro de
+			protección a la propiedad, del cual EL BANCO es beneficiario irrevocable, conforme a la póliza No. {!propiedad.poliza}, que ampara el
+			vehículo puesto en garantía mediante este contrato de préstamo, contra daños a la propiedad ajena, lesiones corporales o muertes a una
+			o más personas, colisión y volcadura, responsabilidad civil de uno o más pasajeros, accidentes personales, gastos médicos del
+			conductor, riesgos comprensivos (100%) y fianza judicial, expedida por {!propiedad.aseguradora}, ubicada en {!propiedad.direccion},
+			quedando EL BANCO obligado a entregar a {!propietario.nombre} los documentos relativos a la contratación de la póliza y su cobertura.
+		</p>
+		<p class="paragraph">
+			PÁRRAFO I: La póliza de seguro será pagada por {!propietario.nombre} conjuntamente con las cuotas de capital e intereses, mediante
+			cuotas mensuales por la suma de {!propiedad.primaLetras} ({!propiedad.simboloMoneda}{!propiedad.primaNumero}), durante la vigencia del
+			préstamo, y en caso de incumplimiento de esta obligación {!propietario.nombre} perderá{!propietario.n} el beneficio de los plazos
+			acordados. La póliza de seguro podrá ser aumentada por EL BANCO si en cualquier momento durante su vigencia la compañía aseguradora
+			decide aumentar la prima por cualquier causa justificada, previa notificación por escrito o por cualquier medio fehaciente a
+			{!propietario.nombre} antes de su aplicación, con treinta (30) días calendario de anticipación.
+		</p>
+		<p class="paragraph">
+			PÁRRAFO II. VIGENCIA DE LA PÓLIZA. Queda expresamente convenido entre las partes que el seguro indicado en este Artículo es contratado
+			solamente por un período de tiempo igual a la vigencia del contrato de préstamo. {!propietario.nombre} se obliga{!propietario.n} a
+			mantener en vigor por renovaciones sucesivas y mientras sea{!propietario.n} {!propietario.deudor} de EL BANCO la póliza de seguro, en el
+			entendido de que si dejare{!propietario.n} de renovarla EL BANCO estará autorizado, sin estar obligado, a hacer dicha renovación por
+			cuenta de {!propietario.nombre} o contratar una nueva póliza de seguro con una compañía distinta, debiendo {!propietario.nombre}
+			cancelar los avances en que incurra EL BANCO antes del próximo vencimiento de los intereses convencionales establecidos en el presente
+			contrato, acordando que las sumas que por este concepto avance EL BANCO devengarán intereses a la tasa vigente en el mercado y serán
+			exigibles a opción de EL BANCO. Las sumas que EL BANCO avance por tal concepto, estarán avaladas por la garantía descrita en este acto.
+			En caso de que se produjera un siniestro, EL BANCO aplicará el monto del seguro a los intereses, al capital y demás gastos
+			correspondientes al préstamo concedido. EL BANCO reembolsará a {!propietario.nombre} cualquier diferencia que existiere a su favor.
+		</p>
+		<p class="paragraph">
+			PÁRRAFO III. En caso de presentarse, durante el curso del préstamo, una situación ajena a EL BANCO y {!propietario.nombre} que afecte
+			la póliza de seguro contratada, por lo cual EL BANCO tenga que contratar los servicios de otra compañía de seguros, EL BANCO y
+			{!propietario.nombre} evaluarán y contratarán la póliza de la compañía aseguradora más conveniente dentro del mercado.
+		</p>
+	</apex:outputPanel>
+
+	<!-- Seguro de vehículo endosado a EL BANCO -->
+	<apex:outputPanel layout="none" rendered="{!AND(propiedad.aplica, propiedad.esVehiculo, propiedad.endosado)}">
+		<p class="paragraph">
+			<span class="articulo"></span>SEGURO DE PROPIEDAD VEHÍCULO. {!propietario.nombre} cede{!propietario.n} y endosa{!propietario.n} a
+			favor de EL BANCO el cual acepta en calidad de beneficiario irrevocable, la Póliza de Seguro No. {!propiedad.poliza}, que ampara el
+			vehículo puesto en garantía mediante este contrato de préstamo, contra daños a la propiedad ajena, lesiones corporales o muertes a una
+			o más personas, colisión y volcadura, responsabilidad civil de uno o más pasajeros, accidentes personales, gastos médicos del
+			conductor, riesgos comprensivos (100%) y fianza judicial, expedida por {!propiedad.aseguradora}, ubicada en {!propiedad.direccion},
+			cuyos beneficios han sido cedidos a favor de EL BANCO, mediante el Endoso de Cesión de Derechos de fecha {!propiedad.fechaEndoso},
+			hasta la suma de {!propiedad.montoLetras} ({!propiedad.simboloMoneda}{!propiedad.montoNumero}). Asimismo, {!propietario.nombre}
+			autoriza{!propietario.n} a cualquier compañía de seguros que en el futuro tenga asegurado el vehículo objeto del presente contrato a
+			pagar directamente a EL BANCO las reclamaciones que pudieren surgir, previa notificación a la compañía cedida.
+		</p>
+		<p class="paragraph">
+			PÁRRAFO I. VIGENCIA DE LA PÓLIZA. Queda expresamente convenido entre las partes que el seguro indicado en este Artículo es contratado
+			solamente por un período de tiempo igual a la vigencia del contrato de préstamo. {!propietario.nombre} se obliga{!propietario.n} a
+			mantener en vigor por renovaciones sucesivas y mientras sea{!propietario.n} {!propietario.deudor} de EL BANCO la póliza de seguro, en el
+			entendido de que si dejare{!propietario.n} de renovarla EL BANCO estará autorizado, sin estar obligado, a hacer dicha renovación por
+			cuenta de {!propietario.nombre} o contratar una nueva póliza de seguro con una compañía distinta, debiendo {!propietario.nombre}
+			cancelar los avances en que incurra EL BANCO antes del próximo vencimiento de los intereses convencionales establecidos en el presente
+			contrato, acordando que las sumas que por este concepto avance EL BANCO devengarán intereses a la tasa vigente en el mercado y serán
+			exigibles a opción de EL BANCO. Las sumas que EL BANCO avance por tal concepto, estarán avaladas por la garantía descrita en este acto.
+			En caso de que se produjera un siniestro, EL BANCO aplicará el monto del seguro a los intereses, al capital y demás gastos
+			correspondientes al préstamo concedido. EL BANCO reembolsará a {!propietario.nombre} cualquier diferencia que existiere a su favor.
+		</p>
+		<p class="paragraph">
+			PÁRRAFO II. En caso de presentarse, durante el curso del préstamo, una situación ajena a EL BANCO y {!propietario.nombre} que afecte
+			la póliza de seguro contratada, por lo cual EL BANCO tenga que contratar los servicios de otra compañía de seguros, EL BANCO y
+			{!propietario.nombre} evaluarán y contratarán la póliza de la compañía aseguradora más conveniente dentro del mercado.
+		</p>
+	</apex:outputPanel>
+
+	<!-- Seguro de vida, póliza colectiva de EL BANCO -->
+	<apex:outputPanel layout="none" rendered="{!AND(vida.aplica, NOT(vida.endosado))}">
+		<p class="paragraph">
+			<span class="articulo"></span>SEGURO DE VIDA. Dentro del listado de compañías aseguradoras aprobadas por EL BANCO (que siempre contará
+			con un mínimo de tres (3) compañías), {!asegurado.nombre} ha{!asegurado.n} decidido contratar un seguro de vida, del cual EL BANCO es
+			beneficiario irrevocable, conforme a la póliza No. {!vida.poliza}, expedida por {!vida.aseguradora}, ubicada en {!vida.direccion},
+			quedando EL BANCO obligado a entregar a {!asegurado.nombre} los documentos relativos a la contratación de la póliza y su cobertura.
+			{!asegurado.nombre} se compromete{!asegurado.n} a pagar juntamente con las cuotas de capital e intereses, las cuotas correspondientes a
+			la prima de seguro antes mencionada, la cual endosa{!asegurado.n} a favor de EL BANCO bajo la siguiente condición: Será por el término
+			del presente contrato, la cual será renovada anualmente y correspondiente al monto del préstamo.
+		</p>
+		<p class="paragraph">
+			PÁRRAFO I: La póliza de seguro será pagada por {!asegurado.nombre} mediante {!vida.cuotasLetras} ({!vida.cuotasNumero}) cuotas
+			mensuales, iguales y consecutivas, por la suma de {!vida.primaLetras} ({!vida.simboloMoneda}{!vida.primaNumero}), y en caso de
+			incumplimiento de esta obligación {!asegurado.nombre} perderá{!asegurado.n} el beneficio de los plazos acordados y, en consecuencia,
+			toda la porción del capital adeudado y de los intereses, serán inmediatamente exigibles. La póliza de seguro que {!asegurado.nombre}
+			suscriba{!asegurado.n} a tales fines podrá ser aumentada por EL BANCO si en cualquier momento durante la vigencia de la póliza de
+			seguros contratada, la compañía aseguradora decide aumentar la prima de seguros por cualquier causa justificada, previa notificación por
+			escrito o por cualquier medio fehaciente a {!asegurado.nombre} antes de su aplicación, con treinta (30) días calendario de anticipación.
+		</p>
+		<p class="paragraph">
+			PÁRRAFO II: {!asegurado.nombre} mientras sea{!asegurado.n} {!asegurado.deudor} de EL BANCO se obliga{!asegurado.n} a pagar los
+			valores correspondientes a las renovaciones de la póliza de seguros, en el entendido de que si dejare{!asegurado.n} de hacerlo EL BANCO
+			estará autorizado, sin estar obligado, a hacer dicha renovación por cuenta de {!asegurado.nombre}, en cuyo caso {!asegurado.le}
+			notificará sobre la renovación realizada, debiendo {!asegurado.nombre} cancelar los avances en que incurra EL BANCO por dicho concepto,
+			antes del próximo vencimiento de los intereses convencionales establecidos en el presente contrato. Las sumas que EL BANCO avance por tal
+			concepto, devengarán intereses de acuerdo con la tasa vigente en el mercado, los cuales serán exigibles a opción de EL BANCO.
+		</p>
+		<p class="paragraph">
+			PÁRRAFO III: En caso de presentarse, durante el curso del préstamo, una situación ajena a EL BANCO y {!asegurado.nombre} que afecte la
+			póliza de seguro contratada, por lo cual EL BANCO tenga que contratar los servicios de otra compañía de seguros, EL BANCO y
+			{!asegurado.nombre} evaluarán y contratarán la póliza de la compañía aseguradora más conveniente dentro del mercado, quedando EL BANCO
+			obligado a entregar a {!asegurado.nombre} los documentos relativos a la contratación de la póliza y su cobertura.
+		</p>
+	</apex:outputPanel>
+
+	<!-- Seguro de vida endosado a EL BANCO -->
+	<apex:outputPanel layout="none" rendered="{!AND(vida.aplica, vida.endosado)}">
+		<p class="paragraph">
+			<span class="articulo"></span>SEGURO DE VIDA. {!asegurado.nombre} mediante el presente acto cede{!asegurado.n} y
+			endosa{!asegurado.n} a favor de EL BANCO el cual acepta en calidad de beneficiario irrevocable, la Póliza de Seguro de Vida No.
+			{!vida.poliza}, expedida por {!vida.aseguradora}, ubicada en {!vida.direccion}, cuyos beneficios han sido cedidos a favor de EL BANCO,
+			mediante el endoso de cesión de derechos de fecha {!vida.fechaEndoso}, hasta la suma de {!vida.montoLetras}
+			({!vida.simboloMoneda}{!vida.montoNumero}). Asimismo, {!asegurado.nombre} autoriza{!asegurado.n} a cualquier compañía de seguros que en
+			el futuro tenga el seguro de vida objeto del presente contrato a pagar directamente a EL BANCO las reclamaciones que pudieren surgir,
+			previa notificación a la compañía cedida.
+		</p>
+		<p class="paragraph">
+			PÁRRAFO I: Queda expresamente convenido entre las partes que la póliza de seguro de vida, indicada en este Artículo es contratada
+			solamente por un período de tiempo igual a la vigencia del contrato de préstamo.
+		</p>
+		<p class="paragraph">
+			PÁRRAFO II: En caso de presentarse, durante el curso del préstamo, una situación ajena a EL BANCO y a {!asegurado.nombre} que afecte la
+			póliza de seguro contratada, por lo cual EL BANCO tenga que contratar los servicios de otra compañía de seguros, EL BANCO y
+			{!asegurado.nombre} evaluarán y contratarán la póliza de la compañía aseguradora más conveniente dentro del mercado.
+		</p>
+	</apex:outputPanel>
+</apex:component>

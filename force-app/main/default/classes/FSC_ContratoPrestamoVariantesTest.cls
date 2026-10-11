@@ -56,7 +56,11 @@ private class FSC_ContratoPrestamoVariantesTest {
 		Map<String, Object> interveners = new Map<String, Object>{
 			'codeudor_0_domicilio' => 'Santo Domingo',
 			'garanteContrato_0_domicilio' => 'Santo Domingo',
-			'garanteContrato_1_domicilio' => 'Santiago'
+			'garanteContrato_1_domicilio' => 'Santiago',
+			'representanteSexo' => 'Masculino',
+			'codeudor_0_sexo' => 'Femenino',
+			'garanteContrato_0_sexo' => 'Femenino',
+			'garanteContrato_1_sexo' => 'Femenino'
 		};
 		update new ResidentialLoanApplication(
 			Id = rla.Id,
@@ -123,5 +127,13 @@ private class FSC_ContratoPrestamoVariantesTest {
 		System.assertEquals(true, controller.vehiculo.tieneGaranteMobiliario);
 		System.assertEquals(2, controller.vehiculo.garantes.size());
 		System.assert(!String.isBlank(controller.vehiculo.nombresFirmantesNotario));
+		// Empresa con codeudora: plural masculino; dos garantes mujeres: plural femenino.
+		System.assertEquals('LOS PRESTATARIOS', controller.deudor.nombre);
+		System.assertEquals('LAS GARANTES MOBILIARIAS', controller.garante.nombre);
+		System.assertEquals(controller.garante, controller.vehiculo.otorgante);
+		System.assertEquals(FSC_ContratoSeguro.TIPO_VEHICULO, controller.seguroPropiedad.tipo);
+		System.assertEquals(true, controller.seguroPropiedad.endosado);
+		System.assertEquals(false, controller.seguroVida.aplica);
+		System.assert(controller.vehiculo.garantesGenerales.contains('portadora'));
 	}
 }

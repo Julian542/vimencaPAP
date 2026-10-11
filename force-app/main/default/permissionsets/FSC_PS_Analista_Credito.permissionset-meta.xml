@@ -141,6 +141,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>FSC_ContratoParte</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>FSC_ContratoParticipanteService</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -170,6 +174,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>FSC_ContratoPrestamoConsumoVehiculoCtrl</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_ContratoRedaccionService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_ContratoSeguro</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>

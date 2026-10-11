@@ -52,6 +52,9 @@ declare module "@salesforce/apex/FSC_RlaAccionesController.aprobarProcesoActual"
 declare module "@salesforce/apex/FSC_RlaAccionesController.aprobarProcesoActualConHistorial" {
   export default function aprobarProcesoActualConHistorial(param: {residentialLoanApplicationId: any, comentario: any, historialPago: any}): Promise<any>;
 }
+declare module "@salesforce/apex/FSC_RlaAccionesController.rechazarBancaSeguro" {
+  export default function rechazarBancaSeguro(param: {residentialLoanApplicationId: any, motivo: any, comentario: any}): Promise<any>;
+}
 declare module "@salesforce/apex/FSC_RlaAccionesController.rechazarProcesoActual" {
   export default function rechazarProcesoActual(param: {residentialLoanApplicationId: any, motivo: any, motivoDeRechazo: any}): Promise<any>;
 }
@@ -124,6 +127,12 @@ declare module "@salesforce/apex/FSC_RlaAccionesController.getUsuariosCapturaOpe
 declare module "@salesforce/apex/FSC_RlaAccionesController.reasignarCapturaOperaciones" {
   export default function reasignarCapturaOperaciones(param: {residentialLoanApplicationId: any, usuarioId: any, etapa: any}): Promise<any>;
 }
+declare module "@salesforce/apex/FSC_RlaAccionesController.getUsuariosPagares" {
+  export default function getUsuariosPagares(param: {residentialLoanApplicationId: any}): Promise<any>;
+}
+declare module "@salesforce/apex/FSC_RlaAccionesController.reasignarUsuarioPagares" {
+  export default function reasignarUsuarioPagares(param: {residentialLoanApplicationId: any, usuarioId: any}): Promise<any>;
+}
 declare module "@salesforce/apex/FSC_RlaAccionesController.descartarArchivosDesembolso" {
   export default function descartarArchivosDesembolso(param: {documentosIds: any}): Promise<any>;
 }
@@ -137,7 +146,7 @@ declare module "@salesforce/apex/FSC_RlaAccionesController.marcarDocCompletaAnal
   export default function marcarDocCompletaAnalisis(param: {residentialLoanApplicationId: any}): Promise<any>;
 }
 declare module "@salesforce/apex/FSC_RlaAccionesController.consultarEstadoFirma" {
-  export default function consultarEstadoFirma(): Promise<any>;
+  export default function consultarEstadoFirma(param: {residentialLoanApplicationId: any}): Promise<any>;
 }
 declare module "@salesforce/apex/FSC_RlaAccionesController.actualizarSubestadoGeneracionPagares" {
   export default function actualizarSubestadoGeneracionPagares(param: {residentialLoanApplicationId: any}): Promise<any>;

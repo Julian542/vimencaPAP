@@ -55,6 +55,8 @@ import guardarCapturaAbanks from '@salesforce/apex/FSC_RlaAccionesController.gua
 import confirmarDesembolsoManual from '@salesforce/apex/FSC_RlaAccionesController.confirmarDesembolsoManual';
 import getUsuariosCapturaOperaciones from '@salesforce/apex/FSC_RlaAccionesController.getUsuariosCapturaOperaciones';
 import reasignarCapturaOperaciones from '@salesforce/apex/FSC_RlaAccionesController.reasignarCapturaOperaciones';
+import getUsuariosPagares from '@salesforce/apex/FSC_RlaAccionesController.getUsuariosPagares';
+import reasignarUsuarioPagares from '@salesforce/apex/FSC_RlaAccionesController.reasignarUsuarioPagares';
 import descartarArchivosDesembolso from '@salesforce/apex/FSC_RlaAccionesController.descartarArchivosDesembolso';
 import enviarAArchivoYCustodia from '@salesforce/apex/FSC_RlaAccionesController.enviarAArchivoYCustodia';
 import solicitarExcepcionBuro from '@salesforce/apex/FSC_RlaAccionesController.solicitarExcepcionBuro';
@@ -234,6 +236,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	usuariosManuales = [];
 	usuarioManualSeleccionado;
 	etapaReasignacionManual;
+	reasignandoPagares = false;
 	formatosDesembolso = ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.jpg', '.jpeg', '.png'];
 	wiredApprovalContextResult;
 	wiredPagaresContextResult;
@@ -1259,6 +1262,10 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		return this.hasAdminPermission && this.showResponsableManual;
 	}
 
+	get showReasignarPagares() {
+		return this.allowSupervisorOrAdmins && this.showPagaresAssignedBanner;
+	}
+
 	get requiereGarantiasCaptura() {
 		return this.contextoManual.requiereGarantias;
 	}
@@ -1563,6 +1570,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	get hasActions() {
 		return (
 			this.showReasignarManual ||
+			this.showReasignarPagares ||
 			this.showEnviarDocumentacionContratos ||
 			this.showEdicionDocumentosAnalisis ||
 			this.showSolicitarExcepcionCredito ||
@@ -2915,8 +2923,24 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		this.loading = true;
 		try {
 			await refreshApex(this.wiredCapturaOperacionesResult);
+			this.reasignandoPagares = false;
 			this.etapaReasignacionManual = this.contextoManual.etapa;
 			this.usuariosManuales = await getUsuariosCapturaOperaciones({ residentialLoanApplicationId: this.recordId });
+			this.usuarioManualSeleccionado = null;
+			this.showModalReasignacionManual = true;
+		} catch (e) {
+			this.showToast('Error', this.getErrorMessage(e, 'No se pudieron consultar los usuarios de la cola.'), 'error');
+		} finally {
+			this.loading = false;
+		}
+	}
+
+	async handleReasignarPagares() {
+		if (this.loading) return;
+		this.loading = true;
+		try {
+			this.reasignandoPagares = true;
+			this.usuariosManuales = await getUsuariosPagares({ residentialLoanApplicationId: this.recordId });
 			this.usuarioManualSeleccionado = null;
 			this.showModalReasignacionManual = true;
 		} catch (e) {
@@ -2938,11 +2962,18 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		if (this.loading || !this.template.querySelector('[data-usuario-manual]').reportValidity()) return;
 		this.loading = true;
 		try {
-			await reasignarCapturaOperaciones({
-				residentialLoanApplicationId: this.recordId,
-				usuarioId: this.usuarioManualSeleccionado,
-				etapa: this.etapaReasignacionManual,
-			});
+			if (this.reasignandoPagares) {
+				await reasignarUsuarioPagares({
+					residentialLoanApplicationId: this.recordId,
+					usuarioId: this.usuarioManualSeleccionado,
+				});
+			} else {
+				await reasignarCapturaOperaciones({
+					residentialLoanApplicationId: this.recordId,
+					usuarioId: this.usuarioManualSeleccionado,
+					etapa: this.etapaReasignacionManual,
+				});
+			}
 			this.showModalReasignacionManual = false;
 			this.showToast('Actualizado', 'Responsable reasignado.', 'success');
 			await this.actualizarEtapaManual();

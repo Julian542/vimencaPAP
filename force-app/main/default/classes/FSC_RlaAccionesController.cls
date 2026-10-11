@@ -34,6 +34,9 @@ public without sharing class FSC_RlaAccionesController {
 	private static final String PERMISO_PREVENCION_LAVADO_ACTIVOS = 'FSC_CP_Prevencion_Lavado_Activos';
 	private static final String PERMISO_CONTROL_DOCUMENTOS = 'FSC_CP_Recepcion_Control_Documentos';
 	private static final String PERMISO_SUPERVISOR = 'FSC_CP_Supervisor';
+	private static final String PERMISO_OFICIAL_NEGOCIO = 'FSC_CP_Oficial_Negocio';
+	private static final String SUBESTADO_GENERACION_PAGARES = 'Generación de pagarés y plantillas';
+	private static final String COLA_PAGARES_Y_CONTRATOS = 'FSC_GestionDePagaresYContratos';
 	private static final String PERMISO_BANCA_SEGURO = 'FSC_CP_BancaSeguro';
 	private static final String RT_SOLICITUD_CREDITO_CONSUMO = 'FSC_Solicitud_Credito_Consumo';
 	private static final String RT_SOLICITUD_CREDITO_VEHICULO = 'FSC_Solicitud_Credito_Vehiculo';
@@ -1349,6 +1352,67 @@ public without sharing class FSC_RlaAccionesController {
 	}
 
 	@AuraEnabled
+	public static List<Map<String, String>> getUsuariosPagares(Id residentialLoanApplicationId) {
+		validarPermisoSupervisorOAdministrador();
+		validarSolicitudEnGeneracionPagares(residentialLoanApplicationId);
+
+		List<Map<String, String>> opciones = new List<Map<String, String>>();
+		for (User usuario : obtenerUsuariosColaPagares()) {
+			opciones.add(new Map<String, String>{ 'label' => usuario.Name, 'value' => usuario.Id });
+		}
+		return opciones;
+	}
+
+	@AuraEnabled
+	public static void reasignarUsuarioPagares(Id residentialLoanApplicationId, Id usuarioId) {
+		validarPermisoSupervisorOAdministrador();
+		validarSolicitudEnGeneracionPagares(residentialLoanApplicationId);
+
+		Boolean usuarioElegible = false;
+		for (User usuario : obtenerUsuariosColaPagares()) {
+			if (usuario.Id == usuarioId) {
+				usuarioElegible = true;
+			}
+		}
+		if (!usuarioElegible) {
+			throw new AuraHandledException('Seleccione un usuario activo de la cola de Gestión de pagarés y contratos.');
+		}
+
+		update new ResidentialLoanApplication(Id = residentialLoanApplicationId, FSC_UsuarioPagaresYContratos__c = usuarioId);
+	}
+
+	private static void validarSolicitudEnGeneracionPagares(Id residentialLoanApplicationId) {
+		if (residentialLoanApplicationId == null) {
+			throw new AuraHandledException('Solicitud requerida.');
+		}
+
+		List<ResidentialLoanApplication> solicitudes = [
+			SELECT FSC_Subestado__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :residentialLoanApplicationId
+			LIMIT 1
+		];
+		if (solicitudes.isEmpty() || solicitudes[0].FSC_Subestado__c != SUBESTADO_GENERACION_PAGARES) {
+			throw new AuraHandledException('La solicitud no está en Generación de pagarés y plantillas.');
+		}
+	}
+
+	private static List<User> obtenerUsuariosColaPagares() {
+		List<Group> colas = [
+			SELECT Id
+			FROM Group
+			WHERE Type = 'Queue' AND DeveloperName = :COLA_PAGARES_Y_CONTRATOS
+			LIMIT 1
+		];
+		if (colas.isEmpty()) {
+			return new List<User>();
+		}
+
+		Set<Id> miembros = FSC_RandomQueueApproverAction.collectCandidatePrincipalIds(colas[0].Id);
+		return [SELECT Id, Name FROM User WHERE Id IN :miembros AND IsActive = TRUE ORDER BY Name];
+	}
+
+	@AuraEnabled
 	public static void descartarArchivosDesembolso(List<Id> documentosIds) {
 		FSC_CapturaOperacionesService.descartarArchivos(documentosIds);
 	}
@@ -1448,16 +1512,16 @@ public without sharing class FSC_RlaAccionesController {
 			throw new AuraHandledException('Solicitud requerida.');
 		}
 
-		cancelarAprobacion(residentialLoanApplicationId);
+		validarPermisoOficialOAdministrador();
+		String comentarioAuditoria = construirComentarioDecisionCliente('Cliente acepta condiciones del comité.');
 
-		ResidentialLoanApplication upd = new ResidentialLoanApplication(
-			Id = residentialLoanApplicationId,
-			FSC_Subestado__c = 'Generación de pagarés y plantillas',
-			FSC_SolicitudAprobadaPorComite__c = true,
-			FSC_FechaYHoraAprobacionComite__c = System.now()
-		);
+		// El recall de la aprobación del comité requiere admin; el Oficial lo ejecuta vía Named Credential.
+		if (shouldUsePrivilegedSupervisorFallback(residentialLoanApplicationId)) {
+			FSC_RlaApprovalAdminClient.clienteAceptaCondicion(residentialLoanApplicationId, comentarioAuditoria);
+			return;
+		}
 
-		update upd;
+		FSC_RlaApprovalAdminService.clienteAceptaCondicion(residentialLoanApplicationId, comentarioAuditoria);
 	}
 
 	@AuraEnabled
@@ -1487,15 +1551,20 @@ public without sharing class FSC_RlaAccionesController {
 			throw new AuraHandledException('Solicitud requerida.');
 		}
 
-		cancelarAprobacion(residentialLoanApplicationId);
+		validarPermisoOficialOAdministrador();
+		String comentarioAuditoria = construirComentarioDecisionCliente('Cliente no acepta condiciones del comité.');
 
-		ResidentialLoanApplication upd = new ResidentialLoanApplication(
-			Id = residentialLoanApplicationId,
-			Status = 'Cerrada Perdida',
-			FSC_Subestado__c = 'Rechazada por cliente'
-		);
+		if (shouldUsePrivilegedSupervisorFallback(residentialLoanApplicationId)) {
+			FSC_RlaApprovalAdminClient.clienteRechazaCondicion(residentialLoanApplicationId, comentarioAuditoria);
+			return;
+		}
 
-		update upd;
+		FSC_RlaApprovalAdminService.clienteRechazaCondicion(residentialLoanApplicationId, comentarioAuditoria);
+	}
+
+	@TestVisible
+	private static String construirComentarioDecisionCliente(String decision) {
+		return decision + ' Ejecutado por: ' + UserInfo.getName() + ' (' + UserInfo.getUserId() + ').';
 	}
 
 	private static String validarTipoDocumentoAnalisis(String tipoDocumento) {
@@ -2464,6 +2533,22 @@ public without sharing class FSC_RlaAccionesController {
 			return;
 		if (!FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR)) {
 			throw new AuraHandledException(mensajeError);
+		}
+	}
+
+	private static void validarPermisoSupervisorOAdministrador() {
+		if (testBypassPermissions)
+			return;
+		if (!FeatureManagement.checkPermission(PERMISO_SUPERVISOR) && !FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR)) {
+			throw new AuraHandledException('Solo un Supervisor o un administrador puede reasignar esta etapa.');
+		}
+	}
+
+	private static void validarPermisoOficialOAdministrador() {
+		if (testBypassPermissions)
+			return;
+		if (!FeatureManagement.checkPermission(PERMISO_OFICIAL_NEGOCIO) && !FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR)) {
+			throw new AuraHandledException('Solo un Oficial de Negocio o un administrador puede registrar la decisión del cliente.');
 		}
 	}
 

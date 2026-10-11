@@ -108,6 +108,67 @@ private class FSC_RlaApprovalAdminClientTest {
 		Test.stopTest();
 	}
 
+	private class ClientDecisionMock implements HttpCalloutMock {
+		private String accionEsperada;
+
+		ClientDecisionMock(String accionEsperada) {
+			this.accionEsperada = accionEsperada;
+		}
+
+		public HttpResponse respond(HttpRequest req) {
+			System.assert(req.getEndpoint().endsWith('/services/apexrest/fsc/rla-approval-admin/client-decision'));
+			Map<String, Object> body = (Map<String, Object>) JSON.deserializeUntyped(req.getBody());
+			System.assertEquals(accionEsperada, body.get('accion'));
+			System.assertEquals('auditoria', body.get('comentarioAuditoria'));
+
+			HttpResponse res = new HttpResponse();
+			res.setStatusCode(200);
+			res.setBody('{"success":true,"message":"OK"}');
+			return res;
+		}
+	}
+
+	@IsTest
+	static void clienteAceptaCondicion_enviaAccionYAuditoria() {
+		Test.setMock(HttpCalloutMock.class, new ClientDecisionMock(FSC_RlaApprovalAdminService.ACCION_CLIENTE_ACEPTA));
+
+		Test.startTest();
+		FSC_RlaApprovalAdminClient.clienteAceptaCondicion(UserInfo.getUserId(), 'auditoria');
+		Test.stopTest();
+	}
+
+	@IsTest
+	static void clienteRechazaCondicion_enviaAccionYAuditoria() {
+		Test.setMock(HttpCalloutMock.class, new ClientDecisionMock(FSC_RlaApprovalAdminService.ACCION_CLIENTE_RECHAZA));
+
+		Test.startTest();
+		FSC_RlaApprovalAdminClient.clienteRechazaCondicion(UserInfo.getUserId(), 'auditoria');
+		Test.stopTest();
+	}
+
+	@IsTest
+	static void clienteDecision_lanzaErrorEnFalloHttpOIdNulo() {
+		Test.setMock(HttpCalloutMock.class, new FailureMock());
+
+		Boolean thrown = false;
+		Test.startTest();
+		try {
+			FSC_RlaApprovalAdminClient.clienteAceptaCondicion(UserInfo.getUserId(), 'auditoria');
+		} catch (AuraHandledException ex) {
+			thrown = true;
+		}
+		Test.stopTest();
+		System.assertEquals(true, thrown);
+
+		thrown = false;
+		try {
+			FSC_RlaApprovalAdminClient.clienteRechazaCondicion(null, 'auditoria');
+		} catch (AuraHandledException ex) {
+			thrown = true;
+		}
+		System.assertEquals(true, thrown);
+	}
+
 	@IsTest
 	static void validatesRequiredArguments() {
 		assertThrowsNullSupervisor();

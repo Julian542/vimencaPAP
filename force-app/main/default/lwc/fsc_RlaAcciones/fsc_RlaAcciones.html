@@ -351,6 +351,15 @@
 						</div>
 					</template>
 
+					<template if:true={showReasignarPagares}>
+						<div class="btnRow center">
+							<lightning-button
+								label="Reasignar"
+								onclick={handleReasignarPagares}
+								disabled={loading}></lightning-button>
+						</div>
+					</template>
+
 					<template if:true={showEnviarDocumentacionContratos}>
 						<div class="btnRow center">
 							<lightning-button

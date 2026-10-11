@@ -14,6 +14,10 @@ public with sharing class FSC_RlaApprovalAdminClient {
 		'callout:' +
 		NAMED_CREDENTIAL +
 		'/services/apexrest/fsc/rla-approval-admin/update-forma-desembolso';
+	private static final String CLIENT_DECISION_ENDPOINT =
+		'callout:' +
+		NAMED_CREDENTIAL +
+		'/services/apexrest/fsc/rla-approval-admin/client-decision';
 
 	public static void sendToSupervisor(Id residentialLoanApplicationId) {
 		if (residentialLoanApplicationId == null) {
@@ -78,13 +82,47 @@ public with sharing class FSC_RlaApprovalAdminClient {
 		);
 	}
 
+	public static void clienteAceptaCondicion(Id residentialLoanApplicationId, String comentarioAuditoria) {
+		sendClientDecision(
+			residentialLoanApplicationId,
+			FSC_RlaApprovalAdminService.ACCION_CLIENTE_ACEPTA,
+			comentarioAuditoria,
+			'No se pudo ejecutar el fallback tecnico para registrar la aceptacion del cliente.'
+		);
+	}
+
+	public static void clienteRechazaCondicion(Id residentialLoanApplicationId, String comentarioAuditoria) {
+		sendClientDecision(
+			residentialLoanApplicationId,
+			FSC_RlaApprovalAdminService.ACCION_CLIENTE_RECHAZA,
+			comentarioAuditoria,
+			'No se pudo ejecutar el fallback tecnico para registrar el rechazo del cliente.'
+		);
+	}
+
+	private static void sendClientDecision(Id residentialLoanApplicationId, String accion, String comentarioAuditoria, String baseErrorMessage) {
+		if (residentialLoanApplicationId == null) {
+			throw new AuraHandledException('Solicitud requerida.');
+		}
+
+		sendRequest(
+			CLIENT_DECISION_ENDPOINT,
+			JSON.serialize(new ClientDecisionPayload(residentialLoanApplicationId, accion, comentarioAuditoria)),
+			baseErrorMessage
+		);
+	}
+
 	private static void sendRequest(String endpoint, RequestPayload payload, String baseErrorMessage) {
+		sendRequest(endpoint, JSON.serialize(payload), baseErrorMessage);
+	}
+
+	private static void sendRequest(String endpoint, String body, String baseErrorMessage) {
 		HttpRequest req = new HttpRequest();
 		req.setEndpoint(endpoint);
 		req.setMethod('POST');
 		req.setHeader('Content-Type', 'application/json');
 		req.setTimeout(120000);
-		req.setBody(JSON.serialize(payload));
+		req.setBody(body);
 
 		HttpResponse res;
 		try {
@@ -122,6 +160,18 @@ public with sharing class FSC_RlaApprovalAdminClient {
 			this.motivo = motivo;
 			this.permisoOrigen = permisoOrigen;
 			this.formaDeDesembolso = formaDeDesembolso;
+		}
+	}
+
+	private class ClientDecisionPayload {
+		public Id residentialLoanApplicationId;
+		public String accion;
+		public String comentarioAuditoria;
+
+		ClientDecisionPayload(Id residentialLoanApplicationId, String accion, String comentarioAuditoria) {
+			this.residentialLoanApplicationId = residentialLoanApplicationId;
+			this.accion = accion;
+			this.comentarioAuditoria = comentarioAuditoria;
 		}
 	}
 }

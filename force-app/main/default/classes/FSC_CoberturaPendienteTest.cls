@@ -68,6 +68,7 @@ private class FSC_CoberturaPendienteTest {
 			FSC_Fecha_Acta_Autorizacion__c = Date.today(),
 			FSC_Personas_Autorizadas__c = 'Representante Prueba',
 			FSC_Calidad_Autorizados__c = 'Gerente',
+			FSC_Datos_Intervinientes_Contrato__c = JSON.serialize(new Map<String, Object>{ 'representanteSexo' => 'Masculino' }),
 			FSC_UsuarioPagaresYContratos__c = UserInfo.getUserId()
 		);
 		insert rla;

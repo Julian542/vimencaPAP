@@ -13,24 +13,8 @@
 			<meta
 				http-equiv="Content-Type"
 				content="text/html; charset=UTF-8" />
+			<c:FSC_ContratoEstiloBase />
 			<style type="text/css">
-				@page {
-					size: letter;
-					margin: 25mm 19mm 21mm 19mm;
-					@bottom-center {
-						content: counter(page);
-						font-family: 'Arial Narrow', Arial, sans-serif;
-						font-size: 9pt;
-					}
-				}
-				body {
-					margin: 0;
-					padding: 0;
-					color: #000;
-					font-family: 'Arial Narrow', Arial, sans-serif;
-					font-size: 11pt;
-					line-height: 1.2;
-				}
 				.title {
 					margin: 0 0 1.2em;
 					text-align: center;
@@ -43,7 +27,7 @@
 					widows: 3;
 				}
 				.quote {
-					margin: 0 7mm 1.2em;
+					margin: 0 0 1.2em;
 					text-align: justify;
 				}
 				.strong {
@@ -90,6 +74,7 @@
 			</style>
 		</head>
 		<body>
+			<c:FSC_ContratoSelloAgua />
 			<div class="title">{!datos.tituloContrato}</div>
 			<p class="paragraph">
 				ENTRE: BANCO MÚLTIPLE VIMENCA, S. A., entidad de intermediación financiera organizada de conformidad con las leyes de la República
@@ -104,391 +89,172 @@
 				sigue se denominará EL BANCO, de una parte, y de otra parte;
 			</p>
 			<p class="paragraph">
-				{!vehiculo.prestatariosGenerales}, quien(es) para los fines del presente contrato se denominará(n) {!vehiculo.denominacionPrestatarios}.
+				{!vehiculo.prestatariosGenerales}, {!IF(deudor.plural, 'quienes', 'quien')} para los fines del presente contrato se denominará{!deudor.n} {!deudor.nombre}.
 			</p>
 			<apex:outputPanel rendered="{!vehiculo.tieneGaranteMobiliario}" layout="none">
 				<p class="paragraph">
-					{!vehiculo.garantesGenerales}, quien(es) para los fines del presente contrato se denominará(n) {!vehiculo.denominacionGarantes}.
+					{!vehiculo.garantesGenerales}, {!IF(garante.plural, 'quienes', 'quien')} para los fines del presente contrato se denominará{!garante.n} {!garante.nombre}.
 				</p>
 			</apex:outputPanel>
 			<p class="paragraph">
-				POR CUANTO: EL PRESTATARIO - GARANTE MOBILIARIO ha solicitado un préstamo con Garantía Mobiliaria sin Posesión, por un monto de
+				POR CUANTO: {!deudor.nombre} ha{!deudor.n} solicitado un préstamo con Garantía Mobiliaria sin Posesión, por un monto de
 				{!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}), para {!datos.destinoPrestamo}.
 			</p>
 			<p class="paragraph">
 				POR CUANTO: EL BANCO ha consentido en aprobar el Préstamo con Garantía Mobiliaria sin Posesión por el monto de {!datos.montoLetras}
-				({!datos.simboloMoneda}{!datos.montoNumero}), a favor de EL PRESTATARIO - GARANTE MOBILIARIO.
+				({!datos.simboloMoneda}{!datos.montoNumero}), a favor de {!deudor.nombre}.
 			</p>
 			<p class="paragraph">
-				Toda vez que sean mencionados EL BANCO y {!vehiculo.denominacionPrestatarios}<apex:outputPanel layout="none" rendered="{!vehiculo.tieneGaranteMobiliario}"> y {!vehiculo.denominacionGarantes}</apex:outputPanel> en su conjunto, se nombrar&#225;n LAS PARTES;
+				Toda vez que sean mencionados EL BANCO y {!deudor.nombre}<apex:outputPanel layout="none" rendered="{!vehiculo.tieneGaranteMobiliario}"> y {!garante.nombre}</apex:outputPanel> en su conjunto, se nombrarán LAS PARTES;
 			</p>
 			<p class="paragraph">POR TANTO: Y en el entendido de que los anteriores POR CUANTOS forman parte integral del presente contrato;</p>
 			<p class="paragraph strong centered">LAS PARTES HAN CONVENIDO Y PACTADO LO SIGUIENTE:</p>
 			<p class="paragraph">
-				ARTÍCULO 1. MONTO. EL BANCO, por el presente contrato concede a EL PRESTATARIO - GARANTE MOBILIARIO, quien acepta, un préstamo por la
+				<span class="articulo"></span>MONTO. EL BANCO, por el presente contrato concede a {!deudor.nombre}, {!IF(deudor.plural, 'quienes aceptan', 'quien acepta')}, un préstamo por la
 				suma de {!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}), cuyos fondos estarán siendo utilizados para
-				{!datos.destinoPrestamo}, suma que EL PRESTATARIO - GARANTE MOBILIARIO declara haber recibido a su entera satisfacción.
+				{!datos.destinoPrestamo}, suma que {!deudor.nombre} declara{!deudor.n} haber recibido a su entera satisfacción.
 			</p>
 			<p class="paragraph">
-				P&#193;RRAFO: EL PRESTATARIO-GARANTE MOBILIARIO se compromete a suministrar a EL BANCO, de manera oportuna y durante la vigencia del
-				pr&#233;stamo, todas las informaciones que, seg&#250;n las normas vigentes se requieran a los fines de poder mantener actualizado el
-				expediente de cr&#233;dito.
+				PÁRRAFO: {!deudor.nombre} se compromete{!deudor.n} a suministrar a EL BANCO, de manera oportuna y durante la vigencia del
+				préstamo, todas las informaciones que, según las normas vigentes se requieran a los fines de poder mantener actualizado el
+				expediente de crédito.
 			</p>
 			<p class="paragraph">
-				ARTÍCULO 2. PAGARÉ. EL PRESTATARIO - GARANTE MOBILIARIO se compromete a suscribir, conjuntamente con el presente contrato de préstamo,
+				<span class="articulo"></span>PAGARÉ. {!deudor.nombre} se compromete{!deudor.n} a suscribir, conjuntamente con el presente contrato de préstamo,
 				un pagaré a favor de EL BANCO por la suma de {!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}).
 			</p>
 			<p class="paragraph">
-				ARTÍCULO 3. INTERESES. EL PRESTATARIO - GARANTE MOBILIARIO pagará intereses sobre saldos insolutos de capital, a razón de
+				<span class="articulo"></span>INTERESES. {!deudor.nombre} pagará{!deudor.n} intereses sobre saldos insolutos de capital, a razón de
 				{!datos.tasaLetras} por ciento ({!datos.tasaNumero}%) anual, sobre la base de un (1) año de trescientos sesenta (360) días.
 			</p>
 			<p class="paragraph">
-				ART&#205;CULO 4. VARIACI&#211;N DE LA TASA DE INTER&#201;S. VARIACI&#211;N DE LA TASA DE INTER&#201;S. LAS PARTES convienen que, en
-				caso de operarse durante la vigencia de este contrato, una variaci&#243;n de los intereses en el Mercado Bancario, dicha
-				variaci&#243;n ser&#225; aplicada, al saldo insoluto del pr&#233;stamo, previa notificaci&#243;n a EL PRESTATARIO-GARANTE MOBILIARIO
-				antes de su aplicaci&#243;n, con treinta (30) d&#237;as calendario de anticipaci&#243;n. Igualmente, es entendido y acordado entre las
-				partes que en caso de que EL PRESTATARIO-GARANTE MOBILIARIO pasen a ser mayor deudor comercial en el sistema financiero de acuerdo a
-				los criterios que establezca la Superintendencia de EL BANCO s de la Rep&#250;blica Dominicana, EL BANCO podr&#225; realizar un
-				aumento de la tasa aplicable a los intereses del pr&#233;stamo acorde a la calificaci&#243;n del sistema financiero previa
-				notificaci&#243;n a EL PRESTATARIO-GARANTE MOBILIARIO antes de su aplicaci&#243;n, con treinta (30) d&#237;as calendario de
-				anticipaci&#243;n. Las notificaciones a las que se refiere este art&#237;culo se realizar&#225;n y se considerar&#225;n
-				v&#225;lidamente recibidas si se realizan a trav&#233;s de uno de los medios siguientes a opci&#243;n de EL BANCO: a) mediante
-				comunicaci&#243;n f&#237;sica por escrito; b) al correo electr&#243;nico suministrado por EL PRESTATARIO-GARANTE MOBILIARIO a EL
-				BANCO, o; c) cualquier otro medio fehaciente de conformidad con el derecho com&#250;n dominicano.
+				<span class="articulo"></span>VARIACIÓN DE LA TASA DE INTERÉS. VARIACIÓN DE LA TASA DE INTERÉS. LAS PARTES convienen que, en
+				caso de operarse durante la vigencia de este contrato, una variación de los intereses en el Mercado Bancario, dicha
+				variación será aplicada, al saldo insoluto del préstamo, previa notificación a {!deudor.nombre}
+				antes de su aplicación, con treinta (30) días calendario de anticipación. Igualmente, es entendido y acordado entre las
+				partes que en caso de que {!deudor.nombre} pase{!deudor.n} a ser mayor deudor comercial en el sistema financiero de acuerdo a
+				los criterios que establezca la Superintendencia de Bancos de la República Dominicana, EL BANCO podrá realizar un
+				aumento de la tasa aplicable a los intereses del préstamo acorde a la calificación del sistema financiero previa
+				notificación a {!deudor.nombre} antes de su aplicación, con treinta (30) días calendario de
+				anticipación. Las notificaciones a las que se refiere este artículo se realizarán y se considerarán
+				válidamente recibidas si se realizan a través de uno de los medios siguientes a opción de EL BANCO: a) mediante
+				comunicación física por escrito; b) al correo electrónico suministrado por {!deudor.nombre} a EL
+				BANCO, o; c) cualquier otro medio fehaciente de conformidad con el derecho común dominicano.
 			</p>
 			<p class="paragraph">
-				P&#193;RRAFO I: Con cada variaci&#243;n de la tasa de inter&#233;s, EL BANCO deber&#225; entregar a EL PRESTATARIO-GARANTE MOBILIARIO
-				la tabla de amortizaci&#243;n correspondiente.
+				PÁRRAFO I: Con cada variación de la tasa de interés, EL BANCO deberá entregar a {!deudor.nombre}
+				la tabla de amortización correspondiente.
 			</p>
 			<p class="paragraph">
-				P&#193;RRAFO II: Si producto de las variaciones de tasa de inter&#233;s o de cualquier otra modificaci&#243;n unilateral de las
-				condiciones del contrato realizadas por EL BANCO, EL PRESTATARIO-GARANTE MOBILIARIO opta por terminar la relaci&#243;n contractual, EL
-				PRESTATARIO-GARANTE MOBILIARIO no incurrir&#225; en ning&#250;n tipo de responsabilidad, esto as&#237;, siempre y cuando EL
-				PRESTATARIO-GARANTE MOBILIARIO notifique la terminaci&#243;n y salde totalmente los valores adeudados de capital, intereses y
-				dem&#225;s accesorios, antes de la entrada en vigencia de la modificaci&#243;n realizada que genera la solicitud de terminaci&#243;n.
+				PÁRRAFO II: Si producto de las variaciones de tasa de interés o de cualquier otra modificación unilateral de las
+				condiciones del contrato realizadas por EL BANCO, {!deudor.nombre} opta{!deudor.n} por terminar la relación contractual, {!deudor.nombre} no incurrirá{!deudor.n} en ningún tipo de responsabilidad, esto así, siempre y cuando {!deudor.nombre} notifique{!deudor.n} la terminación y salde{!deudor.n} totalmente los valores adeudados de capital, intereses y
+				demás accesorios, antes de la entrada en vigencia de la modificación realizada que genera la solicitud de terminación.
 			</p>
 			<p class="paragraph">
-				ARTÍCULO 5. VENCIMIENTO Y FORMA DE PAGO. EL PRESTATARIO - GARANTE MOBILIARIO se obliga a pagar esta deuda en el término de
+				<span class="articulo"></span>VENCIMIENTO Y FORMA DE PAGO. {!deudor.nombre} se obliga{!deudor.n} a pagar esta deuda en el término de
 				{!datos.plazoLetras} ({!datos.plazoNumero}) meses, contados a partir del {!datos.fechaContrato}, mediante {!datos.plazoLetras}
 				({!datos.plazoNumero}) cuotas iguales, mensuales y consecutivas, contentivas de capital e intereses, por la suma de
 				{!datos.cuotaLetras} ({!datos.simboloMoneda}{!datos.cuotaNumero}), con vencimiento el {!datos.fechaVencimiento}.
 			</p>
 			<p class="paragraph">
-				PARRAFO I: Es entendido y acordado por LAS PARTES que EL PRESTATARIO-GARANTE MOBILIARIO pagar&#225; a EL BANCO intereses mensuales
-				sobre saldos insolutos de capital, de conformidad con lo establecido en el Art&#237;culo Tercero del presente contrato, debiendo
-				saldar el total del capital adeudado m&#225;s los intereses y accesorios pendientes de pago al momento del vencimiento del
-				t&#233;rmino de vigencia del pr&#233;stamo. Los pagos deber&#225;n ser realizados por EL PRESTATARIO-GARANTE MOBILIARIO en cualquiera
-				de las sucursales o puntos autorizados por EL BANCO en efectivo, cheque o transferencia electr&#243;nica, de conformidad a las normas
-				que rigen cada uno de estos medios de pago. EL BANCO podr&#225; poner a disposici&#243;n de EL PRESTATARIO-GARANTE MOBILIARIO otros
-				medios de pago que le ser&#225;n informados a esta de manera oportuna.
+				PARRAFO I: Es entendido y acordado por LAS PARTES que {!deudor.nombre} pagará{!deudor.n} a EL BANCO intereses mensuales
+				sobre saldos insolutos de capital, de conformidad con lo establecido en el artículo de Intereses del presente contrato, debiendo
+				saldar el total del capital adeudado más los intereses y accesorios pendientes de pago al momento del vencimiento del
+				término de vigencia del préstamo. Los pagos deberán ser realizados por {!deudor.nombre} en cualquiera
+				de las sucursales o puntos autorizados por EL BANCO en efectivo, cheque o transferencia electrónica, de conformidad a las normas
+				que rigen cada uno de estos medios de pago. EL BANCO podrá poner a disposición de {!deudor.nombre} otros medios de pago que {!deudor.le} serán informados de manera oportuna.
 			</p>
 			<p class="paragraph">
-				P&#193;RRAFO II: Los pagos realizados mediante cheques por EL PRESTATARIO-GARANTE MOBILIARIO a EL BANCO, se considerar&#225;n
-				efectivos el d&#237;a en que los fondos correspondientes a los mismos est&#233;n disponibles y se hagan efectivos los pagos
+				PÁRRAFO II: Los pagos realizados mediante cheques por {!deudor.nombre} a EL BANCO, se considerarán
+				efectivos el día en que los fondos correspondientes a los mismos estén disponibles y se hagan efectivos los pagos
 				pertinentes.
 			</p>
 			<p class="paragraph">
-				PARRAFO III: Los pagos realizados por EL PRESTATARIO-GARANTE MOBILIARIO ser&#225;n aplicados por EL BANCO a la deuda que surja del
+				PARRAFO III: Los pagos realizados por {!deudor.nombre} serán aplicados por EL BANCO a la deuda que surja del
 				presente contrato en el siguiente orden: primero, al pago de gastos y honorarios; segundo, al pago de mora; tercero, los intereses; y,
-				por &#250;ltimo, al capital.
+				por último, al capital.
 			</p>
 			<p class="paragraph">
-				PARRAFO IV: Si producto de las variaciones de tasa de inter&#233;s o de cualquier otra modificaci&#243;n unilateral de las condiciones
-				del contrato realizada por EL BANCO, EL PRESTATARIO-GARANTE MOBILIARIO opta por terminar la relaci&#243;n contractual, EL
-				PRESTATARIO-GARANTE MOBILIARIO no incurrir&#225; en ning&#250;n tipo de responsabilidad y EL BANCO no podr&#225; cobrarle penalidad
-				alguna por este motivo, esto as&#237;, siempre y cuando EL PRESTATARIO-GARANTE MOBILIARIO notifique la terminaci&#243;n y salde
-				totalmente los valores adeudados de capital, intereses y dem&#225;s accesorios antes de la entrada en vigencia de la modificaci&#243;n
-				realizada que genera la solicitud de terminaci&#243;n.
+				PARRAFO IV: Si producto de las variaciones de tasa de interés o de cualquier otra modificación unilateral de las condiciones
+				del contrato realizada por EL BANCO, {!deudor.nombre} opta{!deudor.n} por terminar la relación contractual, {!deudor.nombre} no incurrirá{!deudor.n} en ningún tipo de responsabilidad y EL BANCO no podrá cobrarle penalidad
+				alguna por este motivo, esto así, siempre y cuando {!deudor.nombre} notifique{!deudor.n} la terminación y salde{!deudor.n}
+				totalmente los valores adeudados de capital, intereses y demás accesorios antes de la entrada en vigencia de la modificación
+				realizada que genera la solicitud de terminación.
 			</p>
 			<p class="paragraph">
-				ART&#205;CULO 6. SALDOS ANTICIPADOS. EL PRESTATARIO-GARANTE MOBILIARIO podr&#225; realizar abonos o cancelaciones anticipadas al
-				balance de capital, siempre que la facilidad crediticia se encuentre al d&#237;a en el pago de sus cuotas mensuales, para lo cual, EL
-				BANCO estar&#225; en pleno derecho de cobrar una penalidad, si dicho abono o cancelaci&#243;n anticipada, se realiza dentro de los
-				primeros veinticuatro (24) meses de amortizaci&#243;n del cr&#233;dito, contados a partir de la fecha del desembolso, seg&#250;n lo
-				establecido en el Tarifario de Productos y Servicios que est&#233; vigente al momento de realizar la transacci&#243;n.
+				<span class="articulo"></span>SALDOS ANTICIPADOS. {!deudor.nombre} podrá{!deudor.n} realizar abonos o cancelaciones anticipadas al
+				balance de capital, siempre que la facilidad crediticia se encuentre al día en el pago de sus cuotas mensuales, para lo cual, EL
+				BANCO estará en pleno derecho de cobrar una penalidad, si dicho abono o cancelación anticipada, se realiza dentro de los
+				primeros veinticuatro (24) meses de amortización del crédito, contados a partir de la fecha del desembolso, según lo
+				establecido en el Tarifario de Productos y Servicios que esté vigente al momento de realizar la transacción.
 			</p>
 			<p class="paragraph">
-				ART&#205;CULO 7. MORA - EL PRESTATARIO - GARANTE MOBILIARIO se compromete, en caso de no cumplir a su vencimiento, con una cualquiera
-				de sus obligaciones de pago, a pagar por concepto de mora, a t&#237;tulo de cl&#225;usula penal, el cinco por ciento (5%) mensual
+				<span class="articulo"></span>MORA - {!deudor.nombre} se compromete{!deudor.n}, en caso de no cumplir a su vencimiento, con una cualquiera
+				de sus obligaciones de pago, a pagar por concepto de mora, a título de cláusula penal, el cinco por ciento (5%) mensual
 				sobre el monto vencido, sin formalidad judicial o extrajudicial alguna.
 			</p>
 			<p class="paragraph">
-				ART&#205;CULO 8. GARANT&#205;A. Para seguridad del pago de la deuda asumida por {!vehiculo.denominacionPrestatarios}<apex:outputPanel rendered="{!vehiculo.tieneGaranteMobiliario}" layout="none"> y {!vehiculo.denominacionGarantes}</apex:outputPanel>, se otorga a
-				favor de EL BANCO una garant&#237;a mobiliaria sin posesi&#243;n, para ser regida por las disposiciones de la Ley No. 45-20, sobre
-				Garant&#237;as Mobiliarias de fecha 18 de febrero del 2020 y sus modificaciones, sobre el veh&#237;culo de su propiedad que se
-				describe a continuaci&#243;n:
+				<span class="articulo"></span>GARANTÍA. Para seguridad del pago de la deuda asumida por {!deudor.nombre}<apex:outputPanel rendered="{!vehiculo.tieneGaranteMobiliario}" layout="none"> y {!garante.nombre}</apex:outputPanel>, se otorga a
+				favor de EL BANCO una garantía mobiliaria sin posesión, para ser regida por las disposiciones de la Ley No. 45-20, sobre
+				Garantías Mobiliarias de fecha 18 de febrero del 2020 y sus modificaciones, sobre el vehículo de su propiedad que se
+				describe a continuación:
 			</p>
 			<p class="quote">"{!datos.vehiculoDescripcion}"</p>
 			<p class="paragraph">
-				PARRAFO: <apex:outputText value="{!IF(vehiculo.tieneGaranteMobiliario, vehiculo.denominacionGarantes, vehiculo.denominacionPrestatarios)}" /> autoriza expresa e irrevocablemente a EL BANCO, en su calidad de acreedor garantizado,
-				para que proceda con la inscripci&#243;n de la garant&#237;a mobiliaria sin posesi&#243;n y sus modificaciones en el Sistema
-				Electr&#243;nico de Garant&#237;as Mobiliarias (SEGM). En tal sentido, <apex:outputText value="{!IF(vehiculo.tieneGaranteMobiliario, vehiculo.denominacionGarantes, vehiculo.denominacionPrestatarios)}" /> se compromete y obliga a
-				colaborar en todo lo que sea necesario para que dicho registro pueda ser realizado por EL BANCO.
+				PARRAFO: {!vehiculo.otorgante.nombre} autoriza{!vehiculo.otorgante.n} expresa e irrevocablemente a EL BANCO, en su calidad de acreedor garantizado,
+				para que proceda con la inscripción de la garantía mobiliaria sin posesión y sus modificaciones en el Sistema
+				Electrónico de Garantías Mobiliarias (SEGM). En tal sentido, {!vehiculo.otorgante.nombre} se compromete{!vehiculo.otorgante.n} y obliga{!vehiculo.otorgante.n} a colaborar en todo lo que sea necesario para que dicho registro pueda ser realizado por EL BANCO.
 			</p>
 			<p class="paragraph">
-				ART&#205;CULO 9. AUSENCIA DE GRAVAMEN Y CONSERVACI&#211;N DE LA GARANTIA. <apex:outputText value="{!IF(vehiculo.tieneGaranteMobiliario, vehiculo.denominacionGarantes, vehiculo.denominacionPrestatarios)}" /> declara bajo la fe del
-				juramento, que el bien dado en garant&#237;a mediante este acto es de su propiedad y que el mismo no ha sido cedido a ninguna otra
-				persona f&#237;sica o moral, ni pesa sobre &#233;ste ning&#250;n gravamen legal, convencional o judicial. Asimismo, se compromete a
-				conservarlo y mantenerlo en buen estado y tomar todas las medidas para evitar su deterioro.
+				<span class="articulo"></span>AUSENCIA DE GRAVAMEN Y CONSERVACIÓN DE LA GARANTIA. {!vehiculo.otorgante.nombre} declara{!vehiculo.otorgante.n} bajo la fe del
+				juramento, que el bien dado en garantía mediante este acto es de su propiedad y que el mismo no ha sido cedido a ninguna otra
+				persona física o moral, ni pesa sobre éste ningún gravamen legal, convencional o judicial. Asimismo, se compromete{!vehiculo.otorgante.n} a conservarlo y mantenerlo en buen estado y tomar todas las medidas para evitar su deterioro.
 			</p>
 			<p class="paragraph">
-				ARTÍCULO 10. VALOR DEL BIEN DADO EN GARANTÍA. EL PRESTATARIO - GARANTE MOBILIARIO declara que el vehículo dado en garantía tiene un
+				<span class="articulo"></span>VALOR DEL BIEN DADO EN GARANTÍA. {!deudor.nombre} declara{!deudor.n} que el vehículo dado en garantía tiene un
 				valor de {!datos.vehiculoValorLetras} ({!datos.simboloMoneda}{!datos.vehiculoValorNumero}) y se encuentra ubicado en
 				{!datos.vehiculoUbicacion}.
 			</p>
 			<p class="paragraph">
-				ART&#205;CULO 11. OBLIGACI&#211;N DE MANTENIMIENTO. EL PRESTATARIO - GARANTE MOBILIARIO se compromete a mantener el veh&#237;culo dado
-				en garant&#237;a en buen estado de funcionamiento, absteni&#233;ndose de someterlo a un uso anormal y abusivo que pueda producir su
-				r&#225;pida depreciaci&#243;n, y autoriza a EL BANCO a realizar inspecciones peri&#243;dicas para comprobar su ubicaci&#243;n y
-				conservaci&#243;n en buen estado.
+				<span class="articulo"></span>OBLIGACIÓN DE MANTENIMIENTO. {!deudor.nombre} se compromete{!deudor.n} a mantener el vehículo dado
+				en garantía en buen estado de funcionamiento, absteniéndose de someterlo a un uso anormal y abusivo que pueda producir su
+				rápida depreciación, y autoriza{!deudor.n} a EL BANCO a realizar inspecciones periódicas para comprobar su ubicación y
+				conservación en buen estado.
 			</p>
 			<p class="paragraph">
-				P&#193;RRAFO I: EL PRESTATARIO - GARANTE MOBILIARIO est&#225; obligada a dar aviso inmediatamente a EL BANCO de cualquier da&#241;o u
+				PÁRRAFO I: {!deudor.nombre} está{!deudor.n} obligad{!deudor.o} a dar aviso inmediatamente a EL BANCO de cualquier daño u
 				otro siniestro que afecte el bien otorgado en prenda.
 			</p>
 			<p class="paragraph">
-				P&#193;RRAFO II: EL PRESTATARIO - GARANTE MOBILIARIO reconoce y acepta, que frente a una posible entrega voluntaria de la
-				garant&#237;a EL BANCO se reserva el derecho de recibir o no, el bien dado en prenda. Asimismo, es entendido entre las partes que la
-				no recepci&#243;n del bien, por parte de EL BANCO, no ser&#225; interpretada en ning&#250;n caso como renuncia a perseguir, el cobro
+				PÁRRAFO II: {!deudor.nombre} reconoce{!deudor.n} y acepta{!deudor.n}, que frente a una posible entrega voluntaria de la
+				garantía EL BANCO se reserva el derecho de recibir o no, el bien dado en prenda. Asimismo, es entendido entre las partes que la
+				no recepción del bien, por parte de EL BANCO, no será interpretada en ningún caso como renuncia a perseguir, el cobro
 				de la deuda, por todos los medios que este tenga a su alcance.
 			</p>
 			<p class="paragraph">
-				ART&#205;CULO 12. PROHIBICI&#211;N ENAJENACI&#211;N Y/O CONSTITUCI&#211;N DE OTROS GRAV&#193;MENES: EL PRESTATARIO - GARANTE
-				MOBILIARIO reconoce que le est&#225; prohibido constituir una nueva garant&#237;a mobiliaria sin posesi&#243;n o cualquier otro
-				gravamen sobre la garant&#237;a otorgada, as&#237; como vender o de cualquier forma enajenar el veh&#237;culo que constituye la
-				prenda, a menos que obtenga previamente autorizaci&#243;n de EL BANCO, estableci&#233;ndose expresamente que si gravara o enajenara de
-				cualquier forma el bien que conforma la garant&#237;a otorgada, sin el consentimiento expreso de EL BANCO, el presente contrato se
-				resolver&#225; de pleno derecho, sin ninguna formalidad previa y, en consecuencia, EL PRESTATARIO - GARANTE MOBILIARIO perder&#225; el
-				beneficio del t&#233;rmino y las condiciones de pago del pr&#233;stamo que se le otorga mediante este contrato, haci&#233;ndose de
-				pleno derecho ejecutable la garant&#237;a consentida.
+				<span class="articulo"></span>PROHIBICIÓN ENAJENACIÓN Y/O CONSTITUCIÓN DE OTROS GRAVÁMENES: {!deudor.nombre} reconoce{!deudor.n} que {!deudor.le} está prohibido constituir una nueva garantía mobiliaria sin posesión o cualquier otro
+				gravamen sobre la garantía otorgada, así como vender o de cualquier forma enajenar el vehículo que constituye la
+				prenda, a menos que obtenga{!deudor.n} previamente autorización de EL BANCO, estableciéndose expresamente que si gravara{!deudor.n} o enajenara{!deudor.n} de
+				cualquier forma el bien que conforma la garantía otorgada, sin el consentimiento expreso de EL BANCO, el presente contrato se
+				resolverá de pleno derecho, sin ninguna formalidad previa y, en consecuencia, {!deudor.nombre} perderá{!deudor.n} el
+				beneficio del término y las condiciones de pago del préstamo que se {!deudor.le} otorga mediante este contrato, haciéndose de
+				pleno derecho ejecutable la garantía consentida.
 			</p>
 			<p class="paragraph">
-				ARTÍCULO 13. SEGURO DE PROPIEDAD. EL PRESTATARIO - GARANTE MOBILIARIO ha decidido contratar un seguro de protección a la propiedad,
-				del cual EL BANCO es beneficiario irrevocable, conforme a la póliza No. {!datos.seguroPoliza}, que ampara el vehículo puesto en
-				garantía, expedida por {!datos.seguroAseguradora}, ubicada en {!datos.seguroDireccion}, por la suma de {!datos.seguroMontoLetras}
-				({!datos.simboloMoneda}{!datos.seguroMontoNumero}).
+				<span class="articulo"></span>OTRAS OBLIGACIONES DE {!deudor.nombre}. {!deudor.nombre} efectuará{!deudor.n} por su
+				propia cuenta todas las contribuciones, y demás tributos nacionales o municipales, multas e impuestos y que graven o pudieran
+				gravar de tiempo en tiempo el bien otorgado en garantía, debiendo cuando así lo requiera EL BANCO para los fines del
+				presente contrato, entregar a éste los recibos oficiales que se expidan.
 			</p>
-			<p class="paragraph">
-				PÁRRAFO I: La póliza de seguro será pagada por EL PRESTATARIO - GARANTE MOBILIARIO durante la vigencia del préstamo, mediante cuotas
-				mensuales por un monto de {!datos.seguroPrimaLetras} ({!datos.simboloMoneda}{!datos.seguroPrimaNumero}). EL BANCO deberá notificar
-				cualquier aumento de la prima por cualquier medio fehaciente, con treinta (30) días calendario de antelación.
-			</p>
-			<p class="paragraph">
-				P&#193;RRAFO II: VIGENCIA DE LA POLIZA. Queda expresamente convenido entre LAS PARTES que el seguro indicado en este art&#237;culo es
-				contratado solamente por un per&#237;odo de tiempo igual a la vigencia del contrato de pr&#233;stamo. EL PRESTATARIO - GARANTE
-				MOBILIARIO se obliga a pagar los valores correspondientes a las renovaciones de la p&#243;liza de seguro en el entendido de que si
-				dejare de renovarla EL BANCO estar&#225; autorizado, sin estar obligado, a hacer dicha renovaci&#243;n por cuenta de EL PRESTATARIO -
-				GARANTE MOBILIARIO o contratar una nueva p&#243;liza de seguro con una compa&#241;&#237;a distinta, debiendo EL PRESTATARIO - GARANTE
-				MOBILIARIO cancelar los avances en que incurra EL BANCO antes del pr&#243;ximo vencimiento de los intereses convencionales
-				establecidos en el presente contrato. Las sumas que por este concepto avance EL BANCO estar&#225;n avaladas por la garant&#237;a
-				descrita en este acto y devengar&#225;n intereses de acuerdo con la tasa vigente en el mercado, los cuales ser&#225;n exigibles a
-				opci&#243;n de EL BANCO.
-			</p>
-			<p class="paragraph">
-				P&#193;RRAFO III: En caso de que se produjera un siniestro, EL BANCO aplicar&#225; el monto del seguro a los intereses, al capital y
-				dem&#225;s gastos correspondientes al pr&#233;stamo concedido. EL BANCO reembolsar&#225; a EL PRESTATARIO - GARANTE MOBILIARIO
-				cualquier diferencia que existiere a su favor.
-			</p>
-			<p class="paragraph">
-				ART&#205;CULO 14. OPCI&#211;N DE COBROS. Queda convenido que a su vencimiento EL BANCO podr&#225; exigir a su opci&#243;n, el pago de
-				la deuda a EL PRESTATARIO - GARANTE MOBILIARIO mediante la ejecuci&#243;n del pagar&#233; antes mencionado, o por todas las v&#237;as
-				de derecho, sin que tal acci&#243;n implique renuncia de parte de EL BANCO a ning&#250;n otro de los derechos que le corresponden en
-				su condici&#243;n de acreedor.
-			</p>
-			<p class="paragraph">
-				ART&#205;CULO 15. CADUCIDAD y TERMINACI&#211;N. La falta de pago de dos (02) cuota de capital e intereses, o el incumplimiento de
-				cualquier obligaci&#243;n a cargo de EL PRESTATARIO - GARANTE MOBILIARIO producir&#225; el vencimiento del t&#233;rmino del presente
-				contrato a opci&#243;n de EL BANCO, haci&#233;ndose exigible la totalidad de la deuda y ejecutable la garant&#237;a, de conformidad
-				con las formalidades legales establecidas a estos fines, sin que haya plazo para que EL BANCO ejerza este derecho.
-			</p>
-			<p class="paragraph">
-				P&#193;RRAFO I: TERMINACI&#211;N ANTICIPADA. Independientemente de otras causas de caducidad del t&#233;rmino que resultan de la
-				legislaci&#243;n vigente y en adici&#243;n a ellas, y de las que se consignen en otras partes del presente documento, este contrato
-				podr&#225; terminarse por las razones siguientes:
-			</p>
-			<p class="paragraph">Por la llegada del t&#233;rmino del contrato;</p>
-			<p class="paragraph">Por mutuo acuerdo entre las partes contratantes (previo saldo del total adeudado);</p>
-			<p class="paragraph">
-				Igualmente EL BANCO podr&#225;, a su &#250;nica opci&#243;n, dar t&#233;rmino al presente contrato en cualquier momento antes del
-				t&#233;rmino estipulado, sin comprometer su responsabilidad y sin necesidad alguna de formalidad judicial o extrajudicial, pudiendo EL
-				BANCO exigir el pago de la totalidad de la deuda, y en consecuencia, proceder a la ejecuci&#243;n de las garant&#237;as otorgadas en
-				este acto, s&#237; ocurre alguna de las situaciones siguientes: a) si EL PRESTATARIO - GARANTE MOBILIARIO utilizare los fondos
-				desembolsados para fines contrarios al prop&#243;sito del pr&#233;stamo consignado en este documento; b) ante la ocurrencia de
-				cualquier evento que, en el criterio razonable de EL BANCO, ponga en riesgo el cr&#233;dito, afecte la capacidad financiera o
-				disminuya el valor del patrimonio de EL PRESTATARIO - GARANTE MOBILIARIO, para cumplir satisfactoriamente con las obligaciones
-				asumidas en el presente contrato; c) si EL PRESTATARIO - GARANTE MOBILIARIO es demandada o se produce el secuestro, embargo
-				conservatorio, retentivo o ejecutorio contra cualquiera de sus bienes; d) en caso de incumplimiento por parte de EL PRESTATARIO -
-				GARANTE MOBILIARIO de una cualquiera de las obligaciones resultantes del presente contrato; e) si EL BANCO descubre que hubo
-				falsificaci&#243;n, manipulaci&#243;n o inexactitud de la documentaci&#243;n financiera, legal o de cualquier naturaleza suministrada
-				a EL BANCO por parte de EL PRESTATARIO - GARANTE MOBILIARIO para el otorgamiento del pr&#233;stamo. Por igual, si se demuestra que EL
-				PRESTATARIO - GARANTE MOBILIARIO hubiere ocultado u omitido alguna informaci&#243;n o dato razonable y objetivamente relevante para el
-				otorgamiento del cr&#233;dito y que de haber sido sabido por EL BANCO no se hubiera aprobado la facilidad crediticia.
-			</p>
-			<p class="paragraph">
-				P&#193;RRAFO II: En todos los casos de terminaci&#243;n previstos en este contrato, EL BANCO deber&#225; notificar la ruptura del
-				contrato a EL PRESTATARIO - GARANTE MOBILIARIO, por escrito o por cualquier medio fehaciente.
-			</p>
-			<p class="paragraph">
-				P&#193;RRAFO III: EL BANCO se reserva el derecho de terminar de manera anticipada el presente contrato siempre que se identifiquen
-				elementos de alto riesgo relacionados a actos il&#237;citos cometidos por EL PRESTATARIO - GARANTE MOBILIARIO, sus administradores y/o
-				accionistas con participaci&#243;n significativa. En caso de ejercer este derecho EL BANCO deber&#225; notificar la terminaci&#243;n a
-				EL PRESTATARIO - GARANTE MOBILIARIO en un plazo no mayor a cinco (5) d&#237;as posteriores a la terminaci&#243;n.
-			</p>
-			<p class="paragraph">
-				ART&#205;CULO 16. SOBRE LA REESTRUCTURACI&#211;N Y LIQUIDACI&#211;N DE EMPRESAS Y PERSONAS F&#205;SICAS COMERCIANTES. EL PRESTATARIO -
-				GARANTE MOBILIARIO empleada privada, por medio del presente contrato declara que no ha sido sometida ni ha sido iniciado un proceso de
-				Reestructuraci&#243;n, de Liquidaci&#243;n o de Acuerdo Previo de Plan, del cual forme parte, de conformidad con las disposiciones de
-				la Ley No. 141-15 de fecha 7 de agosto de 2015, sobre Reestructuraci&#243;n y Liquidaci&#243;n de Empresas y Personas F&#237;sicas
-				Comerciantes. EL PRESTATARIO - GARANTE MOBILIARIO reconoce que dicha declaraci&#243;n es un elemento esencial tomado en cuenta por EL
-				BANCO para la firma del presente contrato.
-			</p>
-			<p class="paragraph">
-				P&#193;RRAFO I: En caso de EL PRESTATARIO - GARANTE MOBILIARIO comercial o alguno de sus acreedores se acoja a la Ley No. 141-15, su
-				Reglamento de aplicaci&#243;n y sus modificaciones, o aquella que la sustituya, EL PRESTATARIO - GARANTE MOBILIARIO se compromete a:
-				a) notificar a EL BANCO en un plazo no mayor de dos (2) d&#237;as laborables, previo al sometimiento al tribunal el Acuerdo Previo de
-				Plan que ser&#225; sometido; b) notificar a EL BANCO treinta (30) d&#237;as antes de solicitar EL PRESTATARIO - GARANTE MOBILIARIO la
-				Reestructuraci&#243;n al tribunal u &#243;rganos correspondientes, adjuntando a dicha notificaci&#243;n las razones que fundamentan la
-				solicitud y el posible plan de reestructuraci&#243;n; c) notificar a EL BANCO cuando se trate de una solicitud de
-				Reestructuraci&#243;n iniciada por uno o m&#225;s acreedores de EL PRESTATARIO - GARANTE MOBILIARIO a m&#225;s tardar el d&#237;as
-				siguiente de recibida la solicitud de Reestructuraci&#243;n; d) informar a EL BANCO cuando se encuentre en al menos una de las
-				condiciones que fundamentan la solicitud de Reestructuraci&#243;n de conformidad con la referida ley; y e) a incluir en toda solicitud
-				de Reestructuraci&#243;n de deuda a EL BANCO como acreedor de este en la relaci&#243;n de todos sus acreedores, siempre que existan
-				cr&#233;ditos pendientes de pago a EL BANCO.
-			</p>
-			<p class="paragraph">
-				ART&#205;CULO 17. COMPENSACI&#211;N DE DEUDA. EL PRESTATARIO - GARANTE MOBILIARIO autoriza y faculta a EL BANCO, a su &#250;nica
-				opci&#243;n, a que en cualquier momento pueda compensar la deuda mediante la apropiaci&#243;n de cualquier suma de dinero de su
-				propiedad que se encuentre en manos de EL BANCO, para cubrir el pago de capital, intereses y accesorios o de derechos vencidos
-				originados por el presente contrato. En caso de aplicar una compensaci&#243;n de deuda, EL BANCO deber&#225; notificarlo a EL
-				PRESTATARIO - GARANTE MOBILIARIO indicando el monto compensado, la cuenta afectada y la forma en que fueron aplicados los valores a la
-				deuda. Dicha notificaci&#243;n podr&#225; hacerse por uno de los medios siguientes a opci&#243;n de EL BANCO: a) mediante
-				comunicaci&#243;n f&#237;sica; b) correo electr&#243;nico suministrado por EL PRESTATARIO - GARANTE MOBILIARIO a EL BANCO, o; c)
-				cualquier otro medio fehaciente de conformidad con el Derecho com&#250;n dominicana.
-			</p>
-			<p class="paragraph">
-				ART&#205;CULO 18. SUMINISTRO DE INFORMACI&#211;N. En virtud de las disposiciones de la Ley Org&#225;nica sobre Protecci&#243;n de
-				Datos de Car&#225;cter Personal No. 172-13, de fecha 13 de diciembre de 2013, EL PRESTATARIO - GARANTE MOBILIARIO autoriza a EL BANCO
-				a consultarla en la base de datos de las Sociedades de Informaci&#243;n Crediticia (SIC) a los fines de evaluaci&#243;n de
-				cr&#233;dito, as&#237; como para cualquier uso adicional que EL BANCO considere pertinente con el objetivo de brindar sus servicios a
-				EL PRESTATARIO - GARANTE MOBILIARIO; as&#237; como para dar cumplimiento a las disposiciones legales vigentes, especialmente, y sin
-				que ello sea limitativo, a las disposiciones sobre prevenci&#243;n de lavado de activos y financiamiento del terrorismo. EL
-				PRESTATARIO - GARANTE MOBILIARIO declara, reconoce y acepta el uso y conservaci&#243;n de la informaci&#243;n de car&#225;cter
-				personal y crediticia otorgada a EL BANCO, facult&#225;ndolo a mantener dichas informaciones en su base de datos. De igual forma, EL
-				PRESTATARIO - GARANTE MOBILIARIO autoriza a EL BANCO a transmitir a las Sociedades de Informaci&#243;n Crediticia (SIC) la
-				informaci&#243;n requerida conforme los par&#225;metros de ley y necesaria para los fines de evaluaci&#243;n del cr&#233;dito por
-				parte de otras instituciones suscriptores de dichas Sociedades de Informaci&#243;n, reconociendo y garantizando que la revelaci&#243;n
-				de dichas informaciones por parte de EL BANCO y/o por las Sociedades de Informaci&#243;n Crediticia y/o por sus respectivos empleados,
-				funcionarios y accionistas no conllevara violaci&#243;n de secreto profesional a los efectos del Art&#237;culo 377 del C&#243;digo
-				Penal, violaci&#243;n al secreto bancario a los efectos del literal b) de la Ley Monetaria y Financiera No. 183-02, ni generar&#225;
-				responsabilidades bajo los Art&#237;culos 1382 y siguientes del C&#243;digo Civil, ni bajo ning&#250;n otro texto legal. De igual
-				forma, EL PRESTATARIO - GARANTE MOBILIARIO consiente y autoriza a EL BANCO a ceder las informaciones otorgadas, incluyendo
-				informaciones biogr&#225;ficas, a sus gestores de cobro y a las sociedades con las que mantengan acuerdos de referimiento o relaciones
-				comerciales para dar cumplimiento a los fines directamente relacionados con el inter&#233;s leg&#237;timo de EL BANCO, manteniendo EL
-				PRESTATARIO - GARANTE MOBILIARIO, la facultad de rectificar y/o suprimir los datos que demuestre sean incorrectos, incompletos,
-				desactualizados o cuyo registro est&#233; prohibido.
-			</p>
-			<p class="paragraph">
-				P&#193;RRAFO I: Asimismo, EL PRESTATARIO - GARANTE MOBILIARIO autoriza expresamente a EL BANCO a consultar sus datos en el Maestro de
-				Cedulados que mantiene la Junta Central Electoral (JCE), conforme las disposiciones del Reglamento que establece el Procedimiento para
-				Acceder al Maestro de Cedulados y Fija las tasas por los Servicios de Acceso de fecha 23 de julio de 2013, descargando a EL BANCO de
-				cualquier responsabilidad relativa a la consulta realizada en el referido Maestro, en el entendido de que dichos datos deber&#225;n
-				ser manejados con la debida confidencialidad y no podr&#225;n ser divulgados sin el consentimiento de EL PRESTATARIO - GARANTE
-				MOBILIARIO.
-			</p>
-			<p class="paragraph">
-				P&#193;RRAFO II: EL PRESTATARIO - GARANTE MOBILIARIO de nacionalidad extranjera, en los casos que aplique, autorizan a EL BANCO, a
-				realizar las revisiones correspondientes de su historial crediticio en el bur&#243; de cr&#233;dito internacional que corresponda.
-			</p>
-			<p class="paragraph">
-				ART&#205;CULO 19. PREVENCI&#211;N LAVADO DE ACTIVOS. EL PRESTATARIO - GARANTE MOBILIARIO declara, reconoce y acepta haber sido
-				informado por EL BANCO de las disposiciones contenidas en la Ley No. 155-17 de fecha 1&#186; de junio de 2017, contra el lavado de
-				activos y financiamiento del terrorismo, admitiendo que se constituye en sujeto obligado a los fines de dicha ley y a las regulaciones
-				emanadas de las Autoridades Monetarias y Financieras.
-			</p>
-			<p class="paragraph">
-				P&#193;RRAFO: EL PRESTATARIO - GARANTE MOBILIARIO queda obligada a ofrecer a EL BANCO las informaciones que le sean solicitadas, en
-				forma veraz y sin demora, quedando comprometida a colaborar para lograr una eficiente prevenci&#243;n en el lavado de activos. En caso
-				contrario, significar&#225; un incumplimiento del presente contrato y esta situaci&#243;n generar&#225; la opci&#243;n a favor de EL
-				BANCO, de terminaci&#243;n inmediata del mismo, sin que implique responsabilidad para EL BANCO.
-			</p>
-			<p class="paragraph">
-				ART&#205;CULO 20. DERECHOS DE EL PRESTATARIO - GARANTE MOBILIARIO. Queda entendido entre las partes que EL PRESTATARIO - GARANTE
-				MOBILIARIO tendr&#225; derecho a una contrataci&#243;n justa, a reclamar, a que exista equilibrio entre la protecci&#243;n del usuario
-				y la provisi&#243;n de servicios financieros a costos accesibles, a la libre elecci&#243;n, a la publicidad y difusi&#243;n, a las
-				reglas de interpretaci&#243;n, a la transparencia, al trato equitativo, no discriminatorio o abusivo, y al trato igualitario para los
-				usuarios discapacitados.
-			</p>
-			<p class="paragraph">
-				ART&#205;CULO 21. IMPUESTOS, GASTOS Y HONORARIOS. EL PRESTATARIO - GARANTE MOBILIARIO se obliga a pagar todos los impuestos, gastos y
-				honorarios que origine este contrato, as&#237; como cualquier suma de dinero que EL BANCO tuviere que pagar por concepto de gastos y
-				honorarios, como consecuencia de cualquier actuaci&#243;n judicial o extrajudicial que realice en relaci&#243;n con el presente
-				contrato, todos los cuales quedar&#225;n garantizados en toda su extensi&#243;n por la garant&#237;a aqu&#237; constituida.
-			</p>
-			<p class="paragraph">
-				P&#193;RRAFO I: EL PRESTATARIO - GARANTE MOBILIARIO podr&#225; solicitar a EL BANCO, y este deber&#225; obtemperar al requerimiento,
-				todos los comprobantes de aquellos impuestos y gastos en que se incurra respecto del presente contrato de pr&#233;stamo. Asimismo, EL
-				PRESTATARIO - GARANTE MOBILIARIO declara que ha recibido y evaluado el documento contentivo del desglose de impuestos, gastos,
-				honorarios y comisiones que deber&#225;n pagar en ocasi&#243;n de la suscripci&#243;n del presente contrato, sin perjuicio de aquellos
-				montos que surjan de manera imprevisible los cuales al momento de presentarse deber&#225;n ser notificados a EL PRESTATARIO - GARANTE
-				MOBILIARIO con la justificaci&#243;n correspondiente.
-			</p>
-			<p class="paragraph">
-				P&#193;RRAFO II: El tarifario de servicios formar&#225; parte integral del presente contrato, as&#237; como cualquier
-				modificaci&#243;n posterior al mismo. Igualmente, EL BANCO deber&#225; entregar con cada desembolso o con cada modificaci&#243;n a la
-				tasa de inter&#233;s una tabla que contenga la forma de amortizaci&#243;n del valor de capital consignado en el contrato y de acuerdo
-				a las condiciones generales estipuladas en este documento.
-			</p>
-			<p class="paragraph">
-				ART&#205;CULO 22. OTRAS OBLIGACIONES DE EL PRESTATARIO - GARANTE MOBILIARIO. EL PRESTATARIO - GARANTE MOBILIARIO efectuar&#225; por su
-				propia cuenta todas las contribuciones, y dem&#225;s tributos nacionales o municipales, multas e impuestos y que graven o pudieran
-				gravar de tiempo en tiempo el bien otorgado en garant&#237;a, debiendo cuando as&#237; lo requiera EL BANCO para los fines del
-				presente contrato, entregar a &#233;ste los recibos oficiales que se expidan.
-			</p>
-			<p class="paragraph">
-				ART&#205;CULO 23. CESI&#211;N DE CR&#201;DITO Y/O GARANT&#205;A. Queda expresamente convenido que EL BANCO podr&#225; ceder el
-				cr&#233;dito resultante del pr&#233;stamo otorgado en virtud del presente contrato, as&#237; como los derechos sobre la garant&#237;a
-				otorgada en su favor. En ese caso, EL BANCO deber&#225; notificar por cualquier medio escrito la cesi&#243;n a EL PRESTATARIO -
-				GARANTE MOBILIARIO, consintiendo este &#250;ltimo por medio del presente contrato a la cesi&#243;n y oblig&#225;ndose a no oponer
-				objeci&#243;n o traba alguna al respeto. De igual manera, EL BANCO podr&#225; proporcionar al cesionario las informaciones personales
-				y crediticias de EL PRESTATARIO - GARANTE MOBILIARIO, sin que ello implique violaci&#243;n alguna a la Ley Org&#225;nica sobre
-				Protecci&#243;n de Datos de Car&#225;cter Personal No. 172-13, o de derechos de EL PRESTATARIO - GARANTE MOBILIARIO.
-			</p>
-			<p class="paragraph">
-				ART&#205;CULO 24. NO RENUNCIA. El retraso o no ejercicio por EL BANCO de cualquier acci&#243;n, derecho o privilegio otorgado por
-				medio del presente contrato, no debe interpretarse como una renuncia a ejercer dicha acci&#243;n, derecho o privilegio en el futuro.
-			</p>
-			<p class="paragraph">
-				ART&#205;CULO 25 MODIFICACIONES. Sin perjuicio de lo previsto en otra parte del presente documento, este contrato podr&#225; ser
-				modificado: a) por el mutuo acuerdo entre las partes; b) en virtud de cualquier disposici&#243;n legal que se dicte en el futuro en
-				relaci&#243;n con el objeto de este contrato; y c) por modificaciones a la tasa, cargos, comisiones, fechas y lugares de pago. En este
-				&#250;ltimo caso, EL BANCO comunicar&#225; tales cambios a EL PRESTATARIO - GARANTE MOBILIARIO, con treinta (30) d&#237;as de
-				anticipaci&#243;n a la fecha efectiva, por los medios que se establecen en el presente contrato o cualquier otro medio fehaciente.
-			</p>
-			<p class="paragraph">
-				ART&#205;CULO 26. ELECCI&#211;N DE DOMICILIO Y NOTIFICACIONES. Para el cumplimiento y ejecuci&#243;n del presente contrato, las partes
-				hacen elecci&#243;n de domicilio en las direcciones indicadas al principio de este contrato.
-			</p>
-			<p class="paragraph">
-				P&#193;RRAFO: Todas las comunicaciones, avisos o cartas que deban ser enviadas por una parte a la otra en cumplimiento de las
-				disposiciones de este contrato, ser&#225;n consideradas debidamente recibidas, si son enviados por escrito por medio de correo u otro
-				medio de comunicaci&#243;n admisible como correo electr&#243;nico, carta, fax o a las direcciones que se indican en este contrato. Es
-				responsabilidad de EL PRESTATARIO - GARANTE MOBILIARIO notificar a EL BANCO cualquier cambio en la direcci&#243;n y los datos de
-				contacto suministrados. A falta de esta notificaci&#243;n, los avisos y dem&#225;s correspondencia se considerar&#225;n dados
-				v&#225;lidamente, cuando hayan sido remitidos a la &#250;ltima direcci&#243;n que aparezca registrada en EL BANCO.
-			</p>
-			<p class="paragraph">
-				ART&#205;CULO 27. LEY APLICABLE. Para lo no previsto en el presente contrato las partes se someten a las disposiciones de la Ley
-				Monetaria y Financiera, No. 183-02, de las normas dictadas por la Autoridad Monetaria y Financiera de la Rep&#250;blica Dominicana, y
-				las disposiciones de Derecho com&#250;n, siendo competencia exclusiva de los tribunales de la Rep&#250;blica Dominicana el
-				conocimiento de las acciones judiciales derivadas de la ejecuci&#243;n del presente acuerdo.
-			</p>
+			<c:FSC_ContratoArticulosSeguros propietario="{!vehiculo.otorgante}" asegurado="{!deudor}" propiedad="{!seguroPropiedad}" vida="{!seguroVida}" />
+			<c:FSC_ContratoArticulosGenerales p="{!sujetoGeneral}" garantiaInmueble="{!garantiaInmueble}" />
 			<p class="paragraph">
 				HECHO Y FIRMADO DE BUENA FE, en tantos originales como partes contratantes, de un mismo tenor y efecto, en {!datos.lugarFirma}, a los
 				{!datos.fechaContratoDiaLetras} ({!datos.fechaContratoDiaNumero}) días del mes de {!datos.fechaContratoMes} del año
 				{!datos.fechaContratoAnoLetras} ({!datos.fechaContratoAnoNumero}).
 			</p>
 			<div class="signature-section">
-				<div class="signature-heading">POR {!vehiculo.denominacionPrestatarios}:</div>
+				<div class="signature-heading">POR {!deudor.nombre}:</div>
 				<table class="signature-table">
 					<apex:repeat value="{!vehiculo.prestatarios}" var="firmante">
 						<tr><td class="signature-cell">
@@ -498,7 +264,7 @@
 					</apex:repeat>
 				</table>
 				<apex:outputPanel rendered="{!vehiculo.tieneGaranteMobiliario}" layout="block">
-					<div class="signature-heading">POR {!vehiculo.denominacionGarantes}:</div>
+					<div class="signature-heading">POR {!garante.nombre}:</div>
 					<table class="signature-table">
 						<apex:repeat value="{!vehiculo.garantes}" var="garante">
 							<tr><td class="signature-cell"><div class="signature-line"></div><div class="signature-name">{!garante.nombre}</div></td><td class="signature-cell"></td></tr>

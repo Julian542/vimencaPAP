@@ -1,0 +1,40 @@
+<apex:component layout="none">
+	<style type="text/css">
+		@page {
+			size: letter;
+			margin: 25.4mm;
+			@bottom-right {
+				content: counter(page);
+				font-family: 'Arial Narrow', Arial, sans-serif;
+				font-size: 11pt;
+			}
+		}
+		body {
+			margin: 0;
+			padding: 0;
+			color: #000000;
+			font-family: 'Arial Narrow', Arial, sans-serif;
+			font-size: 11pt;
+			/* Equivale al interlineado "Múltiple 1.2" de Word (1.2 x 1.15 de la métrica de Arial). */
+			line-height: 1.38;
+			counter-reset: articulo;
+		}
+		/* Numeración automática: solo cuentan los artículos que se muestran en el contrato. */
+		.articulo {
+			counter-increment: articulo;
+		}
+		.articulo:before {
+			content: "ARTÍCULO " counter(articulo) ". ";
+		}
+		.sello-agua {
+			position: fixed;
+			top: 62mm;
+			left: 10mm;
+			width: 145mm;
+			z-index: -1;
+		}
+		.sello-agua-imagen {
+			width: 145mm;
+		}
+	</style>
+</apex:component>

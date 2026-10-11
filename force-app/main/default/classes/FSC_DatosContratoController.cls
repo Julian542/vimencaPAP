@@ -1,4 +1,16 @@
 public without sharing class FSC_DatosContratoController {
+	private static final String SECCION_SEGURO_PROPIEDAD = 'Datos obligatorios del seguro de propiedad';
+	private static final String SECCION_SEGURO_VIDA = 'Datos obligatorios del seguro de vida';
+	private static final List<String> REPRESENTANTES_ADICIONALES = new List<String>{ 'representante2_', 'representante3_' };
+	private static final List<String> CAMPOS_REPRESENTANTE = new List<String>{
+		'cargo',
+		'sexo',
+		'nacionalidad',
+		'estadoCivil',
+		'identificacion',
+		'domicilio'
+	};
+
 	public class OpcionEntrada {
 		@AuraEnabled
 		public String label { get; set; }
@@ -266,11 +278,8 @@ public without sharing class FSC_DatosContratoController {
 			}
 		}
 
-		if (
-			resolution.templateCode == FSC_RLAContractTemplateResolver.TEMPLATE_CONSUMO_GARANTIA_HIPOTECARIA ||
-			resolution.templateCode == FSC_RLAContractTemplateResolver.TEMPLATE_CONSUMO_GARANTIA_MOBILIARIA
-		) {
-			addConsumptionInsurancePremium(context, queryInsurance(residentialLoanApplicationId, resolution.templateCode));
+		if (FSC_ContratoRedaccionService.aplicaSeguroVida(account.IsPersonAccount, resolution.templateCode)) {
+			context.seccionesContrato.add(buildLifeInsuranceSection(rla));
 		}
 
 		if (esHipotecario) {
@@ -385,11 +394,7 @@ public without sharing class FSC_DatosContratoController {
 				currentRla.FSC_Propietario_Garantia_Hipotecaria__c
 			),
 			FSC_Tipo_Vendedor_Hipotecario__c = valueOrCurrent(values, 'hipotecarioTipoVendedor', currentRla.FSC_Tipo_Vendedor_Hipotecario__c),
-			FSC_Datos_Intervinientes_Contrato__c = generarSoloActoGarantia != true && resolution.aplicaContrato &&
-				(currentRla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Vehiculo' ||
-				currentRla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Hipotecario')
-				? JSON.serialize(intervenerValues(values))
-				: currentRla.FSC_Datos_Intervinientes_Contrato__c,
+			FSC_Datos_Intervinientes_Contrato__c = mergeIntervenerValues(currentRla.FSC_Datos_Intervinientes_Contrato__c, values),
 			FSC_GastosLegalesContratos__c = gastosLegales,
 			FSC_GastosGarantiasHip2__c = gastosGarantiaHip2,
 			FSC_GastosGarantiasHip3__c = gastosGarantiaHip3,
@@ -516,6 +521,8 @@ public without sharing class FSC_DatosContratoController {
 				FSC_Nacionalidad_Garante_Contrato__c,
 				FSC_Estado_Civil_Garante_Contrato__c,
 				FSC_Domicilio_Garante_Contrato__c,
+				FSC_NumeroPolizaSeguroDeVida__c,
+				FSC_SeguroVidaMonto__c,
 				Account.Id,
 				Account.Name,
 				Account.IsPersonAccount,
@@ -621,6 +628,12 @@ public without sharing class FSC_DatosContratoController {
 			WHERE FSC_Residential_Loan_Application__c = :rlaId
 			ORDER BY CreatedDate ASC, Id ASC
 		];
+		// Se prefiere una póliza que no sea de vida; el tipo por defecto del picklist es de vida, así que se conserva
+		// como alternativa cualquier póliza con datos de contrato.
+		for (FSC_Seguro__c record : records) {
+			if (!isLifeInsurance(record) && hasContractInsuranceData(record))
+				return record;
+		}
 		for (FSC_Seguro__c record : records) {
 			if (hasContractInsuranceData(record))
 				return record;
@@ -633,6 +646,23 @@ public without sharing class FSC_DatosContratoController {
 				return record;
 		}
 		return null;
+	}
+
+	private static FSC_Seguro__c queryLifeInsurance(Id rlaId) {
+		for (FSC_Seguro__c record : [
+			SELECT Id, FSC_Tipo_de_Seguro__c, FSC_Numero_Poliza_Contrato__c, FSC_Aseguradora_Contrato__c, FSC_Monto_de_la_Prima__c
+			FROM FSC_Seguro__c
+			WHERE FSC_Residential_Loan_Application__c = :rlaId
+			ORDER BY CreatedDate ASC, Id ASC
+		]) {
+			if (isLifeInsurance(record))
+				return record;
+		}
+		return null;
+	}
+
+	private static Boolean isLifeInsurance(FSC_Seguro__c insurance) {
+		return String.valueOf(insurance.FSC_Tipo_de_Seguro__c).toUpperCase().contains('VIDA');
 	}
 
 	private static Boolean hasContractInsuranceData(FSC_Seguro__c insurance) {
@@ -652,6 +682,7 @@ public without sharing class FSC_DatosContratoController {
 	}
 
 	private static void buildClientSections(ContextoGeneracion context, ResidentialLoanApplication rla, Account account, String templateCode) {
+		Map<String, Object> saved = FSC_ContratoIntervinienteService.parse(rla.FSC_Datos_Intervinientes_Contrato__c);
 		SeccionEntrada client = new SeccionEntrada('Datos obligatorios del cliente para el contrato');
 		if (account.IsPersonAccount) {
 			client.campos.add(
@@ -678,6 +709,7 @@ public without sharing class FSC_DatosContratoController {
 					'text'
 				)
 			);
+			client.campos.add(sexField('clienteSexo', 'Sexo del cliente', stored(saved, 'clienteSexo')));
 		} else {
 			client.campos.add(field('clienteRnc', 'RNC del cliente', first(rla.FSC_RNC_Cliente_Contrato__c, account.ACC_RNC__c), 'text'));
 			client.campos.add(
@@ -697,7 +729,8 @@ public without sharing class FSC_DatosContratoController {
 		if (account.IsPersonAccount)
 			return;
 
-		Participante__c participant = queryAuthorizedParticipant(account.Id);
+		List<Participante__c> participants = queryAuthorizedParticipants(account.Id);
+		Participante__c participant = participants.isEmpty() ? null : participants[0];
 		SeccionEntrada representative = new SeccionEntrada('Representante autorizado del cliente');
 		representative.campos.add(
 			field('representanteNombre', 'Nombre completo', first(rla.FSC_Nombre_Representante_Cliente__c, participantName(participant)), 'text')
@@ -737,7 +770,18 @@ public without sharing class FSC_DatosContratoController {
 		representative.campos.add(
 			field('representanteDomicilio', 'Domicilio', first(rla.FSC_Domicilio_Representante__c, participantAddress(participant)), 'textarea')
 		);
+		representative.campos.add(sexField('representanteSexo', 'Sexo', stored(saved, 'representanteSexo')));
 		context.seccionesContrato.add(representative);
+		for (Integer index = 0; index < REPRESENTANTES_ADICIONALES.size(); index++) {
+			context.seccionesContrato.add(
+				buildAdditionalRepresentativeSection(
+					REPRESENTANTES_ADICIONALES[index],
+					index + 2,
+					saved,
+					participants.size() > index + 1 ? participants[index + 1] : null
+				)
+			);
+		}
 
 		if (templateCode != FSC_RLAContractTemplateResolver.TEMPLATE_GARANTIA_MOBILIARIA_CON_POSESION) {
 			SeccionEntrada authorization = new SeccionEntrada('Autorización societaria');
@@ -813,6 +857,10 @@ public without sharing class FSC_DatosContratoController {
 		section.campos.add(
 			field('garanteDomicilio', 'Domicilio', first(rla.FSC_Domicilio_Garante_Contrato__c, contactAddress(guarantor)), 'textarea')
 		);
+		if (!forPagare) {
+			Map<String, Object> saved = FSC_ContratoIntervinienteService.parse(rla.FSC_Datos_Intervinientes_Contrato__c);
+			section.campos.add(sexField('garanteSexo', 'Sexo', stored(saved, 'garanteSexo')));
+		}
 		if (forPagare)
 			context.seccionesPagare.add(section);
 		else
@@ -1209,7 +1257,8 @@ public without sharing class FSC_DatosContratoController {
 				field(prefix + 'identificacion', 'Identificación', person.identificacion, 'text'),
 				field(prefix + 'nacionalidad', 'Nacionalidad', person.nacionalidad, 'text'),
 				field(prefix + 'estadoCivil', 'Estado civil', person.estadoCivil, 'text'),
-				field(prefix + 'domicilio', 'Domicilio', person.domicilio, 'textarea')
+				field(prefix + 'domicilio', 'Domicilio', person.domicilio, 'textarea'),
+				sexField(prefix + 'sexo', 'Sexo', person.sexo)
 			};
 			for (CampoEntrada input : fields) {
 				input.mostrarParaPropietarioGarantia = ownerCondition;
@@ -1592,30 +1641,36 @@ public without sharing class FSC_DatosContratoController {
 		}
 	}
 
-	private static Map<String, Object> intervenerValues(Map<String, Object> values) {
-		Map<String, Object> result = new Map<String, Object>();
+	private static Boolean isIntervenerKey(String key) {
+		return key.startsWith('codeudor_') ||
+			key.startsWith('garanteContrato_') ||
+			key.startsWith('conyuge_') ||
+			key.startsWith('representante2_') ||
+			key.startsWith('representante3_') ||
+			key.startsWith('seguroVida') ||
+			key == 'clienteSexo' ||
+			key == 'representanteSexo' ||
+			key == 'garanteSexo' ||
+			key == 'hipotecarioConyugeInterviniente';
+	}
+
+	// Se combina con lo ya guardado para no perder datos capturados en otro flujo (ej. acto de garantía).
+	private static String mergeIntervenerValues(String currentJson, Map<String, Object> values) {
+		Map<String, Object> result = FSC_ContratoIntervinienteService.parse(currentJson);
+		Boolean changed = false;
 		for (String key : values.keySet()) {
-			if (
-				key.startsWith('codeudor_') ||
-				key.startsWith('garanteContrato_') ||
-				key.startsWith('conyuge_') ||
-				key == 'hipotecarioConyugeInterviniente'
-			) {
+			if (isIntervenerKey(key)) {
 				result.put(key, values.get(key));
+				changed = true;
 			}
 		}
-		return result;
+		return changed ? JSON.serialize(result) : currentJson;
 	}
 
 	private static Map<String, Object> nonIntervenerValues(Map<String, Object> values) {
 		Map<String, Object> result = new Map<String, Object>();
 		for (String key : values.keySet()) {
-			if (
-				!key.startsWith('codeudor_') &&
-				!key.startsWith('garanteContrato_') &&
-				!key.startsWith('conyuge_') &&
-				key != 'hipotecarioConyugeInterviniente'
-			) {
+			if (!isIntervenerKey(key)) {
 				result.put(key, values.get(key));
 			}
 		}
@@ -1724,27 +1779,185 @@ public without sharing class FSC_DatosContratoController {
 			)
 		);
 		section.campos.add(
-			field('seguroFechaEndoso', 'Fecha del endoso', insurance == null ? null : stringValue(insurance.FSC_Fecha_Endoso_Contrato__c), 'date')
+			optionalField(
+				'seguroFechaEndoso',
+				'Fecha del endoso (solo si la póliza es endosada a EL BANCO)',
+				insurance == null ? null : stringValue(insurance.FSC_Fecha_Endoso_Contrato__c),
+				'date'
+			)
 		);
 		section.campos.add(
-			field('seguroMonto', 'Monto asegurado', insurance == null ? null : stringValue(insurance.FSC_Monto_Asegurado_Contrato__c), 'number')
+			optionalField(
+				'seguroMonto',
+				'Monto asegurado (póliza endosada)',
+				insurance == null ? null : stringValue(insurance.FSC_Monto_Asegurado_Contrato__c),
+				'number'
+			)
+		);
+		section.campos.add(
+			optionalField(
+				'seguroPrima',
+				'Prima mensual (póliza colectiva de EL BANCO)',
+				insurance == null ? null : stringValue(insurance.FSC_Monto_de_la_Prima__c),
+				'number'
+			)
 		);
 		return section;
 	}
 
-	private static void addConsumptionInsurancePremium(ContextoGeneracion context, FSC_Seguro__c insurance) {
+	// El seguro de vida se guarda en el JSON de la solicitud: FSC_Seguro__c queda bloqueado al aprobarse el crédito.
+	private static SeccionEntrada buildLifeInsuranceSection(ResidentialLoanApplication rla) {
+		Map<String, Object> saved = FSC_ContratoIntervinienteService.parse(rla.FSC_Datos_Intervinientes_Contrato__c);
+		FSC_Seguro__c insurance = queryLifeInsurance(rla.Id);
+		SeccionEntrada section = new SeccionEntrada(SECCION_SEGURO_VIDA);
+		section.campos.add(
+			field(
+				'seguroVidaPoliza',
+				'Número de póliza',
+				first(
+					stored(saved, 'seguroVidaPoliza'),
+					first(rla.FSC_NumeroPolizaSeguroDeVida__c, insurance == null ? null : insurance.FSC_Numero_Poliza_Contrato__c)
+				),
+				'text'
+			)
+		);
+		section.campos.add(
+			field(
+				'seguroVidaAseguradora',
+				'Compañía aseguradora',
+				first(stored(saved, 'seguroVidaAseguradora'), insurance == null ? null : insurance.FSC_Aseguradora_Contrato__c),
+				'text'
+			)
+		);
+		section.campos.add(field('seguroVidaDireccion', 'Dirección de la aseguradora', stored(saved, 'seguroVidaDireccion'), 'textarea'));
+		section.campos.add(
+			optionalField(
+				'seguroVidaFechaEndoso',
+				'Fecha del endoso (solo si la póliza es endosada a EL BANCO)',
+				stored(saved, 'seguroVidaFechaEndoso'),
+				'date'
+			)
+		);
+		section.campos.add(
+			optionalField(
+				'seguroVidaMonto',
+				'Monto asegurado (póliza endosada)',
+				first(stored(saved, 'seguroVidaMonto'), rla.FSC_SeguroVidaMonto__c),
+				'number'
+			)
+		);
+		section.campos.add(
+			optionalField(
+				'seguroVidaPrima',
+				'Prima mensual (póliza colectiva de EL BANCO)',
+				first(stored(saved, 'seguroVidaPrima'), insurance == null ? null : insurance.FSC_Monto_de_la_Prima__c),
+				'number'
+			)
+		);
+		return section;
+	}
+
+	private static SeccionEntrada buildAdditionalRepresentativeSection(
+		String prefix,
+		Integer position,
+		Map<String, Object> saved,
+		Participante__c participant
+	) {
+		SeccionEntrada section = new SeccionEntrada('Representante autorizado ' + position + ' del cliente (opcional)');
+		section.campos.add(
+			optionalField(prefix + 'nombre', 'Nombre completo', first(stored(saved, prefix + 'nombre'), participantName(participant)), 'text')
+		);
+		section.campos.add(
+			optionalField(
+				prefix + 'cargo',
+				'Cargo o calidad',
+				first(stored(saved, prefix + 'cargo'), participant == null ? null : participant.Cargo__c),
+				'text'
+			)
+		);
+		CampoEntrada sex = sexField(prefix + 'sexo', 'Sexo', stored(saved, prefix + 'sexo'));
+		sex.requerido = false;
+		section.campos.add(sex);
+		section.campos.add(
+			optionalField(
+				prefix + 'nacionalidad',
+				'Nacionalidad',
+				first(stored(saved, prefix + 'nacionalidad'), participant == null ? null : participant.Participante__r.ACC_Nacionalidad__c),
+				'text'
+			)
+		);
+		section.campos.add(
+			optionalField(
+				prefix + 'estadoCivil',
+				'Estado civil',
+				first(stored(saved, prefix + 'estadoCivil'), participant == null ? null : participant.Participante__r.ACC_Estado_Civil__c),
+				'text'
+			)
+		);
+		section.campos.add(
+			optionalField(
+				prefix + 'identificacion',
+				'Identificación',
+				first(stored(saved, prefix + 'identificacion'), participant == null ? null : participant.Participante__r.ACC_NumIdentificacion__c),
+				'text'
+			)
+		);
+		section.campos.add(
+			optionalField(prefix + 'domicilio', 'Domicilio', first(stored(saved, prefix + 'domicilio'), participantAddress(participant)), 'textarea')
+		);
+		return section;
+	}
+
+	private static CampoEntrada sexField(String key, String label, String valueToUse) {
+		CampoEntrada result = field(key, label, valueToUse, 'picklist');
+		result.opciones.add(new OpcionEntrada(FSC_ContratoParte.SEXO_MASCULINO, FSC_ContratoParte.SEXO_MASCULINO));
+		result.opciones.add(new OpcionEntrada(FSC_ContratoParte.SEXO_FEMENINO, FSC_ContratoParte.SEXO_FEMENINO));
+		return result;
+	}
+
+	private static CampoEntrada optionalField(String key, String label, Object valueToUse, String type) {
+		CampoEntrada result = field(key, label, valueToUse, type);
+		result.requerido = false;
+		return result;
+	}
+
+	/**
+	 * Validaciones que dependen de varios campos: cada póliza debe traer los datos de su versión del artículo
+	 * (endosada: fecha y monto; colectiva: prima) y un representante adicional debe estar completo.
+	 */
+	public static List<String> validarDatosCombinados(ContextoGeneracion context) {
+		List<String> errors = new List<String>();
+		Map<String, String> values = new Map<String, String>();
+		Set<String> sections = new Set<String>();
 		for (SeccionEntrada section : context.seccionesContrato) {
-			if (section.titulo == 'Datos obligatorios del seguro de propiedad') {
-				section.campos.add(
-					field(
-						'seguroPrima',
-						'Prima mensual del seguro',
-						insurance == null ? null : stringValue(insurance.FSC_Monto_de_la_Prima__c),
-						'number'
-					)
-				);
-				return;
+			sections.add(section.titulo);
+			for (CampoEntrada item : section.campos)
+				values.put(item.clave, item.valor);
+		}
+		if (sections.contains(SECCION_SEGURO_PROPIEDAD)) {
+			validateInsuranceVersion(errors, values, 'seguro', 'seguro de propiedad');
+		}
+		if (sections.contains(SECCION_SEGURO_VIDA)) {
+			validateInsuranceVersion(errors, values, 'seguroVida', 'seguro de vida');
+		}
+		for (String prefix : REPRESENTANTES_ADICIONALES) {
+			if (String.isBlank(values.get(prefix + 'nombre')))
+				continue;
+			for (String suffix : CAMPOS_REPRESENTANTE) {
+				if (String.isBlank(values.get(prefix + suffix))) {
+					errors.add('Falta ' + suffix + ' del representante ' + values.get(prefix + 'nombre') + '.');
+				}
 			}
+		}
+		return errors;
+	}
+
+	private static void validateInsuranceVersion(List<String> errors, Map<String, String> values, String prefix, String label) {
+		if (!String.isBlank(values.get(prefix + 'FechaEndoso'))) {
+			if (String.isBlank(values.get(prefix + 'Monto')))
+				errors.add('Falta el monto asegurado del ' + label + ' endosado.');
+		} else if (String.isBlank(values.get(prefix + 'Prima'))) {
+			errors.add('Indique la fecha del endoso o la prima mensual del ' + label + '.');
 		}
 	}
 
@@ -1853,8 +2066,8 @@ public without sharing class FSC_DatosContratoController {
 		rla.FSC_Calidad_Autorizados__c = null;
 	}
 
-	private static Participante__c queryAuthorizedParticipant(Id accountId) {
-		List<Participante__c> records = [
+	private static List<Participante__c> queryAuthorizedParticipants(Id accountId) {
+		return [
 			SELECT
 				Id,
 				Cargo__c,
@@ -1869,9 +2082,8 @@ public without sharing class FSC_DatosContratoController {
 			FROM Participante__c
 			WHERE PAR_Cliente__c = :accountId AND VFS_FirmanteDeContratoAutorizado__c = TRUE
 			ORDER BY CreatedDate ASC, Id ASC
-			LIMIT 1
+			LIMIT 3
 		];
-		return records.isEmpty() ? null : records[0];
 	}
 
 	private static CampoEntrada field(String key, String label, Object valueToUse, String type) {
@@ -1957,6 +2169,8 @@ public without sharing class FSC_DatosContratoController {
 	private static void validateSavedContext(Id rlaId, Boolean soloActoGarantia) {
 		ContextoGeneracion refreshed = getContextoGeneracion(rlaId);
 		List<String> missingFields = getMissingFieldLabels(refreshed, soloActoGarantia);
+		if (soloActoGarantia != true && refreshed.aplicaContrato)
+			missingFields.addAll(validarDatosCombinados(refreshed));
 		List<String> configurationErrors = soloActoGarantia == true ? refreshed.erroresConfiguracionActo : refreshed.erroresConfiguracion;
 		if (!configurationErrors.isEmpty())
 			missingFields.addAll(configurationErrors);

@@ -220,6 +220,93 @@ private class FSC_RlaApprovalAdminServiceTest {
 	}
 
 	@IsTest
+	static void clienteAceptaCondicion_pasaAGeneracionDePagares() {
+		ResidentialLoanApplication rla = createRla();
+
+		Test.startTest();
+		FSC_RlaApprovalAdminService.ejecutarDecisionCliente(rla.Id, FSC_RlaApprovalAdminService.ACCION_CLIENTE_ACEPTA, 'auditoria');
+		Test.stopTest();
+
+		ResidentialLoanApplication refreshed = [
+			SELECT FSC_Subestado__c, FSC_SolicitudAprobadaPorComite__c, FSC_FechaYHoraAprobacionComite__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :rla.Id
+		];
+		System.assertEquals('Generación de pagarés y plantillas', refreshed.FSC_Subestado__c);
+		System.assertEquals(true, refreshed.FSC_SolicitudAprobadaPorComite__c);
+		System.assertNotEquals(null, refreshed.FSC_FechaYHoraAprobacionComite__c);
+	}
+
+	@IsTest
+	static void clienteRechazaCondicion_cierraSolicitudYRegistraAuditoriaEnRecall() {
+		ResidentialLoanApplication rla = createRla();
+		Approval.ProcessSubmitRequest request = new Approval.ProcessSubmitRequest();
+		request.setObjectId(rla.Id);
+		request.setProcessDefinitionNameOrId('FSC_AnalistasDeCredito');
+		request.setSkipEntryCriteria(true);
+		request.setNextApproverIds(new List<Id>{ UserInfo.getUserId() });
+		System.assertEquals(true, Approval.process(request).isSuccess());
+		String auditoria = 'Cliente no acepta. Ejecutado por: Oficial Test (' + UserInfo.getUserId() + ').';
+
+		Test.startTest();
+		FSC_RlaApprovalAdminService.ejecutarDecisionCliente(rla.Id, FSC_RlaApprovalAdminService.ACCION_CLIENTE_RECHAZA, auditoria);
+		Test.stopTest();
+
+		ResidentialLoanApplication refreshed = [SELECT Status, FSC_Subestado__c FROM ResidentialLoanApplication WHERE Id = :rla.Id];
+		System.assertEquals('Cerrada Perdida', refreshed.Status);
+		System.assertEquals('Rechazada por cliente', refreshed.FSC_Subestado__c);
+		System.assertEquals(0, [SELECT COUNT() FROM ProcessInstanceWorkitem WHERE ProcessInstance.TargetObjectId = :rla.Id]);
+
+		List<ProcessInstanceHistory> pasosRemovidos = new List<ProcessInstanceHistory>();
+		for (ProcessInstance instancia : [
+			SELECT (SELECT StepStatus, Comments FROM StepsAndWorkitems WHERE StepStatus = 'Removed')
+			FROM ProcessInstance
+			WHERE TargetObjectId = :rla.Id
+		]) {
+			pasosRemovidos.addAll(instancia.StepsAndWorkitems);
+		}
+		System.assertEquals(1, pasosRemovidos.size());
+		System.assert(pasosRemovidos[0].Comments.contains(UserInfo.getUserId()), 'El recall debe registrar quién ejecutó la acción.');
+	}
+
+	@IsTest
+	static void ejecutarDecisionCliente_validaEntradas() {
+		Boolean thrown = false;
+		try {
+			FSC_RlaApprovalAdminService.ejecutarDecisionCliente(UserInfo.getUserId(), 'OTRA', null);
+		} catch (AuraHandledException ex) {
+			thrown = true;
+		}
+		System.assertEquals(true, thrown, 'Debe rechazar una acción desconocida.');
+
+		thrown = false;
+		try {
+			FSC_RlaApprovalAdminService.clienteAceptaCondicion(null, null);
+		} catch (AuraHandledException ex) {
+			thrown = true;
+		}
+		System.assertEquals(true, thrown);
+
+		thrown = false;
+		try {
+			FSC_RlaApprovalAdminService.clienteRechazaCondicion(null, null);
+		} catch (AuraHandledException ex) {
+			thrown = true;
+		}
+		System.assertEquals(true, thrown);
+	}
+
+	@IsTest
+	static void buildRecallComment_agregaAuditoria() {
+		System.assertEquals('Proceso cancelado desde sistema.', FSC_RlaApprovalAdminService.buildRecallComment(null));
+		System.assertEquals(
+			'Proceso cancelado desde sistema. Ejecutado por: X',
+			FSC_RlaApprovalAdminService.buildRecallComment(' Ejecutado por: X ')
+		);
+		System.assertEquals(4000, FSC_RlaApprovalAdminService.buildRecallComment('x'.repeat(5000)).length());
+	}
+
+	@IsTest
 	static void buildRecallFailure_returnsDefaultException() {
 		AuraHandledException ex = FSC_RlaApprovalAdminService.buildRecallFailure(null);
 		System.assertNotEquals(null, ex);

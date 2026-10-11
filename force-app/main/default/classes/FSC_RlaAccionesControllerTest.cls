@@ -1181,4 +1181,92 @@ private class FSC_RlaAccionesControllerTest {
 		System.assertEquals(UserInfo.getUserId(), context.get('currentApproverId'));
 		FSC_RlaAccionesController.cancelarAprobacion(rla.Id);
 	}
+
+	@IsTest
+	static void reasignarUsuarioPagares_asignaUsuarioDeLaCola() {
+		FSC_RlaAccionesController.testBypassPermissions = true;
+		Group cola = [SELECT Id FROM Group WHERE Type = 'Queue' AND DeveloperName = 'FSC_GestionDePagaresYContratos' LIMIT 1];
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			if ([SELECT COUNT() FROM GroupMember WHERE GroupId = :cola.Id AND UserOrGroupId = :UserInfo.getUserId()] == 0) {
+				insert new GroupMember(GroupId = cola.Id, UserOrGroupId = UserInfo.getUserId());
+			}
+		}
+		ResidentialLoanApplication rla = createRla('ACTREAPAG', SUBESTADO_PAGARES);
+
+		Test.startTest();
+		List<Map<String, String>> opciones = FSC_RlaAccionesController.getUsuariosPagares(rla.Id);
+		FSC_RlaAccionesController.reasignarUsuarioPagares(rla.Id, UserInfo.getUserId());
+		Test.stopTest();
+
+		Boolean incluyeUsuario = false;
+		for (Map<String, String> opcion : opciones) {
+			if (opcion.get('value') == UserInfo.getUserId()) {
+				incluyeUsuario = true;
+			}
+		}
+		System.assert(incluyeUsuario, 'Los miembros activos de la cola deben ofrecerse para reasignar.');
+		ResidentialLoanApplication refreshed = [SELECT FSC_UsuarioPagaresYContratos__c FROM ResidentialLoanApplication WHERE Id = :rla.Id];
+		System.assertEquals(UserInfo.getUserId(), refreshed.FSC_UsuarioPagaresYContratos__c);
+	}
+
+	@IsTest
+	static void reasignarUsuarioPagares_validaEtapaYUsuario() {
+		FSC_RlaAccionesController.testBypassPermissions = true;
+		ResidentialLoanApplication rlaAnalisis = createRla('ACTREAPAG2', SUBESTADO_ANALISIS);
+		ResidentialLoanApplication rlaPagares = createRla('ACTREAPAG3', SUBESTADO_PAGARES);
+
+		Test.startTest();
+		Boolean etapaInvalida = false;
+		try {
+			FSC_RlaAccionesController.getUsuariosPagares(rlaAnalisis.Id);
+		} catch (AuraHandledException e) {
+			etapaInvalida = true;
+		}
+		Boolean usuarioInvalido = false;
+		try {
+			FSC_RlaAccionesController.reasignarUsuarioPagares(rlaPagares.Id, null);
+		} catch (AuraHandledException e) {
+			usuarioInvalido = true;
+		}
+		Boolean solicitudRequerida = false;
+		try {
+			FSC_RlaAccionesController.reasignarUsuarioPagares(null, UserInfo.getUserId());
+		} catch (AuraHandledException e) {
+			solicitudRequerida = true;
+		}
+		Test.stopTest();
+
+		System.assert(etapaInvalida, 'Solo se reasigna en Generación de pagarés y plantillas.');
+		System.assert(usuarioInvalido, 'El usuario debe pertenecer a la cola.');
+		System.assert(solicitudRequerida);
+	}
+
+	@IsTest
+	static void rechazarPorCliente_registraUsuarioEnComentarioDelRecall() {
+		FSC_RlaAccionesController.testBypassPermissions = true;
+		ResidentialLoanApplication rla = createRla('ACTCLIENTE', SUBESTADO_ANALISIS);
+		setPymeRecordType(rla);
+		Approval.ProcessResult submission = submitToAnalystApproval(rla.Id);
+		System.assertEquals(true, submission.isSuccess());
+
+		Test.startTest();
+		FSC_RlaAccionesController.rechazarPorCliente(rla.Id);
+		Test.stopTest();
+
+		ResidentialLoanApplication refreshed = [SELECT Status, FSC_Subestado__c FROM ResidentialLoanApplication WHERE Id = :rla.Id];
+		System.assertEquals('Cerrada Perdida', refreshed.Status);
+		System.assertEquals('Rechazada por cliente', refreshed.FSC_Subestado__c);
+
+		List<ProcessInstanceHistory> pasosRemovidos = new List<ProcessInstanceHistory>();
+		for (ProcessInstance instancia : [
+			SELECT (SELECT StepStatus, Comments FROM StepsAndWorkitems WHERE StepStatus = 'Removed')
+			FROM ProcessInstance
+			WHERE TargetObjectId = :rla.Id
+		]) {
+			pasosRemovidos.addAll(instancia.StepsAndWorkitems);
+		}
+		System.assertEquals(1, pasosRemovidos.size());
+		System.assert(pasosRemovidos[0].Comments.contains('Cliente no acepta condiciones'));
+		System.assert(pasosRemovidos[0].Comments.contains(UserInfo.getUserId()));
+	}
 }

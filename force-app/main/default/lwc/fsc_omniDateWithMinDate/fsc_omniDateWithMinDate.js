@@ -7,6 +7,7 @@ export default class FscOmniDateWithMinDate extends OmniscriptBaseMixin(Lightnin
 	_fieldApiName = '';
 	_defaultValue = '';
 	_createdDate = '';
+	_lastReportedValidity;
 
 	@api label = '';
 	@api outputParentNode = DEFAULT_OUTPUT_PARENT_NODE;
@@ -52,11 +53,30 @@ export default class FscOmniDateWithMinDate extends OmniscriptBaseMixin(Lightnin
 	}
 
 	renderedCallback() {
+		if (typeof super.renderedCallback === 'function') {
+			super.renderedCallback();
+		}
 		const minimumDate = this.resolveMinimumDate();
 		if (minimumDate !== this.minimumDate) {
 			this.minimumDate = minimumDate;
 		}
-		this.validateInput();
+		this.syncOmniValidity();
+	}
+
+	syncOmniValidity() {
+		const input = this.template.querySelector('lightning-input');
+		if (!input || typeof this.omniValidate !== 'function') {
+			return;
+		}
+
+		const isValid = this.checkValidity();
+		if (this._lastReportedValidity === isValid) {
+			return;
+		}
+
+		// Actualiza la validez del step antes de Siguiente, no durante el primer intento de avanzar.
+		this._lastReportedValidity = isValid;
+		this.omniValidate(false);
 	}
 
 	get isRequired() {
@@ -69,7 +89,8 @@ export default class FscOmniDateWithMinDate extends OmniscriptBaseMixin(Lightnin
 
 	handleChange(event) {
 		this.value = event.target.value || '';
-		const isValid = this.validateInput(event.target);
+		const isValid = this.checkValidity();
+		this.syncOmniValidity();
 		if (!isValid) {
 			event.target.reportValidity();
 			return;

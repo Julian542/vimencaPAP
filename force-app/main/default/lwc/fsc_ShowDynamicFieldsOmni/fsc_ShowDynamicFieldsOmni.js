@@ -15,6 +15,7 @@ const PASO_SOLICITUD_NODE = 'PasoSolicitud';
 
 export default class Fsc_ShowDynamicFieldsOmni extends OmniscriptBaseMixin(LightningElement) {
 	_fieldToShow;
+	_lastReportedValidity;
 
 	gastosTramitacionValue = null;
 	hasGastosTramitacionApiValue = false;
@@ -130,6 +131,24 @@ export default class Fsc_ShowDynamicFieldsOmni extends OmniscriptBaseMixin(Light
 		return (this.fieldToShow || '').trim();
 	}
 
+	renderedCallback() {
+		if (typeof super.renderedCallback === 'function') {
+			super.renderedCallback();
+		}
+		this.syncOmniValidity();
+	}
+
+	syncOmniValidity() {
+		const isValid = this.checkValidity();
+		if (typeof this.omniValidate !== 'function' || this._lastReportedValidity === isValid) {
+			return;
+		}
+
+		// El step debe conocer la validez antes del primer clic en Siguiente.
+		this._lastReportedValidity = isValid;
+		this.omniValidate(false);
+	}
+
 	get showGastosTramitacion() {
 		return this.normalizedFieldToShow === GASTOS_TRAMITACION;
 	}
@@ -152,6 +171,16 @@ export default class Fsc_ShowDynamicFieldsOmni extends OmniscriptBaseMixin(Light
 
 	get montoCuotaRegularFormatted() {
 		return this.formatCurrency(this.montoCuotaRegularValue);
+	}
+
+	@api
+	checkValidity() {
+		return [...this.template.querySelectorAll('lightning-input')].every((input) => input.checkValidity());
+	}
+
+	@api
+	reportValidity() {
+		return [...this.template.querySelectorAll('lightning-input')].reduce((isValid, input) => input.reportValidity() && isValid, true);
 	}
 
 	handleGastosTramitacionKeyDown(event) {
@@ -204,6 +233,7 @@ export default class Fsc_ShowDynamicFieldsOmni extends OmniscriptBaseMixin(Light
 			input.value = value;
 		}
 		this.updateGastosTramitacionOmniJson();
+		this.syncOmniValidity();
 	}
 
 	handleGastosTramitacionChange(event) {
@@ -215,16 +245,19 @@ export default class Fsc_ShowDynamicFieldsOmni extends OmniscriptBaseMixin(Light
 	handleGastosTramitacionBlur() {
 		this.gastosTramitacionValue = this.normalizeCurrencyValue(this.gastosTramitacionValue);
 		this.updateGastosTramitacionOmniJson();
+		this.syncOmniValidity();
 	}
 
 	handleSeguroDeVidaChange(event) {
 		this.seguroDeVidaValue = this.normalizeCurrencyValue(event.detail.value);
 		this.updateSeguroDeVidaOmniJson();
+		this.syncOmniValidity();
 	}
 
 	handleSeguroDeVidaBlur() {
 		this.seguroDeVidaValue = this.normalizeCurrencyValue(this.seguroDeVidaValue);
 		this.updateSeguroDeVidaOmniJson();
+		this.syncOmniValidity();
 	}
 
 	normalizeCurrencyValue(value) {
@@ -241,7 +274,9 @@ export default class Fsc_ShowDynamicFieldsOmni extends OmniscriptBaseMixin(Light
 	}
 
 	sanitizeCurrencyInput(value) {
-		const numericValue = String(value || '').replace(',', '.').replace(/[^0-9.]/g, '');
+		const numericValue = String(value || '')
+			.replace(',', '.')
+			.replace(/[^0-9.]/g, '');
 		const [integerPart, ...decimalParts] = numericValue.split('.');
 		if (decimalParts.length === 0) {
 			return integerPart;
@@ -419,29 +454,36 @@ export default class Fsc_ShowDynamicFieldsOmni extends OmniscriptBaseMixin(Light
 	}
 
 	updateGastosTramitacionOmniJson() {
-		if (typeof this.omniApplyCallResp === 'function') {
-			this.omniApplyCallResp(
-				this.buildPasoSolicitudPayload(GASTOS_TRAMITACION_OMNI_FIELD, this.normalizeCurrencyValue(this.gastosTramitacionValue))
-			);
+		if (this.showGastosTramitacion) {
+			this.updateOmniField(GASTOS_TRAMITACION_OMNI_FIELD, this.normalizeCurrencyValue(this.gastosTramitacionValue));
 		}
 	}
 
 	updateSucursalUsuarioOmniJson() {
-		if (typeof this.omniApplyCallResp === 'function') {
-			this.omniApplyCallResp(this.buildPasoSolicitudPayload(SUCURSAL_USUARIO_OMNI_FIELD, this.sucursalUsuarioValue || null));
+		if (this.showSucursalUsuario) {
+			this.updateOmniField(SUCURSAL_USUARIO_OMNI_FIELD, this.sucursalUsuarioValue || null);
 		}
 	}
 
 	updateSeguroDeVidaOmniJson() {
-		if (typeof this.omniApplyCallResp === 'function') {
-			this.omniApplyCallResp(this.buildPasoSolicitudPayload(SEGURO_DE_VIDA_OMNI_FIELD, this.seguroDeVidaValue));
+		if (this.showSeguroDeVida) {
+			this.updateOmniField(SEGURO_DE_VIDA_OMNI_FIELD, this.seguroDeVidaValue);
 		}
 	}
 
 	updateMontoCuotaRegularOmniJson() {
-		if (typeof this.omniApplyCallResp === 'function') {
-			this.omniApplyCallResp(this.buildPasoSolicitudPayload(MONTO_CUOTA_REGULAR_OMNI_FIELD, this.montoCuotaRegularValue));
+		if (this.showMontoCuotaRegular) {
+			this.updateOmniField(MONTO_CUOTA_REGULAR_OMNI_FIELD, this.montoCuotaRegularValue);
 		}
+	}
+
+	updateOmniField(fieldName, value) {
+		if (typeof this.omniApplyCallResp !== 'function' || this.omniJsonData?.[PASO_SOLICITUD_NODE]?.[fieldName] === value) {
+			return;
+		}
+
+		// Evita actualizar el paso durante el blur previo al clic en Siguiente si el valor ya está sincronizado.
+		this.omniApplyCallResp(this.buildPasoSolicitudPayload(fieldName, value));
 	}
 
 	getOmniFieldValue(fieldName) {

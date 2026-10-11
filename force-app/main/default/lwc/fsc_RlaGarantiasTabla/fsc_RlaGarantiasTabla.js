@@ -3,176 +3,198 @@ import { OmniscriptBaseMixin } from 'omnistudio/omniscriptBaseMixin';
 import getGarantias from '@salesforce/apex/FSC_RlaGarantiasTablaController.getGarantias';
 
 export default class Fsc_RlaGarantiasTabla extends OmniscriptBaseMixin(LightningElement) {
-    @api title = 'Garantías relacionadas';
-    @api emptyMessage = 'No se encontraron garantías relacionadas.';
-    @api residentialLoanApplicationId;
-    @api recordId;
-    @api contextId;
+	@api title = 'Garantías relacionadas';
+	@api emptyMessage = 'No se encontraron garantías relacionadas.';
+	@api residentialLoanApplicationId;
+	@api recordId;
+	@api contextId;
 
-    rows = [];
-    errorMessage = '';
-    isLoaded = false;
+	rows = [];
+	errorMessage = '';
+	isLoaded = false;
+	_hasReportedValidity = false;
 
-    @wire(getGarantias, { residentialLoanApplicationId: '$effectiveResidentialLoanApplicationId' })
-    wiredGarantias({ data, error }) {
-        if (data === undefined && error === undefined) {
-            return;
-        }
+	renderedCallback() {
+		if (typeof super.renderedCallback === 'function') {
+			super.renderedCallback();
+		}
+		if (!this._hasReportedValidity && typeof this.omniValidate === 'function') {
+			this._hasReportedValidity = true;
+			this.omniValidate(false);
+		}
+	}
 
-        this.isLoaded = true;
+	@api
+	checkValidity() {
+		// La tabla es informativa; no exige garantías para avanzar.
+		return true;
+	}
 
-        if (data) {
-            this.rows = (data || []).map((item) => ({
-                id: item.id,
-                titulo: item.descripcionGarantia || item.nombre || 'Garantía',
-                subtitulo: this.getSubtitle(item),
-                esPyme: item.esPyme,
-                numeroFacilidad: item.numeroFacilidad || '',
-                detalles: (item.detalles || []).map((detalle, index) => this.getDetail(detalle, index)),
-                hasDetalles: (item.detalles || []).length > 0,
-                hasImportes: (item.importes || []).length > 0,
-                hasMonedaPendiente: (item.importes || []).some((importe) => !importe.moneda),
-                importes: (item.importes || []).map((importe) => ({
-                    ...importe,
-                    valorFormatted: this.formatCurrency(importe.valor, importe.moneda)
-                })),
-                porcentajeAdmisibilidadFormatted: this.formatPercent(item.porcentajeAdmisibilidad)
-            }));
-            this.errorMessage = '';
-            return;
-        }
+	@api
+	reportValidity() {
+		return this.checkValidity();
+	}
 
-        this.rows = [];
-        this.errorMessage = this.normalizeError(error);
-    }
+	@wire(getGarantias, { residentialLoanApplicationId: '$effectiveResidentialLoanApplicationId' })
+	wiredGarantias({ data, error }) {
+		if (data === undefined && error === undefined) {
+			return;
+		}
 
-    get effectiveResidentialLoanApplicationId() {
-        const omniData = this.omniJsonData || {};
-        const omniResidentialLoanApplication = omniData.ResidentialLoanApplication || {};
+		this.isLoaded = true;
 
-        return this.firstNonEmptyValue([
-            this.residentialLoanApplicationId,
-            this.recordId,
-            this.contextId,
-            omniData.ContextId,
-            omniData.recordId,
-            omniData.residentialLoanApplicationId,
-            omniData.ResidentialLoanApplicationId,
-            omniResidentialLoanApplication.Id
-        ]);
-    }
+		if (data) {
+			this.rows = (data || []).map((item) => ({
+				id: item.id,
+				titulo: item.descripcionGarantia || item.nombre || 'Garantía',
+				subtitulo: this.getSubtitle(item),
+				esPyme: item.esPyme,
+				numeroFacilidad: item.numeroFacilidad || '',
+				detalles: (item.detalles || []).map((detalle, index) => this.getDetail(detalle, index)),
+				hasDetalles: (item.detalles || []).length > 0,
+				hasImportes: (item.importes || []).length > 0,
+				hasMonedaPendiente: (item.importes || []).some((importe) => !importe.moneda),
+				importes: (item.importes || []).map((importe) => ({
+					...importe,
+					valorFormatted: this.formatCurrency(importe.valor, importe.moneda),
+				})),
+				porcentajeAdmisibilidadFormatted: this.formatPercent(item.porcentajeAdmisibilidad),
+			}));
+			this.errorMessage = '';
+			return;
+		}
 
-    get hasRows() {
-        return this.rows.length > 0;
-    }
+		this.rows = [];
+		this.errorMessage = this.normalizeError(error);
+	}
 
-    get hasEffectiveResidentialLoanApplicationId() {
-        return !!this.effectiveResidentialLoanApplicationId;
-    }
+	get effectiveResidentialLoanApplicationId() {
+		const omniData = this.omniJsonData || {};
+		const omniResidentialLoanApplication = omniData.ResidentialLoanApplication || {};
 
-    get hasError() {
-        return !!this.errorMessage;
-    }
+		return this.firstNonEmptyValue([
+			this.residentialLoanApplicationId,
+			this.recordId,
+			this.contextId,
+			omniData.ContextId,
+			omniData.recordId,
+			omniData.residentialLoanApplicationId,
+			omniData.ResidentialLoanApplicationId,
+			omniResidentialLoanApplication.Id,
+		]);
+	}
 
-    get showLoading() {
-        return this.hasEffectiveResidentialLoanApplicationId && !this.isLoaded;
-    }
+	get hasRows() {
+		return this.rows.length > 0;
+	}
 
-    get showEmpty() {
-        return this.hasEffectiveResidentialLoanApplicationId && this.isLoaded && !this.hasRows && !this.hasError;
-    }
+	get hasEffectiveResidentialLoanApplicationId() {
+		return !!this.effectiveResidentialLoanApplicationId;
+	}
 
-    get showTable() {
-        return this.hasRows;
-    }
+	get hasError() {
+		return !!this.errorMessage;
+	}
 
-    get showPymeColumns() {
-        return this.rows.some((row) => row.esPyme);
-    }
+	get showLoading() {
+		return this.hasEffectiveResidentialLoanApplicationId && !this.isLoaded;
+	}
 
-    get countLabel() {
-        return `${this.rows.length} ${this.rows.length === 1 ? 'garantía' : 'garantías'}`;
-    }
+	get showEmpty() {
+		return this.hasEffectiveResidentialLoanApplicationId && this.isLoaded && !this.hasRows && !this.hasError;
+	}
 
-    getSubtitle(item) {
-        const nombre = (item.nombre || '').trim();
-        const descripcion = (item.descripcionGarantia || '').trim();
-        return descripcion && nombre.toLocaleLowerCase() !== descripcion.toLocaleLowerCase() ? nombre : '';
-    }
+	get showTable() {
+		return this.hasRows;
+	}
 
-    getDetail(value, index) {
-        const separator = value.indexOf(':');
-        return {
-            id: String(index),
-            etiqueta: separator >= 0 ? value.slice(0, separator) : 'Descripción',
-            valor: separator >= 0 ? value.slice(separator + 1).trim() : value
-        };
-    }
+	get showPymeColumns() {
+		return this.rows.some((row) => row.esPyme);
+	}
 
-    firstNonEmptyValue(values) {
-        for (const value of values) {
-            if (value !== null && value !== undefined && String(value).trim()) {
-                return String(value).trim();
-            }
-        }
+	get countLabel() {
+		return `${this.rows.length} ${this.rows.length === 1 ? 'garantía' : 'garantías'}`;
+	}
 
-        return null;
-    }
+	getSubtitle(item) {
+		const nombre = (item.nombre || '').trim();
+		const descripcion = (item.descripcionGarantia || '').trim();
+		return descripcion && nombre.toLocaleLowerCase() !== descripcion.toLocaleLowerCase() ? nombre : '';
+	}
 
-    formatCurrency(value, currency) {
-        if (value === null || value === undefined || value === '') {
-            return '';
-        }
+	getDetail(value, index) {
+		const separator = value.indexOf(':');
+		return {
+			id: String(index),
+			etiqueta: separator >= 0 ? value.slice(0, separator) : 'Descripción',
+			valor: separator >= 0 ? value.slice(separator + 1).trim() : value,
+		};
+	}
 
-        // Conserva la moneda de cada importe, sin convertir su valor.
-        const number = new Intl.NumberFormat('es-DO', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        }).format(value);
-        if (!currency) {
-            return number;
-        }
-        try {
-            return new Intl.NumberFormat('es-DO', {
-                style: 'currency',
-                currency,
-                currencyDisplay: 'code',
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }).format(value);
-        } catch (e) {
-            return `${currency} ${number}`;
-        }
-    }
+	firstNonEmptyValue(values) {
+		for (const value of values) {
+			if (value !== null && value !== undefined && String(value).trim()) {
+				return String(value).trim();
+			}
+		}
 
-    formatPercent(value) {
-        if (value === null || value === undefined || value === '') {
-            return '';
-        }
+		return null;
+	}
 
-        try {
-            return `${new Intl.NumberFormat('es-DO', {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 2
-            }).format(value)}%`;
-        } catch (e) {
-            return `${value}%`;
-        }
-    }
+	formatCurrency(value, currency) {
+		if (value === null || value === undefined || value === '') {
+			return '';
+		}
 
-    normalizeError(error) {
-        if (Array.isArray(error?.body)) {
-            return error.body.map((item) => item.message).join(' | ');
-        }
+		// Conserva la moneda de cada importe, sin convertir su valor.
+		const number = new Intl.NumberFormat('es-DO', {
+			minimumFractionDigits: 2,
+			maximumFractionDigits: 2,
+		}).format(value);
+		if (!currency) {
+			return number;
+		}
+		try {
+			return new Intl.NumberFormat('es-DO', {
+				style: 'currency',
+				currency,
+				currencyDisplay: 'code',
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2,
+			}).format(value);
+		} catch (e) {
+			return `${currency} ${number}`;
+		}
+	}
 
-        if (typeof error?.body?.message === 'string') {
-            return error.body.message;
-        }
+	formatPercent(value) {
+		if (value === null || value === undefined || value === '') {
+			return '';
+		}
 
-        if (typeof error?.message === 'string') {
-            return error.message;
-        }
+		try {
+			return `${new Intl.NumberFormat('es-DO', {
+				minimumFractionDigits: 0,
+				maximumFractionDigits: 2,
+			}).format(value)}%`;
+		} catch (e) {
+			return `${value}%`;
+		}
+	}
 
-        return 'Ocurrió un error al cargar las garantías.';
-    }
+	normalizeError(error) {
+		if (Array.isArray(error?.body)) {
+			return error.body.map((item) => item.message).join(' | ');
+		}
+
+		if (typeof error?.body?.message === 'string') {
+			return error.body.message;
+		}
+
+		if (typeof error?.message === 'string') {
+			return error.message;
+		}
+
+		return 'Ocurrió un error al cargar las garantías.';
+	}
 }

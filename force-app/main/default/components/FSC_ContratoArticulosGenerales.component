@@ -1,0 +1,179 @@
+<apex:component layout="none">
+	<apex:attribute name="p" type="FSC_ContratoParte" required="true" description="Parte que se obliga en los artículos generales." />
+	<apex:attribute name="garantiaInmueble" type="Boolean" default="false" description="Incluye el párrafo de cancelación de hipoteca." />
+	<p class="paragraph">
+		<span class="articulo"></span>OPCIÓN DE COBROS. Queda convenido que a su vencimiento EL BANCO podrá exigir a su opción, el pago de la deuda
+		a {!p.nombre} mediante la ejecución del pagaré antes mencionado, o por todas las vías de derecho, sin que tal cosa implique renuncia
+		de parte de EL BANCO a ningún otro de los derechos que le corresponden en su condición de acreedor.
+	</p>
+	<p class="paragraph">
+		<span class="articulo"></span>COMPENSACIÓN DE DEUDA. Asimismo, {!p.nombre} autoriza{!p.n} y faculta{!p.n} a EL BANCO, a su única
+		opción, a que en cualquier momento pueda compensar la deuda mediante la apropiación de cualquier suma de dinero de su propiedad que se
+		encuentre en manos de EL BANCO, para cubrir el pago de capital, intereses y accesorios o de derechos vencidos originados por el presente
+		contrato. En caso de aplicar una compensación de deuda EL BANCO deberá notificarlo a {!p.nombre} indicando el monto compensado, la
+		cuenta afectada y la forma en que fueron aplicados los valores a la deuda. Dicha notificación podrá hacerse por uno de los medios
+		siguientes a opción de EL BANCO: a) mediante comunicación física por escrito; b) al correo electrónico suministrado por {!p.nombre} a
+		EL BANCO, o; c) cualquier otro medio fehaciente de conformidad con el derecho común dominicano.
+	</p>
+	<p class="paragraph">
+		<span class="articulo"></span>CADUCIDAD y TERMINACIÓN. La falta de pago de dos (02) cuotas de capital e intereses, o el incumplimiento
+		de cualquier obligación a cargo de {!p.nombre} producirán el vencimiento del término del presente contrato a opción de EL BANCO,
+		haciéndose exigible la totalidad de la deuda, y ejecutable la garantía, atendiendo a las formalidades legales establecidas, sin que haya
+		plazo para que EL BANCO ejerza este derecho.
+	</p>
+	<p class="paragraph">
+		PÁRRAFO I: Sin perjuicio de otras causas de caducidad del término que resultan de la legislación vigente y de las que se consignen en
+		otras partes del presente documento, este contrato podrá terminarse por las razones siguientes:
+	</p>
+	<p class="paragraph">Por la llegada del término;</p>
+	<p class="paragraph">Por mutuo acuerdo entre las partes contratantes (previo saldo del total adeudado);</p>
+	<p class="paragraph">
+		Igualmente, EL BANCO podrá, a su única opción, dar término al presente contrato en cualquier momento antes del término estipulado,
+		haciéndose exigible la totalidad de la deuda y suspendiendo cualquier desembolso pendiente, sin comprometer su responsabilidad y sin
+		necesidad alguna de formalidad judicial o extrajudicial, si ocurre alguna de las situaciones siguientes: a) {!p.nombre}
+		utilizare{!p.n} los fondos desembolsados para fines contrarios al propósito del préstamo consignado en este documento; b) ante la
+		ocurrencia de cualquier evento que, en el criterio razonable de EL BANCO, ponga en riesgo el crédito, afecte la capacidad financiera o
+		disminuya el valor del patrimonio de {!p.nombre}, para cumplir satisfactoriamente con las obligaciones asumidas en el presente
+		contrato; c) si {!p.nombre} {!p.es} demandad{!p.o} o se produce el secuestro, embargo conservatorio, retentivo o ejecutorio contra
+		cualquiera de sus bienes; d) en caso de incumplimiento por parte de {!p.nombre} de una cualquiera de las obligaciones resultantes del
+		presente contrato; e) si EL BANCO descubre que hubo falsificación, manipulación o inexactitud de la documentación financiera, legal o de
+		cualquier naturaleza suministrada a EL BANCO por parte de {!p.nombre} para el otorgamiento del préstamo; f) si se demuestra que
+		{!p.nombre} hubiere{!p.n} ocultado u omitido alguna información o dato razonable y objetivamente relevante para el otorgamiento del
+		crédito y que de haber sido sabido por EL BANCO, no se hubiera aprobado la facilidad crediticia.
+	</p>
+	<p class="paragraph">
+		PÁRRAFO II: En los casos de terminación anticipada previstos en este contrato, EL BANCO deberá notificar la ruptura del contrato a
+		{!p.nombre}, por escrito o por cualquier medio fehaciente, con treinta (30) días calendario de antelación a dicha terminación, salvo
+		que se identifiquen elementos de alto riesgo relacionados a actos ilícitos cometidos por {!p.nombre}, sus administradores y/o
+		accionistas con participación significativa, en cuyo caso EL BANCO deberá notificar la terminación a {!p.nombre} en un plazo no mayor
+		a cinco (5) días posteriores a la terminación.
+	</p>
+	<p class="paragraph">
+		<span class="articulo"></span>SOBRE LA REESTRUCTURACIÓN Y LIQUIDACIÓN DE EMPRESAS Y PERSONAS FÍSICAS COMERCIANTES. {!p.nombre}
+		comerciante{!p.s}, por medio del presente contrato declara{!p.n} que no ha{!p.n} sido sometid{!p.o} ni ha sido iniciado un proceso de
+		reestructuración, de liquidación o de acuerdo previo de plan, del cual forme{!p.n} parte, de conformidad con las disposiciones de la Ley
+		No. 141-15 de fecha 7 de agosto de 2015, sobre Reestructuración y Liquidación de Empresas y Personas Físicas Comerciantes. {!p.nombre}
+		reconoce{!p.n} que dicha declaración es un elemento esencial tomado en cuenta por EL BANCO para la firma del presente contrato.
+	</p>
+	<p class="paragraph">
+		PÁRRAFO I: En caso de que {!p.nombre} o alguno de sus acreedores se acoja a la Ley 141-15, su Reglamento de aplicación y sus
+		modificaciones, o aquella que la sustituya, {!p.nombre} se compromete{!p.n} a: a) notificar a EL BANCO en un plazo no mayor de dos (2)
+		días laborables, previo al sometimiento al tribunal el Acuerdo Previo de Plan que será sometido; b) notificar a EL BANCO con treinta (30)
+		días laborables de antelación al sometimiento por parte de {!p.nombre} de la solicitud de reestructuración al tribunal u órganos
+		correspondientes, adjuntando a dicha notificación las razones que fundamentan la solicitud y el posible plan de reestructuración; c)
+		notificar a EL BANCO cuando se trate de una solicitud de Reestructuración iniciada por uno o más acreedores de {!p.nombre} a más tardar
+		el día siguiente de recibida la solicitud de reestructuración; d) informar a EL BANCO cuando se encuentre{!p.n} en al menos una de las
+		condiciones que fundamentan la solicitud de reestructuración de conformidad con la referida ley; y e) a incluir en toda solicitud de
+		reestructuración de deuda a EL BANCO como acreedor en la relación de todos sus acreedores, siempre que existan créditos pendientes de
+		pago a EL BANCO.
+	</p>
+	<p class="paragraph">
+		<span class="articulo"></span>SUMINISTRO DE INFORMACIÓN. En virtud de las disposiciones de la Ley Orgánica sobre Protección de Datos de
+		Carácter Personal No. 172-13, del trece (13) de diciembre del año dos mil trece (2013), {!p.nombre} autoriza{!p.n} a EL BANCO a
+		consultar{!p.lo} en la base de datos de las Sociedades de Información Crediticia (SIC) a los fines de evaluación de crédito, así como
+		para cualquier uso adicional que EL BANCO considere pertinente con el objetivo de brindar sus servicios a {!p.nombre}; así como para dar
+		cumplimiento a las disposiciones legales vigentes, especialmente, y sin que ello sea limitativo, a las disposiciones sobre prevención de
+		lavado de activos y financiamiento del terrorismo. {!p.nombre} declara{!p.n}, reconoce{!p.n} y acepta{!p.n} el uso y conservación de la
+		información de carácter personal y crediticia otorgada a EL BANCO, facultándolo a mantener dichas informaciones en su base de datos. De
+		igual forma, {!p.nombre} autoriza{!p.n} a EL BANCO a transmitir a las Sociedades de Información Crediticia (SIC) la información
+		requerida conforme los parámetros de ley y necesaria para los fines de evaluación del crédito por parte de otras instituciones
+		suscriptores de dichas Sociedades de Información, reconociendo y garantizando que la revelación de dichas informaciones por parte de EL
+		BANCO y/o por las Sociedades de Información Crediticia y/o por sus respectivos empleados, funcionarios y accionistas no conllevará
+		violación de secreto profesional a los efectos del artículo 377 del Código Penal, violación al secreto bancario a los efectos del literal
+		b) de la Ley Monetaria y Financiera No. 183-02, ni generarán responsabilidades bajo los artículos 1382 y siguientes del Código Civil, ni
+		bajo ningún otro texto legal. De igual forma, {!p.nombre} consiente{!p.n} y autoriza{!p.n} a EL BANCO a ceder las informaciones
+		otorgadas, incluyendo informaciones biográficas, a sus gestores de cobro y a las sociedades con las que mantenga acuerdos de referimiento
+		o relaciones comerciales para dar cumplimiento a los fines directamente relacionados con el interés legítimo de EL BANCO y {!p.nombre},
+		manteniendo éste la facultad de rectificar y/o suprimir los datos que demuestre sean incorrectos, incompletos, desactualizados o cuyo
+		registro esté prohibido.
+	</p>
+	<p class="paragraph">
+		PÁRRAFO I: Asimismo, {!p.nombre} autoriza{!p.n} expresamente a EL BANCO a consultar sus datos en el Maestro de Cedulados que mantiene la
+		Junta Central Electoral (JCE), conforme las disposiciones del Reglamento que establece el Procedimiento para Acceder al Maestro de
+		Cedulados y Fija las tasas por los Servicios de Acceso de fecha veintitrés (23) de julio del año dos mil trece (2013), descargando a EL
+		BANCO de cualquier responsabilidad relativa a la consulta realizada en el referido Maestro, en el entendido de que dichos datos deberán
+		ser manejados con la debida confidencialidad y no podrán ser divulgados sin el consentimiento de {!p.nombre}.
+	</p>
+	<p class="paragraph">
+		PÁRRAFO II: {!p.nombre} de nacionalidad extranjera, en los casos que aplique, autoriza{!p.n} a EL BANCO, a realizar las revisiones
+		correspondientes de su historial crediticio en el buró de crédito internacional que corresponda.
+	</p>
+	<p class="paragraph">
+		<span class="articulo"></span>PREVENCIÓN LAVADO DE ACTIVOS. {!p.nombre} declara{!p.n}, reconoce{!p.n} y acepta{!p.n} haber sido
+		informad{!p.o} por EL BANCO de las disposiciones contenidas en la Ley No. 155-17 de fecha 1º de junio de 2017, contra el lavado de
+		activos y financiamiento del terrorismo, admitiendo que se constituye{!p.n} en sujeto{!p.s} obligado{!p.s} a los fines de dicha ley y a
+		las regulaciones emanadas de las autoridades monetarias y financieras.
+	</p>
+	<p class="paragraph">
+		PÁRRAFO: {!p.nombre} queda{!p.n} obligad{!p.o} a ofrecer a EL BANCO las informaciones que le sean solicitadas, en forma veraz y sin
+		demora, quedando comprometid{!p.o} a colaborar para lograr una eficiente prevención en el lavado de activos, en caso contrario,
+		significará un incumplimiento del presente contrato, y esta situación generará la opción a favor de EL BANCO de terminación inmediata del
+		mismo, sin que implique responsabilidad para EL BANCO.
+	</p>
+	<p class="paragraph">
+		<span class="articulo"></span>DERECHOS DE {!p.nombre}. Queda entendido entre las partes que {!p.nombre} tendrá{!p.n} derecho a una
+		contratación justa, a reclamar, a que exista equilibrio entre la protección del usuario y la provisión de servicios financieros a costos
+		accesibles, a la libre elección, a la publicidad y difusión, a las reglas de interpretación, a la transparencia, al trato equitativo, no
+		discriminatorio o abusivo, y al trato igualitario para los usuarios discapacitados.
+	</p>
+	<p class="paragraph">
+		<span class="articulo"></span>IMPUESTOS, GASTOS Y HONORARIOS. {!p.nombre} se obliga{!p.n} a pagar todos los impuestos, gastos y
+		honorarios que origine este contrato, así como cualquier suma de dinero que EL BANCO tuviere que pagar por concepto de gastos y
+		honorarios, como consecuencia de cualquier actuación judicial o extrajudicial que realice en relación con el mismo.
+	</p>
+	<p class="paragraph">
+		PÁRRAFO I: {!p.nombre} podrá{!p.n} solicitar a EL BANCO, y este deberá obtemperar al requerimiento, todos los comprobantes de aquellos
+		impuestos y gastos en que se incurra respecto del presente contrato de préstamo. Asimismo, {!p.nombre} declara{!p.n} que ha{!p.n}
+		recibido y evaluado el documento contentivo del desglose de impuestos, gastos, honorarios y comisiones que deberá{!p.n} pagar en ocasión
+		de la suscripción del presente contrato, sin perjuicio de aquellos montos que surjan de manera imprevisible los cuales al momento de
+		presentarse deberán ser notificados a {!p.nombre} con la justificación correspondiente.
+	</p>
+	<apex:outputPanel layout="none" rendered="{!garantiaInmueble}">
+		<p class="paragraph">
+			PÁRRAFO II: {!p.nombre} se compromete{!p.n} a pagar conjuntamente con la cancelación del préstamo otorgado en virtud del presente
+			contrato, la suma aplicable por la expedición de la cancelación de hipoteca (acto de radiación), de conformidad a lo indicado en el
+			tarifario vigente al momento de la cancelación.
+		</p>
+	</apex:outputPanel>
+	<p class="paragraph">
+		PÁRRAFO {!IF(garantiaInmueble, 'III', 'II')}: El tarifario de servicios formará parte integral del presente contrato, así como cualquier
+		modificación posterior al mismo.
+	</p>
+	<p class="paragraph">
+		<span class="articulo"></span>CESIÓN DE CRÉDITO. Queda expresamente convenido entre las partes que EL BANCO podrá ceder el crédito
+		emergente del préstamo otorgado en virtud del presente contrato, así como sus accesorios. En ese caso, EL BANCO deberá notificar por
+		cualquier medio escrito la cesión a {!p.nombre}, consintiendo {!p.nombre} por medio del presente contrato a la cesión y obligándose a no
+		oponer objeción o traba alguna al respecto. De igual manera, EL BANCO podrá proporcionar al cesionario las informaciones personales y
+		crediticias de {!p.nombre}, sin que ello implique violación alguna a la Ley Orgánica sobre Protección de Datos de Carácter Personal No.
+		172-13, o de derechos de {!p.nombre}.
+	</p>
+	<p class="paragraph">
+		<span class="articulo"></span>NO RENUNCIA. El retraso o no ejercicio por EL BANCO de cualquier acción, derecho o privilegio otorgado por
+		medio del presente contrato, no debe interpretarse como una renuncia a ejercer dicha acción, derecho o privilegio en el futuro.
+	</p>
+	<p class="paragraph">
+		<span class="articulo"></span>MODIFICACIONES. Sin perjuicio de lo previsto en otra parte del presente documento, este contrato podrá ser
+		modificado: a) por el mutuo acuerdo entre las partes; b) en virtud de cualquier disposición legal que se dicte en el futuro en relación
+		con el objeto de este contrato; y c) por modificaciones a la tasa, cargos, comisiones, fechas y lugares de pago. En este último caso, EL
+		BANCO comunicará tales cambios a {!p.nombre}, con treinta (30) días de anticipación a la fecha efectiva, por los medios que se establecen
+		en el presente contrato o cualquier otro medio fehaciente.
+	</p>
+	<p class="paragraph">
+		<span class="articulo"></span>ELECCIÓN DE DOMICILIO Y NOTIFICACIONES. Para el cumplimiento y ejecución del presente contrato, las partes
+		hacen elección de domicilio en las direcciones indicadas al principio de este contrato.
+	</p>
+	<p class="paragraph">
+		PÁRRAFO: Todas las comunicaciones, avisos o cartas que deban ser enviadas por una parte a la otra en cumplimiento de las disposiciones de
+		este contrato, serán consideradas debidamente recibidas, si son enviados por escrito por medio de correo u otro medio de comunicación
+		admisible como correo electrónico, carta, fax o a las direcciones que se indican en este contrato. Es responsabilidad de {!p.nombre}
+		notificar a EL BANCO cualquier cambio en la dirección y los datos de contacto suministrados. A falta de esta notificación, los avisos y
+		demás correspondencia se considerarán dados válidamente, cuando hayan sido remitidos a la última dirección que aparezca registrada en EL
+		BANCO.
+	</p>
+	<p class="paragraph">
+		<span class="articulo"></span>LEY APLICABLE. Para lo no previsto en el presente contrato las partes se someten a las disposiciones de la
+		Ley Monetaria y Financiera No. 183-02, de las normas dictadas por la Autoridad Monetaria y Financiera de la República Dominicana, y las
+		disposiciones de derecho común, siendo competencia exclusiva de los tribunales de la República Dominicana el conocimiento de las acciones
+		judiciales derivadas de la ejecución del presente acuerdo.
+	</p>
+</apex:component>

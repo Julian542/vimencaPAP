@@ -3,6 +3,19 @@ public virtual without sharing class FSC_ContratoPrestamoComercialBaseCtrl {
     public ResidentialLoanApplication loanApplication { get; private set; }
     public Map<String, String> mergeFields { get; private set; }
     public Boolean esDolares { get; private set; }
+    /** Parte deudora tal como se denomina en el contrato (EL PRESTATARIO, LA PRESTATARIA, LOS PRESTATARIOS...). */
+    public FSC_ContratoParte deudor { get; protected set; }
+    /** Garante solidario del contrato comercial con garantía solidaria. */
+    public FSC_ContratoParte garante { get; protected set; }
+    /** Sujeto de los artículos generales (deudor, o deudor y garante cuando ambos se obligan). */
+    public FSC_ContratoParte sujetoGeneral { get; protected set; }
+    public FSC_ContratoSeguro seguroVida { get; private set; }
+    public FSC_ContratoSeguro seguroPropiedad { get; private set; }
+    public Boolean garantiaInmueble { get; private set; }
+    public String clienteGenerales { get; private set; }
+    public String garanteGenerales { get; private set; }
+    /** Quienes firman por el deudor: la persona física o los representantes de la empresa. */
+    public List<String> firmantesCliente { get; private set; }
 
     public Boolean getHasAnnexImage() {
         return true;
@@ -24,6 +37,7 @@ public virtual without sharing class FSC_ContratoPrestamoComercialBaseCtrl {
         public String clienteNacionalidad { get; set; }
         public String clienteEstadoCivil { get; set; }
         public String clienteDomicilio { get; set; }
+        public String clienteSexo { get; set; }
         public String representanteNombre { get; set; }
         public String representanteCargo { get; set; }
         public String representanteNacionalidad { get; set; }
@@ -71,20 +85,9 @@ public virtual without sharing class FSC_ContratoPrestamoComercialBaseCtrl {
         public String vehiculoUbicacion { get; set; }
         public String certificadoDescripcion { get; set; }
         public String certificadoNombreMoneda { get; set; }
-        public String seguroPoliza { get; set; }
-        public String seguroAseguradora { get; set; }
-        public String seguroDireccion { get; set; }
-        public String seguroFechaEndoso { get; set; }
-        public String seguroMontoLetras { get; set; }
-        public String seguroMontoNumero { get; set; }
-        public String seguroPrimaLetras { get; set; }
-        public String seguroPrimaNumero { get; set; }
-        public String seguroVidaMontoLetras { get; set; }
-        public String seguroVidaMontoNumero { get; set; }
         public String nombresFirmantesNotario { get; set; }
         public String lugarFirma { get; set; }
         public String referenciaLegal { get; set; }
-        public String paginaAnexo { get; set; }
     }
 
     protected FSC_ContratoPrestamoComercialBaseCtrl(
@@ -113,6 +116,123 @@ public virtual without sharing class FSC_ContratoPrestamoComercialBaseCtrl {
         FSC_ContratoParticipanteService.ParticipantesContrato participants =
             FSC_ContratoParticipanteService.getParticipantes(resolution.tipoContrato);
         datos = buildDocumentData(rla, resolution, participants, values, contractDate);
+        initializeDrafting(rla, resolution.templateCode, values);
+    }
+
+    private void initializeDrafting(ResidentialLoanApplication rla, String templateCode, Map<String, String> values) {
+        deudor = FSC_ContratoParte.crear(
+            FSC_RLAContractTemplateResolver.isMortgagePurchaseTemplate(templateCode) ? 'PRESTATARIO - COMPRADOR' : 'PRESTATARIO',
+            get(values, 'clienteSexo'),
+            !datos.esPersonaFisica
+        );
+        sujetoGeneral = deudor;
+        if (templateCode == FSC_RLAContractTemplateResolver.TEMPLATE_GARANTIA_SOLIDARIA) {
+            garante = FSC_ContratoParte.crear('GARANTE SOLIDARIO', get(values, 'garanteSexo'), false);
+            sujetoGeneral = FSC_ContratoParte.combinar(deudor, garante);
+            garanteGenerales = FSC_ContratoRedaccionService.generalesPersona(
+                datos.garanteNombre,
+                get(values, 'garanteSexo'),
+                datos.garanteNacionalidad,
+                datos.garanteEstadoCivil,
+                datos.garanteIdentificacion,
+                datos.garanteDomicilio
+            );
+        }
+        if (templateCode == FSC_RLAContractTemplateResolver.TEMPLATE_CONSUMO_GARANTIA_HIPOTECARIA) {
+            // En consumo con garantía hipotecaria el mismo cliente hipoteca su inmueble.
+            garante = FSC_ContratoParte.crear('GARANTE REAL', get(values, 'clienteSexo'), !datos.esPersonaFisica);
+        }
+        clienteGenerales = datos.esPersonaFisica
+            ? FSC_ContratoRedaccionService.generalesPersona(
+                datos.clienteNombre,
+                get(values, 'clienteSexo'),
+                datos.clienteNacionalidad,
+                datos.clienteEstadoCivil,
+                datos.clienteIdentificacion,
+                datos.clienteDomicilio
+            )
+            : FSC_ContratoRedaccionService.generalesEmpresa(
+                datos.clienteNombre,
+                datos.clienteRnc,
+                datos.clienteRegistroMercantil,
+                datos.clienteDomicilio,
+                representatives(values)
+            );
+        garantiaInmueble = FSC_ContratoRedaccionService.esPlantillaInmueble(templateCode);
+        firmantesCliente = new List<String>();
+        if (datos.esPersonaFisica) {
+            firmantesCliente.add(datos.clienteNombre);
+        } else {
+            for (FSC_ContratoRedaccionService.Representante item : representatives(values)) {
+                if (!String.isBlank(item.nombre)) firmantesCliente.add(item.nombre);
+            }
+        }
+        List<String> signerNames = new List<String>(firmantesCliente);
+        if (templateCode == FSC_RLAContractTemplateResolver.TEMPLATE_GARANTIA_SOLIDARIA) signerNames.add(datos.garanteNombre);
+        signerNames.add(datos.bancoRepresentante1.nombreCompleto);
+        signerNames.add(datos.bancoRepresentante2.nombreCompleto);
+        datos.nombresFirmantesNotario = joinNames(signerNames);
+
+        Integer months = loanMonths(rla);
+        String propertyType = FSC_ContratoRedaccionService.tipoSeguroPropiedad(templateCode);
+        seguroPropiedad = propertyType == null
+            ? FSC_ContratoSeguro.noAplica(null)
+            : FSC_ContratoSeguro.crear(
+                propertyType,
+                get(values, 'seguroPoliza'),
+                get(values, 'seguroAseguradora'),
+                get(values, 'seguroDireccion'),
+                dateInput(values, 'seguroFechaEndoso'),
+                decimalInput(values, 'seguroMonto'),
+                decimalInput(values, 'seguroPrima'),
+                months,
+                rla.FSC_Moneda__c
+            );
+        seguroVida = FSC_ContratoRedaccionService.aplicaSeguroVida(datos.esPersonaFisica, templateCode)
+            ? FSC_ContratoSeguro.crear(
+                FSC_ContratoSeguro.TIPO_VIDA,
+                get(values, 'seguroVidaPoliza'),
+                get(values, 'seguroVidaAseguradora'),
+                get(values, 'seguroVidaDireccion'),
+                dateInput(values, 'seguroVidaFechaEndoso'),
+                decimalInput(values, 'seguroVidaMonto'),
+                decimalInput(values, 'seguroVidaPrima'),
+                months,
+                rla.FSC_Moneda__c
+            )
+            : FSC_ContratoSeguro.noAplica(FSC_ContratoSeguro.TIPO_VIDA);
+    }
+
+    private static List<FSC_ContratoRedaccionService.Representante> representatives(Map<String, String> values) {
+        List<FSC_ContratoRedaccionService.Representante> result = new List<FSC_ContratoRedaccionService.Representante>{
+            representative(values, 'representante')
+        };
+        for (String prefix : new List<String>{ 'representante2_', 'representante3_' }) {
+            if (!String.isBlank(get(values, prefix + 'nombre'))) result.add(representative(values, prefix));
+        }
+        return result;
+    }
+
+    // Representante principal: claves 'representanteNombre'...; adicionales: 'representante2_nombre'...
+    private static FSC_ContratoRedaccionService.Representante representative(Map<String, String> values, String prefix) {
+        Boolean principal = prefix == 'representante';
+        FSC_ContratoRedaccionService.Representante item = new FSC_ContratoRedaccionService.Representante();
+        item.nombre = get(values, prefix + (principal ? 'Nombre' : 'nombre'));
+        item.cargo = get(values, prefix + (principal ? 'Cargo' : 'cargo'));
+        item.sexo = get(values, prefix + (principal ? 'Sexo' : 'sexo'));
+        item.nacionalidad = get(values, prefix + (principal ? 'Nacionalidad' : 'nacionalidad'));
+        item.estadoCivil = get(values, prefix + (principal ? 'EstadoCivil' : 'estadoCivil'));
+        item.identificacion = get(values, prefix + (principal ? 'Identificacion' : 'identificacion'));
+        item.domicilio = get(values, prefix + (principal ? 'Domicilio' : 'domicilio'));
+        return item;
+    }
+
+    private static Integer loanMonths(ResidentialLoanApplication rla) {
+        Decimal monthsValue = rla.FSC_PlazoMesesAprobado__c;
+        if (monthsValue == null && !String.isBlank(rla.FSC_Plazo_meses__c)) {
+            monthsValue = Decimal.valueOf(rla.FSC_Plazo_meses__c);
+        }
+        return monthsValue == null ? null : monthsValue.intValue();
     }
 
     public String getPlaceholderValue(String key) {
@@ -137,11 +257,7 @@ public virtual without sharing class FSC_ContratoPrestamoComercialBaseCtrl {
         DatosDocumento data = new DatosDocumento();
         Decimal amount = rla.FSC_MontoAprobado__c == null ? rla.FSC_Monto__c : rla.FSC_MontoAprobado__c;
         Decimal rate = rla.FSC_TasaInteresAprobada__c == null ? rla.FSC_TasaInteres__c : rla.FSC_TasaInteresAprobada__c;
-        Decimal monthsValue = rla.FSC_PlazoMesesAprobado__c;
-        if (monthsValue == null && !String.isBlank(rla.FSC_Plazo_meses__c)) {
-            monthsValue = Decimal.valueOf(rla.FSC_Plazo_meses__c);
-        }
-        Integer months = monthsValue == null ? null : monthsValue.intValue();
+        Integer months = loanMonths(rla);
         Decimal payment = FSC_ContratoFormatoService.calcularCuota(amount, rate, months);
         Date expirationDate = months == null ? contractDate : contractDate.addMonths(months);
 
@@ -156,6 +272,7 @@ public virtual without sharing class FSC_ContratoPrestamoComercialBaseCtrl {
         data.clienteNacionalidad = get(values, 'clienteNacionalidad');
         data.clienteEstadoCivil = get(values, 'clienteEstadoCivil');
         data.clienteDomicilio = get(values, 'clienteDomicilio');
+        data.clienteSexo = get(values, 'clienteSexo');
         data.representanteNombre = get(values, 'representanteNombre');
         data.representanteCargo = get(values, 'representanteCargo');
         data.representanteNacionalidad = get(values, 'representanteNacionalidad');
@@ -208,37 +325,8 @@ public virtual without sharing class FSC_ContratoPrestamoComercialBaseCtrl {
         data.vehiculoUbicacion = get(values, 'vehiculoUbicacion');
         data.certificadoDescripcion = buildCertificateDescription(values);
         data.certificadoNombreMoneda = get(values, 'certificadoMoneda').toLowerCase();
-
-        data.seguroPoliza = get(values, 'seguroPoliza');
-        data.seguroAseguradora = get(values, 'seguroAseguradora');
-        data.seguroDireccion = get(values, 'seguroDireccion');
-        data.seguroFechaEndoso = formatInputDate(get(values, 'seguroFechaEndoso'));
-        Decimal insuredAmount = decimalInput(values, 'seguroMonto');
-        data.seguroMontoLetras = FSC_ContratoFormatoService.montoEnLetras(insuredAmount, rla.FSC_Moneda__c);
-        data.seguroMontoNumero = FSC_ContratoFormatoService.formatearMonto(insuredAmount);
-        Decimal insurancePremium = decimalInput(values, 'seguroPrima');
-        data.seguroPrimaLetras = FSC_ContratoFormatoService.montoEnLetras(insurancePremium, rla.FSC_Moneda__c);
-        data.seguroPrimaNumero = FSC_ContratoFormatoService.formatearMonto(insurancePremium);
-        data.seguroVidaMontoLetras = FSC_ContratoFormatoService.montoEnLetras(rla.FSC_SeguroVidaMonto__c, rla.FSC_Moneda__c);
-        data.seguroVidaMontoNumero = FSC_ContratoFormatoService.formatearMonto(rla.FSC_SeguroVidaMonto__c);
-
-        List<String> signerNames = new List<String>();
-        signerNames.add(data.esPersonaFisica ? data.clienteNombre : data.representanteNombre);
-        if (resolution.templateCode == FSC_RLAContractTemplateResolver.TEMPLATE_GARANTIA_SOLIDARIA) {
-            signerNames.add(data.garanteNombre);
-        }
-        signerNames.add(data.bancoRepresentante1.nombreCompleto);
-        signerNames.add(data.bancoRepresentante2.nombreCompleto);
-        data.nombresFirmantesNotario = joinNames(signerNames);
         data.lugarFirma = participants.notario.lugarFirma;
         data.referenciaLegal = legalReference(resolution.templateCode) + ' / ' + data.clienteNombre + ' / ' + rla.Id;
-        if (resolution.templateCode == FSC_RLAContractTemplateResolver.TEMPLATE_GARANTIA_SOLIDARIA) {
-            data.paginaAnexo = '07';
-        } else if (resolution.templateCode == FSC_RLAContractTemplateResolver.TEMPLATE_SOLA_FIRMA) {
-            data.paginaAnexo = '08';
-        } else {
-            data.paginaAnexo = '10';
-        }
         return data;
     }
 
@@ -248,7 +336,7 @@ public virtual without sharing class FSC_ContratoPrestamoComercialBaseCtrl {
                 FSC_Plazo_meses__c, FSC_TasaInteresAprobada__c, FSC_TasaInteres__c,
                 FSC_Destino_del_Prestamo__c, FSC_DescripcionPropositoFacilidad__c,
                 FSC_Moneda__c, FSC_Fecha_Contrato__c,
-                FSC_SeguroVidaMonto__c, CreatedBy.Name, Account.Name, Account.IsPersonAccount
+                CreatedBy.Name, Account.Name, Account.IsPersonAccount
             FROM ResidentialLoanApplication
             WHERE Id = :rlaId
             LIMIT 1
@@ -258,6 +346,7 @@ public virtual without sharing class FSC_ContratoPrestamoComercialBaseCtrl {
     private static void validateContext(FSC_DatosContratoController.ContextoGeneracion context) {
         List<String> errors = new List<String>();
         errors.addAll(context.erroresConfiguracion);
+        errors.addAll(FSC_DatosContratoController.validarDatosCombinados(context));
         for (FSC_DatosContratoController.SeccionEntrada section : context.seccionesContrato) {
             for (FSC_DatosContratoController.CampoEntrada field : section.campos) {
                 if (field.requerido && String.isBlank(field.valor)) errors.add('Falta ' + field.etiqueta + '.');

@@ -9,6 +9,7 @@ public without sharing class FSC_ContratoIntervinienteService {
         public String nacionalidad { get; set; }
         public String estadoCivil { get; set; }
         public String domicilio { get; set; }
+        public String sexo { get; set; }
         public String generales { get; set; }
     }
 
@@ -56,6 +57,7 @@ public without sharing class FSC_ContratoIntervinienteService {
             item.nacionalidad = first(stored(values, prefix + 'nacionalidad'), applicant == null ? null : applicant.FSC_Nacionalidad__c);
             item.estadoCivil = first(stored(values, prefix + 'estadoCivil'), applicant == null ? null : applicant.FSC_EstadoCivil__c);
             item.domicilio = first(stored(values, prefix + 'domicilio'), applicantAddress(applicant));
+            item.sexo = stored(values, prefix + 'sexo');
             item.generales = buildGenerales(item);
             result.add(item);
         }
@@ -71,6 +73,7 @@ public without sharing class FSC_ContratoIntervinienteService {
         item.nacionalidad = first(stored(values, 'conyuge_nacionalidad'), spouse == null ? null : spouse.ACC_Nacionalidad__c);
         item.estadoCivil = first(stored(values, 'conyuge_estadoCivil'), spouse == null ? null : spouse.ACC_Estado_Civil__c);
         item.domicilio = first(stored(values, 'conyuge_domicilio'), spouse == null ? null : accountAddress(spouse));
+        item.sexo = stored(values, 'conyuge_sexo');
         item.generales = buildGenerales(item);
         return item;
     }
@@ -82,6 +85,17 @@ public without sharing class FSC_ContratoIntervinienteService {
         String civilStatus,
         String address
     ) {
+        return fromPrimaryAccount(name, identification, nationality, civilStatus, address, null);
+    }
+
+    public static Interviniente fromPrimaryAccount(
+        String name,
+        String identification,
+        String nationality,
+        String civilStatus,
+        String address,
+        String sex
+    ) {
         Interviniente item = new Interviniente();
         item.indice = -1;
         item.nombre = name;
@@ -89,6 +103,7 @@ public without sharing class FSC_ContratoIntervinienteService {
         item.nacionalidad = nationality;
         item.estadoCivil = civilStatus;
         item.domicilio = address;
+        item.sexo = sex;
         item.generales = buildGenerales(item);
         return item;
     }
@@ -99,6 +114,12 @@ public without sharing class FSC_ContratoIntervinienteService {
             if (!String.isBlank(person.generales)) values.add(person.generales);
         }
         return joinWithLast(values);
+    }
+
+    public static List<String> sexes(List<Interviniente> people) {
+        List<String> values = new List<String>();
+        for (Interviniente person : people) values.add(person.sexo);
+        return values;
     }
 
     public static String joinNames(List<Interviniente> people) {
@@ -154,8 +175,9 @@ public without sharing class FSC_ContratoIntervinienteService {
     private static String buildGenerales(Interviniente item) {
         if (item == null || String.isBlank(item.nombre)) return '';
         return item.nombre + ', de nacionalidad ' + item.nacionalidad + ', mayor de edad, estado civil ' +
-            item.estadoCivil + ', portador(a) del documento de identidad No. ' + item.identificacion +
-            ', domiciliado(a) y residente en ' + item.domicilio;
+            item.estadoCivil + ', ' + FSC_ContratoRedaccionService.concordar('portador', item.sexo) +
+            ' del documento de identidad No. ' + item.identificacion + ', ' +
+            FSC_ContratoRedaccionService.concordar('domiciliado', item.sexo) + ' y residente en ' + item.domicilio;
     }
 
     private static String applicantName(LoanApplicant applicant) {

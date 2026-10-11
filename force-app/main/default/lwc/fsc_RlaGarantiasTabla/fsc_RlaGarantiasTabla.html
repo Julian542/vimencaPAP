@@ -1,86 +1,111 @@
 <template>
-    <section class="guarantees" aria-label={title}>
-        <header class="section-header">
-            <div class="section-heading">
-                <lightning-icon icon-name="standard:asset" size="small" alternative-text=""></lightning-icon>
-                <h2>{title}</h2>
-            </div>
-            <template if:true={showTable}>
-                <span class="count">{countLabel}</span>
-            </template>
-        </header>
-        <template if:true={showLoading}>
-            <div class="loading-state">
-                <lightning-spinner alternative-text="Cargando garantías" size="small"></lightning-spinner>
-            </div>
-        </template>
-        <template if:true={showTable}>
-            <div class="guarantee-list">
-                <template for:each={rows} for:item="row">
-                    <article key={row.id} class="guarantee-card">
-                        <header class="card-header">
-                            <div>
-                                <h3>{row.titulo}</h3>
-                                <template if:true={row.subtitulo}>
-                                    <p class="subtitle">{row.subtitulo}</p>
-                                </template>
-                            </div>
-                            <template if:true={row.esPyme}>
-                                <div class="pyme-data">
-                                    <template if:true={row.numeroFacilidad}>
-                                        <span class="badge">Facilidad {row.numeroFacilidad}</span>
-                                    </template>
-                                    <template if:true={row.porcentajeAdmisibilidadFormatted}>
-                                        <span class="badge">Admisibilidad {row.porcentajeAdmisibilidadFormatted}</span>
-                                    </template>
-                                </div>
-                            </template>
-                        </header>
-                        <div class="card-body">
-                            <div class="details-area">
-                                <template if:true={row.hasDetalles}>
-                                    <dl class="details-grid">
-                                        <template for:each={row.detalles} for:item="detalle">
-                                            <div key={detalle.id} class="detail">
-                                                <dt>{detalle.etiqueta}</dt>
-                                                <dd>{detalle.valor}</dd>
-                                            </div>
-                                        </template>
-                                    </dl>
-                                </template>
-                                <template if:false={row.hasDetalles}>
-                                    <p class="muted">Sin detalles adicionales.</p>
-                                </template>
-                            </div>
-                            <aside class="amounts-area" aria-label="Valores de la garantía">
-                                <h4>Valores de la garantía</h4>
-                                <template if:true={row.hasImportes}>
-                                    <dl class="amounts-list">
-                                        <template for:each={row.importes} for:item="importe">
-                                            <div key={importe.etiqueta} class="amount">
-                                                <dt>{importe.etiqueta}</dt>
-                                                <dd>{importe.valorFormatted}</dd>
-                                            </div>
-                                        </template>
-                                    </dl>
-                                    <template if:true={row.hasMonedaPendiente}>
-                                        <p class="currency-note">Moneda no informada en los importes sin código de moneda.</p>
-                                    </template>
-                                </template>
-                                <template if:false={row.hasImportes}>
-                                    <p class="muted">Sin valores registrados.</p>
-                                </template>
-                            </aside>
-                        </div>
-                    </article>
-                </template>
-            </div>
-        </template>
-        <template if:true={hasError}>
-            <div class="status-message error" role="alert">{errorMessage}</div>
-        </template>
-        <template if:true={showEmpty}>
-            <div class="status-message">{emptyMessage}</div>
-        </template>
-    </section>
+	<section
+		class="guarantees"
+		aria-label={title}>
+		<header class="section-header">
+			<div class="section-heading">
+				<lightning-icon
+					icon-name="standard:asset"
+					size="small"
+					alternative-text=""></lightning-icon>
+				<h2>{title}</h2>
+			</div>
+			<template if:true={showTable}>
+				<span class="count">{countLabel}</span>
+			</template>
+		</header>
+		<template if:true={showLoading}>
+			<div class="loading-state">
+				<lightning-spinner
+					alternative-text="Cargando garantías"
+					size="small"></lightning-spinner>
+			</div>
+		</template>
+		<template if:true={showTable}>
+			<div class="guarantee-list">
+				<template
+					for:each={rows}
+					for:item="row">
+					<article
+						key={row.id}
+						class="guarantee-card">
+						<header class="card-header">
+							<div>
+								<h3>{row.titulo}</h3>
+								<template if:true={row.subtitulo}>
+									<p class="subtitle">{row.subtitulo}</p>
+								</template>
+							</div>
+							<template if:true={row.esPyme}>
+								<div class="pyme-data">
+									<template if:true={row.numeroFacilidad}>
+										<span class="badge">Facilidad {row.numeroFacilidad}</span>
+									</template>
+									<template if:true={row.porcentajeAdmisibilidadFormatted}>
+										<span class="badge">Admisibilidad {row.porcentajeAdmisibilidadFormatted}</span>
+									</template>
+								</div>
+							</template>
+						</header>
+						<div class="card-body">
+							<div class="details-area">
+								<template if:true={row.hasDetalles}>
+									<dl class="details-grid">
+										<template
+											for:each={row.detalles}
+											for:item="detalle">
+											<div
+												key={detalle.id}
+												class="detail">
+												<dt>{detalle.etiqueta}</dt>
+												<dd>{detalle.valor}</dd>
+											</div>
+										</template>
+									</dl>
+								</template>
+								<template if:false={row.hasDetalles}>
+									<p class="muted">Sin detalles adicionales.</p>
+								</template>
+							</div>
+							<aside
+								class="amounts-area"
+								aria-label="Valores de la garantía">
+								<h4>Valores de la garantía</h4>
+								<template if:true={row.hasImportes}>
+									<dl class="amounts-list">
+										<template
+											for:each={row.importes}
+											for:item="importe">
+											<div
+												key={importe.etiqueta}
+												class="amount">
+												<dt>{importe.etiqueta}</dt>
+												<dd>{importe.valorFormatted}</dd>
+											</div>
+										</template>
+									</dl>
+									<template if:true={row.hasMonedaPendiente}>
+										<p class="currency-note">Moneda no informada en los importes sin código de moneda.</p>
+									</template>
+								</template>
+								<template if:false={row.hasImportes}>
+									<p class="muted">Sin valores registrados.</p>
+								</template>
+							</aside>
+						</div>
+					</article>
+				</template>
+			</div>
+		</template>
+		<template if:true={hasError}>
+			<div
+				class="status-message error"
+				role="alert">
+				{errorMessage}
+			</div>
+		</template>
+		<template if:true={showEmpty}>
+			<div class="status-message">{emptyMessage}</div>
+		</template>
+	</section>
 </template>

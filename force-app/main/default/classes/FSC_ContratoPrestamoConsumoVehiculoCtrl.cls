@@ -3,8 +3,7 @@ public without sharing class FSC_ContratoPrestamoConsumoVehiculoCtrl extends FSC
 
     public class DatosVehiculo {
         public Boolean tieneGaranteMobiliario { get; set; }
-        public String denominacionPrestatarios { get; set; }
-        public String denominacionGarantes { get; set; }
+        public FSC_ContratoParte otorgante { get; set; }
         public String prestatariosGenerales { get; set; }
         public String garantesGenerales { get; set; }
         public String nombresFirmantesNotario { get; set; }
@@ -32,7 +31,8 @@ public without sharing class FSC_ContratoPrestamoConsumoVehiculoCtrl extends FSC
                 datos.clienteIdentificacion,
                 datos.clienteNacionalidad,
                 datos.clienteEstadoCivil,
-                datos.clienteDomicilio
+                datos.clienteDomicilio,
+                datos.clienteSexo
             )
         };
         item.prestatarios.addAll(
@@ -54,10 +54,16 @@ public without sharing class FSC_ContratoPrestamoConsumoVehiculoCtrl extends FSC
                 true
             )
             : new List<FSC_ContratoIntervinienteService.Interviniente>();
-        item.denominacionPrestatarios = item.tieneGaranteMobiliario
-            ? (item.prestatarios.size() > 1 ? 'LOS PRESTATARIOS' : 'EL PRESTATARIO')
-            : (item.prestatarios.size() > 1 ? 'LOS PRESTATARIOS - GARANTES MOBILIARIOS' : 'EL PRESTATARIO - GARANTE MOBILIARIO');
-        item.denominacionGarantes = item.garantes.size() > 1 ? 'LOS GARANTES MOBILIARIOS' : 'EL GARANTE MOBILIARIO';
+        // Si el deudor es dueño del vehículo, es a la vez prestatario y garante mobiliario.
+        deudor = FSC_ContratoParte.crear(
+            item.tieneGaranteMobiliario ? 'PRESTATARIO' : 'PRESTATARIO - GARANTE MOBILIARIO',
+            FSC_ContratoIntervinienteService.sexes(item.prestatarios),
+            !datos.esPersonaFisica
+        );
+        sujetoGeneral = deudor;
+        garante = FSC_ContratoParte.crear('GARANTE MOBILIARIO', FSC_ContratoIntervinienteService.sexes(item.garantes), false);
+        // Quien otorga la garantía (deudor o garante mobiliario) concuerda los verbos de los artículos de la garantía.
+        item.otorgante = item.tieneGaranteMobiliario ? garante : deudor;
         item.prestatariosGenerales = FSC_ContratoIntervinienteService.joinGenerales(item.prestatarios);
         item.garantesGenerales = FSC_ContratoIntervinienteService.joinGenerales(item.garantes);
 
