@@ -107,7 +107,10 @@ public class INT003 {
     }
     
     @future(callout=true)
-    // public static INT003.Response validatePF(String idClient) {  
+    public static void validatePF(String idClient) {  
+        validatePF(idClient, null);
+    }
+
     public static void validatePF(String idClient, String idSolicitudDeCredito) {  
         List<StaticResource> srList = [SELECT id, name, body FROM StaticResource WHERE name = 'INT003_request_frame'];
         List<AuthSession> authList = [Select id, SourceIP, Users.Name, LoginType, NumSecondsValid, CreatedDate From AuthSession WHERE UsersId =: UserInfo.getUserId() Order By CreatedDate DESC LIMIT 1];

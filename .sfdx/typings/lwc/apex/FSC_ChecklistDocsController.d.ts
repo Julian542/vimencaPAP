@@ -13,6 +13,9 @@ declare module "@salesforce/apex/FSC_ChecklistDocsController.processUploadedFile
 declare module "@salesforce/apex/FSC_ChecklistDocsController.enforceSingleFileOnJoin" {
   export default function enforceSingleFileOnJoin(param: {joinId: any, keepContentDocumentId: any}): Promise<any>;
 }
+declare module "@salesforce/apex/FSC_ChecklistDocsController.deleteUploadedFile" {
+  export default function deleteUploadedFile(param: {joinId: any, contentDocumentId: any}): Promise<any>;
+}
 declare module "@salesforce/apex/FSC_ChecklistDocsController.linkUploadedFilesToRla" {
   export default function linkUploadedFilesToRla(param: {residentialLoanApplicationId: any, contentDocumentIds: any}): Promise<any>;
 }

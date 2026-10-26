@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_SaldoHipotecaNoNegativo</fullName>
+    <active>true</active>
+    <description>Impide un saldo negativo de primera hipoteca; cero identifica ausencia de deuda previa.</description>
+    <errorConditionFormula>FSC_SaldoPrimeraHipoteca__c &lt; 0</errorConditionFormula>
+    <errorDisplayField>FSC_SaldoPrimeraHipoteca__c</errorDisplayField>
+    <errorMessage>El saldo de primera hipoteca no puede ser negativo.</errorMessage>
+</ValidationRule>

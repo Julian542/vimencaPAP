@@ -30,7 +30,7 @@
         <criteriaItems>
             <field>ResidentialLoanApplication.FSC_SolicitaExcepcionParaRechazoDeBuro__c</field>
             <operation>equals</operation>
-            <value>Verdadero</value>
+            <value>True</value>
         </criteriaItems>
         <criteriaItems>
             <field>ResidentialLoanApplication.FSC_Subestado__c</field>

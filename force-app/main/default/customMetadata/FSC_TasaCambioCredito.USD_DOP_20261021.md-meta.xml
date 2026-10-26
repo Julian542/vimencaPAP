@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>USD a DOP vigente 21/10/2026</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_FechaReferencia__c</field>
+        <value xsi:type="xsd:date">2026-10-20</value>
+    </values>
+    <values>
+        <field>FSC_FechaVigencia__c</field>
+        <value xsi:type="xsd:date">2026-10-21</value>
+    </values>
+    <values>
+        <field>FSC_FuenteReferencia__c</field>
+        <value xsi:type="xsd:string">https://www.bancentral.gov.do/</value>
+    </values>
+    <values>
+        <field>FSC_Fuente__c</field>
+        <value xsi:type="xsd:string">https://www.aduanas.gob.do/tasa-de-cambio/</value>
+    </values>
+    <values>
+        <field>FSC_MonedaDestino__c</field>
+        <value xsi:type="xsd:string">DOP</value>
+    </values>
+    <values>
+        <field>FSC_MonedaOrigen__c</field>
+        <value xsi:type="xsd:string">USD</value>
+    </values>
+    <values>
+        <field>FSC_Tasa__c</field>
+        <value xsi:type="xsd:double">61.52</value>
+    </values>
+    <values>
+        <field>FSC_TipoCotizacion__c</field>
+        <value xsi:type="xsd:string">VENTA</value>
+    </values>
+</CustomMetadata>

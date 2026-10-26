@@ -1,0 +1,71 @@
+<apex:page controller="FSC_FormalizacionDocumentosController"
+    applyBodyTag="false" applyHtmlTag="false" showHeader="false" sidebar="false"
+    standardStylesheets="false" cache="false" language="es" renderAs="pdf">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <style type="text/css">
+                @page { size: letter; margin: 18mm 18mm 20mm 18mm; }
+                body { margin: 0; color: #000; font-family: Arial, sans-serif; font-size: 10pt; line-height: 1.25; }
+                h1 { margin: 0 0 12pt; text-align: center; font-size: 13pt; font-weight: 700; }
+                h2 { margin: 12pt 0 4pt; font-size: 10.5pt; font-weight: 700; }
+                table { width: 100%; border-collapse: collapse; }
+                td, th { border: 0.75pt solid #000; padding: 3pt 5pt; vertical-align: top; }
+                th { background: #e7e6e6; font-weight: 700; text-align: left; }
+                .datos td.etiqueta { width: 32%; font-weight: 700; }
+                .cantidad { width: 12%; text-align: center; }
+                .monto { width: 16%; text-align: right; }
+                .descripcion { min-height: 60pt; white-space: pre-wrap; }
+                .total td { font-weight: 700; }
+                .firma { margin-top: 48pt; width: 45%; text-align: center; page-break-inside: avoid; }
+                .firma-linea { border-top: 0.75pt solid #000; padding-top: 4pt; }
+            </style>
+        </head>
+        <body>
+            <apex:outputPanel layout="none" rendered="{!inventario != null}">
+                <h1>INVENTARIO PARA DEPÓSITO EN REGISTRO DE TÍTULOS</h1>
+
+                <h2>Datos personales</h2>
+                <table class="datos">
+                    <tr><td class="etiqueta">Nombre del cliente:</td><td>{!inventario.nombreCliente}</td></tr>
+                    <tr><td class="etiqueta">Teléfono:</td><td>{!inventario.telefono}</td></tr>
+                    <tr><td class="etiqueta">Correo electrónico:</td><td>{!inventario.correo}</td></tr>
+                    <tr><td class="etiqueta">Fecha:</td><td>{!inventario.fecha}</td></tr>
+                    <tr><td class="etiqueta">Monto del contrato:</td><td>{!inventario.montoContrato}</td></tr>
+                </table>
+
+                <h2>Concepto</h2>
+                <table>
+                    <tr><th>Descripción de inmueble</th></tr>
+                    <tr><td class="descripcion">{!inventario.descripcionInmueble}</td></tr>
+                </table>
+
+                <h2>Descripción de garantía</h2>
+                <table>
+                    <tr><th class="cantidad">Cant.</th><th>Documento</th></tr>
+                    <apex:repeat value="{!inventario.documentos}" var="documento">
+                        <tr><td class="cantidad">{!documento.cantidad}</td><td>{!documento.concepto}</td></tr>
+                    </apex:repeat>
+                </table>
+
+                <h2>Tasas por servicio</h2>
+                <table>
+                    <tr><th class="cantidad">Cant.</th><th>Tasa por servicio</th><th class="monto">Valor</th><th class="monto">Precio</th></tr>
+                    <apex:repeat value="{!inventario.tasas}" var="tasa">
+                        <tr>
+                            <td class="cantidad">{!tasa.cantidad}</td>
+                            <td>{!tasa.concepto}</td>
+                            <td class="monto">{!tasa.valor}</td>
+                            <td class="monto">{!tasa.precio}</td>
+                        </tr>
+                    </apex:repeat>
+                    <tr class="total"><td colspan="3">Total</td><td class="monto">{!inventario.total}</td></tr>
+                </table>
+
+                <div class="firma">
+                    <div class="firma-linea">Firma del depositante</div>
+                </div>
+            </apex:outputPanel>
+        </body>
+    </html>
+</apex:page>

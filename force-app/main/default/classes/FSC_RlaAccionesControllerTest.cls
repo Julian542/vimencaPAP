@@ -225,7 +225,7 @@ private class FSC_RlaAccionesControllerTest {
 			return;
 		}
 
-		System.assert(refreshed.FSC_Subestado__c == SUBESTADO_CONTRATO || refreshed.FSC_Subestado__c == SUBESTADO_FIRMAS);
+		System.assertEquals(SUBESTADO_PAGARES, refreshed.FSC_Subestado__c);
 	}
 
 	@IsTest
@@ -248,6 +248,8 @@ private class FSC_RlaAccionesControllerTest {
 
 	@IsTest
 	static void coversSimpleUpdateMethods() {
+		// El usuario que despliega puede no tener los permisos de rol (p. ej. en produccion).
+		FSC_RlaAccionesController.testBypassPermissions = true;
 		ResidentialLoanApplication rla = createRla('ACT222', SUBESTADO_DOC_DESEMBOLSO);
 		setPymeRecordType(rla);
 		createNoAplicaJoin(rla.Id, CAT_CONTRATO, 1);
@@ -583,12 +585,18 @@ private class FSC_RlaAccionesControllerTest {
 	}
 
 	@IsTest
-	static void rechazarProcesoActual_noRequiereMotivoRechazoParaNoPyme() {
+	static void rechazarProcesoActual_requiereMotivoRechazoParaNoPyme() {
 		FSC_RlaAccionesController.testBypassPermissions = true;
 		ResidentialLoanApplication rla = createRla('ACT342', SUBESTADO_ANALISIS);
 
 		Test.startTest();
-		FSC_RlaAccionesController.rechazarProcesoActual(rla.Id, 'observacion no pyme', '');
+		Boolean thrown = false;
+		try {
+			FSC_RlaAccionesController.rechazarProcesoActual(rla.Id, 'observacion no pyme', '');
+		} catch (AuraHandledException e) {
+			thrown = true;
+		}
+		FSC_RlaAccionesController.rechazarProcesoActual(rla.Id, 'observacion no pyme', '1');
 		Test.stopTest();
 
 		ResidentialLoanApplication refreshed = [
@@ -596,8 +604,9 @@ private class FSC_RlaAccionesControllerTest {
 			FROM ResidentialLoanApplication
 			WHERE Id = :rla.Id
 		];
+		System.assertEquals(true, thrown);
 		System.assertEquals('observacion no pyme', refreshed.FSC_ObservacionAdministrador__c);
-		System.assertEquals(null, refreshed.FSC_MotivosDeRechazo__c);
+		System.assertEquals('1', refreshed.FSC_MotivosDeRechazo__c);
 	}
 
 	@IsTest
@@ -1239,6 +1248,123 @@ private class FSC_RlaAccionesControllerTest {
 		System.assert(etapaInvalida, 'Solo se reasigna en Generación de pagarés y plantillas.');
 		System.assert(usuarioInvalido, 'El usuario debe pertenecer a la cola.');
 		System.assert(solicitudRequerida);
+	}
+
+	@IsTest
+	static void reasignarUsuarioGestionPlanilla_asignaUsuarioDeLaColaYValidaEtapa() {
+		FSC_RlaAccionesController.testBypassPermissions = true;
+		Group cola = [SELECT Id FROM Group WHERE Type = 'Queue' AND DeveloperName = 'FSC_GestionPlanillasDeDesembolso' LIMIT 1];
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			if ([SELECT COUNT() FROM GroupMember WHERE GroupId = :cola.Id AND UserOrGroupId = :UserInfo.getUserId()] == 0) {
+				insert new GroupMember(GroupId = cola.Id, UserOrGroupId = UserInfo.getUserId());
+			}
+		}
+		ResidentialLoanApplication rla = createRla('ACTREAPLA', 'Pendiente planilla de desembolso');
+		ResidentialLoanApplication rlaAnalisis = createRla('ACTREAPLA2', SUBESTADO_ANALISIS);
+
+		Test.startTest();
+		List<Map<String, String>> opciones = FSC_RlaAccionesController.getUsuariosGestionPlanilla(rla.Id);
+		FSC_RlaAccionesController.reasignarUsuarioGestionPlanilla(rla.Id, UserInfo.getUserId());
+		Boolean etapaInvalida = false;
+		try {
+			FSC_RlaAccionesController.getUsuariosGestionPlanilla(rlaAnalisis.Id);
+		} catch (AuraHandledException e) {
+			etapaInvalida = true;
+		}
+		Boolean usuarioInvalido = false;
+		try {
+			FSC_RlaAccionesController.reasignarUsuarioGestionPlanilla(rla.Id, null);
+		} catch (AuraHandledException e) {
+			usuarioInvalido = true;
+		}
+		Test.stopTest();
+
+		Boolean incluyeUsuario = false;
+		for (Map<String, String> opcion : opciones) {
+			if (opcion.get('value') == UserInfo.getUserId()) {
+				incluyeUsuario = true;
+			}
+		}
+		System.assert(incluyeUsuario, 'Los miembros activos de la cola deben ofrecerse para reasignar.');
+		ResidentialLoanApplication refreshed = [SELECT FSC_UsuarioGestionPlanilla__c FROM ResidentialLoanApplication WHERE Id = :rla.Id];
+		System.assertEquals(UserInfo.getUserId(), refreshed.FSC_UsuarioGestionPlanilla__c);
+		System.assert(etapaInvalida, 'Solo se reasigna en Pendiente planilla de desembolso.');
+		System.assert(usuarioInvalido, 'El usuario debe pertenecer a la cola.');
+	}
+
+	@IsTest
+	static void reasignarUsuarioFormalizacion_asignaUsuarioDeLaColaYValidaEtapa() {
+		FSC_RlaAccionesController.testBypassPermissions = true;
+		Group cola = [SELECT Id FROM Group WHERE Type = 'Queue' AND DeveloperName = 'FSC_GestionFormalizacion' LIMIT 1];
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			if ([SELECT COUNT() FROM GroupMember WHERE GroupId = :cola.Id AND UserOrGroupId = :UserInfo.getUserId()] == 0) {
+				insert new GroupMember(GroupId = cola.Id, UserOrGroupId = UserInfo.getUserId());
+			}
+		}
+		ResidentialLoanApplication rla = createRla('ACTREAFOR', 'Formalización');
+		ResidentialLoanApplication rlaAnalisis = createRla('ACTREAFOR2', SUBESTADO_ANALISIS);
+
+		Test.startTest();
+		List<Map<String, String>> opciones = FSC_RlaAccionesController.getUsuariosFormalizacion(rla.Id);
+		FSC_RlaAccionesController.reasignarUsuarioFormalizacion(rla.Id, UserInfo.getUserId());
+		Boolean etapaInvalida = false;
+		try {
+			FSC_RlaAccionesController.getUsuariosFormalizacion(rlaAnalisis.Id);
+		} catch (AuraHandledException e) {
+			etapaInvalida = true;
+		}
+		Boolean usuarioInvalido = false;
+		try {
+			FSC_RlaAccionesController.reasignarUsuarioFormalizacion(rla.Id, null);
+		} catch (AuraHandledException e) {
+			usuarioInvalido = true;
+		}
+		Test.stopTest();
+
+		Boolean incluyeUsuario = false;
+		for (Map<String, String> opcion : opciones) {
+			if (opcion.get('value') == UserInfo.getUserId()) {
+				incluyeUsuario = true;
+			}
+		}
+		System.assert(incluyeUsuario, 'Los miembros activos de la cola deben ofrecerse para reasignar.');
+		ResidentialLoanApplication refreshed = [SELECT FSC_UsuarioFormalizacion__c FROM ResidentialLoanApplication WHERE Id = :rla.Id];
+		System.assertEquals(UserInfo.getUserId(), refreshed.FSC_UsuarioFormalizacion__c);
+		System.assert(etapaInvalida, 'Solo se reasigna en Formalización.');
+		System.assert(usuarioInvalido, 'El usuario debe pertenecer a la cola.');
+	}
+
+	@IsTest
+	static void flowAsignaUsuarioDeFormalizacionAlEntrarEnLaEtapa() {
+		Group cola = [SELECT Id FROM Group WHERE Type = 'Queue' AND DeveloperName = 'FSC_GestionFormalizacion' LIMIT 1];
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			if ([SELECT COUNT() FROM GroupMember WHERE GroupId = :cola.Id AND UserOrGroupId = :UserInfo.getUserId()] == 0) {
+				insert new GroupMember(GroupId = cola.Id, UserOrGroupId = UserInfo.getUserId());
+			}
+		}
+		ResidentialLoanApplication rla = createRla('ACTFLUFOR', 'Gestionar firmas');
+		// En produccion los flows nuevos se despliegan inactivos hasta activarlos a mano.
+		Boolean flowActivo = [
+			SELECT COUNT()
+			FROM FlowDefinitionView
+			WHERE ApiName = 'FSC_ProcesoAsignacionFormalizacion' AND IsActive = TRUE
+		] > 0;
+
+		Test.startTest();
+		update new ResidentialLoanApplication(Id = rla.Id, FSC_Subestado__c = 'Formalización');
+		FSC_RandomQueueApproverAction.Input accionInput = new FSC_RandomQueueApproverAction.Input();
+		accionInput.groupId = cola.Id;
+		accionInput.assignedUserFieldApiName = 'FSC_UsuarioFormalizacion__c';
+		List<FSC_RandomQueueApproverAction.Output> accionOutput = FSC_RandomQueueApproverAction.run(
+			new List<FSC_RandomQueueApproverAction.Input>{ accionInput }
+		);
+		Test.stopTest();
+
+		System.assertNotEquals(null, accionOutput[0].userId, 'La acción debe devolver un usuario de la cola de formalización.');
+		if (flowActivo) {
+			ResidentialLoanApplication refreshed = [SELECT FSC_UsuarioFormalizacion__c FROM ResidentialLoanApplication WHERE Id = :rla.Id];
+			System.assertNotEquals(null, refreshed.FSC_UsuarioFormalizacion__c, 'El flow debe asignar un usuario de la cola de formalización.');
+		}
 	}
 
 	@IsTest

@@ -180,13 +180,27 @@
 
 			<div class="slds-box slds-theme_default slds-m-bottom_medium">
 				<div class="slds-text-heading_small slds-m-bottom_medium">Calcular cuota</div>
+				<template if:true={creditPolicyDisplayMessage}>
+					<p
+						class="slds-text-color_error slds-m-bottom_small"
+						role="alert">
+						{creditPolicyDisplayMessage}
+					</p>
+				</template>
+				<template if:true={creditPolicyAmountHelp}>
+					<p
+						class="slds-m-bottom_small"
+						role="status">
+						{creditPolicyAmountHelp}
+					</p>
+				</template>
 				<div class="slds-grid slds-wrap slds-gutters">
 					<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
 						<lightning-input
 							name="montoSolicitado"
 							type="number"
 							step="0.01"
-							label="Monto Solicitado"
+							label={montoSolicitadoLabel}
 							value={montoSolicitado}
 							required
 							data-facility-input
@@ -218,7 +232,11 @@
 								onchange={handleValueChange}>
 							</lightning-input>
 							<template if:false={loanTermValidationMessage}>
-								<div class="slds-form-element__help" role="status">{loanTermHelpText}</div>
+								<div
+									class="slds-form-element__help"
+									role="status">
+									{loanTermHelpText}
+								</div>
 							</template>
 						</div>
 						<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
@@ -287,7 +305,7 @@
 								name="montoCuota"
 								type="number"
 								step="0.01"
-								label="Monto de la Cuota"
+								label={montoCuotaLabel}
 								value={montoCuota}
 								readonly>
 							</lightning-input>
@@ -377,7 +395,7 @@
 											name="FSC_Proposito_Garantia_Hipotecario__c"
 											label="Proposito Garantia Hipotecario"
 											value={guaranteeDraft.FSC_Proposito_Garantia_Hipotecario__c}
-											options={propositoGarantiaOptions}
+											options={filteredPropositoGarantiaOptions}
 											required
 											data-guarantee-input
 											onchange={handleGuaranteeDraftChange}>
@@ -402,6 +420,51 @@
 											onchange={handleGuaranteeDraftChange}>
 										</lightning-input>
 									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Valor_Mejoras__c"
+											required={requiresImprovementsValue}
+											type="number"
+											step="0.01"
+											min="0.01"
+											label="Valor de las mejoras"
+											field-level-help="Para reconstrucción o terminación. Indique el valor de las mejoras en la misma moneda del crédito; no el valor total del inmueble."
+											message-when-range-underflow="El valor de las mejoras debe ser mayor que cero."
+											value={guaranteeDraft.FSC_Valor_Mejoras__c}
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+										<lightning-input
+											name="FSC_Valor_Inmueble__c"
+											type="number"
+											step="0.01"
+											min="0.01"
+											label="Valor del inmueble o solar"
+											field-level-help="Indique el valor total en la moneda del crédito. Para solares, identifique el tipo de inmueble como Solar o Solar sin gravamen."
+											value={guaranteeDraft.FSC_Valor_Inmueble__c}
+											required={requiresPropertyValue}
+											data-guarantee-input
+											onchange={handleGuaranteeDraftChange}>
+										</lightning-input>
+									</div>
+									<template if:true={requiresFirstMortgageBalance}>
+										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
+											<lightning-input
+												name="FSC_SaldoPrimeraHipoteca__c"
+												type="number"
+												step="0.01"
+												min="0"
+												label="Saldo de primera hipoteca"
+												field-level-help="Saldo previo sobre este inmueble, en la moneda del crédito. Use cero si no existe deuda previa."
+												value={guaranteeDraft.FSC_SaldoPrimeraHipoteca__c}
+												required
+												data-guarantee-input
+												onchange={handleGuaranteeDraftChange}>
+											</lightning-input>
+										</div>
+									</template>
 									<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
 										<lightning-radio-group
 											name="FSC_EsTasadorExterno__c"
@@ -472,7 +535,7 @@
 											step="0.01"
 											label="Precio de Venta"
 											value={guaranteeDraft.FSC_Precio_de_Venta__c}
-											required
+											required={requiresSalePrice}
 											data-guarantee-input
 											onchange={handleGuaranteeDraftChange}>
 										</lightning-input>

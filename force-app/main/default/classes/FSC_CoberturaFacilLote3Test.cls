@@ -160,6 +160,85 @@ private class FSC_CoberturaFacilLote3Test {
             );
             FSC_CreditoAprobadoLockService.finalizarDecisionComite();
             System.assertEquals(0, committeeChange.getErrors().size());
+
+            FSC_CreditoAprobadoLockService.iniciarPlanillaDesembolso();
+            ResidentialLoanApplication planillaCompleta = previousRla.clone(true, false, false, false);
+            planillaCompleta.FSC_TipoCredito__c = '06 - MIPYMES';
+            ResidentialLoanApplication planillaCambia = previousRla.clone(true, false, false, false);
+            planillaCambia.FSC_Monto__c = 800000;
+            FSC_CreditoAprobadoLockService.validarCamposCriticosSolicitud(
+                new List<ResidentialLoanApplication>{ planillaCompleta },
+                new Map<Id, ResidentialLoanApplication>{ approved.Id => previousRla }
+            );
+            FSC_CreditoAprobadoLockService.validarCamposCriticosSolicitud(
+                new List<ResidentialLoanApplication>{ planillaCambia },
+                new Map<Id, ResidentialLoanApplication>{ approved.Id => previousRla }
+            );
+            FSC_CreditoAprobadoLockService.finalizarPlanillaDesembolso();
+            System.assertEquals(0, planillaCompleta.getErrors().size(), 'La planilla puede completar campos críticos vacíos.');
+            System.assertEquals(1, planillaCambia.getErrors().size(), 'La planilla no puede cambiar valores aprobados.');
+
+            FSC_Garantia__c garantiaContrato = previousGuarantee.clone(true, false, false, false);
+            garantiaContrato.FSC_Numero_Titulo__c = 'T-100';
+            garantiaContrato.FSC_Valor_Vehiculo__c = 900000;
+            FSC_Garantia__c garantiaFueraContrato = previousGuarantee.clone(true, false, false, false);
+            garantiaFueraContrato.Name = 'Otra garantía';
+
+            Id assetId = (Id) (LoanApplicationAsset.SObjectType.getDescribe().getKeyPrefix() + '000000000001');
+            LoanApplicationAsset activoAnterior = new LoanApplicationAsset(Id = assetId, LoanApplicationId = approved.Id, CashOrMarketValue = 1000);
+            LoanApplicationAsset activoContrato = activoAnterior.clone(true, false, false, false);
+            activoContrato.FSC_Numero_Titulo_Contrato__c = 'T-200';
+            LoanApplicationAsset activoMonto = activoAnterior.clone(true, false, false, false);
+            activoMonto.CashOrMarketValue = 2000;
+
+            Id seguroId = (Id) (FSC_Seguro__c.SObjectType.getDescribe().getKeyPrefix() + '000000000001');
+            FSC_Seguro__c seguroAnterior = new FSC_Seguro__c(Id = seguroId, FSC_Residential_Loan_Application__c = approved.Id);
+            FSC_Seguro__c seguroContrato = seguroAnterior.clone(true, false, false, false);
+            seguroContrato.FSC_Numero_Poliza_Contrato__c = 'P-1';
+            FSC_Seguro__c seguroNuevo = new FSC_Seguro__c(FSC_Residential_Loan_Application__c = approved.Id);
+
+            FSC_CreditoAprobadoLockService.iniciarDatosContrato();
+            FSC_CreditoAprobadoLockService.validarGarantias(
+                new List<FSC_Garantia__c>{ garantiaContrato, garantiaFueraContrato },
+                new Map<Id, FSC_Garantia__c>{ guaranteeId => previousGuarantee },
+                true
+            );
+            FSC_CreditoAprobadoLockService.validarActivosSolicitud(
+                new List<LoanApplicationAsset>{ activoContrato },
+                new Map<Id, LoanApplicationAsset>{ assetId => activoAnterior }
+            );
+            FSC_CreditoAprobadoLockService.validarActivosSolicitud(
+                new List<LoanApplicationAsset>{ activoMonto },
+                new Map<Id, LoanApplicationAsset>{ assetId => activoAnterior }
+            );
+            FSC_CreditoAprobadoLockService.validarSeguros(
+                new List<FSC_Seguro__c>{ seguroContrato },
+                new Map<Id, FSC_Seguro__c>{ seguroId => seguroAnterior },
+                false
+            );
+            FSC_CreditoAprobadoLockService.validarSeguros(new List<FSC_Seguro__c>{ seguroNuevo }, null, true);
+            FSC_CreditoAprobadoLockService.finalizarDatosContrato();
+
+            System.assertEquals(0, garantiaContrato.getErrors().size(), 'El contrato completa datos del título y montos vacíos.');
+            System.assertEquals(1, garantiaFueraContrato.getErrors().size(), 'El contrato no edita otros campos de la garantía.');
+            System.assertEquals(0, activoContrato.getErrors().size(), 'El contrato completa los campos de contrato del activo.');
+            System.assertEquals(1, activoMonto.getErrors().size(), 'El contrato no cambia un monto ya informado.');
+            System.assertEquals(0, seguroContrato.getErrors().size(), 'El contrato completa la póliza.');
+            System.assertEquals(0, seguroNuevo.getErrors().size(), 'El contrato puede crear el seguro.');
+
+            FSC_Garantia__c garantiaFormalizada = previousGuarantee.clone(true, false, false, false);
+            garantiaFormalizada.FSC_Garantia_Constituida__c = 'Sí';
+            garantiaFormalizada.FSC_Fecha_Constitucion_Garantia__c = Date.today();
+            FSC_CreditoAprobadoLockService.validarGarantias(
+                new List<FSC_Garantia__c>{ garantiaFormalizada },
+                new Map<Id, FSC_Garantia__c>{ guaranteeId => previousGuarantee },
+                true
+            );
+            System.assertEquals(0, garantiaFormalizada.getErrors().size(), 'La formalización de la garantía se permite tras la aprobación.');
+
+            FSC_Seguro__c seguroSinContrato = new FSC_Seguro__c(FSC_Residential_Loan_Application__c = approved.Id);
+            FSC_CreditoAprobadoLockService.validarSeguros(new List<FSC_Seguro__c>{ seguroSinContrato }, null, true);
+            System.assertEquals(1, seguroSinContrato.getErrors().size(), 'Fuera del contrato el seguro sigue bloqueado.');
         }
     }
 

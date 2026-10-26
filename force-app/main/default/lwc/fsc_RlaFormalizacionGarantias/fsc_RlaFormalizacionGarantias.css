@@ -1,0 +1,116 @@
+.panel {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	padding: 0.9rem 1rem;
+	border: 1px solid #c9c9c9;
+	border-radius: 0.75rem;
+	background: #ffffff;
+}
+
+.encabezado {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 0.5rem;
+}
+
+.titulo {
+	font-weight: 700;
+	font-size: 0.95rem;
+}
+
+.ruta {
+	font-size: 0.8rem;
+	color: #444444;
+	padding: 0.1rem 0.5rem;
+	border: 1px solid #d8dde6;
+	border-radius: 1rem;
+	background: #f3f3f3;
+}
+
+.resumen {
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+	font-size: 0.875rem;
+}
+
+.etiqueta {
+	color: #444444;
+	margin-right: 0.25rem;
+}
+
+.desembolsado {
+	color: #1f6f3d;
+	font-weight: 600;
+}
+
+.banner {
+	display: flex;
+	gap: 0.5rem;
+	padding: 0.65rem 0.8rem;
+	border-radius: 0.6rem;
+	border: 1px solid #e5e5e5;
+	line-height: 1.35;
+	font-size: 0.875rem;
+}
+
+.banner.warning {
+	border-color: #f3dcc0;
+	background: #fff7ed;
+	color: #8a4b08;
+}
+
+.banner.info {
+	border-color: #c9d7ea;
+	background: #f2f7fd;
+	color: #0b3a6e;
+}
+
+.btnRow {
+	display: flex;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+
+.btnRow.center {
+	justify-content: center;
+}
+
+.datosGarantia {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+	gap: 0.5rem 1rem;
+	margin: 0;
+	font-size: 0.85rem;
+}
+
+.datoGarantia dt {
+	color: #444444;
+}
+
+.datoGarantia dd {
+	margin: 0;
+	font-weight: 600;
+	word-break: break-word;
+	user-select: all;
+}
+
+.columnaCantidad {
+	width: 6rem;
+}
+
+.columnaMonto {
+	width: 9rem;
+}
+
+.monto {
+	text-align: right;
+}
+
+.total {
+	font-weight: 700;
+}

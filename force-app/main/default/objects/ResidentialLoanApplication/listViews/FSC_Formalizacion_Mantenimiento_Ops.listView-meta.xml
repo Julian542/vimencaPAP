@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Formalizacion_Mantenimiento_Ops</fullName>
+    <columns>Name</columns>
+    <columns>Account</columns>
+    <columns>FSC_EtapaFormalizacion__c</columns>
+    <columns>FSC_ResponsableAreaFormalizacion__c</columns>
+    <columns>FSC_UsuarioFormalizacion__c</columns>
+    <columns>FSC_Subestado__c</columns>
+    <columns>LastModifiedDate</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>FSC_EtapaFormalizacion__c</field>
+        <operation>equals</operation>
+        <value>Mantenimiento de Operaciones</value>
+    </filters>
+    <label>Formalización - Mantenimiento Ops</label>
+</ListView>

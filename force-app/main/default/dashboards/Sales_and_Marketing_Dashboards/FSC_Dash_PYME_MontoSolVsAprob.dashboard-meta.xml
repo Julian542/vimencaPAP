@@ -4,7 +4,7 @@
     <backgroundFadeDirection>Diagonal</backgroundFadeDirection>
     <backgroundStartColor>#FFFFFF</backgroundStartColor>
     <dashboardType>SpecifiedUser</dashboardType>
-    <description>Comparación entre montos solicitados y aprobados de PYME para el trimestre fiscal actual, con el contexto de acceso del usuario conectado.</description>
+    <description>Comparación entre montos solicitados y aprobados de PYME para el trimestre fiscal actual, con el contexto de acceso del usuario conectado, agrupada por moneda.</description>
     <isGridLayout>false</isGridLayout>
     <leftSection>
         <columnSize>Medium</columnSize>
@@ -27,7 +27,7 @@
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
-            <groupingColumn>ResidentialLoanApplication$CreatedDate</groupingColumn>
+            <groupingColumn>ResidentialLoanApplication$FSC_Moneda__c</groupingColumn>
             <groupingSortProperties/>
             <header>PYME - Monto solicitado vs aprobado</header>
             <legendPosition>Bottom</legendPosition>

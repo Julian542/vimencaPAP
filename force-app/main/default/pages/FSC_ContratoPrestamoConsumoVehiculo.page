@@ -7,7 +7,7 @@
 	standardStylesheets="false"
 	cache="false"
 	language="es"
-	renderAs="pdf">
+	renderAs="{!IF($CurrentPage.parameters.legalHtml = 'true', '', 'pdf')}">
 	<html>
 		<head>
 			<meta
@@ -74,7 +74,7 @@
 			</style>
 		</head>
 		<body>
-			<c:FSC_ContratoSelloAgua />
+			<c:FSC_ContratoPiePagina />
 			<div class="title">{!datos.tituloContrato}</div>
 			<p class="paragraph">
 				ENTRE: BANCO MÚLTIPLE VIMENCA, S. A., entidad de intermediación financiera organizada de conformidad con las leyes de la República

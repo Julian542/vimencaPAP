@@ -367,6 +367,7 @@ private class FSC_ChecklistDocsControllerTest {
 		System.assertEquals('Observado', firstRow.estadoRevision);
 		System.assertEquals(1, firstRow.files.size());
 		System.assertEquals('archivo_join_1', firstRow.files[0].title);
+		System.assertEquals(true, firstRow.files[0].eliminable, 'Un archivo subido en la fila debe poder eliminarse');
 
 		Integer totalJoins = [
 			SELECT COUNT()
@@ -937,6 +938,106 @@ private class FSC_ChecklistDocsControllerTest {
 		Boolean thrown = false;
 		try {
 			FSC_ChecklistDocsController.processUploadedFiles(anotherRla.Id, joinRec.Id, new List<Id>{ fileId });
+		} catch (AuraHandledException e) {
+			thrown = true;
+		}
+		System.assertEquals(true, thrown);
+	}
+
+	// =========================
+	// Tests deleteUploadedFile
+	// =========================
+
+	@IsTest
+	static void testDeleteUploadedFile_OficialEliminaArchivoDeOtroUsuario() {
+		Id pymeRtId = getRecordTypeId(RT_PYME);
+		if (pymeRtId == null) {
+			System.assert(true);
+			return;
+		}
+
+		ResidentialLoanApplication rla = createRla(RT_PYME);
+		List<FSC_ChecklistDocumentos__c> docs = createChecklistDocs(1);
+		// Observado y con "No aplica" marcado: igual se puede eliminar.
+		FSC_SolicitudDeCreditoYChecklistDeDocs__c joinRec = createJoin(rla.Id, docs[0].Id, true, 'Revisar', 'Observado');
+		Id cdId = uploadFile(joinRec.Id, 'archivo_a_eliminar');
+		FSC_ChecklistDocsController.linkUploadedFilesToRla(rla.Id, new List<Id>{ cdId });
+		User officialUser = createUserWithPermissionSet('FSC_PS_Oficial_Negocio', 'ofidel01');
+
+		Test.startTest();
+		System.runAs(officialUser) {
+			FSC_ChecklistDocsController.deleteUploadedFile(joinRec.Id, cdId);
+		}
+		Test.stopTest();
+
+		System.assertEquals(0, [SELECT COUNT() FROM ContentDocument WHERE Id = :cdId], 'El archivo debe eliminarse');
+		System.assertEquals(0, [SELECT COUNT() FROM ContentDocumentLink WHERE LinkedEntityId = :rla.Id], 'El archivo no debe quedar en la solicitud');
+	}
+
+	@IsTest
+	static void testDeleteUploadedFile_NoEliminaPrecargado() {
+		FSC_ChecklistDocsController.testBypassPermissions = true;
+		Id pymeRtId = getRecordTypeId(RT_PYME);
+		if (pymeRtId == null) {
+			System.assert(true);
+			return;
+		}
+
+		ResidentialLoanApplication rla = createRla(RT_PYME);
+		List<FSC_ChecklistDocumentos__c> docs = createChecklistDocs(1);
+		FSC_SolicitudDeCreditoYChecklistDeDocs__c joinRec = createJoin(rla.Id, docs[0].Id, false, null, 'Pendiente');
+		Id cdId = uploadFile(rla.AccountId, 'archivo_cuenta');
+		insert new ContentDocumentLink(LinkedEntityId = joinRec.Id, ContentDocumentId = cdId, ShareType = 'V', Visibility = 'AllUsers');
+
+		List<FSC_ChecklistDocsController.RowDTO> rows = FSC_ChecklistDocsController.initAndGetRows(rla.Id);
+		System.assertEquals(1, rows[0].files.size());
+		System.assertEquals(false, rows[0].files[0].eliminable, 'Un archivo precargado no debe poder eliminarse');
+
+		Boolean thrown = false;
+		Test.startTest();
+		try {
+			FSC_ChecklistDocsController.deleteUploadedFile(joinRec.Id, cdId);
+		} catch (AuraHandledException e) {
+			thrown = true;
+		}
+		Test.stopTest();
+
+		System.assertEquals(true, thrown);
+		System.assertEquals(1, [SELECT COUNT() FROM ContentDocument WHERE Id = :cdId], 'El archivo original debe conservarse');
+	}
+
+	@IsTest
+	static void testDeleteUploadedFile_NoEliminaAprobado() {
+		FSC_ChecklistDocsController.testBypassPermissions = true;
+		Id pymeRtId = getRecordTypeId(RT_PYME);
+		if (pymeRtId == null) {
+			System.assert(true);
+			return;
+		}
+
+		ResidentialLoanApplication rla = createRla(RT_PYME);
+		List<FSC_ChecklistDocumentos__c> docs = createChecklistDocs(1);
+		FSC_SolicitudDeCreditoYChecklistDeDocs__c joinRec = createJoin(rla.Id, docs[0].Id, false, null, 'Aprobado');
+		Id cdId = uploadFile(joinRec.Id, 'archivo_aprobado');
+
+		Boolean thrown = false;
+		Test.startTest();
+		try {
+			FSC_ChecklistDocsController.deleteUploadedFile(joinRec.Id, cdId);
+		} catch (AuraHandledException e) {
+			thrown = true;
+		}
+		Test.stopTest();
+
+		System.assertEquals(true, thrown);
+		System.assertEquals(1, [SELECT COUNT() FROM ContentDocument WHERE Id = :cdId]);
+	}
+
+	@IsTest
+	static void testDeleteUploadedFile_ParametrosNulos() {
+		Boolean thrown = false;
+		try {
+			FSC_ChecklistDocsController.deleteUploadedFile(null, null);
 		} catch (AuraHandledException e) {
 			thrown = true;
 		}

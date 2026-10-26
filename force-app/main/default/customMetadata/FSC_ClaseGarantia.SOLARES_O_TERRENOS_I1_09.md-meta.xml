@@ -11,6 +11,10 @@
         <value xsi:type="xsd:string">real-estate</value>
     </values>
     <values>
+        <field>FSC_RutaFormalizacion__c</field>
+        <value xsi:type="xsd:string">hipotecaria</value>
+    </values>
+    <values>
         <field>FSC_Valor__c</field>
         <value xsi:type="xsd:string">SOLARES O TERRENOS I1</value>
     </values>

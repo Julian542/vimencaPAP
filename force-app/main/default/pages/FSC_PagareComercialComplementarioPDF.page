@@ -1,7 +1,7 @@
 <apex:page standardController="ResidentialLoanApplication"
     extensions="FSC_PagareComercialComplementarioCtrl"
     applyBodyTag="false" applyHtmlTag="false" showHeader="false" sidebar="false"
-    standardStylesheets="false" cache="false" language="es" renderAs="pdf">
+    standardStylesheets="false" cache="false" language="es" renderAs="{!IF($CurrentPage.parameters.legalHtml = 'true', '', 'pdf')}">
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -46,9 +46,9 @@
             <div class="header-details">
                 <div class="header-detail">Valor: {!simboloMonedaPagare}{!valorMonto}</div>
                 <div class="header-detail">Cédula: {!cedula}</div>
-                <div class="header-detail">Préstamo No.: <span class="blank-field">{!numeroPrestamoPagare}</span></div>
+                <div class="header-detail">Préstamo No.: <span class="blank-field" data-legal-field="numeroPrestamo">{!numeroPrestamoPagare}</span></div>
                 <div class="header-detail">Fecha: <span class="blank-field">{!fechaPagare}</span></div>
-                <div class="header-detail">Vencimiento: <span class="blank-field blank-field-wide">{!fechaVencimientoPagare}</span></div>
+                <div class="header-detail">Vencimiento: <span class="blank-field blank-field-wide" data-legal-field="fechaVencimiento">{!fechaVencimientoPagare}</span></div>
             </div>
 
             <p class="paragraph">Por la suma recibida y en la forma y vencimiento que se indican más adelante en este Pagaré, de conformidad con las disposiciones del {!nombreContratoPagare}, de fecha {!fechaPagare} (en lo sucesivo referido como el Contrato), firmado por el (los) suscrito(s) y BANCO MÚLTIPLE VIMENCA, S. A., RNC No. 1-01-02141-1 (en lo adelante BANCO VIMENCA), del cual forma parte integral este Pagaré, quedando su pago sujeto a las condiciones y estipulaciones del mismo el(los) suscrito(s) conjunta y solidariamente se obliga(n) a pagar a la orden del BANCO VIMENCA, la cantidad de {!valorMontoTexto} en {!nombreMonedaPagare} ({!simboloMonedaPagare}{!valorMonto}), recibida por el(los) suscrito(s) a título de préstamo. Esta cantidad producirá intereses a favor de BANCO VIMENCA sobre el saldo insoluto del principal adeudado, a razón de un {!tasaInteresTexto} por ciento ({!tasaInteresNumero}%) anual, pagaderos en la misma moneda {!nombreMonedaPagare}, a partir del desembolso, calculables sobre la base de trescientos sesenta (360) días por año, más los cargos por comisión y tramitación fijados en el tarifario de servicios, el cual es entregado al(los) suscrito(s) al momento de la firma. La suma adeudada será pagada de la siguiente manera: {!plazoMesesTexto} ({!plazoMeses}) cuotas, mensuales, iguales y consecutivas contentivas de capital e intereses, por la suma de {!cuotaMensualTexto} en {!nombreMonedaPagare} ({!simboloMonedaPagare}{!cuotaMensual}). Es entendido que los intereses vencidos y no pagados en el plazo de un (1) año, contado a partir de la fecha de su vencimiento, podrán ser capitalizados, por lo que se calcularán intereses sobre dichos montos.</p>

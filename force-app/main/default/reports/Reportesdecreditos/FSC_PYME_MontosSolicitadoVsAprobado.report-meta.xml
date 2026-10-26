@@ -12,13 +12,13 @@
         <chartSummaries>
             <aggregate>Sum</aggregate>
             <axisBinding>y</axisBinding>
-            <column>ResidentialLoanApplication$FSC_MontoAprobadoMoneda__c</column>
+            <column>ResidentialLoanApplication$FSC_MontoAprobado__c</column>
         </chartSummaries>
         <chartType>VerticalColumn</chartType>
         <enableHoverLabels>true</enableHoverLabels>
         <expandOthers>true</expandOthers>
-        <groupingColumn>ResidentialLoanApplication$CreatedDate</groupingColumn>
-        <legendPosition>Right</legendPosition>
+        <groupingColumn>ResidentialLoanApplication$FSC_Moneda__c</groupingColumn>
+        <legendPosition>Bottom</legendPosition>
         <location>CHART_BOTTOM</location>
         <showAxisLabels>true</showAxisLabels>
         <showPercentage>false</showPercentage>
@@ -41,9 +41,9 @@
     </columns>
     <columns>
         <aggregateTypes>Sum</aggregateTypes>
-        <field>ResidentialLoanApplication$FSC_MontoAprobadoMoneda__c</field>
+        <field>ResidentialLoanApplication$FSC_MontoAprobado__c</field>
     </columns>
-    <description>Comparacion de montos solicitados y aprobados de PYME durante el trimestre fiscal actual.</description>
+    <description>Comparacion de montos solicitados y aprobados de PYME durante el trimestre fiscal actual, agrupados por moneda.</description>
     <filter>
         <criteriaItems>
             <column>ResidentialLoanApplication$RecordType</column>
@@ -55,6 +55,11 @@
         <language>en_US</language>
     </filter>
     <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>ResidentialLoanApplication$FSC_Moneda__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
     <groupingsDown>
         <dateGranularity>Month</dateGranularity>
         <field>ResidentialLoanApplication$CreatedDate</field>

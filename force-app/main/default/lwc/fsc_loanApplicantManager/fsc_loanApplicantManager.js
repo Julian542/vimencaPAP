@@ -2420,6 +2420,21 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 			return;
 		}
 
+		const applicantType = this.normalizeApplicantType(this.tipoSolicitante);
+		if (
+			['codeudor', 'garante'].includes(applicantType) &&
+			!this.direccionesElectronicas.some((row) => this.isValidEmailAddress(row.EmailAddress))
+		) {
+			this.dispatchEvent(
+				new ShowToastEvent({
+					title: 'Correo requerido',
+					message: 'Debe agregar al menos un correo electronico valido para el codeudor o garante antes de guardar.',
+					variant: 'warning',
+				})
+			);
+			return;
+		}
+
 		if (this.normalizeApplicantType(this.tipoSolicitante) === 'deudor' && this.hasAnotherDeudor()) {
 			this.dispatchEvent(
 				new ShowToastEvent({

@@ -38,7 +38,11 @@ public with sharing class FSC_CreacionDesembolsoAsync implements Queueable, Data
 
 	public void execute(QueueableContext context) {
 		List<FSC_APIPrestamoDesembolso.Input> desembolsoInputs = new List<FSC_APIPrestamoDesembolso.Input>();
+		Set<Id> ids = new Set<Id>();
+		for (Input inputItem : pendingInputs) ids.add(inputItem.residentialLoanApplicationId);
+		Set<Id> habilitadas = FSC_ProcesamientoAbanks.habilitadas(ids);
 		for (Input inputItem : pendingInputs) {
+			if (!habilitadas.contains(inputItem.residentialLoanApplicationId)) continue;
 			FSC_APIPrestamoDesembolso.Input desembolsoInput = new FSC_APIPrestamoDesembolso.Input();
 			desembolsoInput.residentialLoanApplicationId = inputItem.residentialLoanApplicationId;
 			desembolsoInput.codigoUsuario = inputItem.codigoUsuario;

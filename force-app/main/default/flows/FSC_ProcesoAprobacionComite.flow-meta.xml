@@ -31,6 +31,27 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </actionCalls>
     <actionCalls>
+        <name>ObtenerMontoComite</name>
+        <label>ObtenerMontoComite</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>FSC_MontoComiteAction</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Monto</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>solicitudId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>FSC_MontoComiteAction</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
         <name>ObtenerUsuarioComiteIDesdeCola</name>
         <label>ObtenerUsuarioComiteIDesdeCola</label>
         <locationX>0</locationX>
@@ -191,14 +212,14 @@
             <name>Hasta_2_5M_PYME_o_7M_Otros</name>
             <conditionLogic>(1 AND 3) OR (2 AND NOT(3))</conditionLogic>
             <conditions>
-                <leftValueReference>$Record.FSC_Monto__c</leftValueReference>
+                <leftValueReference>ObtenerMontoComite.monto</leftValueReference>
                 <operator>LessThanOrEqualTo</operator>
                 <rightValue>
                     <numberValue>2500000.0</numberValue>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference>$Record.FSC_Monto__c</leftValueReference>
+                <leftValueReference>ObtenerMontoComite.monto</leftValueReference>
                 <operator>LessThanOrEqualTo</operator>
                 <rightValue>
                     <numberValue>7000000.0</numberValue>
@@ -220,7 +241,7 @@
             <name>Hasta_25M</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>$Record.FSC_Monto__c</leftValueReference>
+                <leftValueReference>ObtenerMontoComite.monto</leftValueReference>
                 <operator>LessThanOrEqualTo</operator>
                 <rightValue>
                     <numberValue>2.5E7</numberValue>
@@ -235,7 +256,7 @@
             <name>Hasta_100M</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>$Record.FSC_Monto__c</leftValueReference>
+                <leftValueReference>ObtenerMontoComite.monto</leftValueReference>
                 <operator>LessThanOrEqualTo</operator>
                 <rightValue>
                     <numberValue>1.0E8</numberValue>
@@ -319,7 +340,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Monto</targetReference>
+            <targetReference>ObtenerMontoComite</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>

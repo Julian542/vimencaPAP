@@ -3,10 +3,9 @@
 		@page {
 			size: letter;
 			margin: 25.4mm;
-			@bottom-right {
-				content: counter(page);
-				font-family: 'Arial Narrow', Arial, sans-serif;
-				font-size: 11pt;
+			@bottom-center {
+				content: element(contrato-pie-pagina);
+				width: 100%;
 			}
 		}
 		body {
@@ -26,15 +25,22 @@
 		.articulo:before {
 			content: "ARTÍCULO " counter(articulo) ". ";
 		}
-		.sello-agua {
-			position: fixed;
-			top: 62mm;
-			left: 10mm;
-			width: 145mm;
-			z-index: -1;
+		/* El pie se repite dentro del margen inferior de cada hoja. */
+		.contrato-pie-pagina {
+			position: running(contrato-pie-pagina);
+			width: 100%;
+			font-family: 'Arial Narrow', Arial, sans-serif;
+			font-size: 7pt;
+			line-height: 1.2;
+			text-align: center;
 		}
-		.sello-agua-imagen {
-			width: 145mm;
+		.contrato-numero-pagina {
+			margin-top: 1mm;
+			font-size: 11pt;
+			text-align: right;
+		}
+		.contrato-numero-pagina:before {
+			content: counter(page);
 		}
 	</style>
 </apex:component>

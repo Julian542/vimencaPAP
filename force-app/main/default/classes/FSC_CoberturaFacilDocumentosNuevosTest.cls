@@ -24,6 +24,8 @@ private class FSC_CoberturaFacilDocumentosNuevosTest {
 	}
 
 	private static ResidentialLoanApplication createRla(String recordTypeName, String suffix) {
+		// Estos tests cubren documentos y contratos; los límites de política se prueban en FSC_CreditPolicyGuardTest.
+		FSC_CreditPolicyGuard.bypassInTests = true;
 		Account account = FSC_FabricaDatosDocumentosAnalisisTest.obtenerCuentaBase();
 		ResidentialLoanApplication rla = FSC_FabricaDatosDocumentosAnalisisTest.crearSolicitud(
 			account.Id,

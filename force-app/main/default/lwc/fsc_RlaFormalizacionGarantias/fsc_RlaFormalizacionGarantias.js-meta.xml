@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>FSC RLA Formalización de garantías</masterLabel>
+    <description>Panel del proceso de formalización de garantías por etapas, embebido en fsc_RlaAcciones.</description>
+</LightningComponentBundle>

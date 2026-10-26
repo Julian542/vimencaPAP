@@ -39,22 +39,22 @@
         <criteriaItems>
             <field>ResidentialLoanApplication.FSC_Doc_Completa_Analisis__c</field>
             <operation>equals</operation>
-            <value>Verdadero</value>
+            <value>True</value>
         </criteriaItems>
         <criteriaItems>
             <field>ResidentialLoanApplication.FSC_DebeRevisarComite__c</field>
             <operation>equals</operation>
-            <value>Falso</value>
+            <value>False</value>
         </criteriaItems>
         <criteriaItems>
             <field>ResidentialLoanApplication.FSC_DebeRevisarSupervisor__c</field>
             <operation>equals</operation>
-            <value>Falso</value>
+            <value>False</value>
         </criteriaItems>
         <criteriaItems>
             <field>ResidentialLoanApplication.FSC_Aprobado_con_Condiciones__c</field>
             <operation>equals</operation>
-            <value>Falso</value>
+            <value>False</value>
         </criteriaItems>
     </entryCriteria>
     <finalApprovalActions>

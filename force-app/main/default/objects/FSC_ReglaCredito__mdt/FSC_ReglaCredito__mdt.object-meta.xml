@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Configura mínimos monetarios, porcentajes máximos y plazos inclusivos por producto, propósito exacto, perfil y moneda. El motor aplica estas reglas en el formulario y al guardar solicitudes y garantías. Las conversiones utilizan cotizaciones fechadas independientes.</description>
+    <label>Regla de crédito</label>
+    <pluralLabel>Reglas de crédito</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_MonedaOrigen__c</fullName>
+    <description>Moneda del importe antes de multiplicar por la tasa.</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Use el código ISO de tres letras. Ejemplo: USD.</inlineHelpText>
+    <label>Moneda origen</label>
+    <length>3</length>
+    <required>true</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,69 @@
+COMPONENTES MODIFICADOS Y CREADOS
+Solución: revisión y edición de pagarés y contratos
+Org de despliegue: vimencab
+
+MODIFICADOS (24 componentes Salesforce)
+
+Clases Apex (7):
+1. FSC_GenerarContratoPDFQueueable
+2. FSC_GenerarPagarePDF_Action
+3. FSC_GenerarPagarePDF_ActionTest
+4. FSC_MissingCoverageTest
+5. FSC_RegenerarPagareComplementarioQbl
+6. FSC_RlaAccionesController
+7. FSC_RlaAccionesControllerTest
+
+Lightning Web Components (1):
+8. fsc_RlaAcciones (JavaScript y HTML)
+
+Páginas Visualforce (16):
+9. FSC_ContratoConsumoHipotecario
+10. FSC_ContratoHipFideicomisoBajoCosto
+11. FSC_ContratoHipFideicomisoNormal
+12. FSC_ContratoHipotecarioEmpresa
+13. FSC_ContratoHipotecarioEmpresaLey158
+14. FSC_ContratoHipotecarioPersonaFisica
+15. FSC_ContratoPrestamoComercialCH
+16. FSC_ContratoPrestamoComercialGMSP
+17. FSC_ContratoPrestamoComercialGS
+18. FSC_ContratoPrestamoComercialGarantiaCD
+19. FSC_ContratoPrestamoComercialSF
+20. FSC_ContratoPrestamoConsumoVehiculo
+21. FSC_PagareComercialComplementarioPDF
+22. FSC_PagareConsumoSimplePDF
+23. FSC_PagarePDF
+24. FSC_PignoracionCertificadoConsumoPDF
+
+CREADOS (4 componentes Salesforce)
+
+Clases Apex (2):
+1. FSC_DocumentoLegalService
+2. FSC_DocumentoLegalServiceTest
+
+Lightning Web Components (1):
+3. fsc_EditarDocumentoLegal (JavaScript, HTML, CSS, metadata y pruebas Jest)
+
+Campo personalizado (1):
+4. ContentVersion.FSC_ContenidoLegal__c
+
+ARCHIVOS AUXILIARES DEL REPOSITORIO
+
+Modificado:
+- .forceignore
+
+Creados:
+- .gitignore
+- manifest/packageDocumentosLegales.xml
+- reports/validacion-documentos-legales.md
+- reports/componentes-documentos-legales.txt
+
+NOTAS
+
+- Total: 28 componentes Salesforce modificados o creados.
+- El despliegue incluyó 29 componentes: también se incluyó
+  FSC_DocumentosAnalisisCreditoTest, sin modificar su contenido.
+- No se modificaron ni crearon PermissionSets o Perfiles.
+- Las clases Apex están en force-app/main/default/classes/.
+- Los LWC están en force-app/main/default/lwc/.
+- Las páginas Visualforce están en force-app/main/default/pages/.
+- El campo está en force-app/main/default/objects/ContentVersion/fields/.

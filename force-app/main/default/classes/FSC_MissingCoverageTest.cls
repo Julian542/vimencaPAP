@@ -420,17 +420,20 @@ private class FSC_MissingCoverageTest {
 		Id finAccountRecordTypeId = Schema.SObjectType.FinServ__FinancialAccount__c.getRecordTypeInfosByDeveloperName()
 			.get('CheckingAccount')
 			.getRecordTypeId();
-		insert new FinServ__FinancialAccount__c(
+		FinServ__FinancialAccount__c cuenta = new FinServ__FinancialAccount__c(
 			Name = 'Cuenta Principal',
 			FinServ__FinancialAccountNumber__c = '123456789',
 			FinServ__SourceSystemId__c = 'SRC123456789',
 			FinServ__PrimaryOwner__c = rla.AccountId,
 			RecordTypeId = finAccountRecordTypeId
 		);
+		insert cuenta;
+		// La automatizacion de la org puede reemplazar el Name por el numero de cuenta.
+		String nombreCuenta = [SELECT Name FROM FinServ__FinancialAccount__c WHERE Id = :cuenta.Id].Name;
 
 		List<Map<String, String>> cuentas = FSC_RlaAccionesController.getCuentasDesembolsoOptions(rla.Id);
 		System.assertEquals(1, cuentas.size());
-		System.assertEquals('123456789 - 123456789', cuentas[0].get('label'));
+		System.assertEquals(nombreCuenta + ' - 123456789', cuentas[0].get('label'));
 
 		System.assertEquals('', FSC_RlaAccionesController.getProcessDefinitionDeveloperName(null));
 		System.assertEquals('recepcion de documentos analisis', FSC_RlaAccionesController.normalize('Recepción de documentos – Análisis'));
@@ -694,20 +697,27 @@ private class FSC_MissingCoverageTest {
 		}
 
 		FSC_APIPrestamoProductos.mockIpResponse = new Map<String, Object>{ 'productos' => new List<Object>() };
-		try {
-			FSC_RlaAccionesController.reintentarCreacionPrestamo(rla.Id);
-			System.assert(false, 'Un producto inexistente debe producir un error controlado.');
-		} catch (AuraHandledException expected) {
-			System.assertNotEquals(null, expected);
-		}
+		FSC_RlaAccionesController.ReintentoPrestamoResult sinProducto = FSC_RlaAccionesController.reintentarCreacionPrestamo(rla.Id);
+		System.assertEquals(false, sinProducto.success, 'Un producto inexistente debe producir un error controlado.');
 
 		FSC_APIPrestamoProductos.mockIpResponse = new Map<String, Object>{ 'success' => false, 'error' => 'Error simulado' };
-		try {
-			FSC_RlaAccionesController.reintentarCreacionPrestamo(rla.Id);
-			System.assert(false, 'Un error del catálogo debe propagarse de forma controlada.');
-		} catch (AuraHandledException expected) {
-			System.assertNotEquals(null, expected);
-		}
+		FSC_RlaAccionesController.ReintentoPrestamoResult errorCatalogo = FSC_RlaAccionesController.reintentarCreacionPrestamo(rla.Id);
+		System.assertEquals(false, errorCatalogo.success, 'Un error del catálogo debe propagarse de forma controlada.');
+		System.assert(errorCatalogo.message.contains('Error simulado'));
+
+		FSC_APIPrestamoProductos.mockIpResponse = '<html><head><title>502 Bad Gateway</title></head></html>';
+		FSC_RlaAccionesController.ReintentoPrestamoResult gatewayCaido = FSC_RlaAccionesController.reintentarCreacionPrestamo(rla.Id);
+		System.assertEquals(false, gatewayCaido.success);
+		System.assert(gatewayCaido.message.contains('502 Bad Gateway'), gatewayCaido.message);
+
+		ResidentialLoanApplication conLog = [
+			SELECT FSC_FlagErrorAPIPrestamos__c, FSC_LogErrores__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :rla.Id
+		];
+		System.assertEquals(true, conLog.FSC_FlagErrorAPIPrestamos__c);
+		System.assert(conLog.FSC_LogErrores__c.contains('API Productos | Error: Error simulado'), conLog.FSC_LogErrores__c);
+		System.assert(conLog.FSC_LogErrores__c.contains('502 Bad Gateway'), conLog.FSC_LogErrores__c);
 
 		insert new LoanApplicant(
 			Name = 'Deudor reintento',
@@ -724,10 +734,24 @@ private class FSC_MissingCoverageTest {
 			FSC_NumeroPrestamoAbanks__c = '54290',
 			FSC_NumeroCuentaDesembolso__c = '102083476'
 		);
+		Matriz_de_producto__c productoAhorro = new Matriz_de_producto__c(
+			Name = 'C/AHORRO PERSONAL SIN LIBRETA',
+			PRO_Codigo_de_linea_de_producto__c = 'BCA',
+			PRO_Codigo_de_producto__c = '209'
+		);
+		insert productoAhorro;
+		insert new FinServ__FinancialAccount__c(
+			Name = 'Cuenta 102083476',
+			FinServ__FinancialAccountNumber__c = '102083476',
+			FinServ__PrimaryOwner__c = rla.AccountId,
+			FIN_Producto__c = productoAhorro.Id,
+			RecordTypeId = Schema.SObjectType.FinServ__FinancialAccount__c.getRecordTypeInfosByDeveloperName()
+				.get('SavingsAccount')
+				.getRecordTypeId()
+		);
 		FSC_APIPrestamoDesembolso.mockIpResponse = new Map<String, Object>{
-			'HTTPDesembolso' => new Map<String, Object>{ 'StatusCode' => 200 }
+			'HTTPDesembolso' => new Map<String, Object>{ 'StatusCode' => 200, 'descripcionRespuesta' => 'Exitoso' }
 		};
-
 		Test.startTest();
 		String desembolsoResult = FSC_RlaAccionesController.reintentarDesembolso(rla.Id);
 		Test.stopTest();

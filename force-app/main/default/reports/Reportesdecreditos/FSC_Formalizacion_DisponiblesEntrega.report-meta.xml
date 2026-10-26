@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>ResidentialLoanApplication$Name</field>
+    </columns>
+    <columns>
+        <field>ResidentialLoanApplication$Account</field>
+    </columns>
+    <columns>
+        <field>ResidentialLoanApplication.FSC_Garantias__r$Name</field>
+    </columns>
+    <columns>
+        <field>ResidentialLoanApplication.FSC_Garantias__r$FSC_Clase_de_Garantia__c</field>
+    </columns>
+    <columns>
+        <field>ResidentialLoanApplication.FSC_Garantias__r$FSC_NumeroExpedienteRegistroTitulos__c</field>
+    </columns>
+    <columns>
+        <field>ResidentialLoanApplication.FSC_Garantias__r$FSC_NumeroExpedienteDGII__c</field>
+    </columns>
+    <columns>
+        <field>ResidentialLoanApplication.FSC_Garantias__r$FSC_Fecha_Constitucion_Garantia__c</field>
+    </columns>
+    <columns>
+        <field>ResidentialLoanApplication$FSC_UsuarioFormalizacion__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>ResidentialLoanApplication$FSC_EtapaFormalizacion__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Disponible para entrega</value>
+        </criteriaItems>
+        <language>es</language>
+    </filter>
+    <format>Tabular</format>
+    <name>Formalización - Disponibles para entrega</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>FSC_Formalizacion_Garantias__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>ResidentialLoanApplication.FSC_Garantias__r$FSC_Fecha_Constitucion_Garantia__c</dateColumn>
+        <interval>INTERVAL_CURRENT</interval>
+    </timeFrameFilter>
+</Report>

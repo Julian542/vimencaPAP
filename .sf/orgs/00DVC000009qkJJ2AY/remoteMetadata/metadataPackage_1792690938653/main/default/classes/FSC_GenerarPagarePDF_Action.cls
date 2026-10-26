@@ -1,0 +1,212 @@
+public without sharing class FSC_GenerarPagarePDF_Action {
+    @TestVisible private static Boolean testBypassValidation = false;
+
+    private static String normalizeFieldValue(Object value) {
+        return value == null ? null : String.valueOf(value).trim();
+    }
+
+    public class Input {
+        @InvocableVariable(required=true)
+        public Id residentialLoanApplicationId;
+    }
+
+    public class Output {
+        @InvocableVariable
+        public Id contentVersionId;
+
+        @InvocableVariable
+        public Id contentDocumentId;
+
+        @InvocableVariable
+        public String status;
+
+        @InvocableVariable
+        public String message;
+    }
+
+    @InvocableMethod(label='Generar Pagaré PDF (Visualforce)' description='Genera el PDF desde VF y lo adjunta como File al ResidentialLoanApplication')
+    public static List<Output> run(List<Input> inputs) {
+        List<Output> results = new List<Output>();
+        List<Id> listId = new List<Id>();
+        for (Input variable : inputs) {
+            if (variable != null && variable.residentialLoanApplicationId != null) {
+                listId.add(variable.residentialLoanApplicationId);
+            }
+        }
+
+        Map<Id, ResidentialLoanApplication> rlaMap = new Map<Id, ResidentialLoanApplication>();
+        if (!listId.isEmpty()) {
+            rlaMap = new Map<Id, ResidentialLoanApplication>([
+                SELECT Id, Account.Name
+                FROM ResidentialLoanApplication
+                WHERE Id IN :listId
+            ]);
+        }
+        for (Input i : inputs) {
+            Output o = new Output();
+            Savepoint sp;
+            try {
+                if (i == null || i.residentialLoanApplicationId == null) {
+                    o.status = 'ERROR';
+                    o.message = 'residentialLoanApplicationId es requerido';
+                    results.add(o);
+                    continue;
+                }
+
+                if (!testBypassValidation) {
+                    FSC_DocumentacionContratosService.validarGeneracion(i.residentialLoanApplicationId);
+                }
+                ResidentialLoanApplication rla = [
+                    SELECT Id,
+                           CreatedDate,
+                           FSC_Pagares_y_Plantillas_Generados__c,
+                           FSC_ActoNumeroPagare__c,
+                           FSC_NumeroFolioPagare__c,
+                           FSC_RequiereContratoPagareNotarial__c,
+                           FSC_Excepcion_Contrato_Notarial__c,
+                           FSC_Requiere_Acto_Garantia__c,
+                           FSC_Acto_Garantia_Generado__c,
+                           FSC_Numero_Prestamo_Pagare__c,
+                           FSC_Subestado__c,
+                           FSC_Monto__c,
+                           FSC_MontoAprobado__c,
+                           FSC_Plazo_meses__c,
+                           FSC_PlazoMesesAprobado__c,
+                           FSC_TasaInteres__c,
+                           FSC_TasaInteresAprobada__c,
+                           FSC_Aprobado_con_Condiciones__c,
+                           RecordType.DeveloperName
+                    FROM ResidentialLoanApplication
+                    WHERE Id = :i.residentialLoanApplicationId
+                    LIMIT 1
+                ];
+
+                String actoNumeroPagare = normalizeFieldValue(rla.FSC_ActoNumeroPagare__c);
+                String numeroFolioPagare = normalizeFieldValue(rla.get('FSC_NumeroFolioPagare__c'));
+                String tipoPagare = resolvePagareType(rla);
+                Boolean usaPagareNotarial = tipoPagare == FSC_ConsumoDocumentoResolver.PAGARE_NOTARIAL;
+
+                if (usaPagareNotarial && (String.isBlank(actoNumeroPagare) || String.isBlank(numeroFolioPagare))) {
+                    o.status = 'ERROR';
+                    o.message = 'Debe completar los campos Acto número pagaré y Número de folio antes de generar el pagaré.';
+                    results.add(o);
+                    continue;
+                }
+                if (rla.FSC_Pagares_y_Plantillas_Generados__c == true) {
+                    o.status = 'ERROR';
+                    o.message = 'El pagare ya fue generado para esta solicitud.';
+                    results.add(o);
+                    continue;
+                }
+
+                ResidentialLoanApplication rlaHeader = rlaMap.get(i.residentialLoanApplicationId);
+                String accountName = (rlaHeader != null && rlaHeader.Account != null)
+                    ? rlaHeader.Account.Name
+                    : 'Sin Nombre';
+
+                String tipoPagareArchivo = pagareFileName(tipoPagare);
+                String finalName = tipoPagareArchivo + ' ' + accountName + ' ' + System.now().format('yyyy-MM-dd-HH-mm-ss') + '.pdf';
+
+                PageReference pr = pagarePage(tipoPagare);
+                pr.getParameters().put('id', String.valueOf(i.residentialLoanApplicationId));
+
+                Blob pdfBlob;
+                if (Test.isRunningTest()) {
+                    pdfBlob = Blob.valueOf('TEST PDF');
+                } else {
+                    pdfBlob = pr.getContentAsPDF();
+                }
+
+                ContentVersion cv = new ContentVersion();
+                cv.Title = finalName.replace('.pdf','');
+                cv.PathOnClient = finalName;
+                cv.VersionData = pdfBlob;
+                cv.FSC_EnviarDocumento__c = true;
+                cv.FSC_ContenidoLegal__c = FSC_DocumentoLegalService.capturar(pr, FSC_DocumentoLegalService.PAGARE);
+                ResidentialLoanApplication actual = [SELECT FSC_Pagares_y_Plantillas_Generados__c, FSC_Subestado__c
+                    FROM ResidentialLoanApplication WHERE Id = :rla.Id FOR UPDATE];
+                if (actual.FSC_Pagares_y_Plantillas_Generados__c == true || actual.FSC_Subestado__c != FSC_DocumentoLegalService.ETAPA) {
+                    throw new AuraHandledException('La solicitud cambió o sus documentos ya fueron generados. Actualice la página.');
+                }
+                sp = Database.setSavepoint();
+                insert cv;
+
+                cv = [
+                    SELECT Id, ContentDocumentId
+                    FROM ContentVersion
+                    WHERE Id = :cv.Id
+                    LIMIT 1
+                ];
+
+                ContentDocumentLink cdl = new ContentDocumentLink();
+                cdl.LinkedEntityId = i.residentialLoanApplicationId;
+                cdl.ContentDocumentId = cv.ContentDocumentId;
+                cdl.ShareType = 'V';
+                cdl.Visibility = 'AllUsers';
+                insert cdl;
+
+                Boolean aprobadoConCondiciones = rla.FSC_Aprobado_con_Condiciones__c == true;
+
+                if (!aprobadoConCondiciones) {
+                    rla.FSC_MontoAprobado__c = rla.FSC_Monto__c;
+                    rla.FSC_PlazoMesesAprobado__c = (rla.FSC_Plazo_meses__c == null)
+                        ? null
+                        : Integer.valueOf(rla.FSC_Plazo_meses__c);
+                    rla.FSC_TasaInteresAprobada__c = rla.FSC_TasaInteres__c;
+                }
+
+                rla.FSC_Pagares_y_Plantillas_Generados__c = true;
+                // Generar nunca valida: la solicitud permanece en la etapa de revisión.
+                update rla;
+                System.enqueueJob(new FSC_GenerarContratoPDFQueueable(new List<Id>{rla.Id}, true));
+
+                o.status = 'OK';
+                o.message = 'PDF generado y adjuntado como File.';
+                o.contentVersionId = cv.Id;
+                o.contentDocumentId = cv.ContentDocumentId;
+
+            } catch (Exception e) {
+                if (sp != null) Database.rollback(sp);
+                o.status = 'ERROR';
+                o.message = e.getMessage();
+            }
+            results.add(o);
+        }
+        return results;
+    }
+
+    private static String resolvePagareType(ResidentialLoanApplication rla) {
+        if (rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Consumo') {
+            return FSC_ConsumoDocumentoResolver.resolve(rla.Id).codigoPagare;
+        }
+        if (rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Vehiculo') {
+            return FSC_VehiculoDocumentoResolver.resolve(rla.Id).codigoPagare;
+        }
+        if (rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Hipotecario') {
+            return FSC_HipotecarioDocumentoResolver.resolve(rla.Id).codigoPagare;
+        }
+        if (rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_PYME' &&
+            rla.FSC_RequiereContratoPagareNotarial__c != true) {
+            return FSC_ConsumoDocumentoResolver.PAGARE_COMPLEMENTARIO;
+        }
+        return FSC_ConsumoDocumentoResolver.PAGARE_NOTARIAL;
+    }
+
+    private static PageReference pagarePage(String pagareType) {
+        if (pagareType == FSC_ConsumoDocumentoResolver.PAGARE_COMPLEMENTARIO) {
+            return Page.FSC_PagareComercialComplementarioPDF;
+        }
+        if (pagareType == FSC_ConsumoDocumentoResolver.PAGARE_SIMPLE ||
+            pagareType == FSC_ConsumoDocumentoResolver.PAGARE_SIMPLE_FIADOR) {
+            return Page.FSC_PagareConsumoSimplePDF;
+        }
+        return Page.FSC_PagarePDF;
+    }
+
+    private static String pagareFileName(String pagareType) {
+        if (pagareType == FSC_ConsumoDocumentoResolver.PAGARE_COMPLEMENTARIO) return 'Pagare Complementario';
+        if (pagareType == FSC_ConsumoDocumentoResolver.PAGARE_SIMPLE_FIADOR) return 'Pagare Individual con Fiador';
+        if (pagareType == FSC_ConsumoDocumentoResolver.PAGARE_SIMPLE) return 'Pagare Individual';
+        return 'Pagare Notarial';
+    }
+}

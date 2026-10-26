@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_SaldoPrimeraHipoteca__c</fullName>
+    <description>Saldo previo de la primera hipoteca sobre este inmueble. Permite limitar la exposición total de la garantía sin confundirla con deudas de otras facilidades.</description>
+    <inlineHelpText>Para destinos que incluyen primer rango, indique el saldo en la moneda del crédito. Use cero cuando no exista deuda previa.</inlineHelpText>
+    <label>Saldo de primera hipoteca</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

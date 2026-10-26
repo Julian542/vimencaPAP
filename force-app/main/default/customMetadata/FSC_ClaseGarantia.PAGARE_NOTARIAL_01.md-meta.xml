@@ -11,6 +11,10 @@
         <value xsi:type="xsd:string">general</value>
     </values>
     <values>
+        <field>FSC_RutaFormalizacion__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
         <field>FSC_Valor__c</field>
         <value xsi:type="xsd:string">PAGARE NOTARIAL</value>
     </values>

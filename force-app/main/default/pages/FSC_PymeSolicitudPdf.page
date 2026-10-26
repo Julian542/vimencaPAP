@@ -979,6 +979,8 @@
 							>[[!FIRMASOLICITANTE:signer1:signature:size(width=120,height=40)]]</span
 						>
 						<br />
+						<apex:outputText value="{!pfNombres} {!pfApellidos}" />
+						<br />
 						Solicitante
 						<br />
 						Firma
@@ -1003,7 +1005,7 @@
 									>[[!{!la.firmaElementId}:signer1:signature:size(width=120,height=40)]]</span
 								>
 								<br />
-								<apex:outputText value="{!la.name}" />
+								<apex:outputText value="{!loanApplicantNames[la.applicantId]}" />
 								<br />
 								<apex:outputText value="{!la.tipoSolicitante}" />
 								<br />
@@ -1011,33 +1013,33 @@
 							</td>
 						</tr>
 					</apex:repeat>
-					</table>
-				</apex:outputPanel>
-
-				<table class="noBorder mt8">
-					<tr>
-						<td class="w25">&nbsp;</td>
-						<td class="w50 center lbl">
-							<br />
-							<br />
-							<br />
-							__________________________
-							<br />
-							<span style="color: #fff; font-family: Arial, sans-serif; font-size: 4pt; white-space: nowrap"
-								>[[!FIRMAOFICIALNEGOCIO:signer1:signature:size(width=160,height=60)]]</span
-							>
-							<br />
-							<apex:outputText value="{!oficialNegociosFirma}" />
-							<br />
-							OFICIAL DE NEGOCIOS/SUBGERENTE DE NEGOCIOS/GERENTE DE NEGOCIOS
-						</td>
-						<td class="w25">&nbsp;</td>
-					</tr>
 				</table>
+			</apex:outputPanel>
 
-				<table class="noBorder mt8 small">
-					<tr>
-						<td class="w60">Código: PC-BP-FOR-003</td>
+			<table class="noBorder mt8">
+				<tr>
+					<td class="w25">&nbsp;</td>
+					<td class="w50 center lbl">
+						<br />
+						<br />
+						<br />
+						__________________________
+						<br />
+						<span style="color: #fff; font-family: Arial, sans-serif; font-size: 4pt; white-space: nowrap"
+							>[[!FIRMAOFICIALNEGOCIO:signer1:signature:size(width=160,height=60)]]</span
+						>
+						<br />
+						<apex:outputText value="{!oficialNegociosFirma}" />
+						<br />
+						OFICIAL DE NEGOCIOS/SUBGERENTE DE NEGOCIOS/GERENTE DE NEGOCIOS
+					</td>
+					<td class="w25">&nbsp;</td>
+				</tr>
+			</table>
+
+			<table class="noBorder mt8 small">
+				<tr>
+					<td class="w60">Código: PC-BP-FOR-003</td>
 					<td class="w40 right">Versión: 01–11/03/2025</td>
 				</tr>
 			</table>

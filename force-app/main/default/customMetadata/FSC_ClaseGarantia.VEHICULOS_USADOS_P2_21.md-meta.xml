@@ -11,6 +11,10 @@
         <value xsi:type="xsd:string">vehicle</value>
     </values>
     <values>
+        <field>FSC_RutaFormalizacion__c</field>
+        <value xsi:type="xsd:string">vehiculo</value>
+    </values>
+    <values>
         <field>FSC_Valor__c</field>
         <value xsi:type="xsd:string">VEHICULOS USADOS-P2</value>
     </values>

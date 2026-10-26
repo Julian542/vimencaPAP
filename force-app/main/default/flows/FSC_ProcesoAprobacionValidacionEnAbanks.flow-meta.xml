@@ -158,6 +158,7 @@
         </connector>
         <filterFormula>AND(
     ISPICKVAL({!$Record.Status}, &apos;En proceso&apos;),
+    {!$Record.FSC_AbanksAutomatico__c},
     ISPICKVAL({!$Record.FSC_Subestado__c}, &apos;Creación de crédito&apos;),
     ISPICKVAL({!$Record.FSC_FormaDeDesembolso__c}, &apos;Cuenta de ahorro&apos;),
     NOT(ISBLANK({!$Record.FSC_NumeroPrestamoAbanks__c})),

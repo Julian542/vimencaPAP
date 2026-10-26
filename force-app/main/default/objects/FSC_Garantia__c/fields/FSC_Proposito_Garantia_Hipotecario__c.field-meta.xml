@@ -10,6 +10,36 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
+                <fullName>Remodelación o ampliación de bienes inmuebles residenciales</fullName>
+                <default>false</default>
+                <label>Remodelación o ampliación de bienes inmuebles residenciales</label>
+            </value>
+            <value>
+                <fullName>Desinteresar codeudor o copropietario con hipoteca vigente</fullName>
+                <default>false</default>
+                <label>Desinteresar codeudor o copropietario con hipoteca vigente</label>
+            </value>
+            <value>
+                <fullName>Reconstrucción o terminación de bienes inmuebles residenciales</fullName>
+                <default>false</default>
+                <label>Reconstrucción o terminación de bienes inmuebles residenciales</label>
+            </value>
+            <value>
+                <fullName>Otros consumos u otros fines a solicitud del cliente</fullName>
+                <default>false</default>
+                <label>Otros consumos u otros fines a solicitud del cliente</label>
+            </value>
+            <value>
+                <fullName>Remodelación o ampliación con consolidación de deudas</fullName>
+                <default>false</default>
+                <label>Remodelación o ampliación con consolidación de deudas</label>
+            </value>
+            <value>
+                <fullName>Consumo para desinteresar codeudor o copropietario</fullName>
+                <default>false</default>
+                <label>Consumo para desinteresar codeudor o copropietario</label>
+            </value>
+            <value>
                 <fullName>Compra Vivienda – Residencial o Turística (Moneda Nacional)</fullName>
                 <default>false</default>
                 <label>Compra Vivienda – Residencial o Turística (Moneda Nacional)</label>
@@ -38,11 +68,6 @@
                 <fullName>Reestructuración de deudas de préstamos hipotecarios (Moneda Nacional o Extranjera)</fullName>
                 <default>false</default>
                 <label>Reestructuración de deudas de préstamos hipotecarios (Moneda Nacional o Extranjera)</label>
-            </value>
-            <value>
-                <fullName>Remodelación, ampliación, reconstrucción o terminación de bienes inmuebles residenciales</fullName>
-                <default>false</default>
-                <label>Remodelación, ampliación, reconstrucción o terminación de bienes inmuebles residenciales</label>
             </value>
             <value>
                 <fullName>Construcción de viviendas</fullName>
@@ -89,6 +114,12 @@
                 <default>false</default>
                 <isActive>false</isActive>
                 <label>Consolidacion Deudas (Prestamos y TC&apos;s)</label>
+            </value>
+            <value>
+                <fullName>Remodelación, ampliación, reconstrucción o terminación de bienes inmuebles residenciales</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Remodelación, ampliación, reconstrucción o terminación de bienes inmuebles residenciales</label>
             </value>
         </valueSetDefinition>
     </valueSet>

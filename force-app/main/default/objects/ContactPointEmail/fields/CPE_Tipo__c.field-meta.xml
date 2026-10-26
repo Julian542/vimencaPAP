@@ -22,6 +22,7 @@
             <value>
                 <fullName>SITIO/PÁGINA WEB</fullName>
                 <default>false</default>
+                <isActive>false</isActive>
                 <label>SITIO/PÁGINA WEB</label>
             </value>
         </valueSetDefinition>

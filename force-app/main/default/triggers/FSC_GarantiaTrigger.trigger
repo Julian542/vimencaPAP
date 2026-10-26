@@ -14,16 +14,13 @@ trigger FSC_GarantiaTrigger on FSC_Garantia__c(before insert, before update, bef
 	}
 
 	if (Trigger.isAfter) {
+		FSC_CreditPolicyGuard.validateGuarantees(Trigger.isDelete ? Trigger.old : Trigger.new, Trigger.isUpdate ? Trigger.oldMap : null);
 		if (Trigger.isInsert) {
 			FSC_RegenerarSolicitudCreditoService.enqueueRegenerationForRelatedRecords(Trigger.new);
 			FSC_TipoGarantiaService.publishForRelatedRecords(Trigger.new, 'FSC_Residential_Loan_Application__c');
 		} else if (Trigger.isUpdate) {
 			FSC_RegenerarSolicitudCreditoService.enqueueRegenerationForRelatedRecords(Trigger.new, Trigger.oldMap);
-			FSC_TipoGarantiaService.publishForRelatedRecords(
-				Trigger.new,
-				Trigger.old,
-				'FSC_Residential_Loan_Application__c'
-			);
+			FSC_TipoGarantiaService.publishForRelatedRecords(Trigger.new, Trigger.old, 'FSC_Residential_Loan_Application__c');
 		} else if (Trigger.isDelete) {
 			FSC_RegenerarSolicitudCreditoService.enqueueRegenerationForRelatedRecords(Trigger.old);
 			FSC_TipoGarantiaService.publishForRelatedRecords(Trigger.old, 'FSC_Residential_Loan_Application__c');

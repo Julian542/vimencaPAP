@@ -1,42 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>FSC_PlazoMaximoPermitido__c</fullName>
-    <description>Plazo máximo vigente segun el tipo de crédito y el vehículo más antiguo. Cero indica una configuración inválida o ausencia de un vehículo con antigüedad admitida.</description>
+    <description>Techo general por producto y antigüedad de vehículo. Para consumo inmobiliario toma el mayor techo configurado; el motor de política aplica además el plazo exacto del destino y perfil, tanto solicitado como aprobado.</description>
     <externalId>false</externalId>
-    <formula>IF(
-    RecordType.DeveloperName = &quot;FSC_Solicitud_Credito_Consumo&quot;,
-    IF(AND($CustomMetadata.FSC_PlazoCredito__mdt.Consumo.FSC_PlazoMaximo__c &gt;= 1, $CustomMetadata.FSC_PlazoCredito__mdt.Consumo.FSC_PlazoMaximo__c &lt;= 999), $CustomMetadata.FSC_PlazoCredito__mdt.Consumo.FSC_PlazoMaximo__c, 0),
-    IF(
-        RecordType.DeveloperName = &quot;FSC_Solicitud_Credito_Vehiculo&quot;,
-        IF(
-            AND(
-                FSC_AnioVehiculoMasAntiguo__c &gt; 0,
-                NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioDesde__c)),
-                NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioDesde__c)),
-                NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioDesde__c)),
-                NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioHasta__c)),
-                NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioHasta__c)),
-                NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioHasta__c)),
-                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioDesde__c = 0,
-                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioHasta__c &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioDesde__c,
-                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioHasta__c &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioDesde__c,
-                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioHasta__c &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioDesde__c,
-                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioDesde__c = $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioHasta__c + 1,
-                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioDesde__c = $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioHasta__c + 1,
-                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioHasta__c &lt;= 99,
-                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_PlazoMaximo__c &lt;= 999,
-                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_PlazoMaximo__c &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_PlazoMaximo__c,
-                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_PlazoMaximo__c &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_PlazoMaximo__c,
-                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_PlazoMaximo__c &gt;= 1,
-                (YEAR(TODAY()) - FSC_AnioVehiculoMasAntiguo__c) &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioDesde__c,
-                (YEAR(TODAY()) - FSC_AnioVehiculoMasAntiguo__c) &lt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioHasta__c
-            ),
-            IF((YEAR(TODAY()) - FSC_AnioVehiculoMasAntiguo__c) &lt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioHasta__c, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_PlazoMaximo__c, IF((YEAR(TODAY()) - FSC_AnioVehiculoMasAntiguo__c) &lt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioHasta__c, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_PlazoMaximo__c, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_PlazoMaximo__c)),
-            0
-        ),
-        999
-    )
-)</formula>
+    <formula>IF( RecordType.DeveloperName = &quot;FSC_Solicitud_Credito_Consumo&quot;, IF(FSC_TipoGarantia__c = &quot;Garantía Real&quot;, MAX($CustomMetadata.FSC_ReglaCredito__mdt.ConsConsolidacion.FSC_PlazoMaximo__c, $CustomMetadata.FSC_ReglaCredito__mdt.ConsOtros.FSC_PlazoMaximo__c, $CustomMetadata.FSC_ReglaCredito__mdt.ConsSegundaHipoteca.FSC_PlazoMaximo__c, $CustomMetadata.FSC_ReglaCredito__mdt.ConsRemodelacion.FSC_PlazoMaximo__c, $CustomMetadata.FSC_ReglaCredito__mdt.ConsSolar.FSC_PlazoMaximo__c, $CustomMetadata.FSC_ReglaCredito__mdt.ConsTraslado.FSC_PlazoMaximo__c, $CustomMetadata.FSC_ReglaCredito__mdt.ConsDesinteresar.FSC_PlazoMaximo__c), IF(AND($CustomMetadata.FSC_PlazoCredito__mdt.Consumo.FSC_PlazoMaximo__c &gt;= 1, $CustomMetadata.FSC_PlazoCredito__mdt.Consumo.FSC_PlazoMaximo__c &lt;= 999), $CustomMetadata.FSC_PlazoCredito__mdt.Consumo.FSC_PlazoMaximo__c, 0) ), IF( RecordType.DeveloperName = &quot;FSC_Solicitud_Credito_Vehiculo&quot;, IF( AND( FSC_AnioVehiculoMasAntiguo__c &gt; 0, NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioDesde__c)), NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioDesde__c)), NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioDesde__c)), NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioHasta__c)), NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioHasta__c)), NOT(ISBLANK($CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioHasta__c)), $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioDesde__c = 0, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioHasta__c &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioDesde__c, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioHasta__c &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioDesde__c, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioHasta__c &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioDesde__c, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioDesde__c = $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioHasta__c + 1, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioDesde__c = $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioHasta__c + 1, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioHasta__c &lt;= 99, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_PlazoMaximo__c &lt;= 999, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_PlazoMaximo__c &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_PlazoMaximo__c, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_PlazoMaximo__c &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_PlazoMaximo__c, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_PlazoMaximo__c &gt;= 1, (YEAR(TODAY()) - FSC_AnioVehiculoMasAntiguo__c) &gt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioDesde__c, (YEAR(TODAY()) - FSC_AnioVehiculoMasAntiguo__c) &lt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_AnioHasta__c ), IF((YEAR(TODAY()) - FSC_AnioVehiculoMasAntiguo__c) &lt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioHasta__c, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_PlazoMaximo__c, IF((YEAR(TODAY()) - FSC_AnioVehiculoMasAntiguo__c) &lt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioHasta__c, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_PlazoMaximo__c, $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_PlazoMaximo__c)), 0 ), 999 ) )</formula>
     <inlineHelpText>Valor calculado desde Plazos de crédito. Para vehículos, revise el año de las garantías. Cero significa que no hay un plazo habilitado.</inlineHelpText>
     <label>Plazo máximo permitido</label>
     <precision>18</precision>

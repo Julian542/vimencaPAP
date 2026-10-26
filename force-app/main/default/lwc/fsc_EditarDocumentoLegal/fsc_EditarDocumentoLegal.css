@@ -1,0 +1,5 @@
+.modalContainer { width: 90%; max-width: 72rem; }
+.modalContent { position: relative; padding: 1.5rem; }
+.textSection { margin-bottom: 1.5rem; }
+.sectionLabel { color: #444; font-size: .8rem; margin-bottom: .4rem; }
+.textBlock { margin-bottom: .4rem; line-height: 1.55; resize: vertical; }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Cotizaciones de venta fechadas para convertir mínimos entre monedas. El motor exige una única cotización positiva y vigente en la fecha de evaluación. La captura inicial USD_DOP_20261021 corresponde al 21/10/2026. No se actualiza automáticamente ni admite una captura vencida como tasa de hoy.</description>
+    <label>Tasa de cambio de crédito</label>
+    <pluralLabel>Tasas de cambio de crédito</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

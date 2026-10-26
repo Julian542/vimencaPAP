@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Activa__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Permite habilitar o deshabilitar la regla sin modificar código.</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Habilite la regla solo cuando su criterio de selección y cálculo esté definido.</inlineHelpText>
+    <label>Activa</label>
+    <type>Checkbox</type>
+</CustomField>

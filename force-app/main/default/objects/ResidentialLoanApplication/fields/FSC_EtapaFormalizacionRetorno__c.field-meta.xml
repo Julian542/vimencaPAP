@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_EtapaFormalizacionRetorno__c</fullName>
+    <description>Uso interno: etapa de formalización a la que vuelve la solicitud luego de una devolución o del desembolso.</description>
+    <encryptionScheme>None</encryptionScheme>
+    <externalId>false</externalId>
+    <inlineHelpText>Uso interno: etapa de formalización a la que vuelve la solicitud luego de una devolución o del desembolso.</inlineHelpText>
+    <label>Etapa de retorno formalización</label>
+    <length>255</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

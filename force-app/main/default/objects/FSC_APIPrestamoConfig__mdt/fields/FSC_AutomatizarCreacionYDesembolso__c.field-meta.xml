@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_AutomatizarCreacionYDesembolso__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>En Default habilita la creación y el desembolso por API. Apagado, las solicitudes a cuenta utilizan Captura y Operaciones manuales.</description>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Automatizar creación y desembolso</label>
+    <type>Checkbox</type>
+</CustomField>

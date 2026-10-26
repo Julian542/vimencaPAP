@@ -1,7 +1,7 @@
 <apex:page standardController="ResidentialLoanApplication"
     extensions="FSC_ContratoPrestamoComercialGSCtrl"
     applyBodyTag="false" applyHtmlTag="false" showHeader="false" sidebar="false"
-    standardStylesheets="false" cache="false" language="es" renderAs="pdf">
+    standardStylesheets="false" cache="false" language="es" renderAs="{!IF($CurrentPage.parameters.legalHtml = 'true', '', 'pdf')}">
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -27,7 +27,7 @@
             </style>
         </head>
         <body>
-            <c:FSC_ContratoSelloAgua />
+            <c:FSC_ContratoPiePagina />
             <div class="title">{!datos.tituloContrato}</div>
             <p class="paragraph">BANCO MULTIPLE VIMENCA, S. A., entidad constituida de conformidad con las leyes de la República Dominicana, con Registro Nacional de Contribuyente número 1-01-02141-1 y Registro Mercantil número 10019SD, con su domicilio social principal en la avenida Abraham Lincoln número 306, del Sector La Julia, de la ciudad de Santo Domingo, Distrito Nacional, capital de la República Dominicana, debidamente representada por su {!datos.bancoRepresentante1.cargo}, {!datos.bancoRepresentante1.tratamiento} {!datos.bancoRepresentante1.nombreCompleto}, {!datos.bancoRepresentante1.nacionalidad}, mayor de edad, {!datos.bancoRepresentante1.estadoCivil}, portador de la cédula de identidad y electoral número {!datos.bancoRepresentante1.identificacion}, domiciliado y residente en {!datos.bancoRepresentante1.domicilio}, y por su {!datos.bancoRepresentante2.cargo}, {!datos.bancoRepresentante2.tratamiento} {!datos.bancoRepresentante2.nombreCompleto}, {!datos.bancoRepresentante2.nacionalidad}, mayor de edad, {!datos.bancoRepresentante2.estadoCivil}, portador de la cédula de identidad y electoral número {!datos.bancoRepresentante2.identificacion}, domiciliado y residente en {!datos.bancoRepresentante2.domicilio}, entidad que en lo que sigue del presente acto, se denominará EL BANCO;</p>
             <p class="paragraph">{!clienteGenerales}, quien en lo que sigue del presente acto se denominará {!deudor.nombre}.</p>

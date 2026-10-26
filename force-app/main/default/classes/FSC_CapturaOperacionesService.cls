@@ -10,8 +10,17 @@ public without sharing class FSC_CapturaOperacionesService {
     private static Map<String, List<User>> usuariosPorEtapa = new Map<String, List<User>>();
 
     public static Boolean esEtapaManual(ResidentialLoanApplication rla) {
-        return rla.Status == 'En proceso' && FORMAS_MANUALES.contains(rla.FSC_FormaDeDesembolso__c) &&
+        return !desembolsoApiExitoso(rla) && rla.Status == 'En proceso' && (FORMAS_MANUALES.contains(rla.FSC_FormaDeDesembolso__c) || FSC_ProcesamientoAbanks.esCuentaManual(rla)) &&
             (rla.FSC_Subestado__c == CAPTURA || rla.FSC_Subestado__c == OPERACIONES);
+    }
+
+    private static Boolean desembolsoApiExitoso(ResidentialLoanApplication rla) {
+        return rla.getPopulatedFieldsAsMap().get('FSC_DesembolsoAPIExitoso__c') == true;
+    }
+
+    private static Boolean requiereEvidenciasApi(ResidentialLoanApplication rla) {
+        return rla.Status == 'En proceso' && rla.FSC_Subestado__c == OPERACIONES && desembolsoApiExitoso(rla) &&
+            rla.getPopulatedFieldsAsMap().get('FSC_EvidenciasDesembolsoCargadas__c') != true;
     }
 
     private static String campoUsuario(String etapa) {
@@ -25,7 +34,8 @@ public without sharing class FSC_CapturaOperacionesService {
     // Conserva el responsable al volver a una etapa y completa solicitudes anteriores en su próxima edición.
     public static void asignarResponsables(List<ResidentialLoanApplication> solicitudes) {
         for (ResidentialLoanApplication rla : solicitudes) {
-            if (!esEtapaManual(rla) || rla.get(campoUsuario(rla.FSC_Subestado__c)) != null) continue;
+            if (!desembolsoApiExitoso(rla)) FSC_ProcesamientoAbanks.fijarModoManual(rla);
+            if ((!esEtapaManual(rla) && !requiereEvidenciasApi(rla)) || rla.get(campoUsuario(rla.FSC_Subestado__c)) != null) continue;
             List<User> candidatos = usuariosElegibles(rla.FSC_Subestado__c);
             if (candidatos.isEmpty()) continue;
             Long aleatorio = Crypto.getRandomInteger();
@@ -36,8 +46,10 @@ public without sharing class FSC_CapturaOperacionesService {
 
     // Inicialización administrativa; no se expone a Lightning.
     public static Map<String, Integer> inicializarSolicitudesExistentes() {
+        Set<String> formas = new Set<String>(FORMAS_MANUALES);
+        formas.add('Cuenta de ahorro');
         String filtro = ' FROM ResidentialLoanApplication WHERE Status = \'En proceso\' ' +
-            'AND FSC_FormaDeDesembolso__c IN :FORMAS_MANUALES ' +
+            'AND FSC_FormaDeDesembolso__c IN :formas AND FSC_AbanksAutomatico__c = false ' +
             'AND ((FSC_Subestado__c = :CAPTURA AND FSC_UsuarioCaptura__c = null) ' +
             'OR (FSC_Subestado__c = :OPERACIONES AND FSC_UsuarioOperaciones__c = null))';
         List<ResidentialLoanApplication> solicitudes = Database.query('SELECT Id' + filtro + ' LIMIT 200');
@@ -178,7 +190,8 @@ public without sharing class FSC_CapturaOperacionesService {
         if (solicitudId == null) throw new AuraHandledException('Solicitud requerida.');
         String consulta = 'SELECT Id, Status, FSC_Subestado__c, FSC_FormaDeDesembolso__c, ' +
             'FSC_UsuarioCaptura__c, FSC_UsuarioCaptura__r.Name, FSC_UsuarioOperaciones__c, FSC_UsuarioOperaciones__r.Name, ' +
-            'FSC_NumeroPrestamoAbanks__c FROM ResidentialLoanApplication WHERE Id = :solicitudId';
+            'FSC_NumeroPrestamoAbanks__c, FSC_ProcesamientoAbanksManual__c, FSC_DesembolsoAPIExitoso__c, ' +
+            'FSC_EvidenciasDesembolsoCargadas__c, FSC_FlagErrorAPIDesembolso__c FROM ResidentialLoanApplication WHERE Id = :solicitudId';
         if (bloquear) consulta += ' FOR UPDATE';
         List<ResidentialLoanApplication> solicitudes = Database.query(consulta);
         if (solicitudes.isEmpty()) throw new AuraHandledException('No se encontró la solicitud.');
@@ -193,28 +206,53 @@ public without sharing class FSC_CapturaOperacionesService {
 
     private static ResidentialLoanApplication validarAccion(Id solicitudId, String etapa) {
         ResidentialLoanApplication rla = obtenerSolicitud(solicitudId, true);
-        if (!esEtapaManual(rla) || rla.FSC_Subestado__c != etapa) {
+        if ((!esEtapaManual(rla) && !(etapa == OPERACIONES && requiereEvidenciasApi(rla))) || rla.FSC_Subestado__c != etapa) {
             throw new AuraHandledException('La solicitud ya no está en la etapa correspondiente a esta acción.');
         }
         if (!puedeActuar(rla)) throw new AuraHandledException('Solo el usuario asignado con el permiso correspondiente o un administrador puede realizar esta acción.');
+        if (tieneAprobacionPendiente(solicitudId)) {
+            throw new AuraHandledException('Complete la aprobación pendiente antes de continuar con la operación manual.');
+        }
         return rla;
+    }
+
+    private static Boolean tieneAprobacionPendiente(Id solicitudId) {
+        return ![SELECT Id FROM ProcessInstance WHERE TargetObjectId = :solicitudId AND Status = 'Pending' LIMIT 1].isEmpty();
     }
 
     public static Map<String, Object> contexto(Id solicitudId) {
         ResidentialLoanApplication rla = obtenerSolicitud(solicitudId, false);
         Boolean manual = esEtapaManual(rla);
+        Boolean evidencias = requiereEvidenciasApi(rla);
+        Boolean aprobacionPendiente = (manual || evidencias) && tieneAprobacionPendiente(solicitudId);
         // La lectura del contexto respeta el acceso al registro de quien abrió la página.
         List<UserRecordAccess> accesos = [SELECT RecordId, HasReadAccess FROM UserRecordAccess WHERE UserId = :UserInfo.getUserId() AND RecordId = :solicitudId];
         if (accesos.isEmpty() || !accesos[0].HasReadAccess) throw new AuraHandledException('No tiene acceso a esta solicitud.');
         return new Map<String, Object>{
-            'etapaManual' => manual,
+            'etapaManual' => (manual || evidencias) && !aprobacionPendiente,
             'etapa' => rla.FSC_Subestado__c,
-            'puedeActuar' => manual && puedeActuar(rla),
+            'puedeActuar' => manual && puedeActuar(rla) && !aprobacionPendiente,
+            'requiereArchivosDesembolso' => evidencias && !aprobacionPendiente,
+            'puedeCargarArchivosDesembolso' => evidencias && puedeActuar(rla) && !aprobacionPendiente,
+            'desembolsoApiExitoso' => desembolsoApiExitoso(rla),
+            'errorAPIDesembolso' => rla.FSC_FlagErrorAPIDesembolso__c,
+            'requiereInicializacionManual' => manual && rla.FSC_FormaDeDesembolso__c == 'Cuenta de ahorro' &&
+                rla.FSC_ProcesamientoAbanksManual__c != true && !aprobacionPendiente,
+            'automatizacionHabilitada' => FSC_ProcesamientoAbanks.habilitadas(new Set<Id>{solicitudId}).contains(solicitudId),
             'responsable' => rla.FSC_Subestado__c == CAPTURA ? rla.FSC_UsuarioCaptura__r.Name : rla.FSC_UsuarioOperaciones__r.Name,
             'numeroPrestamo' => rla.FSC_NumeroPrestamoAbanks__c,
             'requiereGarantias' => manual && rla.FSC_Subestado__c == CAPTURA && tieneGarantias(solicitudId),
             'requiereSeguros' => manual && rla.FSC_Subestado__c == CAPTURA && tieneSeguros(solicitudId)
         };
+    }
+
+    public static void prepararProcesamientoManual(Id solicitudId) {
+        Map<String, Object> datos = contexto(solicitudId);
+        if (datos.get('requiereInicializacionManual') != true) return;
+        ResidentialLoanApplication rla = obtenerSolicitud(solicitudId, true);
+        if (!esEtapaManual(rla) || tieneAprobacionPendiente(solicitudId)) return;
+        // La primera apertura incorpora también solicitudes que estaban esperando la API.
+        update new ResidentialLoanApplication(Id = solicitudId, FSC_ProcesamientoAbanksManual__c = true);
     }
 
     private static Boolean tieneGarantias(Id solicitudId) {
@@ -227,20 +265,25 @@ public without sharing class FSC_CapturaOperacionesService {
     }
 
     public static void guardarCaptura(Id solicitudId, String numeroPrestamo, Boolean credito, Boolean garantias, Boolean seguros) {
-        validarAccion(solicitudId, CAPTURA);
+        ResidentialLoanApplication rla = validarAccion(solicitudId, CAPTURA);
         if (credito != true || (tieneGarantias(solicitudId) && garantias != true) || (tieneSeguros(solicitudId) && seguros != true)) {
             throw new AuraHandledException('Debe marcar todas las confirmaciones que correspondan a la solicitud.');
         }
         if (String.isBlank(numeroPrestamo) || numeroPrestamo.trim().length() > 255) {
             throw new AuraHandledException('Ingrese el número de crédito en Abanks (máximo 255 caracteres).');
         }
-        update new ResidentialLoanApplication(Id = solicitudId, FSC_NumeroPrestamoAbanks__c = numeroPrestamo.trim(), FSC_Subestado__c = OPERACIONES);
+        if (rla.FSC_FormaDeDesembolso__c == 'Cuenta de ahorro' && String.isNotBlank(rla.FSC_NumeroPrestamoAbanks__c) && rla.FSC_NumeroPrestamoAbanks__c != numeroPrestamo.trim()) {
+            throw new AuraHandledException('La solicitud ya tiene un préstamo en Abanks. Conserve ese número para evitar duplicados.');
+        }
+        update new ResidentialLoanApplication(Id = solicitudId, FSC_NumeroPrestamoAbanks__c = numeroPrestamo.trim(),
+            FSC_ProcesamientoAbanksManual__c = rla.FSC_FormaDeDesembolso__c == 'Cuenta de ahorro' || rla.FSC_ProcesamientoAbanksManual__c,
+            FSC_Subestado__c = OPERACIONES);
     }
 
     public static List<Map<String, String>> opcionesReasignacion(Id solicitudId) {
         if (!testBypassPermissions && !FeatureManagement.checkPermission(PERMISO_ADMIN)) throw new AuraHandledException('Solo un administrador puede reasignar.');
         ResidentialLoanApplication rla = obtenerSolicitud(solicitudId, false);
-        if (!esEtapaManual(rla)) throw new AuraHandledException('La solicitud no está en una etapa de captura u operaciones manual.');
+        if (!esEtapaManual(rla) && !requiereEvidenciasApi(rla)) throw new AuraHandledException('La solicitud no está en una etapa de captura u operaciones.');
         List<Map<String, String>> opciones = new List<Map<String, String>>();
         for (User usuario : usuariosElegibles(rla.FSC_Subestado__c)) opciones.add(new Map<String, String>{'label' => usuario.Name, 'value' => usuario.Id});
         return opciones;
@@ -258,7 +301,8 @@ public without sharing class FSC_CapturaOperacionesService {
     }
 
     public static void confirmarDesembolso(Id solicitudId, List<Id> amortizacion, List<Id> recibos) {
-        validarAccion(solicitudId, OPERACIONES);
+        ResidentialLoanApplication rla = validarAccion(solicitudId, OPERACIONES);
+        if (String.isBlank(rla.FSC_NumeroPrestamoAbanks__c)) throw new AuraHandledException('Registre el número de préstamo en Abanks antes de confirmar el desembolso.');
         if (amortizacion == null || amortizacion.isEmpty() || recibos == null || recibos.isEmpty()) {
             throw new AuraHandledException('Debe cargar al menos un archivo de amortización y un recibo de desembolso.');
         }
@@ -275,7 +319,8 @@ public without sharing class FSC_CapturaOperacionesService {
         }
         // Los archivos y el avance se confirman en la misma transacción.
         insert enlaces;
-        update new ResidentialLoanApplication(Id = solicitudId, FSC_Subestado__c = 'Archivo y custodia', FSC_Desembolso_Realizado__c = true);
+        update new ResidentialLoanApplication(Id = solicitudId, FSC_Subestado__c = 'Archivo y custodia',
+            FSC_Desembolso_Realizado__c = true, FSC_EvidenciasDesembolsoCargadas__c = true);
     }
 
     private static List<ContentDocument> archivosPrivados(Set<Id> documentosIds) {

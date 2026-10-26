@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OmniDataTransform xmlns="http://soap.sforce.com/2006/04/metadata">
-    <active>false</active>
+    <active>true</active>
     <assignmentRulesUsed>false</assignmentRulesUsed>
     <deletedOnSuccess>false</deletedOnSuccess>
     <errorIgnored>false</errorIgnored>
@@ -8,15 +8,6 @@
   &quot;StepDatosGeneralesSolicitud&quot; : {
     &quot;FSC_EsConsolidacionDeudas__c&quot; : &quot;Si&quot;,
     &quot;FSC_EsRefinanciamiento__c&quot; : &quot;Si&quot;,
-    &quot;FSC_Referidor__c-Block&quot; : {
-      &quot;DeveloperName&quot; : &quot;ANASTASIA_ANGUSTIA_001_0193856_1&quot;,
-      &quot;FSC_CodigoReferidor__c&quot; : &quot;33&quot;,
-      &quot;FSC_NombreReferidor__c&quot; : &quot;ANASTASIA ANGUSTIA ( 001-0193856-1)&quot;,
-      &quot;FSC_Referidor__c&quot; : &quot;ANASTASIA ANGUSTIA ( 001-0193856-1)&quot;,
-      &quot;Id&quot; : &quot;m0cVC000007eBX2YAM&quot;
-    },
-    &quot;FSC_SolicitudMedianteReferidor__c&quot; : &quot;Si&quot;,
-    &quot;FSC_TipoDeudaCancelar__c&quot; : &quot;Solo Préstamos&quot;,
     &quot;FSC_Facilidades_De_Credito__c&quot; : [ {
       &quot;FSC_Aumento_Solicitado__c&quot; : 100000,
       &quot;FSC_Compromiso_Mensual__c&quot; : 8884.88,
@@ -26,13 +17,13 @@
       &quot;FSC_Garantias__r&quot; : [ {
         &quot;FSC_Clase_de_Garantia__c&quot; : &quot;BIENES INMUEBLES&quot;,
         &quot;FSC_Descripcion_de_la_Garantia__c&quot; : &quot;asdsadas&quot;,
+        &quot;FSC_EsTasadorExterno__c&quot; : true,
         &quot;FSC_Fecha_Tasacion__c&quot; : &quot;XXXX&quot;,
         &quot;FSC_Metros_Cuadrados_de_Construccion__c&quot; : &quot;XXXX&quot;,
         &quot;FSC_Monto_Inicial_Avance_Pagado__c&quot; : &quot;XXXX&quot;,
+        &quot;FSC_NombreTasadorExterno__c&quot; : &quot;XXXX&quot;,
         &quot;FSC_Precio_de_Venta__c&quot; : &quot;XXXX&quot;,
         &quot;FSC_Proposito_Garantia_Hipotecario__c&quot; : &quot;XXXX&quot;,
-        &quot;FSC_EsTasadorExterno__c&quot; : true,
-        &quot;FSC_NombreTasadorExterno__c&quot; : &quot;XXXX&quot;,
         &quot;FSC_Tasado_Por__c&quot; : &quot;XXXX&quot;,
         &quot;FSC_Tipo_de_Garantia__c&quot; : &quot;HIPOTECARIA INMUEBLES -H1-&quot;,
         &quot;FSC_Tipo_de_Inmueble__c&quot; : &quot;XXXX&quot;,
@@ -63,7 +54,16 @@
       &quot;FSC_Tipo_de_Facilidad__c&quot; : &quot;CONTROL DE PRESTAMOS - BPR&quot;,
       &quot;Name&quot; : &quot;CONSUMO - 401 facilidad-3&quot;,
       &quot;__key&quot; : &quot;facilidad-3&quot;
-    } ]
+    } ],
+    &quot;FSC_Referidor__c-Block&quot; : {
+      &quot;DeveloperName&quot; : &quot;ANASTASIA_ANGUSTIA_001_0193856_1&quot;,
+      &quot;FSC_CodigoReferidor__c&quot; : &quot;33&quot;,
+      &quot;FSC_NombreReferidor__c&quot; : &quot;ANASTASIA ANGUSTIA ( 001-0193856-1)&quot;,
+      &quot;FSC_Referidor__c&quot; : &quot;ANASTASIA ANGUSTIA ( 001-0193856-1)&quot;,
+      &quot;Id&quot; : &quot;m0cVC000007eBX2YAM&quot;
+    },
+    &quot;FSC_SolicitudMedianteReferidor__c&quot; : &quot;Si&quot;,
+    &quot;FSC_TipoDeudaCancelar__c&quot; : &quot;Solo Préstamos&quot;
   },
   &quot;StepDatosSolicitante&quot; : {
     &quot;AccountId&quot; : &quot;001U700000WVxHVIA1&quot;,
@@ -186,13 +186,13 @@
   &quot;FSC_Garantias__c&quot; : [ {
     &quot;FSC_Clase_de_Garantia__c&quot; : &quot;BIENES INMUEBLES&quot;,
     &quot;FSC_Descripcion_de_la_Garantia__c&quot; : &quot;asdsadas&quot;,
+    &quot;FSC_EsTasadorExterno__c&quot; : true,
     &quot;FSC_Fecha_Tasacion__c&quot; : &quot;XXXX&quot;,
     &quot;FSC_Metros_Cuadrados_de_Construccion__c&quot; : &quot;XXXX&quot;,
     &quot;FSC_Monto_Inicial_Avance_Pagado__c&quot; : &quot;XXXX&quot;,
+    &quot;FSC_NombreTasadorExterno__c&quot; : &quot;XXXX&quot;,
     &quot;FSC_Precio_de_Venta__c&quot; : &quot;XXXX&quot;,
     &quot;FSC_Proposito_Garantia_Hipotecario__c&quot; : &quot;XXXX&quot;,
-    &quot;FSC_EsTasadorExterno__c&quot; : true,
-    &quot;FSC_NombreTasadorExterno__c&quot; : &quot;XXXX&quot;,
     &quot;FSC_Tasado_Por__c&quot; : &quot;XXXX&quot;,
     &quot;FSC_Tipo_de_Garantia__c&quot; : &quot;HIPOTECARIA INMUEBLES -H1-&quot;,
     &quot;FSC_Tipo_de_Inmueble__c&quot; : &quot;XXXX&quot;,
@@ -489,145 +489,13 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>ee41ca0a-3948-4ba3-bd71-6718025a2d46</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Valor_Tasado__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2v5</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2v5</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Valor_Tasado__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>82259247-74be-4658-89a6-2951b71df5c9</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tasa_Interes__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2v6</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2v6</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Tasa_Interes__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>b2dda74c-4ddc-48d7-b2a5-e768bba325c3</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Seguros__r:FSC_Monto_Prima_Desempleo__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vy</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vy</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Seguros__c:FSC_Monto_Prima_Desempleo__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>f72704a4-7155-44e5-a1c1-62c1a68b4121</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Precio_de_Venta__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vz</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vz</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Precio_de_Venta__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>60faa345-0a3f-4635-b4e9-7b5dddcc4bd9</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tipo_Modalidad__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vw</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vw</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Tipo_Modalidad__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>81d7b013-e674-48a7-a016-047d4a0cda2a</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Prestamo_Convenio__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vx</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vx</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Prestamo_Convenio__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190104</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Modelo_Vehiculo__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vq</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vq</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Modelo_Vehiculo__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>18c24e08-2ab4-4dbd-b743-7f091c048ee0</globalKey>
-        <inputFieldName>StepDatosSolicitante:FormulaTitle</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vr</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vr</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:Name</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
         <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190106</globalKey>
         <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Color_Vehiculo__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vo</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vo</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idhz</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhz</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldName>FSC_Garantias__c:FSC_Color_Vehiculo__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
@@ -637,15 +505,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>2240349c-72a7-4912-a5fc-6db4e1f87793</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Ubicacion__c</inputFieldName>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb19010b</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Fecha_Expedicion_Vehiculo__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vp</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vp</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idhy</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhy</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Ubicacion__c</outputFieldName>
+        <outputFieldName>FSC_Garantias__c:FSC_Fecha_Expedicion_Vehiculo__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <upsertKey>false</upsertKey>
@@ -653,15 +521,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>317b62ed-482a-4cf6-99cb-ee218fb6eca9</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Seguros__r:FSC_Monto_de_la_Prima__c</inputFieldName>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb19010a</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Numero_Matricula__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vu</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vu</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idhx</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhx</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Seguros__c:FSC_Monto_de_la_Prima__c</outputFieldName>
+        <outputFieldName>FSC_Garantias__c:FSC_Numero_Matricula__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <upsertKey>false</upsertKey>
@@ -669,15 +537,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>17fc330a-f81e-4d8f-9991-03270c8af1cc</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Clase_de_Garantia__c</inputFieldName>
+        <globalKey>36759478-8916-4cd1-aa38-bda9fbcc5977</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_CanalSolicitudMRI__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vv</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vv</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdiY</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiY</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Clase_de_Garantia__c</outputFieldName>
+        <outputFieldName>ResidentialLoanApplication:FSC_CanalSolicitudMRI__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <upsertKey>false</upsertKey>
@@ -685,31 +553,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190105</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Ano_Vehiculo__c</inputFieldName>
+        <globalKey>ef1dbb52-851d-48e1-ad84-5b51978e6c3b</globalKey>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vs</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vs</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idhw</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhw</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Ano_Vehiculo__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>5a53a107-1f35-47e5-8b00-9bb944aa8ec4</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Referidor__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vt</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vt</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Referidor__c</outputFieldName>
+        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
+        <outputFieldName>FSC_Facilidades_De_Credito__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <transformValuesMappings>{ }</transformValuesMappings>
@@ -718,64 +570,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190107</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Numero_Chasis_Vehiculo__c</inputFieldName>
+        <globalKey>eda81ba2-799f-44dc-9c47-66a7bda7c1e1</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_TipoProductoSolicitudMRI__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vi</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vi</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdiX</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiX</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Numero_Chasis_Vehiculo__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>d153c881-cb94-4ae4-aacc-c35ae53c2bb3</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_EsTasadorExterno__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2wJ</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2wJ</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_EsTasadorExterno__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>4c2dcd91-0f46-4b8e-865f-c123179581ed</globalKey>
-        <inputFieldName>FormulaRecordTypeId</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vj</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vj</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:RecordTypeId</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>fb04224d-6e45-4cb3-9d01-b4f6bda0c805</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_NombreTasadorExterno__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2wK</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2wK</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_NombreTasadorExterno__c</outputFieldName>
+        <outputFieldName>ResidentialLoanApplication:FSC_TipoProductoSolicitudMRI__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <upsertKey>false</upsertKey>
@@ -788,8 +591,8 @@
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vg</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vg</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idhr</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhr</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldName>FSC_Garantias__c:FSC_Numero_Placa_Vehiculo__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
@@ -804,8 +607,8 @@
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2wH</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2wH</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdiS</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiS</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldName>ResidentialLoanApplication:FSC_Requiere_Contrato_Pagare_Notarial__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
@@ -816,32 +619,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>8e189c46-4f26-488f-ad8a-bf7b9e5f1aca</globalKey>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190108</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Serial_Motor_Vehiculo__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vh</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vh</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idhq</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhq</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
-        <outputFieldName>LoanApplicant:ContactPointAddress</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>7914aedf-4f97-48ca-956c-818aee4b01ff</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Tasado_Por__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2wI</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2wI</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Tasado_Por__c</outputFieldName>
+        <outputFieldName>FSC_Garantias__c:FSC_Serial_Motor_Vehiculo__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <upsertKey>false</upsertKey>
@@ -849,149 +635,17 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb19010a</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Numero_Matricula__c</inputFieldName>
+        <globalKey>db4e8e6d-32f0-4d29-8f64-33289e53cc36</globalKey>
+        <inputFieldName>rlaId</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vm</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vm</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdiR</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiR</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Numero_Matricula__c</outputFieldName>
+        <outputFieldName>ResidentialLoanApplication:Id</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb19010b</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Fecha_Expedicion_Vehiculo__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vn</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vn</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Fecha_Expedicion_Vehiculo__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb19010c</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Valor_Vehiculo__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vk</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vk</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Valor_Vehiculo__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>ef1dbb52-851d-48e1-ad84-5b51978e6c3b</globalKey>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vl</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vl</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
-        <outputFieldName>FSC_Facilidades_De_Credito__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>c5f5f434-155a-41ab-931e-9825744199a5</globalKey>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2va</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2va</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
-        <outputFieldName>FSC_Garantias__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>3b7b9924-a930-4de2-89ea-40afabd857ee</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Proposito_Garantia_Hipotecario__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2wB</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2wB</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Proposito_Garantia_Hipotecario__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>bc315d5b-e2ee-4f51-be79-e420b6619d27</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Descripcion_Proposito_Facilidad__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vb</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vb</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Descripcion_Proposito_Facilidad__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>990a18f4-c064-4c45-8f14-255e42d4fb49</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Metros_Cuadrados_de_Construccion__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2wC</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2wC</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Metros_Cuadrados_de_Construccion__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>23b872ff-cd47-4bbe-9096-974cf358e955</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Plazo_meses__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2wA</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2wA</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Plazo_meses__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
         <upsertKey>false</upsertKey>
     </omniDataTransformItem>
     <omniDataTransformItem>
@@ -1002,8 +656,8 @@
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2ve</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2ve</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idhp</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhp</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldName>ResidentialLoanApplication:FSC_Cuotas__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
@@ -1019,78 +673,12 @@
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2wF</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2wF</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdiQ</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiQ</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldName>FSC_Garantias__c:FSC_Monto_Inicial_Avance_Pagado__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190108</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Serial_Motor_Vehiculo__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vf</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vf</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Serial_Motor_Vehiculo__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>db4e8e6d-32f0-4d29-8f64-33289e53cc36</globalKey>
-        <inputFieldName>rlaId</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2wG</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2wG</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:Id</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>b91d9bf5-cbc0-4cbf-83e7-e7acca2c55a0</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Monto_De_La_Cuota__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vc</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vc</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Monto_De_La_Cuota__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>0831602d-1cbb-43a6-ab63-b7064909f899</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Prestamo_Con_Garantia__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2wD</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2wD</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Prestamo_Con_Garantia__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
         <upsertKey>false</upsertKey>
     </omniDataTransformItem>
     <omniDataTransformItem>
@@ -1101,8 +689,8 @@
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vd</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vd</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idho</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idho</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldFormat>Boolean</outputFieldFormat>
         <outputFieldName>ResidentialLoanApplication:FSC_EsRefinanciamiento__c</outputFieldName>
@@ -1122,8 +710,8 @@
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2wE</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2wE</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdiP</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiP</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldName>ResidentialLoanApplication:FSC_Resultado_PEP_Listas__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
@@ -1137,13 +725,143 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb19010c</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Valor_Vehiculo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idhv</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhv</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Valor_Vehiculo__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>88b26f57-3324-4834-aaf5-f9340d681f69</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_TipoSolicitudMRI__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdiW</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiW</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_TipoSolicitudMRI__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>4c2dcd91-0f46-4b8e-865f-c123179581ed</globalKey>
+        <inputFieldName>FormulaRecordTypeId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idhu</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhu</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:RecordTypeId</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>fb04224d-6e45-4cb3-9d01-b4f6bda0c805</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_NombreTasadorExterno__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdiV</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiV</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_NombreTasadorExterno__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190107</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Numero_Chasis_Vehiculo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idht</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idht</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Numero_Chasis_Vehiculo__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>d153c881-cb94-4ae4-aacc-c35ae53c2bb3</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_EsTasadorExterno__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdiU</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiU</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_EsTasadorExterno__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>8e189c46-4f26-488f-ad8a-bf7b9e5f1aca</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idhs</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhs</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
+        <outputFieldName>LoanApplicant:ContactPointAddress</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>7914aedf-4f97-48ca-956c-818aee4b01ff</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Tasado_Por__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdiT</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiT</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Tasado_Por__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
         <globalKey>fc9d3f4a-1cfd-4891-b77b-af128d72ceb0</globalKey>
         <inputFieldName>StepDatosGeneralesSolicitud:FSC_EsConsolidacionDeudas__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vY</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vY</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idhj</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhj</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldFormat>Boolean</outputFieldFormat>
         <outputFieldName>ResidentialLoanApplication:FSC_EsConsolidacionDeudas__c</outputFieldName>
@@ -1158,49 +876,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>7f0b00bb-ead5-4d00-8728-07a554b6a29b</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Monto_Solicitado__c</inputFieldName>
+        <globalKey>358f6bec-e9dd-4f53-a72b-10093c6d32d5</globalKey>
+        <inputFieldName>StepDatosSolicitante:Status</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vZ</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vZ</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdiK</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiK</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Monto__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>18c5b94d-edd7-4bff-b58b-959b53989ab8</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Compromiso_Mensual__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vW</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vW</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Compromiso_Mensual__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190101</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Es_Concesionario_Dealer__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2w8</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2w8</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Es_Concesionario_Dealer__c</outputFieldName>
+        <outputFieldName>ResidentialLoanApplication:Status</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <upsertKey>false</upsertKey>
@@ -1213,8 +897,8 @@
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vX</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vX</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idhi</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhi</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldName>ResidentialLoanApplication:FSC_Nombre_Cliente__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
@@ -1224,17 +908,201 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>358f6bec-e9dd-4f53-a72b-10093c6d32d5</globalKey>
-        <inputFieldName>StepDatosSolicitante:Status</inputFieldName>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190101</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Es_Concesionario_Dealer__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2w9</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2w9</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdiJ</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiJ</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:Status</outputFieldName>
+        <outputFieldName>FSC_Garantias__c:FSC_Es_Concesionario_Dealer__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>18c5b94d-edd7-4bff-b58b-959b53989ab8</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Compromiso_Mensual__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idhh</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhh</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Compromiso_Mensual__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>c9750b74-a2c6-4196-a17a-777219df24be</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdiI</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiI</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
+        <outputFieldName>LoanApplicant:ContactPointEmail</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>01e8ec6d-ef58-4d2a-91bc-60407b2b806f</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Aumento_Solicitado__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idhg</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhg</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Aumento_Solicitado__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>10d6a3a3-4d25-4a5f-b97a-81d9f755d2fc</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Descripcion_de_la_Garantia__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdiH</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiH</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Descripcion_de_la_Garantia__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>b91d9bf5-cbc0-4cbf-83e7-e7acca2c55a0</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Monto_De_La_Cuota__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idhn</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhn</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Monto_De_La_Cuota__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>bc315d5b-e2ee-4f51-be79-e420b6619d27</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Descripcion_Proposito_Facilidad__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idhm</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhm</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Descripcion_Proposito_Facilidad__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>990a18f4-c064-4c45-8f14-255e42d4fb49</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Metros_Cuadrados_de_Construccion__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdiN</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiN</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Metros_Cuadrados_de_Construccion__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>c5f5f434-155a-41ab-931e-9825744199a5</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idhl</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhl</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
+        <outputFieldName>FSC_Garantias__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>3b7b9924-a930-4de2-89ea-40afabd857ee</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Proposito_Garantia_Hipotecario__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdiM</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiM</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Proposito_Garantia_Hipotecario__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>7f0b00bb-ead5-4d00-8728-07a554b6a29b</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Monto_Solicitado__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idhk</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhk</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Monto__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>23b872ff-cd47-4bbe-9096-974cf358e955</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Plazo_meses__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdiL</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiL</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Plazo_meses__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
         <upsertKey>false</upsertKey>
     </omniDataTransformItem>
     <omniDataTransformItem>
@@ -1245,8 +1113,8 @@
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vQ</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vQ</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idhb</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhb</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldName>ResidentialLoanApplication:FSC_Lineas_Financieras_Empresas__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
@@ -1257,15 +1125,165 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>2d7257f6-fe87-45c7-a582-cfdd73d61933</globalKey>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190102</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Concesionario__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2w2</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2w2</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdiC</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiC</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Concesionario__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>9f99e20d-ae95-4a76-b4ef-256b657e6fe1</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Forma_De_Pago__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idha</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idha</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Forma_De_Pago__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a869b9c-90fa-4d02-8107-62a75ff95cf9</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tipo_Facilidad__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdiB</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiB</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Tipo_Facilidad__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>f72704a4-7155-44e5-a1c1-62c1a68b4121</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Precio_de_Venta__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdiA</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiA</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Precio_de_Venta__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>54dd78ac-209b-403c-9e6e-496131e020f4</globalKey>
+        <inputFieldName>StepDatosSolicitante:AccountId</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idhf</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhf</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:AccountId</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>d43449f5-ca43-4e9b-b8bb-1786707d7e86</globalKey>
+        <inputFieldName>StepDatosSolicitante:LoanApplicant</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdiG</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiG</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
-        <outputFieldName>LoanApplicant:ContactPointPhone</outputFieldName>
+        <outputFieldName>LoanApplicant</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>bed5bedd-99bf-4415-ba41-7e5d9ee6b3ee</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idhe</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhe</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
+        <outputFieldName>LoanApplicant:FSC_Facilidad_Otra_Institucion__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190103</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Marca_Vehiculo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdiF</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiF</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Marca_Vehiculo__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>772d0b63-4325-433a-a20d-297a175e9e58</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Monto_Solicitado__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idhd</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhd</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Monto_Solicitado__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>2bb31c69-5454-4bc9-af37-6edf469e1d7b</globalKey>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdiE</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiE</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
+        <outputFieldName>LoanApplicant:FSC_Referencias__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <transformValuesMappings>{ }</transformValuesMappings>
@@ -1282,8 +1300,8 @@
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vR</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vR</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idhc</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idhc</omniDataTransformationId>
         <outputCreationSequence>0.0</outputCreationSequence>
         <outputFieldName>Formula</outputFieldName>
         <outputObjectName>Formula</outputObjectName>
@@ -1293,15 +1311,32 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>2bb31c69-5454-4bc9-af37-6edf469e1d7b</globalKey>
+        <globalKey>2d7257f6-fe87-45c7-a582-cfdd73d61933</globalKey>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2w3</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2w3</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdiD</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdiD</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
-        <outputFieldName>LoanApplicant:FSC_Referencias__c</outputFieldName>
+        <outputFieldName>LoanApplicant:ContactPointPhone</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>6d0f3b52-8a4e-4c1d-9f27-b3e5a1c8d904</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Moneda__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdhZ</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhZ</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Moneda__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <transformValuesMappings>{ }</transformValuesMappings>
@@ -1315,8 +1350,8 @@
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vO</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vO</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdhY</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhY</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldName>ResidentialLoanApplication:FSC_Tipo_de_Facilidad__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
@@ -1327,15 +1362,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>0a869b9c-90fa-4d02-8107-62a75ff95cf9</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tipo_Facilidad__c</inputFieldName>
+        <globalKey>85fdf9b8-14e1-4522-8912-5bf9b0092d60</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Seguros__r:FSC_Seguro_Desempleo__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2w0</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2w0</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdhX</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhX</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Tipo_Facilidad__c</outputFieldName>
+        <outputFieldName>FSC_Seguros__c:FSC_Seguro_Desempleo__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <transformValuesMappings>{ }</transformValuesMappings>
@@ -1344,32 +1379,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>9f99e20d-ae95-4a76-b4ef-256b657e6fe1</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Forma_De_Pago__c</inputFieldName>
+        <globalKey>b2dda74c-4ddc-48d7-b2a5-e768bba325c3</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Seguros__r:FSC_Monto_Prima_Desempleo__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vP</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vP</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idi9</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idi9</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Forma_De_Pago__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190102</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Concesionario__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2w1</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2w1</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Concesionario__c</outputFieldName>
+        <outputFieldName>FSC_Seguros__c:FSC_Monto_Prima_Desempleo__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <upsertKey>false</upsertKey>
@@ -1377,15 +1395,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>54dd78ac-209b-403c-9e6e-496131e020f4</globalKey>
-        <inputFieldName>StepDatosSolicitante:AccountId</inputFieldName>
+        <globalKey>80680543-1691-46ae-b042-5e4c6b06f161</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Seguros__r:FSC_Tipo_de_Seguro__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vU</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vU</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdhW</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhW</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:AccountId</outputFieldName>
+        <outputFieldName>FSC_Seguros__c:FSC_Tipo_de_Seguro__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <upsertKey>false</upsertKey>
@@ -1393,169 +1411,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>10d6a3a3-4d25-4a5f-b97a-81d9f755d2fc</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Descripcion_de_la_Garantia__c</inputFieldName>
+        <globalKey>81d7b013-e674-48a7-a016-047d4a0cda2a</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Prestamo_Convenio__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2w6</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2w6</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idi8</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idi8</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Descripcion_de_la_Garantia__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>01e8ec6d-ef58-4d2a-91bc-60407b2b806f</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Aumento_Solicitado__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vV</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vV</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Aumento_Solicitado__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>c9750b74-a2c6-4196-a17a-777219df24be</globalKey>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2w7</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2w7</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
-        <outputFieldName>LoanApplicant:ContactPointEmail</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>772d0b63-4325-433a-a20d-297a175e9e58</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Monto_Solicitado__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vS</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vS</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Monto_Solicitado__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190103</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Marca_Vehiculo__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2w4</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2w4</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Marca_Vehiculo__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>bed5bedd-99bf-4415-ba41-7e5d9ee6b3ee</globalKey>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vT</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vT</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
-        <outputFieldName>LoanApplicant:FSC_Facilidad_Otra_Institucion__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>d43449f5-ca43-4e9b-b8bb-1786707d7e86</globalKey>
-        <inputFieldName>StepDatosSolicitante:LoanApplicant</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2w5</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2w5</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
-        <outputFieldName>LoanApplicant</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>8bb1d840-5fe0-4045-9535-00a99af20c77</globalKey>
-        <inputFieldName>StepDatosSolicitante:FSC_Subestado__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vI</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vI</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Subestado__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{
-  &quot;En Motor Buro&quot; : &quot;En Motor Buró&quot;
-}</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>8a14be0d-87c9-40fe-bbad-42477e89a6df</globalKey>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vJ</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vJ</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
-        <outputFieldName>FSC_Seguros__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>b5655a1c-6a26-4b51-aa20-24de86f0005e</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tasa_Interes__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vG</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vG</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_TasaInteres__c</outputFieldName>
+        <outputFieldName>ResidentialLoanApplication:FSC_Prestamo_Convenio__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <transformValuesMappings>{ }</transformValuesMappings>
@@ -1569,8 +1433,8 @@
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vH</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vH</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdhR</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhR</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldName>FSC_Garantias__c:FSC_Valor_Inmueble__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
@@ -1580,15 +1444,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>80680543-1691-46ae-b042-5e4c6b06f161</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Seguros__r:FSC_Tipo_de_Seguro__c</inputFieldName>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190105</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Ano_Vehiculo__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vM</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vM</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idi3</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idi3</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Seguros__c:FSC_Tipo_de_Seguro__c</outputFieldName>
+        <outputFieldName>FSC_Garantias__c:FSC_Ano_Vehiculo__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <upsertKey>false</upsertKey>
@@ -1596,15 +1460,130 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>85fdf9b8-14e1-4522-8912-5bf9b0092d60</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Seguros__r:FSC_Seguro_Desempleo__c</inputFieldName>
+        <globalKey>b5655a1c-6a26-4b51-aa20-24de86f0005e</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tasa_Interes__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vN</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vN</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdhQ</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhQ</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Seguros__c:FSC_Seguro_Desempleo__c</outputFieldName>
+        <outputFieldName>ResidentialLoanApplication:FSC_TasaInteres__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>18c24e08-2ab4-4dbd-b743-7f091c048ee0</globalKey>
+        <inputFieldName>StepDatosSolicitante:FormulaTitle</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idi2</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idi2</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:Name</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>a0db24d1-f8bb-484e-9da6-c272a833afa0</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Tipo_de_Garantia__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdhP</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhP</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Tipo_de_Garantia__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0a03d47c-ecb5-4b16-ae8c-4e54fb190104</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Modelo_Vehiculo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idi1</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idi1</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Modelo_Vehiculo__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>eb57fd71-a73a-4216-9ca6-7b8d567fc00f</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tasa_Fija__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdhO</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhO</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Tasa_Fija__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>2240349c-72a7-4912-a5fc-6db4e1f87793</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Ubicacion__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idi0</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idi0</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Ubicacion__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>a5c17c79-041e-45bd-8e40-7f8d780dcc3f</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Tipo_de_Inmueble__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdhV</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhV</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Tipo_de_Inmueble__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>60faa345-0a3f-4635-b4e9-7b5dddcc4bd9</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tipo_Modalidad__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000Idi7</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idi7</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Tipo_Modalidad__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <transformValuesMappings>{ }</transformValuesMappings>
@@ -1618,8 +1597,8 @@
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vK</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vK</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdhU</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhU</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldFormat>Boolean</outputFieldFormat>
         <outputFieldName>ResidentialLoanApplication:FSC_SolicitudMedianteReferidor__c</outputFieldName>
@@ -1634,15 +1613,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>a5c17c79-041e-45bd-8e40-7f8d780dcc3f</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Tipo_de_Inmueble__c</inputFieldName>
+        <globalKey>17fc330a-f81e-4d8f-9991-03270c8af1cc</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Clase_de_Garantia__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vL</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vL</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idi6</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idi6</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Tipo_de_Inmueble__c</outputFieldName>
+        <outputFieldName>FSC_Garantias__c:FSC_Clase_de_Garantia__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <upsertKey>false</upsertKey>
@@ -1650,31 +1629,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>ca43f188-3264-43bf-a58b-39b137e169a3</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:Name</inputFieldName>
+        <globalKey>8a14be0d-87c9-40fe-bbad-42477e89a6df</globalKey>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vA</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vA</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdhT</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhT</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:Name</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>18e395b3-d6f2-4e39-a7de-c040eea069e2</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tasa__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vB</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vB</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Tasa__c</outputFieldName>
+        <outputFieldFormat>List&lt;Map&gt;</outputFieldFormat>
+        <outputFieldName>FSC_Seguros__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <transformValuesMappings>{ }</transformValuesMappings>
@@ -1683,32 +1646,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>eb57fd71-a73a-4216-9ca6-7b8d567fc00f</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tasa_Fija__c</inputFieldName>
+        <globalKey>317b62ed-482a-4cf6-99cb-ee218fb6eca9</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Seguros__r:FSC_Monto_de_la_Prima__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vE</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vE</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idi5</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idi5</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Tasa_Fija__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>a0db24d1-f8bb-484e-9da6-c272a833afa0</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Tipo_de_Garantia__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vF</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vF</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Tipo_de_Garantia__c</outputFieldName>
+        <outputFieldName>FSC_Seguros__c:FSC_Monto_de_la_Prima__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <upsertKey>false</upsertKey>
@@ -1716,32 +1662,34 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>d5598f6a-b89e-46c2-b9ed-94733639a355</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tiempo_Tasa_Fija__c</inputFieldName>
+        <globalKey>8bb1d840-5fe0-4045-9535-00a99af20c77</globalKey>
+        <inputFieldName>StepDatosSolicitante:FSC_Subestado__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vC</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vC</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdhS</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhS</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>ResidentialLoanApplication:FSC_Tiempo_Tasa_Fija__c</outputFieldName>
+        <outputFieldName>ResidentialLoanApplication:FSC_Subestado__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
+        <transformValuesMappings>{
+  &quot;En Motor Buro&quot; : &quot;En Motor Buró&quot;
+}</transformValuesMappings>
         <upsertKey>false</upsertKey>
     </omniDataTransformItem>
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>2d60c7b5-7977-472c-9fde-b89e4cb7ecd0</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Seguros__r:FSC_Fuente_de_Ingresos__c</inputFieldName>
+        <globalKey>5a53a107-1f35-47e5-8b00-9bb944aa8ec4</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Referidor__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2vD</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2vD</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Idi4</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idi4</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Seguros__c:FSC_Fuente_de_Ingresos__c</outputFieldName>
+        <outputFieldName>ResidentialLoanApplication:FSC_Referidor__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <transformValuesMappings>{ }</transformValuesMappings>
@@ -1755,8 +1703,8 @@
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2v9</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2v9</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdhJ</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhJ</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldName>ResidentialLoanApplication:FSC_Plazo_meses__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
@@ -1767,13 +1715,29 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
+        <globalKey>655d68d1-503e-456f-98a6-fa81aacd12ce</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Fecha_Tasacion__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdhI</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhI</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Fecha_Tasacion__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
         <globalKey>256310b7-9049-47b7-ac6f-cdefb9cb7024</globalKey>
         <inputFieldName>StepDatosGeneralesSolicitud:FSC_TipoDeudaCancelar__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2v7</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2v7</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdhH</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhH</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldName>ResidentialLoanApplication:FSC_TipoDeudaCancelar__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
@@ -1783,15 +1747,148 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>655d68d1-503e-456f-98a6-fa81aacd12ce</globalKey>
-        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Fecha_Tasacion__c</inputFieldName>
+        <globalKey>82259247-74be-4658-89a6-2951b71df5c9</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tasa_Interes__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
-        <omniDataTransformation>0kdVC000000I2v8</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I2v8</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000IdhG</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhG</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>FSC_Garantias__c:FSC_Fecha_Tasacion__c</outputFieldName>
+        <outputFieldName>ResidentialLoanApplication:FSC_Tasa_Interes__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>2d60c7b5-7977-472c-9fde-b89e4cb7ecd0</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Seguros__r:FSC_Fuente_de_Ingresos__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdhN</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhN</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Seguros__c:FSC_Fuente_de_Ingresos__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>d5598f6a-b89e-46c2-b9ed-94733639a355</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tiempo_Tasa_Fija__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdhM</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhM</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Tiempo_Tasa_Fija__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>18e395b3-d6f2-4e39-a7de-c040eea069e2</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Tasa__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdhL</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhL</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_Tasa__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>ca43f188-3264-43bf-a58b-39b137e169a3</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:Name</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdhK</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhK</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:Name</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>0831602d-1cbb-43a6-ab63-b7064909f899</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Prestamo_Con_Garantia__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdpJ</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdpJ</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>ResidentialLoanApplication:FSC_PrestamoGarantia__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>ee41ca0a-3948-4ba3-bd71-6718025a2d46</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Valor_Tasado__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdhF</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdhF</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Valor_Tasado__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>f76fc1c5-aab3-4f44-85b8-8830da14f834</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_SaldoPrimeraHipoteca__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdpL</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdpL</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_SaldoPrimeraHipoteca__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>7c253d8b-b88c-4937-bc25-a8029912c5bf</globalKey>
+        <inputFieldName>StepDatosGeneralesSolicitud:FSC_Facilidades_De_Credito__c:FSC_Garantias__r:FSC_Valor_Mejoras__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniDataTransformation>0kdVC000000IdpK</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000IdpK</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Garantias__c:FSC_Valor_Mejoras__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <upsertKey>false</upsertKey>
@@ -1799,8 +1896,6 @@
     <outputType>JSON</outputType>
     <previewJsonData>{
   &quot;StepDatosGeneralesSolicitud&quot; : {
-    &quot;FSC_Referidor__c-Block&quot; : null,
-    &quot;FSC_SolicitudMedianteReferidor__c&quot; : &quot;No&quot;,
     &quot;FSC_Facilidades_De_Credito__c&quot; : [ {
       &quot;FSC_Aumento_Solicitado__c&quot; : &quot;1&quot;,
       &quot;FSC_Compromiso_Mensual__c&quot; : 1,
@@ -1826,7 +1921,9 @@
       &quot;FSC_Tipo_de_Facilidad__c&quot; : &quot;CONTROL DE PRESTAMOS - BPR&quot;,
       &quot;Name&quot; : &quot;HIPOTECARIOS PARA LA VIVIENDA - 402 facilidad-1&quot;,
       &quot;__key&quot; : &quot;facilidad-1&quot;
-    } ]
+    } ],
+    &quot;FSC_Referidor__c-Block&quot; : null,
+    &quot;FSC_SolicitudMedianteReferidor__c&quot; : &quot;No&quot;
   },
   &quot;StepDatosSolicitante&quot; : {
     &quot;AccountId&quot; : &quot;001U700000WVxHVIA1&quot;,

@@ -260,6 +260,14 @@ public with sharing class FSC_APIPrestamoProductos {
 			if (String.isBlank(responseText)) {
 				return null;
 			}
+			// Un gateway caido (p. ej. 502 de nginx) devuelve HTML en lugar de JSON.
+			if (responseText.trim().startsWith('<')) {
+				String titulo = responseText.substringBetween('<title>', '</title>');
+				throw new CalloutException(
+					'El servicio de productos no esta disponible: ' +
+					(String.isBlank(titulo) ? responseText.trim().left(200) : titulo.trim())
+				);
+			}
 
 			return JSON.deserializeUntyped(responseText);
 		}

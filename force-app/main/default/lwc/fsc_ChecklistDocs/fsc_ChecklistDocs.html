@@ -137,6 +137,21 @@
 																			{f.shortTitle}
 																		</a>
 																		<span class="slds-text-color_weak"> ({f.fileType})</span>
+																		<template if:true={f.canDelete}>
+																			<lightning-button-icon
+																				class="file-delete"
+																				icon-name="utility:delete"
+																				variant="bare"
+																				size="small"
+																				alternative-text="Eliminar archivo"
+																				title="Eliminar archivo"
+																				data-joinid={r.joinId}
+																				data-docid={f.contentDocumentId}
+																				data-title={f.title}
+																				onclick={handleDeleteFile}
+																				disabled={loading}>
+																			</lightning-button-icon>
+																		</template>
 																	</div>
 																</template>
 															</div>

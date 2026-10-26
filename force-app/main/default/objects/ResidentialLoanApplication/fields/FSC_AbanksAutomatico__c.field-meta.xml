@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_AbanksAutomatico__c</fullName>
+    <description>Modalidad efectiva para las automatizaciones de creación y desembolso a cuenta.</description>
+    <formula>AND(ISPICKVAL(FSC_FormaDeDesembolso__c, &quot;Cuenta de ahorro&quot;), NOT(FSC_ProcesamientoAbanksManual__c), $CustomMetadata.FSC_APIPrestamoConfig__mdt.Default.FSC_AutomatizarCreacionYDesembolso__c)</formula>
+    <label>Automatización Abanks habilitada</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

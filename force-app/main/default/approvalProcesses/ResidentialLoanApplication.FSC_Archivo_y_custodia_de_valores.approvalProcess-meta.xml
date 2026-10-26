@@ -61,12 +61,12 @@
         <criteriaItems>
             <field>ResidentialLoanApplication.FSC_Desembolso_Realizado__c</field>
             <operation>equals</operation>
-            <value>Verdadero</value>
+            <value>True</value>
         </criteriaItems>
         <criteriaItems>
             <field>ResidentialLoanApplication.FSC_Doc_Incompleta_Post_Desembolso__c</field>
             <operation>equals</operation>
-            <value>Falso</value>
+            <value>False</value>
         </criteriaItems>
     </entryCriteria>
     <finalApprovalRecordLock>false</finalApprovalRecordLock>

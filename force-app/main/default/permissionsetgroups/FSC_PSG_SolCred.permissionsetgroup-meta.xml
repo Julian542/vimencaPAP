@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSetGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Agrupa los permission sets base de FSC: Financial Services Cloud Standard, Insurance Access, Servicio de FSC, Usuario de Omnistudio y Query all files.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>FSC Solicitudes de crédito</label>
+    <permissionSets>FSC_QueryAllFiles</permissionSets>
+    <permissionSets>FinServ__FinancialServicesCloudStandard</permissionSets>
+    <permissionSets>FinServ__InsuranceAccess</permissionSets>
+    <permissionSets>force__FSCService</permissionSets>
+    <permissionSets>force__OmniStudioExecution</permissionSets>
+    <status>Updated</status>
+</PermissionSetGroup>

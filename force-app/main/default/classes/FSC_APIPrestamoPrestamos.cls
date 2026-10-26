@@ -7,12 +7,38 @@ public with sharing class FSC_APIPrestamoPrestamos {
 	private static final String CLASES_GARANTIA_ENDPOINT = 'callout:FSC_APIPrestamo/api/prestamo/garantias/clases';
 	private static final String CLASES_POR_TIPO_ENDPOINT = 'callout:FSC_APIPrestamo/api/prestamo/garantias/clases-por-tipo';
 	private static final String ASEGURADORAS_ENDPOINT = 'callout:FSC_APIPrestamo/api/prestamo/garantias/aseguradoras';
+	private static final String TIPOS_SALDO_ENDPOINT = 'callout:FSC_APIPrestamo/api/prestamo/tipos/saldo';
+	private static final String TIPO_DEDUCCION_ABANKS = 'D';
+	private static final String CAPITALIZAR_COMISION = 'S';
+	// Gastos de la planilla de desembolso: el label de cada campo es la DESCRIPCION del tipo de saldo en ABANKS.
+	private static final List<Schema.SObjectField> DEDUCTION_FIELDS = new List<Schema.SObjectField>{
+		ResidentialLoanApplication.FSC_ComisionAdminSeguroMonto__c,
+		ResidentialLoanApplication.FSC_TransferenciaInmobiliaria__c,
+		ResidentialLoanApplication.FSC_TasasServicios__c,
+		ResidentialLoanApplication.FSC_AyuntamientoRegistroCivil__c,
+		ResidentialLoanApplication.FSC_OtrosGastosLegales__c,
+		ResidentialLoanApplication.FSC_InscripcionHipoteca__c,
+		ResidentialLoanApplication.FSC_ComisionEndosoPoliza__c,
+		ResidentialLoanApplication.FSC_HonorariosLegalizacion__c,
+		ResidentialLoanApplication.FSC_ConfeccionCheque__c
+	};
+	// Gastos cuyo label no coincide con la DESCRIPCION del tipo de saldo en ABANKS.
+	private static final Map<Schema.SObjectField, String> TIPO_SALDO_DESCRIPTION_BY_FIELD = new Map<Schema.SObjectField, String>{
+		ResidentialLoanApplication.FSC_ComisionAdminSeguroMonto__c => 'SERV. ADM DE SEGUROS',
+		ResidentialLoanApplication.FSC_AyuntamientoRegistroCivil__c => 'PAGO POR REGISTRO DE PAGARE',
+		ResidentialLoanApplication.FSC_ConfeccionCheque__c => 'IMP CK/TRANSF, ADMINISTRACION'
+	};
 	private static final String API_KEY_HEADER = 'X-API-KEY';
 	private static final String API_KEY_CONFIG = 'Default';
 	private static final Integer HTTP_TIMEOUT = 120000;
 	private static final String SUCCESS_DESCRIPTION = 'Exitoso';
 	private static final String SUBESTADO_DESEMBOLSO = 'Desembolso';
 	private static final String FORMA_DESEMBOLSO_CUENTA_AHORRO = 'Cuenta de ahorro';
+	// Valores fijos de ABANKS que no entrega el API de productos ni los catalogos de garantias.
+	private static final String CODIGO_EMPRESA_ABANKS = '1';
+	private static final String CODIGO_ESTADO_CARTERA_DEFAULT = 'A';
+	private static final String ESTADO_GARANTIA_ABANKS = '2';
+	private static final Integer PORCENTAJE_ASIGNACION_GARANTIA = 100;
 	private static final String ERROR_LOG_SEPARATOR = '\n--------------------\n';
 	private static final Integer ERROR_LOG_MAX_LENGTH = 10000;
 	private static final Integer ERROR_DETAIL_MAX_LENGTH = 3000;
@@ -42,6 +68,7 @@ public with sharing class FSC_APIPrestamoPrestamos {
 	private static Map<Id, FSC_Garantia__c> catalogCodesByGuaranteeId = new Map<Id, FSC_Garantia__c>();
 	private static Map<String, List<Map<String, Object>>> catalogCache = new Map<String, List<Map<String, Object>>>();
 	private static GuaranteeCatalog guaranteeCatalog;
+	private static Map<String, Integer> tipoSaldoCodesByDescription;
 
 	public class Input {
 		@InvocableVariable(required=true)
@@ -117,7 +144,6 @@ public with sharing class FSC_APIPrestamoPrestamos {
 						CreatedDate,
 						Status,
 						FSC_Subestado__c,
-						FSC_Grupo_de_Empresa__c,
 						FSC_MontoAprobado__c,
 						FSC_MontoCuotaRegular__c,
 						FSC_Monto_De_La_Cuota__c,
@@ -140,6 +166,15 @@ public with sharing class FSC_APIPrestamoPrestamos {
 						FSC_Valor_de_la_Garantia__c,
 						FSC_Porcentaje_de_Admisibilidad__c,
 						FSC_Moneda__c,
+						FSC_ComisionAdminSeguroMonto__c,
+						FSC_TransferenciaInmobiliaria__c,
+						FSC_TasasServicios__c,
+						FSC_AyuntamientoRegistroCivil__c,
+						FSC_OtrosGastosLegales__c,
+						FSC_InscripcionHipoteca__c,
+						FSC_ComisionEndosoPoliza__c,
+						FSC_HonorariosLegalizacion__c,
+						FSC_ConfeccionCheque__c,
 						FSC_LogErrores__c
 					FROM ResidentialLoanApplication
 					WHERE Id IN :rlaIds
@@ -149,7 +184,11 @@ public with sharing class FSC_APIPrestamoPrestamos {
 			loadGuaranteeData(rlaIds);
 		}
 
+		Map<Id, String> existingLoanNumberByRlaId = loadExistingLoanNumbers(rlaIds);
+		String currentUserCode = needsCurrentUserCode(inputs) ? getCurrentUserCode() : null;
 		List<PendingUpdate> pendingUpdates = new List<PendingUpdate>();
+		Set<Id> processedRlaIds = new Set<Id>();
+		Set<Id> habilitadas = FSC_ProcesamientoAbanks.habilitadas(rlaIds);
 
 		for (Input inputItem : inputs) {
 			Output outputItem = new Output();
@@ -170,6 +209,32 @@ public with sharing class FSC_APIPrestamoPrestamos {
 					continue;
 				}
 
+				if (!habilitadas.contains(rla.Id)) {
+					outputItem.message = 'La automatización de Abanks está deshabilitada para esta solicitud. Continúe por Captura y Operaciones.';
+					outputs.add(outputItem);
+					continue;
+				}
+
+				// Evita crear el prestamo dos veces en ABANKS.
+				if (!processedRlaIds.add(rla.Id)) {
+					outputItem.message = 'La solicitud viene repetida en la misma ejecucion; se omite.';
+					outputs.add(outputItem);
+					continue;
+				}
+				if (existingLoanNumberByRlaId.containsKey(rla.Id)) {
+					outputItem.numeroPrestamo = existingLoanNumberByRlaId.get(rla.Id);
+					outputItem.message =
+						'La solicitud ya tiene el prestamo ' + outputItem.numeroPrestamo + ' creado en ABANKS; no se vuelve a crear.';
+					outputs.add(outputItem);
+					continue;
+				}
+
+				if (String.isBlank(inputItem.codigoUsuario)) {
+					inputItem.codigoUsuario = currentUserCode;
+				}
+				if (String.isBlank(inputItem.codigoEjecutivo)) {
+					inputItem.codigoEjecutivo = currentUserCode;
+				}
 				Map<String, Object> ipInput = buildIpInput(rla, inputItem);
 				outputItem.ipInput = JSON.serialize(ipInput);
 				Object rawResponse = callPrestamosIp(ipInput);
@@ -273,13 +338,15 @@ public with sharing class FSC_APIPrestamoPrestamos {
 		Decimal montoInicial = rla.FSC_MontoAprobado__c;
 		Decimal valorCuota = rla.FSC_Monto_De_La_Cuota__c == null ? rla.FSC_MontoCuotaRegular__c : rla.FSC_Monto_De_La_Cuota__c;
 		Decimal tasaAprobada = rla.FSC_TasaInteresAprobada__c;
-		String codigoEmpresa = firstNonBlank(new List<String>{ extractCode(rla.FSC_Grupo_de_Empresa__c), '1' });
+		// FSC_Grupo_de_Empresa__c es el grupo economico del cliente, no la empresa de ABANKS.
+		String codigoEmpresa = CODIGO_EMPRESA_ABANKS;
+		String codigoUsuario = firstNonBlank(new List<String>{ inputItem == null ? null : inputItem.codigoUsuario });
 		String codigoAgencia = extractCode(inputItem == null ? null : inputItem.codigoAgencia);
 		String codigoSubAplicacion = extractCode(rla.FSC_subAplicacion__c);
 		String claveProducto = valueToString(producto == null ? null : producto.get('CLAVE_PRODUCTO'));
 		String codigoTipoAmortizacion = valueToString(producto == null ? null : producto.get('CODIGO_TIPO_AMORTIZACION'));
 		String codigoEstadoCartera = firstNonBlank(
-			new List<String>{ valueToString(producto == null ? null : producto.get('CODIGO_ESTADO_CARTERA')), 'A' }
+			new List<String>{ valueToString(producto == null ? null : producto.get('CODIGO_ESTADO_CARTERA')), CODIGO_ESTADO_CARTERA_DEFAULT }
 		);
 		String diasGraciaMora = valueToString(producto == null ? null : producto.get('DIAS_GRACIA_MORA'));
 		Object rawCodigoValorTasaCartera = producto == null ? null : producto.get('CODIGO_VALOR_TASA_CARTERA');
@@ -299,9 +366,9 @@ public with sharing class FSC_APIPrestamoPrestamos {
 		String codigoValorTasaMora = valueToString(producto == null ? null : producto.get('CODIGO_VALOR_TASA_CARTERA_MORA'));
 
 		List<String> missingFields = new List<String>();
+		addMissingIfBlank(missingFields, codigoUsuario, 'codigoUsuario (User.FSC_CodigoAbanks__c o User.Alias)');
 		addMissingIfBlank(missingFields, numeroIdentificacion, 'Account.ACC_NumIdentificacion__c');
 		addMissingIfBlank(missingFields, codigoTipoIdentificacion, 'Account.ACC_TipoIdentificacion__c');
-		addMissingIfBlank(missingFields, codigoEmpresa, 'codigoEmpresa');
 		addMissingIfBlank(missingFields, codigoAgencia, 'codigoAgencia');
 		addMissingIfNull(missingFields, montoInicial, 'FSC_MontoAprobado__c');
 		addMissingIfNull(missingFields, valorCuota, 'FSC_MontoCuotaRegular__c');
@@ -367,7 +434,7 @@ public with sharing class FSC_APIPrestamoPrestamos {
 			'fechaVencimiento' => formatAbanksDate(rla.FSC_FechaVencimiento__c),
 			'fechaVencimientoCalculado' => '',
 			'codigoEjecutivo' => firstNonBlank(
-				new List<String>{ inputItem == null ? null : inputItem.codigoEjecutivo, inputItem == null ? null : inputItem.codigoUsuario, 'ABANKS' }
+				new List<String>{ inputItem == null ? null : inputItem.codigoEjecutivo, codigoUsuario }
 			)
 		};
 		GuaranteePayload guaranteePayload = buildGuaranteePayload(
@@ -378,9 +445,10 @@ public with sharing class FSC_APIPrestamoPrestamos {
 			codigoSubAplicacion,
 			plazo
 		);
+		List<Object> deductionItems = buildDeductionItems(rla, numeroIdentificacion);
 
 		Map<String, Object> ipInput = new Map<String, Object>{
-			'codigoUsuario' => firstNonBlank(new List<String>{ inputItem == null ? null : inputItem.codigoUsuario, 'LOBAL001' }),
+			'codigoUsuario' => codigoUsuario,
 			'prestamo' => new Map<String, Object>{ 'prPrestamosItem' => new List<Object>{ prestamoItem } }
 		};
 		if (!guaranteePayload.guaranteeItems.isEmpty()) {
@@ -389,7 +457,94 @@ public with sharing class FSC_APIPrestamoPrestamos {
 		if (!guaranteePayload.vehicleItems.isEmpty()) {
 			ipInput.put('garantiaAutos', new Map<String, Object>{ 'gaAutosItem' => guaranteePayload.vehicleItems });
 		}
+		if (!deductionItems.isEmpty()) {
+			ipInput.put('deducciones', new Map<String, Object>{ 'prDeduccionesItem' => deductionItems });
+		}
 		return ipInput;
+	}
+
+	// Un item por cada gasto de la planilla con monto; sin codigo de tipo de saldo no se crea el prestamo incompleto.
+	private static List<Object> buildDeductionItems(ResidentialLoanApplication rla, String numeroIdentificacion) {
+		List<Object> deductionItems = new List<Object>();
+		List<String> labelsWithoutCode = new List<String>();
+		for (Schema.SObjectField field : DEDUCTION_FIELDS) {
+			Decimal valor = (Decimal) rla.get(field);
+			if (valor == null || valor <= 0) {
+				continue;
+			}
+			String label = field.getDescribe().getLabel();
+			String description = TIPO_SALDO_DESCRIPTION_BY_FIELD.containsKey(field) ? TIPO_SALDO_DESCRIPTION_BY_FIELD.get(field) : label;
+			Integer codigoTipoSaldo = getTipoSaldoCode(description);
+			if (codigoTipoSaldo == null) {
+				labelsWithoutCode.add(label);
+				continue;
+			}
+			deductionItems.add(
+				new Map<String, Object>{
+					'numeroSolicitud' => '',
+					'numeroIdentificacion' => numeroIdentificacion,
+					'codigoTipoSaldo' => codigoTipoSaldo,
+					'tipoDeduccion' => TIPO_DEDUCCION_ABANKS,
+					'valor' => valor,
+					'capitalizar' => normalizeText(label).contains('COMISION') ? CAPITALIZAR_COMISION : ''
+				}
+			);
+		}
+		if (!labelsWithoutCode.isEmpty()) {
+			throw new IllegalArgumentException(
+				'No existe tipo de saldo en ABANKS con la descripcion: ' + String.join(labelsWithoutCode, ', ') + '.'
+			);
+		}
+		return deductionItems;
+	}
+
+	private static Integer getTipoSaldoCode(String description) {
+		// El catalogo se consulta solo si hay gastos y una vez por transaccion.
+		if (tipoSaldoCodesByDescription == null) {
+			tipoSaldoCodesByDescription = new Map<String, Integer>();
+			for (Map<String, Object> row : fetchCatalog(TIPOS_SALDO_ENDPOINT)) {
+				String key = compactText(valueToString(row.get('DESCRIPCION')));
+				if (!String.isBlank(key) && !tipoSaldoCodesByDescription.containsKey(key)) {
+					tipoSaldoCodesByDescription.put(key, toInteger(row.get('CODIGO_TIPO_SALDO'), 'CODIGO_TIPO_SALDO'));
+				}
+			}
+		}
+		return tipoSaldoCodesByDescription.get(compactText(description));
+	}
+
+	// Se lee en modo sistema: el control de duplicados no puede depender del FLS del usuario.
+	private static Map<Id, String> loadExistingLoanNumbers(Set<Id> rlaIds) {
+		Map<Id, String> loanNumberByRlaId = new Map<Id, String>();
+		if (rlaIds.isEmpty()) {
+			return loanNumberByRlaId;
+		}
+		for (ResidentialLoanApplication rla : [
+			SELECT Id, FSC_NumeroPrestamoAbanks__c
+			FROM ResidentialLoanApplication
+			WHERE Id IN :rlaIds AND FSC_NumeroPrestamoAbanks__c != NULL
+			WITH SYSTEM_MODE
+		]) {
+			loanNumberByRlaId.put(rla.Id, rla.FSC_NumeroPrestamoAbanks__c);
+		}
+		return loanNumberByRlaId;
+	}
+
+	private static Boolean needsCurrentUserCode(List<Input> inputs) {
+		for (Input inputItem : inputs) {
+			if (inputItem != null && (String.isBlank(inputItem.codigoUsuario) || String.isBlank(inputItem.codigoEjecutivo))) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// Usuario y ejecutivo ABANKS: el codigo ABANKS del usuario o, si no lo tiene, su alias.
+	private static String getCurrentUserCode() {
+		List<User> users = [SELECT FSC_CodigoAbanks__c, Alias FROM User WHERE Id = :UserInfo.getUserId() WITH SYSTEM_MODE LIMIT 1];
+		if (users.isEmpty()) {
+			return null;
+		}
+		return String.isBlank(users[0].FSC_CodigoAbanks__c) ? users[0].Alias : users[0].FSC_CodigoAbanks__c;
 	}
 
 	// Carga las relaciones antes de iniciar los callouts.
@@ -519,24 +674,32 @@ public with sharing class FSC_APIPrestamoPrestamos {
 		for (Integer index = 0; index < sources.size(); index++) {
 			GuaranteeSource source = sources[index];
 			Integer sequence = index + 1;
-			Integer guaranteeTypeCode = catalogs.resolveGuaranteeTypeCode(source, rla.FSC_Moneda__c);
-			if (guaranteeTypeCode == null) {
-				throw new IllegalArgumentException(
-					'No se encontro codigo de tipo para la garantia ' + sequence + ': ' + source.typeDescription + '.'
-				);
-			}
+			Integer guaranteeTypeCode;
+			Integer guaranteeClassCode;
+			if (source.usesStoredCodes) {
+				// Las garantias capturadas guardan los codigos del catalogo; no se deducen por texto.
+				guaranteeClassCode = catalogs.requireStoredClassCode(source, sequence);
+				guaranteeTypeCode = catalogs.requireStoredTypeCode(source, guaranteeClassCode, sequence);
+			} else {
+				guaranteeTypeCode = catalogs.resolveGuaranteeTypeCode(source, rla.FSC_Moneda__c);
+				if (guaranteeTypeCode == null) {
+					throw new IllegalArgumentException(
+						'No se encontro codigo de tipo para la garantia ' + sequence + ': ' + source.typeDescription + '.'
+					);
+				}
 
-			Integer guaranteeClassCode = catalogs.resolveGuaranteeClassCode(
-				source.classCode,
-				source.classReference,
-				guaranteeTypeCode,
-				source.vehicle,
-				source.typeDescription
-			);
-			if (guaranteeClassCode == null) {
-				throw new IllegalArgumentException(
-					'No se encontro codigo de clase para la garantia ' + sequence + ': ' + source.classReference + '.'
+				guaranteeClassCode = catalogs.resolveGuaranteeClassCode(
+					source.classCode,
+					source.classReference,
+					guaranteeTypeCode,
+					source.vehicle,
+					source.typeDescription
 				);
+				if (guaranteeClassCode == null) {
+					throw new IllegalArgumentException(
+						'No se encontro codigo de clase para la garantia ' + sequence + ': ' + source.classReference + '.'
+					);
+				}
 			}
 
 			Integer goodCode = catalogs.resolveGoodCode(
@@ -551,7 +714,15 @@ public with sharing class FSC_APIPrestamoPrestamos {
 			if (coveragePercentage == null) {
 				coveragePercentage = catalogs.getCoveragePercentage(guaranteeTypeCode);
 			}
-			coveragePercentage = coveragePercentage == null ? 100 : coveragePercentage;
+			if (coveragePercentage == null) {
+				throw new IllegalArgumentException(
+					'No hay porcentaje de cobertura para la garantia ' +
+						sequence +
+						': falta FSC_Porcentaje_de_Admisibilidad__c y el tipo ' +
+						guaranteeTypeCode +
+						' no trae PORCENTAJE_SIB.'
+				);
+			}
 			Boolean solidary = normalizeText(firstNonBlank(new List<String>{ source.typeDescription, source.classReference, source.description }))
 				.contains('SOLIDAR');
 			Decimal guaranteeValue = solidary ? 0 : (realValue * coveragePercentage / 100);
@@ -570,14 +741,14 @@ public with sharing class FSC_APIPrestamoPrestamos {
 					'descripcionGarantia' => description,
 					'fechaPresentacion' => formatGuaranteeDate(presentationDate),
 					'subType' => catalogs.getGoodSubtype(goodCode),
-					'estado' => '2',
+					'estado' => ESTADO_GARANTIA_ABANKS,
 					'valorAvaluo' => realValue,
 					'valorContable' => realValue,
 					'valorDisponible' => guaranteeValue,
 					'valorInicial' => realValue,
 					'codigoEmpresa' => companyCode,
 					'codigoAgencia' => agencyCode,
-					'porcentajeAsignacion' => 100,
+					'porcentajeAsignacion' => PORCENTAJE_ASIGNACION_GARANTIA,
 					'porcentajeCobertura' => coveragePercentage,
 					'valorRealGarantia' => realValue,
 					'codigoSubAplicacion' => subApplicationCode,
@@ -607,7 +778,7 @@ public with sharing class FSC_APIPrestamoPrestamos {
 		Integer companyCode,
 		Integer contractLife
 	) {
-		VehicleCodes vehicleCodes = catalogs.resolveVehicleCodes(source.brandCode, source.modelCode, source.brand, source.model);
+		VehicleCodes vehicleCodes = catalogs.resolveVehicleCodes(source);
 		List<String> missingFields = new List<String>();
 		if (vehicleCodes.brandCode == null) {
 			missingFields.add('marca ' + source.brand);
@@ -705,6 +876,7 @@ public with sharing class FSC_APIPrestamoPrestamos {
 		source.motorNumber = guarantee.FSC_Serial_Motor_Vehiculo__c;
 		source.plateNumber = guarantee.FSC_Numero_Placa_Vehiculo__c;
 		source.registrationNumber = guarantee.FSC_Numero_Matricula__c;
+		source.usesStoredCodes = true;
 		FSC_Garantia__c codes = catalogCodesByGuaranteeId.get(guarantee.Id);
 		if (codes != null) {
 			source.classCode = decimalToInteger(codes.FSC_Codigo_Clase_Garantia__c);
@@ -838,7 +1010,7 @@ public with sharing class FSC_APIPrestamoPrestamos {
 			queueCompletedCallout(endpoint, request, response);
 			if (response.getStatusCode() < 200 || response.getStatusCode() >= 300) {
 				throw new CalloutException(
-					'Catalogo de garantias respondio HTTP ' +
+					'Catalogo ' + endpoint.substringAfter('/api/prestamo/') + ' respondio HTTP ' +
 						response.getStatusCode() +
 						': ' +
 						trimForLog(response.getBody(), ERROR_DETAIL_MAX_LENGTH)
@@ -1008,6 +1180,45 @@ public with sharing class FSC_APIPrestamoPrestamos {
 			}
 		}
 
+		private Integer requireStoredClassCode(GuaranteeSource source, Integer sequence) {
+			String guaranteeLabel = 'la garantia ' + sequence + ' (' + source.classReference + ')';
+			if (source.classCode == null) {
+				throw new IllegalArgumentException(
+					'Falta el codigo de clase ABANKS (FSC_Codigo_Clase_Garantia__c) en ' +
+						guaranteeLabel +
+						'. Edite la garantia y seleccione la clase del catalogo.'
+				);
+			}
+			if (!classesByCode.containsKey(source.classCode)) {
+				throw new IllegalArgumentException(
+					'El codigo de clase ' + source.classCode + ' de ' + guaranteeLabel + ' no existe en el catalogo de ABANKS.'
+				);
+			}
+			return source.classCode;
+		}
+
+		private Integer requireStoredTypeCode(GuaranteeSource source, Integer classCode, Integer sequence) {
+			String guaranteeLabel = 'la garantia ' + sequence + ' (' + source.typeDescription + ')';
+			if (source.typeCode == null) {
+				throw new IllegalArgumentException(
+					'Falta el codigo de tipo ABANKS (FSC_Codigo_Tipo_Garantia__c) en ' +
+						guaranteeLabel +
+						'. Edite la garantia y seleccione el tipo del catalogo.'
+				);
+			}
+			if (!guaranteeTypesByCode.containsKey(source.typeCode)) {
+				throw new IllegalArgumentException(
+					'El codigo de tipo ' + source.typeCode + ' de ' + guaranteeLabel + ' no existe en el catalogo de ABANKS.'
+				);
+			}
+			if (!typeMatchesClass(source.typeCode, classCode)) {
+				throw new IllegalArgumentException(
+					'El tipo ' + source.typeCode + ' de ' + guaranteeLabel + ' no corresponde a la clase ' + classCode + ' en ABANKS.'
+				);
+			}
+			return source.typeCode;
+		}
+
 		private Integer resolveGuaranteeTypeCode(GuaranteeSource source, String currencyCode) {
 			List<String> references = new List<String>{
 				source.typeDescription,
@@ -1108,7 +1319,8 @@ public with sharing class FSC_APIPrestamoPrestamos {
 				Integer code = findTypeCodeByText(searchText, currencyValue, expectedClassCode, null);
 				return code == null ? findTypeCodeByText('PERSONA DISTINTA DEL DP', currencyValue, expectedClassCode, null) : code;
 			}
-			return findFirstTypeCode(currencyValue, expectedClassCode);
+			// Sin una coincidencia clara no se elige un tipo cualquiera del catalogo.
+			return null;
 		}
 
 		private Integer resolveVehicleGuaranteeType(GuaranteeSource source, Integer currencyValue, Integer expectedClassCode) {
@@ -1195,17 +1407,6 @@ public with sharing class FSC_APIPrestamoPrestamos {
 			return null;
 		}
 
-		private Integer findFirstTypeCode(Integer currencyValue, Integer expectedClassCode) {
-			for (Integer code : sortedTypeCodes()) {
-				Map<String, Object> row = guaranteeTypesByCode.get(code);
-				Integer rowCurrency = toInteger(row.get('CODIGO_MONEDA'), 'CODIGO_MONEDA');
-				if ((currencyValue == null || currencyValue == rowCurrency) && typeMatchesClass(code, expectedClassCode)) {
-					return code;
-				}
-			}
-			return null;
-		}
-
 		private List<Integer> sortedTypeCodes() {
 			List<Integer> codes = new List<Integer>(guaranteeTypesByCode.keySet());
 			codes.sort();
@@ -1280,7 +1481,8 @@ public with sharing class FSC_APIPrestamoPrestamos {
 			if (vehicle && relatedCodes.contains(genericVehicleClass)) {
 				return genericVehicleClass;
 			}
-			return orderedCodes[0];
+			// Con varias clases posibles no se elige la primera a ciegas.
+			return null;
 		}
 
 		private Integer resolveGoodCode(List<String> references) {
@@ -1310,32 +1512,35 @@ public with sharing class FSC_APIPrestamoPrestamos {
 			if (combined.contains('MAQUINARIA')) {
 				return findBestCode(goodCodesByDescription, 'MAQUINARIA');
 			}
-			return findBestCode(goodCodesByDescription, 'OTROS');
+			// Sin coincidencia no se envia "OTROS"; el llamador informa el bien que falta.
+			return null;
 		}
 
-		private VehicleCodes resolveVehicleCodes(Integer storedBrandCode, Integer storedModelCode, String brand, String model) {
+		private VehicleCodes resolveVehicleCodes(GuaranteeSource source) {
 			VehicleCodes result = new VehicleCodes();
-			List<Integer> brandCodes = brandCodesByDescription.get(normalizeText(brand));
-			Map<String, Object> selectedModel = storedBrandCode == null || storedModelCode == null || brandCodes == null || !brandCodes.contains(storedBrandCode)
-				? null
-				: modelsByBrandAndCode.get(storedBrandCode + '|' + storedModelCode);
-			if (selectedModel != null && compactText(valueToString(selectedModel.get('DESCRIPCION'))) != compactText(model)) {
-				selectedModel = null;
-			}
-			List<Map<String, Object>> modelRows = modelsByDescription.get(normalizeText(model));
-			if (modelRows == null) {
-				modelRows = findBestRows(modelsByDescription, model);
-			}
-
-			if (selectedModel == null && modelRows != null) {
-				for (Map<String, Object> row : modelRows) {
-					Integer rowBrandCode = toInteger(row.get('CODIGO_MARCA'), 'CODIGO_MARCA');
-					if (brandCodes != null && brandCodes.contains(rowBrandCode)) {
-						selectedModel = row;
-						break;
+			Map<String, Object> selectedModel;
+			List<Integer> brandCodes;
+			if (source.usesStoredCodes) {
+				// Marca y modelo se eligieron del catalogo al capturar la garantia.
+				brandCodes = source.brandCode == null ? null : new List<Integer>{ source.brandCode };
+				selectedModel = source.brandCode == null || source.modelCode == null
+					? null
+					: modelsByBrandAndCode.get(source.brandCode + '|' + source.modelCode);
+			} else {
+				brandCodes = brandCodesByDescription.get(normalizeText(source.brand));
+				List<Map<String, Object>> modelRows = modelsByDescription.get(normalizeText(source.model));
+				if (modelRows == null) {
+					modelRows = findBestRows(modelsByDescription, source.model);
+				}
+				// El modelo debe pertenecer a la marca indicada; nunca se toma el de otra marca.
+				if (modelRows != null && brandCodes != null) {
+					for (Map<String, Object> row : modelRows) {
+						if (brandCodes.contains(toInteger(row.get('CODIGO_MARCA'), 'CODIGO_MARCA'))) {
+							selectedModel = row;
+							break;
+						}
 					}
 				}
-				selectedModel = selectedModel == null && !modelRows.isEmpty() ? modelRows[0] : selectedModel;
 			}
 
 			if (selectedModel != null) {
@@ -1484,6 +1689,8 @@ public with sharing class FSC_APIPrestamoPrestamos {
 		private Decimal percentage;
 		private Date presentationDate;
 		private Boolean vehicle = false;
+		// Solo FSC_Garantia__c guarda los codigos ABANKS elegidos al capturar la garantia.
+		private Boolean usesStoredCodes = false;
 		private String brand;
 		private String model;
 		private Integer classCode;
@@ -1530,7 +1737,7 @@ public with sharing class FSC_APIPrestamoPrestamos {
 		// Un fallo del log no debe impedir actualizar la solicitud.
 		Savepoint loggingSavepoint = Database.setSavepoint();
 		try {
-			insert requests;
+			insert as system requests;
 
 			List<INT_Response__c> responses = new List<INT_Response__c>();
 			for (Integer i = 0; i < logs.size(); i++) {
@@ -1543,7 +1750,7 @@ public with sharing class FSC_APIPrestamoPrestamos {
 					)
 				);
 			}
-			insert responses;
+			insert as system responses;
 		} catch (Exception e) {
 			Database.rollback(loggingSavepoint);
 			System.debug(LoggingLevel.ERROR, 'No se pudo registrar el log de integracion: ' + e.getMessage());
@@ -1593,7 +1800,8 @@ public with sharing class FSC_APIPrestamoPrestamos {
 			recordsToUpdate.add(pendingUpdate.record);
 		}
 
-		Database.SaveResult[] saveResults = Database.update(recordsToUpdate, false);
+		// Campos tecnicos de la integracion: el usuario de desembolso no tiene FLS de edicion.
+		Database.SaveResult[] saveResults = Database.update(recordsToUpdate, false, AccessLevel.SYSTEM_MODE);
 		for (Integer i = 0; i < saveResults.size(); i++) {
 			if (saveResults[i].isSuccess()) {
 				continue;

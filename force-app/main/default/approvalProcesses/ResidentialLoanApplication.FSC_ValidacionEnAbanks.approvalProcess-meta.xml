@@ -28,6 +28,7 @@
     <entryCriteria>
         <formula>AND(
     ISPICKVAL(Status, &quot;En proceso&quot;),
+    NOT(FSC_ProcesamientoAbanksManual__c),
     ISPICKVAL(FSC_Subestado__c, &quot;Creación de crédito&quot;),
     ISPICKVAL(FSC_FormaDeDesembolso__c, &quot;Cuenta de ahorro&quot;),
     NOT(ISBLANK(FSC_NumeroPrestamoAbanks__c))

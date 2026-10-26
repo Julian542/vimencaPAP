@@ -7,7 +7,7 @@ trigger FSC_LoanApplicationAssetTrigger on LoanApplicationAsset(before insert, b
 		if (Trigger.isDelete) {
 			FSC_CreditoAprobadoLockService.validarActivosSolicitud(Trigger.old);
 		} else {
-			FSC_CreditoAprobadoLockService.validarActivosSolicitud(Trigger.new);
+			FSC_CreditoAprobadoLockService.validarActivosSolicitud(Trigger.new, Trigger.oldMap);
 		}
 	}
 

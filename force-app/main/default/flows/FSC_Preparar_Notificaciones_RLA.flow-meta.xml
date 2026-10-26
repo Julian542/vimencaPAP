@@ -85,7 +85,8 @@
     OR(
         ISCHANGED({!$Record.FSC_UsuarioCaptura__c}),
         ISCHANGED({!$Record.FSC_Subestado__c}),
-        ISCHANGED({!$Record.FSC_FormaDeDesembolso__c})
+        ISCHANGED({!$Record.FSC_FormaDeDesembolso__c}),
+        ISCHANGED({!$Record.FSC_ProcesamientoAbanksManual__c})
     ),
     &quot;|CAPTURA|&quot;,
     &quot;&quot;
@@ -94,7 +95,9 @@
     OR(
         ISCHANGED({!$Record.FSC_UsuarioOperaciones__c}),
         ISCHANGED({!$Record.FSC_Subestado__c}),
-        ISCHANGED({!$Record.FSC_FormaDeDesembolso__c})
+        ISCHANGED({!$Record.FSC_FormaDeDesembolso__c}),
+        ISCHANGED({!$Record.FSC_ProcesamientoAbanksManual__c}),
+        ISCHANGED({!$Record.FSC_DesembolsoAPIExitoso__c})
     ),
     &quot;|OPERACIONES|&quot;,
     &quot;&quot;
@@ -128,6 +131,20 @@
             <targetReference>Validar_Tipo_Credito</targetReference>
         </connector>
         <filterLogic>or</filterLogic>
+        <filters>
+            <field>FSC_DesembolsoAPIExitoso__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>FSC_ProcesamientoAbanksManual__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
         <filters>
             <field>FSC_Subestado__c</field>
             <operator>IsChanged</operator>

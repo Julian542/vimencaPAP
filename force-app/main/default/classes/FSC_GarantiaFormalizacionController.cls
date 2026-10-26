@@ -15,6 +15,8 @@ public with sharing class FSC_GarantiaFormalizacionController {
 
 	@TestVisible
 	private static Boolean omitirValidacionPermisoEnPrueba = false;
+	@TestVisible
+	private static Boolean ignorarAdministradorEnPrueba = false;
 
 	@AuraEnabled(cacheable=true)
 	public static FormalizacionContext getContext(Id residentialLoanApplicationId) {
@@ -91,7 +93,7 @@ public with sharing class FSC_GarantiaFormalizacionController {
 		}
 
 		try {
-			Database.update(garantiasParaActualizar, true, AccessLevel.USER_MODE);
+			new EscrituraFormalizacion().actualizar(garantiasParaActualizar);
 		} catch (DmlException exceptionDetails) {
 			throw new AuraHandledException('No se pudieron guardar los datos de formalización. Verifique sus permisos y los valores ingresados.');
 		}
@@ -233,7 +235,9 @@ public with sharing class FSC_GarantiaFormalizacionController {
 
 	private static void actualizarSubestado(Id residentialLoanApplicationId, String subestado) {
 		try {
-			Database.update(new ResidentialLoanApplication(Id = residentialLoanApplicationId, FSC_Subestado__c = subestado), AccessLevel.USER_MODE);
+			new EscrituraFormalizacion().actualizar(
+				new List<SObject>{ new ResidentialLoanApplication(Id = residentialLoanApplicationId, FSC_Subestado__c = subestado) }
+			);
 		} catch (DmlException exceptionDetails) {
 			throw new AuraHandledException('No se pudo actualizar el subestado de la solicitud. Verifique sus permisos.');
 		}
@@ -249,6 +253,36 @@ public with sharing class FSC_GarantiaFormalizacionController {
 			!FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR)
 		) {
 			throw new AuraHandledException('No tiene permiso para formalizar garantías.');
+		}
+		validarUsuarioAsignado(residentialLoanApplicationId);
+	}
+
+	// El usuario de formalización solo lee la solicitud (modelo Private); las escrituras se hacen sin sharing
+	// después de validar el permiso y la asignación, y solo tocan los campos que arma este controlador.
+	private without sharing class EscrituraFormalizacion {
+		void actualizar(List<SObject> registros) {
+			Database.update(registros, true, AccessLevel.SYSTEM_MODE);
+		}
+	}
+
+	// Sin usuario asignado (cola vacía o solicitudes anteriores) cualquiera con el permiso puede formalizar.
+	private static void validarUsuarioAsignado(Id residentialLoanApplicationId) {
+		if (!ignorarAdministradorEnPrueba && FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR)) {
+			return;
+		}
+		List<ResidentialLoanApplication> solicitudes = [
+			SELECT FSC_UsuarioFormalizacion__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :residentialLoanApplicationId
+			WITH SYSTEM_MODE
+			LIMIT 1
+		];
+		if (
+			!solicitudes.isEmpty() &&
+			solicitudes[0].FSC_UsuarioFormalizacion__c != null &&
+			solicitudes[0].FSC_UsuarioFormalizacion__c != UserInfo.getUserId()
+		) {
+			throw new AuraHandledException('La formalización está asignada a otro usuario. Solo la persona asignada o un administrador pueden realizarla.');
 		}
 	}
 

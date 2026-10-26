@@ -44,7 +44,7 @@ public without sharing class FSC_GenerarPagarePDF_Action {
         }
         for (Input i : inputs) {
             Output o = new Output();
-            Savepoint sp = Database.setSavepoint();
+            Savepoint sp;
             try {
                 if (i == null || i.residentialLoanApplicationId == null) {
                     o.status = 'ERROR';
@@ -85,7 +85,6 @@ public without sharing class FSC_GenerarPagarePDF_Action {
                 String numeroFolioPagare = normalizeFieldValue(rla.get('FSC_NumeroFolioPagare__c'));
                 String tipoPagare = resolvePagareType(rla);
                 Boolean usaPagareNotarial = tipoPagare == FSC_ConsumoDocumentoResolver.PAGARE_NOTARIAL;
-                Boolean usaPagareComplementario = tipoPagare == FSC_ConsumoDocumentoResolver.PAGARE_COMPLEMENTARIO;
 
                 if (usaPagareNotarial && (String.isBlank(actoNumeroPagare) || String.isBlank(numeroFolioPagare))) {
                     o.status = 'ERROR';
@@ -123,6 +122,13 @@ public without sharing class FSC_GenerarPagarePDF_Action {
                 cv.PathOnClient = finalName;
                 cv.VersionData = pdfBlob;
                 cv.FSC_EnviarDocumento__c = true;
+                cv.FSC_ContenidoLegal__c = FSC_DocumentoLegalService.capturar(pr, FSC_DocumentoLegalService.PAGARE);
+                ResidentialLoanApplication actual = [SELECT FSC_Pagares_y_Plantillas_Generados__c, FSC_Subestado__c
+                    FROM ResidentialLoanApplication WHERE Id = :rla.Id FOR UPDATE];
+                if (actual.FSC_Pagares_y_Plantillas_Generados__c == true || actual.FSC_Subestado__c != FSC_DocumentoLegalService.ETAPA) {
+                    throw new AuraHandledException('La solicitud cambió o sus documentos ya fueron generados. Actualice la página.');
+                }
+                sp = Database.setSavepoint();
                 insert cv;
 
                 cv = [
@@ -150,24 +156,9 @@ public without sharing class FSC_GenerarPagarePDF_Action {
                 }
 
                 rla.FSC_Pagares_y_Plantillas_Generados__c = true;
-                Boolean esVehiculo = rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Vehiculo';
-                Boolean esHipotecario = rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Hipotecario';
-                Boolean esTipoConReglaNotarial = rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_PYME' ||
-                    rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Consumo' || esVehiculo;
-                Boolean omitirDocumentoPorPagareNotarial = esTipoConReglaNotarial && usaPagareNotarial &&
-                    rla.FSC_Excepcion_Contrato_Notarial__c != true;
-                Boolean omitirDocumentoPorPagareSimple =
-                    rla.RecordType.DeveloperName == 'FSC_Solicitud_Credito_Consumo' &&
-                    !usaPagareNotarial && !usaPagareComplementario;
-                Boolean omitirDocumentoVehicularSinContrato = esVehiculo &&
-                    !FSC_RLAContractTemplateResolver.resolve(rla.Id).aplicaContrato;
-                Boolean omitirDocumentoHipotecarioSinContrato = esHipotecario &&
-                    !FSC_RLAContractTemplateResolver.resolve(rla.Id).aplicaContrato;
-                rla.FSC_Subestado__c = omitirDocumentoPorPagareNotarial || omitirDocumentoPorPagareSimple ||
-                    omitirDocumentoVehicularSinContrato || omitirDocumentoHipotecarioSinContrato
-                    ? 'Gestionar firmas'
-                    : 'Generación de contrato';
+                // Generar nunca valida: la solicitud permanece en la etapa de revisión.
                 update rla;
+                System.enqueueJob(new FSC_GenerarContratoPDFQueueable(new List<Id>{rla.Id}, true));
 
                 o.status = 'OK';
                 o.message = 'PDF generado y adjuntado como File.';
@@ -175,7 +166,7 @@ public without sharing class FSC_GenerarPagarePDF_Action {
                 o.contentDocumentId = cv.ContentDocumentId;
 
             } catch (Exception e) {
-                Database.rollback(sp);
+                if (sp != null) Database.rollback(sp);
                 o.status = 'ERROR';
                 o.message = e.getMessage();
             }

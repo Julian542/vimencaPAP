@@ -186,6 +186,8 @@ private class FSC_ActaComitePDFControllerTest {
 
 	@IsTest
 	static void testController_detectsFscGuaranteeForMortgage() {
+		// Estos datos no prueban la política de crédito; sus límites se prueban en FSC_CreditPolicyGuardTest.
+		FSC_CreditPolicyGuard.bypassInTests = true;
 		Account acc = getTestAccount();
 		Date actaDate = Date.today();
 		DateTime approvedAt = DateTime.newInstance(actaDate.year(), actaDate.month(), actaDate.day(), 11, 0, 0);
@@ -252,6 +254,8 @@ private class FSC_ActaComitePDFControllerTest {
 
 	@IsTest
 	static void testController_includesAndLabelsAllCreditTypes() {
+		// Estos datos no prueban la política de crédito; sus límites se prueban en FSC_CreditPolicyGuardTest.
+		FSC_CreditPolicyGuard.bypassInTests = true;
 		Account acc = getTestAccount();
 
 		Date actaDate = Date.today();

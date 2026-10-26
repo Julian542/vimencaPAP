@@ -97,6 +97,7 @@ private class FSC_APIPrestamoPrestamosTest {
 
 		Map<String, Object> ipInput = FSC_APIPrestamoPrestamos.lastIpInput;
 		Assert.isFalse(ipInput.containsKey('bodyRequest'), 'El IP debe recibir la estructura directa, sin bodyRequest.');
+		Assert.isFalse(ipInput.containsKey('deducciones'), 'Sin gastos en la planilla no se envian deducciones.');
 
 		Map<String, Object> prestamo = (Map<String, Object>) ipInput.get('prestamo');
 		List<Object> prestamosItems = (List<Object>) prestamo.get('prPrestamosItem');
@@ -261,7 +262,7 @@ private class FSC_APIPrestamoPrestamosTest {
 		ResidentialLoanApplication rla = createRla();
 		update new ResidentialLoanApplication(Id = rla.Id, FSC_Moneda__c = '1', FSC_Porcentaje_de_Admisibilidad__c = 80);
 
-		insert new List<FSC_Garantia__c>{
+		List<FSC_Garantia__c> garantias = new List<FSC_Garantia__c>{
 			new FSC_Garantia__c(
 				Name = 'Vehiculo usado',
 				FSC_Residential_Loan_Application__c = rla.Id,
@@ -304,6 +305,12 @@ private class FSC_APIPrestamoPrestamosTest {
 				FSC_Monto_Certificado_Deposito__c = 500000
 			)
 		};
+		insert garantias;
+		// Codigos que la captura guarda desde el catalogo (ver guaranteeCatalogResponses).
+		setStoredCodes(garantias[0].Id, 1, 10, 7, 70);
+		setStoredCodes(garantias[1].Id, 2, 20, null, null);
+		setStoredCodes(garantias[2].Id, 3, 30, null, null);
+		setStoredCodes(garantias[3].Id, 4, 40, null, null);
 
 		FSC_APIPrestamoPrestamos.callCatalogHttpInTests = true;
 		Test.setMock(HttpCalloutMock.class, new PrestamosAndCatalogCalloutMock(guaranteeCatalogResponses()));
@@ -370,17 +377,7 @@ private class FSC_APIPrestamoPrestamosTest {
 			FSC_Valor_Vehiculo__c = 1500000
 		);
 		insert vehicle;
-		// El trigger solo recalcula codigos si cambia el texto, por lo que estos codigos se conservan.
-		Database.update(
-			new FSC_Garantia__c(
-				Id = vehicle.Id,
-				FSC_Codigo_Clase_Garantia__c = 1,
-				FSC_Codigo_Tipo_Garantia__c = 60,
-				FSC_Codigo_Marca_Vehiculo__c = 7,
-				FSC_Codigo_Modelo_Vehiculo__c = 71
-			),
-			AccessLevel.SYSTEM_MODE
-		);
+		setStoredCodes(vehicle.Id, 1, 60, 7, 71);
 
 		// Dos tipos y dos modelos con la misma descripcion: sin codigo, la descripcion no alcanza para elegir.
 		Map<String, Object> catalogResponses = guaranteeCatalogResponses();
@@ -406,6 +403,214 @@ private class FSC_APIPrestamoPrestamosTest {
 		Assert.areEqual(60, guarantee.get('codigoTipoGarantia'), 'Ante tipos repetidos debe enviarse el tipo exacto elegido en el catalogo.');
 		Assert.areEqual(1, guarantee.get('codigoClaseGarantias'), 'Debe enviarse la clase guardada.');
 		Assert.areEqual(71, vehicleItem.get('codigoModelo'), 'Ante modelos repetidos debe enviarse el modelo exacto guardado.');
+	}
+
+	@IsTest
+	static void run_sendsDisbursementExpensesAsDeductions() {
+		ResidentialLoanApplication rla = createRla();
+		update new ResidentialLoanApplication(
+			Id = rla.Id,
+			FSC_ComisionAdminSeguroMonto__c = 12345,
+			FSC_TransferenciaInmobiliaria__c = 123,
+			FSC_TasasServicios__c = 1236,
+			FSC_AyuntamientoRegistroCivil__c = 1237,
+			FSC_OtrosGastosLegales__c = 0,
+			FSC_SeguroPropiedadMonto__c = 800,
+			FSC_InscripcionHipoteca__c = 12391,
+			FSC_ComisionEndosoPoliza__c = 1234,
+			FSC_HonorariosLegalizacion__c = 1235,
+			FSC_ConfeccionCheque__c = 1238
+		);
+		FSC_APIPrestamoPrestamos.mockIpResponse = successfulResponse();
+		FSC_APIPrestamoPrestamos.mockCatalogResponses = tipoSaldoCatalogResponses();
+
+		Test.startTest();
+		List<FSC_APIPrestamoPrestamos.Output> outputs = FSC_APIPrestamoPrestamos.run(new List<FSC_APIPrestamoPrestamos.Input>{ buildInput(rla.Id) });
+		Test.stopTest();
+
+		Assert.isTrue(outputs[0].success, 'La solicitud debe procesarse: ' + outputs[0].message);
+		List<Object> items = (List<Object>) ((Map<String, Object>) FSC_APIPrestamoPrestamos.lastIpInput.get('deducciones')).get('prDeduccionesItem');
+		Map<Integer, Map<String, Object>> itemsByCode = new Map<Integer, Map<String, Object>>();
+		for (Object item : items) {
+			Map<String, Object> deduction = (Map<String, Object>) item;
+			itemsByCode.put((Integer) deduction.get('codigoTipoSaldo'), deduction);
+			Assert.areEqual('', deduction.get('numeroSolicitud'), 'numeroSolicitud debe ir vacio.');
+			Assert.areEqual('001-0880361-0', deduction.get('numeroIdentificacion'), 'Debe enviar la identificacion del deudor.');
+			Assert.areEqual('D', deduction.get('tipoDeduccion'), 'El tipo de deduccion siempre es D.');
+		}
+		// Seguro de propiedad no es deduccion en ABANKS y los montos en cero no se envian.
+		Assert.areEqual(8, items.size(), 'Solo se envian los gastos con monto: ' + JSON.serialize(items));
+		Assert.areEqual(new Set<Integer>{ 13, 95, 35, 97, 93, 36, 41, 14 }, itemsByCode.keySet(), 'Debe buscar el codigo por la descripcion.');
+		Assert.areEqual(Decimal.valueOf('1237'), itemsByCode.get(97).get('valor'), 'Ayuntamiento / Registro Civil va como registro de pagare.');
+		Assert.areEqual('', itemsByCode.get(97).get('capitalizar'), 'Los gastos que no son comision no se capitalizan.');
+		Assert.areEqual(Decimal.valueOf('12345'), itemsByCode.get(13).get('valor'), 'Debe enviar el monto del campo.');
+		Assert.areEqual(Decimal.valueOf('12391'), itemsByCode.get(93).get('valor'), 'Debe enviar el monto del campo.');
+		Assert.areEqual(Decimal.valueOf('1238'), itemsByCode.get(14).get('valor'), 'Debe enviar el monto del campo.');
+		Assert.areEqual('S', itemsByCode.get(13).get('capitalizar'), 'Las comisiones se capitalizan.');
+		Assert.areEqual('S', itemsByCode.get(36).get('capitalizar'), 'Las comisiones se capitalizan.');
+		Assert.areEqual('', itemsByCode.get(14).get('capitalizar'), 'Los gastos que no son comision no se capitalizan.');
+		Assert.areEqual('', itemsByCode.get(93).get('capitalizar'), 'Los gastos que no son comision no se capitalizan.');
+	}
+
+	@IsTest
+	static void run_failsWhenExpenseHasNoTipoSaldo() {
+		ResidentialLoanApplication rla = createRla();
+		update new ResidentialLoanApplication(Id = rla.Id, FSC_TasasServicios__c = 500);
+		FSC_APIPrestamoPrestamos.mockIpResponse = successfulResponse();
+		FSC_APIPrestamoPrestamos.mockCatalogResponses = new Map<String, Object>{
+			'callout:FSC_APIPrestamo/api/prestamo/tipos/saldo' => new List<Object>()
+		};
+
+		Test.startTest();
+		List<FSC_APIPrestamoPrestamos.Output> outputs = FSC_APIPrestamoPrestamos.run(new List<FSC_APIPrestamoPrestamos.Input>{ buildInput(rla.Id) });
+		Test.stopTest();
+
+		String label = ResidentialLoanApplication.FSC_TasasServicios__c.getDescribe().getLabel();
+		Assert.isFalse(outputs[0].success, 'No se debe crear el prestamo sin todas las deducciones.');
+		Assert.isTrue(outputs[0].message.contains(label), 'Debe indicar el gasto sin tipo de saldo: ' + outputs[0].message);
+		Assert.isNull(FSC_APIPrestamoPrestamos.lastIpInput, 'No debe llamar al API de prestamos.');
+	}
+
+	@IsTest
+	static void run_failsWhenGuaranteeHasNoStoredCodes() {
+		ResidentialLoanApplication rla = createRla();
+		update new ResidentialLoanApplication(Id = rla.Id, FSC_Moneda__c = '1', FSC_Porcentaje_de_Admisibilidad__c = 80);
+		// Sin catalogo sincronizado el trigger no puede completar los codigos.
+		insert new FSC_Garantia__c(
+			Name = 'Hipoteca sin codigos',
+			FSC_Residential_Loan_Application__c = rla.Id,
+			FSC_Clase_de_Garantia__c = 'BIENES INMUEBLES',
+			FSC_Tipo_de_Garantia__c = 'EDIFICIOS RESIDENCIALES VIVIENDAS O APTOS',
+			FSC_Tipo_de_Inmueble__c = 'CASA',
+			FSC_Valor_Tasado__c = 3000000
+		);
+		FSC_APIPrestamoPrestamos.mockIpResponse = successfulResponse();
+		FSC_APIPrestamoPrestamos.mockCatalogResponses = guaranteeCatalogResponses();
+
+		Test.startTest();
+		List<FSC_APIPrestamoPrestamos.Output> outputs = FSC_APIPrestamoPrestamos.run(new List<FSC_APIPrestamoPrestamos.Input>{ buildInput(rla.Id) });
+		Test.stopTest();
+
+		Assert.isFalse(outputs[0].success, 'Sin codigos guardados no se debe crear el prestamo.');
+		Assert.isTrue(outputs[0].message.contains('Falta el codigo de'), 'Debe indicar el codigo faltante: ' + outputs[0].message);
+		Assert.isNull(FSC_APIPrestamoPrestamos.lastIpInput, 'No debe llamar al API de prestamos.');
+	}
+
+	@IsTest
+	static void run_failsWhenStoredTypeDoesNotBelongToClass() {
+		ResidentialLoanApplication rla = createRla();
+		update new ResidentialLoanApplication(Id = rla.Id, FSC_Moneda__c = '1', FSC_Porcentaje_de_Admisibilidad__c = 80);
+		FSC_Garantia__c garantia = new FSC_Garantia__c(
+			Name = 'Hipoteca',
+			FSC_Residential_Loan_Application__c = rla.Id,
+			FSC_Clase_de_Garantia__c = 'BIENES INMUEBLES',
+			FSC_Tipo_de_Garantia__c = 'EDIFICIOS RESIDENCIALES VIVIENDAS O APTOS',
+			FSC_Tipo_de_Inmueble__c = 'CASA',
+			FSC_Valor_Tasado__c = 3000000
+		);
+		insert garantia;
+		// El tipo 10 pertenece a la clase 1 (vehiculos), no a la 2.
+		setStoredCodes(garantia.Id, 2, 10, null, null);
+		FSC_APIPrestamoPrestamos.mockIpResponse = successfulResponse();
+		FSC_APIPrestamoPrestamos.mockCatalogResponses = guaranteeCatalogResponses();
+
+		Test.startTest();
+		List<FSC_APIPrestamoPrestamos.Output> outputs = FSC_APIPrestamoPrestamos.run(new List<FSC_APIPrestamoPrestamos.Input>{ buildInput(rla.Id) });
+		Test.stopTest();
+
+		Assert.isFalse(outputs[0].success, 'Un tipo de otra clase no debe enviarse.');
+		Assert.isTrue(outputs[0].message.contains('no corresponde a la clase'), 'Debe explicar la inconsistencia: ' + outputs[0].message);
+		Assert.isNull(FSC_APIPrestamoPrestamos.lastIpInput, 'No debe llamar al API de prestamos.');
+	}
+
+	@IsTest
+	static void run_doesNotRecreateExistingLoan() {
+		ResidentialLoanApplication rla = createRla();
+		update new ResidentialLoanApplication(Id = rla.Id, FSC_NumeroPrestamoAbanks__c = '58715');
+		FSC_APIPrestamoPrestamos.mockIpResponse = successfulResponse();
+
+		Test.startTest();
+		List<FSC_APIPrestamoPrestamos.Output> outputs = FSC_APIPrestamoPrestamos.run(new List<FSC_APIPrestamoPrestamos.Input>{ buildInput(rla.Id) });
+		Test.stopTest();
+
+		Assert.isFalse(outputs[0].success, 'No debe crear un segundo prestamo.');
+		Assert.areEqual('58715', outputs[0].numeroPrestamo, 'Debe informar el prestamo existente.');
+		Assert.isNull(FSC_APIPrestamoPrestamos.lastIpInput, 'No debe llamar al API de prestamos.');
+		Assert.areEqual(
+			'58715',
+			[SELECT FSC_NumeroPrestamoAbanks__c FROM ResidentialLoanApplication WHERE Id = :rla.Id].FSC_NumeroPrestamoAbanks__c,
+			'Debe conservar el numero de prestamo.'
+		);
+	}
+
+	@IsTest
+	static void run_sendsRepeatedRequestOnlyOnce() {
+		ResidentialLoanApplication rla = createRla();
+		FSC_APIPrestamoPrestamos.mockIpResponse = successfulResponse();
+
+		Test.startTest();
+		List<FSC_APIPrestamoPrestamos.Output> outputs = FSC_APIPrestamoPrestamos.run(
+			new List<FSC_APIPrestamoPrestamos.Input>{ buildInput(rla.Id), buildInput(rla.Id) }
+		);
+		Test.stopTest();
+
+		Assert.isTrue(outputs[0].success, 'La primera entrada debe crear el prestamo.');
+		Assert.isFalse(outputs[1].success, 'La entrada repetida no debe crear otro prestamo.');
+		Assert.isTrue(outputs[1].message.contains('repetida'), 'Debe explicar que se omitio.');
+	}
+
+	@IsTest
+	static void run_usesCurrentUserAbanksCodeOrAlias() {
+		ResidentialLoanApplication rla = createRla();
+		FSC_APIPrestamoPrestamos.mockIpResponse = successfulResponse();
+		FSC_APIPrestamoPrestamos.Input inputItem = buildInput(rla.Id);
+		inputItem.codigoUsuario = null;
+		inputItem.codigoEjecutivo = null;
+		User currentUser = [SELECT FSC_CodigoAbanks__c, Alias FROM User WHERE Id = :UserInfo.getUserId()];
+		String expectedCode = String.isBlank(currentUser.FSC_CodigoAbanks__c) ? currentUser.Alias : currentUser.FSC_CodigoAbanks__c.trim();
+
+		Test.startTest();
+		List<FSC_APIPrestamoPrestamos.Output> outputs = FSC_APIPrestamoPrestamos.run(new List<FSC_APIPrestamoPrestamos.Input>{ inputItem });
+		Test.stopTest();
+
+		Assert.isTrue(outputs[0].success, 'Debe crear el prestamo con el usuario actual: ' + outputs[0].message);
+		Map<String, Object> ipInput = FSC_APIPrestamoPrestamos.lastIpInput;
+		Map<String, Object> prestamoItem = (Map<String, Object>) ((List<Object>) ((Map<String, Object>) ipInput.get('prestamo')).get('prPrestamosItem'))[0];
+		Assert.areEqual(expectedCode, ipInput.get('codigoUsuario'), 'Usuario: codigo ABANKS o, si falta, alias.');
+		Assert.areEqual(expectedCode, prestamoItem.get('codigoEjecutivo'), 'Ejecutivo: codigo ABANKS o, si falta, alias.');
+	}
+
+	@IsTest
+	static void reintentarCreacionPrestamo_rejectsWhenLoanAlreadyExists() {
+		ResidentialLoanApplication rla = createRla();
+		update new ResidentialLoanApplication(Id = rla.Id, FSC_FormaDeDesembolso__c = 'Cuenta de ahorro', FSC_NumeroPrestamoAbanks__c = '58715');
+		FSC_APIPrestamoPrestamos.mockIpResponse = successfulResponse();
+
+		Boolean rejected = false;
+		Test.startTest();
+		try {
+			FSC_RlaAccionesController.reintentarCreacionPrestamo(rla.Id);
+		} catch (AuraHandledException e) {
+			rejected = true;
+		}
+		Test.stopTest();
+
+		Assert.isTrue(rejected, 'El reintento no debe crear un segundo prestamo.');
+		Assert.isNull(FSC_APIPrestamoPrestamos.lastIpInput, 'No debe llamar al API de prestamos.');
+	}
+
+	private static void setStoredCodes(Id guaranteeId, Integer classCode, Integer typeCode, Integer brandCode, Integer modelCode) {
+		// El trigger solo recalcula codigos si cambia el texto, por lo que estos codigos se conservan.
+		Database.update(
+			new FSC_Garantia__c(
+				Id = guaranteeId,
+				FSC_Codigo_Clase_Garantia__c = classCode,
+				FSC_Codigo_Tipo_Garantia__c = typeCode,
+				FSC_Codigo_Marca_Vehiculo__c = brandCode,
+				FSC_Codigo_Modelo_Vehiculo__c = modelCode
+			),
+			AccessLevel.SYSTEM_MODE
+		);
 	}
 
 	@IsTest
@@ -632,6 +837,27 @@ private class FSC_APIPrestamoPrestamosTest {
 				catalogRow(new Map<String, Object>{ 'CODIGO_ASEGURADORA' => 9, 'NOMBRE' => 'Seguros Universal' })
 			}
 		};
+	}
+
+	// Descripciones del API tipos/saldo de ABANKS.
+	private static Map<String, Object> tipoSaldoCatalogResponses() {
+		List<Object> rows = new List<Object>();
+		Map<String, Integer> codesByDescription = new Map<String, Integer>{
+			'G/IMP. INSCRIPCION (2%)' => 93,
+			'G/IMP.TRANSF. HIP. (3%)' => 95,
+			'GASTOS HONOR. NOTAR. PUBLIC.' => 41,
+			'SERV. ADM DE SEGUROS' => 13,
+			'PAGO POR REGISTRO DE PAGARE' => 97,
+			'IMP CK/TRANSF, ADMINISTRACION' => 14,
+			'SEG. INCENDIO (DEP/ANTIC.)' => 50,
+			'GASTOS TASAS' => 35,
+			'GASTOS LEGALES' => 48,
+			'COMISION POR ENDOSO POLIZA' => 36
+		};
+		for (String description : codesByDescription.keySet()) {
+			rows.add(new Map<String, Object>{ 'TIPO_ABONO' => 'G', 'DESCRIPCION' => description, 'CODIGO_TIPO_SALDO' => codesByDescription.get(description) });
+		}
+		return new Map<String, Object>{ 'callout:FSC_APIPrestamo/api/prestamo/tipos/saldo' => rows };
 	}
 
 	private static Map<String, Object> catalogRow(Map<String, Object> row) {

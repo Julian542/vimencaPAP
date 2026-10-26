@@ -1,5 +1,13 @@
-trigger FSC_FacilidadesDeCreditoTrigger on FSC_Facilidades_De_Credito__c(before insert, before update, before delete, after insert, after update, after delete) {
+trigger FSC_FacilidadesDeCreditoTrigger on FSC_Facilidades_De_Credito__c(
+	before insert,
+	before update,
+	before delete,
+	after insert,
+	after update,
+	after delete
+) {
 	if (Trigger.isBefore) {
+		if (!Trigger.isDelete) FSC_CreditPolicyGuard.validateFacilities(Trigger.new, Trigger.isUpdate ? Trigger.oldMap : null);
 		if (Trigger.isDelete) {
 			FSC_CreditoAprobadoLockService.validarFacilidades(Trigger.old);
 		} else {

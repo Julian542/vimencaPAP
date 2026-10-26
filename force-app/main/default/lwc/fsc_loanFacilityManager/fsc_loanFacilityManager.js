@@ -1,4 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
+import getCreditPolicyRules from '@salesforce/apex/FSC_CreditPolicyController.getRules';
+import evaluateCreditPolicy from '@salesforce/apex/FSC_CreditPolicyController.evaluate';
 import getLoanTermConfiguration from '@salesforce/apex/FSC_LoanFacilityController.getLoanTermConfiguration';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { getObjectInfo, getPicklistValues } from 'lightning/uiObjectInfoApi';
@@ -41,7 +43,10 @@ const LOAN_TYPE_HIPOTECARIO = 'hipotecario';
 const LOAN_TYPE_VEHICULO = 'vehiculo';
 const DEFAULT_FACILITY_CONSUMO = 'CONSUMO - 401';
 const NEW_VEHICLE_GUARANTEE_CLASS = 'VEHICULOS NUEVOS -P2';
-const HIPOTECARIO_FACILITY_VALUES = Object.freeze(['HIPOTECARIOS PARA LA VIVIENDA - 402', 'HIPOTECARIO PARA LA VIVIENDA DOLARES - 453']);
+const HIPOTECARIO_FACILITY_DOLARES = 'HIPOTECARIO PARA LA VIVIENDA DOLARES - 453';
+const HIPOTECARIO_FACILITY_VALUES = Object.freeze(['HIPOTECARIOS PARA LA VIVIENDA - 402', HIPOTECARIO_FACILITY_DOLARES]);
+const MONEDA_PESOS = '1';
+const MONEDA_DOLARES = '2';
 const OMNI_SUBTYPE_CONSUMO = 'solicitudcreditoconsumo';
 const OMNI_SUBTYPE_HIPOTECARIO = 'solicitudcreditohipotecario';
 const OMNI_SUBTYPE_VEHICULO = 'solicitudcreditovehiculo';
@@ -52,6 +57,8 @@ const EMPTY_GUARANTEE = Object.freeze({
 	FSC_Descripcion_de_la_Garantia__c: '',
 	FSC_Proposito_Garantia_Hipotecario__c: '',
 	FSC_Valor_Tasado__c: '',
+	FSC_Valor_Mejoras__c: '',
+	FSC_SaldoPrimeraHipoteca__c: '',
 	FSC_EsTasadorExterno__c: null,
 	FSC_NombreTasadorExterno__c: '',
 	FSC_Tasado_Por__c: '',
@@ -103,6 +110,13 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 	loanTermConfiguration;
 	loanTermConfigurationError = '';
 	propositoGarantiaOptions = [];
+	creditPolicyRules = [];
+	creditPolicyError = '';
+	creditPolicyResult;
+	creditPolicyRequestKey = '';
+	creditPolicyValidatedKey = '';
+	creditPolicyTimer;
+	creditPolicyDisconnected = false;
 	tasadoPorOptions = [];
 	concesionarioOptions = [];
 	modeloVehiculoPicklistData;
@@ -409,6 +423,7 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 	}
 
 	connectedCallback() {
+		this.creditPolicyDisconnected = false;
 		this.hydrateFacilitiesFromOmni();
 		this.applyFacilityRules();
 	}
@@ -659,6 +674,30 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 		return this.loanRequestType === LOAN_TYPE_HIPOTECARIO;
 	}
 
+	get monedaFacilidad() {
+		if (this.loanRequestType === LOAN_TYPE_CONSUMO) return MONEDA_PESOS;
+		if (!this.isTipoCreditoHipotecario || !HIPOTECARIO_FACILITY_VALUES.includes(this.facilidad)) {
+			return null;
+		}
+		return this.facilidad === HIPOTECARIO_FACILITY_DOLARES ? MONEDA_DOLARES : MONEDA_PESOS;
+	}
+
+	get montoSolicitadoLabel() {
+		return this.withSimboloMoneda('Monto Solicitado');
+	}
+
+	get montoCuotaLabel() {
+		return this.withSimboloMoneda('Monto de la Cuota');
+	}
+
+	withSimboloMoneda(label) {
+		const moneda = this.monedaFacilidad;
+		if (!moneda) {
+			return label;
+		}
+		return `${label} (${moneda === MONEDA_DOLARES ? 'US$' : 'RD$'})`;
+	}
+
 	get isTipoCreditoConGarantiaObligatoria() {
 		return [LOAN_TYPE_HIPOTECARIO, LOAN_TYPE_VEHICULO].includes(this.loanRequestType);
 	}
@@ -668,6 +707,7 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 	}
 
 	get maxLoanTermMonths() {
+		if (this.usesCreditPolicy && this.currentCreditPolicyResult?.maxMonths) return this.currentCreditPolicyResult.maxMonths;
 		if (this.loanRequestType === LOAN_TYPE_CONSUMO) {
 			return this.loanTermConfiguration?.consumoMaxMonths || 0;
 		}
@@ -704,6 +744,7 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 	}
 
 	get loanTermPolicyMessage() {
+		if (this.usesCreditPolicy) return this.currentCreditPolicyResult?.termMessage || '';
 		if (![LOAN_TYPE_CONSUMO, LOAN_TYPE_VEHICULO].includes(this.loanRequestType)) {
 			return '';
 		}
@@ -722,6 +763,12 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 	}
 
 	get loanTermHelpText() {
+		if (this.usesCreditPolicy && this.currentCreditPolicyResult?.minMonths) {
+			return `Plazo permitido: ${this.currentCreditPolicyResult.minMonths} a ${this.currentCreditPolicyResult.maxMonths} meses.`;
+		}
+		if (this.usesCreditPolicy && !this.currentCreditPolicyResult) {
+			return 'Validando límites del crédito...';
+		}
 		return this.loanTermPolicyMessage || `Plazo máximo: ${this.maxLoanTermMonths} meses.`;
 	}
 
@@ -1530,6 +1577,7 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 			this.recalculateInsuranceDraftPremium();
 		}
 
+		this.queueCreditPolicyValidation();
 		this.persistFacilityDraft();
 	}
 
@@ -1574,9 +1622,9 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 		if (event.target.value !== sanitizedValue) {
 			event.target.value = sanitizedValue;
 		}
+		this.updateNumericField('plazoMeses', sanitizedValue);
 		this.setPlazoMesesValidity(event.target, sanitizedValue);
 		event.target.reportValidity();
-		this.updateNumericField('plazoMeses', sanitizedValue);
 		this.updateTiempoTasaFijaValidity(true);
 	}
 
@@ -1616,9 +1664,9 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 		event.preventDefault();
 		const sanitizedValue = this.sanitizeNumericInput(clipboardValue, 'integer').slice(0, 3);
 		event.target.value = sanitizedValue;
+		this.updateNumericField('plazoMeses', sanitizedValue);
 		this.setPlazoMesesValidity(event.target, sanitizedValue);
 		event.target.reportValidity();
-		this.updateNumericField('plazoMeses', sanitizedValue);
 		this.updateTiempoTasaFijaValidity(true);
 	}
 
@@ -1662,6 +1710,7 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 		}
 
 		this[fieldName] = value;
+		this.queueCreditPolicyValidation();
 		if (['montoSolicitado', 'plazoMeses', 'tasaInteres'].includes(fieldName)) {
 			this.calculateInstallment();
 		}
@@ -1915,6 +1964,12 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 	}
 
 	validateFacilityInputs(reportErrors = true) {
+		this.queueCreditPolicyValidation(reportErrors);
+		this.updateCreditPolicyAmountValidity();
+		if (this.usesCreditPolicy && this.creditPolicyValidationMessage) {
+			if (reportErrors) this.showToast('Límites del crédito', this.creditPolicyValidationMessage, 'error');
+			return false;
+		}
 		const loanTermError = this.loanTermValidationMessage;
 		if (loanTermError) {
 			this.updatePlazoMesesValidity();
@@ -1935,13 +1990,14 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 		}, true);
 	}
 
-	updatePlazoMesesValidity() {
+	updatePlazoMesesValidity(reportErrors = false) {
 		const input = this.template.querySelector('[data-plazo-meses]');
 		if (!input) {
 			return;
 		}
 
 		this.setPlazoMesesValidity(input, this.plazoMeses);
+		if (reportErrors) input.reportValidity();
 	}
 
 	setPlazoMesesValidity(input, value) {
@@ -1953,6 +2009,7 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 	}
 
 	getLoanTermValidationMessage(value) {
+		if (this.usesCreditPolicy) return this.loanTermPolicyMessage;
 		const plazo = Number(value);
 		const isValidPlazo = !value || (Number.isInteger(plazo) && plazo >= 1 && plazo <= this.maxLoanTermMonths);
 		return this.loanTermPolicyMessage || (isValidPlazo ? '' : `El plazo debe ser un número entero entre 1 y ${this.maxLoanTermMonths} meses.`);
@@ -2094,6 +2151,7 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 			FSC_Compromiso_Mensual__c: cuota,
 			FSC_Garantias__r: this.serializeGuarantees(),
 			FSC_Seguros__r: this.serializeInsurances(),
+			...(this.monedaFacilidad ? { FSC_Moneda__c: this.monedaFacilidad } : {}),
 		};
 	}
 
@@ -2120,6 +2178,8 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 				FSC_Descripcion_de_la_Garantia__c: row.FSC_Descripcion_de_la_Garantia__c || '',
 				FSC_Proposito_Garantia_Hipotecario__c: row.FSC_Proposito_Garantia_Hipotecario__c || '',
 				FSC_Valor_Tasado__c: this.normalizeInputValue(row.FSC_Valor_Tasado__c),
+				FSC_Valor_Mejoras__c: this.normalizeInputValue(row.FSC_Valor_Mejoras__c),
+				FSC_SaldoPrimeraHipoteca__c: this.normalizeInputValue(row.FSC_SaldoPrimeraHipoteca__c),
 				FSC_EsTasadorExterno__c: this.normalizeBoolean(row.FSC_EsTasadorExterno__c),
 				FSC_NombreTasadorExterno__c: row.FSC_NombreTasadorExterno__c || '',
 				FSC_Tasado_Por__c: row.FSC_Tasado_Por__c || '',
@@ -2268,6 +2328,8 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 		if (!this.isRealEstateGuaranteeClass(draft.FSC_Clase_de_Garantia__c)) {
 			draft.FSC_Proposito_Garantia_Hipotecario__c = '';
 			draft.FSC_Valor_Tasado__c = '';
+			draft.FSC_Valor_Mejoras__c = '';
+			draft.FSC_SaldoPrimeraHipoteca__c = '';
 			draft.FSC_EsTasadorExterno__c = null;
 			draft.FSC_NombreTasadorExterno__c = '';
 			draft.FSC_Tasado_Por__c = '';
@@ -2370,12 +2432,14 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 			FSC_Descripcion_de_la_Garantia__c: this.guaranteeDraft.FSC_Descripcion_de_la_Garantia__c || '',
 			FSC_Proposito_Garantia_Hipotecario__c: this.guaranteeDraft.FSC_Proposito_Garantia_Hipotecario__c || '',
 			FSC_Valor_Tasado__c: this.normalizeNumberValue(this.guaranteeDraft.FSC_Valor_Tasado__c, 2),
+			FSC_Valor_Mejoras__c: this.normalizeNumberValue(this.guaranteeDraft.FSC_Valor_Mejoras__c, 2),
+			FSC_SaldoPrimeraHipoteca__c: this.normalizeNumberValue(this.guaranteeDraft.FSC_SaldoPrimeraHipoteca__c, 2),
 			FSC_EsTasadorExterno__c: this.guaranteeDraft.FSC_EsTasadorExterno__c === true,
 			FSC_NombreTasadorExterno__c: this.guaranteeDraft.FSC_NombreTasadorExterno__c || '',
 			FSC_Tasado_Por__c: this.guaranteeDraft.FSC_Tasado_Por__c || '',
 			FSC_Fecha_Tasacion__c: this.guaranteeDraft.FSC_Fecha_Tasacion__c || null,
 			FSC_Monto_Inicial_Avance_Pagado__c: this.normalizeNumberValue(this.guaranteeDraft.FSC_Monto_Inicial_Avance_Pagado__c, 2),
-			FSC_Valor_Inmueble__c: null,
+			FSC_Valor_Inmueble__c: this.normalizeNumberValue(this.guaranteeDraft.FSC_Valor_Inmueble__c, 2),
 			FSC_Precio_de_Venta__c: this.normalizeNumberValue(this.guaranteeDraft.FSC_Precio_de_Venta__c, 2),
 			FSC_Metros_Cuadrados_de_Construccion__c: this.normalizeNumberValue(this.guaranteeDraft.FSC_Metros_Cuadrados_de_Construccion__c, 2),
 			FSC_Ubicacion__c: this.guaranteeDraft.FSC_Ubicacion__c || '',
@@ -2915,6 +2979,8 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 			FSC_Descripcion_de_la_Garantia__c: row.FSC_Descripcion_de_la_Garantia__c || '',
 			FSC_Proposito_Garantia_Hipotecario__c: row.FSC_Proposito_Garantia_Hipotecario__c || '',
 			FSC_Valor_Tasado__c: this.normalizeNumberValue(row.FSC_Valor_Tasado__c, 2),
+			FSC_Valor_Mejoras__c: this.normalizeNumberValue(row.FSC_Valor_Mejoras__c, 2),
+			FSC_SaldoPrimeraHipoteca__c: this.normalizeNumberValue(row.FSC_SaldoPrimeraHipoteca__c, 2),
 			FSC_EsTasadorExterno__c: this.normalizeBoolean(row.FSC_EsTasadorExterno__c),
 			FSC_NombreTasadorExterno__c: row.FSC_NombreTasadorExterno__c || '',
 			FSC_Tasado_Por__c: row.FSC_Tasado_Por__c || '',
@@ -2965,12 +3031,14 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 			FSC_Descripcion_de_la_Garantia__c: item.FSC_Descripcion_de_la_Garantia__c || '',
 			FSC_Proposito_Garantia_Hipotecario__c: item.FSC_Proposito_Garantia_Hipotecario__c || '',
 			FSC_Valor_Tasado__c: this.normalizeNumberValue(item.FSC_Valor_Tasado__c, 2),
+			FSC_Valor_Mejoras__c: this.normalizeNumberValue(item.FSC_Valor_Mejoras__c, 2),
+			FSC_SaldoPrimeraHipoteca__c: this.normalizeNumberValue(item.FSC_SaldoPrimeraHipoteca__c, 2),
 			FSC_EsTasadorExterno__c: item.FSC_EsTasadorExterno__c === true,
 			FSC_NombreTasadorExterno__c: item.FSC_NombreTasadorExterno__c || '',
 			FSC_Tasado_Por__c: item.FSC_Tasado_Por__c || '',
 			FSC_Fecha_Tasacion__c: item.FSC_Fecha_Tasacion__c || null,
 			FSC_Monto_Inicial_Avance_Pagado__c: this.normalizeNumberValue(item.FSC_Monto_Inicial_Avance_Pagado__c, 2),
-			FSC_Valor_Inmueble__c: null,
+			FSC_Valor_Inmueble__c: this.normalizeNumberValue(item.FSC_Valor_Inmueble__c, 2),
 			FSC_Precio_de_Venta__c: this.normalizeNumberValue(item.FSC_Precio_de_Venta__c, 2),
 			FSC_Metros_Cuadrados_de_Construccion__c: this.normalizeNumberValue(item.FSC_Metros_Cuadrados_de_Construccion__c, 2),
 			FSC_Ubicacion__c: item.FSC_Ubicacion__c || '',
@@ -3066,6 +3134,184 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 
 	stringifyFacilities(facilities) {
 		return JSON.stringify(Array.isArray(facilities) ? facilities : []);
+	}
+
+	@wire(getCreditPolicyRules)
+	wiredCreditPolicyRules({ data, error }) {
+		if (data) {
+			this.creditPolicyRules = data;
+			this.creditPolicyError = data.length ? '' : 'No hay reglas de crédito configuradas.';
+		} else if (error) {
+			this.creditPolicyRules = [];
+			this.creditPolicyError = 'No se pudo cargar la política de crédito. Revise los permisos y la configuración.';
+		}
+	}
+
+	get usesCreditPolicy() {
+		return (
+			this.isTipoCreditoHipotecario ||
+			(this.loanRequestType === LOAN_TYPE_CONSUMO &&
+				this.guaranteeRows.some(
+					(row) =>
+						this.isRealEstateGuaranteeClass(row.FSC_Clase_de_Garantia__c) ||
+						this.creditPolicyRules.some((rule) => rule.FSC_Proposito__c === row.FSC_Proposito_Garantia_Hipotecario__c)
+				))
+		);
+	}
+
+	get creditPolicyContext() {
+		const source = this.omniJsonData || {};
+		const debtor = this.getApplicantByRole('deudor');
+		const candidates = [
+			source.ContextId,
+			source.AccountId,
+			source.DatosSolicitante?.AccountId,
+			source.StepDatosSolicitante?.AccountId,
+			debtor?.AccountId,
+		];
+		const accountId = candidates.find((value) => String(value || '').startsWith('001')) || '';
+		return {
+			loanType: this.loanRequestType,
+			accountId,
+			applicants: {
+				LoanApplicant: this.extractLoanApplicants(source).map((applicant) => ({
+					FSC_TipoSolicitante__c: applicant.FSC_TipoSolicitante__c,
+					FSC_Nacionalidad__c: applicant.FSC_Nacionalidad__c,
+				})),
+			},
+			facility: {
+				FSC_Monto_Solicitado__c: this.montoSolicitado,
+				FSC_Plazo_meses__c: this.plazoMeses,
+				FSC_Moneda__c: this.monedaFacilidad || MONEDA_PESOS,
+				FSC_Garantias__r: this.serializeGuarantees(),
+			},
+		};
+	}
+
+	get currentCreditPolicyResult() {
+		return this.creditPolicyValidatedKey === JSON.stringify(this.creditPolicyContext) ? this.creditPolicyResult : undefined;
+	}
+
+	get creditPolicyValidationMessage() {
+		if (!this.usesCreditPolicy) return '';
+		if (this.creditPolicyError) return this.creditPolicyError;
+		const result = this.currentCreditPolicyResult;
+		return result
+			? result.valid
+				? ''
+				: result.message || 'Revise los límites del crédito.'
+			: 'Espere a que se validen los límites del crédito.';
+	}
+
+	get creditPolicyDisplayMessage() {
+		return this.usesCreditPolicy ? this.creditPolicyError || this.currentCreditPolicyResult?.message || '' : '';
+	}
+
+	get creditPolicyAmountHelp() {
+		const result = this.currentCreditPolicyResult;
+		return result?.minAmount != null ? `Monto permitido: ${result.minAmount} a ${result.maxAmount} ${result.currencyCode}.` : '';
+	}
+
+	get filteredPropositoGarantiaOptions() {
+		if (![LOAN_TYPE_HIPOTECARIO, LOAN_TYPE_CONSUMO].includes(this.loanRequestType)) return this.propositoGarantiaOptions;
+		const product = this.isTipoCreditoHipotecario ? 'HIPOTECARIO' : 'CONSUMO_GARANTIA_INMOBILIARIA';
+		const currency = this.monedaFacilidad === MONEDA_DOLARES ? 'USD' : 'DOP';
+		const profile = this.currentCreditPolicyResult?.profile;
+		return this.propositoGarantiaOptions.filter((option) =>
+			this.creditPolicyRules.some(
+				(rule) =>
+					rule.FSC_Producto__c === product &&
+					rule.FSC_Proposito__c === option.value &&
+					(rule.FSC_Moneda__c === currency || rule.FSC_Moneda__c === 'TODAS') &&
+					(!profile || rule.FSC_Perfil__c === profile)
+			)
+		);
+	}
+
+	get draftCreditPolicyRule() {
+		const product = this.isTipoCreditoHipotecario ? 'HIPOTECARIO' : 'CONSUMO_GARANTIA_INMOBILIARIA';
+		return this.creditPolicyRules.find(
+			(rule) => rule.FSC_Producto__c === product && rule.FSC_Proposito__c === this.guaranteeDraft.FSC_Proposito_Garantia_Hipotecario__c
+		);
+	}
+
+	get requiresImprovementsValue() {
+		return this.draftCreditPolicyRule?.FSC_BaseCalculo__c === 'MEJORAS';
+	}
+
+	get requiresPropertyValue() {
+		return !!this.draftCreditPolicyRule && !this.requiresImprovementsValue;
+	}
+
+	get requiresFirstMortgageBalance() {
+		return this.draftCreditPolicyRule?.FSC_BaseCalculo__c === 'INMUEBLE_CON_PRIMER_RANGO';
+	}
+
+	get requiresSalePrice() {
+		return this.draftCreditPolicyRule?.FSC_BaseCalculo__c === 'MENOR_INMUEBLE_VENTA';
+	}
+
+	renderedCallback() {
+		this.queueCreditPolicyValidation();
+		this.updateCreditPolicyAmountValidity();
+		this.updatePlazoMesesValidity();
+	}
+
+	disconnectedCallback() {
+		this.creditPolicyDisconnected = true;
+		clearTimeout(this.creditPolicyTimer);
+	}
+
+	queueCreditPolicyValidation(immediate = false) {
+		if (!this.usesCreditPolicy || this.creditPolicyDisconnected) return;
+		const contextJson = JSON.stringify(this.creditPolicyContext);
+		if (contextJson === this.creditPolicyRequestKey && (!immediate || this.creditPolicyTimer === undefined)) return;
+		this.creditPolicyRequestKey = contextJson;
+		clearTimeout(this.creditPolicyTimer);
+		this.creditPolicyTimer = undefined;
+		this.updateCreditPolicyAmountValidity(true);
+		this.updatePlazoMesesValidity(true);
+		const validate = () => {
+			this.creditPolicyTimer = undefined;
+			if (!this.isCurrentCreditPolicyRequest(contextJson)) return;
+			evaluateCreditPolicy({ contextJson })
+				.then((result) => {
+					if (!this.isCurrentCreditPolicyRequest(contextJson)) return;
+					this.applyCreditPolicyResult(result, contextJson);
+				})
+				.catch(() => {
+					if (!this.isCurrentCreditPolicyRequest(contextJson)) return;
+					this.applyCreditPolicyResult(
+						{ valid: false, message: 'No se pudieron validar los límites. Revise los datos y los permisos.' },
+						contextJson
+					);
+				});
+		};
+		if (immediate) validate();
+		else this.creditPolicyTimer = setTimeout(validate, 1000);
+	}
+
+	isCurrentCreditPolicyRequest(contextJson) {
+		return (
+			!this.creditPolicyDisconnected &&
+			this.usesCreditPolicy &&
+			this.creditPolicyRequestKey === contextJson &&
+			JSON.stringify(this.creditPolicyContext) === contextJson
+		);
+	}
+
+	applyCreditPolicyResult(result, contextJson) {
+		this.creditPolicyResult = result;
+		this.creditPolicyValidatedKey = contextJson;
+		this.updateCreditPolicyAmountValidity(true);
+		this.updatePlazoMesesValidity(true);
+		this.omniValidate?.(false);
+	}
+
+	updateCreditPolicyAmountValidity(reportErrors = false) {
+		const input = this.template.querySelector('lightning-input[name="montoSolicitado"]');
+		input?.setCustomValidity(this.usesCreditPolicy ? this.currentCreditPolicyResult?.amountMessage || '' : '');
+		if (reportErrors) input?.reportValidity();
 	}
 
 	showToast(title, message, variant) {

@@ -6,14 +6,32 @@ public with sharing class FSC_RLATriggerHandler {
 	private static final Id PYME_RECORD_TYPE_ID = Schema.SObjectType.ResidentialLoanApplication.getRecordTypeInfosByDeveloperName()
 		.get('FSC_Solicitud_Credito_PYME')
 		.getRecordTypeId();
+	private static final Id HIPOTECARIO_RECORD_TYPE_ID = Schema.SObjectType.ResidentialLoanApplication.getRecordTypeInfosByDeveloperName()
+		.get('FSC_Solicitud_Credito_Hipotecario')
+		.getRecordTypeId();
+	private static final String MONEDA_PESOS = '1';
 
 	public static void beforeInsert(List<ResidentialLoanApplication> newRLA) {
+		assignDefaultMortgageCurrency(newRLA);
+		FSC_CreditPolicyGuard.validateApplications(newRLA, null);
 		FSC_CapturaOperacionesService.asignarResponsables(newRLA);
 		validateUniquePagareFields(newRLA, null);
 	}
 
+	// La moneda en dólares llega desde fsc_loanFacilityManager (facilidad 453); sin ella el hipotecario queda en pesos.
+	@TestVisible
+	private static void assignDefaultMortgageCurrency(List<ResidentialLoanApplication> newRLA) {
+		for (ResidentialLoanApplication rla : newRLA) {
+			if (rla.RecordTypeId == HIPOTECARIO_RECORD_TYPE_ID && String.isBlank(rla.FSC_Moneda__c)) {
+				rla.FSC_Moneda__c = MONEDA_PESOS;
+			}
+		}
+	}
+
 	public static void beforeUpdate(List<ResidentialLoanApplication> newRLA, Map<Id, ResidentialLoanApplication> oldRLA) {
 		stampWonClosureDate(newRLA, oldRLA);
+		FSC_CreditPolicyGuard.validateApplications(newRLA, oldRLA);
+		FSC_FormalizacionGarantiasService.encaminar(newRLA, oldRLA);
 		FSC_CapturaOperacionesService.asignarResponsables(newRLA);
 		FSC_DocumentacionContratosService.encaminarEntradas(newRLA, oldRLA);
 		FSC_CreditoAprobadoLockService.validarCamposCriticosSolicitud(newRLA, oldRLA);
@@ -43,6 +61,8 @@ public with sharing class FSC_RLATriggerHandler {
 
 	public static void afterUpdate(List<ResidentialLoanApplication> newRLA, Map<Id, ResidentialLoanApplication> oldRLA) {
 		FSC_CapturaOperacionesService.compartirSolicitudes(newRLA, oldRLA);
+		FSC_FormalizacionGarantiasService.compartir(newRLA, oldRLA);
+		FSC_FormalizacionNotificaciones.programar(newRLA, oldRLA);
 		FSC_ServicioDocumentosAnalisisCredito.programarSegunCambioAnalisis(newRLA, oldRLA);
 
 		Set<Id> contractGenerationIds = new Set<Id>();
@@ -238,6 +258,7 @@ public with sharing class FSC_RLATriggerHandler {
 			SELECT Id, FSC_ActoNumeroPagare__c
 			FROM ResidentialLoanApplication
 			WHERE FSC_ActoNumeroPagare__c IN :values AND Id NOT IN :currentRecordIds
+			WITH USER_MODE
 		]) {
 			String value = normalizeUniqueValue(existingRecord.get(ACTO_NUMERO_PAGARE_FIELD));
 			if (!String.isBlank(value) && !existingByValue.containsKey(value)) {
@@ -254,7 +275,7 @@ public with sharing class FSC_RLATriggerHandler {
 			return existingByValue;
 		}
 
-		Schema.DescribeFieldResult folioFieldDescribe = ResidentialLoanApplication.SObjectType.getDescribe()
+		Schema.DescribeFieldResult folioFieldDescribe = ResidentialLoanApplication.SObjectType.getDescribe(SObjectDescribeOptions.DEFERRED)
 			.fields.getMap()
 			.get(NUMERO_FOLIO_PAGARE_FIELD)
 			.getDescribe();
@@ -271,8 +292,8 @@ public with sharing class FSC_RLATriggerHandler {
 			for (String value : values) {
 				try {
 					decimalValues.add(Decimal.valueOf(value));
-				} catch (Exception e) {
-					// Si no se puede convertir, igual se ignora en la consulta y se mantiene la validacion local.
+				} catch (TypeException invalidNumber) {
+					continue;
 				}
 			}
 

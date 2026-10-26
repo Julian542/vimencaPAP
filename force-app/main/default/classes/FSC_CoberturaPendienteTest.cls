@@ -406,6 +406,8 @@ private class FSC_CoberturaPendienteTest {
 
 	@IsTest
 	static void datosContratoYQueueableCubreGarantiasConsumo() {
+		// Estos datos no prueban la política de crédito; sus límites se prueban en FSC_CreditPolicyGuardTest.
+		FSC_CreditPolicyGuard.bypassInTests = true;
 		ResidentialLoanApplication mortgage = createConsumption('consumo-hipoteca');
 		update new ResidentialLoanApplication(Id = mortgage.Id, FSC_Tipo_de_Garantia__c = 'Garantía Real', FSC_Excepcion_Contrato_Notarial__c = true);
 		insert new FSC_Garantia__c(
@@ -663,6 +665,39 @@ private class FSC_CoberturaPendienteTest {
 		if (campos.containsKey('USE_Oficina__c')) {
 			asegurarOficinaEnDatosMaestros((String) usuario.get('USE_Oficina__c'));
 		}
+	}
+
+	@IsTest
+	static void gastosGarantiaHipotecariaPermitenAmbosValores() {
+		ResidentialLoanApplication mortgage = new ResidentialLoanApplication(
+			RecordType = new RecordType(DeveloperName = 'FSC_Solicitud_Credito_Hipotecario'),
+			FSC_GastosGarantiasHip2__c = 2000,
+			FSC_GastosGarantiasHip3__c = 3000
+		);
+
+		// Ambos gastos informados, o uno vacío (N/A), ya no son excluyentes.
+		FSC_DatosContratoController.validateMortgageExpenses(mortgage, 1000, 2000, 3000);
+		FSC_DatosContratoController.validateMortgageExpenses(mortgage, null, null, 3000);
+		FSC_DatosContratoController.validateMortgageExpenses(mortgage, null, 2000, null);
+
+		try {
+			FSC_DatosContratoController.validateMortgageExpenses(mortgage, null, -1, 3000);
+			System.assert(false, 'Un gasto negativo debía generar un error controlado.');
+		} catch (AuraHandledException expected) {
+			System.assertNotEquals(null, expected);
+		}
+
+		FSC_DatosContratoController.ContextoGeneracion context = new FSC_DatosContratoController.ContextoGeneracion();
+		FSC_DatosContratoController.buildMortgageExpenseSection(context, mortgage);
+		Map<String, FSC_DatosContratoController.CampoEntrada> fieldsByKey = new Map<String, FSC_DatosContratoController.CampoEntrada>();
+		for (FSC_DatosContratoController.CampoEntrada campo : context.seccionesContrato[0].campos) {
+			fieldsByKey.put(campo.clave, campo);
+		}
+		System.assertEquals('2000', fieldsByKey.get('gastosGarantiaHip2').valor);
+		System.assertEquals('3000', fieldsByKey.get('gastosGarantiaHip3').valor);
+		System.assertEquals('Deje vacío si no aplica (N/A)', fieldsByKey.get('gastosGarantiaHip2').ayuda);
+		System.assertEquals('Deje vacío si no aplica (N/A)', fieldsByKey.get('gastosGarantiaHip3').ayuda);
+		System.assertEquals(null, fieldsByKey.get('gastosLegalesContratos').ayuda);
 	}
 
 	// El flow "Información usuario" busca la oficina del usuario en Datos_Maestros__c y falla si no existe.

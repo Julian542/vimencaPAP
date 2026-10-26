@@ -1,18 +1,21 @@
 @IsTest
 private class FSC_RLATriggerHandlerTest {
-    @TestSetup
-    static void asignarPermisosAdministrador() {
-        System.runAs(new User(Id = UserInfo.getUserId())) {
-            PermissionSet permiso = [SELECT Id FROM PermissionSet WHERE Name = 'FSC_PS_Administrador' LIMIT 1];
-            // El usuario que ejecuta los tests puede tener ya el permission set asignado.
-            if ([SELECT COUNT() FROM PermissionSetAssignment WHERE AssigneeId = :UserInfo.getUserId() AND PermissionSetId = :permiso.Id] == 0) {
-                insert new PermissionSetAssignment(AssigneeId = UserInfo.getUserId(), PermissionSetId = permiso.Id);
-            }
-        }
-    }
+	@TestSetup
+	static void asignarPermisosAdministrador() {
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			PermissionSet permiso = [SELECT Id FROM PermissionSet WHERE Name = 'FSC_PS_Administrador' LIMIT 1];
+			// El usuario que ejecuta los tests puede tener ya el permission set asignado.
+			if ([SELECT COUNT() FROM PermissionSetAssignment WHERE AssigneeId = :UserInfo.getUserId() AND PermissionSetId = :permiso.Id] == 0) {
+				insert new PermissionSetAssignment(AssigneeId = UserInfo.getUserId(), PermissionSetId = permiso.Id);
+			}
+		}
+	}
 
 	private static final String RT_CREDITO_CONSUMO = 'FSC_Solicitud_Credito_Consumo';
 	private static final String RT_CREDITO_PYME = 'FSC_Solicitud_Credito_PYME';
+	private static final String RT_CREDITO_HIPOTECARIO = 'FSC_Solicitud_Credito_Hipotecario';
+	private static final String MONEDA_PESOS = '1';
+	private static final String MONEDA_DOLARES = '2';
 	private static final String STATUS_BORRADOR = 'Borrador';
 	private static final String STATUS_EN_PROCESO = 'En proceso';
 	private static final String STATUS_CERRADA_GANADA = 'Cerrada Ganada';
@@ -220,6 +223,54 @@ private class FSC_RLATriggerHandlerTest {
 	}
 
 	@IsTest
+	static void rejectsDuplicatePagareInTheSameBatch() {
+		ResidentialLoanApplication first = new ResidentialLoanApplication(Name = 'Policy duplicate A', FSC_ActoNumeroPagare__c = 'POL-DUP');
+		ResidentialLoanApplication second = new ResidentialLoanApplication(Name = 'Policy duplicate B', FSC_ActoNumeroPagare__c = 'POL-DUP');
+		Test.startTest();
+		FSC_RLATriggerHandler.beforeInsert(new List<ResidentialLoanApplication>{ first, second });
+		Test.stopTest();
+		Assert.areEqual(1, first.getErrors().size(), 'El primer registro debe rechazar el acto duplicado.');
+		Assert.areEqual(1, second.getErrors().size(), 'El segundo registro debe rechazar el acto duplicado.');
+		Assert.isTrue(first.getErrors()[0].getMessage().contains('Acto'), 'Debe identificar el acto de pagaré duplicado.');
+	}
+
+	@IsTest
+	static void rejectsFolioAlreadyStoredInAnotherApplication() {
+		ResidentialLoanApplication original = createRla(STATUS_BORRADOR, SUBESTADO_REGENERACION);
+		original.FSC_ActoNumeroPagare__c = 'POL8585';
+		original.FSC_NumeroFolioPagare__c = 8585;
+		update original;
+		ResidentialLoanApplication duplicate = new ResidentialLoanApplication(Name = 'Policy stored duplicate', FSC_NumeroFolioPagare__c = 8585);
+		Test.startTest();
+		FSC_RLATriggerHandler.beforeInsert(new List<ResidentialLoanApplication>{ duplicate });
+		Test.stopTest();
+		Assert.areEqual(1, duplicate.getErrors().size(), 'Debe detectar el folio ya usado por otra solicitud.');
+		Assert.isTrue(duplicate.getErrors()[0].getMessage().contains('folio'), 'Debe identificar el folio de pagaré duplicado.');
+	}
+
+	@IsTest
+	static void rejectsPagareAlreadyStoredInAnotherApplication() {
+		ResidentialLoanApplication original = createRla(STATUS_BORRADOR, SUBESTADO_REGENERACION);
+		original.FSC_ActoNumeroPagare__c = 'POL8587';
+		update original;
+		ResidentialLoanApplication duplicate = new ResidentialLoanApplication(Name = 'Policy stored pagare', FSC_ActoNumeroPagare__c = 'POL8587');
+		Test.startTest();
+		FSC_RLATriggerHandler.beforeInsert(new List<ResidentialLoanApplication>{ duplicate });
+		Test.stopTest();
+		Assert.areEqual(1, duplicate.getErrors().size(), 'Debe detectar el acto ya usado por otra solicitud.');
+		Assert.isTrue(duplicate.getErrors()[0].getMessage().contains('Acto'), 'Debe identificar el acto de pagaré duplicado.');
+	}
+
+	@IsTest
+	static void acceptsNewFolioWithoutPagareNumber() {
+		ResidentialLoanApplication candidate = new ResidentialLoanApplication(Name = 'Policy independent folio', FSC_NumeroFolioPagare__c = 8586);
+		Test.startTest();
+		FSC_RLATriggerHandler.beforeInsert(new List<ResidentialLoanApplication>{ candidate });
+		Test.stopTest();
+		Assert.isFalse(candidate.hasErrors(), 'Un folio disponible no requiere informar también el acto de pagaré.');
+	}
+
+	@IsTest
 	static void stampWonClosureDatePreservesDateAndIgnoresOtherTransitions() {
 		Id wonRecordId = createSyntheticId(2);
 		Id openRecordId = createSyntheticId(3);
@@ -260,6 +311,60 @@ private class FSC_RLATriggerHandlerTest {
 		for (ResidentialLoanApplication record : newRecords) {
 			Assert.isNotNull(record.FSC_FechaCierreGanada__c, 'Cada solicitud del lote debe recibir la fecha de cierre.');
 		}
+	}
+
+	@IsTest
+	static void assignDefaultMortgageCurrencyOnlyFillsBlankMortgages() {
+		Id hipotecarioRecordTypeId = getResidentialLoanApplicationRecordTypeId(RT_CREDITO_HIPOTECARIO);
+		ResidentialLoanApplication hipotecarioSinMoneda = new ResidentialLoanApplication(RecordTypeId = hipotecarioRecordTypeId);
+		ResidentialLoanApplication hipotecarioDolares = new ResidentialLoanApplication(
+			RecordTypeId = hipotecarioRecordTypeId,
+			FSC_Moneda__c = MONEDA_DOLARES
+		);
+		ResidentialLoanApplication consumoSinMoneda = new ResidentialLoanApplication(
+			RecordTypeId = getResidentialLoanApplicationRecordTypeId(RT_CREDITO_CONSUMO)
+		);
+
+		Test.startTest();
+		FSC_RLATriggerHandler.assignDefaultMortgageCurrency(
+			new List<ResidentialLoanApplication>{ hipotecarioSinMoneda, hipotecarioDolares, consumoSinMoneda }
+		);
+		Test.stopTest();
+
+		Assert.areEqual(MONEDA_PESOS, hipotecarioSinMoneda.FSC_Moneda__c, 'Un hipotecario sin moneda debe quedar en pesos.');
+		Assert.areEqual(MONEDA_DOLARES, hipotecarioDolares.FSC_Moneda__c, 'La moneda en dólares enviada por la facilidad debe respetarse.');
+		Assert.isNull(consumoSinMoneda.FSC_Moneda__c, 'Otros tipos de solicitud no deben recibir moneda por defecto.');
+	}
+
+	@IsTest
+	static void beforeInsertAssignsCurrencyToMortgageApplications() {
+		Account account = createAccount();
+		Id hipotecarioRecordTypeId = getResidentialLoanApplicationRecordTypeId(RT_CREDITO_HIPOTECARIO);
+		List<ResidentialLoanApplication> solicitudes = new List<ResidentialLoanApplication>{
+			new ResidentialLoanApplication(
+				Name = 'Hipotecario pesos',
+				AccountId = account.Id,
+				Status = STATUS_BORRADOR,
+				RecordTypeId = hipotecarioRecordTypeId
+			),
+			new ResidentialLoanApplication(
+				Name = 'Hipotecario dolares',
+				AccountId = account.Id,
+				Status = STATUS_BORRADOR,
+				RecordTypeId = hipotecarioRecordTypeId,
+				FSC_Moneda__c = MONEDA_DOLARES
+			)
+		};
+
+		Test.startTest();
+		insert solicitudes;
+		Test.stopTest();
+
+		Map<Id, ResidentialLoanApplication> guardadas = new Map<Id, ResidentialLoanApplication>(
+			[SELECT Id, FSC_Moneda__c FROM ResidentialLoanApplication WHERE Id IN :solicitudes]
+		);
+		Assert.areEqual(MONEDA_PESOS, guardadas.get(solicitudes[0].Id).FSC_Moneda__c, 'El hipotecario sin moneda debe guardarse en pesos.');
+		Assert.areEqual(MONEDA_DOLARES, guardadas.get(solicitudes[1].Id).FSC_Moneda__c, 'El hipotecario en dólares debe conservar su moneda.');
 	}
 
 	private static Id createSyntheticId(Integer index) {
@@ -429,17 +534,24 @@ private class FSC_RLATriggerHandlerTest {
 		newDesembolso.FSC_Subestado__c = 'Desembolso';
 
 		Test.startTest();
-		try {
-			FSC_RLATriggerHandler.afterUpdate(
-				new List<ResidentialLoanApplication>{ newContrato, newDesembolso },
-				new Map<Id, ResidentialLoanApplication>{ rlaContrato.Id => oldContrato, rlaDesembolso.Id => oldDesembolso }
-			);
-		} catch (Exception e) {
-			// En tu org puede disparar lógica adicional en desembolso.
-		}
+		Integer queuedJobs = Limits.getQueueableJobs();
+		FSC_RLATriggerHandler.afterUpdate(
+			new List<ResidentialLoanApplication>{ newContrato, newDesembolso },
+			new Map<Id, ResidentialLoanApplication>{ rlaContrato.Id => oldContrato, rlaDesembolso.Id => oldDesembolso }
+		);
+		Assert.areEqual(
+			1,
+			Limits.getQueueableJobs() - queuedJobs,
+			'Debe encolar una generación para la solicitud que cambió a generación de contrato.'
+		);
 		Test.stopTest();
 
-		System.assert(true, 'Se cubrieron ambas ramas del handler.');
+		ResidentialLoanApplication refreshed = [SELECT FSC_Subestado__c FROM ResidentialLoanApplication WHERE Id = :rlaContrato.Id WITH USER_MODE];
+		Assert.areEqual(
+			'Pendiente planilla de desembolso',
+			refreshed.FSC_Subestado__c,
+			'El enrutamiento en memoria no debe cambiar una etapa que no se persistió.'
+		);
 	}
 
 	@IsTest
@@ -467,6 +579,12 @@ private class FSC_RLATriggerHandlerTest {
 			LIMIT 1
 		];
 
+		// El motor de consumo se enciende o apaga por org en ConfigLoanDecisionAPI__mdt.URL.
+		if (!FSC_BuroConfigService.isMotorEncendido('FSC_Solicitud_Credito_Consumo')) {
+			System.assertEquals(FSC_BuroConfigService.RESULTADO_REFERIDO, refreshed.FSC_Resultado_Buro__c);
+			System.assertEquals(FSC_BuroConfigService.MENSAJE_MOTOR_APAGADO, refreshed.FSC_Mensajes_Buro__c);
+			return;
+		}
 		System.assertEquals('Aprobado', refreshed.FSC_Resultado_Buro__c);
 		System.assertEquals(Decimal.valueOf('701'), refreshed.FSC_XCore_Buro__c);
 		System.assertEquals('En proceso', refreshed.Status);

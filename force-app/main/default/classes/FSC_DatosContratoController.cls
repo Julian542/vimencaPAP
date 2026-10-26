@@ -59,6 +59,8 @@ public without sharing class FSC_DatosContratoController {
 		public String mostrarParaConyuge { get; set; }
 		@AuraEnabled
 		public List<OpcionEntrada> opciones { get; set; }
+		@AuraEnabled
+		public String ayuda { get; set; }
 
 		public CampoEntrada(String key, String label, String value, String type) {
 			clave = key;
@@ -438,20 +440,30 @@ public without sharing class FSC_DatosContratoController {
 					consumption.tipoGarantia == FSC_ConsumoDocumentoResolver.GARANTIA_CD &&
 					consumption.garantiaId != null
 				) {
-					updatePignoracionGuarantee(consumption.garantiaId, values);
+					FSC_CreditoAprobadoLockService.iniciarDatosContrato();
+					try {
+						updatePignoracionGuarantee(consumption.garantiaId, values);
+					} finally {
+						FSC_CreditoAprobadoLockService.finalizarDatosContrato();
+					}
 				}
 			}
 			validateSavedContext(residentialLoanApplicationId, generarSoloActoGarantia == true);
 			return;
 		}
 
-		if (resolution.loanApplicationAssetId != null) {
-			updateLoanApplicationAsset(resolution.loanApplicationAssetId, resolution.templateCode, values);
-		} else if (resolution.garantiaId != null) {
-			updateGuarantee(resolution.garantiaId, resolution.templateCode, values);
-		}
-		if (isMortgageTemplate(resolution.templateCode) || isVehicleTemplate(resolution.templateCode)) {
-			upsertInsurance(residentialLoanApplicationId, resolution.templateCode, values);
+		FSC_CreditoAprobadoLockService.iniciarDatosContrato();
+		try {
+			if (resolution.loanApplicationAssetId != null) {
+				updateLoanApplicationAsset(resolution.loanApplicationAssetId, resolution.templateCode, values);
+			} else if (resolution.garantiaId != null) {
+				updateGuarantee(resolution.garantiaId, resolution.templateCode, values);
+			}
+			if (isMortgageTemplate(resolution.templateCode) || isVehicleTemplate(resolution.templateCode)) {
+				upsertInsurance(residentialLoanApplicationId, resolution.templateCode, values);
+			}
+		} finally {
+			FSC_CreditoAprobadoLockService.finalizarDatosContrato();
 		}
 
 		validateSavedContext(residentialLoanApplicationId, generarSoloActoGarantia == true);
@@ -1270,6 +1282,7 @@ public without sharing class FSC_DatosContratoController {
 		}
 	}
 
+	@TestVisible
 	private static void buildMortgageExpenseSection(ContextoGeneracion context, ResidentialLoanApplication rla) {
 		SeccionEntrada expenses = new SeccionEntrada('Gastos del contrato hipotecario');
 		CampoEntrada legalExpenses = field('gastosLegalesContratos', 'Gastos legales', rla.FSC_GastosLegalesContratos__c, 'number');
@@ -1281,9 +1294,12 @@ public without sharing class FSC_DatosContratoController {
 			expense.minimo = 0;
 			expenses.campos.add(expense);
 		}
+		mortgageExpenses2.ayuda = 'Deje vacío si no aplica (N/A)';
+		mortgageExpenses3.ayuda = 'Deje vacío si no aplica (N/A)';
 		context.seccionesContrato.add(expenses);
 	}
 
+	@TestVisible
 	private static void validateMortgageExpenses(
 		ResidentialLoanApplication rla,
 		Decimal legalExpenses,
@@ -1294,10 +1310,7 @@ public without sharing class FSC_DatosContratoController {
 		if (hasExpenses && rla.RecordType.DeveloperName != 'FSC_Solicitud_Credito_Hipotecario') {
 			throw new AuraHandledException('Los gastos de contrato solo aplican a créditos hipotecarios.');
 		}
-		if (mortgageExpenses2 != null && mortgageExpenses3 != null) {
-			// Los porcentajes de garantía son excluyentes.
-			throw new AuraHandledException('Debe indicar únicamente uno entre gastos de garantía hipotecaria 2% y 3%.');
-		}
+		// Los gastos 2% y 3% pueden informarse juntos; el que quede vacío equivale a N/A.
 		for (Decimal expense : new List<Decimal>{ legalExpenses, mortgageExpenses2, mortgageExpenses3 }) {
 			if (expense != null && (expense < 0 || expense.scale() > 2)) {
 				throw new AuraHandledException('Los gastos deben ser positivos y admitir como máximo dos decimales.');

@@ -38,6 +38,8 @@ private class FSC_LoanDecisionAPITest {
 	}
 
 	private static ResidentialLoanApplication createDecisionRla(Id accountId, String subestado, String recordTypeDeveloperName, Id opportunityId) {
+		// Estos datos no prueban la política de crédito; sus límites se prueban en FSC_CreditPolicyGuardTest.
+		FSC_CreditPolicyGuard.bypassInTests = true;
 		ResidentialLoanApplication rla = new ResidentialLoanApplication(
 			Name = 'RLA API Test ' + System.now().getTime(),
 			AccountId = accountId,
@@ -675,6 +677,12 @@ private class FSC_LoanDecisionAPITest {
 			WHERE Id = :rla.Id
 		];
 
+		// El motor hipotecario se enciende o apaga por org en ConfigLoanDecisionAPI__mdt.URLHipotecario.
+		if (!FSC_BuroConfigService.isMotorEncendido('FSC_Solicitud_Credito_Hipotecario')) {
+			System.assertEquals(FSC_BuroConfigService.RESULTADO_REFERIDO, refreshed.FSC_Resultado_Buro__c);
+			System.assertEquals(FSC_BuroConfigService.SUBESTADO_REFERIDO, refreshed.FSC_Subestado__c);
+			return;
+		}
 		System.assertEquals('Aprobado', refreshed.FSC_Resultado_Buro__c);
 		System.assertEquals(Decimal.valueOf('856'), refreshed.FSC_XCore_Buro__c);
 		System.assert(

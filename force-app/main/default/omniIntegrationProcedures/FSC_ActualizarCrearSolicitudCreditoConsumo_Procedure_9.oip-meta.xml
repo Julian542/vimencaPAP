@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OmniIntegrationProcedure xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customJavaScript>{&quot;elementName&quot;:&quot;IPActualizarCrearSolicitudCreditoConsumo2&quot;,&quot;omniData&quot;:{&quot;StepDatosGeneralesSolicitud&quot;:{&quot;FSC_EsConsolidacionDeudas__c&quot;:&quot;No&quot;,&quot;FSC_EsRefinanciamiento__c&quot;:&quot;No&quot;,&quot;FSC_Facilidades_De_Credito__c&quot;:[{&quot;FSC_Aumento_Solicitado__c&quot;:&quot;120&quot;,&quot;FSC_Compromiso_Mensual__c&quot;:60.75,&quot;FSC_Descripcion_Proposito_Facilidad__c&quot;:&quot;as&quot;,&quot;FSC_EstadoDelVehiculo__c&quot;:null,&quot;FSC_Facilidad__c&quot;:&quot;CONSUMO - 401&quot;,&quot;FSC_Forma_De_Pago__c&quot;:&quot;Cuotas mensuales, iguales y consecutivas, contentivas de capital e intereses cada una&quot;,&quot;FSC_Garantias__r&quot;:[],&quot;FSC_Lineas_Financieras_Empresas__c&quot;:&quot;&quot;,&quot;FSC_Monto_De_La_Cuota__c&quot;:60.75,&quot;FSC_Monto_Solicitado__c&quot;:&quot;120&quot;,&quot;FSC_Plazo_meses__c&quot;:2,&quot;FSC_Prestamo_Con_Garantia__c&quot;:false,&quot;FSC_Prestamo_Convenio__c&quot;:false,&quot;FSC_Requiere_Contrato_Pagare_Notarial__c&quot;:false,&quot;FSC_Seguros__r&quot;:[{&quot;FSC_Fuente_de_Ingresos__c&quot;:&quot;&quot;,&quot;FSC_Monto_Prima_Desempleo__c&quot;:null,&quot;FSC_Monto_de_la_Prima__c&quot;:0.0708,&quot;FSC_Seguro_Desempleo__c&quot;:false,&quot;FSC_Tipo_de_Seguro__c&quot;:&quot;Seguro_de_Vida_Unit&quot;,&quot;Name&quot;:&quot;Seguro_de_Vida_Unit&quot;}],&quot;FSC_Tasa_Fija__c&quot;:false,&quot;FSC_Tasa_Interes__c&quot;:10,&quot;FSC_Tasa__c&quot;:10,&quot;FSC_Tiempo_Tasa_Fija__c&quot;:null,&quot;FSC_Tipo_Facilidad__c&quot;:&quot;CONTROL DE PRESTAMOS - BPR&quot;,&quot;FSC_Tipo_Modalidad__c&quot;:&quot;&quot;,&quot;FSC_Tipo_de_Facilidad__c&quot;:&quot;CONTROL DE PRESTAMOS - BPR&quot;,&quot;Name&quot;:&quot;CONSUMO - 401 facilidad-1&quot;,&quot;__key&quot;:&quot;facilidad-1&quot;}],&quot;FSC_SolicitudMedianteReferidor__c&quot;:&quot;No&quot;,&quot;FSC_TipoDeudaCancelar__c&quot;:null},&quot;StepDatosSolicitante&quot;:{&quot;AccountId&quot;:&quot;1&quot;,&quot;FSC_Nombre_Cliente__c&quot;:&quot;Joel Valenti&quot;,&quot;FSC_Subestado__c&quot;:&quot;En Motor Buró&quot;,&quot;FormulaTitle&quot;:&quot;Crédito Consumo - Joel Valenti - 42010242&quot;,&quot;LoanApplicant&quot;:[{&quot;ContactPointAddress&quot;:[{&quot;City&quot;:&quot;ccccc&quot;,&quot;Country&quot;:&quot;eeee&quot;,&quot;Name&quot;:&quot;asdasda&quot;,&quot;PostalCode&quot;:&quot;bbbb&quot;,&quot;State&quot;:&quot;dddd&quot;,&quot;Street&quot;:&quot;aaaaa&quot;},{&quot;City&quot;:&quot;asdasdas&quot;,&quot;Country&quot;:&quot;argesds&quot;,&quot;Name&quot;:&quot;asdasd&quot;,&quot;PostalCode&quot;:&quot;5511&quot;,&quot;State&quot;:&quot;asdasd&quot;,&quot;Street&quot;:&quot;123123&quot;},{&quot;City&quot;:&quot;asdasdas&quot;,&quot;Country&quot;:&quot;argesds&quot;,&quot;Name&quot;:&quot;asdasd&quot;,&quot;PostalCode&quot;:&quot;5511&quot;,&quot;State&quot;:&quot;asdasd&quot;,&quot;Street&quot;:&quot;123123&quot;},{&quot;City&quot;:&quot;asd&quot;,&quot;Country&quot;:&quot;asd&quot;,&quot;Name&quot;:&quot;asd&quot;,&quot;PostalCode&quot;:&quot;asd&quot;,&quot;State&quot;:&quot;asd&quot;,&quot;Street&quot;:&quot;asd&quot;}],&quot;ContactPointEmail&quot;:[{&quot;EmailAddress&quot;:&quot;testyopmail12sda@yopmail.com&quot;}],&quot;ContactPointPhone&quot;:[{&quot;FSC_TipoContacto__c&quot;:&quot;&quot;,&quot;TelephoneNumber&quot;:&quot;4400243&quot;},{&quot;FSC_TipoContacto__c&quot;:&quot;Personal&quot;,&quot;TelephoneNumber&quot;:&quot;1122334455&quot;},{&quot;FSC_TipoContacto__c&quot;:&quot;Personal&quot;,&quot;TelephoneNumber&quot;:&quot;1122334455&quot;},{&quot;FSC_TipoContacto__c&quot;:&quot;Personal&quot;,&quot;TelephoneNumber&quot;:&quot;1122334455&quot;}],&quot;Contact_Point_Addresses__r&quot;:[{&quot;City&quot;:&quot;ccccc&quot;,&quot;Country&quot;:&quot;eeee&quot;,&quot;Name&quot;:&quot;asdasda&quot;,&quot;PostalCode&quot;:&quot;bbbb&quot;,&quot;State&quot;:&quot;dddd&quot;,&quot;Street&quot;:&quot;aaaaa&quot;},{&quot;City&quot;:&quot;asdasdas&quot;,&quot;Country&quot;:&quot;argesds&quot;,&quot;Name&quot;:&quot;asdasd&quot;,&quot;PostalCode&quot;:&quot;5511&quot;,&quot;State&quot;:&quot;asdasd&quot;,&quot;Street&quot;:&quot;123123&quot;},{&quot;City&quot;:&quot;asdasdas&quot;,&quot;Country&quot;:&quot;argesds&quot;,&quot;Name&quot;:&quot;asdasd&quot;,&quot;PostalCode&quot;:&quot;5511&quot;,&quot;State&quot;:&quot;asdasd&quot;,&quot;Street&quot;:&quot;123123&quot;},{&quot;City&quot;:&quot;asd&quot;,&quot;Country&quot;:&quot;asd&quot;,&quot;Name&quot;:&quot;asd&quot;,&quot;PostalCode&quot;:&quot;asd&quot;,&quot;State&quot;:&quot;asd&quot;,&quot;Street&quot;:&quot;asd&quot;}],&quot;Contact_Point_Emails__r&quot;:[{&quot;EmailAddress&quot;:&quot;testyopmail12sda@yopmail.com&quot;}],&quot;Contact_Point_Phones__r&quot;:[{&quot;TelephoneNumber&quot;:&quot;4400243&quot;},{&quot;FSC_TipoContacto__c&quot;:&quot;Personal&quot;,&quot;TelephoneNumber&quot;:&quot;1122334455&quot;},{&quot;FSC_TipoContacto__c&quot;:&quot;Personal&quot;,&quot;TelephoneNumber&quot;:&quot;1122334455&quot;},{&quot;FSC_TipoContacto__c&quot;:&quot;Personal&quot;,&quot;TelephoneNumber&quot;:&quot;1122334455&quot;}],&quot;FSC_ClasificacionSIB__c&quot;:&quot;A&quot;,&quot;FSC_DescripcionOtrosIngresos__c&quot;:&quot;&quot;,&quot;FSC_EmpresaAnteriorLaboro__c&quot;:&quot;&quot;,&quot;FSC_EstadoCivil__c&quot;:&quot;SOLTERO/A&quot;,&quot;FSC_Facilidad_Otra_Institucion__c&quot;:[],&quot;FSC_FechaNacimiento__c&quot;:&quot;2026-03-24&quot;,&quot;FSC_FuenteIngreso__c&quot;:&quot;Empleado Publico&quot;,&quot;FSC_IngresosMensuales__c&quot;:&quot;1500000&quot;,&quot;FSC_LugarFondeLabora__c&quot;:&quot;&quot;,&quot;FSC_MontoPrestacionesLaborales__c&quot;:&quot;14&quot;,&quot;FSC_Nacionalidad__c&quot;:&quot;ARGENTINA&quot;,&quot;FSC_Nombre__c&quot;:&quot;Joel&quot;,&quot;FSC_NumIdentificacion__c&quot;:&quot;42010242&quot;,&quot;FSC_NumeroDependientes__c&quot;:2,&quot;FSC_Ocupacion__c&quot;:&quot;ABOGADO&quot;,&quot;FSC_OtrosIngresos__c&quot;:&quot;&quot;,&quot;FSC_PrimerApellido__c&quot;:&quot;Valenti&quot;,&quot;FSC_Referencias__c&quot;:[{&quot;FSC_Direccion__c&quot;:&quot;&quot;,&quot;FSC_Email__c&quot;:&quot;&quot;,&quot;FSC_FirstName__c&quot;:&quot;a&quot;,&quot;FSC_Identificacion__c&quot;:&quot;&quot;,&quot;FSC_LastName__c&quot;:&quot;a&quot;,&quot;FSC_LoanApplicant__c&quot;:&quot;&quot;,&quot;FSC_LugarTrabajo__c&quot;:&quot;&quot;,&quot;FSC_Parentesco__c&quot;:&quot;AMIGO (A)&quot;,&quot;FSC_Telefono__c&quot;:&quot;123&quot;,&quot;FSC_TipoIdentificacion__c&quot;:&quot;&quot;,&quot;Name&quot;:&quot;a a&quot;},{&quot;FSC_Direccion__c&quot;:&quot;&quot;,&quot;FSC_Email__c&quot;:&quot;&quot;,&quot;FSC_FirstName__c&quot;:&quot;b&quot;,&quot;FSC_Identificacion__c&quot;:&quot;&quot;,&quot;FSC_LastName__c&quot;:&quot;b&quot;,&quot;FSC_LoanApplicant__c&quot;:&quot;&quot;,&quot;FSC_LugarTrabajo__c&quot;:&quot;&quot;,&quot;FSC_Parentesco__c&quot;:&quot;AMIGO (A)&quot;,&quot;FSC_Telefono__c&quot;:&quot;321&quot;,&quot;FSC_TipoIdentificacion__c&quot;:&quot;&quot;,&quot;Name&quot;:&quot;b b&quot;}],&quot;FSC_SegundoApellido__c&quot;:&quot;a&quot;,&quot;FSC_TiempoLaborando__c&quot;:&quot;2024-07-16&quot;,&quot;FSC_TiempoVivienda__c&quot;:&quot;2026-03-24&quot;,&quot;FSC_TipoIdentificacion__c&quot;:&quot;Cédula&quot;,&quot;FSC_TipoNegocio__c&quot;:&quot;asd&quot;,&quot;FSC_TipoSolicitante__c&quot;:&quot;Deudor&quot;,&quot;FSC_TipoVivienda__c&quot;:&quot;4&quot;,&quot;FSC_TotalIngresos__c&quot;:&quot;1500000.00&quot;,&quot;Name&quot;:&quot;Joel Valenti a&quot;}],&quot;Status&quot;:&quot;En proceso&quot;},&quot;rlaId&quot;:&quot;&quot;,&quot;validacionListas&quot;:false},&quot;omniScriptId&quot;:&quot;0jNVC0000007Ycr2AE&quot;,&quot;recordTypeName&quot;:&quot;FSC_Solicitud_Credito_Consumo&quot;}</customJavaScript>
+    <description>Dev: FR. HU/BUG: BV-XXX. Description:  Se agrega ajuste en la creacion de los LoanApplicant. Version Cloning: 7</description>
+    <elementTypeComponentMapping>{&quot;ElementTypeToHTMLTemplateList&quot;:[]}</elementTypeComponentMapping>
+    <isActive>true</isActive>
+    <isIntegProcdSignatureAvl>false</isIntegProcdSignatureAvl>
+    <isIntegrationProcedure>true</isIntegrationProcedure>
+    <isManagedUsingStdDesigner>true</isManagedUsingStdDesigner>
+    <isMetadataCacheDisabled>false</isMetadataCacheDisabled>
+    <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+    <isTestProcedure>false</isTestProcedure>
+    <isWebCompEnabled>false</isWebCompEnabled>
+    <language>Procedure</language>
+    <name>FSC_ActualizarCrearSolicitudCreditoConsumo</name>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DMPCrearResidentialLoanApplication</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;failOnStepError&quot; : true,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMPCrearResidentialLoanApplication&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;sendJSONPath&quot; : &quot;DMTDatosParaActualizarCrearSolicitudCreditoConsumo:ResidentialLoanApplication&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;id&quot; : &quot;&quot;,
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCCrearResidentialLoanApplication&quot;,
+  &quot;sendJSONNode&quot; : &quot;ResidentialLoanApplication&quot;
+}</propertySetConfig>
+        <sequenceNumber>3.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DMPGarantias</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;elementValueMap&quot; : { },
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;failOnStepError&quot; : true,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMPGarantias&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;ISNOTBLANK(%DMTDatosParaActualizarCrearSolicitudCreditoConsumo:FSC_Garantias__c%)&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;FSC_Garantia__c&quot; : &quot;=LIST(%DMTDatosParaActualizarCrearSolicitudCreditoConsumo:FSC_Garantias__c%)&quot;,
+    &quot;ResidentialLoanApplicationId&quot; : &quot;%DMPCrearResidentialLoanApplication:ResidentialLoanApplication_1|1:Id%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCCrearGarantias&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>7.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DMPSeguros</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;elementValueMap&quot; : { },
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;failOnStepError&quot; : true,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMPSeguros&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;ISNOTBLANK(%DMTDatosParaActualizarCrearSolicitudCreditoConsumo:FSC_Seguros__c%)&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;ResidentialLoanApplicationId&quot; : &quot;%DMPCrearResidentialLoanApplication:ResidentialLoanApplication_1|1:Id%&quot;,
+    &quot;FSC_Seguros__c&quot; : &quot;=LIST(%DMTDatosParaActualizarCrearSolicitudCreditoConsumo:FSC_Seguros__c%)&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCCrearSeguros&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>9.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Transform Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>DMTDatosParaActualizarCrearSolicitudCreditoConsumo</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;elementValueMap&quot; : { },
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : &quot;&quot;,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;ignoreCache&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMTDatosParaActualizarCrearSolicitudCreditoConsumo&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;StepDatosGeneralesSolicitud&quot; : &quot;%omniData:StepDatosGeneralesSolicitud%&quot;,
+    &quot;validacionListas&quot; : &quot;%omniData:validacionListas%&quot;,
+    &quot;rlaId&quot; : &quot;%rlaId%&quot;,
+    &quot;StepDatosSolicitante&quot; : &quot;%omniData:StepDatosSolicitante%&quot;,
+    &quot;recordTypeName&quot; : &quot;%recordTypeName%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>2.0</sequenceNumber>
+        <type>DataRaptor Transform Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <childElements>
+            <description>Data Mapper Post Action</description>
+            <isActive>true</isActive>
+            <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+            <level>1.0</level>
+            <name>DMPCrearLoanApplicant</name>
+            <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+            <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;elementValueMap&quot; : { },
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;failOnStepError&quot; : true,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;DMPCrearLoanApplicant&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;LoanApplicant&quot; : &quot;%omniData:StepDatosSolicitante:LoanApplicant%&quot;,
+    &quot;ResidentialLoanApplicationId&quot; : &quot;%DMPCrearResidentialLoanApplication:ResidentialLoanApplication_1|1:Id%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCCrearLoanApplicant&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+            <sequenceNumber>1.0</sequenceNumber>
+            <type>DataRaptor Post Action</type>
+        </childElements>
+        <description>Loop Block</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LBCreateLoanApplicant</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;loopList&quot; : &quot;omniData:StepDatosSolicitante:LoanApplicant&quot;,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;ISNOTBLANK(%omniData:StepDatosSolicitante:LoanApplicant%)&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;id&quot; : &quot;&quot;,
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>5.0</sequenceNumber>
+        <type>Loop Block</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LogErrorGarantias</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;elementValueMap&quot; : { },
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;DMPGarantias:success == false&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;objects&quot; : &quot;FSC_Garantia__c&quot;,
+    &quot;sourceName&quot; : &quot;DMPGarantias  en IP FSC_ActualizarCrearSolicitudCreditoConsumo&quot;,
+    &quot;error&quot; : &quot;%DMPGarantias:error%&quot;,
+    &quot;title&quot; : &quot;Error al crear Garantia&quot;,
+    &quot;errors&quot; : &quot;%DMPGarantias:errors%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCLogErrors&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>8.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LogErrorLA</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;elementValueMap&quot; : { },
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;DMPCrearLoanApplicant:success == false&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;objects&quot; : &quot;LoanApplicant&quot;,
+    &quot;sourceName&quot; : &quot;DMPCrearLoanApplicant  en IP FSC_ActualizarCrearSolicitudCreditoConsumo&quot;,
+    &quot;error&quot; : &quot;%DMPCrearLoanApplicant:error%&quot;,
+    &quot;title&quot; : &quot;Error al crear LoanApplicant&quot;,
+    &quot;errors&quot; : &quot;%DMPCrearLoanApplicant:errors%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCLogErrors&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>6.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LogErrorRLA</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;elementValueMap&quot; : { },
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;DMPCrearResidentialLoanApplication:success == false&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;objects&quot; : &quot;ResidentialLoanApplication&quot;,
+    &quot;sourceName&quot; : &quot;DMPCrearResidentialLoanApplication  en IP FSC_ActualizarCrearSolicitudCreditoConsumo&quot;,
+    &quot;error&quot; : &quot;%DMPCrearResidentialLoanApplication:error%&quot;,
+    &quot;title&quot; : &quot;Error al crear ResidentialLoanApplication&quot;,
+    &quot;errors&quot; : &quot;%DMPCrearResidentialLoanApplication:errors%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCLogErrors&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>4.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Data Mapper Post Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>LogErrorSeguros</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;elementValueMap&quot; : { },
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;failOnStepError&quot; : false,
+  &quot;internalNotes&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;DMPSeguros:success == false&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;failureResponse&quot; : { },
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;objects&quot; : &quot;FSC_Seguro__c&quot;,
+    &quot;sourceName&quot; : &quot;DMPSeguros  en IP FSC_ActualizarCrearSolicitudCreditoConsumo&quot;,
+    &quot;error&quot; : &quot;%DMPSeguros:error%&quot;,
+    &quot;title&quot; : &quot;Error al crear Seguro&quot;,
+    &quot;errors&quot; : &quot;%DMPSeguros:errors%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;bundle&quot; : &quot;FSCLogErrors&quot;,
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>10.0</sequenceNumber>
+        <type>DataRaptor Post Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Valida la política de crédito antes de cualquier escritura de la captura completa.</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>RAValidarLimitesCredito</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;sendOnlyAdditionalInput&quot; : true,
+  &quot;remoteOptions&quot; : { },
+  &quot;remoteMethod&quot; : &quot;validate&quot;,
+  &quot;returnOnlyAdditionalOutput&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;failOnStepError&quot; : true,
+  &quot;isActive&quot; : true,
+  &quot;chainOnStep&quot; : false,
+  &quot;returnOnlyFailureResponse&quot; : false,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;RAValidarLimitesCredito&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;remoteClass&quot; : &quot;FSC_CreditPolicyController&quot;,
+  &quot;actionMessage&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : { },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;failureConditionalFormula&quot; : &quot;&quot;,
+  &quot;id&quot; : &quot;&quot;,
+  &quot;additionalInput&quot; : {
+    &quot;omniData&quot; : &quot;%omniData%&quot;,
+    &quot;recordTypeName&quot; : &quot;%recordTypeName%&quot;
+  },
+  &quot;restOptions&quot; : { },
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>1.0</sequenceNumber>
+        <type>Remote Action</type>
+    </omniProcessElements>
+    <omniProcessElements>
+        <description>Response Action</description>
+        <isActive>true</isActive>
+        <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+        <level>0.0</level>
+        <name>Response</name>
+        <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+        <propertySetConfig>{
+  &quot;vlcResponseHeaders&quot; : { },
+  &quot;returnFullDataJSON&quot; : false,
+  &quot;elementValueMap&quot; : { },
+  &quot;returnOnlyAdditionalOutput&quot; : true,
+  &quot;responseFormat&quot; : &quot;&quot;,
+  &quot;isActive&quot; : true,
+  &quot;responseJSONPath&quot; : &quot;&quot;,
+  &quot;responseJSONNode&quot; : &quot;&quot;,
+  &quot;executionConditionalFormula&quot; : &quot;&quot;,
+  &quot;additionalOutput&quot; : {
+    &quot;ResidentialLoanApplicationId&quot; : &quot;%DMPCrearResidentialLoanApplication:ResidentialLoanApplication_1|1:Id%&quot;,
+    &quot;DMPCrearResidentialLoanApplication&quot; : &quot;%DMPCrearResidentialLoanApplication%&quot;,
+    &quot;CreacionExitosa&quot; : &quot;%DMPCrearResidentialLoanApplicationStatus%&quot;
+  },
+  &quot;sendJSONPath&quot; : &quot;&quot;,
+  &quot;id&quot; : &quot;&quot;,
+  &quot;restOptions&quot; : { },
+  &quot;sendJSONNode&quot; : &quot;&quot;
+}</propertySetConfig>
+        <sequenceNumber>11.0</sequenceNumber>
+        <type>Response Action</type>
+    </omniProcessElements>
+    <omniProcessKey>FSC_ActualizarCrearSolicitudCreditoConsumo</omniProcessKey>
+    <omniProcessType>Integration Procedure</omniProcessType>
+    <propertySetConfig>{
+  &quot;rollbackOnError&quot; : true,
+  &quot;transientValues&quot; : {
+    &quot;activateOrDeactivateConsent&quot; : false
+  }
+}</propertySetConfig>
+    <subType>ActualizarCrearSolicitudCreditoConsumo</subType>
+    <type>FSC</type>
+    <uniqueName>FSC_ActualizarCrearSolicitudCreditoConsumo_Procedure_9</uniqueName>
+    <versionNumber>9.0</versionNumber>
+</OmniIntegrationProcedure>

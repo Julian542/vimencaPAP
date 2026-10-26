@@ -1,8 +1,8 @@
 {
   "version": 2,
   "orgId": "00DVC000009qkJJ2AY",
-  "writtenAt": "2026-10-11T19:18:16.512Z",
-  "generation": 766,
+  "writtenAt": "2026-10-26T18:06:55.243Z",
+  "generation": 931,
   "inventory": [],
   "sobjects": {
     "descriptions": []
@@ -47,6 +47,16 @@
       "xmlName": "AiAuthoringBundle",
       "fullName": "Soporte_Empleados_Vimenca_6",
       "signature": "add\u0000[331806,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AARParticipantDataHomologationBatch",
+      "signature": "add\u0000[380014,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AARTriggerHandler",
+      "signature": "add\u0000[380069,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -136,7 +146,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "AGENTE_RegistrarCargoNoReconocidoTest",
-      "signature": "modify\u0000[170336,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384054,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -145,28 +155,103 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "AccountApprovalSubmissionService",
+      "signature": "add\u0000[382781,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AccountApprovalSubmissionServiceTest",
+      "signature": "add\u0000[382748,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AccountClientTypePolicy",
+      "signature": "add\u0000[378496,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AccountClientTypePolicyTest",
+      "signature": "add\u0000[378497,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "AccountContactPointEmailSyncTriggerTest",
       "signature": "add\u0000[368474,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "AccountDocumentClassifierBatch",
+      "signature": "add\u0000[376248,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AccountDocumentClassifierBatchTest",
+      "signature": "add\u0000[376243,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "AccountDocumentsController",
-      "signature": "add\u0000[375892,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[384418,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "AccountDocumentsControllerTest",
-      "signature": "add\u0000[375893,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[384419,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "AccountLookupController",
-      "signature": "modify\u0000[366286,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384011,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "AccountLookupControllerTest",
-      "signature": "modify\u0000[366305,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384014,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AccountMigrationBatch",
+      "signature": "add\u0000[378644,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AccountMigrationService",
+      "signature": "add\u0000[378651,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AccountMigrationServiceTest",
+      "signature": "add\u0000[378646,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AccountNoCustomerConversionBatch",
+      "signature": "add\u0000[378694,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AccountNoCustomerConversionService",
+      "signature": "add\u0000[378703,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AccountNoCustomerConversionTest",
+      "signature": "add\u0000[378704,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AccountNoCustomerRSPBatch",
+      "signature": "add\u0000[376533,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AccountParticipantController",
+      "signature": "add\u0000[383996,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AccountParticipantRegularizationBatch",
+      "signature": "add\u0000[383044,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -185,8 +270,13 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "ActualizacionClienteREST_FSC",
+      "signature": "modify\u0000[383817,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "ActualizacionClienteREST_FSC_Test",
-      "signature": "modify\u0000[169930,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[383818,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -196,7 +286,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "AuxiliaryControllersTest",
-      "signature": "modify\u0000[190240,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[382928,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -212,6 +302,36 @@
       "xmlName": "ApexClass",
       "fullName": "BatchMigrarFirmantesPJTest",
       "signature": "add\u0000[368487,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "CCRInconsistentPJCleanupBatch",
+      "signature": "add\u0000[380885,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "CCRInconsistentPJCleanupBatch_Test",
+      "signature": "add\u0000[380886,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "CCRReferenceDataReconciliationBatch",
+      "signature": "add\u0000[380820,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "CCRReferenceDataReconciliationBatch_Test",
+      "signature": "add\u0000[380823,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "CCRReferenceRemediationBatch",
+      "signature": "add\u0000[380782,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "CCRReferenceRemediationBatch_Test",
+      "signature": "add\u0000[380757,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -246,7 +366,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "CaseRequiredDocumentsValidator",
-      "signature": "add\u0000[366320,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[384370,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -266,12 +386,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "CaseTriggerHandler",
-      "signature": "modify\u0000[281530,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384391,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "CaseTriggerHandlerTest",
-      "signature": "modify\u0000[352527,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384502,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -330,8 +450,13 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "CompanyNoCustomerRemediationBatch",
+      "signature": "add\u0000[380015,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "ComprobanteReclamoExtension",
-      "signature": "modify\u0000[367753,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[376517,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -390,6 +515,21 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "CustomerChildHomologationBatch",
+      "signature": "add\u0000[379617,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "CustomerChildHomologationBatchTest",
+      "signature": "add\u0000[379666,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "CustomerChildReconciliationService",
+      "signature": "add\u0000[379973,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "DataMigrationBatchesTest",
       "signature": "modify\u0000[170859,\"unknown\",\"unknown\",false,false]"
     },
@@ -427,6 +567,21 @@
       "xmlName": "ApexClass",
       "fullName": "ExchangeRateServiceTest",
       "signature": "add\u0000[171950,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FARSignerAbanksRegularizationBatch",
+      "signature": "add\u0000[383045,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSCClientsHelper",
+      "signature": "modify\u0000[378498,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSCClientsHelper_Test",
+      "signature": "modify\u0000[378499,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -546,7 +701,87 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_CaseWrapUpController",
-      "signature": "modify\u0000[354542,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384371,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_CaseWrapUpController_Test",
+      "signature": "modify\u0000[384051,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_ColaGeneracionDocumentosAnalisis",
+      "signature": "modify\u0000[383740,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_ConsumoSolicitudPDFController",
+      "signature": "modify\u0000[383766,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_ConsumoSolicitudPDFController_Test",
+      "signature": "modify\u0000[383779,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_ControladorDocumentosAnalisisCredito",
+      "signature": "modify\u0000[383965,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_CreditPolicyCallable",
+      "signature": "delete\u0000[383560,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_CreditPolicyData",
+      "signature": "delete\u0000[383559,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_CreditPolicyDomain",
+      "signature": "delete\u0000[383562,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_CreditPolicyDomainTest",
+      "signature": "delete\u0000[383557,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_CreditPolicyInput",
+      "signature": "delete\u0000[383556,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_CreditPolicyInputTest",
+      "signature": "delete\u0000[383558,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_CreditPolicyTestFactory",
+      "signature": "delete\u0000[383561,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_DeudaConsolidadaBVService",
+      "signature": "add\u0000[383768,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_DeudaConsolidadaBVServiceTest",
+      "signature": "add\u0000[383769,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_DocumentosAnalisisCreditoTest",
+      "signature": "modify\u0000[383966,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_MissingCoverageTest",
+      "signature": "modify\u0000[383928,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -557,6 +792,16 @@
       "xmlName": "ApexClass",
       "fullName": "FSC_NewCaseComponent_Controller_Test",
       "signature": "add\u0000[365490,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_RLATriggerHandler",
+      "signature": "modify\u0000[383770,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_RlaAccionesController",
+      "signature": "modify\u0000[384528,\"2026-10-26T17:28:24.000+0000\",\"01pVC000003sA6kYAE\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -580,6 +825,11 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "FinAcctCoreValidationServiceTest",
+      "signature": "add\u0000[378500,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "FinancialAccountCoreCreationQueueable",
       "signature": "modify\u0000[101504,\"unknown\",\"unknown\",false,false]"
     },
@@ -591,17 +841,27 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FinancialAccountCoreValidationService",
-      "signature": "modify\u0000[375721,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[378501,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FinancialAccountCustomCreateController",
-      "signature": "modify\u0000[190165,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[383979,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FinancialAccountCustomCreateCtrlTest",
-      "signature": "modify\u0000[170799,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[383164,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FinancialAccountReadinessService",
+      "signature": "add\u0000[383057,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FinancialAccountReadinessServiceTest",
+      "signature": "add\u0000[383065,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -611,7 +871,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FinancialAccountTriggerHandler",
-      "signature": "modify\u0000[127065,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[383980,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FinancialAccountTriggerHandlerTest",
+      "signature": "add\u0000[383981,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -636,12 +901,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "INT001_LEAD_VAER_Controller_FSC",
-      "signature": "modify\u0000[368563,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[381240,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "INT001_LEAD_VAER_Controller_FSC_Test",
-      "signature": "modify\u0000[190218,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[381241,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -680,6 +945,11 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "INT003_Test",
+      "signature": "modify\u0000[382857,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "INT003_validarContraListaFlowController",
       "signature": "modify\u0000[118580,\"unknown\",\"unknown\",false,false]"
     },
@@ -691,12 +961,22 @@
     {
       "xmlName": "ApexClass",
       "fullName": "INT007_FSC",
-      "signature": "modify\u0000[352954,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[383116,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "INT007_FSC_Test",
+      "signature": "modify\u0000[383117,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "INT008_FSC",
-      "signature": "modify\u0000[352955,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[383118,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "INT008_FSC_Test",
+      "signature": "modify\u0000[383119,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -707,6 +987,16 @@
       "xmlName": "ApexClass",
       "fullName": "INT013Agente_Test",
       "signature": "modify\u0000[105825,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "INT013CADTO",
+      "signature": "modify\u0000[376929,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "INT013CCDTO",
+      "signature": "modify\u0000[376930,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -745,8 +1035,28 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "INT029",
+      "signature": "modify\u0000[381151,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "INT029_ACSC_Controller",
+      "signature": "modify\u0000[381152,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "INT029_Test",
+      "signature": "modify\u0000[381153,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "INT056_FSC",
+      "signature": "modify\u0000[383130,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "INT056_FSC_Test",
-      "signature": "modify\u0000[170588,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[383131,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -815,8 +1125,18 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "LeadApprovalSubmissionService",
+      "signature": "add\u0000[383727,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "LeadApprovalSubmissionService_Test",
+      "signature": "add\u0000[383724,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "LeadAutoQualificationQueue",
-      "signature": "modify\u0000[375714,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[376488,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -826,17 +1146,17 @@
     {
       "xmlName": "ApexClass",
       "fullName": "LeadAutoQualificationQueueTest",
-      "signature": "modify\u0000[190259,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[376489,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadCandidatePolicy",
-      "signature": "add\u0000[376075,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383168,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadCandidatePolicyTest",
-      "signature": "add\u0000[376084,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383169,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -851,37 +1171,57 @@
     {
       "xmlName": "ApexClass",
       "fullName": "LeadConversionQueue",
-      "signature": "modify\u0000[376070,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384420,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadConversionQueue_Test",
-      "signature": "modify\u0000[376071,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[383121,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadConvertService",
-      "signature": "modify\u0000[376118,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[382761,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadConvertService_Test",
-      "signature": "modify\u0000[376123,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[382762,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadDocumentsController",
-      "signature": "modify\u0000[375894,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384421,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadDocumentsControllerTest",
-      "signature": "modify\u0000[375895,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384422,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "LeadParticipantRelationSyncService",
+      "signature": "add\u0000[380060,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "LeadSanitizationConversionBatch",
+      "signature": "add\u0000[379602,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "LeadSanitizationConversionBatchTest",
+      "signature": "add\u0000[379603,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadTriggerHandler",
-      "signature": "modify\u0000[375878,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[381146,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "LeadTriggerHandlerTest",
+      "signature": "add\u0000[376547,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -890,8 +1230,33 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "LegacyReferenceMigrationBatch",
+      "signature": "add\u0000[380993,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "LegacyReferenceMigrationBatch_Test",
+      "signature": "add\u0000[380994,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "LegalDocumentsAssignedGridController",
-      "signature": "modify\u0000[188198,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384023,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "LegalDocumentsAssignedGridControllerTest",
+      "signature": "add\u0000[384024,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "LegalWorkloadAssignmentService",
+      "signature": "add\u0000[384025,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "LegalWorkloadAssignmentServiceTest",
+      "signature": "add\u0000[384026,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1045,6 +1410,26 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "PJParticipantRegularizationBatch",
+      "signature": "add\u0000[381066,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "PJParticipantRegularizationBatch_Test",
+      "signature": "add\u0000[381067,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "PLADocumentsAssignedGridController",
+      "signature": "add\u0000[382840,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "PLADocumentsAssignedGridControllerTest",
+      "signature": "add\u0000[382797,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "ParticipanteTotalsService",
       "signature": "modify\u0000[101510,\"unknown\",\"unknown\",false,false]"
     },
@@ -1061,17 +1446,22 @@
     {
       "xmlName": "ApexClass",
       "fullName": "PreQualifyLeadFlowController_FSC",
-      "signature": "modify\u0000[104920,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[378967,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "PreQualifyLeadFlowController_FSCTest",
+      "signature": "modify\u0000[378970,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "PreQualifyLeadFlowHandler_FSC",
-      "signature": "modify\u0000[375910,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[379259,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "PreQualifyLeadFlowHandler_FSCTest",
-      "signature": "modify\u0000[375911,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[379260,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1107,6 +1497,11 @@
       "xmlName": "ApexClass",
       "fullName": "REST_PersonaFisicaTest",
       "signature": "modify\u0000[170340,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "REST_PersonaFisica_FSC",
+      "signature": "modify\u0000[378705,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1161,7 +1556,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "ReintentarCreacionClienteCoreInvocable",
-      "signature": "modify\u0000[126178,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[378505,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "ReintentarCreacionClienteCoreTest",
+      "signature": "add\u0000[378506,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1171,7 +1571,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "ReintentarCreacionProductoCoreTest",
-      "signature": "add\u0000[244925,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[378507,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1202,6 +1602,26 @@
       "xmlName": "ApexClass",
       "fullName": "RetryClienteCoreTest",
       "signature": "modify\u0000[170684,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "SOL00000012_Test",
+      "signature": "add\u0000[383997,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "SOL00000029_Test",
+      "signature": "add\u0000[383046,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "SOL00000053_Test",
+      "signature": "add\u0000[384511,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "SOL_00000042_Test",
+      "signature": "delete\u0000[383916,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1341,7 +1761,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "TestDataFactory",
-      "signature": "modify\u0000[352522,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384503,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1361,7 +1781,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "TestDataFactory_FSC",
-      "signature": "modify\u0000[375729,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[383929,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1386,7 +1806,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFSNewControllerTest",
-      "signature": "modify\u0000[190243,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[381137,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1430,13 +1850,23 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "VFS_ContratoUnicoController",
+      "signature": "modify\u0000[384574,\"2026-10-26T17:44:50.000+0000\",\"01pVT0000035fgtYAA\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "VFS_ContratoUnicoControllerTest",
-      "signature": "modify\u0000[170283,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384575,\"2026-10-26T17:44:50.000+0000\",\"01pVT0000035fguYAA\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "VFS_ContratoUnicoEnvelope",
+      "signature": "modify\u0000[384576,\"2026-10-26T17:44:50.000+0000\",\"01pVT0000035fgvYAA\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ContratoUnicoEnvelopeTest",
-      "signature": "modify\u0000[169998,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384577,\"2026-10-26T17:44:50.000+0000\",\"01pVT0000035fgwYAA\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -1515,8 +1945,13 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "VFS_KYCEnvelope",
+      "signature": "modify\u0000[384578,\"2026-10-26T17:44:50.000+0000\",\"01pVT0000035fh5YAA\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "VFS_KYCEnvelopeTest",
-      "signature": "modify\u0000[170080,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384579,\"2026-10-26T17:44:50.000+0000\",\"01pVT0000035fh6YAA\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -1527,6 +1962,16 @@
       "xmlName": "ApexClass",
       "fullName": "VFS_KYCVerificadorPDF",
       "signature": "add\u0000[247430,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "VFS_LeadAreaResponsableService",
+      "signature": "add\u0000[383988,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "VFS_LeadAreaResponsableServiceTest",
+      "signature": "add\u0000[383989,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1550,8 +1995,13 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "VFS_ResumenConvenioEnvelope",
+      "signature": "modify\u0000[384580,\"2026-10-26T17:44:50.000+0000\",\"01pVT0000035fhAYAQ\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "VFS_ResumenConvenioEnvelopeTest",
-      "signature": "modify\u0000[169994,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384581,\"2026-10-26T17:44:50.000+0000\",\"01pVT0000035fhBYAQ\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -1571,7 +2021,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_nAperturaCuentasController",
-      "signature": "modify\u0000[360173,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[378568,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1586,7 +2036,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_nKYCFisica_Controller",
-      "signature": "modify\u0000[354556,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[381110,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1620,6 +2070,16 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "WF01_ComposicionBatch",
+      "signature": "add\u0000[383892,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "WF01_ComposicionBatchTest",
+      "signature": "add\u0000[383898,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "agentBusinessHoursService",
       "signature": "modify\u0000[105842,\"unknown\",\"unknown\",false,false]"
     },
@@ -1635,8 +2095,18 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "beforeUpdateClientsHelper",
+      "signature": "modify\u0000[379569,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "fsc_lookup_controller",
-      "signature": "modify\u0000[331571,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384383,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "fsc_lookup_controllerTest",
+      "signature": "add\u0000[384388,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1646,12 +2116,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "wsConsultaProdFinPFPJ_FSC",
-      "signature": "modify\u0000[357389,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[376931,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "wsConsultaProdFinPFPJ_FSC_Test",
-      "signature": "modify\u0000[170901,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[376932,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1661,12 +2131,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "wsCreacionProd_FSC",
-      "signature": "modify\u0000[375723,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[383132,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "wsCreacionProd_FSC_Test",
-      "signature": "modify\u0000[375734,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[383145,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexComponent",
@@ -1720,6 +2190,21 @@
     },
     {
       "xmlName": "ApexComponent",
+      "fullName": "VFS_KYC_ActEconomicaEmpresa",
+      "signature": "add\u0000[379663,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexComponent",
+      "fullName": "VFS_KYC_FATCAJuridica",
+      "signature": "add\u0000[379977,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexComponent",
+      "fullName": "VFS_KYC_InfoBasicaDeLaEmpresa",
+      "signature": "add\u0000[379656,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexComponent",
       "fullName": "VFS_KYC_InfoEmpresasFiliales",
       "signature": "add\u0000[354551,\"unknown\",\"unknown\",false,false]"
     },
@@ -1727,6 +2212,11 @@
       "xmlName": "ApexComponent",
       "fullName": "VFS_KYC_InfoMiembrosdelConsejo",
       "signature": "add\u0000[354552,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexComponent",
+      "fullName": "VFS_KYC_InformacionAccionistas",
+      "signature": "add\u0000[380761,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexComponent",
@@ -1742,6 +2232,26 @@
       "xmlName": "ApexComponent",
       "fullName": "VFS_KYC_PrincipalesProveedores",
       "signature": "add\u0000[354554,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexComponent",
+      "fullName": "VFS_KYC_ProductosSolicitados",
+      "signature": "add\u0000[379658,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexComponent",
+      "fullName": "VFS_KYC_ReferenciasBancarias",
+      "signature": "add\u0000[380776,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexComponent",
+      "fullName": "VFS_KYC_ReferenciasComerciales",
+      "signature": "add\u0000[380779,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexComponent",
+      "fullName": "VFS_KYC_VolumenMensualTransferencia",
+      "signature": "add\u0000[379660,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexComponent",
@@ -1951,7 +2461,7 @@
     {
       "xmlName": "ApexPage",
       "fullName": "vfComprobanteReclamo",
-      "signature": "add\u0000[366238,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[376500,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexPage",
@@ -1982,6 +2492,11 @@
       "xmlName": "ApexTestSuite",
       "fullName": "FSC_SolicitudesDeCredito",
       "signature": "delete\u0000[274505,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "ApexTrigger",
+      "fullName": "AARTrigger",
+      "signature": "add\u0000[380072,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexTrigger",
@@ -2046,7 +2561,7 @@
     {
       "xmlName": "ApprovalProcess",
       "fullName": "Account.PA_Flujo_Aprobacion",
-      "signature": "add\u0000[171065,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[382809,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApprovalProcess",
@@ -2061,7 +2576,7 @@
     {
       "xmlName": "ApprovalProcess",
       "fullName": "Lead.Aprobacion_de_Candidatos_por_Legal",
-      "signature": "add\u0000[173430,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[381129,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApprovalProcess",
@@ -2076,7 +2591,7 @@
     {
       "xmlName": "ApprovalProcess",
       "fullName": "Lead.PA_Flujo_Aprobacion_LEAD",
-      "signature": "add\u0000[101584,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[378684,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApprovalProcess",
@@ -2112,6 +2627,11 @@
       "xmlName": "AuraDefinitionBundle",
       "fullName": "INT001_nValidateAgainstElectoralRegister",
       "signature": "add\u0000[169693,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "AuraDefinitionBundle",
+      "fullName": "INT003_ValidarPFContralista",
+      "signature": "add\u0000[382862,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "AuraDefinitionBundle",
@@ -2301,12 +2821,12 @@
     {
       "xmlName": "CustomApplication",
       "fullName": "FSC_Service",
-      "signature": "add\u0000[340997,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[381105,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomApplication",
       "fullName": "Financial_Services_Lightning_Console",
-      "signature": "add\u0000[211244,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[382658,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomApplication",
@@ -2317,6 +2837,16 @@
       "xmlName": "CustomApplication",
       "fullName": "standard__LightningService",
       "signature": "add\u0000[149842,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account.ACC_Abogado_Asignado__c",
+      "signature": "add\u0000[383291,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account.ACC_Account_Migracion__c",
+      "signature": "add\u0000[378642,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2350,18 +2880,38 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "Account.ACC_Fuente_Informacion__c",
+      "signature": "add\u0000[376623,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "Account.ACC_Gerente_Verificador__c",
       "signature": "add\u0000[247423,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Account.ACC_Link_Cliente__c",
-      "signature": "add\u0000[104946,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[378647,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account.ACC_NoCustomer_Original__c",
+      "signature": "add\u0000[378679,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account.ACC_NumOficina__c",
+      "signature": "add\u0000[376900,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "Account.ACC_Pais_Residencia_Legal__c",
       "signature": "add\u0000[110777,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account.ACC_Relacion_Exterior__c",
+      "signature": "add\u0000[383322,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2437,6 +2987,1061 @@
       "xmlName": "CustomField",
       "fullName": "Account.Total_de_seguros_household__c",
       "signature": "add\u0000[165254,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Actividad_Economica__c",
+      "signature": "add\u0000[376628,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Apellido_FATCA__c",
+      "signature": "add\u0000[376630,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Aplica_FATCA__c",
+      "signature": "add\u0000[376631,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Aprobado_Cumplimiento__c",
+      "signature": "add\u0000[376632,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Aprobado_Por__c",
+      "signature": "add\u0000[376633,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Branch__c",
+      "signature": "add\u0000[376634,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_CIF__c",
+      "signature": "add\u0000[376636,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Calificacion_de_cliente__c",
+      "signature": "add\u0000[376637,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Canales_a_utilizar__c",
+      "signature": "add\u0000[376638,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Categoria_Riesgo_Cliente__c",
+      "signature": "add\u0000[376639,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Ciudad_FATCA__c",
+      "signature": "add\u0000[376640,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Ciudad_Nacimiento_OLD__c",
+      "signature": "add\u0000[376641,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Ciudad_Nacimiento__c",
+      "signature": "add\u0000[376642,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Ciudad_de_nacimiento__c",
+      "signature": "add\u0000[376643,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Clasificacion_Empresa__c",
+      "signature": "add\u0000[376644,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Cliente_Conocido__c",
+      "signature": "add\u0000[376645,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Codigo_Depositante__c",
+      "signature": "add\u0000[376646,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Codigo_Postal_FATCA__c",
+      "signature": "add\u0000[376647,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Coincidencia_Listas_Externas__c",
+      "signature": "add\u0000[376648,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Coincidencia_Listas_Internas__c",
+      "signature": "add\u0000[376649,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Colaborador_de_PEP__c",
+      "signature": "add\u0000[376650,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Condicion__c",
+      "signature": "add\u0000[376651,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Conteo_Cuentas_financieras_activas__c",
+      "signature": "add\u0000[376652,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Correo_Electronico_Campanas__c",
+      "signature": "add\u0000[376653,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Correo_Electronico_Cliente__c",
+      "signature": "add\u0000[376654,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Cuenta_Nomina__c",
+      "signature": "add\u0000[376655,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_DeclaracionSiManejaOpInternacionales__c",
+      "signature": "add\u0000[376656,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_DeclaracionSiProyectaManejarEfectivo__c",
+      "signature": "add\u0000[376657,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Direccion_FATCA__c",
+      "signature": "add\u0000[376658,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Direccion_Trabajo_PEP__c",
+      "signature": "add\u0000[376659,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Ejecutivo__c",
+      "signature": "add\u0000[376660,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Empleado_Refiere__c",
+      "signature": "add\u0000[376661,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Employment__c",
+      "signature": "add\u0000[376663,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Empresa_Grupo__c",
+      "signature": "add\u0000[376665,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Error_fatca_participante__c",
+      "signature": "add\u0000[376666,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_EsClienteVimenca__c",
+      "signature": "add\u0000[376667,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_EsEmpleado_Vimenca__c",
+      "signature": "add\u0000[376668,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Es_Empleado_Vimenca__c",
+      "signature": "add\u0000[376669,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Es_Proveedor__c",
+      "signature": "add\u0000[376670,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Es_empleado_grupo_Vimenca__c",
+      "signature": "add\u0000[376671,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Estado_Civil__c",
+      "signature": "add\u0000[376672,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Estado_FATCA__c",
+      "signature": "add\u0000[376673,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Estado__c",
+      "signature": "add\u0000[376674,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Familiar_PEP__c",
+      "signature": "add\u0000[376675,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Fecha_Aprobacion__c",
+      "signature": "add\u0000[376676,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Fecha_Cierre_Fiscal__c",
+      "signature": "add\u0000[376677,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Fecha_Conversion_Cliente__c",
+      "signature": "add\u0000[376678,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Fecha_Decreto_PEP__c",
+      "signature": "add\u0000[376679,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Fecha_Expiracion_FATCA__c",
+      "signature": "add\u0000[376680,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Fecha_Fundacion__c",
+      "signature": "add\u0000[376681,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Fecha_Informacion__c",
+      "signature": "add\u0000[376682,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Fecha_Reconversion_Cliente__c",
+      "signature": "add\u0000[376683,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Fecha_Vencimiento_Pasaporte__c",
+      "signature": "add\u0000[376684,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Fecha_de_calificacion__c",
+      "signature": "add\u0000[376685,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Fuente_Informacion__c",
+      "signature": "add\u0000[376686,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Fuente_de_informacion_traduccion__c",
+      "signature": "add\u0000[376687,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_GIIN__c",
+      "signature": "add\u0000[376688,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Genero_Identificaci_n__c",
+      "signature": "add\u0000[376689,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Genero__c",
+      "signature": "add\u0000[376690,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Gerente_Verificador__c",
+      "signature": "add\u0000[376691,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_INT_Canales_a_utilizar__c",
+      "signature": "add\u0000[376693,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_INT_Nacionalidad__c",
+      "signature": "add\u0000[376694,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_INT_NoIndicaTipoMonedaProdTrans__c",
+      "signature": "add\u0000[376695,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_INT_Otra_Nacionalidad__c",
+      "signature": "add\u0000[376696,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_INT_Pais_Nacimiento__c",
+      "signature": "add\u0000[376697,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_INT_Pais_Residencia_Legal__c",
+      "signature": "add\u0000[376698,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_INT_Tipo_Estructura_Juridica__c",
+      "signature": "add\u0000[376699,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_INT_Tipo_Relacion_PEP__c",
+      "signature": "add\u0000[376700,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_INT_Tipo_de_identificacion__c",
+      "signature": "add\u0000[376701,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Id_Externo_Cuenta__c",
+      "signature": "add\u0000[376702,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Imagen__c",
+      "signature": "add\u0000[376703,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_IndicarVolMensualEstimadoTransaccion__c",
+      "signature": "add\u0000[376704,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Institucion_Trabajo_PEP__c",
+      "signature": "add\u0000[376705,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Internet_Banking__c",
+      "signature": "add\u0000[376706,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Listas__c",
+      "signature": "add\u0000[376707,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Mejor_Hora_Llamar__c",
+      "signature": "add\u0000[376708,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Moneda__c",
+      "signature": "add\u0000[376709,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Motivo_Acercamiento__c",
+      "signature": "add\u0000[376710,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Motivo_Rechazo_Cancelacion__c",
+      "signature": "add\u0000[376711,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_N_Decreto_PEP__c",
+      "signature": "add\u0000[376712,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_N_Dependientes__c",
+      "signature": "add\u0000[376713,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_N_Documentos__c",
+      "signature": "add\u0000[376714,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_N_Identificacion_Anterior__c",
+      "signature": "add\u0000[376715,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_N_Identificacion_PEP__c",
+      "signature": "add\u0000[376716,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_N_Participantes__c",
+      "signature": "add\u0000[376717,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_N_Pasaporte_FATCA__c",
+      "signature": "add\u0000[376718,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Nacionalidad_FATCA__c",
+      "signature": "add\u0000[376719,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Nacionalidad_PEP__c",
+      "signature": "add\u0000[376720,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Nacionalidad__c",
+      "signature": "add\u0000[376721,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_NoIndicaTipoMonedaProdTrans__c",
+      "signature": "add\u0000[376722,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_No_Llamar__c",
+      "signature": "add\u0000[376723,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Nombre_Corto_Comercial__c",
+      "signature": "add\u0000[376724,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Nombre_FATCA__c",
+      "signature": "add\u0000[376725,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_NumEmpleados__c",
+      "signature": "add\u0000[376726,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_NumIdentificacion__c",
+      "signature": "add\u0000[376727,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Num_Acuerdo__c",
+      "signature": "add\u0000[376728,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Objeto_Negocio__c",
+      "signature": "add\u0000[376729,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Ocupacion_PEP__c",
+      "signature": "add\u0000[376730,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Origen__c",
+      "signature": "add\u0000[376731,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Otra_Nacionalidad__c",
+      "signature": "add\u0000[376732,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Pais_Nacimiento__c",
+      "signature": "add\u0000[376733,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Pais_Residencia_Legal__c",
+      "signature": "add\u0000[376734,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Participantes_aprobados__c",
+      "signature": "add\u0000[376735,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Patrimonio_Desc__c",
+      "signature": "add\u0000[376736,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Patrimonio_Num__c",
+      "signature": "add\u0000[376737,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Persona_Fisica__c",
+      "signature": "add\u0000[376738,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Persona_PEP__c",
+      "signature": "add\u0000[376739,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Porcentaje_total__c",
+      "signature": "add\u0000[376740,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Posee_Acuerdo_IRS__c",
+      "signature": "add\u0000[376741,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Posee_Otra_Nacionalidad__c",
+      "signature": "add\u0000[376742,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Posee_Resid_Otro_Pais__c",
+      "signature": "add\u0000[376743,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Preferencias_Correspondencia__c",
+      "signature": "add\u0000[376744,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Primer_Apellido_PEP__c",
+      "signature": "add\u0000[376745,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Primer_Nombre_PEP__c",
+      "signature": "add\u0000[376746,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_ProductosASolicitar__c",
+      "signature": "add\u0000[376747,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Provincia_Nacimiento__c",
+      "signature": "add\u0000[376748,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Puesto_Cargo_PEP__c",
+      "signature": "add\u0000[376749,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Puntos_Acumulados__c",
+      "signature": "add\u0000[376750,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Puntos_Canjeados__c",
+      "signature": "add\u0000[376751,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Puntos_Generados__c",
+      "signature": "add\u0000[376752,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Puntos_Por_Vencer__c",
+      "signature": "add\u0000[376753,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Puntos_Vencidos__c",
+      "signature": "add\u0000[376754,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_RNC__c",
+      "signature": "add\u0000[376755,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Rango_de_Transacciones_estimadas__c",
+      "signature": "add\u0000[376756,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Relacion_Exterior__c",
+      "signature": "add\u0000[376757,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Relacion_de_dignatarios__c",
+      "signature": "add\u0000[376758,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Relacion_ent_alto_riesgo__c",
+      "signature": "add\u0000[376759,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Rentabilidad__c",
+      "signature": "add\u0000[376760,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Residencia_Rep_Dom__c",
+      "signature": "add\u0000[376761,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Resultado_Validacion__c",
+      "signature": "add\u0000[376762,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_SSN_FATCA__c",
+      "signature": "add\u0000[376763,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Score_Crediticio__c",
+      "signature": "add\u0000[376764,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Segmento_FATCA__c",
+      "signature": "add\u0000[376765,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Segmento__c",
+      "signature": "add\u0000[376766,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Segundo_Apellido_PEP__c",
+      "signature": "add\u0000[376767,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Segundo_Nombre_PEP__c",
+      "signature": "add\u0000[376768,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Servicios_a_solicitar__c",
+      "signature": "add\u0000[376769,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_SubEstado__c",
+      "signature": "add\u0000[378627,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_TIN_FATCA__c",
+      "signature": "add\u0000[376771,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Telefono_Campanas__c",
+      "signature": "add\u0000[376772,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Telefono_FATCA__c",
+      "signature": "add\u0000[376773,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Telefono_Movil__c",
+      "signature": "add\u0000[376774,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_TipoIdentificacion__c",
+      "signature": "add\u0000[376775,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_Actividad__c",
+      "signature": "add\u0000[376776,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_Acuerdo__c",
+      "signature": "add\u0000[376777,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_Cliente_PF__c",
+      "signature": "add\u0000[378628,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_Cliente_PJ__c",
+      "signature": "add\u0000[376779,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_Depositante__c",
+      "signature": "add\u0000[376780,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_Identif_PEP__c",
+      "signature": "add\u0000[376781,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_Identificacion_Anterior__c",
+      "signature": "add\u0000[376782,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_Ingreso__c",
+      "signature": "add\u0000[376783,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_Organizacion__c",
+      "signature": "add\u0000[376784,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_Persona_PF__c",
+      "signature": "add\u0000[376785,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_Persona_PJ__c",
+      "signature": "add\u0000[376786,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_Relacion_PEP__c",
+      "signature": "add\u0000[376787,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_Sector__c",
+      "signature": "add\u0000[376788,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_Vinculacion__c",
+      "signature": "add\u0000[376789,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_beneficio_final__c",
+      "signature": "add\u0000[376790,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_cuenta_fisica__c",
+      "signature": "add\u0000[376791,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Tipo_cuenta_juridica__c",
+      "signature": "add\u0000[376792,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Total_Activos__c",
+      "signature": "add\u0000[376793,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Traduccion_tipo_cliente__c",
+      "signature": "add\u0000[376794,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Traduccion_tipo_persona__c",
+      "signature": "add\u0000[376795,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Ultima_Actualizacion_Listas_Externas__c",
+      "signature": "add\u0000[376796,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Ultima_Actualizacion_Listas_Internas__c",
+      "signature": "add\u0000[376797,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Ultima_Actualizacion_Score__c",
+      "signature": "add\u0000[376798,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Ultima_Segmentacion__c",
+      "signature": "add\u0000[376799,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Unificado_Con__c",
+      "signature": "add\u0000[376800,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Usuario_Captador__c",
+      "signature": "add\u0000[376801,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Ventas_Ingresos_Anuales__c",
+      "signature": "add\u0000[376803,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_Volumen_Ventas_Anual__c",
+      "signature": "add\u0000[376804,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.ACC_empleado_Vimenca__c",
+      "signature": "add\u0000[376805,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Account_Original_Id__c",
+      "signature": "add\u0000[378629,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Activos_bajo_gestion_household__c",
+      "signature": "add\u0000[376807,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.CIF_R__c",
+      "signature": "add\u0000[376808,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Cantidad_de_casos_household__c",
+      "signature": "add\u0000[376809,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Cantidad_de_reclamos_household__c",
+      "signature": "add\u0000[376810,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Cantidad_de_solicitudes_household__c",
+      "signature": "add\u0000[376811,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Ciudad_Nacimiento_Codigo__c",
+      "signature": "add\u0000[376812,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.DocumentType__c",
+      "signature": "add\u0000[376813,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.FSC_Origen_Conversion_Lead__c",
+      "signature": "add\u0000[376814,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Gastos_anuales__c",
+      "signature": "add\u0000[376815,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Lugar_de_nacimiento_Padron_Electoral__c",
+      "signature": "add\u0000[376816,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.OBS_R__c",
+      "signature": "add\u0000[376817,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Producto_de_Inter_s__c",
+      "signature": "add\u0000[376818,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Resultado_de_la_Integracion__c",
+      "signature": "add\u0000[376819,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Sucursal_de_preferencia__c",
+      "signature": "add\u0000[376820,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Tiempo_en_Vivienda__c",
+      "signature": "add\u0000[376821,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Tipo_de_vivienda__c",
+      "signature": "add\u0000[376822,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Total_de_cuentas_financieras_household__c",
+      "signature": "add\u0000[376823,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Total_de_depositos_bancarios_household__c",
+      "signature": "add\u0000[376824,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Total_de_inversiones_household__c",
+      "signature": "add\u0000[376825,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.Total_de_seguros_household__c",
+      "signature": "add\u0000[376826,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_ActividadEconomica__c",
+      "signature": "add\u0000[376827,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_CapitalSocial__c",
+      "signature": "add\u0000[376828,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_CapitalSuscritoPagado__c",
+      "signature": "add\u0000[376829,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_ContratoFirmadoERP__c",
+      "signature": "add\u0000[376830,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_ContratoUnicoFirmado__c",
+      "signature": "add\u0000[376831,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_DepositoInicial__c",
+      "signature": "add\u0000[376832,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_EspecifiqueOtro__c",
+      "signature": "add\u0000[376833,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_ExplicacionPerdidaNacionalidad__c",
+      "signature": "add\u0000[376834,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_NumeroSegundaIdentificacion__c",
+      "signature": "add\u0000[376835,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_PropositoPorductoServicio__c",
+      "signature": "add\u0000[376836,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_RegistroMercantil__c",
+      "signature": "add\u0000[376837,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_TipoEmpresaFATCA__c",
+      "signature": "add\u0000[376838,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_Tipo_de_Documento__c",
+      "signature": "add\u0000[376839,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_TotalPasivo__c",
+      "signature": "add\u0000[376840,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_TransaccionesMensualDV__c",
+      "signature": "add\u0000[376841,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_TransaccionesMensualRC__c",
+      "signature": "add\u0000[376842,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Account_Migracion__c.VFS_VinculacionPrevencion__c",
+      "signature": "add\u0000[376843,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Admin_Doc_Requerida__c.ADR_Obligatorio__c",
+      "signature": "add\u0000[384417,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2727,6 +4332,11 @@
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Fecha_contracargo__c",
       "signature": "add\u0000[331813,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Case.CAS_Horario_Apertura__c",
+      "signature": "add\u0000[376225,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -3090,8 +4700,13 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "Documentacion_Legal__c.DOC_Comentarios_Legal__c",
+      "signature": "add\u0000[378604,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "Documentacion_Legal__c.DOC_Estado__c",
-      "signature": "add\u0000[172681,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[376935,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -3225,6 +4840,11 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "FSC_Referencias__c.FSC_Parentesco__c",
+      "signature": "modify\u0000[383943,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "FSC_TipoGarantia.FSC_Clase__c",
       "signature": "add\u0000[230063,\"unknown\",\"unknown\",false,false]"
     },
@@ -3237,6 +4857,61 @@
       "xmlName": "CustomField",
       "fullName": "FSC_TipoGarantia.FSC_Valor__c",
       "signature": "add\u0000[230066,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FinServ__AccountAccountRelation__c.AAR_Email__c",
+      "signature": "add\u0000[379997,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FinServ__AccountAccountRelation__c.AAR_Es_Cliente_Activo__c",
+      "signature": "add\u0000[379998,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FinServ__AccountAccountRelation__c.AAR_Fecha_Nacimiento__c",
+      "signature": "add\u0000[379999,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FinServ__AccountAccountRelation__c.AAR_Genero__c",
+      "signature": "add\u0000[380000,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FinServ__AccountAccountRelation__c.AAR_Lead_Participante__c",
+      "signature": "add\u0000[380001,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FinServ__AccountAccountRelation__c.AAR_Nombre_Participante__c",
+      "signature": "add\u0000[380003,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FinServ__AccountAccountRelation__c.AAR_Numero_Identificacion__c",
+      "signature": "add\u0000[380004,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FinServ__AccountAccountRelation__c.AAR_Telefono__c",
+      "signature": "add\u0000[380005,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FinServ__AccountAccountRelation__c.AAR_Tipo_Identificacion__c",
+      "signature": "add\u0000[380006,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FinServ__ContactContactRelation__c.FinServ__Role__c",
+      "signature": "add\u0000[383170,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FinServ__FinancialAccountTransaction__c.FIN_Monto_Formateado__c",
+      "signature": "add\u0000[377183,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -3257,6 +4932,11 @@
       "xmlName": "CustomField",
       "fullName": "FinServ__FinancialAccount__c.FIN_Respuesta_Integracion_Core__c",
       "signature": "add\u0000[127051,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FinServ__FinancialAccount__c.FIN_Saldo_Formateado__c",
+      "signature": "add\u0000[377184,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -3295,8 +4975,18 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "Lead.LEA_Abogado_Asignado__c",
+      "signature": "add\u0000[383293,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "Lead.LEA_Actividad_Economica__c",
       "signature": "add\u0000[125228,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Lead.LEA_Area_Responsable__c",
+      "signature": "add\u0000[376518,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -3375,6 +5065,11 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "Lead.LEA_NumOficina__c",
+      "signature": "add\u0000[376901,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "Lead.LEA_Pais_Residencia_Legal__c",
       "signature": "add\u0000[104865,\"unknown\",\"unknown\",false,false]"
     },
@@ -3427,6 +5122,11 @@
       "xmlName": "CustomField",
       "fullName": "Lead.LEA_REF_Tipo_de_Cuenta_2__c",
       "signature": "add\u0000[101495,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Lead.LEA_Relacion_Exterior__c",
+      "signature": "add\u0000[383323,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -3950,6 +5650,11 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_DeudaConsolidadaBV__c",
+      "signature": "add\u0000[383765,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_EstadoDeLaExcepcion__c",
       "signature": "delete\u0000[188370,\"unknown\",\"unknown\",true,false]"
     },
@@ -3957,6 +5662,11 @@
       "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_ExcepcionSolicitada__c",
       "signature": "delete\u0000[188363,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_NumeroSolicitud__c",
+      "signature": "add\u0000[383903,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -4154,6 +5864,86 @@
       "signature": "add\u0000[125370,\"unknown\",\"unknown\",false,false]"
     },
     {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.RNC_de_la_empresa__c",
+      "signature": "add\u0000[379193,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Accionista_Principal__c",
+      "signature": "add\u0000[378868,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Anio_Nacimiento_Fundacion__c",
+      "signature": "add\u0000[379254,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Beneficiario_Final__c",
+      "signature": "add\u0000[378887,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Cliente__c",
+      "signature": "add\u0000[378730,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Genero_Accionista_Principal__c",
+      "signature": "add\u0000[379252,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Identificacion_Cliente__c",
+      "signature": "add\u0000[378798,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Numero_Empleados__c",
+      "signature": "add\u0000[378907,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Periodo_Fin__c",
+      "signature": "add\u0000[378764,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Periodo_Inicio__c",
+      "signature": "add\u0000[378747,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Porcentaje_Accionista_Principal__c",
+      "signature": "add\u0000[379256,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Porcentaje_Empresas__c",
+      "signature": "add\u0000[379250,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Porcentaje_Hombres__c",
+      "signature": "add\u0000[379248,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Porcentaje_Mujeres__c",
+      "signature": "add\u0000[379246,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Tipo_Cliente__c",
+      "signature": "add\u0000[378781,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Tipo_Organizacion__c",
+      "signature": "add\u0000[383880,\"unknown\",\"unknown\",false,false]"
+    },
+    {
       "xmlName": "CustomIndex",
       "fullName": "Datos_Maestros__c.SourceSystemIdentifier__c",
       "signature": "add\u0000[169853,\"unknown\",\"unknown\",false,false]"
@@ -4180,13 +5970,38 @@
     },
     {
       "xmlName": "CustomMetadata",
+      "fullName": "ConfigLoanDecisionAPI.URL",
+      "signature": "modify\u0000[383730,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "ConfigLoanDecisionAPI.URLVehicular",
+      "signature": "modify\u0000[383729,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_APIPrestamoConfig.Default",
+      "signature": "modify\u0000[384046,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
       "fullName": "FSC_MatrizClasificacionMIPYMES.Gran_Empresa",
       "signature": "delete\u0000[157567,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "CustomMetadata",
+      "fullName": "FSC_Referidor.Detailed_Studies_SRL_1_32_42664_9",
+      "signature": "add\u0000[383904,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_Referidor.Lopez_Vanderhost_Perez_Real_Estate_232",
+      "signature": "add\u0000[383905,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
       "fullName": "FinServ__FeatureFlagSettings.FinServ__QueryOptimization",
-      "signature": "add\u0000[190274,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[376904,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
@@ -5050,6 +6865,11 @@
     },
     {
       "xmlName": "CustomObject",
+      "fullName": "Account_Migracion__c",
+      "signature": "add\u0000[378630,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomObject",
       "fullName": "AgentLog__c",
       "signature": "add\u0000[105207,\"unknown\",\"unknown\",false,false]"
     },
@@ -5105,6 +6925,16 @@
     },
     {
       "xmlName": "CustomObject",
+      "fullName": "FinServ__AccountAccountRelation__c",
+      "signature": "add\u0000[380002,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomObject",
+      "fullName": "FinServ__ContactContactRelation__c",
+      "signature": "add\u0000[383171,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomObject",
       "fullName": "FinServ__FinancialAccount__c",
       "signature": "add\u0000[115180,\"unknown\",\"unknown\",false,false]"
     },
@@ -5121,7 +6951,7 @@
     {
       "xmlName": "CustomObject",
       "fullName": "Lead",
-      "signature": "modify\u0000[173370,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[383294,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomObject",
@@ -5157,6 +6987,11 @@
       "xmlName": "CustomObject",
       "fullName": "TCP_Welcome_Config",
       "signature": "add\u0000[104398,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomObject",
+      "fullName": "WF01_Composicion__c",
+      "signature": "add\u0000[378886,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomObjectTranslation",
@@ -5201,7 +7036,7 @@
     {
       "xmlName": "CustomObjectTranslation",
       "fullName": "Lead-es",
-      "signature": "add\u0000[352811,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[376358,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomObjectTranslation",
@@ -5225,8 +7060,23 @@
     },
     {
       "xmlName": "CustomPermission",
+      "fullName": "CP_FSC_Legal_Dashboard",
+      "signature": "add\u0000[382632,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomPermission",
+      "fullName": "CP_FSC_PLA_Dashboard",
+      "signature": "add\u0000[382642,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomPermission",
       "fullName": "CP_PLA_User",
       "signature": "add\u0000[171957,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomPermission",
+      "fullName": "FSC_CP_Home_Oficial_Negocio",
+      "signature": "add\u0000[382635,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomPermission",
@@ -5255,6 +7105,21 @@
     },
     {
       "xmlName": "CustomTab",
+      "fullName": "FSC_Bandeja_Legal_Page",
+      "signature": "add\u0000[382657,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomTab",
+      "fullName": "FSC_PLA_Cumplimiento_Page",
+      "signature": "add\u0000[382651,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomTab",
+      "fullName": "Generar_composici_n_WF01",
+      "signature": "add\u0000[379395,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomTab",
       "fullName": "Knowledge__kav",
       "signature": "add\u0000[192536,\"unknown\",\"unknown\",false,false]"
     },
@@ -5267,6 +7132,11 @@
       "xmlName": "CustomTab",
       "fullName": "OpportunityTCP__c",
       "signature": "add\u0000[104437,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomTab",
+      "fullName": "WF01_Composicion__c",
+      "signature": "add\u0000[378971,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Dashboard",
@@ -5502,6 +7372,16 @@
       "xmlName": "Document",
       "fullName": "Documentos/tarifario",
       "signature": "add\u0000[171974,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "DuplicateRule",
+      "fullName": "Lead.DR_Lead_vs_Cuenta_PF",
+      "signature": "add\u0000[376363,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "DuplicateRule",
+      "fullName": "Lead.DR_Lead_vs_Cuenta_PJ",
+      "signature": "add\u0000[376364,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "EmailFolder",
@@ -5834,21 +7714,6 @@
       "signature": "add\u0000[114407,\"unknown\",\"unknown\",false,false]"
     },
     {
-      "xmlName": "ExternalCredential",
-      "fullName": "CallMeBack",
-      "signature": "modify\u0000[375781,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "ExtlClntAppConfigurablePolicies",
-      "fullName": "FSC_Rla_Approval_Admin_App_plcy",
-      "signature": "modify\u0000[375768,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "ExtlClntAppGlobalOauthSettings",
-      "fullName": "FSC_Rla_Approval_Admin_App_glbloauth",
-      "signature": "modify\u0000[375767,\"unknown\",\"unknown\",false,false]"
-    },
-    {
       "xmlName": "FieldRestrictionRule",
       "fullName": "Rule0df961a43cb8c794181e782b9499a82d98702b0de8270f392267bbcff695fa99",
       "signature": "add\u0000[366204,\"unknown\",\"unknown\",false,false]"
@@ -5870,6 +7735,16 @@
     },
     {
       "xmlName": "FlexiPage",
+      "fullName": "Account_Account_Relationship_Record_Page",
+      "signature": "add\u0000[379137,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "FlexiPage",
+      "fullName": "Account_Record_Page2",
+      "signature": "add\u0000[379980,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "FlexiPage",
       "fullName": "AdvertisingInventoryCalendar_UtilityBar",
       "signature": "add\u0000[101380,\"unknown\",\"unknown\",false,false]"
     },
@@ -5887,6 +7762,11 @@
       "xmlName": "FlexiPage",
       "fullName": "Cuenta_financiera_P_gina_de_registro",
       "signature": "add\u0000[357415,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "FlexiPage",
+      "fullName": "FSC_Bandeja_Legal_Page",
+      "signature": "add\u0000[382656,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
@@ -5925,8 +7805,18 @@
     },
     {
       "xmlName": "FlexiPage",
+      "fullName": "FSC_Legal_Home",
+      "signature": "add\u0000[382620,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "FlexiPage",
+      "fullName": "FSC_PLA_Cumplimiento_Page",
+      "signature": "add\u0000[382650,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "FlexiPage",
       "fullName": "FSC_Sales_Home",
-      "signature": "add\u0000[339361,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[382670,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
@@ -5936,7 +7826,7 @@
     {
       "xmlName": "FlexiPage",
       "fullName": "FSC_Service_Home1",
-      "signature": "add\u0000[349490,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[382641,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
@@ -5950,6 +7840,11 @@
     },
     {
       "xmlName": "FlexiPage",
+      "fullName": "Generar_composici_n_WF01",
+      "signature": "add\u0000[379378,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "FlexiPage",
       "fullName": "HomeGerenteAnalisisCredito",
       "signature": "add\u0000[171975,\"unknown\",\"unknown\",false,false]"
     },
@@ -5960,13 +7855,18 @@
     },
     {
       "xmlName": "FlexiPage",
+      "fullName": "Home_Oficial_de_Negocio",
+      "signature": "add\u0000[382638,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "FlexiPage",
       "fullName": "Home_Page_Default",
       "signature": "add\u0000[349614,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "Home_TC_Preembosada",
-      "signature": "add\u0000[165272,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[382671,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
@@ -6012,6 +7912,11 @@
       "xmlName": "FlexiPage",
       "fullName": "Messaging_Session_Record_Page2",
       "signature": "add\u0000[105564,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "FlexiPage",
+      "fullName": "Personal_Account_LP",
+      "signature": "add\u0000[379981,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
@@ -6066,22 +7971,22 @@
     {
       "xmlName": "FlexiPage",
       "fullName": "candidato_pagina_de_registro_PF",
-      "signature": "add\u0000[360171,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[382084,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "candidato_pagina_de_registro_PJ",
-      "signature": "add\u0000[361224,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[382607,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "cliente_pagina_de_registro_BUSINESS",
-      "signature": "add\u0000[376060,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[384369,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "cliente_pagina_de_registro_PERSONA",
-      "signature": "add\u0000[368080,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[382739,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Flow",
@@ -6276,7 +8181,7 @@
     {
       "xmlName": "Flow",
       "fullName": "FSC_Notificaciones_por_Email_RLA",
-      "signature": "add\u0000[272881,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[382951,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Flow",
@@ -6364,6 +8269,16 @@
       "signature": "add\u0000[354538,\"unknown\",\"unknown\",false,false]"
     },
     {
+      "xmlName": "Flow",
+      "fullName": "VFS_FirmantesAutorizados",
+      "signature": "add\u0000[380771,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Flow",
+      "fullName": "WF01_Generar_composici_n",
+      "signature": "add\u0000[378944,\"unknown\",\"unknown\",false,false]"
+    },
+    {
       "xmlName": "GenAiPlannerBundle",
       "fullName": "Agente_Vimenca",
       "signature": "add\u0000[180876,\"unknown\",\"unknown\",false,false]"
@@ -6434,11 +8349,6 @@
       "signature": "delete\u0000[272704,\"unknown\",\"unknown\",true,false]"
     },
     {
-      "xmlName": "Group",
-      "fullName": "FSC_GestionDePagaresYContratos",
-      "signature": "modify\u0000[375839,\"unknown\",\"unknown\",false,false]"
-    },
-    {
       "xmlName": "Layout",
       "fullName": "Account-Cliente (Jurídico) Layout",
       "signature": "add\u0000[354889,\"unknown\",\"unknown\",false,false]"
@@ -6446,7 +8356,12 @@
     {
       "xmlName": "Layout",
       "fullName": "Account-Personas juridicas Page Layout",
-      "signature": "add\u0000[227498,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383109,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Layout",
+      "fullName": "Admin_Doc_Requerida__c-Formato Administración de Doc. Requerida",
+      "signature": "add\u0000[384423,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Layout",
@@ -6477,6 +8392,11 @@
       "xmlName": "Layout",
       "fullName": "ConfigLoanDecisionAPI__mdt-ConfigLoanDecisionAPI Layout",
       "signature": "add\u0000[209203,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Layout",
+      "fullName": "Contact-FinServ__Contact (Business) Layout",
+      "signature": "add\u0000[380804,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Layout",
@@ -6530,6 +8450,11 @@
     },
     {
       "xmlName": "Layout",
+      "fullName": "LoanApplicant-Formato Solicitante de préstamo",
+      "signature": "modify\u0000[383908,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Layout",
       "fullName": "OTP_Challenge__c-OTP Challenge Layout",
       "signature": "add\u0000[105215,\"unknown\",\"unknown\",false,false]"
     },
@@ -6552,6 +8477,26 @@
       "xmlName": "Layout",
       "fullName": "Reclamacion_Routing_Config__mdt-Formato Configuración de Ruteo de Reclamación",
       "signature": "add\u0000[104275,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Layout",
+      "fullName": "ResidentialLoanApplication-Solicitud de crédito Consumo",
+      "signature": "modify\u0000[383830,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Layout",
+      "fullName": "ResidentialLoanApplication-Solicitud de crédito Hipotecario",
+      "signature": "modify\u0000[383831,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Layout",
+      "fullName": "ResidentialLoanApplication-Solicitud de crédito PYME",
+      "signature": "modify\u0000[383832,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Layout",
+      "fullName": "ResidentialLoanApplication-Solicitud de crédito Vehículo",
+      "signature": "modify\u0000[383833,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Layout",
@@ -6589,6 +8534,11 @@
       "signature": "add\u0000[259255,\"unknown\",\"unknown\",false,false]"
     },
     {
+      "xmlName": "Layout",
+      "fullName": "WF01_Composicion__c-WF01 Composición Layout",
+      "signature": "add\u0000[379324,\"unknown\",\"unknown\",false,false]"
+    },
+    {
       "xmlName": "LeadConvertSettings",
       "fullName": "LeadConvertSettings",
       "signature": "add\u0000[271487,\"unknown\",\"unknown\",false,false]"
@@ -6596,7 +8546,17 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "accountDocumentsPicker",
-      "signature": "add\u0000[375900,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[378613,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "LightningComponentBundle",
+      "fullName": "accountParticipantsPicker",
+      "signature": "add\u0000[380098,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "LightningComponentBundle",
+      "fullName": "accountSendToReviewModal",
+      "signature": "add\u0000[382752,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -6641,7 +8601,7 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "financialAccountCustomCreate",
-      "signature": "add\u0000[337614,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383162,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -6661,7 +8621,7 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "fscNewCaseSolicitud",
-      "signature": "add\u0000[367060,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[384436,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -6675,13 +8635,28 @@
     },
     {
       "xmlName": "LightningComponentBundle",
+      "fullName": "fsc_EditarDocumentoAnalisis",
+      "signature": "modify\u0000[383971,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "LightningComponentBundle",
       "fullName": "fsc_NuevaSolicitudCreditoAction",
-      "signature": "add\u0000[190505,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383947,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "LightningComponentBundle",
+      "fullName": "fsc_RlaAcciones",
+      "signature": "modify\u0000[384533,\"2026-10-26T17:28:24.000+0000\",\"0RdVC000000rIrk0AE\",false,true]"
     },
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "fsc_caso_cierre_guiado",
-      "signature": "add\u0000[352895,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[384500,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "LightningComponentBundle",
+      "fullName": "fsc_loanApplicantManager",
+      "signature": "modify\u0000[383938,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -6726,22 +8701,27 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "leadConvertControlled",
-      "signature": "add\u0000[376114,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[378535,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "leadDocumentsPicker",
-      "signature": "add\u0000[375905,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[378618,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "leadParticipantsPicker",
-      "signature": "add\u0000[104971,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[384002,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "LightningComponentBundle",
+      "fullName": "leadSendToLegalApproval",
+      "signature": "add\u0000[383504,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "legalDocumentsAssignedGrid",
-      "signature": "add\u0000[173434,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[384030,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -6765,8 +8745,13 @@
     },
     {
       "xmlName": "LightningComponentBundle",
+      "fullName": "plaDocumentsAssignedGrid",
+      "signature": "add\u0000[382789,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "LightningComponentBundle",
       "fullName": "vFS_GeneraryfirmarDocs",
-      "signature": "add\u0000[359497,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[380837,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -6780,8 +8765,18 @@
     },
     {
       "xmlName": "LightningComponentBundle",
+      "fullName": "vfs_AccountIndicadorCumplimiento",
+      "signature": "add\u0000[384490,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "LightningComponentBundle",
       "fullName": "vfs_GerenteVerificador",
       "signature": "add\u0000[247439,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "LightningComponentBundle",
+      "fullName": "vfs_LeadAreaResponsableAlert",
+      "signature": "add\u0000[377194,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -6791,7 +8786,7 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "vfs_LeadIndicadorCumplimiento",
-      "signature": "add\u0000[224085,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[384495,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ListView",
@@ -6816,7 +8811,7 @@
     {
       "xmlName": "ListView",
       "fullName": "Admin_Doc_Requerida__c.All",
-      "signature": "add\u0000[104794,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[384432,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ListView",
@@ -7014,6 +9009,26 @@
       "signature": "add\u0000[334373,\"unknown\",\"unknown\",false,false]"
     },
     {
+      "xmlName": "ListView",
+      "fullName": "WF01_Composicion__c.All",
+      "signature": "add\u0000[379994,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "MatchingRule",
+      "fullName": "Account.MR_Cuenta_RNC",
+      "signature": "add\u0000[376221,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "MatchingRule",
+      "fullName": "Account.MR_Identificacion_Cuenta_PJ",
+      "signature": "add\u0000[376152,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "MatchingRule",
+      "fullName": "Account.MR_PersonAccount_Cedula",
+      "signature": "add\u0000[376222,\"unknown\",\"unknown\",false,false]"
+    },
+    {
       "xmlName": "MilestoneType",
       "fullName": "Ejecucion_Operaciones_27_Dias",
       "signature": "add\u0000[126007,\"unknown\",\"unknown\",false,false]"
@@ -7134,11 +9149,6 @@
       "signature": "add\u0000[114376,\"unknown\",\"unknown\",false,false]"
     },
     {
-      "xmlName": "NamedCredential",
-      "fullName": "FSC_RlaApprovalAdmin",
-      "signature": "modify\u0000[375759,\"unknown\",\"unknown\",false,false]"
-    },
-    {
       "xmlName": "NavigationMenu",
       "fullName": "Default_Navigation",
       "signature": "add\u0000[114254,\"unknown\",\"unknown\",false,false]"
@@ -7230,6 +9240,86 @@
     },
     {
       "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_Administrador",
+      "signature": "modify\u0000[383834,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_Analista_Credito",
+      "signature": "modify\u0000[383835,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_Archivo_Custodia_Valores",
+      "signature": "modify\u0000[383836,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_BancaSeguro",
+      "signature": "modify\u0000[383837,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_CDD",
+      "signature": "modify\u0000[383838,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_Captura",
+      "signature": "modify\u0000[383839,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_Comite_Credito",
+      "signature": "modify\u0000[383840,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_Desembolso_Creditos",
+      "signature": "modify\u0000[383841,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_EjecucionOperaciones",
+      "signature": "modify\u0000[383842,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_Formalizacion_Creditos",
+      "signature": "modify\u0000[383843,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_Generacion_Pagares_Contratos",
+      "signature": "modify\u0000[383844,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_MantenimientoOperaciones",
+      "signature": "modify\u0000[383845,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_Oficial_Negocio",
+      "signature": "modify\u0000[383846,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_Prevencion_Lavado_Activos",
+      "signature": "modify\u0000[383847,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_Recepcion_Control_Documentos",
+      "signature": "modify\u0000[383848,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_Supervisor",
+      "signature": "modify\u0000[383849,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
       "fullName": "FSC_SecurityEnforced_Test_Access",
       "signature": "delete\u0000[170828,\"unknown\",\"unknown\",true,false]"
     },
@@ -7276,7 +9366,7 @@
     {
       "xmlName": "PermissionSet",
       "fullName": "FSC_VIMENCA_GESTION_COMERCIAL",
-      "signature": "add\u0000[188753,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[384504,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
@@ -7292,6 +9382,11 @@
       "xmlName": "PermissionSet",
       "fullName": "FSC_VIMENCA_PLA",
       "signature": "delete\u0000[132798,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_VIMENCA_PLA_CUMPLIMIENTO",
+      "signature": "add\u0000[382721,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
@@ -7355,6 +9450,16 @@
     },
     {
       "xmlName": "PermissionSet",
+      "fullName": "PS_FSC_Acceso_Legal",
+      "signature": "add\u0000[382924,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "PS_FSC_Oficial_Negocio_Home",
+      "signature": "add\u0000[382639,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
       "fullName": "PS_TCP_Admin",
       "signature": "add\u0000[171991,\"unknown\",\"unknown\",false,false]"
     },
@@ -7406,7 +9511,7 @@
     {
       "xmlName": "PermissionSet",
       "fullName": "Teleasistencia_Omnichannel",
-      "signature": "add\u0000[114684,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383900,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
@@ -7490,6 +9595,11 @@
     },
     {
       "xmlName": "PermissionSetGroup",
+      "fullName": "FSC_PSG_UsuarioBase",
+      "signature": "delete\u0000[382935,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "PermissionSetGroup",
       "fullName": "PSG_VIMENCA_BACK_OFFICE",
       "signature": "add\u0000[311459,\"unknown\",\"unknown\",false,false]"
     },
@@ -7501,12 +9611,12 @@
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "PSG_VIMENCA_FRONT_OFFICE",
-      "signature": "add\u0000[375848,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[384509,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "PSG_VIMENCA_LEGAL",
-      "signature": "add\u0000[160439,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383309,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
@@ -7521,7 +9631,7 @@
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "force__CommerceUsers",
-      "signature": "add\u0000[357378,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383719,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
@@ -7531,7 +9641,7 @@
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "force__GeneralUsers",
-      "signature": "add\u0000[357386,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383717,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
@@ -7541,7 +9651,7 @@
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "force__MarketingUsers",
-      "signature": "add\u0000[357382,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383712,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
@@ -7551,12 +9661,12 @@
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "force__SalesUsers",
-      "signature": "add\u0000[357380,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383716,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "force__SalesWorkspacePSG",
-      "signature": "add\u0000[151711,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383707,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
@@ -7566,7 +9676,7 @@
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "force__ServiceUsers",
-      "signature": "add\u0000[357387,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383710,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
@@ -7586,12 +9696,12 @@
     {
       "xmlName": "Profile",
       "fullName": "Admin",
-      "signature": "add\u0000[376122,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384573,\"2026-10-26T17:44:42.000+0000\",\"00e3i000001RR1qAAG\",false,true]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Advisor",
-      "signature": "add\u0000[367042,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[379398,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -7610,23 +9720,28 @@
     },
     {
       "xmlName": "Profile",
+      "fullName": "Consultor Keystone",
+      "signature": "add\u0000[384501,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Profile",
       "fullName": "Core",
-      "signature": "add\u0000[367043,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[379400,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "ESW_WebKeystone_1782826064620 Profile",
-      "signature": "add\u0000[119100,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[378718,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Inteligencia de Negocio",
-      "signature": "add\u0000[367044,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[379515,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Legal",
-      "signature": "add\u0000[367045,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[379516,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -7636,32 +9751,37 @@
     {
       "xmlName": "Profile",
       "fullName": "Perfil Vimenca",
-      "signature": "add\u0000[376124,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384526,\"2026-10-26T17:26:57.000+0000\",\"00eVT00000FcWvtYAF\",false,true]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Perfil Vimenca - Gerencia - TC Preembosada",
-      "signature": "add\u0000[367048,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[379405,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Perfil Vimenca - TC Negocio",
-      "signature": "add\u0000[367049,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[379404,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Perfil Vimenca - TC Preembosada",
-      "signature": "add\u0000[367050,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[379403,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Profile",
+      "fullName": "Perfil Vimenca - Teleasistencia",
+      "signature": "add\u0000[384389,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Perfíl Vimenca - BO",
-      "signature": "add\u0000[367047,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[379975,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Personal Banker",
-      "signature": "add\u0000[367051,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[379410,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -7671,7 +9791,7 @@
     {
       "xmlName": "Profile",
       "fullName": "Read Only",
-      "signature": "add\u0000[367052,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[379408,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -7681,12 +9801,12 @@
     {
       "xmlName": "Profile",
       "fullName": "Relationship Manager",
-      "signature": "add\u0000[367053,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[379401,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Salesforce API Only System Integrations",
-      "signature": "add\u0000[367054,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[379396,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -7696,7 +9816,7 @@
     {
       "xmlName": "Profile",
       "fullName": "Sólo Lectura Agente",
-      "signature": "add\u0000[367055,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[379514,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ProfilePasswordPolicy",
@@ -7721,7 +9841,7 @@
     {
       "xmlName": "Prompt",
       "fullName": "Nueva_Busqueda_Institucional",
-      "signature": "modify\u0000[376125,\"2026-10-11T18:05:43.000+0000\",\"0bsVC000000A8fRYAS\",false,true]"
+      "signature": "add\u0000[376125,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
@@ -7966,12 +10086,12 @@
     {
       "xmlName": "Queue",
       "fullName": "FSC_Legal",
-      "signature": "add\u0000[333993,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383615,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
       "fullName": "FSC_PLA",
-      "signature": "add\u0000[173420,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383614,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
@@ -8040,6 +10160,11 @@
     },
     {
       "xmlName": "QuickAction",
+      "fullName": "Account.Informacion_Adicional_PJ",
+      "signature": "add\u0000[379978,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "QuickAction",
       "fullName": "Account.Nueva_Solicitud_TC_Preembosada",
       "signature": "add\u0000[118585,\"unknown\",\"unknown\",false,false]"
     },
@@ -8052,6 +10177,11 @@
       "xmlName": "QuickAction",
       "fullName": "Account.Reintentar_C_C_en_CORE",
       "signature": "add\u0000[126213,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "QuickAction",
+      "fullName": "Account.Solicitar_Revision_PLA_Legal",
+      "signature": "add\u0000[382720,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "QuickAction",
@@ -8097,6 +10227,11 @@
       "xmlName": "QuickAction",
       "fullName": "FinServ__FinancialAccount__c.Reintentar_C_P_en_CORE",
       "signature": "add\u0000[244926,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "QuickAction",
+      "fullName": "Lead.Enviar_Aprobacion_Legal_PLA",
+      "signature": "add\u0000[381127,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "QuickAction",
@@ -8184,6 +10319,11 @@
       "signature": "add\u0000[104436,\"unknown\",\"unknown\",false,false]"
     },
     {
+      "xmlName": "QuickAction",
+      "fullName": "WF01_Composicion__c.Generar_composicion_WF01",
+      "signature": "add\u0000[379148,\"unknown\",\"unknown\",false,false]"
+    },
+    {
       "xmlName": "RecordType",
       "fullName": "Account.Candidato_Persona_Juridica",
       "signature": "add\u0000[169775,\"unknown\",\"unknown\",false,false]"
@@ -8217,6 +10357,11 @@
       "xmlName": "RecordType",
       "fullName": "Account.Personas_Juridicas",
       "signature": "add\u0000[169781,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "RecordType",
+      "fullName": "Account_Migracion__c.NoCustomer",
+      "signature": "add\u0000[378631,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
@@ -8371,12 +10516,12 @@
     {
       "xmlName": "RecordType",
       "fullName": "Documentacion_Legal__c.DOC_Documentacion_PF",
-      "signature": "add\u0000[172679,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[377762,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Documentacion_Legal__c.DOC_Documentacion_PJ",
-      "signature": "add\u0000[172680,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[377763,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
@@ -8391,32 +10536,32 @@
     {
       "xmlName": "RecordType",
       "fullName": "Lead.Candidato_Persona_Juridica",
-      "signature": "add\u0000[360181,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383324,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Lead.Candidato_Persona_Natural",
-      "signature": "add\u0000[360180,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383325,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Lead.FinServ__BusinessReferral",
-      "signature": "add\u0000[190173,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383326,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Lead.FinServ__General",
-      "signature": "add\u0000[190176,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383327,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Lead.FinServ__Referral",
-      "signature": "add\u0000[190175,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383328,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "Lead.FinServ__RetirementPlanning",
-      "signature": "add\u0000[190171,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383329,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
@@ -8456,12 +10601,12 @@
     {
       "xmlName": "RelationshipGraphDefinition",
       "fullName": "Documentos_Presentados",
-      "signature": "add\u0000[116254,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[379982,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RelationshipGraphDefinition",
       "fullName": "Informacion_Financiera_de_Cliente",
-      "signature": "add\u0000[272991,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[379983,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RelationshipGraphDefinition",
@@ -8470,13 +10615,18 @@
     },
     {
       "xmlName": "RelationshipGraphDefinition",
+      "fullName": "Participantes",
+      "signature": "add\u0000[379990,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "RelationshipGraphDefinition",
       "fullName": "Referencias",
-      "signature": "add\u0000[358146,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[380848,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RelationshipGraphDefinition",
       "fullName": "Relaciones_Persona_Juridca",
-      "signature": "add\u0000[367759,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[379986,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RemoteSiteSetting",
@@ -8540,6 +10690,56 @@
     },
     {
       "xmlName": "Report",
+      "fullName": "FSCCasos/Tickets_Soporte_TI_por_Dia_y_Horario",
+      "signature": "add\u0000[376226,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Report",
+      "fullName": "FSCVentas/Crecimiento_de_Cartera",
+      "signature": "add\u0000[379632,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Report",
+      "fullName": "FSCVentas/Crecimiento_de_Cartera3",
+      "signature": "add\u0000[379633,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Report",
+      "fullName": "FSCVentas/FSC_Mis_Clientes_Fisicos_y_Juridicos",
+      "signature": "add\u0000[382636,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Report",
+      "fullName": "FSCVentas/FSC_Mis_Prospectos_Fisicos_y_Juridicos",
+      "signature": "add\u0000[382637,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Report",
+      "fullName": "FSCVentas/Profundidad_de_la_Relacion",
+      "signature": "add\u0000[379634,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Report",
+      "fullName": "FSCVentas/Profundidad_de_la_Relacion1",
+      "signature": "add\u0000[379635,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Report",
+      "fullName": "FSCVentas/Top_10_Oficiales_de_Negocio",
+      "signature": "add\u0000[379636,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Report",
+      "fullName": "FSCVentas/Top_10_Oficiales_de_Negocio_Ultimo_Mes_HLB",
+      "signature": "add\u0000[379637,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Report",
+      "fullName": "FinServ__BankingReports/WF01_Composicin_5uy",
+      "signature": "add\u0000[383881,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Report",
       "fullName": "TCPreembosada/TCP_Cantidad_de_Solicitudes_por_Esado_eJh",
       "signature": "add\u0000[171959,\"unknown\",\"unknown\",false,false]"
     },
@@ -8600,13 +10800,18 @@
     },
     {
       "xmlName": "ReportFolder",
+      "fullName": "FSCVentas",
+      "signature": "add\u0000[383011,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ReportFolder",
       "fullName": "Reportesdecreditos",
       "signature": "add\u0000[101745,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ReportFolder",
       "fullName": "TCPreembosada",
-      "signature": "add\u0000[171958,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383012,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ReportType",
@@ -8740,8 +10945,23 @@
     },
     {
       "xmlName": "ValidationRule",
+      "fullName": "Account.VR_Ejecutivo",
+      "signature": "add\u0000[382808,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ValidationRule",
+      "fullName": "Account.VR_RNC",
+      "signature": "add\u0000[382812,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ValidationRule",
       "fullName": "Case.CAS_Limites_Aprobados_Procesamiento",
-      "signature": "add\u0000[351295,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[384373,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ValidationRule",
+      "fullName": "Case.VR_Case_Cerrado_SoloAdministrador",
+      "signature": "add\u0000[384372,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -8795,6 +11015,16 @@
     },
     {
       "xmlName": "ValidationRule",
+      "fullName": "FinServ__ContactContactRelation__c.Restriccion_Tipos_CCR_Por_Tipo_Persona",
+      "signature": "add\u0000[380888,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ValidationRule",
+      "fullName": "Lead.Segmento_Obligatorio_Conversion",
+      "signature": "add\u0000[376903,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Bloquear_Aprobacion_Legal_Sin_Validar",
       "signature": "add\u0000[101543,\"unknown\",\"unknown\",false,false]"
     },
@@ -8811,7 +11041,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_CONVERTIR_PEP_LISTAS_PF",
-      "signature": "add\u0000[101546,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[376895,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -8846,7 +11076,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Conversion_Cliente_PJ",
-      "signature": "add\u0000[101552,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[376921,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -8936,12 +11166,12 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Informacion_FATCA",
-      "signature": "add\u0000[101564,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[376896,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Informacion_PEP",
-      "signature": "add\u0000[101565,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[376897,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -8956,12 +11186,12 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Lead_NumIdentificacion_Requerido_PF",
-      "signature": "add\u0000[101567,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[376310,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Lead_PF_BloqueoCamposIdentidad",
-      "signature": "add\u0000[376079,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[376898,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -8986,7 +11216,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_NumeroCalleSoloNumerico",
-      "signature": "add\u0000[190162,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[383624,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",

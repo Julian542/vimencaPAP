@@ -1,4 +1,6 @@
-public with sharing class FSC_ChecklistDocsController {
+// without sharing: el oficial o el administrador deben poder eliminar archivos que subió otro usuario.
+// Los permisos se validan explícitamente en cada método (validarCargaDocumento, saveRows).
+public without sharing class FSC_ChecklistDocsController {
 	@TestVisible private static Boolean testBypassPermissions = false;
 	private static final String PERMISO_ANALISTA_CREDITO = 'FSC_CP_Analista_Credito';
 	private static final String PERMISO_ADMINISTRADOR = 'FSC_CP_Administrador';
@@ -87,6 +89,9 @@ public with sharing class FSC_ChecklistDocsController {
 		public Datetime createdDate;
 		@AuraEnabled
 		public String createdByName;
+		// true solo si el archivo se subió desde la checklist (no precargado).
+		@AuraEnabled
+		public Boolean eliminable;
 	}
 
 	public class UploadResultDTO {
@@ -208,7 +213,8 @@ public with sharing class FSC_ChecklistDocsController {
 					ContentDocument.Title,
 					ContentDocument.FileType,
 					ContentDocument.CreatedDate,
-					ContentDocument.CreatedBy.Name
+					ContentDocument.CreatedBy.Name,
+					ContentDocument.LatestPublishedVersion.FirstPublishLocationId
 				FROM ContentDocumentLink
 				WHERE LinkedEntityId IN :joinIds
 				ORDER BY ContentDocument.CreatedDate DESC
@@ -219,6 +225,7 @@ public with sharing class FSC_ChecklistDocsController {
 				f.fileType = cdl.ContentDocument.FileType;
 				f.createdDate = cdl.ContentDocument.CreatedDate;
 				f.createdByName = cdl.ContentDocument.CreatedBy != null ? cdl.ContentDocument.CreatedBy.Name : null;
+				f.eliminable = cdl.ContentDocument.LatestPublishedVersion?.FirstPublishLocationId == cdl.LinkedEntityId;
 
 				if (!filesByJoinId.containsKey(cdl.LinkedEntityId)) {
 					filesByJoinId.put(cdl.LinkedEntityId, new List<FileDTO>());
@@ -540,6 +547,32 @@ public with sharing class FSC_ChecklistDocsController {
 	}
 
 	@AuraEnabled
+	public static void deleteUploadedFile(Id joinId, Id contentDocumentId) {
+		if (joinId == null || contentDocumentId == null) {
+			throw new AuraHandledException('No se pudo identificar el archivo a eliminar.');
+		}
+		validarCargaDocumento(joinId, 'No puede eliminar archivos de este documento. Revise el subestado, el responsable y el estado de revisión.');
+
+		// Solo archivos subidos desde la checklist: los precargados vienen de la cuenta o de la solicitud
+		// y borrarlos eliminaría el original.
+		Boolean subidoEnFila = [
+			SELECT COUNT()
+			FROM ContentVersion
+			WHERE ContentDocumentId = :contentDocumentId AND IsLatest = TRUE AND FirstPublishLocationId = :joinId
+		] > 0;
+		Boolean vinculadoAFila = [
+			SELECT COUNT()
+			FROM ContentDocumentLink
+			WHERE LinkedEntityId = :joinId AND ContentDocumentId = :contentDocumentId
+		] > 0;
+		if (!subidoEnFila || !vinculadoAFila) {
+			throw new AuraHandledException('Solo se pueden eliminar archivos cargados desde la checklist de documentos.');
+		}
+
+		delete new ContentDocument(Id = contentDocumentId);
+	}
+
+	@AuraEnabled
 	public static void linkUploadedFilesToRla(Id residentialLoanApplicationId, List<Id> contentDocumentIds) {
 		if (residentialLoanApplicationId == null)
 			return;
@@ -577,6 +610,10 @@ public with sharing class FSC_ChecklistDocsController {
 	}
 
 	private static void validarCargaDocumento(Id joinId) {
+		validarCargaDocumento(joinId, 'No puede cargar archivos en este documento. Revise el subestado, el responsable y el estado de revisión.');
+	}
+
+	private static void validarCargaDocumento(Id joinId, String mensajeError) {
 		FSC_SolicitudDeCreditoYChecklistDeDocs__c fila = [
 			SELECT FSC_EstadoRevision__c, FSC_Documento__r.FSC_CategoriaDelDocumento__c,
 				FSC_SolicitudDeCredito__r.CreatedById, FSC_SolicitudDeCredito__r.FSC_Subestado__c
@@ -594,7 +631,7 @@ public with sharing class FSC_ChecklistDocsController {
 				(subestado == 'Documentación para desembolso y firmas' && categoria == 'Documentos para desembolso');
 		}
 		if (!permitido || fila.FSC_EstadoRevision__c == ESTADO_APROBADO) {
-			throw new AuraHandledException('No puede cargar archivos en este documento. Revise el subestado, el responsable y el estado de revisión.');
+			throw new AuraHandledException(mensajeError);
 		}
 	}
 

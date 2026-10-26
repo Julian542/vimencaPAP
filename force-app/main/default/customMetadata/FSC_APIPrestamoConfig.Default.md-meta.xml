@@ -6,4 +6,8 @@
         <field>FSC_ApiKey__c</field>
         <value xsi:type="xsd:string">0a369d5e06b1e1f6eed8732fcc124010</value>
     </values>
+    <values>
+        <field>FSC_AutomatizarCreacionYDesembolso__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
 </CustomMetadata>

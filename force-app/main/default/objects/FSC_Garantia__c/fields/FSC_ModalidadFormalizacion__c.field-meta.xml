@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ModalidadFormalizacion__c</fullName>
+    <description>Define si el registro de la garantía se realiza antes o después del desembolso, o si solo se liquida el impuesto en DGII.</description>
+    <inlineHelpText>Define si el registro de la garantía se realiza antes o después del desembolso, o si solo se liquida el impuesto en DGII.</inlineHelpText>
+    <label>Modalidad de formalización</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Registro antes del desembolso</fullName>
+                <default>false</default>
+                <label>Registro antes del desembolso</label>
+            </value>
+            <value>
+                <fullName>Solo liquidar impuesto</fullName>
+                <default>false</default>
+                <label>Solo liquidar impuesto</label>
+            </value>
+            <value>
+                <fullName>Registro después del desembolso</fullName>
+                <default>false</default>
+                <label>Registro después del desembolso</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

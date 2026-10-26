@@ -41,7 +41,12 @@ public without sharing class FSC_PlanillaDesembolsoSaver {
 		}
 
 		rlaToUpdate.FSC_Subestado__c = TARGET_SUBSTATUS;
-		update rlaToUpdate;
+		FSC_CreditoAprobadoLockService.iniciarPlanillaDesembolso();
+		try {
+			update rlaToUpdate;
+		} finally {
+			FSC_CreditoAprobadoLockService.finalizarPlanillaDesembolso();
+		}
 	}
 
 	private static Boolean isAllowed(ResidentialLoanApplication rla) {

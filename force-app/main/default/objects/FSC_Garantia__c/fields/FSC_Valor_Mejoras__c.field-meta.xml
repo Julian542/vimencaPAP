@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Valor_Mejoras__c</fullName>
+    <description>Valor de las mejoras utilizado como base para calcular el máximo financiable de reconstrucción o terminación. Es independiente del valor total del inmueble, su tasación y su precio de venta.</description>
+    <inlineHelpText>Ingrese el valor de las mejoras para reconstrucción o terminación, en la misma moneda del crédito. Si lo informa, debe ser mayor que cero.</inlineHelpText>
+    <label>Valor de las mejoras</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

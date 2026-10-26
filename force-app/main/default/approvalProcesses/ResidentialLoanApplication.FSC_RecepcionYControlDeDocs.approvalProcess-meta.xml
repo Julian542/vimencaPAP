@@ -38,7 +38,7 @@
         <criteriaItems>
             <field>ResidentialLoanApplication.FSC_Doc_Completa_Analisis__c</field>
             <operation>equals</operation>
-            <value>Verdadero</value>
+            <value>True</value>
         </criteriaItems>
     </entryCriteria>
     <finalApprovalActions>

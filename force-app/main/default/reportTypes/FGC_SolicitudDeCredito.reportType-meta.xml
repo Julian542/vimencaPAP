@@ -113,6 +113,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>FSC_UsuarioFormalizacion__c</field>
+            <table>ResidentialLoanApplication</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>FSC_UsuarioPagaresYContratos__c</field>
             <table>ResidentialLoanApplication</table>
         </columns>
@@ -1649,6 +1654,36 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>FSC_IdentificacionCliente__c</field>
+            <table>ResidentialLoanApplication</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FSC_TipoSolicitudMRI__c</field>
+            <table>ResidentialLoanApplication</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FSC_TipoProductoSolicitudMRI__c</field>
+            <table>ResidentialLoanApplication</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FSC_CanalSolicitudMRI__c</field>
+            <table>ResidentialLoanApplication</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FSC_CodigoTipoSolicitudMRI__c</field>
+            <table>ResidentialLoanApplication</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FSC_CodigoTipoProductoMRI__c</field>
+            <table>ResidentialLoanApplication</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FSC_CodigoCanalSolicitudMRI__c</field>
             <table>ResidentialLoanApplication</table>
         </columns>
         <masterLabel>Residential Loan Applications</masterLabel>

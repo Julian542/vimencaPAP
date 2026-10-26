@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_TipoCotizacion__c</fullName>
+    <description>Distingue la tasa de compra de la tasa de venta usada en la conversión.</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Indique COMPRA o VENTA. El registro inicial usa VENTA.</inlineHelpText>
+    <label>Tipo de cotización</label>
+    <length>10</length>
+    <required>true</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

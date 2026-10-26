@@ -4,9 +4,15 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initialscale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <style type="text/css">@media screen and (max-width: 480px) {slot[style] {margin-right: 0 !important;}.columnDiv {margin-right: 0 !important;}}@media screen and (min-width: 480px) {slot[style] {margin-bottom: 0 !important;}.columnDiv {margin-bottom: 0 !important;}}</style>
-  <style type="text/css">@media screen and (max-width: 480px) {.contentbuilderBaseColumnRow .columnCell {display:inline-block;width:100%}}</style>
-  <style type="text/css">.contentpageDefaultEmailTemplatePageTemplate .contentRoot {width: 600px;}@media only screen and (max-width: 480px) {.contentpageDefaultEmailTemplatePageTemplate .contentRoot {width: 320px;}}</style>
+  <style type="text/css">/*<![CDATA[*/
+@media screen and (max-width: 480px) {slot[style] {margin-right: 0 !important;}.columnDiv {margin-right: 0 !important;}}@media screen and (min-width: 480px) {slot[style] {margin-bottom: 0 !important;}.columnDiv {margin-bottom: 0 !important;}}
+/*]]>*/</style>
+  <style type="text/css">/*<![CDATA[*/
+@media screen and (max-width: 480px) {.contentbuilderBaseColumnRow .columnCell {display:inline-block;width:100%}}
+/*]]>*/</style>
+  <style type="text/css">/*<![CDATA[*/
+.contentpageDefaultEmailTemplatePageTemplate .contentRoot {width: 600px;}@media only screen and (max-width: 480px) {.contentpageDefaultEmailTemplatePageTemplate .contentRoot {width: 320px;}}
+/*]]>*/</style>
  </head>
  <body>
   <table class="contentpageDefaultEmailTemplatePageTemplate" style="background-color: #E9EAEC;" role="presentation" id="contentpage_emailTemplateBodyContent" width="100%" cellpadding="0" cellspacing="0">
@@ -31,14 +37,16 @@
                      <td align="left"><img src="{[devName:VimencaLogo]}" alt="" width="150" style="width: 100%; display: block; border: none; max-width: 25%; object-fit: fill;" /></td>
                     </tr>
                    </tbody>
-                  </table></td>
+                  </table>
+                 </td>
                 </tr>
                 <tr>
                  <td>
                   <table style="font-size:14px; width: 100%; border-collapse: collapse; word-break: break-word;" role="presentation" cellspacing="0" cellpadding="0" id="contentregion" locked="0">
                    <tbody>
                     <tr>
-                     <td class="contentbuilder-html" style="padding: 0;"><br />
+                     <td class="contentbuilder-html" style="padding: 0;">
+                      <br />
                       <div style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #000000; line-height: 1.5;">
                        <p style="margin: 0 0 14px 0;">Hola {{{ResidentialLoanApplication.FSC_CreatedBy_Name__c}}},</p>
                        <p style="margin: 0 0 14px 0;">Para continuar con la evaluación de la solicitud {{{ResidentialLoanApplication.Name}}}, requerimos que nos suministres lo solicitado en el registro de crédito:</p>
@@ -47,19 +55,24 @@
                        </div>
                        <p style="margin: 0 0 14px 0;">Al recibir esta información dentro de las próximas 24 horas, continúa el proceso de aprobación. De lo contrario, el caso será cerrado.</p>
                        <p style="margin: 0;">¡Feliz día!</p>
-                      </div></td>
+                      </div>
+                     </td>
                     </tr>
                    </tbody>
-                  </table></td>
+                  </table>
+                 </td>
                 </tr>
                </tbody>
-              </table></td>
+              </table>
+             </td>
             </tr>
            </tbody>
-          </table></td>
+          </table>
+         </td>
         </tr>
        </tbody>
-      </table></td>
+      </table>
+     </td>
     </tr>
    </tbody>
   </table>

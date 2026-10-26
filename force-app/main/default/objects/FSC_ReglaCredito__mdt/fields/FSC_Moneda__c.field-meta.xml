@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Moneda__c</fullName>
+    <description>DOP y USD son monedas del crédito; TODAS aplica en ambas conservando la moneda del mínimo.</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Seleccione DOP, USD o TODAS. La moneda del mínimo se configura por separado.</inlineHelpText>
+    <label>Moneda del crédito</label>
+    <required>true</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>DOP</fullName>
+                <default>false</default>
+                <label>DOP</label>
+            </value>
+            <value>
+                <fullName>USD</fullName>
+                <default>false</default>
+                <label>USD</label>
+            </value>
+            <value>
+                <fullName>TODAS</fullName>
+                <default>false</default>
+                <label>TODAS</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

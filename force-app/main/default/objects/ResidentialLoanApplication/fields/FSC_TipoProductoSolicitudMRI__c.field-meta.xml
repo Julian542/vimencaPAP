@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_TipoProductoSolicitudMRI__c</fullName>
+    <description>Producto crediticio según T078. En PYME se informa el producto comercial principal de la solicitud.</description>
+    <inlineHelpText>Seleccione el producto de T078. Si hay varias facilidades, informe el producto de la de mayor monto solicitado.</inlineHelpText>
+    <label>Tipo de producto solicitud MRI</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>111</fullName>
+                <default>false</default>
+                <label>Préstamos Comerciales a través de Líneas de Crédito</label>
+            </value>
+            <value>
+                <fullName>112</fullName>
+                <default>false</default>
+                <label>Préstamos Comerciales Individuales</label>
+            </value>
+            <value>
+                <fullName>113</fullName>
+                <default>false</default>
+                <label>Préstamos Comerciales Pool de Bancos</label>
+            </value>
+            <value>
+                <fullName>115</fullName>
+                <default>false</default>
+                <label>Líneas de crédito asociadas a las operaciones de Confirming</label>
+            </value>
+            <value>
+                <fullName>161</fullName>
+                <default>false</default>
+                <label>Préstamos Personales para Gastos</label>
+            </value>
+            <value>
+                <fullName>162</fullName>
+                <default>false</default>
+                <label>Préstamos a través de Líneas de Crédito Personales (Créditos Diferidos Etc.)</label>
+            </value>
+            <value>
+                <fullName>163</fullName>
+                <default>false</default>
+                <label>Préstamos Personales con Descuento por Nómina</label>
+            </value>
+            <value>
+                <fullName>164</fullName>
+                <default>false</default>
+                <label>Préstamos Personales con Garantía de Certificados Financieros</label>
+            </value>
+            <value>
+                <fullName>165</fullName>
+                <default>false</default>
+                <label>Préstamos Personales para Vehículos Nuevos</label>
+            </value>
+            <value>
+                <fullName>166</fullName>
+                <default>false</default>
+                <label>Préstamos Personales para Vehículos Usados</label>
+            </value>
+            <value>
+                <fullName>167</fullName>
+                <default>false</default>
+                <label>Préstamos Personales para Solares</label>
+            </value>
+            <value>
+                <fullName>168</fullName>
+                <default>false</default>
+                <label>Líneas de Crédito Personales para Gastos Educativos</label>
+            </value>
+            <value>
+                <fullName>169</fullName>
+                <default>false</default>
+                <label>Préstamos Personales para Gastos Educativos</label>
+            </value>
+            <value>
+                <fullName>181</fullName>
+                <default>false</default>
+                <label>Préstamo para adquisición de la Vivienda del Deudor</label>
+            </value>
+            <value>
+                <fullName>182</fullName>
+                <default>false</default>
+                <label>Préstamo para la Construcción de la Vivienda del Deudor</label>
+            </value>
+            <value>
+                <fullName>183</fullName>
+                <default>false</default>
+                <label>Préstamo para adquisición de Segunda Vivienda o Veraneo</label>
+            </value>
+            <value>
+                <fullName>184</fullName>
+                <default>false</default>
+                <label>Préstamo para la Construcción de 2da Vivienda o Veraneo</label>
+            </value>
+            <value>
+                <fullName>185</fullName>
+                <default>false</default>
+                <label>Préstamos para Adquisición de vivienda de bajo costo procedente de un fideicomiso</label>
+            </value>
+            <value>
+                <fullName>186</fullName>
+                <default>false</default>
+                <label>Préstamos para Adquisición de segunda vivienda o veraneo de bajo costo procedente de un fideicomiso</label>
+            </value>
+            <value>
+                <fullName>187</fullName>
+                <default>false</default>
+                <label>Préstamos para la Remodelación de la Vivienda del deudor</label>
+            </value>
+            <value>
+                <fullName>188</fullName>
+                <default>false</default>
+                <label>Préstamos para la Remodelación de la Segunda Vivienda o Veraneo</label>
+            </value>
+            <value>
+                <fullName>191</fullName>
+                <default>false</default>
+                <label>Líneas de Crédito Personales para Gastos Educativos Superior</label>
+            </value>
+            <value>
+                <fullName>192</fullName>
+                <default>false</default>
+                <label>Préstamos Personales para Gastos Educativos Superior</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

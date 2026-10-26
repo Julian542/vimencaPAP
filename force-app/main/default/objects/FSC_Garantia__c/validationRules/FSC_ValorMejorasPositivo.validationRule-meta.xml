@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ValorMejorasPositivo</fullName>
+    <active>true</active>
+    <description>Permite dejar vacío el valor de las mejoras, pero exige un importe positivo cuando se informa.</description>
+    <errorConditionFormula>AND(NOT(ISBLANK(FSC_Valor_Mejoras__c)), FSC_Valor_Mejoras__c &lt;= 0)</errorConditionFormula>
+    <errorDisplayField>FSC_Valor_Mejoras__c</errorDisplayField>
+    <errorMessage>El valor de las mejoras debe ser mayor que cero.</errorMessage>
+</ValidationRule>

@@ -16,6 +16,8 @@ private class FSC_GarantiaFormalizacionTest {
 
 	@TestSetup
 	static void setupData() {
+		// Estos datos no prueban la política de crédito; sus límites se prueban en FSC_CreditPolicyGuardTest.
+		FSC_CreditPolicyGuard.bypassInTests = true;
 		asignarPermisosAdministrador();
 		Account account = FSC_ExcepcionTestDataFactory.createAccount('4701', true);
 		ResidentialLoanApplication solicitudMixta = FSC_ExcepcionTestDataFactory.createSolicitud(
@@ -334,6 +336,29 @@ private class FSC_GarantiaFormalizacionTest {
 			[SELECT FSC_Subestado__c FROM ResidentialLoanApplication WHERE Id = :solicitud.Id].FSC_Subestado__c,
 			'La validacion no debe modificar una solicitud sin garantias aplicables.'
 		);
+	}
+
+	@IsTest
+	static void soloElUsuarioAsignadoPuedeFormalizar() {
+		FSC_GarantiaFormalizacionController.omitirValidacionPermisoEnPrueba = true;
+		FSC_GarantiaFormalizacionController.ignorarAdministradorEnPrueba = true;
+		Id solicitudId = obtenerSolicitudesPorNombre().get(SOLICITUD_MIXTA).Id;
+		User otroUsuario = [SELECT Id FROM User WHERE IsActive = TRUE AND Id != :UserInfo.getUserId() LIMIT 1];
+
+		Test.startTest();
+		update new ResidentialLoanApplication(Id = solicitudId, FSC_UsuarioFormalizacion__c = otroUsuario.Id);
+		Boolean bloqueadoParaOtro = false;
+		try {
+			FSC_GarantiaFormalizacionController.getContext(solicitudId);
+		} catch (AuraHandledException exceptionDetails) {
+			bloqueadoParaOtro = true;
+		}
+		update new ResidentialLoanApplication(Id = solicitudId, FSC_UsuarioFormalizacion__c = UserInfo.getUserId());
+		FSC_GarantiaFormalizacionController.FormalizacionContext contexto = FSC_GarantiaFormalizacionController.getContext(solicitudId);
+		Test.stopTest();
+
+		Assert.isTrue(bloqueadoParaOtro, 'Con otro usuario asignado no se debe poder formalizar.');
+		Assert.isTrue(contexto.tieneGarantiasAplicables, 'El usuario asignado debe poder formalizar.');
 	}
 
 	@IsTest

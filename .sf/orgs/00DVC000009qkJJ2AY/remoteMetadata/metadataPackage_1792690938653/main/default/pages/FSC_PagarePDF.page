@@ -1,0 +1,305 @@
+<apex:page standardController="ResidentialLoanApplication"
+	extensions="FSC_PagareComercialComplementarioCtrl"
+	applyBodyTag="false"
+	showHeader="false"
+	sidebar="false"
+	standardStylesheets="false"
+	cache="false"
+	language="es"
+	renderAs="{!IF($CurrentPage.parameters.legalHtml = 'true', '', 'pdf')}"
+	applyHtmlTag="false">
+	<html>
+		<head>
+			<style>
+				@page {
+					size: 8.5in 14in;
+					margin: 24mm 16mm 18mm 16mm;
+				}
+				body {
+					font-family: Arial, sans-serif;
+					font-size: 11pt;
+					color: #111;
+					line-height: 1.35;
+				}
+				.center {
+					text-align: center;
+				}
+				.title {
+					font-weight: bold;
+					font-size: 14pt;
+					margin-bottom: 8mm;
+				}
+				.page-break {
+					page-break-before: always;
+				}
+				.folio-header {
+					font-size: 10pt;
+					text-align: left;
+					margin: 0 0 6mm 0;
+				}
+				.folio-title {
+					font-size: 10pt;
+					text-align: left;
+					margin: -4mm 0 6mm 0;
+				}
+				.subtitle {
+					font-weight: bold;
+					font-size: 12pt;
+					margin: 3mm 0 6mm 0;
+				}
+				.doc-copy {
+					text-align: justify;
+					text-justify: inter-word;
+				}
+				.p {
+					margin: 0;
+					display: inline;
+				}
+				.p:after {
+					content: ' ';
+				}
+				.sign-wrap {
+					margin-top: 1mm;
+				}
+				.sign-table {
+					width: 100%;
+					border-collapse: collapse;
+				}
+				.sign-cell {
+					width: 50%;
+					padding-top: 0;
+					vertical-align: top;
+				}
+				.sign-grid {
+					width: 100%;
+				}
+				.signature-box {
+					text-align: center;
+					page-break-inside: avoid;
+				}
+				.signature-box-half {
+					float: left;
+					width: 50%;
+				}
+				.line {
+					border-top: 1px solid #111;
+					width: 85%;
+					margin-top: 10mm;
+					margin-left: auto;
+					margin-right: auto;
+				}
+				.label {
+					margin-top: 0.2mm;
+					font-size: 9.5pt;
+					line-height: 1.05;
+				}
+				.sig-marker {
+					color: #fff;
+					font-family: Arial, sans-serif;
+					font-size: 4pt;
+					white-space: nowrap;
+				}
+				.w100 {
+					width: 100%;
+				}
+			</style>
+		</head>
+
+		<body>
+			<div class="doc-copy">
+				<div class="center title">PAGARÉ AUTÉNTICO</div>
+
+				<apex:outputPanel rendered="{!hasNumeroFolio}"
+					layout="none">
+					<div class="folio-title">Número de folio: {!numeroFolioPagare}</div>
+				</apex:outputPanel>
+
+				<p class="p">
+					ACTO NÚMERO: {!actoNumeroPagare}. En la ciudad de Santo Domingo, Distrito Nacional, capital de la República Dominicana,
+					{!fechaString}.
+				</p>
+
+				<p class="p">
+					Por ante mí, {!individuo1.FSC_Nombre__c}, Notario Público de los del número para el Distrito Nacional, Matrícula del Colegio
+					Dominicano de Notarios Incorporados, número dos, seis, siete, ocho ({!individuo1.FSC_NumeroElectoral__c}), con cédula personal de
+					identidad y electoral número cero, cero, uno, guion, cero, uno, dos, cinco, ocho, dos, tres, guion, cuatro ({!cedulaIndividuo1}),
+					estando en mi estudio profesional abierto en la {!individuo1.FSC_Direccion__c}, asistido de los testigos instrumentales, la señora
+					{!individuo2.FSC_Nombre__c}, dominicana, mayor de edad, soltera, portadora de la cédula de identidad y electoral número
+					{!cedulaIndividuo2}, domiciliada y residente en {!individuo2.FSC_Direccion__c}; y la señora {!individuo3.FSC_Nombre__c},
+					dominicana, mayor de edad, soltera, portadora de la cédula de identidad y electoral número cuatro, cero, dos, guion, dos, tres,
+					cuatro, seis, ocho, seis, seis, guion, siete ({!cedulaIndividuo3}), domiciliada y residente en {!individuo3.FSC_Direccion__c};
+					testigos libres de tachas y excepciones de conformidad con la ley.
+				</p>
+
+				<p class="p">
+					HA COMPARECIDO, el señor(a) {!nombreCliente}, dominicano(a), mayor de edad, soltero(a), portador(a) de la cédula de identidad y
+					electoral número {!cedula}, domiciliado(a) y residente en {!direccion}, en su calidad de DEUDOR, quien me ha declarado de manera
+					libre y voluntaria lo siguiente:
+				</p>
+
+				<p class="p">
+					<b>PRIMERO:</b> Que reconoce DEBER Y QUE PAGARÁ, a EL BANCO MÚLTIPLE VIMENCA, S. A., Registro Nacional del Contribuyente Número
+					uno, guion, cero, uno, guion, cero, dos, uno, cuatro, uno, guion uno, (1-01-02141-1), Registro Mercantil número uno, cero, cero,
+					uno, nueve SD (10019SD), sociedad comercial formada y constituida de acuerdo a las leyes de la República Dominicana, con su
+					domicilio social abierto en la Avenida Abraham Lincoln, número trescientos seis (306), de esta ciudad de Santo Domingo, Distrito
+					Nacional, capital de la República Dominicana, la suma de {!valorMontoTexto} PESOS DOMINICANOS (RD${!valorMonto}), devengando una
+					tasa de interés y comisión de un {!tasaInteresTexto} POR CIENTO ({!tasaInteres}%) anual, fija durante los primeros
+					{!plazoMesesTexto} ({!plazoMeses}) meses, por concepto de un préstamo, que el BANCO MÚLTIPLE VIMENCA, S. A., le hace en esta misma
+					fecha, en la presencia del infrascrito Notario; asimismo, declara el(la) compareciente que reconoce que el BANCO MÚLTIPLE VIMENCA,
+					S. A., se reserva el derecho de revisar la tasa global de interés y comisiones indicadas en el presente contrato, para adecuarlas
+					a las condiciones imperantes en el mercado, previa notificación a las demás partes con quince (15) días de antelación;
+				</p>
+
+				<p class="p">
+					<b>SEGUNDO:</b> Reconoce el(la) declarante que la tasa de interés anual acordada, será computada mensualmente sobre los saldos
+					insolutos o balances de capital pendiente; entendiéndose, en el caso de cuotas iguales y consecutivas, que la porción de la cuota
+					correspondiente a intereses, podrá variar cuando ocurran atrasos, en cuyo caso el BANCO MÚLTIPLE VIMENCA, S. A., se cobrará los
+					intereses compensatorios resultantes en las próximas cuotas, hasta que el préstamo sea puesto al día.
+				</p>
+
+				<p class="p">
+					<b>TERCERO:</b> El(la) compareciente, señor(a) {!nombreCliente}, consiente, en que de conformidad con las condiciones fijadas por
+					el artículo 1154 del Código Civil, los intereses debidamente vencidos y no pagados por el plazo de un (01) año, contados a partir
+					de su fecha de vencimiento, podrán ser capitalizados y producirán a su vez intereses;
+				</p>
+
+				<p class="p">
+					<b>CUARTO:</b> El(la) compareciente, señor(a) {!nombreCliente}, declara que se compromete y obliga a pagar el monto total de este
+					préstamo el(la) también compareciente, BANCO MÚLTIPLE VIMENCA, S. A., en el término de {!plazoAniosTexto}, mediante el pago de
+					{!plazoMesesTexto} ({!plazoMeses}) cuotas, mensuales, iguales y consecutivas contentivas de capital, intereses y comisiones por la
+					suma de {!cuotaMensualTexto} PESOS DOMINICANOS (RD${!cuotaMensual}), a contar de la fecha de este acto;
+				</p>
+
+				<p class="p">
+					<b>QUINTO:</b> El(la) compareciente, señor(a) {!nombreCliente}, declara que se compromete y obliga a pagar al BANCO MÚLTIPLE
+					VIMENCA, S. A., la cantidad de capital, intereses y comisiones precedentemente indicados, por reconocer que le DEBE a este banco;
+				</p>
+
+				<p class="p">
+					<b>SEXTO:</b> El(la) compareciente, señor(a) {!nombreCliente}, declara que reconoce que en caso de que deje de pagarle a el BANCO
+					MÚLTIPLE VIMENCA, S. A., dos (02) cuotas consecutivas del aludido préstamo, éste, o sea el BANCO MÚLTIPLE VIMENCA, S. A., queda
+					facultado para ejecutar el presente pagaré con todas sus consecuencias legales;
+				</p>
+			</div>
+
+			<div class="page-break">
+				<apex:outputPanel rendered="{!hasNumeroFolioPagina2}"
+					layout="none">
+					<div class="folio-header">Número de folio: {!numeroFolioPagina2}</div>
+				</apex:outputPanel>
+
+				<div class="doc-copy">
+					<p class="p">
+						<b>SÉPTIMO:</b> El(la) compareciente, señor(a) {!nombreCliente}, declara que para el absoluto y fiel cumplimiento en el pago
+						del préstamo, compromete frente al BANCO MÚLTIPLE VIMENCA, S. A., la universalidad de todos sus bienes y derechos presentes y
+						futuros;
+					</p>
+
+					<p class="p">
+						<b>OCTAVO:</b> Declara el(la) compareciente, señor(a) {!nombreCliente}, que autoriza al BANCO MÚLTIPLE VIMENCA, S. A., para
+						que el mismo suministre las informaciones que les sean requeridas por los centros de información crediticia sobre su historia
+						de pago en relación al préstamo y otros préstamos que mantenga vigentes o no con el BANCO MÚLTIPLE VIMENCA, S. A.;
+					</p>
+
+					<p class="p">
+						<b>NOVENO:</b> Conviene el(la) compareciente, señor(a) {!nombreCliente}, que en caso de demora por su parte en el cumplimiento
+						de pago de su deuda (o cualquier parte de la misma) el día siguiente al de cualquier vencimiento, a más tardar, pagará al
+						BANCO MÚLTIPLE VIMENCA, S. A., una cantidad igual al CINCO POR CIENTO (5%) mensual o parte de mes de retardo, calculado sobre
+						el monto de la deuda total o parte de la misma que esté atrasada, según sea el caso, a título compensatorio por el simple
+						retardo en el pago y sin necesidad de requerimiento ni actuación judicial o extrajudicial alguna. Declara el(la)
+						compareciente, señor(a) {!nombreCliente}, a título de cláusula penal aplicable sobre el capital, los intereses, así como
+						cualquier otro accesorio de la deuda que se haya dejado de pagar, tales como pólizas de seguros, etc., independientemente de
+						su obligación de pagar la suma principal adeudada, sus intereses, comisiones y cualesquiera otras sumas de dinero que adeude
+						al BANCO MULTIPLE VIMENCA, S. A., de conformidad con las cláusulas de este contrato;
+					</p>
+
+					<p class="p">
+						<b>DÉCIMO:</b> El(la) compareciente, señor(a) {!nombreCliente}, declara que contrata a favor del BANCO MÚLTIPLE VIMENCA,
+						Sociedad Anónima (S. A.), una Póliza de Seguro de Vida. Queda expresamente convenido entre las partes que la póliza de seguro
+						de vida, indicada en este Artículo es contratada solamente por un período de tiempo igual a la vigencia del presente acto. La
+						póliza de vida indicada en el presente Artículo será pagada a BANCO MÚLTIPLE VIMENCA, Sociedad Anónima (S. A.), con
+						{!plazoMesesTexto} ({!plazoMeses}) pagos iguales y mensuales, por un monto de {!seguroVidaMontoTexto} PESOS DOMINICANOS
+						(RD${!seguroVidaMonto}), más el monto de {!comisionAdminSeguroMontoTexto} PESOS DOMINICANOS (RD${!comisionAdminSeguroMonto}),
+						por concepto de administración del seguro, a partir de la firma de este acto y en caso de incumplimiento de esta obligación
+						el(la) señor(a) {!nombreCliente}, perderá el beneficio de los plazos acordados y en consecuencia, toda la porción del capital
+						adeudado, de los intereses y de la prima de seguros que no hayan sido pagadas, serán inmediatamente exigibles. La póliza de
+						seguro que el BANCO MÚLTIPLE VIMENCA, S. A. suscriba a tales fines, podrá ser aumentada por el BANCO MÚLTIPLE VIMENCA, S. A.,
+						si en cualquier momento durante la vigencia de la póliza de seguros contratada, la compañía aseguradora decide aumentar la
+						prima de seguro por cualquier causa justificada. Declara el(la) compareciente, {!nombreCliente}, que mantiene su domicilio y
+						residencia, en el lugar arriba indicado al inicio de este acto;
+					</p>
+
+					<p class="p">
+						<b>DÉCIMO PRIMERO:</b> Me declara el(la) compareciente, señor(a) {!nombreCliente}, que se obliga a pagar todos los impuestos,
+						gastos y honorarios que origina el presente Pagaré Notarial, así como cualquier suma de dinero que EL BANCO tuviere que pagar
+						por concepto de gastos y honorarios;
+					</p>
+
+					<p class="p">
+						<b>DÉCIMO SEGUNDO:</b> Me declara el(la) compareciente, señor(a) {!nombreCliente}, que reconoce, que el presente Pagaré
+						Notarial, posee la fuerza ejecutoria prevista en el artículo 545 del Código de Procedimiento Civil Dominicano.
+					</p>
+
+					<p class="p">
+						LEIDO el presente acto por el notario infrascrito a el(la) compareciente, declara aprobarlo en todas sus partes, en fe de lo
+						cual lo firma junto al infrascrito notario al pie y en el margen de todas sus fojas, de todo lo que doy fe y certifico.
+					</p>
+				</div>
+				<div class="sign-wrap">
+					<table class="sign-table">
+						<tr>
+							<td class="w100 center">
+								<div class="line">
+									<span class="sig-marker">[[!FIRMASOLICITANTE:signer1:signature:size(width=160,height=60)]]</span>
+								</div>
+								<div class="label">{!nombreDeudorFirma}<br />Deudor</div>
+							</td>
+						</tr>
+					</table>
+
+					<apex:outputPanel rendered="{!loanApplicantFirmantesSize > 0}"
+						layout="none">
+						<div class="sign-grid">
+							<apex:repeat value="{!loanApplicantFirmantes}"
+								var="la">
+								<div class="signature-box signature-box-half">
+									<div class="line">
+										<span class="sig-marker">[[!{!la.firmaElementId}:signer1:signature:size(width=160,height=60)]]</span>
+									</div>
+									<div class="label">
+										<apex:outputText value="{!la.name}" />
+										<br />
+										<apex:outputText value="{!la.tipoSolicitante}" />
+									</div>
+								</div>
+							</apex:repeat>
+							<div style="clear: both"></div>
+						</div>
+					</apex:outputPanel>
+
+					<table class="sign-table">
+						<tr>
+							<td class="sign-cell center">
+								<div class="line"></div>
+								<div class="label">{!nombreTestigo1Firma}<br />Testigo</div>
+							</td>
+							<td class="sign-cell center">
+								<div class="line"></div>
+								<div class="label">{!nombreTestigo2Firma}<br />Testigo</div>
+							</td>
+						</tr>
+					</table>
+
+					<table class="sign-table">
+						<tr>
+							<td class="w100 center">
+								<div class="line"></div>
+								<div class="label">{!nombreNotarioFirma}<br />Notario Público</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</body>
+	</html>
+</apex:page>

@@ -43,11 +43,17 @@ public without sharing class FSC_RegenerarPagareComplementarioQbl implements Que
         }
 
         Map<Id, Set<Id>> complementaryDocumentIdsByRlaId = getComplementaryDocumentIds(idsToProcess);
+        Set<Id> allDocumentIds = new Set<Id>();
+        for (Set<Id> documentIds : complementaryDocumentIdsByRlaId.values()) allDocumentIds.addAll(documentIds);
+        Map<Id, String> sourcesByDocumentId = new Map<Id, String>();
+        for (ContentVersion version : [SELECT ContentDocumentId, FSC_ContenidoLegal__c FROM ContentVersion WHERE ContentDocumentId IN :allDocumentIds AND IsLatest = true]) {
+            if (!String.isBlank(version.FSC_ContenidoLegal__c)) sourcesByDocumentId.put(version.ContentDocumentId, version.FSC_ContenidoLegal__c);
+        }
         List<PendingReplacement> pendingReplacements = new List<PendingReplacement>();
 
         for (ResidentialLoanApplication rla : [
             SELECT Id, RecordType.DeveloperName, FSC_RequiereContratoPagareNotarial__c,
-                FSC_NumeroPrestamoAbanks__c, Account.Name
+                FSC_NumeroPrestamoAbanks__c, Account.Name, FSC_FechaVencimiento__c, FSC_Fecha_Contrato__c, FSC_PlazoMesesAprobado__c
             FROM ResidentialLoanApplication
             WHERE Id IN :idsToProcess AND FSC_NumeroPrestamoAbanks__c != null
         ]) {
@@ -63,9 +69,17 @@ public without sharing class FSC_RegenerarPagareComplementarioQbl implements Que
 
                 PageReference pageReference = Page.FSC_PagareComercialComplementarioPDF;
                 pageReference.getParameters().put('id', String.valueOf(rla.Id));
-                Blob pdfBlob = Test.isRunningTest()
-                    ? Blob.valueOf('TEST PDF CONTENT')
-                    : pageReference.getContentAsPDF();
+                String sourceJson;
+                for (Id documentId : existingDocumentIds) {
+                    if (sourcesByDocumentId.containsKey(documentId)) { sourceJson = sourcesByDocumentId.get(documentId); break; }
+                }
+                if (sourceJson != null) {
+                    sourceJson = FSC_DocumentoLegalService.completarComplementario(sourceJson, rla);
+                } else {
+                    sourceJson = FSC_DocumentoLegalService.capturar(pageReference, FSC_DocumentoLegalService.PAGARE);
+                }
+                Blob pdfBlob = Test.isRunningTest() ? Blob.valueOf('TEST PDF CONTENT')
+                    : Blob.toPDF(FSC_DocumentoLegalService.leerFuente(sourceJson).html);
 
                 if (pdfBlob == null || pdfBlob.size() == 0) {
                     throw new PagareRegenerationException('El PDF se genero vacio.');
@@ -77,7 +91,7 @@ public without sharing class FSC_RegenerarPagareComplementarioQbl implements Que
                 String title = 'Pagare Complementario ' + accountName + ' ' +
                     System.now().format('yyyy-MM-dd-HH-mm-ss');
                 pendingReplacements.add(
-                    new PendingReplacement(rla.Id, title, pdfBlob, existingDocumentIds)
+                    new PendingReplacement(rla.Id, title, pdfBlob, existingDocumentIds, sourceJson)
                 );
             } catch (Exception error) {
                 System.debug(
@@ -96,6 +110,7 @@ public without sharing class FSC_RegenerarPagareComplementarioQbl implements Que
                     Title = replacement.title,
                     PathOnClient = replacement.title + '.pdf',
                     VersionData = replacement.pdfBlob,
+                    FSC_ContenidoLegal__c = replacement.sourceJson,
                     FirstPublishLocationId = replacement.rlaId,
                     FSC_EnviarDocumento__c = true
                 );
@@ -179,17 +194,20 @@ public without sharing class FSC_RegenerarPagareComplementarioQbl implements Que
         private String title;
         private Blob pdfBlob;
         private Set<Id> previousContentDocumentIds;
+        private String sourceJson;
 
         private PendingReplacement(
             Id rlaId,
             String title,
             Blob pdfBlob,
-            Set<Id> previousContentDocumentIds
+            Set<Id> previousContentDocumentIds,
+            String sourceJson
         ) {
             this.rlaId = rlaId;
             this.title = title;
             this.pdfBlob = pdfBlob;
             this.previousContentDocumentIds = new Set<Id>(previousContentDocumentIds);
+            this.sourceJson = sourceJson;
         }
     }
 

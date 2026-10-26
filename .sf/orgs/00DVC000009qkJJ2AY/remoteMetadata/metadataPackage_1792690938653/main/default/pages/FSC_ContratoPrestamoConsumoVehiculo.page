@@ -1,0 +1,306 @@
+<apex:page standardController="ResidentialLoanApplication"
+	extensions="FSC_ContratoPrestamoConsumoVehiculoCtrl"
+	applyBodyTag="false"
+	applyHtmlTag="false"
+	showHeader="false"
+	sidebar="false"
+	standardStylesheets="false"
+	cache="false"
+	language="es"
+	renderAs="{!IF($CurrentPage.parameters.legalHtml = 'true', '', 'pdf')}">
+	<html>
+		<head>
+			<meta
+				http-equiv="Content-Type"
+				content="text/html; charset=UTF-8" />
+			<c:FSC_ContratoEstiloBase />
+			<style type="text/css">
+				.title {
+					margin: 0 0 1.2em;
+					text-align: center;
+					font-weight: 700;
+				}
+				.paragraph {
+					margin: 0 0 1.2em;
+					text-align: justify;
+					orphans: 3;
+					widows: 3;
+				}
+				.quote {
+					margin: 0 0 1.2em;
+					text-align: justify;
+				}
+				.strong {
+					font-weight: 700;
+				}
+				.centered {
+					text-align: center;
+				}
+				.signature-section,
+				.notary-block {
+					margin-top: 8mm;
+					page-break-inside: avoid;
+				}
+				.signature-table {
+					width: 100%;
+					border-collapse: collapse;
+					margin-top: 8mm;
+					page-break-inside: avoid;
+				}
+				.signature-cell {
+					width: 50%;
+					padding: 0 6mm;
+					vertical-align: top;
+				}
+				.signature-line {
+					border-top: 1px solid #000;
+				}
+				.signature-name,
+				.signature-role {
+					margin-top: 1.5mm;
+					text-align: center;
+				}
+				.signature-heading {
+					margin-top: 6mm;
+					font-weight: 700;
+				}
+				.notary-signature {
+					width: 45%;
+					margin: 10mm auto 0;
+				}
+				.reference-code {
+					margin-top: 6mm;
+				}
+			</style>
+		</head>
+		<body>
+			<c:FSC_ContratoPiePagina />
+			<div class="title">{!datos.tituloContrato}</div>
+			<p class="paragraph">
+				ENTRE: BANCO MÚLTIPLE VIMENCA, S. A., entidad de intermediación financiera organizada de conformidad con las leyes de la República
+				Dominicana, RNC No. 1-01-02141-1, Registro Mercantil No. 10019SD, con su domicilio social en la Avenida Abraham Lincoln No. 306,
+				Sector La Julia, Santo Domingo, Distrito Nacional, capital de la República Dominicana, debidamente representada por su
+				{!datos.bancoRepresentante1.cargo}, {!datos.bancoRepresentante1.tratamiento} {!datos.bancoRepresentante1.nombreCompleto},
+				{!datos.bancoRepresentante1.nacionalidad}, mayor de edad, {!datos.bancoRepresentante1.estadoCivil}, portador de la identificación No.
+				{!datos.bancoRepresentante1.identificacion}, domiciliado y residente en {!datos.bancoRepresentante1.domicilio}, y por su
+				{!datos.bancoRepresentante2.cargo}, {!datos.bancoRepresentante2.tratamiento} {!datos.bancoRepresentante2.nombreCompleto},
+				{!datos.bancoRepresentante2.nacionalidad}, mayor de edad, {!datos.bancoRepresentante2.estadoCivil}, portador de la identificación No.
+				{!datos.bancoRepresentante2.identificacion}, domiciliado y residente en {!datos.bancoRepresentante2.domicilio}, entidad que en lo que
+				sigue se denominará EL BANCO, de una parte, y de otra parte;
+			</p>
+			<p class="paragraph">
+				{!vehiculo.prestatariosGenerales}, {!IF(deudor.plural, 'quienes', 'quien')} para los fines del presente contrato se denominará{!deudor.n} {!deudor.nombre}.
+			</p>
+			<apex:outputPanel rendered="{!vehiculo.tieneGaranteMobiliario}" layout="none">
+				<p class="paragraph">
+					{!vehiculo.garantesGenerales}, {!IF(garante.plural, 'quienes', 'quien')} para los fines del presente contrato se denominará{!garante.n} {!garante.nombre}.
+				</p>
+			</apex:outputPanel>
+			<p class="paragraph">
+				POR CUANTO: {!deudor.nombre} ha{!deudor.n} solicitado un préstamo con Garantía Mobiliaria sin Posesión, por un monto de
+				{!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}), para {!datos.destinoPrestamo}.
+			</p>
+			<p class="paragraph">
+				POR CUANTO: EL BANCO ha consentido en aprobar el Préstamo con Garantía Mobiliaria sin Posesión por el monto de {!datos.montoLetras}
+				({!datos.simboloMoneda}{!datos.montoNumero}), a favor de {!deudor.nombre}.
+			</p>
+			<p class="paragraph">
+				Toda vez que sean mencionados EL BANCO y {!deudor.nombre}<apex:outputPanel layout="none" rendered="{!vehiculo.tieneGaranteMobiliario}"> y {!garante.nombre}</apex:outputPanel> en su conjunto, se nombrarán LAS PARTES;
+			</p>
+			<p class="paragraph">POR TANTO: Y en el entendido de que los anteriores POR CUANTOS forman parte integral del presente contrato;</p>
+			<p class="paragraph strong centered">LAS PARTES HAN CONVENIDO Y PACTADO LO SIGUIENTE:</p>
+			<p class="paragraph">
+				<span class="articulo"></span>MONTO. EL BANCO, por el presente contrato concede a {!deudor.nombre}, {!IF(deudor.plural, 'quienes aceptan', 'quien acepta')}, un préstamo por la
+				suma de {!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}), cuyos fondos estarán siendo utilizados para
+				{!datos.destinoPrestamo}, suma que {!deudor.nombre} declara{!deudor.n} haber recibido a su entera satisfacción.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO: {!deudor.nombre} se compromete{!deudor.n} a suministrar a EL BANCO, de manera oportuna y durante la vigencia del
+				préstamo, todas las informaciones que, según las normas vigentes se requieran a los fines de poder mantener actualizado el
+				expediente de crédito.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>PAGARÉ. {!deudor.nombre} se compromete{!deudor.n} a suscribir, conjuntamente con el presente contrato de préstamo,
+				un pagaré a favor de EL BANCO por la suma de {!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}).
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>INTERESES. {!deudor.nombre} pagará{!deudor.n} intereses sobre saldos insolutos de capital, a razón de
+				{!datos.tasaLetras} por ciento ({!datos.tasaNumero}%) anual, sobre la base de un (1) año de trescientos sesenta (360) días.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>VARIACIÓN DE LA TASA DE INTERÉS. VARIACIÓN DE LA TASA DE INTERÉS. LAS PARTES convienen que, en
+				caso de operarse durante la vigencia de este contrato, una variación de los intereses en el Mercado Bancario, dicha
+				variación será aplicada, al saldo insoluto del préstamo, previa notificación a {!deudor.nombre}
+				antes de su aplicación, con treinta (30) días calendario de anticipación. Igualmente, es entendido y acordado entre las
+				partes que en caso de que {!deudor.nombre} pase{!deudor.n} a ser mayor deudor comercial en el sistema financiero de acuerdo a
+				los criterios que establezca la Superintendencia de Bancos de la República Dominicana, EL BANCO podrá realizar un
+				aumento de la tasa aplicable a los intereses del préstamo acorde a la calificación del sistema financiero previa
+				notificación a {!deudor.nombre} antes de su aplicación, con treinta (30) días calendario de
+				anticipación. Las notificaciones a las que se refiere este artículo se realizarán y se considerarán
+				válidamente recibidas si se realizan a través de uno de los medios siguientes a opción de EL BANCO: a) mediante
+				comunicación física por escrito; b) al correo electrónico suministrado por {!deudor.nombre} a EL
+				BANCO, o; c) cualquier otro medio fehaciente de conformidad con el derecho común dominicano.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: Con cada variación de la tasa de interés, EL BANCO deberá entregar a {!deudor.nombre}
+				la tabla de amortización correspondiente.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: Si producto de las variaciones de tasa de interés o de cualquier otra modificación unilateral de las
+				condiciones del contrato realizadas por EL BANCO, {!deudor.nombre} opta{!deudor.n} por terminar la relación contractual, {!deudor.nombre} no incurrirá{!deudor.n} en ningún tipo de responsabilidad, esto así, siempre y cuando {!deudor.nombre} notifique{!deudor.n} la terminación y salde{!deudor.n} totalmente los valores adeudados de capital, intereses y
+				demás accesorios, antes de la entrada en vigencia de la modificación realizada que genera la solicitud de terminación.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>VENCIMIENTO Y FORMA DE PAGO. {!deudor.nombre} se obliga{!deudor.n} a pagar esta deuda en el término de
+				{!datos.plazoLetras} ({!datos.plazoNumero}) meses, contados a partir del {!datos.fechaContrato}, mediante {!datos.plazoLetras}
+				({!datos.plazoNumero}) cuotas iguales, mensuales y consecutivas, contentivas de capital e intereses, por la suma de
+				{!datos.cuotaLetras} ({!datos.simboloMoneda}{!datos.cuotaNumero}), con vencimiento el {!datos.fechaVencimiento}.
+			</p>
+			<p class="paragraph">
+				PARRAFO I: Es entendido y acordado por LAS PARTES que {!deudor.nombre} pagará{!deudor.n} a EL BANCO intereses mensuales
+				sobre saldos insolutos de capital, de conformidad con lo establecido en el artículo de Intereses del presente contrato, debiendo
+				saldar el total del capital adeudado más los intereses y accesorios pendientes de pago al momento del vencimiento del
+				término de vigencia del préstamo. Los pagos deberán ser realizados por {!deudor.nombre} en cualquiera
+				de las sucursales o puntos autorizados por EL BANCO en efectivo, cheque o transferencia electrónica, de conformidad a las normas
+				que rigen cada uno de estos medios de pago. EL BANCO podrá poner a disposición de {!deudor.nombre} otros medios de pago que {!deudor.le} serán informados de manera oportuna.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: Los pagos realizados mediante cheques por {!deudor.nombre} a EL BANCO, se considerarán
+				efectivos el día en que los fondos correspondientes a los mismos estén disponibles y se hagan efectivos los pagos
+				pertinentes.
+			</p>
+			<p class="paragraph">
+				PARRAFO III: Los pagos realizados por {!deudor.nombre} serán aplicados por EL BANCO a la deuda que surja del
+				presente contrato en el siguiente orden: primero, al pago de gastos y honorarios; segundo, al pago de mora; tercero, los intereses; y,
+				por último, al capital.
+			</p>
+			<p class="paragraph">
+				PARRAFO IV: Si producto de las variaciones de tasa de interés o de cualquier otra modificación unilateral de las condiciones
+				del contrato realizada por EL BANCO, {!deudor.nombre} opta{!deudor.n} por terminar la relación contractual, {!deudor.nombre} no incurrirá{!deudor.n} en ningún tipo de responsabilidad y EL BANCO no podrá cobrarle penalidad
+				alguna por este motivo, esto así, siempre y cuando {!deudor.nombre} notifique{!deudor.n} la terminación y salde{!deudor.n}
+				totalmente los valores adeudados de capital, intereses y demás accesorios antes de la entrada en vigencia de la modificación
+				realizada que genera la solicitud de terminación.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>SALDOS ANTICIPADOS. {!deudor.nombre} podrá{!deudor.n} realizar abonos o cancelaciones anticipadas al
+				balance de capital, siempre que la facilidad crediticia se encuentre al día en el pago de sus cuotas mensuales, para lo cual, EL
+				BANCO estará en pleno derecho de cobrar una penalidad, si dicho abono o cancelación anticipada, se realiza dentro de los
+				primeros veinticuatro (24) meses de amortización del crédito, contados a partir de la fecha del desembolso, según lo
+				establecido en el Tarifario de Productos y Servicios que esté vigente al momento de realizar la transacción.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>MORA - {!deudor.nombre} se compromete{!deudor.n}, en caso de no cumplir a su vencimiento, con una cualquiera
+				de sus obligaciones de pago, a pagar por concepto de mora, a título de cláusula penal, el cinco por ciento (5%) mensual
+				sobre el monto vencido, sin formalidad judicial o extrajudicial alguna.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>GARANTÍA. Para seguridad del pago de la deuda asumida por {!deudor.nombre}<apex:outputPanel rendered="{!vehiculo.tieneGaranteMobiliario}" layout="none"> y {!garante.nombre}</apex:outputPanel>, se otorga a
+				favor de EL BANCO una garantía mobiliaria sin posesión, para ser regida por las disposiciones de la Ley No. 45-20, sobre
+				Garantías Mobiliarias de fecha 18 de febrero del 2020 y sus modificaciones, sobre el vehículo de su propiedad que se
+				describe a continuación:
+			</p>
+			<p class="quote">"{!datos.vehiculoDescripcion}"</p>
+			<p class="paragraph">
+				PARRAFO: {!vehiculo.otorgante.nombre} autoriza{!vehiculo.otorgante.n} expresa e irrevocablemente a EL BANCO, en su calidad de acreedor garantizado,
+				para que proceda con la inscripción de la garantía mobiliaria sin posesión y sus modificaciones en el Sistema
+				Electrónico de Garantías Mobiliarias (SEGM). En tal sentido, {!vehiculo.otorgante.nombre} se compromete{!vehiculo.otorgante.n} y obliga{!vehiculo.otorgante.n} a colaborar en todo lo que sea necesario para que dicho registro pueda ser realizado por EL BANCO.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>AUSENCIA DE GRAVAMEN Y CONSERVACIÓN DE LA GARANTIA. {!vehiculo.otorgante.nombre} declara{!vehiculo.otorgante.n} bajo la fe del
+				juramento, que el bien dado en garantía mediante este acto es de su propiedad y que el mismo no ha sido cedido a ninguna otra
+				persona física o moral, ni pesa sobre éste ningún gravamen legal, convencional o judicial. Asimismo, se compromete{!vehiculo.otorgante.n} a conservarlo y mantenerlo en buen estado y tomar todas las medidas para evitar su deterioro.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>VALOR DEL BIEN DADO EN GARANTÍA. {!deudor.nombre} declara{!deudor.n} que el vehículo dado en garantía tiene un
+				valor de {!datos.vehiculoValorLetras} ({!datos.simboloMoneda}{!datos.vehiculoValorNumero}) y se encuentra ubicado en
+				{!datos.vehiculoUbicacion}.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>OBLIGACIÓN DE MANTENIMIENTO. {!deudor.nombre} se compromete{!deudor.n} a mantener el vehículo dado
+				en garantía en buen estado de funcionamiento, absteniéndose de someterlo a un uso anormal y abusivo que pueda producir su
+				rápida depreciación, y autoriza{!deudor.n} a EL BANCO a realizar inspecciones periódicas para comprobar su ubicación y
+				conservación en buen estado.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: {!deudor.nombre} está{!deudor.n} obligad{!deudor.o} a dar aviso inmediatamente a EL BANCO de cualquier daño u
+				otro siniestro que afecte el bien otorgado en prenda.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: {!deudor.nombre} reconoce{!deudor.n} y acepta{!deudor.n}, que frente a una posible entrega voluntaria de la
+				garantía EL BANCO se reserva el derecho de recibir o no, el bien dado en prenda. Asimismo, es entendido entre las partes que la
+				no recepción del bien, por parte de EL BANCO, no será interpretada en ningún caso como renuncia a perseguir, el cobro
+				de la deuda, por todos los medios que este tenga a su alcance.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>PROHIBICIÓN ENAJENACIÓN Y/O CONSTITUCIÓN DE OTROS GRAVÁMENES: {!deudor.nombre} reconoce{!deudor.n} que {!deudor.le} está prohibido constituir una nueva garantía mobiliaria sin posesión o cualquier otro
+				gravamen sobre la garantía otorgada, así como vender o de cualquier forma enajenar el vehículo que constituye la
+				prenda, a menos que obtenga{!deudor.n} previamente autorización de EL BANCO, estableciéndose expresamente que si gravara{!deudor.n} o enajenara{!deudor.n} de
+				cualquier forma el bien que conforma la garantía otorgada, sin el consentimiento expreso de EL BANCO, el presente contrato se
+				resolverá de pleno derecho, sin ninguna formalidad previa y, en consecuencia, {!deudor.nombre} perderá{!deudor.n} el
+				beneficio del término y las condiciones de pago del préstamo que se {!deudor.le} otorga mediante este contrato, haciéndose de
+				pleno derecho ejecutable la garantía consentida.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>OTRAS OBLIGACIONES DE {!deudor.nombre}. {!deudor.nombre} efectuará{!deudor.n} por su
+				propia cuenta todas las contribuciones, y demás tributos nacionales o municipales, multas e impuestos y que graven o pudieran
+				gravar de tiempo en tiempo el bien otorgado en garantía, debiendo cuando así lo requiera EL BANCO para los fines del
+				presente contrato, entregar a éste los recibos oficiales que se expidan.
+			</p>
+			<c:FSC_ContratoArticulosSeguros propietario="{!vehiculo.otorgante}" asegurado="{!deudor}" propiedad="{!seguroPropiedad}" vida="{!seguroVida}" />
+			<c:FSC_ContratoArticulosGenerales p="{!sujetoGeneral}" garantiaInmueble="{!garantiaInmueble}" />
+			<p class="paragraph">
+				HECHO Y FIRMADO DE BUENA FE, en tantos originales como partes contratantes, de un mismo tenor y efecto, en {!datos.lugarFirma}, a los
+				{!datos.fechaContratoDiaLetras} ({!datos.fechaContratoDiaNumero}) días del mes de {!datos.fechaContratoMes} del año
+				{!datos.fechaContratoAnoLetras} ({!datos.fechaContratoAnoNumero}).
+			</p>
+			<div class="signature-section">
+				<div class="signature-heading">POR {!deudor.nombre}:</div>
+				<table class="signature-table">
+					<apex:repeat value="{!vehiculo.prestatarios}" var="firmante">
+						<tr><td class="signature-cell">
+							<div class="signature-line"></div>
+							<div class="signature-name">{!firmante.nombre}</div>
+						</td><td class="signature-cell"></td></tr>
+					</apex:repeat>
+				</table>
+				<apex:outputPanel rendered="{!vehiculo.tieneGaranteMobiliario}" layout="block">
+					<div class="signature-heading">POR {!garante.nombre}:</div>
+					<table class="signature-table">
+						<apex:repeat value="{!vehiculo.garantes}" var="garante">
+							<tr><td class="signature-cell"><div class="signature-line"></div><div class="signature-name">{!garante.nombre}</div></td><td class="signature-cell"></td></tr>
+						</apex:repeat>
+					</table>
+				</apex:outputPanel>
+				<div class="signature-heading">POR EL BANCO:</div>
+				<table class="signature-table">
+					<tr>
+						<td class="signature-cell">
+							<div class="signature-line"></div>
+							<div class="signature-name">{!datos.bancoRepresentante1.nombreCompleto}</div>
+							<div class="signature-role">{!datos.bancoRepresentante1.cargo}</div>
+						</td>
+						<td class="signature-cell">
+							<div class="signature-line"></div>
+							<div class="signature-name">{!datos.bancoRepresentante2.nombreCompleto}</div>
+							<div class="signature-role">{!datos.bancoRepresentante2.cargo}</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="notary-block">
+				<p class="paragraph">
+					YO, {!datos.notario.tratamiento} {!datos.notario.nombreCompleto}, Notario Público de los del Número para
+					{!datos.notario.jurisdiccionNotario}, Matrícula No. {!datos.notario.matriculaNotario}, del Colegio Dominicano de Notarios,
+					CERTIFICO Y DOY FE de que por ante mí fueron puestas las firmas de {!vehiculo.nombresFirmantesNotario}, cuyas generales constan. En
+					{!datos.lugarFirma}, a los {!datos.fechaContratoDiaLetras} ({!datos.fechaContratoDiaNumero}) días del mes de
+					{!datos.fechaContratoMes} del año {!datos.fechaContratoAnoLetras} ({!datos.fechaContratoAnoNumero}).
+				</p>
+				<div class="notary-signature">
+					<div class="signature-line"></div>
+					<div class="signature-name">{!datos.notario.nombreCompleto}</div>
+					<div class="signature-role">Notario Público</div>
+				</div>
+			</div>
+		</body>
+	</html>
+</apex:page>

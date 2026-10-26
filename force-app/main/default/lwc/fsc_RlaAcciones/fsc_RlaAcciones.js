@@ -53,10 +53,15 @@ import marcarDocCompletaDesembolso from '@salesforce/apex/FSC_RlaAccionesControl
 import getCapturaOperacionesContext from '@salesforce/apex/FSC_RlaAccionesController.getCapturaOperacionesContext';
 import guardarCapturaAbanks from '@salesforce/apex/FSC_RlaAccionesController.guardarCapturaAbanks';
 import confirmarDesembolsoManual from '@salesforce/apex/FSC_RlaAccionesController.confirmarDesembolsoManual';
+import prepararProcesamientoManual from '@salesforce/apex/FSC_RlaAccionesController.prepararProcesamientoManual';
 import getUsuariosCapturaOperaciones from '@salesforce/apex/FSC_RlaAccionesController.getUsuariosCapturaOperaciones';
 import reasignarCapturaOperaciones from '@salesforce/apex/FSC_RlaAccionesController.reasignarCapturaOperaciones';
 import getUsuariosPagares from '@salesforce/apex/FSC_RlaAccionesController.getUsuariosPagares';
 import reasignarUsuarioPagares from '@salesforce/apex/FSC_RlaAccionesController.reasignarUsuarioPagares';
+import getUsuariosGestionPlanilla from '@salesforce/apex/FSC_RlaAccionesController.getUsuariosGestionPlanilla';
+import reasignarUsuarioGestionPlanilla from '@salesforce/apex/FSC_RlaAccionesController.reasignarUsuarioGestionPlanilla';
+import getUsuariosFormalizacion from '@salesforce/apex/FSC_RlaAccionesController.getUsuariosFormalizacion';
+import reasignarUsuarioFormalizacion from '@salesforce/apex/FSC_RlaAccionesController.reasignarUsuarioFormalizacion';
 import descartarArchivosDesembolso from '@salesforce/apex/FSC_RlaAccionesController.descartarArchivosDesembolso';
 import enviarAArchivoYCustodia from '@salesforce/apex/FSC_RlaAccionesController.enviarAArchivoYCustodia';
 import solicitarExcepcionBuro from '@salesforce/apex/FSC_RlaAccionesController.solicitarExcepcionBuro';
@@ -65,6 +70,9 @@ import actualizarSubestadoGeneracionPagares from '@salesforce/apex/FSC_RlaAccion
 import rechazarPorCliente from '@salesforce/apex/FSC_RlaAccionesController.rechazarPorCliente';
 import consultarEstadoFirma from '@salesforce/apex/FSC_RlaAccionesController.consultarEstadoFirma';
 import generarPagare from '@salesforce/apex/FSC_RlaAccionesController.generarPagare';
+import getRevisionDocumentosLegales from '@salesforce/apex/FSC_RlaAccionesController.getRevisionDocumentosLegales';
+import validarDocumentosLegales from '@salesforce/apex/FSC_RlaAccionesController.validarDocumentosLegales';
+import reintentarDocumentosLegales from '@salesforce/apex/FSC_RlaAccionesController.reintentarDocumentosLegales';
 import generarActoGarantiaSolidaria from '@salesforce/apex/FSC_GenerarActoGarantiaSolidaria.generar';
 import marcarDocumentosFirmadosFisicamente from '@salesforce/apex/FSC_RlaAccionesController.marcarDocumentosFirmadosFisicamente';
 import getFirmaValidationState from '@salesforce/apex/FSC_RlaAccionesController.getFirmaValidationState';
@@ -123,6 +131,9 @@ import FORMA_DESEMBOLSO_FIELD from '@salesforce/schema/ResidentialLoanApplicatio
 import NUMERO_CUENTA_DESEMBOLSO_FIELD from '@salesforce/schema/ResidentialLoanApplication.FSC_NumeroCuentaDesembolso__c';
 import USUARIO_GESTION_PLANILLA_FIELD from '@salesforce/schema/ResidentialLoanApplication.FSC_UsuarioGestionPlanilla__c';
 import USUARIO_GESTION_PLANILLA_NAME_FIELD from '@salesforce/schema/ResidentialLoanApplication.FSC_UsuarioGestionPlanilla__r.Name';
+import USUARIO_FORMALIZACION_FIELD from '@salesforce/schema/ResidentialLoanApplication.FSC_UsuarioFormalizacion__c';
+import USUARIO_FORMALIZACION_NAME_FIELD from '@salesforce/schema/ResidentialLoanApplication.FSC_UsuarioFormalizacion__r.Name';
+import ETAPA_FORMALIZACION_FIELD from '@salesforce/schema/ResidentialLoanApplication.FSC_EtapaFormalizacion__c';
 import DESEMBOLSO_REALIZADO_FIELD from '@salesforce/schema/ResidentialLoanApplication.FSC_Desembolso_Realizado__c';
 import DOC_INCOMPLETA_DESEMBOLSO_FIELD from '@salesforce/schema/ResidentialLoanApplication.FSC_Doc_Incompleta_Desembolso__c';
 import FLAG_ERROR_API_PRESTAMOS_FIELD from '@salesforce/schema/ResidentialLoanApplication.FSC_FlagErrorAPIPrestamos__c';
@@ -210,7 +221,15 @@ const FIELDS = [
 	NUMERO_PRESTAMO_ABANKS_FIELD,
 ];
 
-const OPTIONAL_FIELDS = [DOCUMENTOS_FIRMADOS_FIS_FIELD, FLAG_ERROR_API_PRESTAMOS_FIELD, FLAG_ERROR_API_DESEMBOLSO_FIELD, MAX_LOAN_TERM_FIELD];
+const OPTIONAL_FIELDS = [
+	DOCUMENTOS_FIRMADOS_FIS_FIELD,
+	FLAG_ERROR_API_PRESTAMOS_FIELD,
+	FLAG_ERROR_API_DESEMBOLSO_FIELD,
+	MAX_LOAN_TERM_FIELD,
+	USUARIO_FORMALIZACION_FIELD,
+	USUARIO_FORMALIZACION_NAME_FIELD,
+	ETAPA_FORMALIZACION_FIELD,
+];
 
 export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	_recordId;
@@ -220,6 +239,16 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	@track clasificacionMIPYMESValidada = false;
 	@track clasificacionMIPYMESInvalida = false;
 	@track clasificacionMIPYMESError = '';
+
+	revisionDocumentos = {};
+    revisionDocumentosError = '';
+    cargandoRevisionDocumentos = false;
+    showModalDocumentoLegal = false;
+    versionLegalEnEdicion;
+    tipoLegalEnEdicion;
+    revisionTimer;
+    revisionAttempts = 0;
+    revisionRequest = 0;
 
 	@track loading = false;
 	wiredRecordResult;
@@ -236,7 +265,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	usuariosManuales = [];
 	usuarioManualSeleccionado;
 	etapaReasignacionManual;
-	reasignandoPagares = false;
+	tipoReasignacion = 'captura';
 	formatosDesembolso = ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.jpg', '.jpeg', '.png'];
 	wiredApprovalContextResult;
 	wiredPagaresContextResult;
@@ -325,6 +354,11 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 
 	set recordId(value) {
 		this._recordId = value;
+		this.revisionDocumentos = {};
+        this.revisionRequest++;
+        this.revisionAttempts = 0;
+        clearTimeout(this.revisionTimer);
+        this.showModalDocumentoLegal = false;
 		if (this.componentConnected) {
 			this.validarClasificacionMIPYMESInicial();
 		}
@@ -332,12 +366,16 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 
 	connectedCallback() {
 		this.componentConnected = true;
+		this.programarActualizacionDesembolso();
 		this.refreshHandlerId = registerRefreshHandler(this, this.handleRefreshDocumentacion.bind(this));
 		this.validarClasificacionMIPYMESInicial();
 	}
 
 	disconnectedCallback() {
 		this.componentConnected = false;
+		clearTimeout(this.desembolsoRefreshTimer);
+		clearTimeout(this.revisionTimer);
+        this.revisionRequest++;
 		unregisterRefreshHandler(this.refreshHandlerId);
 	}
 
@@ -403,6 +441,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		this.showModalRechazo = false;
 		this.showModalPlanillaDesembolso = false;
 		this.showModalDatosPagare = false;
+		this.showModalDocumentoLegal = false;
 		this.showModalFirmaFisica = false;
 		this.showModalSolicitarExcepcionCredito = false;
 		this.showModalCondicionExcepcion = false;
@@ -413,6 +452,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	@wire(getRecord, { recordId: '$recordId', fields: FIELDS, optionalFields: OPTIONAL_FIELDS })
 	wiredRecord(result) {
 		this.wiredRecordResult = result;
+		this.loadRevisionDocumentos();
 		if (result?.data) {
 			this.rlaRecordTypeId = getFieldValue(result.data, RECORD_TYPE_ID_FIELD);
 			this.rlaOwnerId = getFieldValue(result.data, OWNER_ID_FIELD);
@@ -452,6 +492,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	@wire(getPagaresContext, { residentialLoanApplicationId: '$recordId' })
 	wiredPagaresContext(result) {
 		this.wiredPagaresContextResult = result;
+		this.loadRevisionDocumentos();
 	}
 
 	@wire(getDocumentacionContratosContext, { residentialLoanApplicationId: '$recordId' })
@@ -563,6 +604,16 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 
 	get substatus() {
 		return getFieldValue(this.wiredRecordResult?.data, SUBSTATUS_FIELD);
+	}
+
+	// Con etapa de formalización la solicitud usa el proceso por etapas (fsc_RlaFormalizacionGarantias).
+	get etapaFormalizacion() {
+		return getFieldValue(this.wiredRecordResult?.data, ETAPA_FORMALIZACION_FIELD);
+	}
+
+	async handleFormalizacionActualizada() {
+		await notifyRecordUpdateAvailable([{ recordId: this.recordId }]);
+		await this.refreshAll();
 	}
 	get actoNumeroPagare() {
 		return getFieldValue(this.wiredRecordResult?.data, ACTO_NUMERO_PAGARE_FIELD);
@@ -693,6 +744,12 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	}
 	get usuarioGestionPlanillaName() {
 		return getFieldValue(this.wiredRecordResult?.data, USUARIO_GESTION_PLANILLA_NAME_FIELD);
+	}
+	get usuarioFormalizacion() {
+		return getFieldValue(this.wiredRecordResult?.data, USUARIO_FORMALIZACION_FIELD);
+	}
+	get usuarioFormalizacionName() {
+		return getFieldValue(this.wiredRecordResult?.data, USUARIO_FORMALIZACION_NAME_FIELD);
 	}
 	get usuarioPagaresYContratos() {
 		return this.wiredPagaresContextResult?.data?.assignedUserId || null;
@@ -923,8 +980,12 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		return Boolean(TIENE_PERMISO_ADMINISTRADOR);
 	}
 
+	// Sin usuario asignado cualquiera con el permiso puede formalizar; con asignación solo esa persona o un administrador.
 	get canFormalizeGuarantees() {
-		return Boolean(TIENE_PERMISO_FORMALIZACION_CREDITOS) || this.hasAdminPermission;
+		if (this.hasAdminPermission) {
+			return true;
+		}
+		return Boolean(TIENE_PERMISO_FORMALIZACION_CREDITOS) && (!this.usuarioFormalizacion || this.usuarioFormalizacion === USER_ID);
 	}
 
 	get formalizacionContext() {
@@ -940,6 +1001,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 
 	get showPreguntaFormalizacion() {
 		return (
+			!this.etapaFormalizacion &&
 			this.canFormalizeGuarantees &&
 			this.status === 'En proceso' &&
 			this.substatus === SUBSTATUS_FORMALIZACION &&
@@ -949,6 +1011,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 
 	get showFormalizarGarantiasPendientes() {
 		return (
+			!this.etapaFormalizacion &&
 			this.canFormalizeGuarantees &&
 			this.status === 'En proceso' &&
 			POST_SIGNATURE_SUBSTATUSES.has(this.substatus) &&
@@ -1064,6 +1127,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 
 	get showErrorAPIPrestamos() {
 		return (
+			this.contextoManual.automatizacionHabilitada === true &&
 			this.flagErrorAPIPrestamos === true &&
 			this.substatus === 'Creación de crédito' &&
 			this.formaDeDesembolso === FORMA_DESEMBOLSO_CUENTA_AHORRO
@@ -1071,7 +1135,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	}
 
 	get showErrorAPIDesembolso() {
-		return this.flagErrorAPIDesembolso === true && this.substatus === 'Desembolso' && this.formaDeDesembolso === FORMA_DESEMBOLSO_CUENTA_AHORRO;
+		return !this.contextoManual.desembolsoApiExitoso && this.contextoManual.automatizacionHabilitada === true && (this.contextoManual.errorAPIDesembolso === true || this.flagErrorAPIDesembolso === true) && this.substatus === 'Desembolso' && this.formaDeDesembolso === FORMA_DESEMBOLSO_CUENTA_AHORRO;
 	}
 
 	get showMensajeValidacionAbanks() {
@@ -1212,6 +1276,10 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		return this.rejectButtonLabel;
 	}
 
+	get requiereMotivosRechazo() {
+		return !this.isBancaSeguroApproval;
+	}
+
 	get showClienteAceptaCondicion() {
 		return this.allowOficialOrAdmins && this.aprobadoConCond === true && this.substatus === 'Análisis de crédito';
 	}
@@ -1233,8 +1301,28 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		return this.isSubstatusGeneracionPagares && !!this.usuarioPagaresYContratosName;
 	}
 
+	get showFormalizacionAssignedBanner() {
+		return this.substatus === SUBSTATUS_FORMALIZACION && !!this.usuarioFormalizacionName;
+	}
+
 	get showCreadoEnAbanks() {
 		return this.contextoManual.puedeActuar && this.contextoManual.etapa === 'Creación de crédito';
+	}
+
+	get showMensajeArchivosDesembolso() {
+		return this.contextoManual.requiereArchivosDesembolso === true;
+	}
+
+	get showCargarArchivosDesembolso() {
+		return this.contextoManual.puedeCargarArchivosDesembolso === true;
+	}
+
+	get tituloModalDesembolso() {
+		return this.contextoManual.desembolsoApiExitoso ? 'Cargar archivos de desembolso' : 'Desembolsado';
+	}
+
+	get labelConfirmarArchivosDesembolso() {
+		return this.contextoManual.desembolsoApiExitoso ? 'Guardar archivos y continuar' : 'Confirmar desembolso';
 	}
 
 	get showDesembolsado() {
@@ -1244,6 +1332,38 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	@wire(getCapturaOperacionesContext, { residentialLoanApplicationId: '$recordId' })
 	wiredCapturaOperaciones(result) {
 		this.wiredCapturaOperacionesResult = result;
+		if (result.data?.requiereInicializacionManual) this.inicializarProcesamientoManual();
+		this.programarActualizacionDesembolso();
+	}
+
+	programarActualizacionDesembolso() {
+		clearTimeout(this.desembolsoRefreshTimer);
+		const contexto = this.contextoManual;
+		if (!this.componentConnected || contexto.etapa !== 'Desembolso' || !contexto.automatizacionHabilitada ||
+			contexto.desembolsoApiExitoso || contexto.errorAPIDesembolso) return;
+		this.desembolsoRefreshTimer = setTimeout(async () => {
+			try {
+				await refreshApex(this.wiredCapturaOperacionesResult);
+			} catch {
+				// Reintenta la lectura mientras termina el desembolso asíncrono.
+			} finally {
+				this.programarActualizacionDesembolso();
+			}
+		}, 10000);
+	}
+
+	async inicializarProcesamientoManual() {
+		const solicitudId = this.recordId;
+		if (this.inicializandoManualId === solicitudId) return;
+		this.inicializandoManualId = solicitudId;
+		try {
+			await prepararProcesamientoManual({ residentialLoanApplicationId: solicitudId });
+			if (this.recordId === solicitudId) await this.refreshAll();
+		} catch (error) {
+			this.showToast('Error', this.getErrorMessage(error, 'No se pudo preparar el procesamiento manual.'), 'error');
+		} finally {
+			if (this.inicializandoManualId === solicitudId) this.inicializandoManualId = null;
+		}
 	}
 
 	get contextoManual() {
@@ -1264,6 +1384,15 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 
 	get showReasignarPagares() {
 		return this.allowSupervisorOrAdmins && this.showPagaresAssignedBanner;
+	}
+
+	get showReasignarGestionPlanilla() {
+		return this.allowSupervisorOrAdmins && this.showGestionPlanillaAssignedBanner;
+	}
+
+	// También se muestra sin usuario asignado para que un supervisor pueda asignarlo si la cola estaba vacía.
+	get showReasignarFormalizacion() {
+		return this.allowSupervisorOrAdmins && this.status === 'En proceso' && this.substatus === SUBSTATUS_FORMALIZACION;
 	}
 
 	get requiereGarantiasCaptura() {
@@ -1290,6 +1419,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 
 	get isFormaDesembolsoManual() {
 		return (
+			this.contextoManual.etapaManual === true ||
 			this.formaDeDesembolso === FORMA_DESEMBOLSO_CHEQUE_ADMINISTRACION ||
 			this.formaDeDesembolso === FORMA_DESEMBOLSO_CUENTA_AHORRO_Y_CHEQUE_ADMINISTRACION
 		);
@@ -1347,6 +1477,108 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	get showGenerarPagareMessage() {
 		return false;
 	}
+
+    get showRevisionDocumentos() {
+        return this.status === 'En proceso' && this.isSubstatusGeneracionPagares && this.pagaresGenerados === true;
+    }
+
+    get showRevisionDocumentosButtons() {
+        return this.showRevisionDocumentos && this.canCurrentUserGeneratePagare;
+    }
+
+    get showEditarDocumentosLegales() {
+        return this.showRevisionDocumentosButtons && !!this.revisionDocumentos.pagareId;
+    }
+
+    get disableValidarDocumentos() {
+        return this.loading || this.cargandoRevisionDocumentos || this.revisionDocumentos.listo !== true;
+    }
+
+    get disableEditarContrato() {
+        return this.loading || !this.revisionDocumentos.contratoId;
+    }
+
+    get showDocumentosPendientes() {
+        return this.showRevisionDocumentosButtons && this.revisionDocumentos.listo !== true;
+    }
+
+    get mensajeRevisionDocumentosPendiente() {
+        return this.revisionDocumentosError || this.revisionDocumentos.mensajePendiente || 'Consultando la disponibilidad de los documentos generados.';
+    }
+
+    async loadRevisionDocumentos() {
+        clearTimeout(this.revisionTimer);
+        if (!this.componentConnected || !this.showRevisionDocumentosButtons) return;
+        const recordId = this.recordId;
+        const request = ++this.revisionRequest;
+        this.cargandoRevisionDocumentos = true;
+        try {
+            const context = await getRevisionDocumentosLegales({ residentialLoanApplicationId: recordId });
+            if (request !== this.revisionRequest || !this.componentConnected) return;
+            this.revisionDocumentos = context;
+            this.revisionDocumentosError = '';
+            if (!context.listo && this.revisionAttempts++ < 20) {
+                // La generación del segundo documento termina en otra transacción.
+                // eslint-disable-next-line @lwc/lwc/no-async-operation
+                this.revisionTimer = setTimeout(() => this.loadRevisionDocumentos(), 5000);
+            }
+        } catch (error) {
+            if (request !== this.revisionRequest) return;
+            this.revisionDocumentosError = this.getErrorMessage(error, 'No fue posible consultar los documentos.');
+        } finally {
+            if (request === this.revisionRequest) this.cargandoRevisionDocumentos = false;
+        }
+    }
+
+    async handleActualizarDocumentosLegales() {
+        this.revisionAttempts = 0;
+        await this.loadRevisionDocumentos();
+    }
+
+    async handleReintentarDocumentosLegales() {
+        this.loading = true;
+        try {
+            await reintentarDocumentosLegales({ residentialLoanApplicationId: this.recordId });
+            this.revisionAttempts = 0;
+            await this.loadRevisionDocumentos();
+            this.showToast('Generación solicitada', 'Se reintentará la generación del documento pendiente.', 'info');
+        } catch (error) {
+            this.showToast('Error', this.getErrorMessage(error, 'No fue posible reintentar la generación.'), 'error');
+        } finally { this.loading = false; }
+    }
+
+    async handleValidarDocumentosLegales() {
+        this.loading = true;
+        try {
+            await validarDocumentosLegales({ residentialLoanApplicationId: this.recordId });
+            clearTimeout(this.revisionTimer);
+            this.showToast('Documentos validados', 'La solicitud avanzó a Gestionar firmas.', 'success');
+            await notifyRecordUpdateAvailable([{ recordId: this.recordId }]);
+            await this.refreshAll();
+        } catch (error) {
+            this.showToast('Error', this.getErrorMessage(error, 'No fue posible validar los documentos.'), 'error');
+        } finally { this.loading = false; }
+    }
+
+    handleEditarPagare() {
+        this.versionLegalEnEdicion = this.revisionDocumentos.pagareId;
+        this.tipoLegalEnEdicion = 'PAGARE';
+        this.showModalDocumentoLegal = true;
+    }
+
+    handleEditarContrato() {
+        this.versionLegalEnEdicion = this.revisionDocumentos.contratoId;
+        this.tipoLegalEnEdicion = 'CONTRATO';
+        this.showModalDocumentoLegal = true;
+    }
+
+    closeModalDocumentoLegal() { this.showModalDocumentoLegal = false; }
+
+    async handleDocumentoLegalGuardado() {
+        this.closeModalDocumentoLegal();
+        await this.loadRevisionDocumentos();
+        this.dispatchEvent(new RefreshEvent());
+    }
 
 	get canGeneratePagareStep() {
 		return this.status === 'En proceso' && this.isSubstatusGeneracionPagares && this.pagaresGenerados === false;
@@ -1571,6 +1803,8 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		return (
 			this.showReasignarManual ||
 			this.showReasignarPagares ||
+			this.showReasignarGestionPlanilla ||
+			this.showReasignarFormalizacion ||
 			this.showEnviarDocumentacionContratos ||
 			this.showEdicionDocumentosAnalisis ||
 			this.showSolicitarExcepcionCredito ||
@@ -1597,8 +1831,10 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 			this.showPlanillaDesembolso ||
 			this.showCreadoEnAbanks ||
 			this.showDesembolsado ||
+			this.showCargarArchivosDesembolso ||
 			this.showCompletarInformacion ||
 			this.showDevolverAOficial ||
+			this.showRevisionDocumentosButtons ||
 			this.showGenerarPagareButton ||
 			this.showGenerarActoGarantiaButton
 		);
@@ -1626,9 +1862,12 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 			this.showAnalystValidationStage ||
 			this.showGestionPlanillaAssignedBanner ||
 			this.showPagaresAssignedBanner ||
+			this.showFormalizacionAssignedBanner ||
+			this.showRevisionDocumentos ||
 			this.showGenerarPagareMessage ||
 			this.showCreadoEnAbanks ||
-			this.showDesembolsado
+			this.showDesembolsado ||
+			this.showMensajeArchivosDesembolso
 		);
 	}
 
@@ -1760,7 +1999,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		const motivoDeRechazo = (this.motivoRechazoPicklist || '').trim();
 		const comentarioBancaSeguro = (this.comentarioRechazoBancaSeguro || '').trim();
 
-		if (this.isPymeRla && !motivoDeRechazo) {
+		if (this.requiereMotivosRechazo && !motivoDeRechazo) {
 			this.showToast('Error', 'Motivo de rechazo requerido.', 'error');
 			return;
 		}
@@ -1799,7 +2038,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 				await rechazarProcesoActual({
 					residentialLoanApplicationId: this.recordId,
 					motivo: motivo,
-					motivoDeRechazo: this.isPymeRla ? motivoDeRechazo : null,
+					motivoDeRechazo,
 				});
 			}
 			this.showToast('Actualizado', 'Proceso de aprobación rechazado correctamente.', 'success');
@@ -2532,33 +2771,6 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		) {
 			this.actualizarVisibilidadCamposHipotecarios();
 		}
-		if (fieldKey === 'gastosGarantiaHip2' || fieldKey === 'gastosGarantiaHip3') {
-			Promise.resolve().then(() => this.validarGastosGarantiaHipotecaria(true));
-		}
-	}
-
-	validarGastosGarantiaHipotecaria(mostrarError = false) {
-		const campos = this.seccionesGastosHipotecarios.flatMap((section) => section.campos || []);
-		const gasto2 = campos.find((field) => field.clave === 'gastosGarantiaHip2')?.valor;
-		const gasto3 = campos.find((field) => field.clave === 'gastosGarantiaHip3')?.valor;
-		const ambosCompletos =
-			gasto2 !== null &&
-			gasto2 !== undefined &&
-			String(gasto2).trim() !== '' &&
-			gasto3 !== null &&
-			gasto3 !== undefined &&
-			String(gasto3).trim() !== '';
-		const mensaje = ambosCompletos ? 'Complete únicamente uno entre gastos de garantía hipotecaria 2% y 3%.' : '';
-		['gastosGarantiaHip2', 'gastosGarantiaHip3'].forEach((fieldKey) => {
-			const input = this.template.querySelector(`lightning-input[data-clave="${fieldKey}"]`);
-			if (input) {
-				input.setCustomValidity(mensaje);
-				if (mostrarError || !ambosCompletos) {
-					input.reportValidity();
-				}
-			}
-		});
-		return !ambosCompletos;
 	}
 
 	actualizarVisibilidadCamposHipotecarios(selectedType) {
@@ -2617,7 +2829,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 			return;
 		}
 		const numericInputsAreValid = [...this.template.querySelectorAll('lightning-input[type="number"]')].every((input) => input.reportValidity());
-		if (!numericInputsAreValid || !this.validarGastosGarantiaHipotecaria(true)) {
+		if (!numericInputsAreValid) {
 			return;
 		}
 
@@ -2819,7 +3031,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		this.loading = true;
 		try {
 			await refreshApex(this.wiredCapturaOperacionesResult);
-			if (!this.showDesembolsado) throw new Error('La acción ya no está disponible para este usuario.');
+			if (!this.showDesembolsado && !this.showCargarArchivosDesembolso) throw new Error('La acción ya no está disponible para este usuario.');
 			this.showModalDesembolsoManual = true;
 		} catch (e) {
 			this.showToast('Error', this.getErrorMessage(e, 'No se pudo abrir el desembolso.'), 'error');
@@ -2923,7 +3135,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		this.loading = true;
 		try {
 			await refreshApex(this.wiredCapturaOperacionesResult);
-			this.reasignandoPagares = false;
+			this.tipoReasignacion = 'captura';
 			this.etapaReasignacionManual = this.contextoManual.etapa;
 			this.usuariosManuales = await getUsuariosCapturaOperaciones({ residentialLoanApplicationId: this.recordId });
 			this.usuarioManualSeleccionado = null;
@@ -2935,12 +3147,24 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		}
 	}
 
-	async handleReasignarPagares() {
+	handleReasignarPagares() {
+		return this.abrirReasignacionCola('pagares', getUsuariosPagares);
+	}
+
+	handleReasignarGestionPlanilla() {
+		return this.abrirReasignacionCola('planilla', getUsuariosGestionPlanilla);
+	}
+
+	handleReasignarFormalizacion() {
+		return this.abrirReasignacionCola('formalizacion', getUsuariosFormalizacion);
+	}
+
+	async abrirReasignacionCola(tipo, obtenerUsuarios) {
 		if (this.loading) return;
 		this.loading = true;
 		try {
-			this.reasignandoPagares = true;
-			this.usuariosManuales = await getUsuariosPagares({ residentialLoanApplicationId: this.recordId });
+			this.tipoReasignacion = tipo;
+			this.usuariosManuales = await obtenerUsuarios({ residentialLoanApplicationId: this.recordId });
 			this.usuarioManualSeleccionado = null;
 			this.showModalReasignacionManual = true;
 		} catch (e) {
@@ -2962,8 +3186,18 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		if (this.loading || !this.template.querySelector('[data-usuario-manual]').reportValidity()) return;
 		this.loading = true;
 		try {
-			if (this.reasignandoPagares) {
+			if (this.tipoReasignacion === 'pagares') {
 				await reasignarUsuarioPagares({
+					residentialLoanApplicationId: this.recordId,
+					usuarioId: this.usuarioManualSeleccionado,
+				});
+			} else if (this.tipoReasignacion === 'planilla') {
+				await reasignarUsuarioGestionPlanilla({
+					residentialLoanApplicationId: this.recordId,
+					usuarioId: this.usuarioManualSeleccionado,
+				});
+			} else if (this.tipoReasignacion === 'formalizacion') {
+				await reasignarUsuarioFormalizacion({
 					residentialLoanApplicationId: this.recordId,
 					usuarioId: this.usuarioManualSeleccionado,
 				});
@@ -3425,6 +3659,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 			promises.push(refreshApex(this.wiredFormalizacionResult));
 		}
 		await Promise.all(promises);
+		await this.loadRevisionDocumentos();
 	}
 
 	showToast(title, message, variant) {

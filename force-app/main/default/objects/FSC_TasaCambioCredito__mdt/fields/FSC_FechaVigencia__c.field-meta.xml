@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_FechaVigencia__c</fullName>
+    <description>Día de aplicación solicitado por el usuario; no implica actualización automática.</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Ingrese el día en que se utilizará esta cotización.</inlineHelpText>
+    <label>Fecha de vigencia</label>
+    <required>true</required>
+    <type>Date</type>
+</CustomField>

@@ -4,9 +4,15 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initialscale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <style type="text/css">@media screen and (max-width: 480px) {slot[style] {margin-right: 0 !important;}.columnDiv {margin-right: 0 !important;}}@media screen and (min-width: 480px) {slot[style] {margin-bottom: 0 !important;}.columnDiv {margin-bottom: 0 !important;}}</style>
-  <style type="text/css">@media screen and (max-width: 480px) {.contentbuilderBaseColumnRow .columnCell {display:inline-block;width:100%}}</style>
-  <style type="text/css">.contentpageDefaultEmailTemplatePageTemplate .contentRoot {width: 600px;}@media only screen and (max-width: 480px) {.contentpageDefaultEmailTemplatePageTemplate .contentRoot {width: 320px;}}</style>
+  <style type="text/css">/*<![CDATA[*/
+@media screen and (max-width: 480px) {slot[style] {margin-right: 0 !important;}.columnDiv {margin-right: 0 !important;}}@media screen and (min-width: 480px) {slot[style] {margin-bottom: 0 !important;}.columnDiv {margin-bottom: 0 !important;}}
+/*]]>*/</style>
+  <style type="text/css">/*<![CDATA[*/
+@media screen and (max-width: 480px) {.contentbuilderBaseColumnRow .columnCell {display:inline-block;width:100%}}
+/*]]>*/</style>
+  <style type="text/css">/*<![CDATA[*/
+.contentpageDefaultEmailTemplatePageTemplate .contentRoot {width: 600px;}@media only screen and (max-width: 480px) {.contentpageDefaultEmailTemplatePageTemplate .contentRoot {width: 320px;}}
+/*]]>*/</style>
  </head>
  <body>
   <table class="contentpageDefaultEmailTemplatePageTemplate" style="background-color: #E9EAEC;" role="presentation" id="contentpage_emailTemplateBodyContent" width="100%" cellpadding="0" cellspacing="0">
@@ -31,37 +37,46 @@
                      <td align="left"><img src="{[devName:VimencaLogo]}" alt="" width="150" style="width: 100%; display: block; border: none; max-width: 25%; object-fit: fill;" /></td>
                     </tr>
                    </tbody>
-                  </table></td>
+                  </table>
+                 </td>
                 </tr>
                 <tr>
                  <td>
                   <table style="font-size:14px; width: 100%; border-collapse: collapse; word-break: break-word;" role="presentation" cellspacing="0" cellpadding="0" id="contentregion" locked="0">
                    <tbody>
                     <tr>
-                     <td class="contentbuilder-html" style="padding: 0;"><br />
+                     <td class="contentbuilder-html" style="padding: 0;">
+                      <br />
                       <div style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #000000; line-height: 1.5;">
                        <p style="margin: 0 0 14px 0;">Hola {{{ResidentialLoanApplication.FSC_Nombre_Cliente__c}}},</p>
                        <p style="margin: 0 0 14px 0;">Gracias por pensar en nuestros productos y servicios.</p>
                        <p style="margin: 0 0 14px 0;">En esta oportunidad, tu solicitud de préstamo ha sido declinada. Es de nuestro muy alto interés conectar contigo y reevaluar tu caso en los próximos 6 meses.</p>
                        <p style="margin: 0 0 14px 0;">Si tienes alguna inquietud, puedes escribirnos a <a href="mailto:teleasistencia@bv.com.do" style="color: blue; text-decoration: underline;">teleasistencia@bv.com.do</a> o comunicarte con nosotros al 809.533.1400. Nuestro equipo está disponible para asistirte de lunes a domingo de 7AM a 12AM, y en días feriados de 7AM a 8PM.</p>
                        <p style="margin: 0 0 14px 0;">Para nosotros, es un privilegio servirte.</p>
-                       <p style="margin: 0;">Equipo Banca Personal <br /><b>Banco Vimenca </b></p>
+                       <p style="margin: 0;">Equipo Banca Personal
+                        <br />
+                        <b>Banco Vimenca </b></p>
                        <div style="margin-top: 16px;">
                         <p style="margin: 0;">Cuéntanos tu experiencia con nosotros en <a href="mailto:miexperiencia@bv.com.do" style="color: blue; text-decoration: underline;">miexperiencia@bv.com.do</a>. ¡Queremos escucharte!</p>
                        </div>
-                      </div></td>
+                      </div>
+                     </td>
                     </tr>
                    </tbody>
-                  </table></td>
+                  </table>
+                 </td>
                 </tr>
                </tbody>
-              </table></td>
+              </table>
+             </td>
             </tr>
            </tbody>
-          </table></td>
+          </table>
+         </td>
         </tr>
        </tbody>
-      </table></td>
+      </table>
+     </td>
     </tr>
    </tbody>
   </table>

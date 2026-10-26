@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_RutaFormalizacion__c</fullName>
+    <description>Ruta del proceso de formalización de garantías. Vacío: la clase no requiere formalización.</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Ruta del proceso de formalización de garantías. Vacío: la clase no requiere formalización.</inlineHelpText>
+    <label>Ruta de formalización</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>hipotecaria</fullName>
+                <default>false</default>
+                <label>Hipotecaria</label>
+            </value>
+            <value>
+                <fullName>vehiculo</fullName>
+                <default>false</default>
+                <label>Vehículo</label>
+            </value>
+            <value>
+                <fullName>mobiliaria</fullName>
+                <default>false</default>
+                <label>Mobiliaria (SEGM)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -10,6 +10,8 @@ public without sharing class FSC_CatalogoGarantiaService {
 	private static Map<String, List<FSC_CatalogoGarantia__c>> registrosPorCatalogo;
 	private static Map<String, String> grupoPorClave;
 	private static Map<Integer, String> grupoPorCodigo;
+	private static Map<String, String> rutaPorClave;
+	private static final Map<String, String> RUTA_POR_GRUPO = new Map<String, String>{ 'real-estate' => 'hipotecaria', 'vehicle' => 'vehiculo' };
 
 	public static String normalizarClave(String valor) {
 		if (String.isBlank(valor)) {
@@ -77,6 +79,39 @@ public without sharing class FSC_CatalogoGarantiaService {
 
 	public static String getGrupo(String clase) {
 		return getGrupoPorClase().get(normalizarClave(clase));
+	}
+
+	// Ruta del proceso de formalización; sin valor en el CMT se deduce del grupo (inmueble o vehículo).
+	public static String getRutaFormalizacion(String clase) {
+		if (String.isBlank(clase)) {
+			return null;
+		}
+		if (rutaPorClave == null) {
+			rutaPorClave = new Map<String, String>();
+			Map<Integer, String> rutaPorCodigo = new Map<Integer, String>();
+			for (FSC_ClaseGarantia__mdt configuracion : FSC_ClaseGarantia__mdt.getAll().values()) {
+				String ruta = String.isBlank(configuracion.FSC_RutaFormalizacion__c)
+					? RUTA_POR_GRUPO.get(configuracion.FSC_Grupo__c)
+					: configuracion.FSC_RutaFormalizacion__c;
+				if (ruta == null) {
+					continue;
+				}
+				if (!String.isBlank(configuracion.FSC_Valor__c)) {
+					rutaPorClave.put(normalizarClave(configuracion.FSC_Valor__c), ruta);
+				}
+				if (configuracion.FSC_Codigo__c != null) {
+					rutaPorCodigo.put(configuracion.FSC_Codigo__c.intValue(), ruta);
+				}
+			}
+			for (FSC_CatalogoGarantia__c registro : getRegistros(CATALOGO_CLASE)) {
+				Integer codigo = toInteger(registro.FSC_Codigo__c);
+				String clave = normalizarClave(registro.FSC_Descripcion__c);
+				if (rutaPorCodigo.containsKey(codigo) && !rutaPorClave.containsKey(clave)) {
+					rutaPorClave.put(clave, rutaPorCodigo.get(codigo));
+				}
+			}
+		}
+		return rutaPorClave.get(normalizarClave(clase));
 	}
 
 	// La clase define la categoria de la garantia. Los tipos del core pueden traer palabras de otra
@@ -158,6 +193,7 @@ public without sharing class FSC_CatalogoGarantiaService {
 		registrosPorCatalogo = null;
 		grupoPorClave = null;
 		grupoPorCodigo = null;
+		rutaPorClave = null;
 	}
 
 	private static Integer toInteger(Decimal valor) {

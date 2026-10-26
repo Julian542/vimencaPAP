@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_DesembolsoAPIExitoso__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indica que Abanks confirmó el desembolso por API. Evita repetir la operación mientras se cargan sus evidencias.</description>
+    <label>Desembolso exitoso en Abanks</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

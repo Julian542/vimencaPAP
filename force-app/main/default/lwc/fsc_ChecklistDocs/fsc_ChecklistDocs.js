@@ -3,6 +3,7 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import { refreshApex } from '@salesforce/apex';
 import { RefreshEvent, registerRefreshHandler, unregisterRefreshHandler } from 'lightning/refresh';
+import LightningConfirm from 'lightning/confirm';
 import getDocumentacionContratosContext from '@salesforce/apex/FSC_RlaAccionesController.getDocumentacionContratosContext';
 
 import TIENE_PERMISO_ADMINISTRADOR from '@salesforce/customPermission/FSC_CP_Administrador';
@@ -13,6 +14,7 @@ import TIENE_PERMISO_CONTROL_DOCUMENTOS from '@salesforce/customPermission/FSC_C
 import initAndGetRows from '@salesforce/apex/FSC_ChecklistDocsController.initAndGetRows';
 import saveRows from '@salesforce/apex/FSC_ChecklistDocsController.saveRows';
 import processUploadedFiles from '@salesforce/apex/FSC_ChecklistDocsController.processUploadedFiles';
+import deleteUploadedFile from '@salesforce/apex/FSC_ChecklistDocsController.deleteUploadedFile';
 
 import SUBESTADO_FIELD from '@salesforce/schema/ResidentialLoanApplication.FSC_Subestado__c';
 
@@ -323,6 +325,10 @@ export default class Fsc_ChecklistDocs extends LightningElement {
 				estadoRevisionDisabled = true;
 			}
 
+			// Se puede eliminar donde se puede cargar, aun con "No aplica" marcado (misma regla que el checkbox).
+			// Solo archivos subidos desde la checklist; los precargados no.
+			const canDeleteFiles = !noAplicaDisabled;
+
 			let uploadHint = '';
 
 			if (this.isReviewerOnly) {
@@ -351,7 +357,7 @@ export default class Fsc_ChecklistDocs extends LightningElement {
 
 			return {
 				...r,
-				files,
+				files: files.map((f) => ({ ...f, canDelete: canDeleteFiles && f.eliminable === true })),
 				hasFile,
 				isRelevant,
 				uploadDisabled,
@@ -598,6 +604,34 @@ export default class Fsc_ChecklistDocs extends LightningElement {
 					'success'
 				);
 			}
+		} catch (e) {
+			this.toast('Error', this.normalizeError(e), 'error');
+			await this.load({ preservePending: true });
+		} finally {
+			this.loading = false;
+		}
+	}
+
+	async handleDeleteFile(event) {
+		const { joinid: joinId, docid: contentDocumentId, title } = event.currentTarget.dataset;
+		if (!joinId || !contentDocumentId) {
+			this.toast('Error', 'No se pudo identificar el archivo a eliminar.', 'error');
+			return;
+		}
+
+		const confirmed = await LightningConfirm.open({
+			label: 'Eliminar archivo',
+			message: `¿Deseas eliminar el archivo "${title}"? Esta acción no se puede deshacer.`,
+			theme: 'warning',
+		});
+		if (!confirmed) return;
+
+		this.loading = true;
+		try {
+			await deleteUploadedFile({ joinId, contentDocumentId });
+			await this.load({ preservePending: true });
+			this.dispatchEvent(new RefreshEvent());
+			this.toast('Archivo eliminado', 'El archivo se eliminó correctamente.', 'success');
 		} catch (e) {
 			this.toast('Error', this.normalizeError(e), 'error');
 			await this.load({ preservePending: true });

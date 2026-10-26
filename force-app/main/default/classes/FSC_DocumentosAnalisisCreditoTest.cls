@@ -56,6 +56,8 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 
 	@IsTest
 	static void shouldChooseExpectedReport_WhenEligibleCreditTypesAreProcessed() {
+		// Estos datos no prueban la política de crédito; sus límites se prueban en FSC_CreditPolicyGuardTest.
+		FSC_CreditPolicyGuard.bypassInTests = true;
 		Account cuenta = FSC_FabricaDatosDocumentosAnalisisTest.obtenerCuentaBase();
 		ResidentialLoanApplication consumoLimite = FSC_FabricaDatosDocumentosAnalisisTest.crearSolicitud(
 			cuenta.Id,
@@ -223,6 +225,8 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 
 	@IsTest
 	static void shouldMapStructuredData_WhenMortgageHasRelatedRecords() {
+		// Estos datos no prueban la política de crédito; sus límites se prueban en FSC_CreditPolicyGuardTest.
+		FSC_CreditPolicyGuard.bypassInTests = true;
 		Account cuenta = FSC_FabricaDatosDocumentosAnalisisTest.obtenerCuentaBase();
 		ResidentialLoanApplication solicitud = FSC_FabricaDatosDocumentosAnalisisTest.crearSolicitud(
 			cuenta.Id,

@@ -6,8 +6,10 @@ public inherited sharing class FSC_GarantiaFormalizacionService {
 	private static final String SUBESTADO_COMPLETADO = 'Completado';
 	private static final String SUBESTADO_ARCHIVO_CUSTODIA = 'Archivo y custodia';
 	private static final String STATUS_CERRADA_GANADA = 'Cerrada Ganada';
-	private static final String GRUPO_HIPOTECARIO = 'real-estate';
-	private static final String GRUPO_VEHICULO = 'vehicle';
+	private static final String RUTA_HIPOTECARIA = FSC_FormalizacionGarantiasService.RUTA_HIPOTECARIA;
+	private static final String RUTA_VEHICULO = FSC_FormalizacionGarantiasService.RUTA_VEHICULO;
+	private static final String RUTA_MOBILIARIA = FSC_FormalizacionGarantiasService.RUTA_MOBILIARIA;
+	private static final String ETAPA_COMPLETADA = FSC_FormalizacionGarantiasService.ETAPA_COMPLETADA;
 	private static final String MENSAJE_CIERRE_BLOQUEADO = 'No se puede cerrar la solicitud porque existen garantías hipotecarias o vehiculares pendientes de formalización.';
 	private static final String MENSAJE_APROBACION_BLOQUEADA = 'No se puede aprobar Archivo y custodia porque existen garantías hipotecarias o vehiculares pendientes de formalización.';
 
@@ -83,6 +85,7 @@ public inherited sharing class FSC_GarantiaFormalizacionService {
 		for (FSC_Garantia__c garantia : [
 			SELECT
 				FSC_Residential_Loan_Application__c,
+				FSC_Residential_Loan_Application__r.FSC_EtapaFormalizacion__c,
 				FSC_Clase_de_Garantia__c,
 				FSC_Titulo_Registrado__c,
 				FSC_Fecha_Formalizacion_Hipotecaria__c,
@@ -93,12 +96,22 @@ public inherited sharing class FSC_GarantiaFormalizacionService {
 			WHERE FSC_Residential_Loan_Application__c IN :solicitudIds
 			WITH SYSTEM_MODE
 		]) {
-			String grupo = obtenerGrupo(garantia.FSC_Clase_de_Garantia__c);
-			if (!esGrupoAplicable(grupo)) {
+			String ruta = obtenerRuta(garantia.FSC_Clase_de_Garantia__c);
+			if (ruta == null) {
 				continue;
 			}
 
-			if (!estaFormalizada(garantia, grupo)) {
+			// Con el proceso por etapas la solicitud queda pendiente hasta completar la formalización.
+			String etapa = garantia.FSC_Residential_Loan_Application__r?.FSC_EtapaFormalizacion__c;
+			if (!String.isBlank(etapa)) {
+				if (etapa != ETAPA_COMPLETADA) {
+					solicitudesConGarantiaPendiente.add(garantia.FSC_Residential_Loan_Application__c);
+				}
+				continue;
+			}
+
+			// Solicitudes anteriores al proceso por etapas: solo se exigían garantías hipotecarias y vehiculares.
+			if (ruta != RUTA_MOBILIARIA && !estaFormalizada(garantia, ruta)) {
 				solicitudesConGarantiaPendiente.add(garantia.FSC_Residential_Loan_Application__c);
 			}
 		}
@@ -106,14 +119,14 @@ public inherited sharing class FSC_GarantiaFormalizacionService {
 	}
 
 	public static Boolean esGarantiaAplicable(String claseGarantia) {
-		return esGrupoAplicable(obtenerGrupo(claseGarantia));
+		return obtenerRuta(claseGarantia) != null;
 	}
 
 	public static Boolean estaFormalizada(FSC_Garantia__c garantia) {
 		if (garantia == null) {
 			return false;
 		}
-		return estaFormalizada(garantia, obtenerGrupo(garantia.FSC_Clase_de_Garantia__c));
+		return estaFormalizada(garantia, obtenerRuta(garantia.FSC_Clase_de_Garantia__c));
 	}
 
 	public static String obtenerGrupo(String claseGarantia) {
@@ -124,6 +137,10 @@ public inherited sharing class FSC_GarantiaFormalizacionService {
 		return grupoPorClase.get(normalizar(claseGarantia));
 	}
 
+	public static String obtenerRuta(String claseGarantia) {
+		return FSC_CatalogoGarantiaService.getRutaFormalizacion(claseGarantia);
+	}
+
 	private static Boolean estaCerrando(ResidentialLoanApplication solicitud, ResidentialLoanApplication anterior) {
 		Boolean cambiaACerradaGanada = solicitud.Status == STATUS_CERRADA_GANADA && (anterior == null || anterior.Status != STATUS_CERRADA_GANADA);
 		Boolean cambiaACompletado =
@@ -131,20 +148,20 @@ public inherited sharing class FSC_GarantiaFormalizacionService {
 		return cambiaACerradaGanada || cambiaACompletado;
 	}
 
-	private static Boolean estaFormalizada(FSC_Garantia__c garantia, String grupo) {
-		if (grupo == GRUPO_HIPOTECARIO) {
+	private static Boolean estaFormalizada(FSC_Garantia__c garantia, String ruta) {
+		if (ruta == RUTA_HIPOTECARIA) {
 			return garantia.FSC_Titulo_Registrado__c == RESPUESTA_SI && garantia.FSC_Fecha_Formalizacion_Hipotecaria__c != null;
 		}
-		if (grupo == GRUPO_VEHICULO) {
-			return garantia.FSC_Garantia_Constituida__c == RESPUESTA_SI &&
-				garantia.FSC_Fecha_Constitucion_Garantia__c != null &&
-				!String.isBlank(garantia.FSC_Comentario_Formalizacion_Vehiculo__c);
+		Boolean constituida = garantia.FSC_Garantia_Constituida__c == RESPUESTA_SI && garantia.FSC_Fecha_Constitucion_Garantia__c != null;
+		if (ruta == RUTA_VEHICULO) {
+			// El comentario corresponde al registro anterior al proceso por etapas; ahora se exige la fecha de formalización.
+			return constituida &&
+				(!String.isBlank(garantia.FSC_Comentario_Formalizacion_Vehiculo__c) || garantia.FSC_Fecha_Formalizacion_Hipotecaria__c != null);
+		}
+		if (ruta == RUTA_MOBILIARIA) {
+			return constituida && garantia.FSC_Fecha_Formalizacion_Hipotecaria__c != null;
 		}
 		return true;
-	}
-
-	private static Boolean esGrupoAplicable(String grupo) {
-		return grupo == GRUPO_HIPOTECARIO || grupo == GRUPO_VEHICULO;
 	}
 
 	private static void cargarGrupos() {

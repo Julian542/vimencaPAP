@@ -356,6 +356,13 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>FSC_CanalSolicitudMRI__c</picklist>
+        <values>
+            <fullName>VE</fullName>
+            <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>FSC_DecisionComite__c</picklist>
         <values>
             <fullName>Aprobada</fullName>
@@ -677,6 +684,85 @@
         </values>
         <values>
             <fullName>Sí</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>FSC_EtapaFormalizacion__c</picklist>
+        <values>
+            <fullName>Completada</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Depósito en Registro de Títulos</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Devuelta al oficial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Digitalización CDD</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Disponible para entrega</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>En Custodia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>En desembolso</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>En proceso de pago en DGII</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>En retiro</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mantenimiento de Operaciones</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Matrícula depositada en DGII</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Oposición de matrícula</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendiente de autorización DGII</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendiente de matrícula original</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pendiente envío a Custodia</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Recolección de firmas y notarización</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Registro de aviso en SEGM</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Revisión de documentos</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Solicitud de cheque</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -1022,6 +1108,116 @@
         </values>
         <values>
             <fullName>Tarjetas y Préstamos más Monto Adicional</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>FSC_TipoProductoSolicitudMRI__c</picklist>
+        <values>
+            <fullName>111</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>112</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>113</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>115</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>161</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>162</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>163</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>164</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>165</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>166</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>167</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>168</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>169</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>181</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>182</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>183</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>184</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>185</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>186</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>187</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>188</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>191</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>192</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>FSC_TipoSolicitudMRI__c</picklist>
+        <values>
+            <fullName>0</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
             <default>false</default>
         </values>
     </picklistValues>

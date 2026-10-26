@@ -94,6 +94,8 @@
         <members>FSC_RlaAccionesControllerTest</members>
         <members>FSC_RlaApprovalAdminClient</members>
         <members>FSC_RlaApprovalAdminClientTest</members>
+        <members>FSC_RlaApprovalAdminDecisionRest</members>
+        <members>FSC_RlaApprovalAdminDecisionRestTest</members>
         <members>FSC_RlaApprovalAdminRest</members>
         <members>FSC_RlaApprovalAdminRestTest</members>
         <members>FSC_RlaApprovalAdminReturnToAnalystRest</members>
@@ -177,10 +179,38 @@
         <members>FSC_CatalogoGarantiaSyncJob</members>
         <members>FSC_CatalogoGarantiaSyncJobTest</members>
         <members>FSC_CatalogoGarantiaSyncScheduler</members>
+        <members>FSC_ContratoParte</members>
+        <members>FSC_ContratoSeguro</members>
+        <members>FSC_ContratoRedaccionService</members>
+        <members>FSC_ContratoRedaccionServiceTest</members>
+        <members>FSC_ContratoRedaccionCtrlTest</members>
+        <members>FSC_DocumentoLegalService</members>
+        <members>FSC_DocumentoLegalServiceTest</members>
+        <members>FSC_ProcesamientoAbanks</members>
+        <members>FSC_ProcesamientoAbanksTest</members>
+        <members>FSC_FormalizacionDocumentosController</members>
+        <members>FSC_FormalizacionGarantiasController</members>
+        <members>FSC_FormalizacionGarantiasService</members>
+        <members>FSC_FormalizacionGarantiasTest</members>
+        <members>FSC_FormalizacionNotificaciones</members>
+        <members>FSC_FormalizacionNotificacionesTest</members>
+        <members>FSC_MontoComiteAction</members>
+        <members>FSC_MontoComiteActionTest</members>
+        <members>FSC_CreditPolicyController</members>
+        <members>FSC_CreditPolicyControllerTest</members>
+        <members>FSC_CreditPolicyGuard</members>
+        <members>FSC_CreditPolicyGuardTest</members>
+        <members>FSC_CreditPolicyService</members>
+        <members>FSC_CreditPolicyServiceTest</members>
         <name>ApexClass</name>
     </types>
     <types>
         <members>FSC_ArticuloPagosMonedaNacional</members>
+        <members>FSC_ContratoEstiloBase</members>
+        <members>FSC_ContratoSelloAgua</members>
+        <members>FSC_ContratoArticulosGenerales</members>
+        <members>FSC_ContratoArticulosSeguros</members>
+        <members>FSC_ContratoPiePagina</members>
         <name>ApexComponent</name>
     </types>
     <types>
@@ -208,6 +238,8 @@
         <members>FSC_ContratoHipotecarioEmpresaLey158</members>
         <members>FSC_ContratoHipotecarioPersonaFisica</members>
         <members>FSC_InformeCreditoPymePDF</members>
+        <members>FSC_AutorizacionOposicionMatricula</members>
+        <members>FSC_InventarioRegistroTitulos</members>
         <name>ApexPage</name>
     </types>
     <types>
@@ -900,6 +932,50 @@
         <members>FSC_PlazoCredito__mdt.FSC_PlazoMaximo__c</members>
         <members>ResidentialLoanApplication.FSC_AnioVehiculoMasAntiguo__c</members>
         <members>ResidentialLoanApplication.FSC_PlazoMaximoPermitido__c</members>
+        <members>ContentVersion.FSC_ContenidoLegal__c</members>
+        <members>ResidentialLoanApplication.FSC_UsuarioFormalizacion__c</members>
+        <members>FSC_APIPrestamoConfig__mdt.FSC_AutomatizarCreacionYDesembolso__c</members>
+        <members>ResidentialLoanApplication.FSC_AbanksAutomatico__c</members>
+        <members>ResidentialLoanApplication.FSC_ProcesamientoAbanksManual__c</members>
+        <members>ResidentialLoanApplication.FSC_DesembolsoAPIExitoso__c</members>
+        <members>ResidentialLoanApplication.FSC_EvidenciasDesembolsoCargadas__c</members>
+        <members>ResidentialLoanApplication.FSC_CanalSolicitudMRI__c</members>
+        <members>ResidentialLoanApplication.FSC_CodigoCanalSolicitudMRI__c</members>
+        <members>ResidentialLoanApplication.FSC_CodigoTipoProductoMRI__c</members>
+        <members>ResidentialLoanApplication.FSC_CodigoTipoSolicitudMRI__c</members>
+        <members>ResidentialLoanApplication.FSC_TipoProductoSolicitudMRI__c</members>
+        <members>ResidentialLoanApplication.FSC_TipoSolicitudMRI__c</members>
+        <members>FSC_ClaseGarantia__mdt.FSC_RutaFormalizacion__c</members>
+        <members>FSC_Garantia__c.FSC_ModalidadFormalizacion__c</members>
+        <members>FSC_Garantia__c.FSC_NumeroExpedienteDGII__c</members>
+        <members>FSC_Garantia__c.FSC_NumeroExpedienteRegistroTitulos__c</members>
+        <members>ResidentialLoanApplication.FSC_DesembolsoFormalizacion__c</members>
+        <members>ResidentialLoanApplication.FSC_EtapaFormalizacionRetorno__c</members>
+        <members>ResidentialLoanApplication.FSC_EtapaFormalizacion__c</members>
+        <members>ResidentialLoanApplication.FSC_ObservacionFormalizacion__c</members>
+        <members>ResidentialLoanApplication.FSC_ResponsableAreaFormalizacion__c</members>
+        <members>FSC_Garantia__c.FSC_SaldoPrimeraHipoteca__c</members>
+        <members>FSC_Garantia__c.FSC_Valor_Mejoras__c</members>
+        <members>FSC_ReglaCredito__mdt.FSC_Activa__c</members>
+        <members>FSC_ReglaCredito__mdt.FSC_BaseCalculo__c</members>
+        <members>FSC_ReglaCredito__mdt.FSC_Destino__c</members>
+        <members>FSC_ReglaCredito__mdt.FSC_MonedaMinimo__c</members>
+        <members>FSC_ReglaCredito__mdt.FSC_Moneda__c</members>
+        <members>FSC_ReglaCredito__mdt.FSC_MontoMinimo__c</members>
+        <members>FSC_ReglaCredito__mdt.FSC_Perfil__c</members>
+        <members>FSC_ReglaCredito__mdt.FSC_PlazoMaximo__c</members>
+        <members>FSC_ReglaCredito__mdt.FSC_PlazoMinimo__c</members>
+        <members>FSC_ReglaCredito__mdt.FSC_PorcentajeMaximo__c</members>
+        <members>FSC_ReglaCredito__mdt.FSC_Producto__c</members>
+        <members>FSC_ReglaCredito__mdt.FSC_Proposito__c</members>
+        <members>FSC_TasaCambioCredito__mdt.FSC_FechaReferencia__c</members>
+        <members>FSC_TasaCambioCredito__mdt.FSC_FechaVigencia__c</members>
+        <members>FSC_TasaCambioCredito__mdt.FSC_FuenteReferencia__c</members>
+        <members>FSC_TasaCambioCredito__mdt.FSC_Fuente__c</members>
+        <members>FSC_TasaCambioCredito__mdt.FSC_MonedaDestino__c</members>
+        <members>FSC_TasaCambioCredito__mdt.FSC_MonedaOrigen__c</members>
+        <members>FSC_TasaCambioCredito__mdt.FSC_Tasa__c</members>
+        <members>FSC_TasaCambioCredito__mdt.FSC_TipoCotizacion__c</members>
         <name>CustomField</name>
     </types>
     <types>
@@ -1350,6 +1426,26 @@
         <members>FSC_PlazoCredito.VehiculoNuevo</members>
         <members>FSC_PlazoCredito.VehiculoUsadoAntiguo</members>
         <members>FSC_PlazoCredito.VehiculoUsadoReciente</members>
+        <members>FSC_ReglaCredito.ConsConsolidacion</members>
+        <members>FSC_ReglaCredito.ConsDesinteresar</members>
+        <members>FSC_ReglaCredito.ConsOtros</members>
+        <members>FSC_ReglaCredito.ConsRemodelacion</members>
+        <members>FSC_ReglaCredito.ConsSegundaHipoteca</members>
+        <members>FSC_ReglaCredito.ConsSolar</members>
+        <members>FSC_ReglaCredito.ConsTraslado</members>
+        <members>FSC_ReglaCredito.ExtCompraDOP</members>
+        <members>FSC_ReglaCredito.ExtCompraUSD</members>
+        <members>FSC_ReglaCredito.HipCompraDOP</members>
+        <members>FSC_ReglaCredito.HipCompraUSD</members>
+        <members>FSC_ReglaCredito.HipConstruccion</members>
+        <members>FSC_ReglaCredito.HipDesinteresar</members>
+        <members>FSC_ReglaCredito.HipReconstruccion</members>
+        <members>FSC_ReglaCredito.HipReestructuracion</members>
+        <members>FSC_ReglaCredito.HipRemodelacion</members>
+        <members>FSC_ReglaCredito.HipSegundaRemodelacion</members>
+        <members>FSC_ReglaCredito.HipTrasladoDOP</members>
+        <members>FSC_ReglaCredito.HipTrasladoUSD</members>
+        <members>FSC_TasaCambioCredito.USD_DOP_20261021</members>
         <name>CustomMetadata</name>
     </types>
     <types>
@@ -1395,6 +1491,8 @@
         <members>FSC_APIPrestamoConfig__mdt</members>
         <members>FSC_CatalogoGarantia__c</members>
         <members>FSC_PlazoCredito__mdt</members>
+        <members>FSC_ReglaCredito__mdt</members>
+        <members>FSC_TasaCambioCredito__mdt</members>
         <name>CustomObject</name>
     </types>
     <types>
@@ -1526,6 +1624,7 @@
         <members>FSC_Formula_Clasificacion_MIPYMES</members>
         <members>FSC_ProcesoAprobacionValidacionEnAbanks</members>
         <members>FSC_ProcesoAprobacionBancaSeguro</members>
+        <members>FSC_ProcesoAsignacionFormalizacion</members>
         <name>Flow</name>
     </types>
     <types>
@@ -1573,6 +1672,7 @@
         <members>FSC_VPNegociosBancaPersona</members>
         <members>FSC_AprobadoresValidacionEnAbanks</members>
         <members>FSC_AprobadoresBancaSeguro</members>
+        <members>FSC_GestionFormalizacion</members>
         <name>Group</name>
     </types>
     <types>
@@ -1620,6 +1720,9 @@
         <members>ResidentialLoanApplication-Solicitud de crédito PYME</members>
         <members>ResidentialLoanApplication-Solicitud de crédito Vehículo</members>
         <members>FSC_Excepcion__c-Excepción FSC Layout</members>
+        <members>FSC_APIPrestamoConfig__mdt-Formato Configuracion API Prestamo</members>
+        <members>FSC_ReglaCredito__mdt-Regla de credito Layout</members>
+        <members>FSC_TasaCambioCredito__mdt-Tasa de cambio Layout</members>
         <name>Layout</name>
     </types>
     <types>
@@ -1639,6 +1742,8 @@
         <members>fsc_omniSearchablePicklist</members>
         <members>fsc_omniDateWithMinDate</members>
         <members>fsc_ActaComiteDocumento</members>
+        <members>fsc_EditarDocumentoLegal</members>
+        <members>fsc_RlaFormalizacionGarantias</members>
         <name>LightningComponentBundle</name>
     </types>
     <types>
@@ -1697,6 +1802,13 @@
         <members>ResidentialLoanApplication.Solicitudes_Hipotecario_pagares_contrato</members>
         <members>FSC_ConfiguracionFirmaDocumentos__mdt.AllFields</members>
         <members>FSC_CatalogoGarantia__c.All</members>
+        <members>ResidentialLoanApplication.FSC_Formalizacion_CDD</members>
+        <members>ResidentialLoanApplication.FSC_Formalizacion_Custodia</members>
+        <members>ResidentialLoanApplication.FSC_Formalizacion_Disponibles_Entrega</members>
+        <members>ResidentialLoanApplication.FSC_Formalizacion_Ejecucion_Operaciones</members>
+        <members>ResidentialLoanApplication.FSC_Formalizacion_En_Proceso</members>
+        <members>ResidentialLoanApplication.FSC_Formalizacion_Mantenimiento_Ops</members>
+        <members>ResidentialLoanApplication.FSC_Formalizacion_Pendientes_Oficial</members>
         <name>ListView</name>
     </types>
     <types>
@@ -1721,6 +1833,8 @@
         <members>FSC_CP_Formalizacion_Creditos</members>
         <members>FSC_CP_Generacion_Pagares_Contratos</members>
         <members>FSC_CP_BancaSeguro</members>
+        <members>FSC_CP_CDD</members>
+        <members>FSC_CP_MantenimientoOperaciones</members>
         <name>CustomPermission</name>
     </types>
     <types>
@@ -1741,7 +1855,13 @@
         <members>FSC_PS_Formalizacion_Creditos</members>
         <members>FSC_PS_Generacion_Pagares_Contratos</members>
         <members>FSC_PS_BancaSeguro</members>
+        <members>FSC_PS_CDD</members>
+        <members>FSC_PS_MantenimientoOperaciones</members>
         <name>PermissionSet</name>
+    </types>
+    <types>
+        <members>FSC_PSG_SolCred</members>
+        <name>PermissionSetGroup</name>
     </types>
     <types>
         <members>FSC_ColaAnalistasDeCredito</members>
@@ -1786,6 +1906,9 @@
         <members>FSC_ColaCaptura</members>
         <members>FSC_ColaOperaciones</members>
         <members>FSC_ColaBancaSeguro</members>
+        <members>FSC_GestionFormalizacion</members>
+        <members>FSC_ColaCDD</members>
+        <members>FSC_ColaMantenimientoOperaciones</members>
         <name>Queue</name>
     </types>
     <types>
@@ -1845,14 +1968,17 @@
         <members>Reportesdecreditos/FSC_Vehiculo_TopEjecutivos</members>
         <members>Reportesdecreditos/FSC_Vehiculo_TotalSolicitudes</members>
         <members>Reportesdecreditos/FSC_Solicitudes_de_credito_MIPYMES</members>
+        <members>Reportesdecreditos/FSC_Solicitudes_de_credito_WF02</members>
         <members>Reportesdecreditos/FSC_Consumo_TiempoPromedioCierre</members>
         <members>Reportesdecreditos/FSC_Hipotecario_TiempoPromedioCierre</members>
         <members>Reportesdecreditos/FSC_PYME_TiempoPromedioCierre</members>
         <members>Reportesdecreditos/FSC_Vehiculo_TiempoPromedioCierre</members>
+        <members>Reportesdecreditos/FSC_Formalizacion_DisponiblesEntrega</members>
         <name>Report</name>
     </types>
     <types>
         <members>FGC_SolicitudDeCredito</members>
+        <members>FSC_Formalizacion_Garantias</members>
         <name>ReportType</name>
     </types>
     <types>
@@ -1870,6 +1996,7 @@
     </types>
     <types>
         <members>FSC_ContratoPrestamoComercial_Anexo</members>
+        <members>FSC_SelloAguaContrato</members>
         <members>FSCPymeLayoutStyles</members>
         <members>FSC_PrioridadAmarillo</members>
         <members>FSC_PrioridadRojo</members>
@@ -1901,6 +2028,10 @@
         <members>FSC_Garantia__c.FSC_ValidarPlazoVehiculo</members>
         <members>ResidentialLoanApplication.FSC_ValidarPlazoMaximoConsumo</members>
         <members>ResidentialLoanApplication.FSC_ValidarPlazoMaximoVehiculo</members>
+        <members>ResidentialLoanApplication.FSC_ConservarProcesamientoManual</members>
+        <members>ResidentialLoanApplication.FSC_ExigirEvidenciasDesembolsoAPI</members>
+        <members>FSC_Garantia__c.FSC_SaldoHipotecaNoNegativo</members>
+        <members>FSC_Garantia__c.FSC_ValorMejorasPositivo</members>
         <name>ValidationRule</name>
     </types>
     <types>
@@ -1950,6 +2081,88 @@
     <types>
         <members>ResidentialLoanApplication.FSC_Documentos_a_corregir_adjuntar</members>
         <name>WorkflowTask</name>
+    </types>
+    <types>
+        <members>FSC_FirmanteAutorizacionMatricula</members>
+        <name>CustomLabel</name>
+    </types>
+    <types>
+        <members>FSC_FormalizacionGarantias</members>
+        <name>CustomNotificationType</name>
+    </types>
+    <types>
+        <members>FSC_ActualizarCrearSolicitudCreditoConsumo_Procedure_9</members>
+        <name>OmniIntegrationProcedure</name>
+    </types>
+     <types>
+        <members>FSC_PlanillaDesembolso_Spanish_13</members>
+        <members>FSC_SolicitudCreditoConsumo_Spanish_12</members>
+        <members>FSC_SolicitudCreditoHipotecario_Spanish_5</members>
+        <members>FSC_SolicitudCreditoPYME_Spanish_25</members>
+        <members>FSC_SolicitudCreditoVehiculo_Spanish_5</members>
+        <members>FSC_SolicitudDeCredito_Spanish_5</members>
+        <name>OmniScript</name>
+    </types>
+    <types>
+        <members>FSC_ActualizarCrearSolicitudCreditoConsumo_Procedure_8</members>
+        <members>FSC_ActualizarCrearSolicitudCreditoPYME_Procedure_14</members>
+        <members>FSC_APIBuroCreditoPyme_English_1</members>
+        <members>FSC_APIDesembolso_English_2</members>
+        <members>FSC_APIPrestamos_English_2</members>
+        <members>FSC_APIProductos_English_2</members>
+        <members>FSC_APISaldo_English_1</members>
+        <members>FSC_CrearDocumentoDesembolso_Procedure_2</members>
+        <members>FSC_GetAccountDetails_Procedure_1</members>
+        <members>FSC_GetFinancialServiceAccounts_English_1</members>
+        <members>FSC_GetValidationForConsumo_Procedure_2</members>
+        <members>FSC_GetValidationForHipotecario_Procedure_2</members>
+        <members>FSC_GetValidationForPYME_Procedure_4</members>
+        <members>FSC_GetValidationForVehiculo_Procedure_2</members>
+        <members>FSC_ObtenerDatosRLA_Procedure_2</members>
+        <members>FSC_ObtenerDatosUser_Procedure_1</members>
+        <members>FSC_ValidaListasControl_Procedure_1</members>
+        <members>FSC_ValidarClasificacionMIPYMES_Procedure_1</members>
+        <members>FSC_ValidateFacilidades_Procedure_1</members>
+        <members>test_probarApexCreacionSolicitudPDFPYME_English_1</members>
+        <name>OmniIntegrationProcedure</name>
+    </types>
+    <types>
+        <members>DRGetFinancialServiceAccounts_1</members>
+        <members>FSCActualizarDatosCuenta_1</members>
+        <members>FSCCrearClientesYProveedoresPrincipales_1</members>
+        <members>FSCCrearContactPointAddress_1</members>
+        <members>FSCCrearContactPointEmail_1</members>
+        <members>FSCCrearContactPointPhone_1</members>
+        <members>FSCCrearCrearContactPointAddress_1</members>
+        <members>FSCCrearCrearContactPointPhone_1</members>
+        <members>FSCCrearCrearLoanApplicant_1</members>
+        <members>FSCCrearFacilidadesDeCredito_1</members>
+        <members>FSCCrearFacilidadOtraInstitucion_1</members>
+        <members>FSCCrearFortalezasYDebilidades_1</members>
+        <members>FSCCrearGarantias_1</members>
+        <members>FSCCrearLoanApplicant_1</members>
+        <members>FSCCrearLoanApplicationAsset_1</members>
+        <members>FSCCrearPropositoYUsoDeFondos_1</members>
+        <members>FSCCrearReferencias_1</members>
+        <members>FSCCrearRelacionNegociosColaterales_1</members>
+        <members>FSCCrearResidentialLoanApplication_1</members>
+        <members>FSCCrearSeguros_1</members>
+        <members>FSCCrearSociosPrincipalesYAccionistas_1</members>
+        <members>FSCCrearSolicitudDeCredito_1</members>
+        <members>FSCGetAccountDetails_1</members>
+        <members>FSCGetAPIPrestamoConfig_1</members>
+        <members>FSCGetLoanApplicant_1</members>
+        <members>FSCGetMatrizClasificacionMIPYMES_1</members>
+        <members>FSCGetReferidores_1</members>
+        <members>FSCGetRLA_1</members>
+        <members>FSCGetRLAByAccId_1</members>
+        <members>FSCGetTiposSeguro_1</members>
+        <members>FSCLogErrors_1</members>
+        <members>FSCMapFinServRecordsToFacilidades_1</members>
+        <members>FSCObtenerDatosUser_1</members>
+        <members>FSCTranformDatosParaActualizarCrearSolicitudCreditoConsumo_1</members>
+        <members>FSCTranformDatosParaActualizarCrearSolicitudCreditoPYME_1</members>
+        <name>OmniDataTransform</name>
     </types>
     <version>66.0</version>
 </Package>

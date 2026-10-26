@@ -1,0 +1,332 @@
+<apex:page standardController="ResidentialLoanApplication"
+	extensions="FSC_ContratoHipotecarioEmpresaLey158Ctrl"
+	applyBodyTag="false"
+	applyHtmlTag="false"
+	showHeader="false"
+	sidebar="false"
+	standardStylesheets="false"
+	cache="false"
+	language="es"
+	renderAs="{!IF($CurrentPage.parameters.legalHtml = 'true', '', 'pdf')}">
+	<html>
+		<head>
+			<meta
+				http-equiv="Content-Type"
+				content="text/html; charset=UTF-8" />
+			<c:FSC_ContratoEstiloBase />
+			<style type="text/css">
+				.title {
+					margin: 0 0 1.2em;
+					text-align: center;
+					font-weight: 700;
+				}
+				.paragraph {
+					margin: 0 0 1.2em;
+					text-align: justify;
+					orphans: 3;
+					widows: 3;
+				}
+				.signature-section,
+				.notary-block {
+					margin-top: 8mm;
+					page-break-inside: avoid;
+				}
+				.signature-table {
+					width: 100%;
+					border-collapse: collapse;
+					margin-top: 8mm;
+					page-break-inside: avoid;
+				}
+				.signature-cell {
+					width: 50%;
+					padding: 0 6mm;
+					vertical-align: top;
+				}
+				.signature-line {
+					border-top: 1px solid #000;
+					height: 3mm;
+				}
+				.signature-name,
+				.signature-role {
+					text-align: center;
+				}
+				.signature-heading {
+					margin-top: 6mm;
+					font-weight: 700;
+				}
+				.notary-signature {
+					width: 45%;
+					margin: 10mm auto 0;
+				}
+			</style>
+		</head>
+		<body>
+			<c:FSC_ContratoPiePagina />
+			<p class="title">CONTRATO DE PRÉSTAMO CON GARANTÍA HIPOTECARIA Y COMPRA DE INMUEBLE</p>
+			<p class="paragraph">EXENTO EN VIRTUD DE LA LEY NO. 158-01 SOBRE FOMENTO AL DESARROLLO TURÍSTICO PROMULGADA EL 09/10/2001</p>
+			<p class="paragraph">
+				ENTRE: BANCO MÚLTIPLE VIMENCA, S. A., entidad de intermediación financiera organizada de conformidad con las leyes de la República
+				Dominicana, RNC No. 1-01-02141-1, Registro Mercantil No. 10019SD, con domicilio social en la Avenida Abraham Lincoln No. 306, Sector
+				La Julia, Santo Domingo, Distrito Nacional, debidamente representada por su {!datos.bancoRepresentante1.cargo},
+				{!datos.bancoRepresentante1.tratamiento} {!datos.bancoRepresentante1.nombreCompleto}, {!datos.bancoRepresentante1.nacionalidad}, mayor
+				de edad, estado civil {!datos.bancoRepresentante1.estadoCivil}, identificación No. {!datos.bancoRepresentante1.identificacion},
+				domiciliado(a) en {!datos.bancoRepresentante1.domicilio}, y por su {!datos.bancoRepresentante2.cargo},
+				{!datos.bancoRepresentante2.tratamiento} {!datos.bancoRepresentante2.nombreCompleto}, {!datos.bancoRepresentante2.nacionalidad}, mayor
+				de edad, estado civil {!datos.bancoRepresentante2.estadoCivil}, identificación No. {!datos.bancoRepresentante2.identificacion},
+				domiciliado(a) en {!datos.bancoRepresentante2.domicilio}, entidad que en lo adelante se denominará EL BANCO;
+			</p>
+			<p class="paragraph">{!hipotecario.prestatariosGenerales}, {!IF(deudor.plural, 'quienes', 'quien')} para los fines del presente contrato se denominará{!deudor.n} {!deudor.nombre};</p>
+			<apex:outputPanel rendered="{!hipotecario.tieneGaranteReal}" layout="none"><p class="paragraph">{!hipotecario.garantesGenerales}, {!IF(hipotecario.propietariosGarantia.plural, 'quienes', 'quien')} para los fines del presente contrato se denominará{!hipotecario.propietariosGarantia.n} {!hipotecario.propietariosGarantia.nombre};</p></apex:outputPanel>
+			<apex:outputPanel rendered="{!hipotecario.tieneConyugeInterviniente}" layout="none"><p class="paragraph">{!hipotecario.conyugeGenerales}, quien para los fines del presente contrato se denominará {!hipotecario.conyugeParte.nombre};</p></apex:outputPanel>
+			<p class="paragraph">
+				{!hipotecario.vendedorNombre}, sociedad organizada conforme a las leyes de la República Dominicana, RNC No.
+				{!hipotecario.vendedorRnc}, Registro Mercantil No. {!hipotecario.vendedorRegistroMercantil}, con domicilio social en
+				{!hipotecario.vendedorDomicilio}, debidamente representada por su {!hipotecario.vendedorRepresentanteCargo},
+				{!hipotecario.vendedorRepresentanteNombre}, {!hipotecario.vendedorRepresentanteNacionalidad}, mayor de edad, estado civil
+				{!hipotecario.vendedorRepresentanteEstadoCivil}, portador(a) de la identificación No.
+				{!hipotecario.vendedorRepresentanteIdentificacion}, domiciliado(a) y residente en {!hipotecario.vendedorRepresentanteDomicilio}, quien
+				para los fines del presente contrato se denominará LA VENDEDORA.
+			</p>
+			<p class="paragraph">
+				POR CUANTO: {!deudor.nombre} ha{!deudor.n} solicitado a EL BANCO un Préstamo con Garantía Hipotecaria para adquisición de vivienda por un monto de
+				{!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}).
+			</p>
+			<p class="paragraph">
+				POR CUANTO: Para seguridad del pago de la suma solicitada por {!deudor.nombre}, {!hipotecario.propietariosGarantia.nombre} ofrece{!hipotecario.propietariosGarantia.n} en garantía el inmueble que se describe a
+				continuación:
+			</p>
+			<p class="paragraph">"{!datos.garantiaDescripcion}"</p>
+			<p class="paragraph">
+				POR CUANTO: EL BANCO consintió en otorgar el Préstamo con Garantía Hipotecaria solicitado por {!deudor.nombre} bajo los términos convenidos
+				en el presente contrato.
+			</p>
+			<p class="paragraph">
+				POR CUANTO: Las personas que comparecen en representación de la parte vendedora se encuentran facultadas para suscribir el presente
+				contrato conforme a {!hipotecario.vendedorAutorizacion}.
+			</p>
+			<p class="paragraph">
+				POR CUANTO: La Ley No. 158-01, promulgada en fecha nueve (09) del mes de octubre del año dos mil uno (2001), exonera el pago
+				correspondiente al tres por ciento (3%) por Transferencia Inmobiliaria, por ventas, permutas, aportes en naturaleza y cualesquiera
+				otras formas de transferencia sobre derechos inmobiliarios, por lo que, {!deudor.nombre} ha{!deudor.n} decidido aplicar para dicha exoneración.
+			</p>
+			<p class="paragraph">
+				POR CUANTO: Toda vez que sean mencionados EL BANCO, {!deudor.nombre}<apex:outputPanel layout="none" rendered="{!hipotecario.tieneGaranteReal}">, {!hipotecario.propietariosGarantia.nombre}</apex:outputPanel><apex:outputPanel layout="none" rendered="{!hipotecario.tieneConyugeInterviniente}">, {!hipotecario.conyugeParte.nombre}</apex:outputPanel> y LA VENDEDORA, en su conjunto, se denominarán LAS PARTES.
+			</p>
+			<p class="paragraph">
+				POR TANTO y en el entendido de que los anteriores POR CUANTOS forman parte integral del presente contrato, LAS PARTES,
+			</p>
+			<p class="paragraph">HAN CONVENIDO Y PACTADO LO SIGUIENTE:</p>
+			<p class="paragraph">
+				<span class="articulo"></span>MONTO. EL BANCO concede a {!deudor.nombre}, {!IF(deudor.plural, 'quienes aceptan', 'quien acepta')}, un préstamo por la suma de {!datos.montoLetras}
+				({!datos.simboloMoneda}{!datos.montoNumero}), para ser destinado a adquisición de vivienda, suma que {!deudor.nombre} declara{!deudor.n} haber recibido
+				a su entera satisfacción.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: La tabla de amortización del préstamo deberá ser entregada por EL BANCO a la firma del presente contrato y formará parte
+				integral del mismo.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: {!deudor.nombre} se compromete{!deudor.n} a suministrar a EL BANCO, de manera oportuna y durante la vigencia del préstamo, todas las
+				informaciones que, según las normas vigentes se requieran a los fines de poder mantener actualizado el expediente de crédito.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>PAGARÉ. {!deudor.nombre} se compromete{!deudor.n} a suscribir conjuntamente con el presente contrato un pagaré a favor de EL BANCO por la
+				suma de {!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}). En dicho pagaré se consignarán las condiciones financieras
+				particulares del desembolso realizado.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>INTERESES. {!deudor.nombre} pagará{!deudor.n} intereses sobre saldos insolutos de capital a razón de {!datos.tasaLetras} por ciento
+				({!datos.tasaNumero}%) anual, sobre la base de un año de trescientos sesenta (360) días. La tasa será fija durante los primeros
+				{!hipotecario.periodoTasaFijaLetras} ({!hipotecario.periodoTasaFijaNumero}) meses.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>VARIACIÓN DE LA TASA DE INTERÉS.- VARIACIÓN DE LA TASA DE INTERÉS. LAS PARTES convienen que en caso de operarse durante la
+				vigencia de este contrato una variación de los intereses en el Mercado Bancario, dicha variación será aplicada al saldo insoluto del
+				préstamo, previa notificación a {!deudor.nombre} antes de su aplicación, con treinta (30) días calendario de anticipación. Igualmente, es
+				entendido y acordado entre LAS PARTES que en caso de producirse una reclasificación de {!deudor.nombre}, producto de sus indicadores
+				financieros, a una categoría distinta a la que le había sido asignada, de acuerdo con los criterios que establezca la Superintendencia
+				de Bancos de la República Dominicana, y que esto implique un mayor riesgo para EL BANCO, se podrán tomar las medidas siguientes, a
+				opción de EL BANCO: a) solicitar a {!deudor.nombre} el saldo total de los valores adeudados de capital, intereses y demás accesorios, en un
+				plazo no mayor de treinta (30) días calendario posteriores a su notificación; o b) realizar un aumento de la tasa aplicable a los
+				intereses del préstamo, acorde a la nueva calificación en el sistema financiero, previa notificación a {!deudor.nombre} antes de su
+				aplicación, con treinta (30) días calendario de anticipación. Las notificaciones a las que se refiere este Artículo se realizarán y se
+				considerarán válidamente recibidas si se realizan a través de uno de los medios siguientes a opción de EL BANCO: a) mediante
+				comunicación física por escrito; b) al correo electrónico suministrado por {!deudor.nombre} a EL BANCO, o; c) cualquier otro medio
+				fehaciente de conformidad con el Derecho común dominicano.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: Con cada variación de la tasa de interés, EL BANCO deberá entregar a {!deudor.nombre} una tabla que contenga la forma de
+				amortización del préstamo ajustada conforme la nueva tasa.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO: Si producto de las variaciones de tasa de interés o de cualquier otra modificación unilateral de las condiciones del contrato
+				realizadas por EL BANCO, {!deudor.nombre} opta{!deudor.n} por terminar la relación contractual, {!deudor.nombre} no incurrirá{!deudor.n} en ningún tipo de
+				responsabilidad y EL BANCO no podrá cobrarle penalidad alguna por este motivo, esto así, siempre y cuando {!deudor.nombre} notifique{!deudor.n} la terminación y salde{!deudor.n} totalmente los valores adeudados de capital, intereses y demás accesorios, antes de la entrada en vigencia de la
+				modificación realizada que genera la solicitud de terminación.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>VENCIMIENTO Y FORMA DE PAGO. {!deudor.nombre} se obliga{!deudor.n} a pagar esta deuda en el término de {!datos.plazoLetras}
+				({!datos.plazoNumero}) meses, mediante {!datos.plazoLetras} ({!datos.plazoNumero}) cuotas mensuales, iguales y consecutivas,
+				contentivas de capital e intereses, por la suma de {!datos.cuotaLetras} ({!datos.simboloMoneda}{!datos.cuotaNumero}), con vencimiento
+				el {!datos.fechaVencimiento}.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: Es entendido y acordado por las partes que {!deudor.nombre} pagará{!deudor.n} a EL BANCO intereses mensuales sobre saldo insoluto de
+				capital de conformidad con lo establecido en el artículo de Intereses del presente contrato, debiendo saldar el total del capital adeudado
+				más los intereses y accesorios pendientes de pago al momento del vencimiento del término de vigencia del Préstamo. Los pagos deberán
+				ser realizados por {!deudor.nombre} en cualquiera de las sucursales o puntos autorizados por EL BANCO, en efectivo, cheque o transferencia
+				electrónica de conformidad a las normas que rigen cada uno de estos medios de pagos. EL BANCO podrá poner a disposición de {!deudor.nombre} otros medios de pago que {!deudor.le} serán informados de manera oportuna.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: Los pagos realizados por {!deudor.nombre} serán aplicados por EL BANCO a la deuda que surja del presente contrato en el
+				siguiente orden: primero al pago de honorarios, impuestos, comisiones, primas de pólizas de seguros y gastos pendientes de pago así
+				como sumas avanzadas por EL BANCO con la finalidad de proteger o mantener las garantías otorgadas por {!deudor.nombre} o de manera general
+				sumas pagadas por EL BANCO por cuenta de {!deudor.nombre}, previa autorización de {!deudor.este}; segundo al pago de mora; tercero a los intereses
+				ordinarios devengados; y por último al capital adeudado.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO III: Los pagos realizados mediante cheques por {!deudor.nombre} a EL BANCO, se considerarán efectivos el día en que los fondos
+				correspondientes a los mismos estén disponibles y se hagan efectivos los pagos correspondientes.
+			</p>
+			<c:FSC_ArticuloPagosMonedaNacional mostrar="{!esDolares}" p="{!deudor}" />
+			<p class="paragraph">
+				<span class="articulo"></span>SALDOS ANTICIPADOS. {!deudor.nombre} podrá{!deudor.n} realizar abonos o cancelaciones anticipadas al balance de
+				capital, siempre que la facilidad crediticia se encuentre al día en el pago de sus cuotas mensuales, para lo cual, EL BANCO estará en
+				pleno derecho de cobrar una penalidad, si dicho abono o cancelación anticipada, se realiza dentro de los primeros treinta y seis (36)
+				meses de amortización del crédito, contados a partir de la fecha del desembolso, según lo establecido en el Tarifario de Productos y
+				Servicios que esté vigente al momento de realizar la transacción.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>MORA. {!deudor.nombre} se compromete{!deudor.n}, en caso de no cumplir a su vencimiento, con una cualquiera de sus
+				obligaciones de pago, a pagar por concepto de mora, a título de cláusula penal, el cinco por ciento (5%) mensual o fracción de mes,
+				sobre el monto vencido, sin formalidad judicial, ni extrajudicial alguna.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>VENTA.- LA VENDEDORA, en virtud del presente acto, vende, cede y transfiere, desde hoy y para
+				siempre, con las garantías de derecho sobre evicción, libre de cargas y gravámenes, a {!deudor.nombre}, el inmueble que se describe a
+				continuación:
+			</p>
+			<p class="paragraph">"{!datos.garantiaDescripcion}"</p>
+			<p class="paragraph">
+				PÁRRAFO I: LA VENDEDORA justifica su derecho de propiedad sobre el inmueble mediante el Certificado de Título Matrícula No.
+				{!datos.garantiaNumeroTitulo}, emitido por {!datos.garantiaRegistroTitulos}, en fecha {!datos.garantiaFechaTitulo}.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>PRECIO DE LA VENTA. El precio de venta se estipula en {!hipotecario.precioVentaLetras}
+				({!datos.simboloMoneda}{!hipotecario.precioVentaNumero}). La parte vendedora declara haber recibido de {!deudor.nombre}
+				{!hipotecario.aporteInicialLetras} ({!datos.simboloMoneda}{!hipotecario.aporteInicialNumero}), mediante
+				{!hipotecario.medioPagoInicial}, según comprobante de fecha {!hipotecario.fechaPagoInicial}; y por otra parte la suma de
+				{!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}), pagadera mediante {!hipotecario.medioPagoFinanciado} con fondos del
+				financiamiento otorgado por EL BANCO.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>GARANTÍA DEL PRÉSTAMO. - Para seguridad del pago de la suma prestada, así como de los intereses y
+				demás obligaciones a cargo de {!deudor.nombre}, {!hipotecario.propietariosGarantia.nombre} otorga{!hipotecario.propietariosGarantia.n} una hipoteca en PRIMER RANGO a favor de EL BANCO sobre el inmueble que se
+				describe a continuación:
+			</p>
+			<p class="paragraph">"{!datos.garantiaDescripcion}"</p>
+			<p class="paragraph">
+				PÁRRAFO I: BIENES AFECTADOS POR LA HIPOTECA.- {!hipotecario.propietariosGarantia.nombre}, en su calidad de propietari{!hipotecario.propietariosGarantia.o} del bien afectado, declara{!hipotecario.propietariosGarantia.n} por este acto, que
+				la hipoteca que se consiente sobre el inmueble anteriormente descrito, afectará no solamente las mejoras existentes a la fecha de la
+				suscripción de este contrato, sino también las que puedan existir en el futuro, así como los bienes que para tales fines se consideren
+				inmuebles por naturaleza o por su destino, en especial, aunque no exclusivamente, las edificaciones, estructuras, plantas físicas,
+				anexidades y dependencias, así como los demás bienes que, por estar destinados al uso de los inmuebles, se consideren inmuebles por
+				destinación. Asimismo, es entendido que las hipotecas gravan todo lo enclavado, plantado, adherido al suelo, muros, techos,
+				anexidades, mejoras, no solamente de las construcciones y mejoras actualmente existentes, sino también de las que se construyen, hagan
+				o edifiquen en dichos inmuebles y constituyan inmuebles por destinación.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: {!hipotecario.propietariosGarantia.nombre} autoriza{!hipotecario.propietariosGarantia.n} a EL BANCO o a la persona en quien ésta delegue, a retirar del Registro de Títulos el Duplicado del
+				Dueño, luego de haberse inscrito la hipoteca, y una vez en las oficinas de EL BANCO, el Duplicado del Dueño será entregado a su
+				titular.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO III: {!hipotecario.propietariosGarantia.nombre} se compromete{!hipotecario.propietariosGarantia.n} formalmente a lo siguiente: a) pagar todos los impuestos que {!hipotecario.propietariosGarantia.le} corresponde pagar, incluyendo
+				los impuestos que recaen sobre los inmuebles otorgados en garantía, dentro de los periodos establecidos por la Ley; b) dar aviso
+				inmediato por correo certificado o carta con acuse de recibo a EL BANCO sobre cualquier daño material que sufra el inmueble otorgado
+				en garantía; c) cuidar dicho inmueble como lo haría un buen padre de familia y mantenerlo en buen estado de conservación y reparación.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO V: {!hipotecario.propietariosGarantia.nombre} reconoce{!hipotecario.propietariosGarantia.n} que no podrá{!hipotecario.propietariosGarantia.n} transferir a terceros este contrato, ni constituir nuevas hipotecas o afectar con
+				cualquier otro gravamen el inmueble dado en garantía, sin contar con la autorización previa, expresa y por escrito de EL BANCO. La
+				falta de autorización de EL BANCO para constituir nuevas hipotecas será una causa de incumplimiento y en consecuencia {!hipotecario.propietariosGarantia.nombre} perderá{!hipotecario.propietariosGarantia.n} el beneficio del término y de las facilidades de pago bajo este contrato, haciéndose ejecutable la garantía hipotecaria
+				otorgada, atendiendo a las formalidades de ley.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO VI: {!hipotecario.propietariosGarantia.nombre} declara{!hipotecario.propietariosGarantia.n} y reconoce{!hipotecario.propietariosGarantia.n} que en caso de que la totalidad o parte de los inmuebles dados en garantía hipotecaria
+				mediante este contrato, sean expropiados por el Estado Dominicano o por cualquier organismo competente, el precio que se pague como
+				resultado de la expropiación será entregado a EL BANCO para aplicarlo al pago de las sumas adeudadas bajo el presente contrato. En
+				consecuencia, en caso de que ocurra tal eventualidad, {!hipotecario.propietariosGarantia.nombre} autoriza{!hipotecario.propietariosGarantia.n} expresa e irrevocablemente al expropiante o adquiriente a
+				entregar directamente a EL BANCO los valores resultantes de la expropiación, para aplicarlos al pago de las sumas adeudadas, debiendo
+				EL BANCO entregar a {!hipotecario.propietariosGarantia.nombre} el excedente, en caso de que el pago del precio de la expropiación exceda el monto adeudado.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO VI: {!hipotecario.propietariosGarantia.nombre} declara{!hipotecario.propietariosGarantia.n} y reconoce{!hipotecario.propietariosGarantia.n} que la hipoteca otorgada cubre cualquier valor adeudado en virtud del presente contrato y
+				que en caso de EL BANCO tenga que ejecutar la hipoteca por falta de pago o incumplimiento del presente contrato, la extinción de dicha
+				garantía no extingue la acreencia sino hasta la concurrencia del precio de adjudicación del inmueble. Es decir que, si el monto
+				adeudado llegare a ser mayor que el valor de adjudicación, EL BANCO podrá perseguir el pago de la deuda restante.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO VII: En los casos donde la normativa vigente exija a las entidades de intermediación financiera mantener una tasación
+				actualizada de las garantías, {!hipotecario.propietariosGarantia.nombre} se obliga{!hipotecario.propietariosGarantia.n} a proporcionarla a su solo costo. En caso de que {!hipotecario.propietariosGarantia.nombre} no cumpla{!hipotecario.propietariosGarantia.n} con esta
+				obligación, EL BANCO tendrá el derecho, más no la obligación, de avanzar estos gastos con fondos propios y reclamar su pago directo a
+				{!hipotecario.propietariosGarantia.nombre} o cargar dicha erogación al préstamo, cuando {!hipotecario.propietariosGarantia.este} no obtempere{!hipotecario.propietariosGarantia.n} al requerimiento de pago que al efecto realice EL BANCO.
+			</p>
+			<c:FSC_ContratoArticulosSeguros propietario="{!hipotecario.propietariosGarantia}" asegurado="{!deudor}" propiedad="{!seguroPropiedad}" vida="{!seguroVida}" />
+			<c:FSC_ContratoArticulosGenerales p="{!sujetoGeneral}" garantiaInmueble="{!garantiaInmueble}" />
+			<p class="paragraph">
+				HECHO Y FIRMADO DE BUENA FE, en tantos originales como partes contratantes, en {!datos.lugarFirma}, a los
+				{!datos.fechaContratoDiaLetras} ({!datos.fechaContratoDiaNumero}) días del mes de {!datos.fechaContratoMes} del año
+				{!datos.fechaContratoAnoLetras} ({!datos.fechaContratoAnoNumero}).
+			</p>
+			<div class="signature-section">
+				<div class="signature-heading">POR {!deudor.nombre}:</div>
+				<table class="signature-table">
+					<apex:repeat value="{!hipotecario.prestatarios}" var="firmante"><tr><td class="signature-cell"><div class="signature-line"></div><div class="signature-name">{!firmante.nombre}</div></td><td class="signature-cell"></td></tr></apex:repeat>
+				</table>
+				<apex:outputPanel rendered="{!hipotecario.tieneGaranteReal}" layout="block"><div class="signature-heading">POR {!hipotecario.propietariosGarantia.nombre}:</div><table class="signature-table"><apex:repeat value="{!hipotecario.garantesReales}" var="garante"><tr><td class="signature-cell"><div class="signature-line"></div><div class="signature-name">{!garante.nombre}</div></td><td class="signature-cell"></td></tr></apex:repeat></table></apex:outputPanel>
+				<apex:outputPanel rendered="{!hipotecario.tieneConyugeInterviniente}" layout="block"><div class="signature-heading">POR {!hipotecario.conyugeParte.nombre}:</div><table class="signature-table"><tr><td class="signature-cell"><div class="signature-line"></div><div class="signature-name">{!hipotecario.conyuge.nombre}</div></td><td class="signature-cell"></td></tr></table></apex:outputPanel>
+				<div class="signature-heading">POR LA PARTE VENDEDORA:</div>
+				<table class="signature-table">
+					<tr>
+						<td class="signature-cell">
+							<div class="signature-line"></div>
+							<div class="signature-name">
+								<apex:outputText value="{!IF(hipotecario.esPersonaFisica,hipotecario.vendedorNombre,IF(hipotecario.esEmpresa,hipotecario.vendedorRepresentanteNombre,hipotecario.fiduciariaFirmantes))}" />
+							</div>
+						</td>
+						<td class="signature-cell"></td>
+					</tr>
+				</table>
+				<div class="signature-heading">POR EL BANCO:</div>
+				<table class="signature-table">
+					<tr>
+						<td class="signature-cell">
+							<div class="signature-line"></div>
+							<div class="signature-name">{!datos.bancoRepresentante1.nombreCompleto}</div>
+							<div class="signature-role">{!datos.bancoRepresentante1.cargo}</div>
+						</td>
+						<td class="signature-cell">
+							<div class="signature-line"></div>
+							<div class="signature-name">{!datos.bancoRepresentante2.nombreCompleto}</div>
+							<div class="signature-role">{!datos.bancoRepresentante2.cargo}</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="notary-block">
+				<p class="paragraph">
+					YO, {!datos.notario.tratamiento} {!datos.notario.nombreCompleto}, Notario Público de los del Número para
+					{!datos.notario.jurisdiccionNotario}, Matrícula No. {!datos.notario.matriculaNotario}, CERTIFICO Y DOY FE de que por ante mí
+					fueron puestas las firmas de {!hipotecario.nombresFirmantesNotario}, quienes manifestaron que son las firmas que acostumbran usar. En
+					{!datos.lugarFirma}, a los {!datos.fechaContratoDiaLetras} ({!datos.fechaContratoDiaNumero}) días del mes de
+					{!datos.fechaContratoMes} del año {!datos.fechaContratoAnoLetras} ({!datos.fechaContratoAnoNumero}).
+				</p>
+				<div class="notary-signature">
+					<div class="signature-line"></div>
+					<div class="signature-name">{!datos.notario.nombreCompleto}</div>
+					<div class="signature-role">Notario Público</div>
+				</div>
+			</div>
+		</body>
+	</html></apex:page>

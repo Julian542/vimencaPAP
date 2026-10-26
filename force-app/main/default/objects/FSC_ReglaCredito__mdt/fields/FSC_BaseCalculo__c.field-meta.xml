@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_BaseCalculo__c</fullName>
+    <description>MENOR_INMUEBLE_VENTA usa el menor valor. INMUEBLE_CON_PRIMER_RANGO exige considerar la deuda previa en la exposición total; confirmar fórmula operativa.</description>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Seleccione el valor patrimonial sobre el que se aplica el porcentaje máximo.</inlineHelpText>
+    <label>Base de cálculo</label>
+    <required>true</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>MENOR_INMUEBLE_VENTA</fullName>
+                <default>false</default>
+                <label>MENOR_INMUEBLE_VENTA</label>
+            </value>
+            <value>
+                <fullName>INMUEBLE</fullName>
+                <default>false</default>
+                <label>INMUEBLE</label>
+            </value>
+            <value>
+                <fullName>INMUEBLE_CON_PRIMER_RANGO</fullName>
+                <default>false</default>
+                <label>INMUEBLE_CON_PRIMER_RANGO</label>
+            </value>
+            <value>
+                <fullName>MEJORAS</fullName>
+                <default>false</default>
+                <label>MEJORAS</label>
+            </value>
+            <value>
+                <fullName>SOLAR</fullName>
+                <default>false</default>
+                <label>SOLAR</label>
+            </value>
+            <value>
+                <fullName>SOLAR_SIN_GRAVAMEN</fullName>
+                <default>false</default>
+                <label>SOLAR_SIN_GRAVAMEN</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

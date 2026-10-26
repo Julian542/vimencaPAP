@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_EtapaFormalizacion__c</fullName>
+    <description>Etapa del proceso de formalización de la garantía. Se actualiza desde el panel de acciones de la solicitud.</description>
+    <inlineHelpText>Etapa del proceso de formalización de la garantía. Se actualiza desde el panel de acciones de la solicitud.</inlineHelpText>
+    <label>Etapa de formalización</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Revisión de documentos</fullName>
+                <default>false</default>
+                <label>Revisión de documentos</label>
+            </value>
+            <value>
+                <fullName>Devuelta al oficial</fullName>
+                <default>false</default>
+                <label>Devuelta al oficial</label>
+            </value>
+            <value>
+                <fullName>Recolección de firmas y notarización</fullName>
+                <default>false</default>
+                <label>Recolección de firmas y notarización</label>
+            </value>
+            <value>
+                <fullName>Pendiente de autorización DGII</fullName>
+                <default>false</default>
+                <label>Pendiente de autorización DGII</label>
+            </value>
+            <value>
+                <fullName>Solicitud de cheque</fullName>
+                <default>false</default>
+                <label>Solicitud de cheque</label>
+            </value>
+            <value>
+                <fullName>En proceso de pago en DGII</fullName>
+                <default>false</default>
+                <label>En proceso de pago en DGII</label>
+            </value>
+            <value>
+                <fullName>Depósito en Registro de Títulos</fullName>
+                <default>false</default>
+                <label>Depósito en Registro de Títulos</label>
+            </value>
+            <value>
+                <fullName>Registro de aviso en SEGM</fullName>
+                <default>false</default>
+                <label>Registro de aviso en SEGM</label>
+            </value>
+            <value>
+                <fullName>En desembolso</fullName>
+                <default>false</default>
+                <label>En desembolso</label>
+            </value>
+            <value>
+                <fullName>Pendiente de matrícula original</fullName>
+                <default>false</default>
+                <label>Pendiente de matrícula original</label>
+            </value>
+            <value>
+                <fullName>Oposición de matrícula</fullName>
+                <default>false</default>
+                <label>Oposición de matrícula</label>
+            </value>
+            <value>
+                <fullName>Matrícula depositada en DGII</fullName>
+                <default>false</default>
+                <label>Matrícula depositada en DGII</label>
+            </value>
+            <value>
+                <fullName>Disponible para entrega</fullName>
+                <default>false</default>
+                <label>Disponible para entrega</label>
+            </value>
+            <value>
+                <fullName>En retiro</fullName>
+                <default>false</default>
+                <label>En retiro</label>
+            </value>
+            <value>
+                <fullName>Mantenimiento de Operaciones</fullName>
+                <default>false</default>
+                <label>Mantenimiento de Operaciones</label>
+            </value>
+            <value>
+                <fullName>Pendiente envío a Custodia</fullName>
+                <default>false</default>
+                <label>Pendiente envío a Custodia</label>
+            </value>
+            <value>
+                <fullName>En Custodia</fullName>
+                <default>false</default>
+                <label>En Custodia</label>
+            </value>
+            <value>
+                <fullName>Digitalización CDD</fullName>
+                <default>false</default>
+                <label>Digitalización CDD</label>
+            </value>
+            <value>
+                <fullName>Completada</fullName>
+                <default>false</default>
+                <label>Completada</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

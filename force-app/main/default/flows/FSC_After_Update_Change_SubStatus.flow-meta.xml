@@ -141,6 +141,13 @@
                     <booleanValue>false</booleanValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>$Record.FSC_AbanksAutomatico__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>FSC_Encolar_creacion_de_prestamo</targetReference>
             </connector>
@@ -161,6 +168,13 @@
                 <operator>EqualTo</operator>
                 <rightValue>
                     <stringValue>Cuenta de ahorro</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.FSC_AbanksAutomatico__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>

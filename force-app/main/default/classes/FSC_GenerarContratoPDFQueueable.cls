@@ -12,11 +12,21 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
     private static final String TIPO_ARCHIVO_PIGNORACION = 'PIGNORACION';
 
     private List<Id> residentialLoanApplicationIds;
+    private Boolean conservarSubestado = false;
 
     public FSC_GenerarContratoPDFQueueable(List<Id> residentialLoanApplicationIds) {
         this.residentialLoanApplicationIds = residentialLoanApplicationIds == null
             ? new List<Id>()
             : new List<Id>(new Set<Id>(residentialLoanApplicationIds));
+    }
+
+    public FSC_GenerarContratoPDFQueueable(List<Id> ids, Boolean conservarSubestado) {
+        this(ids);
+        this.conservarSubestado = conservarSubestado == true;
+    }
+
+    private String subestadoDestino() {
+        return conservarSubestado ? FSC_DocumentoLegalService.ETAPA : SUBESTADO_GESTIONAR_FIRMAS;
     }
 
     public void execute(QueueableContext context) {
@@ -28,7 +38,7 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
             SELECT Id, RecordType.DeveloperName, FSC_Subestado__c, FSC_Contrato_Generado__c,
                 FSC_LogErrores__c, FSC_RequiereContratoPagareNotarial__c,
                 FSC_Excepcion_Contrato_Notarial__c, FSC_Pignoracion_Generada__c,
-                FSC_Relacion_Propietario_CD__c, FSC_Fecha_Contrato__c
+                FSC_Relacion_Propietario_CD__c, FSC_Fecha_Contrato__c, FSC_Pagares_y_Plantillas_Generados__c
             FROM ResidentialLoanApplication
             WHERE Id IN :residentialLoanApplicationIds
         ];
@@ -45,7 +55,9 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
         Set<Id> loanApplicationsToAdvanceWithoutFile = new Set<Id>();
 
         for (ResidentialLoanApplication loanApplication : loanApplications) {
-            if (loanApplication.FSC_Subestado__c != SUBESTADO_GENERACION_CONTRATO) {
+            if (conservarSubestado
+                ? loanApplication.FSC_Subestado__c != FSC_DocumentoLegalService.ETAPA || loanApplication.FSC_Pagares_y_Plantillas_Generados__c != true
+                : loanApplication.FSC_Subestado__c != SUBESTADO_GENERACION_CONTRATO) {
                 continue;
             }
 
@@ -95,6 +107,7 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
                         Title = pignorationTitle,
                         PathOnClient = pignorationTitle + '.pdf',
                         VersionData = pignorationBlob,
+                        FSC_ContenidoLegal__c = FSC_DocumentoLegalService.capturar(pignorationPage, FSC_DocumentoLegalService.PIGNORACION),
                         FirstPublishLocationId = loanApplication.Id,
                         FSC_EnviarDocumento__c = true
                     ));
@@ -150,6 +163,7 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
                     Title = fileTitle,
                     PathOnClient = fileTitle + '.pdf',
                     VersionData = pdfBlob,
+                    FSC_ContenidoLegal__c = FSC_DocumentoLegalService.capturar(contractPage, FSC_DocumentoLegalService.CONTRATO),
                     FirstPublishLocationId = loanApplication.Id,
                     FSC_EnviarDocumento__c = true
                 ));
@@ -175,7 +189,7 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
 
         if (!filesToInsert.isEmpty()) {
             Map<Id, ResidentialLoanApplication> lockedLoanApplications = new Map<Id, ResidentialLoanApplication>([
-                SELECT Id, FSC_Contrato_Generado__c, FSC_Pignoracion_Generada__c
+                SELECT Id, FSC_Contrato_Generado__c, FSC_Pignoracion_Generada__c, FSC_Subestado__c
                 FROM ResidentialLoanApplication
                 WHERE Id IN :fileLoanApplicationIds
                 FOR UPDATE
@@ -185,6 +199,7 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
             List<String> filteredFileTypes = new List<String>();
             for (Integer i = 0; i < filesToInsert.size(); i++) {
                 ResidentialLoanApplication lockedRla = lockedLoanApplications.get(fileLoanApplicationIds[i]);
+                if (conservarSubestado && lockedRla != null && lockedRla.FSC_Subestado__c != FSC_DocumentoLegalService.ETAPA) continue;
                 Boolean alreadyGenerated = lockedRla != null &&
                     (fileTypes[i] == TIPO_ARCHIVO_PIGNORACION
                         ? lockedRla.FSC_Pignoracion_Generada__c == true
@@ -238,7 +253,7 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
             for (Id loanApplicationId : successfulContractLoanApplicationIds) {
                 loanApplicationsToUpdate.add(new ResidentialLoanApplication(
                     Id = loanApplicationId,
-                    FSC_Subestado__c = SUBESTADO_GESTIONAR_FIRMAS,
+                    FSC_Subestado__c = subestadoDestino(),
                     FSC_Contrato_Generado__c = true,
                     FSC_Fecha_Contrato__c = contractDateFor(loanApplications, loanApplicationId)
                 ));
@@ -248,16 +263,17 @@ public without sharing class FSC_GenerarContratoPDFQueueable implements Queueabl
             for (Id loanApplicationId : successfulPignorationLoanApplicationIds) {
                 loanApplicationsToUpdate.add(new ResidentialLoanApplication(
                     Id = loanApplicationId,
-                    FSC_Subestado__c = SUBESTADO_GESTIONAR_FIRMAS,
+                    FSC_Subestado__c = subestadoDestino(),
                     FSC_Pignoracion_Generada__c = true
                 ));
                 updateLoanApplicationIds.add(loanApplicationId);
             }
 
             for (Id loanApplicationId : loanApplicationsToAdvanceWithoutFile) {
+                if (conservarSubestado) continue;
                 loanApplicationsToUpdate.add(new ResidentialLoanApplication(
                     Id = loanApplicationId,
-                    FSC_Subestado__c = SUBESTADO_GESTIONAR_FIRMAS
+                    FSC_Subestado__c = subestadoDestino()
                 ));
                 updateLoanApplicationIds.add(loanApplicationId);
             }

@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OmniDataTransform xmlns="http://soap.sforce.com/2006/04/metadata">
-    <active>false</active>
+    <active>true</active>
     <assignmentRulesUsed>false</assignmentRulesUsed>
     <deletedOnSuccess>false</deletedOnSuccess>
     <errorIgnored>false</errorIgnored>
     <expectedInputJson>{
   &quot;FSC_Garantia__c&quot; : [ {
-    &quot;FSC_Tipo_de_Inmueble__c&quot; : &quot;sdasdas&quot;,
-    &quot;FSC_Fecha_Tasacion__c&quot; : &quot;2026-04-13&quot;,
-    &quot;FSC_Descripcion_de_la_Garantia__c&quot; : &quot;sadasdada&quot;,
-    &quot;FSC_Ubicacion__c&quot; : &quot;asdasda&quot;,
-    &quot;FSC_Monto_Inicial_Avance_Pagado__c&quot; : 1212,
     &quot;FSC_Clase_de_Garantia__c&quot; : &quot;CERTIFICADOS DEPOSITOS BANCO VIMENCA&quot;,
-    &quot;FSC_Precio_de_Venta__c&quot; : 1212,
-    &quot;Name&quot; : &quot;CARTA DE DESAHUCIO EMPL. GRUPO VIMENCA -G3-&quot;,
-    &quot;FSC_Valor_Tasado__c&quot; : 12,
+    &quot;FSC_Descripcion_de_la_Garantia__c&quot; : &quot;sadasdada&quot;,
     &quot;FSC_EsTasadorExterno__c&quot; : true,
-    &quot;FSC_NombreTasadorExterno__c&quot; : &quot;Tasador externo de ejemplo&quot;,
-    &quot;FSC_Tasado_Por__c&quot; : &quot;Onel D. Peña Aristy&quot;,
-    &quot;FSC_Valor_Inmueble__c&quot; : 1212,
+    &quot;FSC_Fecha_Tasacion__c&quot; : &quot;2026-04-13&quot;,
     &quot;FSC_Metros_Cuadrados_de_Construccion__c&quot; : 121,
+    &quot;FSC_Monto_Inicial_Avance_Pagado__c&quot; : 1212,
+    &quot;FSC_NombreTasadorExterno__c&quot; : &quot;Tasador externo de ejemplo&quot;,
+    &quot;FSC_Precio_de_Venta__c&quot; : 1212,
+    &quot;FSC_Proposito_Garantia_Hipotecario__c&quot; : &quot;Compra Vivienda – Residencial o Turística (Moneda Nacional)&quot;,
+    &quot;FSC_Tasado_Por__c&quot; : &quot;Onel D. Peña Aristy&quot;,
     &quot;FSC_Tipo_de_Garantia__c&quot; : &quot;CARTA DE DESAHUCIO EMPL. GRUPO VIMENCA -G3-&quot;,
-    &quot;FSC_Proposito_Garantia_Hipotecario__c&quot; : &quot;Compra Vivienda – Residencial o Turística (Moneda Nacional)&quot;
+    &quot;FSC_Tipo_de_Inmueble__c&quot; : &quot;sdasdas&quot;,
+    &quot;FSC_Ubicacion__c&quot; : &quot;asdasda&quot;,
+    &quot;FSC_Valor_Inmueble__c&quot; : 1212,
+    &quot;FSC_Valor_Tasado__c&quot; : 12,
+    &quot;Name&quot; : &quot;CARTA DE DESAHUCIO EMPL. GRUPO VIMENCA -G3-&quot;
   } ],
   &quot;FacilidadesDeCreditoId&quot; : &quot;a1MVC00000JSZUX2A5&quot;
 }</expectedInputJson>
@@ -106,6 +106,38 @@
         <omniDataTransformationId>0kdVC000000I2v4</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldName>FSC_Valor_Vehiculo__c</outputFieldName>
+        <outputObjectName>FSC_Garantia__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>da19112a-b144-4eb4-96d3-e88fbac563a7</globalKey>
+        <inputFieldName>FSC_Garantia__c:FSC_Valor_Mejoras__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearGarantias</name>
+        <omniDataTransformation>0kdVC000000Idnh</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idnh</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_Valor_Mejoras__c</outputFieldName>
+        <outputObjectName>FSC_Garantia__c</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>b97e3225-1c52-4fc1-8e44-f437e3b4906c</globalKey>
+        <inputFieldName>FSC_Garantia__c:FSC_SaldoPrimeraHipoteca__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCCrearGarantias</name>
+        <omniDataTransformation>0kdVC000000Idni</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Idni</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>FSC_SaldoPrimeraHipoteca__c</outputFieldName>
         <outputObjectName>FSC_Garantia__c</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <upsertKey>false</upsertKey>
@@ -515,22 +547,22 @@
     <outputType>SObject</outputType>
     <previewJsonData>{
   &quot;FSC_Garantia__c&quot; : [ {
-    &quot;FSC_Tipo_de_Inmueble__c&quot; : &quot;sdasdas&quot;,
-    &quot;FSC_Fecha_Tasacion__c&quot; : &quot;2026-04-13&quot;,
-    &quot;FSC_Descripcion_de_la_Garantia__c&quot; : &quot;sadasdada&quot;,
-    &quot;FSC_Ubicacion__c&quot; : &quot;asdasda&quot;,
-    &quot;FSC_Monto_Inicial_Avance_Pagado__c&quot; : 1212,
     &quot;FSC_Clase_de_Garantia__c&quot; : &quot;CERTIFICADOS DEPOSITOS BANCO VIMENCA&quot;,
-    &quot;FSC_Precio_de_Venta__c&quot; : 1212,
-    &quot;Name&quot; : &quot;CARTA DE DESAHUCIO EMPL. GRUPO VIMENCA -G3-&quot;,
-    &quot;FSC_Valor_Tasado__c&quot; : 12,
+    &quot;FSC_Descripcion_de_la_Garantia__c&quot; : &quot;sadasdada&quot;,
     &quot;FSC_EsTasadorExterno__c&quot; : true,
-    &quot;FSC_NombreTasadorExterno__c&quot; : &quot;Tasador externo de ejemplo&quot;,
-    &quot;FSC_Tasado_Por__c&quot; : &quot;Onel D. Peña Aristy&quot;,
-    &quot;FSC_Valor_Inmueble__c&quot; : 1212,
+    &quot;FSC_Fecha_Tasacion__c&quot; : &quot;2026-04-13&quot;,
     &quot;FSC_Metros_Cuadrados_de_Construccion__c&quot; : 121,
+    &quot;FSC_Monto_Inicial_Avance_Pagado__c&quot; : 1212,
+    &quot;FSC_NombreTasadorExterno__c&quot; : &quot;Tasador externo de ejemplo&quot;,
+    &quot;FSC_Precio_de_Venta__c&quot; : 1212,
+    &quot;FSC_Proposito_Garantia_Hipotecario__c&quot; : &quot;Compra Vivienda – Residencial o Turística (Moneda Nacional)&quot;,
+    &quot;FSC_Tasado_Por__c&quot; : &quot;Onel D. Peña Aristy&quot;,
     &quot;FSC_Tipo_de_Garantia__c&quot; : &quot;CARTA DE DESAHUCIO EMPL. GRUPO VIMENCA -G3-&quot;,
-    &quot;FSC_Proposito_Garantia_Hipotecario__c&quot; : &quot;Compra Vivienda – Residencial o Turística (Moneda Nacional)&quot;
+    &quot;FSC_Tipo_de_Inmueble__c&quot; : &quot;sdasdas&quot;,
+    &quot;FSC_Ubicacion__c&quot; : &quot;asdasda&quot;,
+    &quot;FSC_Valor_Inmueble__c&quot; : 1212,
+    &quot;FSC_Valor_Tasado__c&quot; : 12,
+    &quot;Name&quot; : &quot;CARTA DE DESAHUCIO EMPL. GRUPO VIMENCA -G3-&quot;
   } ],
   &quot;FacilidadesDeCreditoId&quot; : &quot;a1MVC00000JSZUX2A5&quot;
 }</previewJsonData>

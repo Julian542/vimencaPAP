@@ -49,6 +49,9 @@ public without sharing class FSC_CreacionPrestamoAsync implements Queueable, Dat
 			inputByRlaId.put(inputItem.residentialLoanApplicationId, inputItem);
 		}
 
+		rlaIds.retainAll(FSC_ProcesamientoAbanks.habilitadas(rlaIds));
+		if (rlaIds.isEmpty()) return;
+
 		try {
 			Map<Id, ResidentialLoanApplication> rlaById = new Map<Id, ResidentialLoanApplication>([
 				SELECT Id, FSC_lineaFinanciera__c, FSC_subAplicacion__c, FSC_ClaveProducto__c
@@ -149,7 +152,8 @@ public without sharing class FSC_CreacionPrestamoAsync implements Queueable, Dat
 			);
 		}
 		if (!updates.isEmpty()) {
-			Database.update(updates, false);
+			// Campos tecnicos de la integracion: el usuario que encola no tiene FLS de edicion.
+			Database.update(updates, false, AccessLevel.SYSTEM_MODE);
 		}
 	}
 

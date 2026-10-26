@@ -21,6 +21,8 @@ public without sharing class FSC_RlaAccionesController {
 	private static final String SUBESTADO_CREACION_CREDITO = 'Creación de crédito';
 	private static final String SUBESTADO_DESEMBOLSO = 'Desembolso';
 	private static final String FORMA_DESEMBOLSO_CUENTA_AHORRO = 'Cuenta de ahorro';
+	private static final String LOG_ERRORES_SEPARADOR = '\n--------------------\n';
+	private static final Integer LOG_ERRORES_MAX_LENGTH = 10000;
 	private static final String RT_SOLICITUD_CREDITO_PYME = 'FSC_Solicitud_Credito_PYME';
 	private static final String IP_VALIDAR_CLASIFICACION_MIPYMES = 'FSC_ValidarClasificacionMIPYMES';
 	private static final String RESPUESTA_CLASIFICACION_MIPYMES_VALIDA = 'ClasificacionMIPYMESValida';
@@ -37,6 +39,10 @@ public without sharing class FSC_RlaAccionesController {
 	private static final String PERMISO_OFICIAL_NEGOCIO = 'FSC_CP_Oficial_Negocio';
 	private static final String SUBESTADO_GENERACION_PAGARES = 'Generación de pagarés y plantillas';
 	private static final String COLA_PAGARES_Y_CONTRATOS = 'FSC_GestionDePagaresYContratos';
+	private static final String SUBESTADO_PENDIENTE_PLANILLA = 'Pendiente planilla de desembolso';
+	private static final String COLA_GESTION_PLANILLAS = 'FSC_GestionPlanillasDeDesembolso';
+	private static final String SUBESTADO_FORMALIZACION = 'Formalización';
+	private static final String COLA_GESTION_FORMALIZACION = 'FSC_GestionFormalizacion';
 	private static final String PERMISO_BANCA_SEGURO = 'FSC_CP_BancaSeguro';
 	private static final String RT_SOLICITUD_CREDITO_CONSUMO = 'FSC_Solicitud_Credito_Consumo';
 	private static final String RT_SOLICITUD_CREDITO_VEHICULO = 'FSC_Solicitud_Credito_Vehiculo';
@@ -687,16 +693,7 @@ public without sharing class FSC_RlaAccionesController {
 			throw new AuraHandledException('Motivo máximo 255 caracteres.');
 		}
 
-		ResidentialLoanApplication rla = [
-			SELECT Id, RecordType.DeveloperName
-			FROM ResidentialLoanApplication
-			WHERE Id = :residentialLoanApplicationId
-			LIMIT 1
-		];
-		String recordTypeDeveloperName = rla.RecordType != null ? rla.RecordType.DeveloperName : null;
-		Boolean isPymeRla = recordTypeDeveloperName == RT_SOLICITUD_CREDITO_PYME;
-
-		if (isPymeRla && String.isBlank(motivoDeRechazo)) {
+		if (String.isBlank(motivoDeRechazo)) {
 			throw new AuraHandledException('Motivo de rechazo requerido.');
 		}
 
@@ -719,9 +716,7 @@ public without sharing class FSC_RlaAccionesController {
 		}
 
 		ResidentialLoanApplication upd = new ResidentialLoanApplication(Id = residentialLoanApplicationId);
-		if (isPymeRla) {
-			upd.FSC_MotivosDeRechazo__c = motivoDeRechazo.trim();
-		}
+		upd.FSC_MotivosDeRechazo__c = motivoDeRechazo.trim();
 
 		aplicarObservacionPorPermiso(upd, motivo);
 
@@ -896,7 +891,14 @@ public without sharing class FSC_RlaAccionesController {
 		}
 
 		ResidentialLoanApplication rla = [
-			SELECT Id, FSC_Subestado__c, FSC_FormaDeDesembolso__c, FSC_lineaFinanciera__c, FSC_subAplicacion__c, FSC_ClaveProducto__c
+			SELECT
+				Id,
+				FSC_Subestado__c,
+				FSC_FormaDeDesembolso__c,
+				FSC_lineaFinanciera__c,
+				FSC_subAplicacion__c,
+				FSC_ClaveProducto__c,
+				FSC_NumeroPrestamoAbanks__c
 			FROM ResidentialLoanApplication
 			WHERE Id = :residentialLoanApplicationId
 			LIMIT 1
@@ -905,9 +907,17 @@ public without sharing class FSC_RlaAccionesController {
 		if (rla.FSC_Subestado__c != SUBESTADO_CREACION_CREDITO) {
 			throw new AuraHandledException('La solicitud debe estar en Creacion de credito para reintentar.');
 		}
+		// Tras crear el prestamo la solicitud sigue en Creacion de credito hasta validarse en ABANKS.
+		if (!String.isBlank(rla.FSC_NumeroPrestamoAbanks__c)) {
+			throw new AuraHandledException(
+				'La solicitud ya tiene el prestamo ' + rla.FSC_NumeroPrestamoAbanks__c + ' creado en ABANKS; no se puede volver a crear.'
+			);
+		}
 		if (rla.FSC_FormaDeDesembolso__c != FORMA_DESEMBOLSO_CUENTA_AHORRO) {
 			throw new AuraHandledException('La forma de desembolso debe ser Cuenta de ahorro.');
 		}
+
+		validarAutomatizacionAbanks(residentialLoanApplicationId);
 
 		FSC_APIPrestamoProductos.Input productoInput = new FSC_APIPrestamoProductos.Input();
 		productoInput.lineaFinanciera = rla.FSC_lineaFinanciera__c;
@@ -919,35 +929,34 @@ public without sharing class FSC_RlaAccionesController {
 		);
 		FSC_APIPrestamoProductos.Output productoOutput = productoOutputs == null || productoOutputs.isEmpty() ? null : productoOutputs[0];
 
+		String productoError;
 		if (productoOutput == null) {
-			throw new AuraHandledException('No se pudo consultar el producto del prestamo.');
+			productoError = 'No se pudo consultar el producto del prestamo.';
+		} else if (productoOutput.success != true) {
+			productoError = String.isBlank(productoOutput.message) ? 'No se pudo consultar el producto del prestamo.' : productoOutput.message;
+		} else if (productoOutput.found != true || String.isBlank(productoOutput.productoJson)) {
+			productoError = String.isBlank(productoOutput.message)
+				? 'No se encontro producto para la linea financiera y sub aplicacion indicadas.'
+				: productoOutput.message;
 		}
-		if (productoOutput.success != true) {
-			throw new AuraHandledException(
-				String.isBlank(productoOutput.message) ? 'No se pudo consultar el producto del prestamo.' : productoOutput.message
-			);
-		}
-		if (productoOutput.found != true || String.isBlank(productoOutput.productoJson)) {
-			throw new AuraHandledException(
-				String.isBlank(productoOutput.message)
-					? 'No se encontro producto para la linea financiera y sub aplicacion indicadas.'
-					: productoOutput.message
-			);
+		// Se devuelve el error en vez de lanzarlo para no revertir el registro en el log.
+		if (productoError != null) {
+			registrarErrorCreacionPrestamo(residentialLoanApplicationId, 'API Productos', productoError);
+			return new ReintentoPrestamoResult(false, productoError);
 		}
 
 		User currentUser = [
-			SELECT FSC_CodigoAbanks__c, USE_Oficina__c
+			SELECT USE_Oficina__c
 			FROM User
 			WHERE Id = :UserInfo.getUserId()
 			LIMIT 1
 		];
 
+		// Usuario y ejecutivo los completa FSC_APIPrestamoPrestamos con el codigo ABANKS o el alias del usuario.
 		FSC_APIPrestamoPrestamos.Input prestamoInput = new FSC_APIPrestamoPrestamos.Input();
 		prestamoInput.residentialLoanApplicationId = residentialLoanApplicationId;
 		prestamoInput.productoJson = productoOutput.productoJson;
-		prestamoInput.codigoUsuario = currentUser.FSC_CodigoAbanks__c;
 		prestamoInput.codigoAgencia = currentUser.USE_Oficina__c;
-		prestamoInput.codigoEjecutivo = 'ABANKS';
 
 		List<FSC_APIPrestamoPrestamos.Output> prestamoOutputs = FSC_APIPrestamoPrestamos.run(
 			new List<FSC_APIPrestamoPrestamos.Input>{ prestamoInput }
@@ -965,6 +974,27 @@ public without sharing class FSC_RlaAccionesController {
 		}
 
 		return new ReintentoPrestamoResult(true, String.isBlank(prestamoOutput.message) ? 'Prestamo creado en ABANKS.' : prestamoOutput.message);
+	}
+
+	private static void validarAutomatizacionAbanks(Id solicitudId) {
+		if (!FSC_ProcesamientoAbanks.habilitadas(new Set<Id>{solicitudId}).contains(solicitudId)) {
+			throw new AuraHandledException('La automatización de Abanks está deshabilitada para esta solicitud. Continúe por Captura y Operaciones.');
+		}
+	}
+
+	private static void registrarErrorCreacionPrestamo(Id residentialLoanApplicationId, String origen, String mensaje) {
+		ResidentialLoanApplication rla = [
+			SELECT FSC_LogErrores__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :residentialLoanApplicationId
+			LIMIT 1
+		];
+		String entrada = Datetime.now().format('yyyy-MM-dd HH:mm:ss') + ' | ' + origen + ' | ' + mensaje;
+		String log = String.isBlank(rla.FSC_LogErrores__c) ? entrada : rla.FSC_LogErrores__c + LOG_ERRORES_SEPARADOR + entrada;
+		if (log.length() > LOG_ERRORES_MAX_LENGTH) {
+			log = log.substring(log.length() - LOG_ERRORES_MAX_LENGTH);
+		}
+		update new ResidentialLoanApplication(Id = residentialLoanApplicationId, FSC_FlagErrorAPIPrestamos__c = true, FSC_LogErrores__c = log);
 	}
 
 	@AuraEnabled
@@ -991,15 +1021,17 @@ public without sharing class FSC_RlaAccionesController {
 		}
 
 		User currentUser = [
-			SELECT FSC_CodigoAbanks__c, USE_Oficina__c
+			SELECT USE_Oficina__c
 			FROM User
 			WHERE Id = :UserInfo.getUserId()
 			LIMIT 1
 		];
 
+		validarAutomatizacionAbanks(residentialLoanApplicationId);
+
+		// El usuario lo completa FSC_APIPrestamoDesembolso con el codigo ABANKS o el alias del usuario.
 		FSC_APIPrestamoDesembolso.Input desembolsoInput = new FSC_APIPrestamoDesembolso.Input();
 		desembolsoInput.residentialLoanApplicationId = residentialLoanApplicationId;
-		desembolsoInput.codigoUsuario = currentUser.FSC_CodigoAbanks__c;
 		desembolsoInput.codigoAgencia = currentUser.USE_Oficina__c;
 
 		List<FSC_APIPrestamoDesembolso.Output> outputs = FSC_APIPrestamoDesembolso.run(new List<FSC_APIPrestamoDesembolso.Input>{ desembolsoInput });
@@ -1326,6 +1358,11 @@ public without sharing class FSC_RlaAccionesController {
 	}
 
 	@AuraEnabled
+	public static void prepararProcesamientoManual(Id residentialLoanApplicationId) {
+		FSC_CapturaOperacionesService.prepararProcesamientoManual(residentialLoanApplicationId);
+	}
+
+	@AuraEnabled
 	public static void guardarCapturaAbanks(
 		Id residentialLoanApplicationId,
 		String numeroPrestamo,
@@ -1354,34 +1391,52 @@ public without sharing class FSC_RlaAccionesController {
 	@AuraEnabled
 	public static List<Map<String, String>> getUsuariosPagares(Id residentialLoanApplicationId) {
 		validarPermisoSupervisorOAdministrador();
-		validarSolicitudEnGeneracionPagares(residentialLoanApplicationId);
-
-		List<Map<String, String>> opciones = new List<Map<String, String>>();
-		for (User usuario : obtenerUsuariosColaPagares()) {
-			opciones.add(new Map<String, String>{ 'label' => usuario.Name, 'value' => usuario.Id });
-		}
-		return opciones;
+		validarSolicitudEnSubestado(residentialLoanApplicationId, SUBESTADO_GENERACION_PAGARES);
+		return opcionesUsuariosCola(COLA_PAGARES_Y_CONTRATOS);
 	}
 
 	@AuraEnabled
 	public static void reasignarUsuarioPagares(Id residentialLoanApplicationId, Id usuarioId) {
 		validarPermisoSupervisorOAdministrador();
-		validarSolicitudEnGeneracionPagares(residentialLoanApplicationId);
-
-		Boolean usuarioElegible = false;
-		for (User usuario : obtenerUsuariosColaPagares()) {
-			if (usuario.Id == usuarioId) {
-				usuarioElegible = true;
-			}
-		}
-		if (!usuarioElegible) {
-			throw new AuraHandledException('Seleccione un usuario activo de la cola de Gestión de pagarés y contratos.');
-		}
+		validarSolicitudEnSubestado(residentialLoanApplicationId, SUBESTADO_GENERACION_PAGARES);
+		validarUsuarioEnCola(COLA_PAGARES_Y_CONTRATOS, usuarioId, 'Gestión de pagarés y contratos');
 
 		update new ResidentialLoanApplication(Id = residentialLoanApplicationId, FSC_UsuarioPagaresYContratos__c = usuarioId);
 	}
 
-	private static void validarSolicitudEnGeneracionPagares(Id residentialLoanApplicationId) {
+	@AuraEnabled
+	public static List<Map<String, String>> getUsuariosGestionPlanilla(Id residentialLoanApplicationId) {
+		validarPermisoSupervisorOAdministrador();
+		validarSolicitudEnSubestado(residentialLoanApplicationId, SUBESTADO_PENDIENTE_PLANILLA);
+		return opcionesUsuariosCola(COLA_GESTION_PLANILLAS);
+	}
+
+	@AuraEnabled
+	public static void reasignarUsuarioGestionPlanilla(Id residentialLoanApplicationId, Id usuarioId) {
+		validarPermisoSupervisorOAdministrador();
+		validarSolicitudEnSubestado(residentialLoanApplicationId, SUBESTADO_PENDIENTE_PLANILLA);
+		validarUsuarioEnCola(COLA_GESTION_PLANILLAS, usuarioId, 'Gestión de planillas de desembolso');
+
+		update new ResidentialLoanApplication(Id = residentialLoanApplicationId, FSC_UsuarioGestionPlanilla__c = usuarioId);
+	}
+
+	@AuraEnabled
+	public static List<Map<String, String>> getUsuariosFormalizacion(Id residentialLoanApplicationId) {
+		validarPermisoSupervisorOAdministrador();
+		validarSolicitudEnSubestado(residentialLoanApplicationId, SUBESTADO_FORMALIZACION);
+		return opcionesUsuariosCola(COLA_GESTION_FORMALIZACION);
+	}
+
+	@AuraEnabled
+	public static void reasignarUsuarioFormalizacion(Id residentialLoanApplicationId, Id usuarioId) {
+		validarPermisoSupervisorOAdministrador();
+		validarSolicitudEnSubestado(residentialLoanApplicationId, SUBESTADO_FORMALIZACION);
+		validarUsuarioEnCola(COLA_GESTION_FORMALIZACION, usuarioId, 'Gestión formalización');
+
+		update new ResidentialLoanApplication(Id = residentialLoanApplicationId, FSC_UsuarioFormalizacion__c = usuarioId);
+	}
+
+	private static void validarSolicitudEnSubestado(Id residentialLoanApplicationId, String subestado) {
 		if (residentialLoanApplicationId == null) {
 			throw new AuraHandledException('Solicitud requerida.');
 		}
@@ -1392,16 +1447,33 @@ public without sharing class FSC_RlaAccionesController {
 			WHERE Id = :residentialLoanApplicationId
 			LIMIT 1
 		];
-		if (solicitudes.isEmpty() || solicitudes[0].FSC_Subestado__c != SUBESTADO_GENERACION_PAGARES) {
-			throw new AuraHandledException('La solicitud no está en Generación de pagarés y plantillas.');
+		if (solicitudes.isEmpty() || solicitudes[0].FSC_Subestado__c != subestado) {
+			throw new AuraHandledException('La solicitud no está en ' + subestado + '.');
 		}
 	}
 
-	private static List<User> obtenerUsuariosColaPagares() {
+	private static List<Map<String, String>> opcionesUsuariosCola(String colaDeveloperName) {
+		List<Map<String, String>> opciones = new List<Map<String, String>>();
+		for (User usuario : obtenerUsuariosCola(colaDeveloperName)) {
+			opciones.add(new Map<String, String>{ 'label' => usuario.Name, 'value' => usuario.Id });
+		}
+		return opciones;
+	}
+
+	private static void validarUsuarioEnCola(String colaDeveloperName, Id usuarioId, String nombreCola) {
+		for (User usuario : obtenerUsuariosCola(colaDeveloperName)) {
+			if (usuario.Id == usuarioId) {
+				return;
+			}
+		}
+		throw new AuraHandledException('Seleccione un usuario activo de la cola de ' + nombreCola + '.');
+	}
+
+	private static List<User> obtenerUsuariosCola(String colaDeveloperName) {
 		List<Group> colas = [
 			SELECT Id
 			FROM Group
-			WHERE Type = 'Queue' AND DeveloperName = :COLA_PAGARES_Y_CONTRATOS
+			WHERE Type = 'Queue' AND DeveloperName = :colaDeveloperName
 			LIMIT 1
 		];
 		if (colas.isEmpty()) {
@@ -1544,6 +1616,31 @@ public without sharing class FSC_RlaAccionesController {
 			throw new AuraHandledException(message);
 		}
 	}
+
+    @AuraEnabled
+    public static Map<String, Object> getRevisionDocumentosLegales(Id residentialLoanApplicationId) {
+        return FSC_DocumentoLegalService.contexto(residentialLoanApplicationId);
+    }
+
+    @AuraEnabled
+    public static Map<String, Object> getDocumentoLegalEditable(Id residentialLoanApplicationId, Id contentVersionId) {
+        return FSC_DocumentoLegalService.obtenerDocumento(residentialLoanApplicationId, contentVersionId);
+    }
+
+    @AuraEnabled
+    public static Id guardarDocumentoLegalEditado(Id residentialLoanApplicationId, Id contentVersionId, String cambiosJson) {
+        return FSC_DocumentoLegalService.guardar(residentialLoanApplicationId, contentVersionId, cambiosJson);
+    }
+
+    @AuraEnabled
+    public static void validarDocumentosLegales(Id residentialLoanApplicationId) {
+        FSC_DocumentoLegalService.validar(residentialLoanApplicationId);
+    }
+
+    @AuraEnabled
+    public static void reintentarDocumentosLegales(Id residentialLoanApplicationId) {
+        FSC_DocumentoLegalService.reintentar(residentialLoanApplicationId);
+    }
 
 	@AuraEnabled
 	public static void rechazarPorCliente(Id residentialLoanApplicationId) {

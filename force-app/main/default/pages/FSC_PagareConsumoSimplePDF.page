@@ -1,7 +1,7 @@
 <apex:page standardController="ResidentialLoanApplication"
     extensions="FSC_PagareComercialComplementarioCtrl"
     applyBodyTag="false" applyHtmlTag="false" showHeader="false" sidebar="false"
-    standardStylesheets="false" cache="false" language="es" renderAs="pdf">
+    standardStylesheets="false" cache="false" language="es" renderAs="{!IF($CurrentPage.parameters.legalHtml = 'true', '', 'pdf')}">
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

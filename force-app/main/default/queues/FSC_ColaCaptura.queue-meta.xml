@@ -5,6 +5,7 @@
     <name>FSC - Cola captura</name>
     <queueMembers>
         <users>
+            <user>lcruciani@keystoneadvisors.cl.captura</user>
             <user>jvalenti@keystoneadvisors.cl.mergeqa2</user>
         </users>
     </queueMembers>

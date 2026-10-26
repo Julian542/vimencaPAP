@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_FuenteReferencia__c</fullName>
+    <description>URL que respalda la fecha de referencia y el tipo de cotización.</description>
+    <externalId>false</externalId>
+    <fieldManageability>SubscriberControlled</fieldManageability>
+    <inlineHelpText>Registre la URL oficial del indicador de compra o venta.</inlineHelpText>
+    <label>Fuente de referencia</label>
+    <length>255</length>
+    <required>true</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

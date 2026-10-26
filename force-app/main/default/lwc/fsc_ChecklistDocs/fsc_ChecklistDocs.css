@@ -67,6 +67,11 @@
 	display: inline;
 }
 
+.file-delete {
+	margin-left: 0.25rem;
+	vertical-align: middle;
+}
+
 .checklist-table lightning-input,
 .checklist-table lightning-combobox,
 .checklist-table lightning-formatted-date-time {

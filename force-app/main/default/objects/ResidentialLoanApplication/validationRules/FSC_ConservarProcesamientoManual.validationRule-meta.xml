@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ConservarProcesamientoManual</fullName>
+    <active>true</active>
+    <description>Evita reactivar las API en una solicitud que ya comenzó el circuito manual.</description>
+    <errorConditionFormula>AND(ISCHANGED(FSC_ProcesamientoAbanksManual__c), PRIORVALUE(FSC_ProcesamientoAbanksManual__c), NOT(FSC_ProcesamientoAbanksManual__c))</errorConditionFormula>
+    <errorMessage>La solicitud ya inició el procesamiento manual en Abanks y debe completar ese circuito.</errorMessage>
+</ValidationRule>

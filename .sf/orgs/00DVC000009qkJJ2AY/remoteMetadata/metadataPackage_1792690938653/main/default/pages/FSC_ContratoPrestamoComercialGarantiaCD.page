@@ -1,0 +1,315 @@
+<apex:page standardController="ResidentialLoanApplication"
+	extensions="FSC_ContratoPrestamoComercialGCDCtrl"
+	applyBodyTag="false"
+	applyHtmlTag="false"
+	showHeader="false"
+	sidebar="false"
+	standardStylesheets="false"
+	cache="false"
+	language="es"
+	renderAs="{!IF($CurrentPage.parameters.legalHtml = 'true', '', 'pdf')}">
+	<html>
+		<head>
+			<meta
+				http-equiv="Content-Type"
+				content="text/html; charset=UTF-8" />
+			<c:FSC_ContratoEstiloBase />
+			<style type="text/css">
+				.title {
+					margin: 0 0 4mm 0;
+					text-align: center;
+					font-weight: 700;
+				}
+				.paragraph {
+					margin: 0 0 1.2em;
+					text-align: justify;
+					orphans: 3;
+					widows: 3;
+				}
+				.strong {
+					font-weight: 700;
+				}
+				.centered {
+					text-align: center;
+				}
+				.quote {
+					margin: 0 0 1.2em;
+					text-align: justify;
+				}
+				.signature-section {
+					margin-top: 6mm;
+					page-break-inside: avoid;
+				}
+				.signature-heading {
+					margin: 5mm 0 3mm;
+					font-weight: 700;
+				}
+				.bank-heading {
+					margin-top: 7mm;
+				}
+				.signature-entity {
+					margin-bottom: 8mm;
+					text-align: center;
+					font-weight: 700;
+				}
+				.signature-single {
+					width: 58%;
+					margin: 0 auto 6mm;
+					page-break-inside: avoid;
+				}
+				.signature-table {
+					width: 100%;
+					margin-top: 8mm;
+					border-collapse: collapse;
+					page-break-inside: avoid;
+				}
+				.signature-cell {
+					width: 50%;
+					padding: 0 6mm;
+					vertical-align: top;
+				}
+				.signature-line {
+					border-top: 1px solid #000000;
+					height: 0;
+				}
+				.signature-name,
+				.signature-role {
+					margin-top: 1.5mm;
+					text-align: center;
+				}
+				.notary-block {
+					margin-top: 9mm;
+					page-break-inside: avoid;
+				}
+				.notary-signature {
+					width: 45%;
+					margin: 10mm auto 0;
+				}
+				.reference-code {
+					margin: 6mm 0 0;
+				}
+				.small-note {
+					margin: 2mm 0 0;
+				}
+				.annex-copy {
+					margin: 2mm 0 0;
+					text-align: justify;
+				}
+				.annex-page {
+					page-break-before: left;
+					text-align: center;
+					page-break-inside: avoid;
+				}
+				.annex-image {
+					width: 100%;
+					height: auto;
+					max-height: 245mm;
+				}
+			</style>
+		</head>
+		<body>
+			<c:FSC_ContratoPiePagina />
+			<div class="title">{!datos.tituloContrato}</div>
+			<p class="paragraph">
+				BANCO MULTIPLE VIMENCA, S. A., entidad constituida de conformidad con las leyes de la República Dominicana, con Registro Nacional de
+				Contribuyente número 1-01-02141-1 y Registro Mercantil número 10019SD, con su domicilio social principal en la avenida Abraham Lincoln
+				número 306, del Sector La Julia, de la ciudad de Santo Domingo, Distrito Nacional, capital de la República Dominicana, debidamente
+				representada por su {!datos.bancoRepresentante1.cargo}, {!datos.bancoRepresentante1.tratamiento}
+				{!datos.bancoRepresentante1.nombreCompleto}, {!datos.bancoRepresentante1.nacionalidad}, mayor de edad,
+				{!datos.bancoRepresentante1.estadoCivil}, portador de la cédula de identidad y electoral número
+				{!datos.bancoRepresentante1.identificacion}, domiciliado y residente en {!datos.bancoRepresentante1.domicilio}, y por su
+				{!datos.bancoRepresentante2.cargo}, {!datos.bancoRepresentante2.tratamiento} {!datos.bancoRepresentante2.nombreCompleto},
+				{!datos.bancoRepresentante2.nacionalidad}, mayor de edad, {!datos.bancoRepresentante2.estadoCivil}, portador de la cédula de identidad
+				y electoral número {!datos.bancoRepresentante2.identificacion}, domiciliado y residente en {!datos.bancoRepresentante2.domicilio},
+				entidad que en lo que sigue del presente acto, se denominará EL BANCO;
+			</p>
+			<p class="paragraph">{!clienteGenerales}, quien en lo que sigue del presente acto se denominará {!deudor.nombre}.</p>
+			<p class="paragraph">
+				POR CUANTO: {!deudor.nombre} ha{!deudor.n} solicitado a EL BANCO un Préstamo Comercial a Cuotas con Garantía de Certificado de Depósito, por un monto
+				de {!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}).
+			</p>
+			<p class="paragraph">
+				POR CUANTO: Para seguridad del pago de la suma solicitada por {!deudor.nombre}, {!deudor.este} ofrece{!deudor.n} en garantía el Certificado de Depósito de su
+				propiedad, que se describe a continuación:
+			</p>
+			<p class="quote">"{!datos.certificadoDescripcion}"</p>
+			<p class="paragraph">
+				POR CUANTO: EL BANCO consintió en otorgar el referido Préstamo Comercial a Cuotas con Garantía de Certificado de Depósito, solicitado
+				por {!deudor.nombre}, por el monto de {!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}).
+			</p>
+			<p class="paragraph">POR CUANTO: Toda vez que sean mencionados EL BANCO y {!deudor.nombre} en su conjunto, se nombrarán LAS PARTES;</p>
+			<p class="paragraph">POR TANTO y en el entendido de que los anteriores POR CUANTOS forman parte integral del presente contrato,</p>
+			<p class="paragraph strong centered">LAS PARTES HAN CONVENIDO Y PACTADO LO SIGUIENTE:</p>
+			<p class="paragraph">
+				<span class="articulo"></span>MONTO. - EL BANCO, por el presente contrato concede a {!deudor.nombre}, {!IF(deudor.plural, 'quienes aceptan', 'quien acepta')}, un Préstamo Comercial a Cuotas con
+				Garantía de Certificado de Depósito por la suma de {!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}), cuyos fondos
+				estarían siendo utilizados para {!datos.destinoPrestamo}, suma que {!deudor.nombre} declara{!deudor.n} haber recibido a su entera satisfacción.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: La tabla de amortización del préstamo deberá ser entregada por EL BANCO a la firma del presente contrato y formará parte
+				integral del mismo.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: {!deudor.nombre} se compromete{!deudor.n} a suministrar a EL BANCO, de manera oportuna y durante la vigencia del préstamo, todas las
+				informaciones que, según las normas vigentes se requieran a los fines de poder mantener actualizado el expediente de crédito.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>PAGARÉ. - {!deudor.nombre} se compromete{!deudor.n} a suscribir, juntamente con el presente contrato, un pagaré a favor de EL BANCO por la
+				suma de {!datos.montoLetras} ({!datos.simboloMoneda}{!datos.montoNumero}). En dicho pagaré se consignarán las condiciones financieras
+				particulares del desembolso realizado.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>INTERESES. - {!deudor.nombre} pagará{!deudor.n} intereses mensuales sobre saldos insolutos de capital, a razón de {!datos.tasaLetras} por
+				ciento ({!datos.tasaNumero}%) anual, sobre la base de un (1) año de trescientos sesenta (360) días.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>VARIACIÓN DE LA TASA DE INTERÉS. LAS PARTES convienen que en caso de operarse durante la vigencia de este contrato una
+				variación de los intereses en el Mercado Bancario, dicha variación será aplicada al saldo insoluto del préstamo, previa notificación a
+				{!deudor.nombre} antes de su aplicación, con treinta (30) días calendario de anticipación. Igualmente, es entendido y acordado entre LAS
+				PARTES que en caso de producirse una reclasificación de {!deudor.nombre}, producto de sus indicadores financieros, a una categoría distinta
+				a la que le había sido asignada, de acuerdo con los criterios que establezca la Superintendencia de Bancos de la República Dominicana,
+				y que esto implique un mayor riesgo para EL BANCO, se podrán tomar las medidas siguientes, a opción de EL BANCO: a) solicitar a {!deudor.nombre} el saldo total de los valores adeudados de capital, intereses y demás accesorios, en un plazo no mayor de treinta (30) días
+				calendario posteriores a su notificación; o b) realizar un aumento de la tasa aplicable a los intereses del préstamo, acorde a la
+				nueva calificación en el sistema financiero, previa notificación a {!deudor.nombre} antes de su aplicación, con treinta (30) días calendario
+				de anticipación. Las notificaciones a las que se refiere este Artículo se realizarán y se considerarán válidamente recibidas si se
+				realizan a través de uno de los medios siguientes a opción de EL BANCO: a) mediante comunicación física por escrito; b) al correo
+				electrónico suministrado por {!deudor.nombre} a EL BANCO, o; c) cualquier otro medio fehaciente de conformidad con el Derecho común
+				dominicano.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: Con cada variación de la tasa de interés, EL BANCO deberá entregar a {!deudor.nombre} la tabla de amortización correspondiente.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: Si producto de las variaciones de tasa de interés o de cualquier otra modificación unilateral de las condiciones del
+				contrato realizadas por EL BANCO, {!deudor.nombre} opta{!deudor.n} por terminar la relación contractual, {!deudor.nombre} no incurrirá{!deudor.n} en ningún tipo de
+				responsabilidad, esto así, siempre y cuando {!deudor.nombre} notifique{!deudor.n} la terminación y salde{!deudor.n} totalmente los valores adeudados de capital,
+				intereses y demás accesorios, antes de la entrada en vigencia de la modificación realizada que genera la solicitud de terminación.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>VENCIMIENTO Y FORMA DE PAGO. - {!deudor.nombre} se obliga{!deudor.n} a pagar esta deuda en el término de {!datos.plazoLetras}
+				({!datos.plazoNumero}) meses, contados a partir del {!datos.fechaContrato}, mediante {!datos.plazoLetras} ({!datos.plazoNumero})
+				cuotas mensuales, iguales y consecutivas, contentivas de capital e intereses cada una, por un monto de {!datos.cuotaLetras}
+				({!datos.simboloMoneda}{!datos.cuotaNumero}), con vencimiento del préstamo el {!datos.fechaVencimiento}.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO I: Es entendido y acordado entre LAS PARTES, que {!deudor.nombre} pagará{!deudor.n} a EL BANCO, intereses mensuales sobre saldos insolutos de
+				capital, de conformidad con lo establecido en el artículo de Intereses del presente contrato, debiendo saldar el total del capital adeudado
+				más los intereses y accesorios pendientes de pago al momento del vencimiento del término de la vigencia del Préstamo. Los pagos
+				deberán ser realizados por {!deudor.nombre} en cualquiera de las sucursales o puntos autorizados por EL BANCO, en efectivo, cheque o
+				transferencia electrónica, de conformidad a las normas que rigen cada uno de estos medios de pago. EL BANCO podrá poner a disposición
+				de {!deudor.nombre}, otros medios de pago que {!deudor.le} serán informados de manera oportuna.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: Los pagos realizados por {!deudor.nombre} serán aplicados por EL BANCO a la deuda que surja del presente contrato en el
+				siguiente orden: primero, al pago de honorarios, impuestos, comisiones, primas de pólizas de seguros y gastos pendientes de pago, así
+				como sumas avanzadas por EL BANCO con la finalidad de proteger o mantener la garantía otorgada por {!deudor.nombre}, o de manera general
+				sumas pagadas por EL BANCO por cuenta de {!deudor.nombre}, previa autorización de esta; segundo, al pago de mora; tercero, a los intereses
+				ordinarios devengados; y, por último, al capital adeudado.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO III: Los pagos realizados mediante cheques por {!deudor.nombre} a EL BANCO, se considerarán efectivos el día en que los fondos
+				correspondientes a los mismos estén disponibles y se hagan efectivos los pagos pertinentes.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>SALDOS ANTICIPADOS. {!deudor.nombre} podrá{!deudor.n} realizar abonos o cancelaciones anticipadas al balance de capital, siempre que la
+				facilidad crediticia se encuentre al día en el pago de sus cuotas mensuales, para lo cual, EL BANCO estará en pleno derecho de cobrar
+				una penalidad, si dicho abono o cancelación anticipada, se realiza dentro de los primeros veinticuatro (24) meses de amortización del
+				crédito, contados a partir de la fecha del desembolso, según lo establecido en el Tarifario de Productos y Servicios que esté vigente
+				al momento de realizar la transacción.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>MORA. {!deudor.nombre} se compromete{!deudor.n}, en caso de no cumplir a su vencimiento, con una cualquiera de sus obligaciones de pago, a
+				pagar por concepto de mora, a título de cláusula penal, el cinco por ciento (5%) mensual o fracción de mes, sobre el monto vencido,
+				sin formalidad judicial, ni extrajudicial alguna.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>GARANTÍA. - Para seguridad del pago de la deuda asumida por {!deudor.nombre}, {!deudor.este} pignora{!deudor.n} a favor de EL BANCO el Certificado de
+				Depósito a Plazo de su propiedad, que se describe a continuación:
+			</p>
+			<p class="quote">"{!datos.certificadoDescripcion}"</p>
+			<p class="paragraph">
+				PÁRRAFO I: ENTREGA DE LA GARANTÍA, - Como consecuencia del otorgamiento de la garantía de que se trata, {!deudor.nombre} entrega{!deudor.n} a EL BANCO
+				el Certificado de Depósito a Plazo en {!datos.certificadoNombreMoneda} anteriormente descrito, debidamente endosado para su
+				pignoración, sin incluir los intereses generados por dicho certificado de inversión.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO II: {!deudor.nombre} por el presente contrato se obliga{!deudor.n} frente a EL BANCO, a no realizar respecto a la indicada cuenta, Certificado
+				de Depósito a Plazo en {!datos.certificadoNombreMoneda}, ningún tipo de extracción de fondos, ni a realizar ninguna actuación frente a
+				EL BANCO ni frente a terceras personas, que reduzca, disminuya o suprima los valores que tiene{!deudor.n} depositados en EL BANCO.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO III: {!deudor.nombre} autoriza{!deudor.n} por este medio, de manera formal y expresa a EL BANCO, a mantener congelados o bloqueados los valores
+				depositados en la mencionada cuenta, Certificado de Depósito.
+			</p>
+			<p class="paragraph">
+				PÁRRAFO IV: Las obligaciones y autorizaciones que se indican en los párrafos precedentes, se mantendrán vigentes hasta que el préstamo
+				arriba indicado, junto con todos sus intereses, comisiones y gastos relacionados, sea cancelado en su totalidad.
+			</p>
+			<p class="paragraph">
+				<span class="articulo"></span>OTRAS OBLIGACIONES DE {!deudor.nombre}. {!deudor.nombre} efectuará{!deudor.n} por su propia cuenta todas las contribuciones, y demás tributos
+				nacionales o municipales, multas e impuestos y que graven o pudieran gravar de tiempo en tiempo el bien otorgado en garantía, debiendo
+				cuando así lo requiera EL BANCO para los fines del presente contrato, entregar a este los recibos oficiales que se expidan.
+			</p>
+			<c:FSC_ContratoArticulosSeguros propietario="{!deudor}" asegurado="{!deudor}" propiedad="{!seguroPropiedad}" vida="{!seguroVida}" />
+			<c:FSC_ContratoArticulosGenerales p="{!sujetoGeneral}" garantiaInmueble="{!garantiaInmueble}" />
+			<p class="paragraph">
+				HECHO Y FIRMADO DE BUENA FE, en tres (03) originales de un mismo tenor y efecto, uno para cada una de las partes, en
+				{!datos.lugarFirma}, a los {!datos.fechaContratoDiaLetras} ({!datos.fechaContratoDiaNumero}) días del mes de {!datos.fechaContratoMes}
+				del año {!datos.fechaContratoAnoLetras} ({!datos.fechaContratoAnoNumero}).
+			</p>
+			<div class="signature-section">
+				<div class="signature-heading">POR {!deudor.nombre}:</div>
+				<div class="signature-entity">{!datos.clienteNombre}</div>
+				<apex:repeat value="{!firmantesCliente}" var="firmante">
+					<div class="signature-single">
+						<div class="signature-line"></div>
+						<div class="signature-name">{!firmante}</div>
+						<apex:outputPanel layout="block" styleClass="signature-role" rendered="{!NOT(datos.esPersonaFisica)}">Autorizado</apex:outputPanel>
+					</div>
+				</apex:repeat>
+				<div class="signature-heading bank-heading">POR EL BANCO:</div>
+				<table class="signature-table">
+					<tr>
+						<td class="signature-cell">
+							<div class="signature-line"></div>
+							<div class="signature-name">{!datos.bancoRepresentante1.nombreCompleto}</div>
+							<div class="signature-role">{!datos.bancoRepresentante1.cargo}</div>
+						</td>
+						<td class="signature-cell">
+							<div class="signature-line"></div>
+							<div class="signature-name">{!datos.bancoRepresentante2.nombreCompleto}</div>
+							<div class="signature-role">{!datos.bancoRepresentante2.cargo}</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="notary-block">
+				<p class="paragraph">
+					YO, {!datos.notario.tratamiento} {!datos.notario.nombreCompleto}, Notario Público de los del Número para
+					{!datos.notario.jurisdiccionNotario}, Matrícula No. {!datos.notario.matriculaNotario}, del Colegio Dominicano de Notarios,
+					CERTIFICO Y DOY FE de que por ante mí fueron puestas las firmas de {!datos.nombresFirmantesNotario}, cuyas generales constan y
+					quienes me han manifestado que esas son las firmas que acostumbran a usar en todos los actos de sus vidas públicas y privadas. En
+					{!datos.lugarFirma}, a los {!datos.fechaContratoDiaLetras} ({!datos.fechaContratoDiaNumero}) días del mes de
+					{!datos.fechaContratoMes} del año {!datos.fechaContratoAnoLetras} ({!datos.fechaContratoAnoNumero}).
+				</p>
+				<div class="notary-signature">
+					<div class="signature-line"></div>
+					<div class="signature-name">{!datos.notario.nombreCompleto}</div>
+					<div class="signature-role">Notario Público</div>
+				</div>
+			</div>
+			<p class="small-note strong">NOTA: ESTE CONTRATO TIENE UN ANEXO AL FINAL.</p>
+			<p class="annex-copy">
+				ÚNICO ANEXO: Derechos y deberes de los clientes, establecidos en la circular 001/22 de la SB, emitida en tres (03) del mes de enero de
+				dos mil veintidós (2022), y modificada por la circular 003/22, emitida en fecha treinta y uno (31) del mes de enero de dos mil
+				veintidós (2022).
+			</p>
+			<apex:outputPanel layout="block"
+				styleClass="annex-page"
+				rendered="{!hasAnnexImage}"
+				><apex:image url="{!annexImageUrl}"
+					styleClass="annex-image"
+			/></apex:outputPanel>
+		</body>
+	</html>
+</apex:page>

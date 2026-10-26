@@ -143,6 +143,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
+    <description>Registra garantías de crédito con su clase, destino, tasación y valor del inmueble. Distingue mejoras y saldo de primera hipoteca para calcular la capacidad disponible. Las mejoras informadas deben ser positivas y el saldo previo no negativo. Los destinos precisos determinan los límites de monto y plazo.</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>

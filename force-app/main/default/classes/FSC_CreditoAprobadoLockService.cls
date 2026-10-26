@@ -7,6 +7,14 @@ public without sharing class FSC_CreditoAprobadoLockService {
 		'FSC_NombreTasadorExterno__c',
 		'FSC_Tasado_Por__c'
 	};
+	// La formalización de garantías ocurre siempre después de la aprobación del comité.
+	private static final Set<String> CAMPOS_FORMALIZACION_GARANTIA = new Set<String>{
+		'FSC_Titulo_Registrado__c',
+		'FSC_Fecha_Formalizacion_Hipotecaria__c',
+		'FSC_Garantia_Constituida__c',
+		'FSC_Comentario_Formalizacion_Vehiculo__c',
+		'FSC_Fecha_Constitucion_Garantia__c'
+	};
 	private static final Set<String> CAMPOS_CRITICOS_SOLICITUD = new Set<String>{
 		'AccountId',
 		'FSC_TipoSolicitud__c',
@@ -37,7 +45,77 @@ public without sharing class FSC_CreditoAprobadoLockService {
 		'FSC_SolicitudAprobadaPorComite__c',
 		'FSC_FechaYHoraAprobacionComite__c'
 	};
+	// Datos de redacción del contrato que se capturan al generar pagarés y contratos, después de la aprobación.
+	private static final Set<String> CAMPOS_CONTRATO_GARANTIA = minusculas(new Set<String>{
+		'FSC_Descripcion_de_la_Garantia__c',
+		'FSC_Numero_Titulo__c',
+		'FSC_Registro_de_Titulos__c',
+		'FSC_Fecha_Expedicion_Titulo__c',
+		'FSC_Numero_Certificado_Deposito__c',
+		'FSC_Fecha_Certificado_Deposito__c',
+		'FSC_Titular_Certificado_Deposito__c',
+		'FSC_Moneda_Certificado_Deposito__c',
+		'FSC_Emisor_Certificado_Deposito__c',
+		'FSC_Tipo_Vehiculo__c',
+		'FSC_Marca_Vehiculo__c',
+		'FSC_Codigo_Marca_Vehiculo__c',
+		'FSC_Modelo_Vehiculo__c',
+		'FSC_Codigo_Modelo_Vehiculo__c',
+		'FSC_Ano_Vehiculo__c',
+		'FSC_Color_Vehiculo__c',
+		'FSC_Numero_Chasis_Vehiculo__c',
+		'FSC_Serial_Motor_Vehiculo__c',
+		'FSC_Numero_Placa_Vehiculo__c',
+		'FSC_Numero_Matricula__c',
+		'FSC_Ubicacion__c'
+	});
+	private static final Set<String> MONTOS_CONTRATO_GARANTIA = minusculas(new Set<String>{
+		'FSC_Monto_Certificado_Deposito__c',
+		'FSC_Valor_Vehiculo__c'
+	});
+	private static final Set<String> CAMPOS_CONTRATO_ACTIVO = minusculas(new Set<String>{
+		'FSC_Descripcion_Contrato__c',
+		'FSC_Numero_Titulo_Contrato__c',
+		'FSC_Registro_Titulos_Contrato__c',
+		'FSC_Fecha_Titulo_Contrato__c',
+		'AccountNumber',
+		'FSC_Fecha_CD_Contrato__c',
+		'FSC_Titular_CD_Contrato__c',
+		'FSC_Moneda_CD_Contrato__c',
+		'FinancialInstitutionName',
+		'FSC_Tipo_Vehiculo_Contrato__c',
+		'FSC_Marca_Vehiculo_Contrato__c',
+		'FSC_Modelo_Vehiculo_Contrato__c',
+		'FSC_Ano_Vehiculo_Contrato__c',
+		'FSC_Color_Vehiculo_Contrato__c',
+		'FSC_Chasis_Vehiculo_Contrato__c',
+		'FSC_Motor_Vehiculo_Contrato__c',
+		'FSC_Placa_Vehiculo_Contrato__c',
+		'FSC_Matricula_Vehiculo_Contrato__c',
+		'FSC_Ubicacion_Contrato__c'
+	});
+	private static final Set<String> MONTOS_CONTRATO_ACTIVO = minusculas(new Set<String>{ 'CashOrMarketValue' });
+	private static final Set<String> CAMPOS_CONTRATO_SEGURO = minusculas(new Set<String>{
+		'FSC_Numero_Poliza_Contrato__c',
+		'FSC_Aseguradora_Contrato__c',
+		'FSC_Direccion_Aseguradora_Contrato__c',
+		'FSC_Fecha_Endoso_Contrato__c',
+		'FSC_Monto_Asegurado_Contrato__c'
+	});
+	private static final Set<String> MONTOS_CONTRATO_SEGURO = minusculas(new Set<String>{ 'FSC_Monto_de_la_Prima__c' });
+	private static final Set<String> CAMPOS_SISTEMA = minusculas(new Set<String>{
+		'Id',
+		'CreatedById',
+		'CreatedDate',
+		'LastModifiedById',
+		'LastModifiedDate',
+		'SystemModstamp',
+		'LastViewedDate',
+		'LastReferencedDate'
+	});
 	private static Boolean permitirDecisionComite = false;
+	private static Boolean permitirPlanillaDesembolso = false;
+	private static Boolean permitirDatosContrato = false;
 
 	public static void iniciarDecisionComite() {
 		permitirDecisionComite = true;
@@ -45,6 +123,24 @@ public without sharing class FSC_CreditoAprobadoLockService {
 
 	public static void finalizarDecisionComite() {
 		permitirDecisionComite = false;
+	}
+
+	// La planilla de desembolso completa campos críticos vacíos; nunca puede cambiar un valor ya aprobado.
+	public static void iniciarPlanillaDesembolso() {
+		permitirPlanillaDesembolso = true;
+	}
+
+	public static void finalizarPlanillaDesembolso() {
+		permitirPlanillaDesembolso = false;
+	}
+
+	// Pagarés y contratos completan los datos de redacción del contrato; los montos solo si estaban vacíos.
+	public static void iniciarDatosContrato() {
+		permitirDatosContrato = true;
+	}
+
+	public static void finalizarDatosContrato() {
+		permitirDatosContrato = false;
 	}
 
 	public static void validarParticipantes(List<LoanApplicant> registros) {
@@ -56,6 +152,14 @@ public without sharing class FSC_CreditoAprobadoLockService {
 	}
 
 	public static void validarActivosSolicitud(List<LoanApplicationAsset> registros) {
+		validarActivosSolicitud(registros, null);
+	}
+
+	public static void validarActivosSolicitud(List<LoanApplicationAsset> registros, Map<Id, LoanApplicationAsset> anteriores) {
+		if (permitirDatosContrato && anteriores != null) {
+			validarDatosContrato(registros, anteriores, 'LoanApplicationId', CAMPOS_CONTRATO_ACTIVO, MONTOS_CONTRATO_ACTIVO);
+			return;
+		}
 		List<SObject> registrosGenericos = new List<SObject>();
 		for (LoanApplicationAsset registro : registros) {
 			registrosGenericos.add(registro);
@@ -72,6 +176,18 @@ public without sharing class FSC_CreditoAprobadoLockService {
 	}
 
 	public static void validarSeguros(List<FSC_Seguro__c> registros) {
+		validarSeguros(registros, null, false);
+	}
+
+	public static void validarSeguros(List<FSC_Seguro__c> registros, Map<Id, FSC_Seguro__c> anteriores, Boolean esInsercion) {
+		if (permitirDatosContrato && esInsercion == true) {
+			// El contrato crea el seguro de incendio o vehículo cuando la solicitud aún no lo tiene.
+			return;
+		}
+		if (permitirDatosContrato && anteriores != null) {
+			validarDatosContrato(registros, anteriores, 'FSC_Residential_Loan_Application__c', CAMPOS_CONTRATO_SEGURO, MONTOS_CONTRATO_SEGURO);
+			return;
+		}
 		List<SObject> registrosGenericos = new List<SObject>();
 		for (FSC_Seguro__c registro : registros) {
 			registrosGenericos.add(registro);
@@ -100,7 +216,36 @@ public without sharing class FSC_CreditoAprobadoLockService {
 			}
 
 			FSC_Garantia__c anterior = esActualizacion && anteriores != null ? anteriores.get(registro.Id) : null;
-			if (anterior == null || tieneCambiosFueraDelTasador(registro, anterior)) {
+			Set<String> permitidos = new Set<String>(CAMPOS_TASADOR_EDITABLES);
+			permitidos.addAll(CAMPOS_FORMALIZACION_GARANTIA);
+			Set<String> montosPermitidos = new Set<String>();
+			if (permitirDatosContrato) {
+				permitidos.addAll(CAMPOS_CONTRATO_GARANTIA);
+				montosPermitidos.addAll(MONTOS_CONTRATO_GARANTIA);
+			}
+			if (anterior == null || tieneCambiosNoPermitidos(registro, anterior, permitidos, montosPermitidos)) {
+				registro.addError(MENSAJE_BLOQUEO);
+			}
+		}
+	}
+
+	private static void validarDatosContrato(
+		List<SObject> registros,
+		Map<Id, SObject> anteriores,
+		String campoSolicitud,
+		Set<String> permitidos,
+		Set<String> montosPermitidos
+	) {
+		if (esAdministrador() || registros == null || registros.isEmpty()) {
+			return;
+		}
+		Set<Id> solicitudesAprobadas = obtenerSolicitudesAprobadas(registros, campoSolicitud);
+		for (SObject registro : registros) {
+			if (!solicitudesAprobadas.contains((Id) registro.get(campoSolicitud))) {
+				continue;
+			}
+			SObject anterior = anteriores.get(registro.Id);
+			if (anterior == null || tieneCambiosNoPermitidos(registro, anterior, permitidos, montosPermitidos)) {
 				registro.addError(MENSAJE_BLOQUEO);
 			}
 		}
@@ -121,6 +266,9 @@ public without sharing class FSC_CreditoAprobadoLockService {
 			}
 
 			for (String campo : CAMPOS_CRITICOS_SOLICITUD) {
+				if (permitirPlanillaDesembolso && esValorVacio(anterior.get(campo))) {
+					continue;
+				}
 				if (registro.get(campo) != anterior.get(campo)) {
 					registro.addError(MENSAJE_BLOQUEO);
 					break;
@@ -166,21 +314,22 @@ public without sharing class FSC_CreditoAprobadoLockService {
 		return solicitudesAprobadas;
 	}
 
-	private static Boolean tieneCambiosFueraDelTasador(FSC_Garantia__c registro, FSC_Garantia__c anterior) {
-		Map<String, Schema.SObjectField> campos = Schema.SObjectType.FSC_Garantia__c.fields.getMap();
+	// Las claves del describe vienen en minúsculas, por eso todos los conjuntos se comparan en minúsculas.
+	private static Boolean tieneCambiosNoPermitidos(
+		SObject registro,
+		SObject anterior,
+		Set<String> permitidos,
+		Set<String> montosPermitidos
+	) {
+		Set<String> libres = minusculas(permitidos);
+		Map<String, Schema.SObjectField> campos = registro.getSObjectType().getDescribe().fields.getMap();
 		for (String campo : campos.keySet()) {
+			String clave = campo.toLowerCase();
 			Schema.DescribeFieldResult descripcion = campos.get(campo).getDescribe();
-			if (
-				CAMPOS_TASADOR_EDITABLES.contains(campo) ||
-				descripcion.isCalculated() ||
-				descripcion.isAutoNumber() ||
-				campo == 'Id' ||
-				campo == 'CreatedById' ||
-				campo == 'CreatedDate' ||
-				campo == 'LastModifiedById' ||
-				campo == 'LastModifiedDate' ||
-				campo == 'SystemModstamp'
-			) {
+			if (libres.contains(clave) || CAMPOS_SISTEMA.contains(clave) || descripcion.isCalculated() || descripcion.isAutoNumber()) {
+				continue;
+			}
+			if (montosPermitidos.contains(clave) && esValorVacio(anterior.get(campo))) {
 				continue;
 			}
 			if (registro.get(campo) != anterior.get(campo)) {
@@ -188,6 +337,18 @@ public without sharing class FSC_CreditoAprobadoLockService {
 			}
 		}
 		return false;
+	}
+
+	private static Set<String> minusculas(Set<String> valores) {
+		Set<String> resultado = new Set<String>();
+		for (String valor : valores) {
+			resultado.add(valor.toLowerCase());
+		}
+		return resultado;
+	}
+
+	private static Boolean esValorVacio(Object valor) {
+		return valor == null || (valor instanceof String && String.isBlank((String) valor));
 	}
 
 	private static Boolean esAdministrador() {

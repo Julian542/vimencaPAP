@@ -77,11 +77,7 @@ private class FSC_GenerarPagarePDF_ActionTest {
         ];
 
         System.assertEquals(true, refreshed.FSC_Pagares_y_Plantillas_Generados__c);
-        System.assert(
-            refreshed.FSC_Subestado__c == 'Generación de contrato' ||
-            refreshed.FSC_Subestado__c == 'Gestionar firmas',
-            'Subestado inesperado: ' + refreshed.FSC_Subestado__c
-        );
+        System.assertEquals('Generación de pagarés y plantillas', refreshed.FSC_Subestado__c);
         System.assertEquals(1000, refreshed.FSC_MontoAprobado__c);
         System.assertEquals(12, refreshed.FSC_PlazoMesesAprobado__c);
         System.assertEquals(10, refreshed.FSC_TasaInteresAprobada__c);

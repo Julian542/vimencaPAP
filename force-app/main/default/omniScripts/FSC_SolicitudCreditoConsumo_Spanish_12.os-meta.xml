@@ -16,6 +16,48 @@
             <isActive>true</isActive>
             <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
             <level>1.0</level>
+            <name>FSC_CanalSolicitudMRI__c</name>
+            <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+            <propertySetConfig>{
+  &quot;controlWidth&quot; : 6,
+  &quot;label&quot; : &quot;Canal de solicitud MRI&quot;,
+  &quot;showInputWidth&quot; : false,
+  &quot;inputWidth&quot; : 12,
+  &quot;required&quot; : true,
+  &quot;repeat&quot; : false,
+  &quot;repeatClone&quot; : false,
+  &quot;repeatLimit&quot; : null,
+  &quot;readOnly&quot; : true,
+  &quot;defaultValue&quot; : &quot;VE&quot;,
+  &quot;help&quot; : true,
+  &quot;helpText&quot; : &quot;Canal por el cual se recibió la solicitud, según T069.&quot;,
+  &quot;options&quot; : [ {
+    &quot;name&quot; : &quot;VE&quot;,
+    &quot;value&quot; : &quot;Sucursal o agencia (ventanilla)&quot;
+  } ],
+  &quot;optionSource&quot; : {
+    &quot;type&quot; : &quot;&quot;,
+    &quot;source&quot; : &quot;&quot;
+  },
+  &quot;controllingField&quot; : {
+    &quot;element&quot; : &quot;&quot;,
+    &quot;type&quot; : &quot;&quot;,
+    &quot;source&quot; : &quot;&quot;
+  },
+  &quot;show&quot; : null,
+  &quot;conditionType&quot; : &quot;Hide if False&quot;,
+  &quot;accessibleInFutureSteps&quot; : false,
+  &quot;HTMLTemplateId&quot; : &quot;&quot;,
+  &quot;hide&quot; : false,
+  &quot;disOnTplt&quot; : false
+}</propertySetConfig>
+            <sequenceNumber>7.0</sequenceNumber>
+            <type>Select</type>
+        </childElements>
+        <childElements>
+            <isActive>true</isActive>
+            <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+            <level>1.0</level>
             <name>FSC_EsConsolidacionDeudas__c</name>
             <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
             <propertySetConfig>{
@@ -134,7 +176,7 @@
   &quot;bStandalone&quot; : false,
   &quot;customAttributes&quot; : [ ]
 }</propertySetConfig>
-            <sequenceNumber>5.0</sequenceNumber>
+            <sequenceNumber>8.0</sequenceNumber>
             <type>Custom Lightning Web Component</type>
         </childElements>
         <childElements>
@@ -276,6 +318,120 @@
   &quot;disOnTplt&quot; : false
 }</propertySetConfig>
             <sequenceNumber>4.0</sequenceNumber>
+            <type>Select</type>
+        </childElements>
+        <childElements>
+            <isActive>true</isActive>
+            <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+            <level>1.0</level>
+            <name>FSC_TipoProductoSolicitudMRI__c</name>
+            <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+            <propertySetConfig>{
+  &quot;controlWidth&quot; : 6,
+  &quot;label&quot; : &quot;Tipo de producto solicitud MRI&quot;,
+  &quot;showInputWidth&quot; : false,
+  &quot;inputWidth&quot; : 12,
+  &quot;required&quot; : true,
+  &quot;repeat&quot; : false,
+  &quot;repeatClone&quot; : false,
+  &quot;repeatLimit&quot; : null,
+  &quot;readOnly&quot; : false,
+  &quot;defaultValue&quot; : null,
+  &quot;help&quot; : true,
+  &quot;helpText&quot; : &quot;Seleccione el producto de T078. Si hay varias facilidades, informe el producto de la de mayor monto solicitado.&quot;,
+  &quot;options&quot; : [ {
+    &quot;name&quot; : &quot;161&quot;,
+    &quot;value&quot; : &quot;Préstamos Personales para Gastos&quot;
+  }, {
+    &quot;name&quot; : &quot;162&quot;,
+    &quot;value&quot; : &quot;Préstamos a través de Líneas de Crédito Personales (Créditos Diferidos Etc.)&quot;
+  }, {
+    &quot;name&quot; : &quot;163&quot;,
+    &quot;value&quot; : &quot;Préstamos Personales con Descuento por Nómina&quot;
+  }, {
+    &quot;name&quot; : &quot;164&quot;,
+    &quot;value&quot; : &quot;Préstamos Personales con Garantía de Certificados Financieros&quot;
+  }, {
+    &quot;name&quot; : &quot;167&quot;,
+    &quot;value&quot; : &quot;Préstamos Personales para Solares&quot;
+  }, {
+    &quot;name&quot; : &quot;168&quot;,
+    &quot;value&quot; : &quot;Líneas de Crédito Personales para Gastos Educativos&quot;
+  }, {
+    &quot;name&quot; : &quot;169&quot;,
+    &quot;value&quot; : &quot;Préstamos Personales para Gastos Educativos&quot;
+  }, {
+    &quot;name&quot; : &quot;191&quot;,
+    &quot;value&quot; : &quot;Líneas de Crédito Personales para Gastos Educativos Superior&quot;
+  }, {
+    &quot;name&quot; : &quot;192&quot;,
+    &quot;value&quot; : &quot;Préstamos Personales para Gastos Educativos Superior&quot;
+  } ],
+  &quot;optionSource&quot; : {
+    &quot;type&quot; : &quot;&quot;,
+    &quot;source&quot; : &quot;&quot;
+  },
+  &quot;controllingField&quot; : {
+    &quot;element&quot; : &quot;&quot;,
+    &quot;type&quot; : &quot;&quot;,
+    &quot;source&quot; : &quot;&quot;
+  },
+  &quot;show&quot; : null,
+  &quot;conditionType&quot; : &quot;Hide if False&quot;,
+  &quot;accessibleInFutureSteps&quot; : false,
+  &quot;HTMLTemplateId&quot; : &quot;&quot;,
+  &quot;hide&quot; : false,
+  &quot;disOnTplt&quot; : false
+}</propertySetConfig>
+            <sequenceNumber>6.0</sequenceNumber>
+            <type>Select</type>
+        </childElements>
+        <childElements>
+            <isActive>true</isActive>
+            <isOmniScriptEmbeddable>false</isOmniScriptEmbeddable>
+            <level>1.0</level>
+            <name>FSC_TipoSolicitudMRI__c</name>
+            <omniProcessVersionNumber>0.0</omniProcessVersionNumber>
+            <propertySetConfig>{
+  &quot;controlWidth&quot; : 6,
+  &quot;label&quot; : &quot;Tipo de solicitud MRI&quot;,
+  &quot;showInputWidth&quot; : false,
+  &quot;inputWidth&quot; : 12,
+  &quot;required&quot; : true,
+  &quot;repeat&quot; : false,
+  &quot;repeatClone&quot; : false,
+  &quot;repeatLimit&quot; : null,
+  &quot;readOnly&quot; : false,
+  &quot;defaultValue&quot; : null,
+  &quot;help&quot; : true,
+  &quot;helpText&quot; : &quot;Seleccione el tipo de solicitud de crédito según T238.&quot;,
+  &quot;options&quot; : [ {
+    &quot;name&quot; : &quot;0&quot;,
+    &quot;value&quot; : &quot;No Aplica&quot;
+  }, {
+    &quot;name&quot; : &quot;1&quot;,
+    &quot;value&quot; : &quot;Nuevo Producto&quot;
+  }, {
+    &quot;name&quot; : &quot;2&quot;,
+    &quot;value&quot; : &quot;Aumento Limite de Crédito&quot;
+  } ],
+  &quot;optionSource&quot; : {
+    &quot;type&quot; : &quot;&quot;,
+    &quot;source&quot; : &quot;&quot;
+  },
+  &quot;controllingField&quot; : {
+    &quot;element&quot; : &quot;&quot;,
+    &quot;type&quot; : &quot;&quot;,
+    &quot;source&quot; : &quot;&quot;
+  },
+  &quot;show&quot; : null,
+  &quot;conditionType&quot; : &quot;Hide if False&quot;,
+  &quot;accessibleInFutureSteps&quot; : false,
+  &quot;HTMLTemplateId&quot; : &quot;&quot;,
+  &quot;hide&quot; : false,
+  &quot;disOnTplt&quot; : false
+}</propertySetConfig>
+            <sequenceNumber>5.0</sequenceNumber>
             <type>Select</type>
         </childElements>
         <isActive>true</isActive>

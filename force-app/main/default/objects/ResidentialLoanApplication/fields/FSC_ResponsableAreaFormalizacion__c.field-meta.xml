@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ResponsableAreaFormalizacion__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Usuario de Ejecución de Operaciones, Mantenimiento de Operaciones, Custodia o CDD asignado a la etapa actual de formalización.</description>
+    <inlineHelpText>Usuario del área asignado a la etapa actual de formalización.</inlineHelpText>
+    <label>Responsable área formalización</label>
+    <referenceTo>User</referenceTo>
+    <relationshipLabel>Solicitudes responsable formalización</relationshipLabel>
+    <relationshipName>SolicitudesResponsableFormalizacion</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>Lookup</type>
+</CustomField>

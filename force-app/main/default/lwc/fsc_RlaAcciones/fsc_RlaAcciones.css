@@ -89,7 +89,3 @@
 	justify-content: center;
 	text-align: center;
 }
-
-.btnRow lightning-button {
-	min-width: 240px;
-}

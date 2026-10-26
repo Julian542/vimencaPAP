@@ -17,18 +17,21 @@ private class FSC_CatalogoGarantiaServiceTest {
 	}
 
 	private static void crearCatalogo() {
-		Database.insert(new List<FSC_CatalogoGarantia__c>{
-			registro('Clase', 24, null, CLASE_AGRO_API),
-			registro('Clase', 15, null, 'MAQUINARIAS INDUSTRIALES'),
-			registro('Clase', 1, null, 'BIENES INMUEBLES'),
-			registro('Tipo', 37, 24, TIPO_AGRO_API),
-			registro('Tipo', 52, 15, 'CALENTADORES SOLARES PARA AGUA Y/O ACEITE TÉRMICO-J4'),
-			registro('Tipo', 6, 1, 'MAQUINARIAS Y EQUIPOS DE USO MULTIPLE (RD$)- H2'),
-			registro('Marca', 5, null, 'TOYOTA'),
-			registro('Modelo', 7, 5, 'COROLLA'),
-			registro('Modelo', 9, 5, 'COROLLA'),
-			registro('Modelo', 8, 5, 'HILUX')
-		}, AccessLevel.SYSTEM_MODE);
+		Database.insert(
+			new List<FSC_CatalogoGarantia__c>{
+				registro('Clase', 24, null, CLASE_AGRO_API),
+				registro('Clase', 15, null, 'MAQUINARIAS INDUSTRIALES'),
+				registro('Clase', 1, null, 'BIENES INMUEBLES'),
+				registro('Tipo', 37, 24, TIPO_AGRO_API),
+				registro('Tipo', 52, 15, 'CALENTADORES SOLARES PARA AGUA Y/O ACEITE TÉRMICO-J4'),
+				registro('Tipo', 6, 1, 'MAQUINARIAS Y EQUIPOS DE USO MULTIPLE (RD$)- H2'),
+				registro('Marca', 5, null, 'TOYOTA'),
+				registro('Modelo', 7, 5, 'COROLLA'),
+				registro('Modelo', 9, 5, 'COROLLA'),
+				registro('Modelo', 8, 5, 'HILUX')
+			},
+			AccessLevel.SYSTEM_MODE
+		);
 		FSC_CatalogoGarantiaService.limpiarCache();
 	}
 
@@ -90,7 +93,7 @@ private class FSC_CatalogoGarantiaServiceTest {
 	@IsTest
 	static void resolverCodigos_soloRecalculaLoQueCambio() {
 		crearCatalogo();
-		Id garantiaId = FSC_Garantia__c.SObjectType.getDescribe().getKeyPrefix() + '000000000001';
+		Id garantiaId = FSC_Garantia__c.SObjectType.getDescribe(SObjectDescribeOptions.DEFERRED).getKeyPrefix() + '000000000001';
 		FSC_Garantia__c anterior = new FSC_Garantia__c(
 			Id = garantiaId,
 			FSC_Clase_de_Garantia__c = 'BIENES INMUEBLES',
@@ -120,7 +123,8 @@ private class FSC_CatalogoGarantiaServiceTest {
 		crearCatalogo();
 		Database.update(
 			new FSC_CatalogoGarantia__c(
-				Id = [SELECT Id FROM FSC_CatalogoGarantia__c WHERE FSC_Clave__c = 'CLASE-24' WITH SYSTEM_MODE].Id,
+				Id = [SELECT Id FROM FSC_CatalogoGarantia__c WHERE FSC_Clave__c = 'CLASE-24' WITH SYSTEM_MODE]
+				.Id,
 				FSC_Descripcion__c = 'TERRENOS AGROPECUARIOS RENOMBRADOS EN EL CORE'
 			),
 			AccessLevel.SYSTEM_MODE
@@ -146,8 +150,20 @@ private class FSC_CatalogoGarantiaServiceTest {
 	static void clasificacion_noCambiaPorPalabrasDelTipoDelCore() {
 		asignarPermisosAdministrador();
 		Account cuenta = FSC_ExcepcionTestDataFactory.createAccount('9911', true);
-		ResidentialLoanApplication maquinaria = FSC_ExcepcionTestDataFactory.createSolicitud(cuenta.Id, 'RLA Calentador', 'Gestionar firmas', 3000000, true);
-		ResidentialLoanApplication inmueble = FSC_ExcepcionTestDataFactory.createSolicitud(cuenta.Id, 'RLA Inmueble', 'Gestionar firmas', 3000000, true);
+		ResidentialLoanApplication maquinaria = FSC_ExcepcionTestDataFactory.createSolicitud(
+			cuenta.Id,
+			'RLA Calentador',
+			'Gestionar firmas',
+			3000000,
+			true
+		);
+		ResidentialLoanApplication inmueble = FSC_ExcepcionTestDataFactory.createSolicitud(
+			cuenta.Id,
+			'RLA Inmueble',
+			'Gestionar firmas',
+			null,
+			true
+		);
 		insert new List<FSC_Garantia__c>{
 			new FSC_Garantia__c(
 				Name = 'CALENTADORES SOLARES PARA AGUA Y/O ACEITE TÉRMICO-J4',

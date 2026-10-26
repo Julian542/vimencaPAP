@@ -13,6 +13,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>FSC_APIPrestamoDesembolsoCoverageTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>FSC_APIPrestamoDesembolsoTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -97,7 +101,15 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>FSC_CatalogoGarantiaServiceTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>FSC_CatalogoGarantiaSyncJob</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_CatalogoGarantiaSyncJobTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -281,7 +293,15 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>FSC_ContratoRedaccionCtrlTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>FSC_ContratoRedaccionService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_ContratoRedaccionServiceTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -302,6 +322,30 @@
     </classAccesses>
     <classAccesses>
         <apexClass>FSC_CreacionPrestamoAsync</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_CreditPolicyController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_CreditPolicyControllerTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_CreditPolicyGuard</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_CreditPolicyGuardTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_CreditPolicyService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_CreditPolicyServiceTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -334,6 +378,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>FSC_DocumentacionContratosService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_DocumentoLegalService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_DocumentoLegalServiceTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -402,6 +454,30 @@
     </classAccesses>
     <classAccesses>
         <apexClass>FSC_FirmarDocumentoUtility_Test</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_FormalizacionDocumentosController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_FormalizacionGarantiasController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_FormalizacionGarantiasService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_FormalizacionGarantiasTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_FormalizacionNotificaciones</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_FormalizacionNotificacionesTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -513,6 +589,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>FSC_MontoComiteAction</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_MontoComiteActionTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>FSC_NuevoDocumentoEnvelope</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -562,6 +646,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>FSC_PlanillaDesembolsoSaver</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_ProcesamientoAbanks</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_ProcesamientoAbanksTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -626,6 +718,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>FSC_RlaApprovalAdminClientTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_RlaApprovalAdminDecisionRest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_RlaApprovalAdminDecisionRestTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -1274,7 +1374,15 @@
     </customMetadataTypeAccesses>
     <customMetadataTypeAccesses>
         <enabled>true</enabled>
+        <name>FSC_ReglaCredito__mdt</name>
+    </customMetadataTypeAccesses>
+    <customMetadataTypeAccesses>
+        <enabled>true</enabled>
         <name>FSC_Solicitud_Desembolso_Prestamo__mdt</name>
+    </customMetadataTypeAccesses>
+    <customMetadataTypeAccesses>
+        <enabled>true</enabled>
+        <name>FSC_TasaCambioCredito__mdt</name>
     </customMetadataTypeAccesses>
     <customMetadataTypeAccesses>
         <enabled>true</enabled>
@@ -1283,6 +1391,22 @@
     <customMetadataTypeAccesses>
         <enabled>true</enabled>
         <name>FSC_TiposSeguro__mdt</name>
+    </customMetadataTypeAccesses>
+    <customMetadataTypeAccesses>
+        <enabled>true</enabled>
+        <name>Prestamo_Setting__mdt</name>
+    </customMetadataTypeAccesses>
+    <customMetadataTypeAccesses>
+        <enabled>true</enabled>
+        <name>VFS_Abanks_Credential__mdt</name>
+    </customMetadataTypeAccesses>
+    <customMetadataTypeAccesses>
+        <enabled>true</enabled>
+        <name>VFS_Abanks_Endpoint__mdt</name>
+    </customMetadataTypeAccesses>
+    <customMetadataTypeAccesses>
+        <enabled>true</enabled>
+        <name>VFS_ParametrosESign__mdt</name>
     </customMetadataTypeAccesses>
     <customPermissions>
         <enabled>true</enabled>
@@ -4394,6 +4518,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>FSC_Garantia__c.FSC_ModalidadFormalizacion__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>FSC_Garantia__c.FSC_Modelo_Vehiculo__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -4415,6 +4544,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>FSC_Garantia__c.FSC_NombreTasadorExterno__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>FSC_Garantia__c.FSC_NumeroExpedienteDGII__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>FSC_Garantia__c.FSC_NumeroExpedienteRegistroTitulos__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -4455,6 +4594,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>FSC_Garantia__c.FSC_Registro_de_Titulos__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>FSC_Garantia__c.FSC_SaldoPrimeraHipoteca__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -4500,6 +4644,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>FSC_Garantia__c.FSC_Valor_Inmueble__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>FSC_Garantia__c.FSC_Valor_Mejoras__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -6418,6 +6567,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_AbanksAutomatico__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_Actividad_economica__c</field>
         <readable>true</readable>
@@ -6498,6 +6652,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>ResidentialLoanApplication.FSC_CanalSolicitudMRI__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>ResidentialLoanApplication.FSC_Cantidad_Excepciones__c</field>
         <readable>true</readable>
@@ -6553,8 +6712,23 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_CodigoCanalSolicitudMRI__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_CodigoTaxonomia__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_CodigoTipoProductoMRI__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_CodigoTipoSolicitudMRI__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -6710,6 +6884,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_DesdeMesGananciasyPerdidas__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ResidentialLoanApplication.FSC_DesembolsoAPIExitoso__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ResidentialLoanApplication.FSC_DesembolsoFormalizacion__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -6895,6 +7079,21 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_Estado_Civil_Representante__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ResidentialLoanApplication.FSC_EtapaFormalizacionRetorno__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ResidentialLoanApplication.FSC_EtapaFormalizacion__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ResidentialLoanApplication.FSC_EvidenciasDesembolsoCargadas__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -7364,6 +7563,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>ResidentialLoanApplication.FSC_ObservacionFormalizacion__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_ObservacionPLA__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -7529,6 +7733,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>ResidentialLoanApplication.FSC_ProcesamientoAbanksManual__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_Propietario_Garantia_Hipotecaria__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -7580,6 +7789,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_Resolucion_Autorizacion__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ResidentialLoanApplication.FSC_ResponsableAreaFormalizacion__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -7743,6 +7957,16 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>ResidentialLoanApplication.FSC_TipoProductoSolicitudMRI__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ResidentialLoanApplication.FSC_TipoSolicitudMRI__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>ResidentialLoanApplication.FSC_TipoTasa__c</field>
         <readable>true</readable>
@@ -7880,6 +8104,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_UsuarioControlDocumentos__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ResidentialLoanApplication.FSC_UsuarioFormalizacion__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -8600,6 +8829,10 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>FSC_AutorizacionOposicionMatricula</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>FSC_CapacidadPagoPDF</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -8661,6 +8894,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>FSC_InformeCreditoAnalisisPDF</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>FSC_InventarioRegistroTitulos</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

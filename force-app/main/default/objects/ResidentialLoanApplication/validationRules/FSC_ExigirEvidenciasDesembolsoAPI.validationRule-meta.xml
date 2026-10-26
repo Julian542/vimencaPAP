@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ExigirEvidenciasDesembolsoAPI</fullName>
+    <active>true</active>
+    <description>El desembolso confirmado por Abanks requiere las dos evidencias antes de continuar.</description>
+    <errorConditionFormula>AND(
+        OR(FSC_DesembolsoAPIExitoso__c, PRIORVALUE(FSC_DesembolsoAPIExitoso__c)),
+        NOT(FSC_EvidenciasDesembolsoCargadas__c),
+        OR(
+            NOT(ISPICKVAL(FSC_Subestado__c, &quot;Desembolso&quot;)),
+            ISPICKVAL(Status, &quot;Cerrada Ganada&quot;)
+        )
+    )</errorConditionFormula>
+    <errorMessage>Debe cargar la hoja de amortización y el recibo de desembolso con el botón Cargar archivos de desembolso para continuar.</errorMessage>
+</ValidationRule>

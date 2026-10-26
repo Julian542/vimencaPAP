@@ -29,6 +29,12 @@
 		</template>
 
 		<div class={containerClass}>
+			<c-fsc_-rla-formalizacion-garantias
+				record-id={recordId}
+				etapa={etapaFormalizacion}
+				subestado={substatus}
+				onactualizado={handleFormalizacionActualizada}></c-fsc_-rla-formalizacion-garantias>
+
 			<div class="messagesSection">
 				<template if:true={showResponsableManual}>
 					<div class="banner warning">
@@ -150,13 +156,6 @@
 					</div>
 				</template>
 
-				<template if:true={showPreguntaFormalizacion}>
-					<div class="banner warning">
-						<span class="icon">⚠️</span>
-						<span class="text">¿Desembolsar sin registrar garantía?</span>
-					</div>
-				</template>
-
 				<template if:true={showFormalizarGarantiasPendientes}>
 					<div class="banner warning">
 						<span class="icon">⚠️</span>
@@ -249,6 +248,20 @@
 					</div>
 				</template>
 
+				<template if:true={showFormalizacionAssignedBanner}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text"> Hay un proceso de verificación activo asignado a: <strong>{usuarioFormalizacionName}</strong> </span>
+					</div>
+				</template>
+
+				<template if:true={showPreguntaFormalizacion}>
+					<div class="banner warning">
+						<span class="icon">⚠️</span>
+						<span class="text">¿Formalizar garantía en este momento?</span>
+					</div>
+				</template>
+
 				<template if:true={showPlanillaDesembolso}>
 					<div class="banner warning">
 						<span class="icon">⚠️</span>
@@ -261,6 +274,17 @@
 						<span class="icon">&#9888;&#65039;</span>
 						<span class="text">Debe crear el crédito, seguro y garantías en core de Abanks, cuando esté listo, presionar botón.</span>
 					</div>
+				</template>
+
+				<template if:true={showMensajeArchivosDesembolso}>
+					<div class="banner success">
+						<span class="text">El desembolso se realizó con éxito en Abanks, debe cargar los archivos de evidencia con el botón que se encuentra bajo este mensaje para continuar.</span>
+					</div>
+					<template if:true={showCargarArchivosDesembolso}>
+						<div class="btnRow center">
+							<lightning-button variant="brand" label="Cargar archivos de desembolso" onclick={handleMarcarDesembolsado} disabled={loading}></lightning-button>
+						</div>
+					</template>
 				</template>
 
 				<template if:true={showDesembolsado}>
@@ -292,6 +316,12 @@
 					</div>
 				</template>
 
+				<template if:true={showRevisionDocumentos}>
+                    <div class="banner warning"><span class="text">Debe revisar el pagaré y contrato generado y luego presionar el botón Validado. Si desea modificar los documentos puede hacerlo con los botones que se encuentran debajo de este mensaje.</span></div>
+                    <template if:true={showDocumentosPendientes}>
+                        <div class="banner warning"><span class="text">{mensajeRevisionDocumentosPendiente}</span></div>
+                    </template>
+                </template>
 				<template if:true={showGenerarPagareMessage}>
 					<div class="banner warning">
 						<span class="icon">⚠️</span>
@@ -356,6 +386,24 @@
 							<lightning-button
 								label="Reasignar"
 								onclick={handleReasignarPagares}
+								disabled={loading}></lightning-button>
+						</div>
+					</template>
+
+					<template if:true={showReasignarGestionPlanilla}>
+						<div class="btnRow center">
+							<lightning-button
+								label="Reasignar"
+								onclick={handleReasignarGestionPlanilla}
+								disabled={loading}></lightning-button>
+						</div>
+					</template>
+
+					<template if:true={showReasignarFormalizacion}>
+						<div class="btnRow center">
+							<lightning-button
+								label="Reasignar"
+								onclick={handleReasignarFormalizacion}
 								disabled={loading}></lightning-button>
 						</div>
 					</template>
@@ -533,12 +581,12 @@
 								<lightning-button
 									variant="brand"
 									label="Sí"
-									onclick={handleDesembolsarSinRegistrarGarantias}>
+									onclick={openModalFormalizacionGarantias}>
 								</lightning-button>
 								<lightning-button
 									variant="neutral"
 									label="No"
-									onclick={openModalFormalizacionGarantias}>
+									onclick={handleDesembolsarSinRegistrarGarantias}>
 								</lightning-button>
 							</div>
 						</template>
@@ -689,6 +737,21 @@
 							</div>
 						</template>
 
+						<template if:true={showRevisionDocumentosButtons}>
+                            <div class="btnRow center">
+                                <lightning-button variant="brand" label="Validado" onclick={handleValidarDocumentosLegales} disabled={disableValidarDocumentos}></lightning-button>
+                                <template if:true={showEditarDocumentosLegales}>
+                                    <lightning-button label="Editar pagaré" onclick={handleEditarPagare} disabled={loading}></lightning-button>
+                                    <lightning-button label="Editar contrato" onclick={handleEditarContrato} disabled={disableEditarContrato}></lightning-button>
+                                </template>
+                            </div>
+                            <template if:true={showDocumentosPendientes}>
+                                <div class="btnRow center">
+                                    <lightning-button label="Actualizar documentos" onclick={handleActualizarDocumentosLegales} disabled={loading}></lightning-button>
+                                    <lightning-button label="Reintentar generación" onclick={handleReintentarDocumentosLegales} disabled={loading}></lightning-button>
+                                </div>
+                            </template>
+                        </template>
 						<template if:true={showGenerarPagareButton}>
 							<div class="btnRow center">
 								<lightning-button
@@ -756,6 +819,12 @@
 		</div>
 	</lightning-card>
 
+	<template if:true={showModalDocumentoLegal}>
+        <c-fsc_-editar-documento-legal record-id={recordId} content-version-id={versionLegalEnEdicion}
+            tipo-documento={tipoLegalEnEdicion} oncancel={closeModalDocumentoLegal} onsaved={handleDocumentoLegalGuardado}>
+        </c-fsc_-editar-documento-legal>
+    </template>
+	
 	<template if:true={showModalEdicionDocumentoAnalisis}>
 		<c-fsc_-editar-documento-analisis
 			record-id={recordId}
@@ -1207,6 +1276,8 @@
 												data-clave={campo.clave}
 												label={campo.etiqueta}
 												value={campo.valor}
+												placeholder={campo.ayuda}
+												field-level-help={campo.ayuda}
 												onchange={handleDatoContratoChange}>
 											</lightning-input>
 										</div>
@@ -1775,7 +1846,7 @@
 				</header>
 
 				<div class="slds-modal__content slds-p-around_medium">
-					<template if:true={isPymeRla}>
+					<template if:true={requiereMotivosRechazo}>
 						<lightning-combobox
 							label="Motivos de rechazo"
 							value={motivoRechazoPicklist}
@@ -1897,7 +1968,7 @@
 					<h2
 						id="desembolso-manual-title"
 						class="slds-text-heading_medium">
-						Desembolsado
+						{tituloModalDesembolso}
 					</h2>
 				</header>
 				<div class="slds-modal__content slds-p-around_medium">
@@ -1960,7 +2031,7 @@
 					<lightning-button
 						class="slds-m-left_small"
 						variant="brand"
-						label="Confirmar desembolso"
+						label={labelConfirmarArchivosDesembolso}
 						onclick={handleConfirmarDesembolsoManual}
 						disabled={disableConfirmarDesembolsoManual}></lightning-button>
 				</footer>
