@@ -144,11 +144,7 @@ private class FSC_MissingCoverageTest {
 				FinServ__Occupation__c = 'ABOGADO',
 				FinServ__StartDate__c = Date.newInstance(2020, 1, 15)
 			),
-			new FinServ__Employment__c(
-				Cliente__c = account.Id,
-				EMP_Empleo__c = 'Anterior',
-				EMP_Empresa__c = 'Empresa Anterior'
-			)
+			new FinServ__Employment__c(Cliente__c = account.Id, EMP_Empleo__c = 'Anterior', EMP_Empresa__c = 'Empresa Anterior')
 		};
 
 		insert new ContactPointPhone(ParentId = account.Id, TelephoneNumber = '8095551111');
@@ -312,10 +308,12 @@ private class FSC_MissingCoverageTest {
 
 	@IsTest
 	static void esaEnvelopeStatusServiceHandlesSuccessErrorAndValidation() {
+		// El contexto de prueba separa los callouts del DML pendiente del @TestSetup.
+		Test.startTest();
 		Test.setMock(HttpCalloutMock.class, new EnvelopeStatusMock(200, '{"Status":"Completed"}'));
 		FSC_ESAEnvelopeStatusService.EnvelopeStatusResult successResult = FSC_ESAEnvelopeStatusService.obtenerEstadoEnvelope('env-1');
 
-		System.assertEquals(true, successResult.success, 'La consulta simulada debe ser exitosa.');
+		System.assertEquals(true, successResult.success, 'La consulta simulada debe ser exitosa: ' + successResult.errorMessage);
 		System.assertEquals(200, successResult.statusCode);
 		System.assertEquals('Completed', successResult.status);
 
@@ -327,6 +325,7 @@ private class FSC_MissingCoverageTest {
 		System.assert(String.isNotBlank(errorResult.errorMessage));
 
 		FSC_ESAEnvelopeStatusService.EnvelopeStatusResult missingResult = FSC_ESAEnvelopeStatusService.obtenerEstadoEnvelope(null);
+		Test.stopTest();
 		System.assertEquals(false, missingResult.success);
 		System.assertEquals('envelopeId es requerido.', missingResult.errorMessage);
 	}
@@ -589,7 +588,9 @@ private class FSC_MissingCoverageTest {
 		update new ResidentialLoanApplication(
 			Id = rla.Id,
 			RecordTypeId = ResidentialLoanApplication.SObjectType.getDescribe()
-				.getRecordTypeInfosByDeveloperName().get('FSC_Solicitud_Credito_Consumo').getRecordTypeId(),
+				.getRecordTypeInfosByDeveloperName()
+				.get('FSC_Solicitud_Credito_Consumo')
+				.getRecordTypeId(),
 			Status = 'En proceso',
 			FSC_Subestado__c = 'Creación de crédito',
 			FSC_FormaDeDesembolso__c = null
@@ -642,14 +643,14 @@ private class FSC_MissingCoverageTest {
 
 	@IsTest
 	static void rlaAccionesCoversAbanksRetryBranches() {
+		// La automatización depende de FSC_APIPrestamoConfig__mdt, que varía por org.
+		FSC_ProcesamientoAbanks.automatizacionTest = true;
 		ResidentialLoanApplication rla = createRla();
 		Id consumoRecordTypeId = ResidentialLoanApplication.SObjectType.getDescribe()
-			.getRecordTypeInfosByDeveloperName().get('FSC_Solicitud_Credito_Consumo').getRecordTypeId();
-		update new Account(
-			Id = rla.AccountId,
-			ACC_TipoIdentificacion__c = 'Cédula',
-			ACC_NumIdentificacion__c = '00108803610'
-		);
+			.getRecordTypeInfosByDeveloperName()
+			.get('FSC_Solicitud_Credito_Consumo')
+			.getRecordTypeId();
+		update new Account(Id = rla.AccountId, ACC_TipoIdentificacion__c = 'Cédula', ACC_NumIdentificacion__c = '00108803610');
 		update new ResidentialLoanApplication(
 			Id = rla.Id,
 			RecordTypeId = consumoRecordTypeId,
@@ -682,9 +683,7 @@ private class FSC_MissingCoverageTest {
 			'DIAS_GRACIA_MORA' => 3
 		};
 
-		FSC_APIPrestamoProductos.mockIpResponse = new Map<String, Object>{
-			'productos' => new List<Object>{ activeProduct }
-		};
+		FSC_APIPrestamoProductos.mockIpResponse = new Map<String, Object>{ 'productos' => new List<Object>{ activeProduct } };
 		FSC_APIPrestamoPrestamos.mockIpResponse = new Map<String, Object>{
 			'descripcionRespuesta' => 'Exitoso',
 			'codigoRespuesta' => '00',
@@ -745,9 +744,7 @@ private class FSC_MissingCoverageTest {
 			FinServ__FinancialAccountNumber__c = '102083476',
 			FinServ__PrimaryOwner__c = rla.AccountId,
 			FIN_Producto__c = productoAhorro.Id,
-			RecordTypeId = Schema.SObjectType.FinServ__FinancialAccount__c.getRecordTypeInfosByDeveloperName()
-				.get('SavingsAccount')
-				.getRecordTypeId()
+			RecordTypeId = Schema.SObjectType.FinServ__FinancialAccount__c.getRecordTypeInfosByDeveloperName().get('SavingsAccount').getRecordTypeId()
 		);
 		FSC_APIPrestamoDesembolso.mockIpResponse = new Map<String, Object>{
 			'HTTPDesembolso' => new Map<String, Object>{ 'StatusCode' => 200, 'descripcionRespuesta' => 'Exitoso' }
@@ -762,7 +759,9 @@ private class FSC_MissingCoverageTest {
 	static void rlaAccionesCoversSimpleNoProcessAndMetadataBranches() {
 		ResidentialLoanApplication rla = createRla();
 		Id pymeRecordTypeId = ResidentialLoanApplication.SObjectType.getDescribe()
-			.getRecordTypeInfosByDeveloperName().get('FSC_Solicitud_Credito_PYME').getRecordTypeId();
+			.getRecordTypeInfosByDeveloperName()
+			.get('FSC_Solicitud_Credito_PYME')
+			.getRecordTypeId();
 		update new ResidentialLoanApplication(
 			Id = rla.Id,
 			RecordTypeId = pymeRecordTypeId,
@@ -820,5 +819,137 @@ private class FSC_MissingCoverageTest {
 		}
 		System.assertNotEquals(null, alternativeDisbursement);
 		FSC_RlaAccionesController.guardarFormaDesembolsoGestionPlanillas(rla.Id, alternativeDisbursement, null);
+	}
+
+	@TestSetup
+	static void setupLoanApplicantReferenceData() {
+		TestDataFactory_FSC.createLoanApplicantReferenceData();
+	}
+
+	@IsTest
+	static void shouldLoadAccountReferencesWithApplicant() {
+		Account account = [SELECT Id FROM Account WHERE Name = 'Reference debtor' LIMIT 1];
+		Test.startTest();
+		Map<String, Object> applicant = FSC_LoanApplicantController.getAccountLoanApplicant(account.Id);
+		Test.stopTest();
+		List<Map<String, Object>> references = (List<Map<String, Object>>) applicant.get('Referencias__r');
+		Assert.areEqual(3, references.size(), 'Only active references from this account with a last name should load.');
+		Assert.isTrue(referencesByName(references).containsKey('Last name only'), 'A reference with only LastName must preload.');
+		Map<String, Object> reference = referencesByName(references).get('Alice Reference');
+		Assert.areEqual('8095550100', reference.get('FSC_Telefono__c'), 'Business phone should load.');
+		Assert.areEqual('alice@example.com', reference.get('FSC_Email__c'), 'Email should load.');
+		Assert.areEqual('Test Street Test City', reference.get('FSC_Direccion__c'), 'Address should load.');
+		Assert.areEqual('Heredado de Cliente', reference.get('FSC_Parentesco__c'), 'The REFERENCIA role must mark the reference as inherited.');
+		Assert.isFalse(reference.containsKey('Id'), 'A contact relation ID must not become a loan reference ID.');
+		Assert.isFalse(reference.containsKey('FSC_LoanApplicant__c'), 'The reference must belong to the new applicant when saved.');
+	}
+
+	@IsTest
+	static void shouldUseMobileWithoutInventingRelationship() {
+		Account account = [SELECT Id FROM Account WHERE Name = 'Reference debtor' LIMIT 1];
+		// FSC no permite renombrar roles recíprocos ni editar relaciones: se desactiva la de Bob y se crea otra con un rol distinto.
+		FinServ__ContactContactRelation__c bobRelation = [
+			SELECT Id, FinServ__Contact__c, FinServ__RelatedContact__c
+			FROM FinServ__ContactContactRelation__c
+			WHERE
+				FinServ__Contact__r.AccountId = :account.Id
+				AND FinServ__RelatedContact__r.FirstName = 'Bob'
+				AND FinServ__Active__c = TRUE
+			LIMIT 1
+		];
+		update new FinServ__ContactContactRelation__c(Id = bobRelation.Id, FinServ__Active__c = false);
+		FinServ__ReciprocalRole__c otherRole = new FinServ__ReciprocalRole__c(
+			Name = 'OTRO',
+			FinServ__InverseRole__c = 'OTRO',
+			RecordTypeId = FinServ__ReciprocalRole__c.SObjectType.getDescribe(SObjectDescribeOptions.DEFERRED)
+				.getRecordTypeInfosByDeveloperName()
+				.get('ContactRole')
+				.getRecordTypeId()
+		);
+		insert otherRole;
+		insert TestDataFactory_FSC.createLoanApplicantReferenceRelation(
+			bobRelation.FinServ__Contact__c,
+			bobRelation.FinServ__RelatedContact__c,
+			otherRole.Id,
+			true,
+			'Referencia'
+		);
+		Test.startTest();
+		List<Map<String, Object>> references = FSC_LoanApplicantController.accountReferenceRows(account.Id);
+		Test.stopTest();
+		Map<String, Object> reference = referencesByName(references).get('Bob Reference');
+		Assert.areEqual('8095550101', reference.get('FSC_Telefono__c'), 'Mobile should be used when phone is empty.');
+		Assert.isNull(reference.get('FSC_Parentesco__c'), 'Other roles must not be marked as inherited from the client.');
+	}
+
+	@IsTest
+	static void shouldReturnEmptyForNullAccount() {
+		Test.startTest();
+		List<Map<String, Object>> references = FSC_LoanApplicantController.accountReferenceRows(null);
+		Test.stopTest();
+		Assert.areEqual(0, references.size(), 'Null input must not load references from other accounts.');
+	}
+
+	@IsTest
+	static void shouldReturnEmptyForAccountWithoutReferences() {
+		Account account = new Account(Name = 'No references');
+		insert account;
+		Test.startTest();
+		List<Map<String, Object>> references = FSC_LoanApplicantController.accountReferenceRows(account.Id);
+		Test.stopTest();
+		Assert.areEqual(0, references.size(), 'An account without references must return an empty list.');
+	}
+
+	@IsTest
+	static void shouldDeduplicateRelatedContacts() {
+		Account account = [SELECT Id FROM Account WHERE Name = 'Reference debtor' LIMIT 1];
+		Contact owner = new Contact(LastName = 'Second owner', AccountId = account.Id);
+		insert owner;
+		FinServ__ContactContactRelation__c original = [
+			SELECT RecordTypeId, FinServ__RelatedContact__c, FinServ__Role__c
+			FROM FinServ__ContactContactRelation__c
+			WHERE FinServ__Contact__r.AccountId = :account.Id AND FinServ__RelatedContact__r.FirstName = 'Alice'
+			LIMIT 1
+		];
+		original.FinServ__Contact__c = owner.Id;
+		original.FinServ__Active__c = true;
+		original.Id = null;
+		insert original;
+		Test.startTest();
+		List<Map<String, Object>> references = FSC_LoanApplicantController.accountReferenceRows(account.Id);
+		Test.stopTest();
+		Assert.areEqual(3, references.size(), 'The same related contact must appear only once across account contacts.');
+	}
+
+	@IsTest
+	static void shouldLoad251ReferencesInOneQuery() {
+		Account account = [SELECT Id FROM Account WHERE Name = 'Reference debtor' LIMIT 1];
+		Contact owner = [SELECT Id FROM Contact WHERE AccountId = :account.Id LIMIT 1];
+		FinServ__ReciprocalRole__c role = [SELECT Id FROM FinServ__ReciprocalRole__c WHERE Name = 'REFERENCIA' LIMIT 1];
+		List<Contact> contacts = new List<Contact>();
+		for (Integer index = 0; index < 251; index++) {
+			contacts.add(new Contact(FirstName = 'Bulk', LastName = 'Reference ' + index));
+		}
+		insert contacts;
+		List<FinServ__ContactContactRelation__c> relations = new List<FinServ__ContactContactRelation__c>();
+		for (Contact referenceContact : contacts) {
+			relations.add(TestDataFactory_FSC.createLoanApplicantReferenceRelation(owner.Id, referenceContact.Id, role.Id, true, 'Referencia'));
+		}
+		insert relations;
+		Test.startTest();
+		Integer queriesBefore = Limits.getQueries();
+		List<Map<String, Object>> references = FSC_LoanApplicantController.accountReferenceRows(account.Id);
+		Integer queriesUsed = Limits.getQueries() - queriesBefore;
+		Test.stopTest();
+		Assert.areEqual(254, references.size(), 'Every bulk reference plus the three original references should load.');
+		Assert.areEqual(1, queriesUsed, 'The query count must stay constant as the number of references grows.');
+	}
+
+	private static Map<String, Map<String, Object>> referencesByName(List<Map<String, Object>> references) {
+		Map<String, Map<String, Object>> result = new Map<String, Map<String, Object>>();
+		for (Map<String, Object> reference : references) {
+			result.put((String) reference.get('Name'), reference);
+		}
+		return result;
 	}
 }

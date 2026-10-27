@@ -27,6 +27,9 @@ public without sharing class FSC_RlaAccionesController {
 	private static final String IP_VALIDAR_CLASIFICACION_MIPYMES = 'FSC_ValidarClasificacionMIPYMES';
 	private static final String RESPUESTA_CLASIFICACION_MIPYMES_VALIDA = 'ClasificacionMIPYMESValida';
 	private static final String PROCESO_ANALISTA = 'FSC_AnalistasDeCredito';
+	private static final Set<String> PROCESOS_REASIGNACION_SUPERVISOR = new Set<String>{
+		PROCESO_ANALISTA, 'FSC_SupervisorDeCredito', 'FSC_ComiteDeCredito'
+	};
 	private static final String PROCESO_BANCA_SEGURO = 'FSC_BancaSeguro';
 	private static final String PROCESO_VALIDACION_ABANKS = 'FSC_ValidacionEnAbanks';
 	private static final String PERMISO_ADMINISTRADOR = 'FSC_CP_Administrador';
@@ -57,12 +60,6 @@ public without sharing class FSC_RlaAccionesController {
 	private static final String FORMATO_FECHA = 'date';
 	private static final Set<String> CAMPOS_CALCULADOS_INFORME = new Set<String>{
 		'edad',
-		'antiguedadLaboral',
-		'ingresosMensualesPromedio',
-		'cuotasFinancieras',
-		'relacionCuotaIngresos',
-		'endeudamientoTotal',
-		'solvenciaEstimada',
 		'exposicionTotal',
 		'prestamoSobreTasacion',
 		'prestamoSobrePrecioVenta'
@@ -95,7 +92,7 @@ public without sharing class FSC_RlaAccionesController {
 	private static final Set<String> CAMPOS_CALCULADOS_CAPACIDAD = new Set<String>{
 		'prestamoSobreTasacion',
 		'montosPesos.cuotaTarjetas',
-		'montosPesos.deudaTarjetasCancelar',
+		'montosDolares.cuotaTarjetas',
 		'cargaFinanciera',
 		'resultadoCargaFinanciera',
 		'capacidadIncluyendoVivienda',
@@ -120,6 +117,7 @@ public without sharing class FSC_RlaAccionesController {
 		'ingresoOtros',
 		'ingresoEstadosFinancieros'
 	};
+	private static final Decimal PORCENTAJE_PAGO_MINIMO_TARJETA = 0.08;
 	private static final List<String> CONCEPTOS_DEUDAS_CAPACIDAD = new List<String>{ 'deudaTarjetas', 'deudaPrestamos' };
 	private static final List<String> CONCEPTOS_PAGOS_CAPACIDAD = new List<String>{ 'cuotaTarjetas', 'cuotaPrestamos', 'cuotaNuevoPrestamo' };
 	private static final List<String> CONCEPTOS_CANCELACIONES_CAPACIDAD = new List<String>{ 'cuotasCancelar', 'deudaTarjetasCancelar' };
@@ -195,7 +193,6 @@ public without sharing class FSC_RlaAccionesController {
 			? FSC_ControladorDocumentosAnalisisCredito.construirDatos(residentialLoanApplicationId, tipoNormalizado)
 			: (esInformePyme ? FSC_ControladorInformeCreditoPyme.construirDatos(residentialLoanApplicationId) : null);
 		Integer cantidadCambios = 0;
-		Boolean requiereRecalculoCapacidad = false;
 
 		for (String ruta : cambios.keySet()) {
 			if (!formatosPermitidos.containsKey(ruta)) {
@@ -217,11 +214,6 @@ public without sharing class FSC_RlaAccionesController {
 			ponerValorEnRuta(ajustes, ruta, valorPdf);
 			if (datosEfectivos != null) {
 				ponerValorEnRuta(datosEfectivos, ruta, valorPdf);
-				requiereRecalculoCapacidad =
-					requiereRecalculoCapacidad ||
-					ruta == 'tasaCambio' ||
-					ruta.startsWith('montosPesos.') ||
-					ruta.startsWith('montosDolares.');
 			}
 			cantidadCambios++;
 		}
@@ -229,8 +221,9 @@ public without sharing class FSC_RlaAccionesController {
 		if (cantidadCambios == 0) {
 			throw new AuraHandledException('No se modificó ningún campo.');
 		}
-		if (requiereRecalculoCapacidad) {
-			recalcularCapacidadPago(ajustes, datosEfectivos);
+		// Las fórmulas de capacidad se recalculan en cada guardado para corregir versiones previas incompletas.
+		if (tipoNormalizado == FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD) {
+			recalcularCapacidadPago(ajustes, datosEfectivos, solicitud.FSC_Moneda__c);
 		}
 		if (esInformePyme) {
 			recalcularInformePyme(ajustes, datosEfectivos, solicitud.FSC_Moneda__c);
@@ -340,7 +333,7 @@ public without sharing class FSC_RlaAccionesController {
 
 	@AuraEnabled(cacheable=true)
 	public static List<Map<String, String>> getAssignableUsers() {
-		validarPermisoAdministrador('Solo un administrador puede consultar usuarios para reasignar aprobaciones.');
+		validarPermisoSupervisorOAdministrador();
 		List<Map<String, String>> options = new List<Map<String, String>>();
 
 		for (User u : [
@@ -725,7 +718,7 @@ public without sharing class FSC_RlaAccionesController {
 
 	@AuraEnabled
 	public static void reasignarProcesoActual(Id residentialLoanApplicationId, Id newActorId) {
-		validarPermisoAdministrador('Solo un administrador puede reasignar procesos de aprobación.');
+		validarPermisoSupervisorOAdministrador();
 		if (residentialLoanApplicationId == null) {
 			throw new AuraHandledException('Solicitud requerida.');
 		}
@@ -734,8 +727,31 @@ public without sharing class FSC_RlaAccionesController {
 		}
 
 		List<ProcessInstanceWorkitem> workItems = getActiveWorkItems(residentialLoanApplicationId);
+		// El permiso de supervisor solo habilita estas revisiones de crédito.
+		if (!testBypassPermissions && !FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR)) {
+			ResidentialLoanApplication solicitud = [
+				SELECT FSC_Subestado__c
+				FROM ResidentialLoanApplication
+				WHERE Id = :residentialLoanApplicationId
+				LIMIT 1
+			];
+			if (solicitud.FSC_Subestado__c != 'Análisis de crédito') {
+				throw new AuraHandledException('El supervisor solo puede reasignar aprobaciones en Análisis de crédito.');
+			}
+			for (ProcessInstanceWorkitem workItem : workItems) {
+				if (!PROCESOS_REASIGNACION_SUPERVISOR.contains(workItem.ProcessInstance.ProcessDefinition.DeveloperName)) {
+					throw new AuraHandledException('El supervisor solo puede reasignar las revisiones de Analista, Supervisor o Comité.');
+				}
+			}
+		}
 		if (workItems.isEmpty()) {
 			System.debug('No hay proceso de aprobación activo.');
+		}
+
+		// Salesforce exige permisos de administrador para cambiar el aprobador de otro usuario.
+		if (!workItems.isEmpty() && !testBypassPermissions && !FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR)) {
+			FSC_RlaApprovalAdminClient.reassignApproval(residentialLoanApplicationId, newActorId);
+			return;
 		}
 
 		for (ProcessInstanceWorkitem wi : workItems) {
@@ -1584,7 +1600,7 @@ public without sharing class FSC_RlaAccionesController {
 			throw new AuraHandledException('Solicitud requerida.');
 		}
 
-		validarPermisoOficialOAdministrador();
+		validarOficialCreadorOAdministrador(residentialLoanApplicationId);
 		String comentarioAuditoria = construirComentarioDecisionCliente('Cliente acepta condiciones del comité.');
 
 		// El recall de la aprobación del comité requiere admin; el Oficial lo ejecuta vía Named Credential.
@@ -1648,7 +1664,7 @@ public without sharing class FSC_RlaAccionesController {
 			throw new AuraHandledException('Solicitud requerida.');
 		}
 
-		validarPermisoOficialOAdministrador();
+		validarOficialCreadorOAdministrador(residentialLoanApplicationId);
 		String comentarioAuditoria = construirComentarioDecisionCliente('Cliente no acepta condiciones del comité.');
 
 		if (shouldUsePrivilegedSupervisorFallback(residentialLoanApplicationId)) {
@@ -2090,9 +2106,28 @@ public without sharing class FSC_RlaAccionesController {
 		return numerador == null || denominador == null || denominador == 0 ? null : numerador / denominador * 100;
 	}
 
-	private static void recalcularCapacidadPago(Map<String, Object> ajustes, Map<String, Object> datosEfectivos) {
+	private static void recalcularCapacidadPago(Map<String, Object> ajustes, Map<String, Object> datosEfectivos, String moneda) {
+		Decimal activos = obtenerDecimalEnRuta(datosEfectivos, 'totalActivos');
+		Decimal pasivos = obtenerDecimalEnRuta(datosEfectivos, 'totalPasivos');
+		guardarValorCalculadoDocumento(
+			ajustes,
+			datosEfectivos,
+			'patrimonio',
+			activos == null || pasivos == null ? null : activos - pasivos,
+			FORMATO_DINERO,
+			moneda
+		);
 		for (String rutaMoneda : new List<String>{ 'montosPesos', 'montosDolares' }) {
 			String formato = rutaMoneda == 'montosDolares' ? FORMATO_DINERO_USD : FORMATO_DINERO_DOP;
+			Decimal deudaTarjetas = obtenerDecimalEnRuta(datosEfectivos, rutaMoneda + '.deudaTarjetas');
+			guardarMontoCalculado(
+				ajustes,
+				datosEfectivos,
+				rutaMoneda,
+				'cuotaTarjetas',
+				deudaTarjetas == null ? null : deudaTarjetas * PORCENTAJE_PAGO_MINIMO_TARJETA,
+				formato
+			);
 			guardarMontoCalculado(
 				ajustes,
 				datosEfectivos,
@@ -2409,7 +2444,7 @@ public without sharing class FSC_RlaAccionesController {
 
 	private static List<ProcessInstanceWorkitem> getActiveWorkItems(Id residentialLoanApplicationId) {
 		return [
-			SELECT Id, ActorId, OriginalActorId, ProcessInstanceId
+			SELECT Id, ActorId, OriginalActorId, ProcessInstanceId, ProcessInstance.ProcessDefinition.DeveloperName
 			FROM ProcessInstanceWorkitem
 			WHERE ProcessInstance.TargetObjectId = :residentialLoanApplicationId
 			ORDER BY CreatedDate DESC
@@ -2641,12 +2676,22 @@ public without sharing class FSC_RlaAccionesController {
 		}
 	}
 
-	private static void validarPermisoOficialOAdministrador() {
-		if (testBypassPermissions)
+	private static void validarOficialCreadorOAdministrador(Id residentialLoanApplicationId) {
+		if (testBypassPermissions || FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR)) {
 			return;
-		if (!FeatureManagement.checkPermission(PERMISO_OFICIAL_NEGOCIO) && !FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR)) {
-			throw new AuraHandledException('Solo un Oficial de Negocio o un administrador puede registrar la decisión del cliente.');
 		}
+
+		// La decisión del cliente corresponde al oficial que creó la solicitud.
+		ResidentialLoanApplication solicitud = [
+			SELECT CreatedById, CreatedBy.Name
+			FROM ResidentialLoanApplication
+			WHERE Id = :residentialLoanApplicationId
+			LIMIT 1
+		];
+		if (FeatureManagement.checkPermission(PERMISO_OFICIAL_NEGOCIO) && solicitud.CreatedById == UserInfo.getUserId()) {
+			return;
+		}
+		throw new AuraHandledException('Solo el oficial de negocio ' + solicitud.CreatedBy.Name + ' o un administrador puede realizar esta acción');
 	}
 
 	private static void validarPermisoBancaSeguroOAdministrador() {

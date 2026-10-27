@@ -38,7 +38,6 @@ public inherited sharing class FSC_ConsultaDocumentosAnalisisCredito {
 				FSC_TasaFijaPorMeses__c,
 				FSC_Alquiler_Personales__c,
 				FSC_Monto_de_los_Ingresos__c,
-				FSC_Cuotas__c,
 				FSC_Clasificacion_de_Riesgo__c,
 				FSC_XCore_Buro__c,
 				FSC_MoraTC30Dias__c,
@@ -301,11 +300,7 @@ public inherited sharing class FSC_ConsultaDocumentosAnalisisCredito {
 		}
 
 		return [
-			SELECT
-				Id,
-				FSC_Monto_Solicitado__c,
-				FSC_Requiere_Contrato_Pagare_Notarial__c,
-				FSC_Tiempo_Tasa_Fija__c
+			SELECT Id, FSC_Monto_Solicitado__c, FSC_Requiere_Contrato_Pagare_Notarial__c, FSC_Tiempo_Tasa_Fija__c
 			FROM FSC_Facilidades_De_Credito__c
 			WHERE FSC_Residential_Loan_Application__c = :solicitudId
 			WITH USER_MODE
@@ -337,7 +332,7 @@ public inherited sharing class FSC_ConsultaDocumentosAnalisisCredito {
 		List<FSC_SolicitudDeCreditoYChecklistDeDocs__c> documentos = [
 			SELECT Id, FSC_Documento__r.Name, FSC_Documento__r.FSC_NombreDelDocumento__c
 			FROM FSC_SolicitudDeCreditoYChecklistDeDocs__c
-			WHERE FSC_SolicitudDeCredito__c = :solicitudId AND FSC_NoAplica__c = false
+			WHERE FSC_SolicitudDeCredito__c = :solicitudId AND FSC_NoAplica__c = FALSE
 			WITH USER_MODE
 			ORDER BY FSC_Documento__r.FSC_NroDeDocumento__c
 		];
@@ -369,10 +364,7 @@ public inherited sharing class FSC_ConsultaDocumentosAnalisisCredito {
 				continue;
 			}
 			for (String tituloArchivo : titulosArchivos) {
-				if (
-					(esEvidenciaIngresos(nombre) || esEvidenciaIngresos(tituloArchivo)) &&
-					nombresAgregados.add(tituloArchivo)
-				) {
+				if ((esEvidenciaIngresos(nombre) || esEvidenciaIngresos(tituloArchivo)) && nombresAgregados.add(tituloArchivo)) {
 					resultado.add(tituloArchivo.trim());
 				}
 			}
@@ -418,14 +410,7 @@ public inherited sharing class FSC_ConsultaDocumentosAnalisisCredito {
 	private static String normalizar(String valor) {
 		return String.isBlank(valor)
 			? ''
-			: valor
-				.toLowerCase()
-				.replace('á', 'a')
-				.replace('é', 'e')
-				.replace('í', 'i')
-				.replace('ó', 'o')
-				.replace('ú', 'u')
-				.replace('ü', 'u');
+			: valor.toLowerCase().replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u').replace('ü', 'u');
 	}
 
 	public static List<FSC_Excepcion__c> seleccionarExcepciones(Id solicitudId) {

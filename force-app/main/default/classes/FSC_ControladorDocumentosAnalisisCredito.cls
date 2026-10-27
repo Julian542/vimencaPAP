@@ -36,11 +36,14 @@ public with sharing class FSC_ControladorDocumentosAnalisisCredito {
 		cargarDatos(solicitudValidaId);
 		String tipoDocumento = paginaActual.getParameters().get('tipoDocumento');
 		if (String.isBlank(tipoDocumento)) {
-			tipoDocumento = paginaActual.getUrl().contains('CapacidadPago')
+			tipoDocumento = paginaActual.getUrl().toLowerCase().contains('capacidadpago')
 				? FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD
 				: FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_INFORME;
 		}
 		aplicarEdicionesGuardadas(solicitudValidaId, tipoDocumento);
+		if (tipoDocumento == FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD) {
+			recalcularPatrimonioCapacidad();
+		}
 	}
 
 	private FSC_ControladorDocumentosAnalisisCredito(Boolean inicializarSolo) {
@@ -52,6 +55,9 @@ public with sharing class FSC_ControladorDocumentosAnalisisCredito {
 		FSC_ControladorDocumentosAnalisisCredito controlador = new FSC_ControladorDocumentosAnalisisCredito(true);
 		controlador.cargarDatos(solicitudId);
 		controlador.aplicarEdicionesGuardadas(solicitudId, tipoDocumento);
+		if (tipoDocumento == FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD) {
+			controlador.recalcularPatrimonioCapacidad();
+		}
 		return (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(controlador.datos));
 	}
 
@@ -69,14 +75,56 @@ public with sharing class FSC_ControladorDocumentosAnalisisCredito {
 			Map<String, Object> base = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(datos));
 			Map<String, Object> ajustes = (Map<String, Object>) JSON.deserializeUntyped(ajustesJson);
 			fusionarMapas(base, ajustes);
-			datos = (FSC_DatosDocumentosAnalisisCredito) JSON.deserialize(
-				JSON.serialize(base),
-				FSC_DatosDocumentosAnalisisCredito.class
-			);
+			datos = (FSC_DatosDocumentosAnalisisCredito) JSON.deserialize(JSON.serialize(base), FSC_DatosDocumentosAnalisisCredito.class);
+			if (tipoDocumento == FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD) {
+				recalcularIndicadoresCapacidad();
+			}
 		} catch (Exception error) {
 			// Un ajuste histórico inválido nunca debe impedir la generación del PDF base.
 			System.debug(LoggingLevel.WARN, 'No se pudieron aplicar los ajustes del documento: ' + error.getMessage());
 		}
+	}
+
+	private void recalcularPatrimonioCapacidad() {
+		// Usa los valores visibles finales, incluidos los ajustes del documento.
+		Decimal activos = leerMontoDocumento(datos.totalActivos);
+		Decimal pasivos = leerMontoDocumento(datos.totalPasivos);
+		datos.patrimonio = formatearDineroSolicitud(activos == null || pasivos == null ? null : activos - pasivos);
+	}
+
+	private void recalcularIndicadoresCapacidad() {
+		// Los porcentajes usan los totales finales, incluidos los ajustes del documento.
+		Decimal ingresos = leerMontoDocumento(datos.totalesPesos.get('totalIngresos'));
+		Decimal pagosCredito = leerMontoDocumento(datos.totalesPesos.get('totalPagosCreditos'));
+		Decimal totalPagos = leerMontoDocumento(datos.totalesPesos.get('totalPagos'));
+		datos.cargaFinanciera = formatearRelacion(pagosCredito, ingresos);
+		datos.resultadoCargaFinanciera = evaluarRelacion(
+			pagosCredito, ingresos, LIMITE_CARGA_FINANCIERA, 'CAPACIDAD DE PAGO OK', 'NO DEBE EXCEDER DEL 35%'
+		);
+		datos.capacidadIncluyendoVivienda = formatearRelacion(totalPagos, ingresos);
+		datos.resultadoCapacidadVivienda = evaluarRelacion(
+			totalPagos, ingresos, LIMITE_CAPACIDAD_VIVIENDA, 'CAPACIDAD DE PAGO OK', 'CAPACIDAD DE PAGO ESTRECHA'
+		);
+	}
+
+	private static Decimal leerMontoDocumento(String valor) {
+		if (String.isBlank(valor)) {
+			return null;
+		}
+		String numero = valor.replaceAll('[^0-9,\\.\\-]', '');
+		// Los PDF pueden guardar importes con formato dominicano o español.
+		Integer coma = numero.lastIndexOf(',');
+		Integer punto = numero.lastIndexOf('.');
+		if (coma >= 0 && punto >= 0 && coma > punto) {
+			numero = numero.replace('.', '').replace(',', '.');
+		} else if (coma >= 0 && punto < 0) {
+			numero = numero.length() - coma - 1 == 3 ? numero.replace(',', '') : numero.replace(',', '.');
+		} else if (punto >= 0 && coma < 0 && numero.length() - punto - 1 == 3) {
+			numero = numero.replace('.', '');
+		} else {
+			numero = numero.replace(',', '');
+		}
+		return Decimal.valueOf(numero);
 	}
 
 	private static String obtenerAjustesVersionActual(Id solicitudId, String tipoDocumento) {
@@ -103,7 +151,7 @@ public with sharing class FSC_ControladorDocumentosAnalisisCredito {
 		List<ContentVersion> versiones = [
 			SELECT FSC_DatosEditadosAnalisis__c
 			FROM ContentVersion
-			WHERE ContentDocumentId = :contentDocumentId AND IsLatest = true
+			WHERE ContentDocumentId = :contentDocumentId AND IsLatest = TRUE
 			LIMIT 1
 		];
 		return versiones.isEmpty() ? '' : versiones[0].FSC_DatosEditadosAnalisis__c;
@@ -140,9 +188,7 @@ public with sharing class FSC_ControladorDocumentosAnalisisCredito {
 		List<FSC_Facilidad_Otra_Institucion__c> facilidadesExternas = FSC_ConsultaDocumentosAnalisisCredito.seleccionarFacilidadesExternas(
 			participantesEconomicosIds
 		);
-		List<FSC_Facilidades_De_Credito__c> facilidadesCredito = FSC_ConsultaDocumentosAnalisisCredito.seleccionarFacilidadesCredito(
-			solicitudId
-		);
+		List<FSC_Facilidades_De_Credito__c> facilidadesCredito = FSC_ConsultaDocumentosAnalisisCredito.seleccionarFacilidadesCredito(solicitudId);
 		List<LoanApplicationAsset> activos = FSC_ConsultaDocumentosAnalisisCredito.seleccionarActivos(solicitudId);
 		List<FSC_Garantia__c> garantias = FSC_ConsultaDocumentosAnalisisCredito.seleccionarGarantias(solicitudId);
 		List<FSC_Excepcion__c> excepciones = FSC_ConsultaDocumentosAnalisisCredito.seleccionarExcepciones(solicitudId);
@@ -170,15 +216,10 @@ public with sharing class FSC_ControladorDocumentosAnalisisCredito {
 		Decimal totalPasivos = primerDecimal(
 			new List<Decimal>{ resumenDeudas.totalBalance, cuenta?.VFS_TotalPasivo__c, solicitud.FSC_Total_Pasivos__c }
 		);
-		Decimal pagosExistentesInforme = primerDecimal(new List<Decimal>{ resumenDeudas.totalCuotas, solicitud.FSC_Cuotas__c });
-		Decimal pagosCreditoInforme = calcularPagosCreditos(
-			pagosExistentesInforme,
-			cuotaNueva,
-			resumenDeudas.totalCuotasCancelar
-		);
+		// FSC_Cuotas__c recibe el plazo en meses del formulario de consumo, no un importe mensual.
+		Decimal pagosCreditoInforme = calcularPagosCreditos(resumenDeudas.totalCuotas, cuotaNueva, resumenDeudas.totalCuotasCancelar);
 		aplicarFacilidadesBuro(resumenDeudas, solicitud, datos.esMonedaDolar);
-		Decimal pagosExistentes = primerDecimal(new List<Decimal>{ resumenDeudas.totalCuotas, solicitud.FSC_Cuotas__c });
-		Decimal pagosCredito = calcularPagosCreditos(pagosExistentes, cuotaNueva, resumenDeudas.totalCuotasCancelar);
+		Decimal pagosCredito = calcularPagosCreditos(resumenDeudas.totalCuotas, cuotaNueva, resumenDeudas.totalCuotasCancelar);
 		Decimal pagoVivienda = solicitud.FSC_Alquiler_Personales__c;
 		Decimal totalPagos = sumarValores(new List<Decimal>{ pagosCredito, pagoVivienda });
 		Decimal patrimonio = restar(totalActivos, totalPasivos);
@@ -410,7 +451,9 @@ public with sharing class FSC_ControladorDocumentosAnalisisCredito {
 			'CAPACIDAD DE PAGO ESTRECHA'
 		);
 		Boolean mostrarActivosPasivos =
-			datos.esMonedaPesos && solicitud.FSC_Monto__c != null && solicitud.FSC_Monto__c > MONTO_MINIMO_ACTIVOS_PASIVOS;
+			datos.esMonedaPesos &&
+			solicitud.FSC_Monto__c != null &&
+			solicitud.FSC_Monto__c > MONTO_MINIMO_ACTIVOS_PASIVOS;
 		datos.totalActivos = mostrarActivosPasivos ? formatearDineroSolicitud(totalActivos) : '';
 		datos.totalPasivos = mostrarActivosPasivos ? formatearDineroSolicitud(totalPasivos) : '';
 		datos.patrimonio = formatearDineroSolicitud(patrimonio);
@@ -677,10 +720,7 @@ public with sharing class FSC_ControladorDocumentosAnalisisCredito {
 		return total;
 	}
 
-	private static Decimal calcularExposicionTotal(
-		Decimal montoSolicitado,
-		List<FSC_Facilidades_De_Credito__c> facilidadesCredito
-	) {
+	private static Decimal calcularExposicionTotal(Decimal montoSolicitado, List<FSC_Facilidades_De_Credito__c> facilidadesCredito) {
 		if (facilidadesCredito == null || facilidadesCredito.isEmpty()) {
 			return null;
 		}
@@ -779,36 +819,26 @@ public with sharing class FSC_ControladorDocumentosAnalisisCredito {
 
 		if (datos.esMonedaDolar) {
 			datos.montosDolares.put(clave, formatearDineroConSimbolo(valor, 'US$'));
-			datos.totalesPesos.put(
-				clave,
-				tasaCambioActual == null || valor == null ? '' : formatearDinero(valor * tasaCambioActual)
-			);
+			datos.totalesPesos.put(clave, tasaCambioActual == null || valor == null ? '' : formatearDinero(valor * tasaCambioActual));
 		} else if (datos.esMonedaPesos) {
 			datos.montosPesos.put(clave, formatearDinero(valor));
 			datos.totalesPesos.put(clave, formatearDinero(valor));
 		}
 	}
 
-	private static void aplicarFacilidadesBuro(
-		ResumenDeudas resumen,
-		ResidentialLoanApplication solicitud,
-		Boolean usarDolares
-	) {
+	private static void aplicarFacilidadesBuro(ResumenDeudas resumen, ResidentialLoanApplication solicitud, Boolean usarDolares) {
 		Decimal deudaTarjetas = usarDolares == true ? solicitud.FSC_DeudaTCBuroUSD__c : solicitud.FSC_DeudaTCBuroDOP__c;
-		Decimal deudaPrestamos = usarDolares == true
-			? solicitud.FSC_DeudaPrestamoBuroUSD__c
-			: solicitud.FSC_DeudaPrestamoBuroDOP__c;
+		Decimal deudaPrestamos = usarDolares == true ? solicitud.FSC_DeudaPrestamoBuroUSD__c : solicitud.FSC_DeudaPrestamoBuroDOP__c;
 		Decimal cuotaTarjetas = usarDolares == true ? solicitud.FSC_CuotaTCBuroUSD__c : solicitud.FSC_CuotaTCBuroDOP__c;
-		Decimal cuotaPrestamos = usarDolares == true
-			? solicitud.FSC_CuotaPrestamoBuroUSD__c
-			: solicitud.FSC_CuotaPrestamoBuroDOP__c;
+		Decimal cuotaPrestamos = usarDolares == true ? solicitud.FSC_CuotaPrestamoBuroUSD__c : solicitud.FSC_CuotaPrestamoBuroDOP__c;
 		if (deudaTarjetas == null && deudaPrestamos == null && cuotaTarjetas == null && cuotaPrestamos == null) {
 			return;
 		}
 
 		resumen.balanceTarjetas = deudaTarjetas ?? 0;
 		resumen.balancePrestamos = deudaPrestamos ?? 0;
-		resumen.cuotasTarjetas = cuotaTarjetas ?? 0;
+		// El pago mínimo de tarjetas siempre es el 8% del monto adeudado en tarjetas.
+		resumen.cuotasTarjetas = deudaTarjetas != null ? deudaTarjetas * PORCENTAJE_PAGO_MINIMO_TARJETA : (cuotaTarjetas ?? 0);
 		resumen.cuotasPrestamos = cuotaPrestamos ?? 0;
 		resumen.totalBalance = resumen.balanceTarjetas + resumen.balancePrestamos;
 		resumen.totalCuotas = resumen.cuotasTarjetas + resumen.cuotasPrestamos;

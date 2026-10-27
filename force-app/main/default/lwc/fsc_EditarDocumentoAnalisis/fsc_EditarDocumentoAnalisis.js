@@ -17,12 +17,6 @@ const DATE = 'date';
 // Los resultados calculados se muestran, pero no se editan.
 const INFORME_FORMULA_FIELD_KEYS = new Set([
 	'edad',
-	'antiguedadLaboral',
-	'ingresosMensualesPromedio',
-	'cuotasFinancieras',
-	'relacionCuotaIngresos',
-	'endeudamientoTotal',
-	'solvenciaEstimada',
 	'exposicionTotal',
 	'prestamoSobreTasacion',
 	'prestamoSobrePrecioVenta'
@@ -31,7 +25,7 @@ const CAPACITY_CALCULATED_ROW_KEYS = new Set(['totalIngresos', 'totalAdeudado', 
 const CAPACITY_FORMULA_FIELD_KEYS = new Set([
 	'prestamoSobreTasacion',
 	'montosPesos.cuotaTarjetas',
-	'montosPesos.deudaTarjetasCancelar',
+	'montosDolares.cuotaTarjetas',
 	'cargaFinanciera',
 	'resultadoCargaFinanciera',
 	'capacidadIncluyendoVivienda',
@@ -79,6 +73,7 @@ const CAPACITY_INCOME_DETAIL_KEYS = [
 const CAPACITY_DEBT_DETAIL_KEYS = ['deudaTarjetas', 'deudaPrestamos'];
 const CAPACITY_PAYMENT_DETAIL_KEYS = ['cuotaTarjetas', 'cuotaPrestamos', 'cuotaNuevoPrestamo'];
 const CAPACITY_PAYMENT_CANCEL_KEYS = ['cuotasCancelar', 'deudaTarjetasCancelar'];
+const CARD_MINIMUM_PAYMENT_RATE = 0.08;
 const CAPACITY_ALL_KEYS = [
 	...CAPACITY_INCOME_DETAIL_KEYS,
 	'totalIngresos',
@@ -622,6 +617,10 @@ export default class FscEditarDocumentoAnalisis extends LightningElement {
 					this.prepareField({ ...config, readOnly: config.readOnly ?? section.readOnly }, data)
 				)
 			}));
+			if (!this.esPyme && this.tipoDocumento === CAPACIDAD) {
+				// Muestra las fórmulas al día aunque la versión guardada del PDF las tenga incompletas.
+				this.recalculateCapacityFields();
+			}
 		} catch (error) {
 			this.errorMessage = this.getErrorMessage(error, 'No fue posible cargar la información del documento.');
 		} finally {
@@ -709,12 +708,19 @@ export default class FscEditarDocumentoAnalisis extends LightningElement {
 	}
 
 	affectsCapacityCalculations(key) {
-		return key === 'tasaCambio' || key.startsWith('montosPesos.') || key.startsWith('montosDolares.');
+		return ['tasaCambio', 'totalActivos', 'totalPasivos'].includes(key) || key.startsWith('montosPesos.') || key.startsWith('montosDolares.');
 	}
 
 	recalculateCapacityFields() {
-		const calculatedValues = {};
+		const assets = this.numericFieldValue('totalActivos');
+		const liabilities = this.numericFieldValue('totalPasivos');
+		const calculatedValues = {
+			patrimonio: assets === null || liabilities === null ? '' : this.roundMoney(assets - liabilities)
+		};
 		['montosPesos', 'montosDolares'].forEach((currencyPath) => {
+			const cardDebt = this.numericFieldValue(`${currencyPath}.deudaTarjetas`);
+			calculatedValues[`${currencyPath}.cuotaTarjetas`] =
+				cardDebt === null ? '' : this.roundMoney(cardDebt * CARD_MINIMUM_PAYMENT_RATE);
 			calculatedValues[`${currencyPath}.totalIngresos`] = this.sumCapacityValues(
 				currencyPath,
 				CAPACITY_INCOME_DETAIL_KEYS
@@ -727,7 +733,8 @@ export default class FscEditarDocumentoAnalisis extends LightningElement {
 				currencyPath,
 				CAPACITY_PAYMENT_DETAIL_KEYS,
 				CAPACITY_PAYMENT_CANCEL_KEYS,
-				true
+				true,
+				calculatedValues
 			);
 			calculatedValues[`${currencyPath}.totalPagos`] = this.sumCapacityValues(
 				currencyPath,
@@ -749,12 +756,27 @@ export default class FscEditarDocumentoAnalisis extends LightningElement {
 			calculatedValues[`totalesPesos.${concept}`] = total;
 		});
 
+		// Los indicadores deben reflejar los importes que se están editando.
+		const income = this.numericFieldValue('totalesPesos.totalIngresos', calculatedValues);
+		const creditPayments = this.numericFieldValue('totalesPesos.totalPagosCreditos', calculatedValues);
+		const totalPayments = this.numericFieldValue('totalesPesos.totalPagos', calculatedValues);
+		calculatedValues.cargaFinanciera = this.calculatePercentage(creditPayments, income);
+		calculatedValues.resultadoCargaFinanciera =
+			calculatedValues.cargaFinanciera === ''
+				? ''
+				: creditPayments / income <= 0.35 ? 'CAPACIDAD DE PAGO OK' : 'NO DEBE EXCEDER DEL 35%';
+		calculatedValues.capacidadIncluyendoVivienda = this.calculatePercentage(totalPayments, income);
+		calculatedValues.resultadoCapacidadVivienda =
+			calculatedValues.capacidadIncluyendoVivienda === ''
+				? ''
+				: totalPayments / income <= 0.4 ? 'CAPACIDAD DE PAGO OK' : 'CAPACIDAD DE PAGO ESTRECHA';
+
 		this.sections = this.sections.map((section) => ({
 			...section,
 			fields: section.fields.map((item) =>
-				Object.prototype.hasOwnProperty.call(calculatedValues, item.key)
+				(Object.prototype.hasOwnProperty.call(calculatedValues, item.key)
 					? { ...item, value: calculatedValues[item.key] }
-					: item
+					: item)
 			)
 		}));
 	}
@@ -811,9 +833,9 @@ export default class FscEditarDocumentoAnalisis extends LightningElement {
 		this.sections = this.sections.map((section) => ({
 			...section,
 			fields: section.fields.map((item) =>
-				Object.prototype.hasOwnProperty.call(calculatedValues, item.key)
+				(Object.prototype.hasOwnProperty.call(calculatedValues, item.key)
 					? { ...item, value: calculatedValues[item.key] }
-					: item
+					: item)
 			)
 		}));
 	}

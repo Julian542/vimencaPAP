@@ -202,20 +202,11 @@ Version Cloning: 9.</description>
     ISPICKVAL({!$Record.FSC_Resultado_PEP_Listas__c}, &apos;Coincidencia&apos;), 
     {!$Record.RecordType.DeveloperName} != &apos;FSC_Solicitud_Credito_PYME&apos;,
     OR(
-        AND(
-            OR(
-                ISCHANGED({!$Record.FSC_Subestado__c}),
-                ISCHANGED({!$Record.FSC_Resultado_PEP_Listas__c})
-            ),
-            ISPICKVAL({!$Record.Status}, &apos;En proceso&apos;), 
-            ISPICKVAL({!$Record.FSC_Subestado__c}, &apos;En validación PEP/Listas&apos;)
-        ), 
-        AND(
-            ISNEW(), 
-            ISPICKVAL({!$Record.Status}, &apos;Borrador&apos;), 
-            ISPICKVAL({!$Record.FSC_Subestado__c}, &apos;Completando información&apos;)
-        )
-    )
+        ISCHANGED({!$Record.FSC_Subestado__c}),
+        ISCHANGED({!$Record.FSC_Resultado_PEP_Listas__c})
+    ),
+    ISPICKVAL({!$Record.Status}, &apos;En proceso&apos;),
+    ISPICKVAL({!$Record.FSC_Subestado__c}, &apos;En validación PEP/Listas&apos;)
 )</filterFormula>
         <object>ResidentialLoanApplication</object>
         <recordTriggerType>CreateAndUpdate</recordTriggerType>

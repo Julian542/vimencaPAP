@@ -3,6 +3,22 @@
 Org revisada: VimencaMergeQA (sandbox, 00DVC000009qkJJ2AY).
 Fecha: 26/10/2026.
 
+## Estado del despliegue
+
+Cambio desplegado y activado en VimencaMergeQA el 26/10/2026.
+
+- Retrieve inmediatamente anterior: `09SVC00000fP03e2AC`. La copia recuperada coincidía con la revisión previa y con el archivo local.
+- Validación previa: `0AfVC00000OxLll0AF`, `checkOnly=true`, `Succeeded`, dos Flows y cero errores.
+- Despliegue: `0AfVC00000OxJGw0AN`, `checkOnly=false`, `Succeeded`, dos Flows y cero errores.
+- `FSC_Aprobacion_PLA`: versión activa `301VC00003fUfpTYAS`.
+- `FSC_Aprobacion_PLA_Creacion`: versión activa `301VC00003fUfpUYAS`.
+- Manifiesto: `manifest/packageFixBloqueoPLACreacion.xml`.
+- Respaldo del retrieve y resultados del despliegue: `/var/folders/rq/g0kvc9516mx57wkys9rhty940000gn/T/vimenca-pla-deploy-99soqe2i`.
+
+El cliente CLI mostró un error local al presentar el estado Finalizing. Se consultó el trabajo existente, sin repetir el despliegue, y Metadata API confirmó Succeeded. También se confirmó mediante Tooling API que ambos Flows quedaron activos.
+
+Pendiente: reproducción funcional con el usuario/PS Oficial de Negocio. No se crearon solicitudes de negocio para probar.
+
 ## Evidencia recuperada
 
 Retrieve 09SVC00000fP6Vd2AK, finalizado correctamente. Copia aislada en:
@@ -42,9 +58,9 @@ La alternativa de agregar una ruta asíncrona directamente al Flow actual con su
 
 ## Prueba funcional pendiente
 
-Antes de desplegar el arreglo, activarlo en el entorno de prueba y verificar con el usuario/PS Oficial de Negocio:
+Con el arreglo ya desplegado y activo en MergeQA, verificar con el usuario/PS Oficial de Negocio:
 - Coincidencia: guarda deudor y codeudores, muestra confirmación del OmniScript y crea una sola aprobación PLA después del guardado.
 - Sin coincidencia: continúa por Datos Generales y finaliza igual que antes.
 - Solicitud existente en En validación PEP/Listas: conserva su envío al proceso general.
 
-La validación de metadata no sustituye esa reproducción. No se desplegó ni activó ningún cambio.
+La validación de metadata y la verificación de activación no sustituyen esa reproducción funcional.

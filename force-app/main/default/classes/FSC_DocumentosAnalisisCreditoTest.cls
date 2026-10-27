@@ -3,15 +3,15 @@
  */
 @IsTest
 private with sharing class FSC_DocumentosAnalisisCreditoTest {
-    static void asignarPermisosAdministrador() {
-        System.runAs(new User(Id = UserInfo.getUserId())) {
-            PermissionSet permiso = [SELECT Id FROM PermissionSet WHERE Name = 'FSC_PS_Administrador' LIMIT 1];
-            // El usuario que ejecuta los tests puede tener ya el permission set asignado.
-            if ([SELECT COUNT() FROM PermissionSetAssignment WHERE AssigneeId = :UserInfo.getUserId() AND PermissionSetId = :permiso.Id] == 0) {
-                insert new PermissionSetAssignment(AssigneeId = UserInfo.getUserId(), PermissionSetId = permiso.Id);
-            }
-        }
-    }
+	static void asignarPermisosAdministrador() {
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			PermissionSet permiso = [SELECT Id FROM PermissionSet WHERE Name = 'FSC_PS_Administrador' LIMIT 1];
+			// El usuario que ejecuta los tests puede tener ya el permission set asignado.
+			if ([SELECT COUNT() FROM PermissionSetAssignment WHERE AssigneeId = :UserInfo.getUserId() AND PermissionSetId = :permiso.Id] == 0) {
+				insert new PermissionSetAssignment(AssigneeId = UserInfo.getUserId(), PermissionSetId = permiso.Id);
+			}
+		}
+	}
 
 	private static final String TIPO_CONSUMO = 'FSC_Solicitud_Credito_Consumo';
 	private static final String TIPO_VEHICULO = 'FSC_Solicitud_Credito_Vehiculo';
@@ -27,6 +27,10 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 	static void prepararDatos() {
 		asignarPermisosAdministrador();
 		FSC_FabricaDatosDocumentosAnalisisTest.crearDatosBase();
+		Account account = FSC_FabricaDatosDocumentosAnalisisTest.obtenerCuentaBase();
+		account.ACC_Nacionalidad__c = 'REPUBLICA DOMINICANA';
+		account.ACC_Posee_Otra_Nacionalidad__c = false;
+		update account;
 	}
 
 	@IsTest
@@ -56,8 +60,6 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 
 	@IsTest
 	static void shouldChooseExpectedReport_WhenEligibleCreditTypesAreProcessed() {
-		// Estos datos no prueban la política de crédito; sus límites se prueban en FSC_CreditPolicyGuardTest.
-		FSC_CreditPolicyGuard.bypassInTests = true;
 		Account cuenta = FSC_FabricaDatosDocumentosAnalisisTest.obtenerCuentaBase();
 		ResidentialLoanApplication consumoLimite = FSC_FabricaDatosDocumentosAnalisisTest.crearSolicitud(
 			cuenta.Id,
@@ -75,14 +77,7 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 			1500000,
 			true
 		);
-		ResidentialLoanApplication hipotecario = FSC_FabricaDatosDocumentosAnalisisTest.crearSolicitud(
-			cuenta.Id,
-			TIPO_HIPOTECARIO,
-			ESTADO_EN_PROCESO,
-			SUBESTADO_ANALISIS,
-			3000000,
-			true
-		);
+		ResidentialLoanApplication hipotecario = createMortgageForAnalysis(cuenta.Id, 3000000);
 
 		Test.startTest();
 		System.enqueueJob(new FSC_ColaGeneracionDocumentosAnalisis(new List<Id>{ consumoLimite.Id, vehiculo.Id, hipotecario.Id }));
@@ -225,17 +220,8 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 
 	@IsTest
 	static void shouldMapStructuredData_WhenMortgageHasRelatedRecords() {
-		// Estos datos no prueban la política de crédito; sus límites se prueban en FSC_CreditPolicyGuardTest.
-		FSC_CreditPolicyGuard.bypassInTests = true;
 		Account cuenta = FSC_FabricaDatosDocumentosAnalisisTest.obtenerCuentaBase();
-		ResidentialLoanApplication solicitud = FSC_FabricaDatosDocumentosAnalisisTest.crearSolicitud(
-			cuenta.Id,
-			TIPO_HIPOTECARIO,
-			ESTADO_EN_PROCESO,
-			SUBESTADO_ANALISIS,
-			2000000,
-			true
-		);
+		ResidentialLoanApplication solicitud = createMortgageForAnalysis(cuenta.Id, 2000000);
 		LoanApplicant deudor = FSC_FabricaDatosDocumentosAnalisisTest.crearParticipante(solicitud.Id, 'Deudor', 'Ana Deudora', 100000, 0);
 		LoanApplicant codeudor = FSC_FabricaDatosDocumentosAnalisisTest.crearParticipante(solicitud.Id, 'Co-Deudor', 'Carlos Codeudor', 50000, 0);
 		LoanApplicant garante = FSC_FabricaDatosDocumentosAnalisisTest.crearParticipante(solicitud.Id, 'Garante', 'Gloria Garante', 900000, 0);
@@ -246,7 +232,6 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 		FSC_FabricaDatosDocumentosAnalisisTest.crearDeuda(solicitud.Id, 100000, 10000, false);
 		FSC_FabricaDatosDocumentosAnalisisTest.crearDeuda(solicitud.Id, 20000, 2000, true);
 		FSC_FabricaDatosDocumentosAnalisisTest.crearActivo(solicitud.Id, 700000);
-		FSC_FabricaDatosDocumentosAnalisisTest.crearGarantiaHipotecaria(solicitud.Id, 5000000, 4700000);
 		insert new List<FSC_Excepcion__c>{
 			FSC_ExcepcionTestDataFactory.buildExcepcion(solicitud.Id, 1, 'Aprobada', null),
 			FSC_ExcepcionTestDataFactory.buildExcepcion(solicitud.Id, 2, 'Pendiente', 'Presentar avalúo actualizado')
@@ -308,6 +293,72 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 	}
 
 	@IsTest
+	static void shouldExcludeInstallmentCount_WhenNoExistingDebts() {
+		Account account = FSC_FabricaDatosDocumentosAnalisisTest.obtenerCuentaBase();
+		ResidentialLoanApplication application = FSC_FabricaDatosDocumentosAnalisisTest.crearSolicitud(
+			account.Id,
+			TIPO_CONSUMO,
+			ESTADO_EN_PROCESO,
+			SUBESTADO_ANTERIOR,
+			900000,
+			false
+		);
+		application.FSC_Moneda__c = '1';
+		application.FSC_Cuotas__c = 60;
+		application.FSC_Monto_De_La_Cuota__c = 6492.02;
+		application.FSC_Alquiler_Personales__c = null;
+		insert application;
+		Test.setCurrentPage(Page.FSC_CapacidadPagoPDF);
+		ApexPages.currentPage().getParameters().put('id', application.Id);
+
+		Test.startTest();
+		FSC_DatosDocumentosAnalisisCredito data = new FSC_ControladorDocumentosAnalisisCredito().datos;
+		Test.stopTest();
+
+		String expectedPayment = formatearDinero(application.FSC_Monto_De_La_Cuota__c);
+		Assert.areEqual('', data.cuotaTarjetas, 'Sin deudas no debe existir un pago mínimo de tarjetas.');
+		Assert.areEqual('', data.cuotaPrestamos, 'El número de cuotas no debe convertirse en una cuota mensual existente.');
+		Assert.areEqual(expectedPayment, data.totalPagosCreditos, 'El total debe ser 6492.02, sin sumar los 60 meses del plazo.');
+		Assert.areEqual(expectedPayment, data.montosPesos.get('totalPagosCreditos'), 'La columna RD$ debe coincidir con las cuotas visibles.');
+		Assert.areEqual(expectedPayment, data.totalesPesos.get('totalPagosCreditos'), 'El total RD$ debe excluir el plazo.');
+		Assert.areEqual(expectedPayment, data.totalPagos, 'Sin vivienda, el total de pagos debe ser únicamente la cuota nueva.');
+		Assert.areEqual(expectedPayment, data.cuotasFinancieras, 'El informe de crédito también debe excluir el número de cuotas.');
+		Assert.areEqual(
+			formatearPorcentaje(application.FSC_Monto_De_La_Cuota__c / application.FSC_Monto_de_los_Ingresos__c),
+			data.relacionCuotaIngresos,
+			'La relación cuota/ingresos debe usar importes monetarios, sin incluir los meses.'
+		);
+	}
+
+	@IsTest
+	static void shouldKeepPaymentsEmpty_WhenOnlyInstallmentCountExists() {
+		Account account = FSC_FabricaDatosDocumentosAnalisisTest.obtenerCuentaBase();
+		ResidentialLoanApplication application = FSC_FabricaDatosDocumentosAnalisisTest.crearSolicitud(
+			account.Id,
+			TIPO_CONSUMO,
+			ESTADO_EN_PROCESO,
+			SUBESTADO_ANTERIOR,
+			900000,
+			false
+		);
+		application.FSC_Moneda__c = '1';
+		application.FSC_Cuotas__c = 60;
+		application.FSC_Monto_De_La_Cuota__c = null;
+		application.FSC_Alquiler_Personales__c = null;
+		insert application;
+		Test.setCurrentPage(Page.FSC_CapacidadPagoPDF);
+		ApexPages.currentPage().getParameters().put('id', application.Id);
+
+		Test.startTest();
+		FSC_DatosDocumentosAnalisisCredito data = new FSC_ControladorDocumentosAnalisisCredito().datos;
+		Test.stopTest();
+
+		Assert.areEqual('', data.totalPagosCreditos, 'Sin importes monetarios no debe usar el plazo como pago de crédito.');
+		Assert.areEqual('', data.totalPagos, 'Sin cuotas ni alquiler no debe inventar pagos mensuales.');
+		Assert.areEqual('', data.cuotasFinancieras, 'El informe tampoco debe interpretar el plazo como importe financiero.');
+	}
+
+	@IsTest
 	static void shouldKeepDefaultData_WhenPageIdIsInvalid() {
 		Test.setCurrentPage(Page.FSC_InformeCreditoAnalisisPDF);
 		ApexPages.currentPage().getParameters().put('id', 'identificador-invalido');
@@ -349,6 +400,60 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 	}
 
 	@IsTest
+	static void shouldReturnOnlyDistinctIncomeEvidence_WhenChecklistHasMixedFiles() {
+		Account account = FSC_FabricaDatosDocumentosAnalisisTest.obtenerCuentaBase();
+		ResidentialLoanApplication application = FSC_FabricaDatosDocumentosAnalisisTest.crearSolicitud(
+			account.Id,
+			TIPO_CONSUMO,
+			ESTADO_EN_PROCESO,
+			SUBESTADO_ANTERIOR,
+			900000,
+			true
+		);
+		FSC_ChecklistDocumentos__c document = new FSC_ChecklistDocumentos__c(
+			FSC_TipoDeSolicitudDeCredito__c = 'Solicitud de crédito consumo',
+			FSC_CategoriaDelDocumento__c = 'Documentos para análisis',
+			FSC_NroDeDocumento__c = 90,
+			FSC_NombreDelDocumento__c = 'Documento general'
+		);
+		insert document;
+		List<FSC_SolicitudDeCreditoYChecklistDeDocs__c> checklistItems = new List<FSC_SolicitudDeCreditoYChecklistDeDocs__c>();
+		for (Integer index = 0; index < 2; index++) {
+			checklistItems.add(
+				new FSC_SolicitudDeCreditoYChecklistDeDocs__c(
+					FSC_SolicitudDeCredito__c = application.Id,
+					FSC_Documento__c = document.Id,
+					FSC_NoAplica__c = false
+				)
+			);
+		}
+		insert checklistItems;
+		List<ContentVersion> files = new List<ContentVersion>();
+		for (String title : new List<String>{ 'Carta laboral prueba', 'Nómina prueba', 'Identificación prueba', 'Carta laboral prueba' }) {
+			files.add(
+				new ContentVersion(
+					Title = title,
+					PathOnClient = title + '.pdf',
+					VersionData = Blob.valueOf('PDF de prueba'),
+					FirstPublishLocationId = checklistItems[0].Id
+				)
+			);
+		}
+		insert files;
+
+		Test.startTest();
+		List<String> evidence = FSC_ConsultaDocumentosAnalisisCredito.seleccionarEvidenciasIngresos(application.Id);
+		Test.stopTest();
+
+		Assert.areEqual(2, evidence.size(), 'Debe excluir identificaciones y títulos duplicados.');
+		Assert.areEqual(
+			new Set<String>{ 'Carta laboral prueba', 'Nómina prueba' },
+			new Set<String>(evidence),
+			'Debe reconocer las evidencias de ingresos, incluyendo títulos con acentos.'
+		);
+	}
+
+	@IsTest
 	static void shouldDoNothing_WhenQueueReceivesNullIds() {
 		Integer archivosAntes = [SELECT COUNT() FROM ContentVersion];
 
@@ -387,7 +492,10 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 		capacidad = [SELECT Id, ContentDocumentId FROM ContentVersion WHERE Id = :capacidad.Id];
 		FSC_RlaAccionesController.testPermitirEdicionDocumentosAnalisis = true;
 		Map<String, Object> cambios = new Map<String, Object>{
-			'historialPago' => new Map<String, Object>{ 'value' => 'Historial corregido por el analista', 'format' => 'text' }
+			'historialPago' => new Map<String, Object>{ 'value' => 'Historial corregido por el analista', 'format' => 'text' },
+			'antiguedadLaboral' => new Map<String, Object>{ 'value' => '5 años, 2 meses', 'format' => 'text' },
+			'ingresosMensualesPromedio' => new Map<String, Object>{ 'value' => '150000', 'format' => 'money' },
+			'relacionCuotaIngresos' => new Map<String, Object>{ 'value' => '25', 'format' => 'percent' }
 		};
 
 		Test.startTest();
@@ -403,12 +511,12 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 		ContentVersion informeActual = [
 			SELECT FSC_DatosEditadosAnalisis__c
 			FROM ContentVersion
-			WHERE ContentDocumentId = :informe.ContentDocumentId AND IsLatest = true
+			WHERE ContentDocumentId = :informe.ContentDocumentId AND IsLatest = TRUE
 			LIMIT 1
 		];
 		Assert.isTrue(
 			!String.isBlank(informeActual.FSC_DatosEditadosAnalisis__c) &&
-				informeActual.FSC_DatosEditadosAnalisis__c.contains('Historial corregido por el analista'),
+			informeActual.FSC_DatosEditadosAnalisis__c.contains('Historial corregido por el analista'),
 			'Los ajustes deben conservarse únicamente en la versión del PDF.'
 		);
 
@@ -417,6 +525,12 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 			FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_INFORME
 		);
 		Assert.areEqual('Historial corregido por el analista', datos.get('historialPago'), 'El texto editado debe llegar a Visualforce.');
+		Assert.areEqual('5 años, 2 meses', datos.get('antiguedadLaboral'), 'La antigüedad editada debe conservarse en la nueva versión del informe.');
+		Assert.isTrue(
+			String.valueOf(datos.get('ingresosMensualesPromedio')).endsWith(Decimal.valueOf(150000).setScale(2).format()),
+			'La sección de ingresos y capacidad de pago del informe debe ser editable.'
+		);
+		Assert.areEqual(Decimal.valueOf(25).setScale(2).format() + '%', datos.get('relacionCuotaIngresos'), 'La relación cuota/ingresos debe ser editable.');
 		Assert.areEqual(
 			2,
 			[SELECT COUNT() FROM ContentVersion WHERE ContentDocumentId = :informe.ContentDocumentId],
@@ -462,11 +576,7 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 			FSC_RlaAccionesController.guardarYRegenerarDocumentoAnalisis(
 				solicitud.Id,
 				FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_INFORME,
-				JSON.serialize(
-					new Map<String, Object>{
-						'plazoMeses' => new Map<String, Object>{ 'value' => 'ABC', 'format' => 'integer' }
-					}
-				)
+				JSON.serialize(new Map<String, Object>{ 'plazoMeses' => new Map<String, Object>{ 'value' => 'ABC', 'format' => 'integer' } })
 			);
 		} catch (AuraHandledException error) {
 			rechazoNumero = true;
@@ -493,10 +603,7 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 		solicitud.FSC_Aprobado_con_Condiciones__c = false;
 		update solicitud;
 
-		ContentVersion capacidad = FSC_FabricaDatosDocumentosAnalisisTest.crearArchivo(
-			solicitud.Id,
-			'Capacidad de Pago - ' + solicitud.Name
-		);
+		ContentVersion capacidad = FSC_FabricaDatosDocumentosAnalisisTest.crearArchivo(solicitud.Id, 'Capacidad de Pago - ' + solicitud.Name);
 		capacidad = [SELECT ContentDocumentId FROM ContentVersion WHERE Id = :capacidad.Id];
 		FSC_RlaAccionesController.testPermitirEdicionDocumentosAnalisis = true;
 		Map<String, Object> cambios = new Map<String, Object>{
@@ -506,7 +613,10 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 			'montosPesos.cuotaPrestamos' => new Map<String, Object>{ 'value' => '200', 'format' => 'moneyDop' },
 			'montosPesos.cuotaNuevoPrestamo' => new Map<String, Object>{ 'value' => '300', 'format' => 'moneyDop' },
 			'montosPesos.cuotasCancelar' => new Map<String, Object>{ 'value' => '50', 'format' => 'moneyDop' },
-			'montosPesos.pagoVivienda' => new Map<String, Object>{ 'value' => '400', 'format' => 'moneyDop' }
+			'montosPesos.pagoVivienda' => new Map<String, Object>{ 'value' => '400', 'format' => 'moneyDop' },
+			'montosPesos.deudaTarjetas' => new Map<String, Object>{ 'value' => '10000', 'format' => 'moneyDop' },
+			'montosDolares.deudaTarjetas' => new Map<String, Object>{ 'value' => '100', 'format' => 'moneyUsd' },
+			'montosPesos.deudaTarjetasCancelar' => new Map<String, Object>{ 'value' => '50', 'format' => 'moneyDop' }
 		};
 
 		Test.startTest();
@@ -520,12 +630,10 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 		ContentVersion versionActual = [
 			SELECT FSC_DatosEditadosAnalisis__c
 			FROM ContentVersion
-			WHERE ContentDocumentId = :capacidad.ContentDocumentId AND IsLatest = true
+			WHERE ContentDocumentId = :capacidad.ContentDocumentId AND IsLatest = TRUE
 			LIMIT 1
 		];
-		Map<String, Object> ajustes = (Map<String, Object>) JSON.deserializeUntyped(
-			versionActual.FSC_DatosEditadosAnalisis__c
-		);
+		Map<String, Object> ajustes = (Map<String, Object>) JSON.deserializeUntyped(versionActual.FSC_DatosEditadosAnalisis__c);
 		Map<String, Object> montosPesos = (Map<String, Object>) ajustes.get('montosPesos');
 		Map<String, Object> montosDolares = (Map<String, Object>) ajustes.get('montosDolares');
 		Map<String, Object> totalesPesos = (Map<String, Object>) ajustes.get('totalesPesos');
@@ -534,6 +642,279 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 		Assert.isNotNull(montosDolares.get('totalIngresos'), 'Debe recalcular el total de ingresos en dólares.');
 		Assert.isNotNull(totalesPesos.get('totalIngresos'), 'Debe recalcular el total consolidado en pesos.');
 		Assert.isNotNull(montosPesos.get('totalPagos'), 'Debe recalcular el total de pagos.');
+		Assert.areEqual(formatearDinero(800), montosPesos.get('cuotaTarjetas'), 'El pago mínimo RD$ debe ser el 8% de la deuda en tarjetas.');
+		Assert.areEqual(
+			'US$ ' + Decimal.valueOf(8).setScale(2).format(),
+			montosDolares.get('cuotaTarjetas'),
+			'El pago mínimo USD debe ser el 8% de la deuda en tarjetas.'
+		);
+		Assert.areEqual(formatearDinero(50), montosPesos.get('deudaTarjetasCancelar'), 'El pago mínimo de tarjetas a cancelar debe ser editable.');
+		Assert.areEqual(formatearDinero(1200), montosPesos.get('totalPagosCreditos'), 'Debe usar el 8% calculado y descontar las cancelaciones.');
+
+		Boolean rechazoFormula = false;
+		try {
+			FSC_RlaAccionesController.guardarYRegenerarDocumentoAnalisis(
+				solicitud.Id,
+				FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD,
+				JSON.serialize(
+					new Map<String, Object>{
+						'montosDolares.cuotaTarjetas' => new Map<String, Object>{ 'value' => '1', 'format' => 'moneyUsd' }
+					}
+				)
+			);
+		} catch (AuraHandledException error) {
+			rechazoFormula = true;
+		}
+		Assert.isTrue(rechazoFormula, 'El pago mínimo de tarjetas en USD es una fórmula y no debe editarse.');
+	}
+
+	@IsTest
+	static void shouldRecalculateSavedCapacityIndicators() {
+		ContentVersion archivo = crearCapacidadConTotales('RD$ 52,000', 'RD$ 29,198.83', 'RD$ 29,198.83');
+		Test.startTest();
+		Map<String, Object> datos = FSC_ControladorDocumentosAnalisisCredito.construirDatos(
+			archivo.FirstPublishLocationId, FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD
+		);
+		Test.setCurrentPage(new PageReference('/apex/FSC_CapacidadPagoPDF'));
+		ApexPages.currentPage().getParameters().put('id', archivo.FirstPublishLocationId);
+		FSC_DatosDocumentosAnalisisCredito pdf = new FSC_ControladorDocumentosAnalisisCredito().datos;
+		Test.stopTest();
+
+		String porcentaje = Decimal.valueOf('56.15').setScale(2).format() + '%';
+		Assert.areEqual(
+			new List<Object>{ porcentaje, 'NO DEBE EXCEDER DEL 35%', porcentaje, 'CAPACIDAD DE PAGO ESTRECHA' },
+			new List<Object>{ datos.get('cargaFinanciera'), datos.get('resultadoCargaFinanciera'),
+				datos.get('capacidadIncluyendoVivienda'), datos.get('resultadoCapacidadVivienda') }
+		);
+		Assert.areEqual('RD$ 29,198.83', pdf.totalesPesos.get('totalPagos'));
+		Assert.areEqual(porcentaje, pdf.cargaFinanciera);
+	}
+
+	@IsTest
+	static void shouldClearCapacityIndicatorsWithoutIncome() {
+		ContentVersion archivo = crearCapacidadConTotales('RD$ 0.00', 'RD$ 100.00', 'RD$ 100.00');
+		Test.startTest();
+		for (String ingreso : new List<String>{ 'RD$ 0.00', '' }) {
+			archivo.FSC_DatosEditadosAnalisis__c = JSON.serialize(new Map<String, Object>{
+				'totalesPesos' => new Map<String, String>{ 'totalIngresos' => ingreso, 'totalPagosCreditos' => '', 'totalPagos' => 'RD$ 100.00' },
+				'cargaFinanciera' => '12.48%', 'resultadoCargaFinanciera' => 'CAPACIDAD DE PAGO OK',
+				'capacidadIncluyendoVivienda' => '12.48%', 'resultadoCapacidadVivienda' => 'CAPACIDAD DE PAGO OK'
+			});
+			update new ContentVersion(Id = archivo.Id, FSC_DatosEditadosAnalisis__c = archivo.FSC_DatosEditadosAnalisis__c);
+			Map<String, Object> datos = FSC_ControladorDocumentosAnalisisCredito.construirDatos(
+				archivo.FirstPublishLocationId, FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD
+			);
+			Assert.areEqual(new List<Object>{ '', '', '', '' }, new List<Object>{
+				datos.get('cargaFinanciera'), datos.get('resultadoCargaFinanciera'),
+				datos.get('capacidadIncluyendoVivienda'), datos.get('resultadoCapacidadVivienda')
+			});
+		}
+		Test.stopTest();
+	}
+
+	@IsTest
+	static void shouldEvaluateCapacityLimitsWithLocalizedAmounts() {
+		ContentVersion archivo = crearCapacidadConTotales('RD$ 100.000,00', 'RD$ 35.000', 'RD$ 40.000,00');
+		Test.startTest();
+		Map<String, Object> datos = FSC_ControladorDocumentosAnalisisCredito.construirDatos(
+			archivo.FirstPublishLocationId, FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD
+		);
+		Test.stopTest();
+		Assert.areEqual(Decimal.valueOf(35).setScale(2).format() + '%', datos.get('cargaFinanciera'));
+		Assert.areEqual(Decimal.valueOf(40).setScale(2).format() + '%', datos.get('capacidadIncluyendoVivienda'));
+		Assert.areEqual(new List<Object>{ 'CAPACIDAD DE PAGO OK', 'CAPACIDAD DE PAGO OK' },
+			new List<Object>{ datos.get('resultadoCargaFinanciera'), datos.get('resultadoCapacidadVivienda') });
+	}
+
+	@IsTest
+	static void shouldKeepPatrimonyEmptyWhenAssetsAreHidden() {
+		ResidentialLoanApplication solicitud = FSC_FabricaDatosDocumentosAnalisisTest.crearSolicitud(
+			FSC_FabricaDatosDocumentosAnalisisTest.obtenerCuentaBase().Id,
+			TIPO_CONSUMO, ESTADO_EN_PROCESO, SUBESTADO_ANTERIOR, 250000, true
+		);
+		Test.startTest();
+		Map<String, Object> datos = FSC_ControladorDocumentosAnalisisCredito.construirDatos(
+			solicitud.Id, FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD
+		);
+		Test.setCurrentPage(Page.FSC_CapacidadPagoPDF);
+		ApexPages.currentPage().getParameters().put('id', solicitud.Id);
+		FSC_DatosDocumentosAnalisisCredito pdf = new FSC_ControladorDocumentosAnalisisCredito().datos;
+		Test.stopTest();
+		Assert.areEqual(new List<Object>{ '', '', '' },
+			new List<Object>{ datos.get('totalActivos'), datos.get('totalPasivos'), datos.get('patrimonio') },
+			'No debe mostrar patrimonio a partir de valores internos ocultos.');
+		Assert.areEqual('', pdf.patrimonio, 'El PDF y el modal deben mostrar el mismo patrimonio vacío.');
+	}
+
+	@IsTest
+	static void shouldClearHistoricalPatrimonyWhenAnInputIsMissing() {
+		ContentVersion archivo = crearCapacidadConTotales('RD$ 100,000.00', '', '');
+		Test.startTest();
+		for (List<String> importes : new List<List<String>>{
+			new List<String>{ '', '' }, new List<String>{ 'RD$ 100,000.00', '' }, new List<String>{ '', 'RD$ 50,000.00' }
+		}) {
+			update new ContentVersion(Id = archivo.Id, FSC_DatosEditadosAnalisis__c = JSON.serialize(new Map<String, Object>{
+				'totalActivos' => importes[0], 'totalPasivos' => importes[1], 'patrimonio' => 'RD$ 50,000.00'
+			}));
+			Map<String, Object> datos = FSC_ControladorDocumentosAnalisisCredito.construirDatos(
+				archivo.FirstPublishLocationId, FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD
+			);
+			Assert.areEqual('', datos.get('patrimonio'), 'Ambos importes deben estar completos, incluso con patrimonio histórico.');
+		}
+		Test.setCurrentPage(Page.FSC_CapacidadPagoPDF);
+		ApexPages.currentPage().getParameters().put('id', archivo.FirstPublishLocationId);
+		Assert.areEqual('', new FSC_ControladorDocumentosAnalisisCredito().datos.patrimonio);
+		Test.stopTest();
+	}
+
+	@IsTest
+	static void shouldCalculatePatrimonyFromFinalLocalizedAmountsIncludingZero() {
+		ContentVersion archivo = crearCapacidadConTotales('RD$ 100,000.00', '', '');
+		Test.startTest();
+		for (List<String> importes : new List<List<String>>{
+			new List<String>{ 'RD$ 100,000.00', 'RD$ 30,000.00', formatearDinero(70000) },
+			new List<String>{ 'RD$ 100.000,50', 'RD$ 30.000,25', formatearDinero(70000.25) },
+			new List<String>{ 'RD$ 0.00', 'RD$ 0.00', formatearDinero(0) },
+			new List<String>{ 'RD$ 0.00', 'RD$ 30,000.00', formatearDinero(-30000) }
+		}) {
+			update new ContentVersion(Id = archivo.Id, FSC_DatosEditadosAnalisis__c = JSON.serialize(new Map<String, Object>{
+				'totalActivos' => importes[0], 'totalPasivos' => importes[1], 'patrimonio' => 'RD$ 50,000.00'
+			}));
+			Map<String, Object> datos = FSC_ControladorDocumentosAnalisisCredito.construirDatos(
+				archivo.FirstPublishLocationId, FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD
+			);
+			Assert.areEqual(importes[2], datos.get('patrimonio'), 'Debe restar los valores finales y aceptar cero como un valor completo.');
+		}
+		Test.stopTest();
+	}
+
+	@IsTest
+	static void shouldSaveAndRegenerateCalculatedPatrimony() {
+		ContentVersion archivo = crearCapacidadEditableConPatrimonio();
+		Test.startTest();
+		FSC_RlaAccionesController.guardarYRegenerarDocumentoAnalisis(
+			archivo.FirstPublishLocationId, FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD,
+			JSON.serialize(new Map<String, Object>{
+				'totalActivos' => new Map<String, Object>{ 'value' => '100000.50', 'format' => 'money' },
+				'totalPasivos' => new Map<String, Object>{ 'value' => '30000.25', 'format' => 'money' }
+			})
+		);
+		Test.stopTest();
+		ContentVersion version = [SELECT FSC_DatosEditadosAnalisis__c FROM ContentVersion
+			WHERE ContentDocumentId = :archivo.ContentDocumentId AND IsLatest = TRUE LIMIT 1];
+		Map<String, Object> ajustes = (Map<String, Object>) JSON.deserializeUntyped(version.FSC_DatosEditadosAnalisis__c);
+		Assert.areEqual(formatearDinero(70000.25), ajustes.get('patrimonio'), 'La versión regenerada debe guardar la fórmula actualizada.');
+		Map<String, Object> datos = FSC_ControladorDocumentosAnalisisCredito.construirDatos(
+			archivo.FirstPublishLocationId, FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD);
+		Assert.areEqual(formatearDinero(70000.25), datos.get('patrimonio'), 'Reabrir el modal debe conservar el resultado.');
+	}
+
+	@IsTest
+	static void shouldClearSavedPatrimonyWhenAnInputIsDeleted() {
+		ContentVersion archivo = crearCapacidadEditableConPatrimonio();
+		Test.startTest();
+		FSC_RlaAccionesController.guardarYRegenerarDocumentoAnalisis(
+			archivo.FirstPublishLocationId, FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD,
+			JSON.serialize(new Map<String, Object>{ 'totalPasivos' => new Map<String, Object>{ 'value' => '', 'format' => 'money' } })
+		);
+		Test.stopTest();
+		ContentVersion version = [SELECT FSC_DatosEditadosAnalisis__c FROM ContentVersion
+			WHERE ContentDocumentId = :archivo.ContentDocumentId AND IsLatest = TRUE LIMIT 1];
+		Map<String, Object> ajustes = (Map<String, Object>) JSON.deserializeUntyped(version.FSC_DatosEditadosAnalisis__c);
+		Assert.areEqual('', ajustes.get('patrimonio'), 'Borrar un operando debe vaciar el patrimonio guardado.');
+		Test.setCurrentPage(Page.FSC_CapacidadPagoPDF);
+		ApexPages.currentPage().getParameters().put('id', archivo.FirstPublishLocationId);
+		Assert.areEqual('', new FSC_ControladorDocumentosAnalisisCredito().datos.patrimonio);
+	}
+
+	@IsTest
+	static void shouldPreservePymeDocumentEditingAndCalculatedTotals() {
+		ResidentialLoanApplication solicitud = FSC_FabricaDatosDocumentosAnalisisTest.crearSolicitud(
+			FSC_FabricaDatosDocumentosAnalisisTest.obtenerCuentaBase().Id,
+			TIPO_PYME, ESTADO_EN_PROCESO, SUBESTADO_ANALISIS, 250000, true
+		);
+		update new ResidentialLoanApplication(
+			Id = solicitud.Id, FSC_Resultado_Buro__c = 'Referido', FSC_Doc_Completa_Analisis__c = true,
+			FSC_DocumentacionValidadaAnalista__c = true, FSC_DebeRevisarComite__c = false,
+			FSC_DebeRevisarSupervisor__c = false, FSC_Aprobado_con_Condiciones__c = false
+		);
+		ContentVersion archivo = FSC_FabricaDatosDocumentosAnalisisTest.crearArchivo(solicitud.Id, 'Informe de Crédito Pyme - ' + solicitud.Name);
+		archivo = [SELECT ContentDocumentId FROM ContentVersion WHERE Id = :archivo.Id];
+		FSC_RlaAccionesController.testPermitirEdicionDocumentosAnalisis = true;
+		Test.startTest();
+		FSC_RlaAccionesController.guardarYRegenerarDocumentoAnalisis(
+			solicitud.Id, FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_INFORME,
+			JSON.serialize(new Map<String, Object>{
+				'certificadosBalanceActual' => new Map<String, Object>{ 'value' => 'RD$ 1,000.00\nRD$ 2,000.00', 'format' => 'text' },
+				'montoSolicitado' => new Map<String, Object>{ 'value' => '50000', 'format' => 'money' },
+				'valorGarantia' => new Map<String, Object>{ 'value' => '100000', 'format' => 'money' }
+			})
+		);
+		Test.stopTest();
+		ContentVersion version = [SELECT FSC_DatosEditadosAnalisis__c FROM ContentVersion
+			WHERE ContentDocumentId = :archivo.ContentDocumentId AND IsLatest = TRUE LIMIT 1];
+		Map<String, Object> ajustes = (Map<String, Object>) JSON.deserializeUntyped(version.FSC_DatosEditadosAnalisis__c);
+		Assert.areEqual(formatearDinero(3000), ajustes.get('certificadosTotalBalance'), 'Los totales Pyme deben seguir calculándose al guardar.');
+		Assert.areEqual(Decimal.valueOf(200).setScale(2).format() + '%', ajustes.get('cobertura'));
+		Assert.areEqual(250000, [SELECT FSC_Monto__c FROM ResidentialLoanApplication WHERE Id = :solicitud.Id].FSC_Monto__c,
+			'Editar el documento Pyme no debe modificar los datos de la solicitud.');
+	}
+
+	private static ContentVersion crearCapacidadEditableConPatrimonio() {
+		ContentVersion archivo = crearCapacidadConTotales('RD$ 100,000.00', '', '');
+		update new ResidentialLoanApplication(
+			Id = archivo.FirstPublishLocationId, FSC_Subestado__c = SUBESTADO_ANALISIS,
+			FSC_Resultado_Buro__c = 'Referido', FSC_Doc_Completa_Analisis__c = true,
+			FSC_DocumentacionValidadaAnalista__c = true, FSC_DebeRevisarComite__c = false,
+			FSC_DebeRevisarSupervisor__c = false, FSC_Aprobado_con_Condiciones__c = false
+		);
+		update new ContentVersion(Id = archivo.Id, FSC_DatosEditadosAnalisis__c = JSON.serialize(new Map<String, Object>{
+			'totalActivos' => 'RD$ 100,000.00', 'totalPasivos' => 'RD$ 50,000.00', 'patrimonio' => 'RD$ 50,000.00'
+		}));
+		FSC_RlaAccionesController.testPermitirEdicionDocumentosAnalisis = true;
+		return [SELECT Id, ContentDocumentId, FirstPublishLocationId FROM ContentVersion WHERE Id = :archivo.Id];
+	}
+
+	private static ContentVersion crearCapacidadConTotales(String ingreso, String pagosCredito, String totalPagos) {
+		ResidentialLoanApplication solicitud = FSC_FabricaDatosDocumentosAnalisisTest.crearSolicitud(
+			FSC_FabricaDatosDocumentosAnalisisTest.obtenerCuentaBase().Id,
+			TIPO_CONSUMO, ESTADO_EN_PROCESO, SUBESTADO_ANTERIOR, 250000, true
+		);
+		ContentVersion archivo = FSC_FabricaDatosDocumentosAnalisisTest.crearArchivo(solicitud.Id, 'Capacidad de Pago - ' + solicitud.Name);
+		archivo.FSC_DatosEditadosAnalisis__c = JSON.serialize(new Map<String, Object>{
+			'totalesPesos' => new Map<String, String>{ 'totalIngresos' => ingreso, 'totalPagosCreditos' => pagosCredito, 'totalPagos' => totalPagos },
+			'cargaFinanciera' => '12.48%', 'capacidadIncluyendoVivienda' => '12.48%',
+			'resultadoCargaFinanciera' => 'CAPACIDAD DE PAGO OK', 'resultadoCapacidadVivienda' => 'CAPACIDAD DE PAGO OK'
+		});
+		update new ContentVersion(Id = archivo.Id, FSC_DatosEditadosAnalisis__c = archivo.FSC_DatosEditadosAnalisis__c);
+		return archivo;
+	}
+
+	@IsTest
+	static void shouldUseEightPercentOfBureauCardDebt_WhenBureauFacilitiesExist() {
+		Account cuenta = FSC_FabricaDatosDocumentosAnalisisTest.obtenerCuentaBase();
+		ResidentialLoanApplication solicitud = FSC_FabricaDatosDocumentosAnalisisTest.crearSolicitud(
+			cuenta.Id,
+			TIPO_CONSUMO,
+			ESTADO_EN_PROCESO,
+			SUBESTADO_ANTERIOR,
+			900000,
+			false
+		);
+		solicitud.FSC_Moneda__c = '1';
+		solicitud.FSC_DeudaTCBuroDOP__c = 50000;
+		solicitud.FSC_CuotaTCBuroDOP__c = 1000;
+		insert solicitud;
+		Test.setCurrentPage(Page.FSC_CapacidadPagoPDF);
+		ApexPages.currentPage().getParameters().put('id', solicitud.Id);
+
+		Test.startTest();
+		FSC_DatosDocumentosAnalisisCredito datos = new FSC_ControladorDocumentosAnalisisCredito().datos;
+		Test.stopTest();
+
+		Assert.areEqual(formatearDinero(50000), datos.deudaTarjetas, 'Debe mostrar la deuda en tarjetas del buró.');
+		Assert.areEqual(formatearDinero(4000), datos.cuotaTarjetas, 'El pago mínimo debe ser el 8% de la deuda en tarjetas.');
+		Assert.areEqual(formatearDinero(4000), datos.montosPesos.get('cuotaTarjetas'), 'La columna RD$ debe usar el mismo 8%.');
 	}
 
 	@IsTest
@@ -556,10 +937,8 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 		capacidad = [SELECT ContentDocumentId FROM ContentVersion WHERE Id = :capacidad.Id];
 
 		Test.startTest();
-		new FSC_ColaGeneracionDocumentosAnalisis(
-			new List<Id>{ solicitud.Id },
-			FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD
-		).execute(null);
+		new FSC_ColaGeneracionDocumentosAnalisis(new List<Id>{ solicitud.Id }, FSC_ColaGeneracionDocumentosAnalisis.DOCUMENTO_CAPACIDAD)
+			.execute(null);
 		Test.stopTest();
 
 		Assert.areEqual(
@@ -602,6 +981,43 @@ private with sharing class FSC_DocumentosAnalisisCreditoTest {
 		System.assert(logPendiente.get(solicitudId).contains('Anterior'));
 		System.assertEquals('', FSC_ColaGeneracionDocumentosAnalisis.limitar('', 10));
 		System.assertEquals('123...', FSC_ColaGeneracionDocumentosAnalisis.limitar('12345', 3));
+	}
+
+	private static ResidentialLoanApplication createMortgageForAnalysis(Id accountId, Decimal amount) {
+		ResidentialLoanApplication application = FSC_FabricaDatosDocumentosAnalisisTest.crearSolicitud(
+			accountId,
+			TIPO_HIPOTECARIO,
+			ESTADO_EN_PROCESO,
+			SUBESTADO_ANALISIS,
+			amount,
+			false
+		);
+		application.FSC_Moneda__c = '1';
+		FSC_Garantia__c guarantee = new FSC_Garantia__c(
+			Name = 'Garantía hipotecaria de análisis',
+			FSC_Tipo_de_Garantia__c = 'Hipotecaria',
+			FSC_Clase_de_Garantia__c = 'BIENES INMUEBLES',
+			FSC_Proposito_Garantia_Hipotecario__c = FSC_ReglaCredito__mdt.getInstance('HipCompraDOP').FSC_Proposito__c,
+			FSC_Tipo_de_Inmueble__c = 'Vivienda',
+			FSC_Ubicacion__c = 'Santo Domingo',
+			FSC_Descripcion_de_la_Garantia__c = 'Apartamento residencial',
+			FSC_Valor_Tasado__c = 5000000,
+			FSC_Valor_Inmueble__c = 5000000,
+			FSC_Precio_de_Venta__c = 4700000,
+			FSC_Fecha_Tasacion__c = Date.today()
+		);
+		FSC_CreditPolicyService.Request plan = new FSC_CreditPolicyService.Request();
+		plan.accountId = accountId;
+		plan.loanType = 'hipotecario';
+		plan.currencyCode = 'DOP';
+		plan.amount = amount;
+		plan.months = Decimal.valueOf(application.FSC_Plazo_meses__c);
+		plan.guarantees.add(FSC_CreditPolicyService.storedGuarantee(guarantee));
+		FSC_CreditPolicyGuard.registerPlan(plan);
+		insert application;
+		guarantee.FSC_Residential_Loan_Application__c = application.Id;
+		insert guarantee;
+		return application;
 	}
 
 	private static Set<String> obtenerTitulos(Id solicitudId) {
