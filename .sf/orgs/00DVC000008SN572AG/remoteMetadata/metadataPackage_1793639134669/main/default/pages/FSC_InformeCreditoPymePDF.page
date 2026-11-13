@@ -1,0 +1,200 @@
+<apex:page controller="FSC_ControladorInformeCreditoPyme"
+	renderAs="pdf"
+	applyBodyTag="false"
+	applyHtmlTag="false"
+	showHeader="false"
+	sidebar="false"
+	standardStylesheets="false">
+	<html>
+		<head>
+			<style type="text/css">
+				@page {
+					size: letter;
+					margin: 0.3in 0.6in;
+					@bottom-right { content: "Página " counter(page) " de " counter(pages); }
+				}
+				body { font-family: Arial, Helvetica, sans-serif; font-size: 6.5pt; color: #000; }
+				table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+				.encabezado { margin-bottom: 5px; }
+				.encabezado td { border: 0; vertical-align: middle; padding: 1px 3px; }
+				.logo { width: 118px; }
+				.titulo { color: #003ca6; font-size: 11pt; font-weight: bold; text-align: right; }
+				.meta { margin-bottom: 5px; }
+				.meta td, .bloque td, .tablaDatos th, .tablaDatos td { border: 0.6px solid #000; padding: 2px 3px; vertical-align: top; }
+				.bloque, .tablaDatos { margin-bottom: 6px; page-break-inside: avoid; }
+				.seccion { background: #1f497d; color: #fff; font-size: 7.5pt; font-weight: bold; text-align: center; }
+				.etiqueta { background: #d9eaf7; color: #003ca6; font-weight: bold; }
+				.valor { color: #003ca6; font-weight: bold; white-space: pre-wrap; }
+				.cabeceraColumna { background: #d9eaf7; color: #003ca6; font-weight: bold; text-align: center; }
+				.centrado { text-align: center; }
+				.derecha { text-align: right; }
+				.textoLargo { min-height: 34px; white-space: pre-wrap; }
+				.firma { height: 34px; }
+				.nota { font-size: 5.8pt; }
+			</style>
+		</head>
+		<body>
+			<table class="encabezado">
+				<tr>
+					<td style="width: 25%;"><apex:image url="{!URLFOR($Resource.VimencaLogo)}" styleClass="logo" /></td>
+					<td class="titulo">INFORME DE ANÁLISIS DE CRÉDITOS PYMES – PERSONAS FÍSICAS</td>
+				</tr>
+			</table>
+
+			<table class="meta">
+				<tr>
+					<td class="etiqueta">Fecha Informe:</td><td class="valor">{!datos['fechaInforme']}</td>
+					<td class="etiqueta">Unidad/Sucursal:</td><td class="valor">{!datos['unidadSucursal']}</td>
+					<td class="etiqueta">Ejecutivo(a):</td><td class="valor">{!datos['ejecutivo']}</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Tasa referencia US$:</td><td class="valor">{!datos['tasaCambioUsd']}</td>
+					<td class="etiqueta">Tasa referencia EURO:</td><td class="valor">{!datos['tasaCambioEuro']}</td>
+					<td class="etiqueta">Solicitud:</td><td class="valor">{!datos['numeroSolicitud']}</td>
+				</tr>
+			</table>
+
+			<table class="bloque">
+				<tr><td colspan="6" class="seccion">DATOS GENERALES DEL CLIENTE</td></tr>
+				<tr>
+					<td class="etiqueta">Solicitante:</td><td colspan="2" class="valor">{!datos['solicitante']}</td>
+					<td class="etiqueta">Cédula:</td><td colspan="2" class="valor">{!datos['cedula']}</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Dirección Residencial:</td><td colspan="3" class="valor">{!datos['direccionResidencial']}</td>
+					<td class="etiqueta">Código Abanks:</td><td class="valor">{!datos['codigoAbanks']}</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Dirección Comercial:</td><td colspan="3" class="valor">{!datos['direccionComercial']}</td>
+					<td class="etiqueta">Sector Económico:</td><td class="valor">{!datos['sectorEconomico']}</td>
+				</tr>
+				<tr><td class="etiqueta">Actividad Comercial:</td><td colspan="5" class="valor">{!datos['actividadComercial']}</td></tr>
+				<tr>
+					<td class="etiqueta">Clasificación riesgo BV:</td><td class="valor">{!datos['clasificacionRiesgoBv']}</td>
+					<td class="etiqueta">Grupo de Riesgo:</td><td class="valor">{!datos['grupoRiesgo']}</td>
+					<td class="etiqueta">Tipo Deudor:</td><td class="valor">{!datos['tipoDeudor']}</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Clasificación riesgo actual SIB:</td><td colspan="2" class="valor">{!datos['clasificacionRiesgoSib']}</td>
+					<td class="etiqueta">Score Buró:</td><td colspan="2" class="valor">{!datos['scoreBuro']}</td>
+				</tr>
+				<tr><td colspan="4" class="etiqueta">Monto adeudado del solicitante y/o grupo de riesgo en Sistema Financiero:</td><td colspan="2" class="valor derecha">{!datos['deudaSistemaFinanciero']}</td></tr>
+				<tr><td colspan="4" class="etiqueta">Monto exposición del solicitante y/o grupo de riesgo consolidado en BV:</td><td colspan="2" class="valor derecha">{!datos['exposicionConsolidadaBv']}</td></tr>
+			</table>
+
+			<table class="bloque">
+				<tr><td colspan="6" class="seccion">DATOS GENERALES DE LA SOLICITUD</td></tr>
+				<tr>
+					<td class="etiqueta">Tipo de Tramitación:</td><td class="valor">{!datos['tipoTramitacion']}</td>
+					<td class="etiqueta">Tipo de Garantía:</td><td class="valor">{!datos['tipoGarantia']}</td>
+					<td class="etiqueta">Admisibilidad (%):</td><td class="valor">{!datos['admisibilidad']}</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Tipo de Crédito:</td><td class="valor">{!datos['tipoCredito']}</td>
+					<td class="etiqueta">Valor Garantía:</td><td class="valor">{!datos['valorGarantia']}</td>
+					<td class="etiqueta">Cobertura (%):</td><td class="valor">{!datos['cobertura']}</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Monto RD$:</td><td class="valor">{!datos['montoSolicitado']}</td>
+					<td class="etiqueta">Fecha de Tasación:</td><td class="valor">{!datos['fechaTasacion']}</td>
+					<td class="etiqueta">Tipo:</td><td class="valor">{!datos['tipoBienGarantia']}</td>
+				</tr>
+				<tr><td class="etiqueta">Plazo en Meses:</td><td class="valor">{!datos['plazoMeses']}</td><td class="etiqueta">Uso de los fondos:</td><td colspan="3" class="valor">{!datos['usoFondos']}</td></tr>
+				<tr><td class="etiqueta">Tasa de interés:</td><td class="valor">{!datos['tasaInteres']}</td><td class="etiqueta">Cuota Estimada:</td><td colspan="3" class="valor">{!datos['cuotaEstimada']}</td></tr>
+				<tr><td class="etiqueta">Descripción garantía:</td><td colspan="5" class="valor">{!datos['descripcionGarantia']}</td></tr>
+			</table>
+
+			<apex:outputPanel layout="none" rendered="{!NOT(ISBLANK(datos['facilidadesTipoCredito']))}">
+				<table class="tablaDatos">
+					<tr><td colspan="6" class="seccion">FACILIDADES ADICIONALES SOLICITADAS</td></tr>
+					<tr><th class="cabeceraColumna">Tipo de Crédito</th><th class="cabeceraColumna">Monto</th><th class="cabeceraColumna">Plazo</th><th class="cabeceraColumna">Tasa</th><th class="cabeceraColumna">Cuota</th><th class="cabeceraColumna">Uso de fondos</th></tr>
+					<tr><td class="valor">{!datos['facilidadesTipoCredito']}</td><td class="valor">{!datos['facilidadesMonto']}</td><td class="valor">{!datos['facilidadesPlazo']}</td><td class="valor">{!datos['facilidadesTasa']}</td><td class="valor">{!datos['facilidadesCuota']}</td><td class="valor">{!datos['facilidadesUsoFondos']}</td></tr>
+				</table>
+			</apex:outputPanel>
+
+			<table class="bloque">
+				<tr><td class="etiqueta">Destino del Crédito Taxonomía Verde:</td><td class="valor">{!datos['destinoTaxonomiaVerde']}</td><td class="etiqueta">Código Actividad Económica:</td><td class="valor">{!datos['codigoActividadTaxonomia']}</td></tr>
+				<tr><td class="etiqueta">Actividad Económica Taxonomía Verde:</td><td colspan="3" class="valor">{!datos['actividadTaxonomiaVerde']}</td></tr>
+			</table>
+
+			<table class="bloque">
+				<tr><td colspan="4" class="seccion">DECISIÓN INSTANCIA DE APROBACIÓN Y/O COMITÉ DE CRÉDITO</td></tr>
+				<tr><td class="etiqueta">DECISIÓN</td><td colspan="3" class="valor centrado">{!datos['decision']}</td></tr>
+				<tr><td class="etiqueta">INSTANCIA O COMITÉ</td><td class="valor">{!datos['instanciaDecision']}</td><td class="etiqueta">Fecha:</td><td class="valor">{!datos['fechaDecision']}</td></tr>
+				<tr><td class="etiqueta">Realizado por:</td><td class="valor">{!datos['realizadoPor']}</td><td class="etiqueta">Revisado por:</td><td class="valor">{!datos['revisadoPor']}</td></tr>
+				<tr><td class="etiqueta">Firma:</td><td class="firma"></td><td class="etiqueta">Firma:</td><td class="firma"></td></tr>
+			</table>
+
+			<table class="tablaDatos">
+				<tr><td colspan="7" class="seccion">CERTIFICADOS DE DEPÓSITO CLIENTE Y RELACIONADOS EN BV Y OTROS BANCOS</td></tr>
+				<tr><th class="cabeceraColumna">TIPO DE PRODUCTO</th><th class="cabeceraColumna">NO.</th><th class="cabeceraColumna">FECHA APERTURA</th><th class="cabeceraColumna">MONTO APERTURA</th><th class="cabeceraColumna">BALANCE ACTUAL</th><th class="cabeceraColumna">TASA PASIVA</th><th class="cabeceraColumna">PIGNORADO</th></tr>
+				<tr><td class="valor">{!datos['certificadosTipoProducto']}</td><td class="valor">{!datos['certificadosNumero']}</td><td class="valor">{!datos['certificadosFechaApertura']}</td><td class="valor">{!datos['certificadosMontoApertura']}</td><td class="valor">{!datos['certificadosBalanceActual']}</td><td class="valor">{!datos['certificadosTasaPasiva']}</td><td class="valor">{!datos['certificadosPignorado']}</td></tr>
+				<tr><td colspan="3" class="etiqueta">TOTAL EN RD$</td><td class="valor">{!datos['certificadosTotalMontoApertura']}</td><td class="valor">{!datos['certificadosTotalBalance']}</td><td colspan="2"></td></tr>
+			</table>
+
+			<table class="tablaDatos">
+				<tr><td colspan="8" class="seccion">CUENTAS BANCARIAS DEL CLIENTE Y RELACIONADOS EN BV Y OTROS BANCOS</td></tr>
+				<tr><th class="cabeceraColumna">TIPO DE PRODUCTO</th><th class="cabeceraColumna">NO.</th><th class="cabeceraColumna">FECHA APERTURA</th><th class="cabeceraColumna">ENTIDAD</th><th class="cabeceraColumna">MONEDA</th><th class="cabeceraColumna">BALANCE PROMEDIO</th><th class="cabeceraColumna">PROM. DEP / MENSUALES</th><th class="cabeceraColumna">PERIODO</th></tr>
+				<tr><td class="valor">{!datos['cuentasTipoProducto']}</td><td class="valor">{!datos['cuentasNumero']}</td><td class="valor">{!datos['cuentasFechaApertura']}</td><td class="valor">{!datos['cuentasEntidad']}</td><td class="valor">{!datos['cuentasMoneda']}</td><td class="valor">{!datos['cuentasBalancePromedio']}</td><td class="valor">{!datos['cuentasDepositosPromedio']}</td><td class="valor">{!datos['cuentasPeriodo']}</td></tr>
+				<tr><td colspan="5" class="etiqueta">TOTAL EN RD$</td><td class="valor">{!datos['cuentasTotalBalancePromedio']}</td><td class="valor">{!datos['cuentasTotalDepositosPromedio']}</td><td></td></tr>
+			</table>
+
+			<table class="tablaDatos">
+				<tr><td colspan="5" class="seccion">PRODUCTOS DE CRÉDITO DEL CLIENTE Y RELACIONADOS EN BV</td></tr>
+				<tr><th class="cabeceraColumna">TIPO DE CRÉDITO</th><th class="cabeceraColumna">BALANCE ACTUAL</th><th class="cabeceraColumna">MONTO AUTORIZADO</th><th class="cabeceraColumna">BV SCORE</th><th class="cabeceraColumna">TIPO GARANTÍA</th></tr>
+				<tr><td class="valor">{!datos['productosBvTipoCredito']}</td><td class="valor">{!datos['productosBvBalanceActual']}</td><td class="valor">{!datos['productosBvMontoAutorizado']}</td><td class="valor">{!datos['productosBvScore']}</td><td class="valor">{!datos['productosBvTipoGarantia']}</td></tr>
+				<tr><td class="etiqueta">TOTAL EN RD$</td><td class="valor">{!datos['productosBvTotalBalance']}</td><td class="valor">{!datos['productosBvTotalAutorizado']}</td><td colspan="2"></td></tr>
+			</table>
+
+			<table class="tablaDatos">
+				<tr><td colspan="7" class="seccion">CRÉDITOS VIGENTES DEL CLIENTE Y RELACIONADOS CON OTROS BANCOS</td></tr>
+				<tr><th class="cabeceraColumna">TIPO DE CRÉDITO</th><th class="cabeceraColumna">BANCO</th><th class="cabeceraColumna">TIPO GARANTÍA</th><th class="cabeceraColumna">PROPÓSITO Y USO DE FONDOS</th><th class="cabeceraColumna">RD$ / US$</th><th class="cabeceraColumna">COMP. HISTÓRICO</th><th class="cabeceraColumna">DEUDA ACTUAL</th></tr>
+				<tr><td class="valor">{!datos['creditosOtrosTipoCredito']}</td><td class="valor">{!datos['creditosOtrosBanco']}</td><td class="valor">{!datos['creditosOtrosTipoGarantia']}</td><td class="valor">{!datos['creditosOtrosProposito']}</td><td class="valor">{!datos['creditosOtrosMoneda']}</td><td class="valor">{!datos['creditosOtrosComportamiento']}</td><td class="valor">{!datos['creditosOtrosDeudaActual']}</td></tr>
+				<tr><td colspan="6" class="etiqueta">TOTAL EN RD$</td><td class="valor">{!datos['creditosOtrosTotalDeuda']}</td></tr>
+			</table>
+
+			<table class="bloque"><tr><td class="seccion">CAPACIDAD DE PAGO</td></tr></table>
+			<table class="tablaDatos">
+				<tr><td colspan="3" class="seccion">COMPROMISOS FINANCIEROS RD$</td></tr>
+				<tr><th class="cabeceraColumna">Tipo</th><th class="cabeceraColumna">Balances Adeudados</th><th class="cabeceraColumna">Cuotas Mensuales</th></tr>
+				<tr><td class="valor">{!datos['compromisosTipo']}</td><td class="valor">{!datos['compromisosBalances']}</td><td class="valor">{!datos['compromisosCuotas']}</td></tr>
+				<tr><td class="etiqueta">TOTAL EN RD$</td><td class="valor">{!datos['compromisosTotalBalance']}</td><td class="valor">{!datos['compromisosTotalCuotas']}</td></tr>
+			</table>
+			<table class="bloque">
+				<tr><td colspan="4" class="seccion">DISPONIBILIDAD RD$</td></tr>
+				<tr><td class="etiqueta">Total Balance Prom. Cuenta(s)</td><td class="valor">{!datos['disponibilidadBalancePromedio']}</td><td class="etiqueta">Total Flujo Prom. Cuenta(s)</td><td class="valor">{!datos['disponibilidadFlujoPromedio']}</td></tr>
+				<tr><td class="etiqueta">% Sobre Balance</td><td class="valor">{!datos['disponibilidadPorcentajeBalance']}</td><td class="etiqueta">% Sobre Flujo</td><td class="valor">{!datos['disponibilidadPorcentajeFlujo']}</td></tr>
+				<tr><td class="etiqueta">Capacidad de Pago</td><td colspan="3" class="valor centrado">{!datos['resultadoCapacidad']}</td></tr>
+				<tr><td colspan="4" class="nota">Datos tomados de buró. Incluye estimaciones sobre pagos mínimos de tarjetas de crédito.</td></tr>
+			</table>
+
+			<table class="bloque"><tr><td class="seccion">PERFIL Y ACTIVIDAD COMERCIAL</td></tr><tr><td class="valor textoLargo">{!datos['perfilActividadComercial']}</td></tr></table>
+
+			<table class="bloque">
+				<tr><td colspan="4" class="seccion">ANÁLISIS FINANCIERO</td></tr>
+				<tr><td class="etiqueta">Estados financieros al:</td><td colspan="3" class="valor">{!datos['fechaEstadosFinancieros']}</td></tr>
+				<tr><td class="etiqueta">Ingresos</td><td class="valor">{!datos['ingresosFinancieros']}</td><td class="etiqueta">Activos Fijos</td><td class="valor">{!datos['activosFijos']}</td></tr>
+				<tr><td class="etiqueta">Utilidad Neta</td><td class="valor">{!datos['utilidadNeta']}</td><td class="etiqueta">Deudas bancarias</td><td class="valor">{!datos['deudasBancarias']}</td></tr>
+				<tr><td class="etiqueta">Activos Totales</td><td class="valor">{!datos['activosTotales']}</td><td class="etiqueta">Inventario</td><td class="valor">{!datos['inventario']}</td></tr>
+				<tr><td class="etiqueta">Pasivos Totales</td><td class="valor">{!datos['pasivosTotales']}</td><td class="etiqueta">Ctas. por Cobrar</td><td class="valor">{!datos['cuentasPorCobrar']}</td></tr>
+				<tr><td class="etiqueta">Patrimonio</td><td class="valor">{!datos['patrimonio']}</td><td class="etiqueta">Caja y Bancos</td><td class="valor">{!datos['cajaBancos']}</td></tr>
+				<tr><td class="etiqueta">Apalancamiento</td><td class="valor">{!datos['apalancamiento']}</td><td colspan="2"></td></tr>
+				<tr><td colspan="4" class="valor textoLargo">{!datos['analisisFinanciero']}</td></tr>
+			</table>
+
+			<table class="bloque">
+				<tr><td class="seccion">COMPORTAMIENTO HISTÓRICO DE PAGOS Y CLASIFICACIÓN DE RIESGO</td></tr>
+				<tr><td class="valor textoLargo">{!datos['comportamientoHistorico']}</td></tr>
+				<tr><td class="valor textoLargo">{!datos['resumenClasificacionSib']}</td></tr>
+				<tr><td class="valor textoLargo">{!datos['mitigantes']}</td></tr>
+			</table>
+
+			<table class="bloque"><tr><td class="seccion">CONCLUSIONES Y RECOMENDACIONES</td></tr><tr><td class="valor textoLargo">{!datos['conclusionesRecomendaciones']}</td></tr></table>
+
+			<table class="bloque">
+				<tr><td class="etiqueta">Realizado por:</td><td class="valor">{!datos['realizadoPor']}</td><td class="etiqueta">Revisado por:</td><td class="valor">{!datos['revisadoPor']}</td></tr>
+				<tr><td colspan="2" class="firma centrado">FIRMA ANALISTA</td><td colspan="2" class="firma centrado">FIRMA SUPERVISOR</td></tr>
+			</table>
+		</body>
+	</html>
+</apex:page>

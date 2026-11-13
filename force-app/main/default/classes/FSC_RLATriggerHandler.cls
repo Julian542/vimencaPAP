@@ -10,11 +10,47 @@ public with sharing class FSC_RLATriggerHandler {
 		.get('FSC_Solicitud_Credito_Hipotecario')
 		.getRecordTypeId();
 	private static final String MONEDA_PESOS = '1';
+	private static Map<Id, String> pendingCreationNames = new Map<Id, String>();
+
+	private static Boolean isSettingRequestNumber = false;
+
+	public static void afterInsert(List<ResidentialLoanApplication> newRLA) {
+		if (newRLA == null || newRLA.isEmpty()) {
+			return;
+		}
+		List<ResidentialLoanApplication> recordsToUpdate = new List<ResidentialLoanApplication>();
+		Integer nameLength = ResidentialLoanApplication.Name.getDescribe().getLength();
+		for (ResidentialLoanApplication rla : newRLA) {
+			if (String.isBlank(rla.Name) || String.isBlank(rla.FSC_NumeroSolicitud__c)) {
+				continue;
+			}
+			String suffix = ' - ' + rla.FSC_NumeroSolicitud__c;
+			if (!rla.Name.endsWith(suffix)) {
+				pendingCreationNames.put(rla.Id, rla.Name.left(nameLength - suffix.length()) + suffix);
+				recordsToUpdate.add(new ResidentialLoanApplication(Id = rla.Id));
+			}
+		}
+		if (recordsToUpdate.isEmpty()) {
+			return;
+		}
+		isSettingRequestNumber = true;
+		try {
+			// El autonumérico existe después del insert. El update llega sin cambios de Name
+			// al Flow de bloqueo; el before update completa únicamente estos nombres de creación.
+			update as user recordsToUpdate;
+		} finally {
+			isSettingRequestNumber = false;
+			for (ResidentialLoanApplication rla : recordsToUpdate) {
+				pendingCreationNames.remove(rla.Id);
+			}
+		}
+	}
 
 	public static void beforeInsert(List<ResidentialLoanApplication> newRLA) {
 		assignDefaultMortgageCurrency(newRLA);
 		FSC_CreditPolicyGuard.validateApplications(newRLA, null);
 		FSC_CapturaOperacionesService.asignarResponsables(newRLA);
+		FSC_DeudaConsolidadaBVService.asignarEnSolicitudes(newRLA);
 		validateUniquePagareFields(newRLA, null);
 	}
 
@@ -29,6 +65,12 @@ public with sharing class FSC_RLATriggerHandler {
 	}
 
 	public static void beforeUpdate(List<ResidentialLoanApplication> newRLA, Map<Id, ResidentialLoanApplication> oldRLA) {
+		FSC_InstanciasCreditoService.completarAprobacion(newRLA, oldRLA);
+		for (ResidentialLoanApplication rla : newRLA) {
+			if (pendingCreationNames.containsKey(rla.Id)) {
+				rla.Name = pendingCreationNames.remove(rla.Id);
+			}
+		}
 		stampWonClosureDate(newRLA, oldRLA);
 		FSC_CreditPolicyGuard.validateApplications(newRLA, oldRLA);
 		FSC_FormalizacionGarantiasService.encaminar(newRLA, oldRLA);
@@ -89,7 +131,7 @@ public with sharing class FSC_RLATriggerHandler {
 				}
 			}
 
-			if (FSC_RegenerarSolicitudCreditoService.shouldRegenerateSolicitudCredito(rla, oldRecord)) {
+			if (!isSettingRequestNumber && FSC_RegenerarSolicitudCreditoService.shouldRegenerateSolicitudCredito(rla, oldRecord)) {
 				solicitudCreditoRegenerationIds.add(rla.Id);
 			}
 

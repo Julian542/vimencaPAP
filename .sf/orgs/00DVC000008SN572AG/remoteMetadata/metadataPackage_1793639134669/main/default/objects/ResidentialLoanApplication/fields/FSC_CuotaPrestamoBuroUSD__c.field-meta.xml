@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_CuotaPrestamoBuroUSD__c</fullName>
+    <description>Cuota vigente de préstamos de consumo USD informada por el buró.</description>
+    <externalId>false</externalId>
+    <label>Cuota préstamo buró USD</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

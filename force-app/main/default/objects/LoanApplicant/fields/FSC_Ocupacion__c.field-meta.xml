@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>FSC_Ocupacion__c</fullName>
+    <description>Ocupación del solicitante; conserva el catálogo y admite valores ingresados manualmente al crear el crédito.</description>
     <label>Ocupacion</label>
     <required>false</required>
     <trackHistory>false</trackHistory>

@@ -117,6 +117,10 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 	creditPolicyValidatedKey = '';
 	creditPolicyTimer;
 	creditPolicyDisconnected = false;
+	guaranteePolicyPending = false;
+	guaranteePolicyError = '';
+	guaranteePolicyFieldErrors = {};
+	guaranteePolicyVersion = 0;
 	tasadoPorOptions = [];
 	concesionarioOptions = [];
 	modeloVehiculoPicklistData;
@@ -688,6 +692,14 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 
 	get montoCuotaLabel() {
 		return this.withSimboloMoneda('Monto de la Cuota');
+	}
+
+	get propertyValueLabel() {
+		return this.withSimboloMoneda('Valor del inmueble o solar');
+	}
+
+	get salePriceLabel() {
+		return this.withSimboloMoneda('Precio de Venta');
 	}
 
 	withSimboloMoneda(label) {
@@ -2039,6 +2051,14 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 	validateFacility(reportErrors = true) {
 		const validations = [
 			{
+				value: this.descripcionPropositoFacilidad,
+				message: 'Debe describir el proposito de la facilidad.',
+			},
+			{
+				value: this.prestamoConGarantia,
+				message: 'Debe indicar si el prestamo tiene garantia.',
+			},
+			{
 				value: this.tipoFacilidad,
 				message: 'Debe seleccionar el tipo de facilidad.',
 			},
@@ -2059,6 +2079,10 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 		if (this.hasTipoFacilidadSelected) {
 			validations.push(
 				{
+					value: this.montoCuota,
+					message: 'Debe calcular la cuota de la facilidad.',
+				},
+				{
 					value: this.plazoMeses,
 					message: 'Debe indicar el plazo en meses.',
 				},
@@ -2074,6 +2098,9 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 		}
 
 		if (this.hasFacilidadSelected) {
+			if (!this.isEstadoDelVehiculoDisabled) {
+				validations.push({ value: this.estadoDelVehiculo, message: 'Debe seleccionar el estado del vehiculo.' });
+			}
 			validations.push({
 				value: this.getRequiereContratoValue(),
 				message: 'Debe indicar si requiere contrato o pagare notarial.',
@@ -2100,7 +2127,7 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 			);
 		}
 
-		const error = validations.find((item) => item.value === '' || item.value === null || item.value === undefined);
+		const error = validations.find((item) => item.value === null || item.value === undefined || String(item.value).trim() === '');
 		if (error) {
 			if (reportErrors) {
 				this.showToast('Campo requerido', error.message, 'warning');
@@ -2224,6 +2251,7 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 			return;
 		}
 		const fieldName = event.target.name;
+		this.clearGuaranteePolicyErrors();
 		let value = event.detail?.value ?? event.target.value;
 		if (['FSC_Valor_Tasado__c', 'FSC_Metros_Cuadrados_de_Construccion__c'].includes(fieldName)) {
 			value = this.sanitizeNumericInput(value, 'decimal');
@@ -2406,7 +2434,8 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 		}
 	}
 
-	saveGuarantee() {
+	async saveGuarantee() {
+		if (this.guaranteePolicyPending) return;
 		if (!this.validateGuaranteeConfiguration()) {
 			return;
 		}
@@ -2458,6 +2487,8 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 			FSC_Valor_Vehiculo__c: this.normalizeNumberValue(this.guaranteeDraft.FSC_Valor_Vehiculo__c, 2),
 		};
 
+		if (!(await this.validateDraftCreditPolicy(payload))) return;
+
 		if (this.guaranteeEditKey) {
 			this.guaranteeRows = this.guaranteeRows.map((item) => {
 				return item.__key === this.guaranteeEditKey ? payload : item;
@@ -2501,6 +2532,7 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 	}
 
 	closeGuaranteeEditor() {
+		this.clearGuaranteePolicyErrors();
 		this.showGuaranteeEditor = false;
 		this.guaranteeEditKey = null;
 		this.guaranteeDraft = this.createGuaranteeDraft();
@@ -3209,7 +3241,100 @@ export default class FscLoanFacilityManager extends OmniscriptBaseMixin(Lightnin
 
 	get creditPolicyAmountHelp() {
 		const result = this.currentCreditPolicyResult;
-		return result?.minAmount != null ? `Monto permitido: ${result.minAmount} a ${result.maxAmount} ${result.currencyCode}.` : '';
+		if (result?.minAmount == null || result?.maxAmount == null) return '';
+		if (result.maxAmount < result.minAmount) return this.insufficientGuaranteeMessage(result);
+		return `Monto permitido: ${this.formatPolicyAmount(result.minAmount)} a ${this.formatPolicyAmount(result.maxAmount)} ${result.currencyCode}.`;
+	}
+
+	formatPolicyAmount(value) {
+		return new Intl.NumberFormat('es-DO', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value);
+	}
+
+	insufficientGuaranteeMessage(result) {
+		return `La garantía permite financiar hasta ${this.formatPolicyAmount(result.maxAmount)} ${result.currencyCode}, por debajo del mínimo requerido de ${this.formatPolicyAmount(result.minAmount)} ${result.currencyCode}.`;
+	}
+
+	clearGuaranteePolicyErrors() {
+		this.guaranteePolicyVersion++;
+		const previousErrors = this.guaranteePolicyFieldErrors;
+		this.guaranteePolicyError = '';
+		this.guaranteePolicyFieldErrors = {};
+		for (const input of this.template.querySelectorAll('[data-guarantee-input]')) {
+			if (previousErrors[input.name]) {
+				input.setCustomValidity('');
+				input.reportValidity();
+			}
+		}
+	}
+
+	async validateDraftCreditPolicy(payload) {
+		if (
+			![LOAN_TYPE_HIPOTECARIO, LOAN_TYPE_CONSUMO].includes(this.loanRequestType) ||
+			!this.isRealEstateGuaranteeClass(payload.FSC_Clase_de_Garantia__c)
+		)
+			return true;
+		const context = this.creditPolicyContext;
+		context.facility.FSC_Garantias__r = [payload];
+		const draftKey = JSON.stringify(this.guaranteeDraft);
+		const facilityKey = JSON.stringify(this.creditPolicyContext);
+		const editKey = this.guaranteeEditKey;
+		const version = this.guaranteePolicyVersion;
+		this.guaranteePolicyPending = true;
+		const isCurrent = () =>
+			!this.creditPolicyDisconnected &&
+			this.showGuaranteeEditor &&
+			this.guaranteeEditKey === editKey &&
+			this.guaranteePolicyVersion === version &&
+			JSON.stringify(this.guaranteeDraft) === draftKey &&
+			JSON.stringify(this.creditPolicyContext) === facilityKey;
+		try {
+			const result = await evaluateCreditPolicy({ contextJson: JSON.stringify(context) });
+			if (!isCurrent()) return false;
+			if (result.minAmount != null && result.maxAmount != null && result.maxAmount >= result.minAmount) return true;
+			this.guaranteePolicyError =
+				result.minAmount != null && result.maxAmount != null
+					? this.insufficientGuaranteeMessage(result)
+					: result.message || 'No se pudo determinar la capacidad de la garantía.';
+			this.setGuaranteeCapacityErrors(payload, result);
+			this.showToast('Límites del crédito', this.guaranteePolicyError, 'error');
+			return false;
+		} catch (error) {
+			if (isCurrent()) {
+				this.guaranteePolicyError = 'No se pudo validar la garantía. Intente guardar nuevamente.';
+				this.showToast('Límites del crédito', this.guaranteePolicyError, 'error');
+			}
+			return false;
+		} finally {
+			this.guaranteePolicyPending = false;
+		}
+	}
+
+	setGuaranteeCapacityErrors(payload, result) {
+		const product = this.isTipoCreditoHipotecario ? 'HIPOTECARIO' : 'CONSUMO_GARANTIA_INMOBILIARIA';
+		const rules = this.creditPolicyRules.filter(
+			(rule) =>
+				rule.FSC_Producto__c === product &&
+				rule.FSC_Perfil__c === result.profile &&
+				rule.FSC_Proposito__c === payload.FSC_Proposito_Garantia_Hipotecario__c &&
+				(rule.FSC_Moneda__c === result.currencyCode || rule.FSC_Moneda__c === 'TODAS')
+		);
+		const rule = rules.length === 1 ? rules[0] : undefined;
+		if (rule?.FSC_BaseCalculo__c !== 'MENOR_INMUEBLE_VENTA' || !(rule.FSC_PorcentajeMaximo__c > 0) || result.minAmount == null) return;
+		const minimumBasis = Math.ceil((result.minAmount * 10000) / rule.FSC_PorcentajeMaximo__c) / 100;
+		const errors = {};
+		for (const field of ['FSC_Precio_de_Venta__c', 'FSC_Valor_Inmueble__c']) {
+			if (payload[field] < minimumBasis) {
+				errors[field] =
+					`Para financiar el mínimo de ${this.formatPolicyAmount(result.minAmount)} ${result.currencyCode}, el precio de venta y el valor del inmueble deben ser al menos ${this.formatPolicyAmount(minimumBasis)} ${result.currencyCode}.`;
+			}
+		}
+		this.guaranteePolicyFieldErrors = errors;
+		for (const input of this.template.querySelectorAll('[data-guarantee-input]')) {
+			if (errors[input.name]) {
+				input.setCustomValidity(errors[input.name]);
+				input.reportValidity();
+			}
+		}
 	}
 
 	get filteredPropositoGarantiaOptions() {

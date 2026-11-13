@@ -1,7 +1,8 @@
 /**
  * Genera y publica en Salesforce Files los documentos PDF de análisis de crédito.
  */
-public with sharing class FSC_ColaGeneracionDocumentosAnalisis implements Queueable, Database.AllowsCallouts {
+// El controlador valida al aprobador o administrador antes de solicitar la edición.
+public without sharing class FSC_ColaGeneracionDocumentosAnalisis implements Queueable, Database.AllowsCallouts {
 	private static final Integer TAMANO_BLOQUE = 5;
 	private static final Integer PROFUNDIDAD_MAXIMA = 40;
 	private static final String ESTADO_EN_PROCESO = 'En proceso';

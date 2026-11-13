@@ -1,7 +1,6 @@
 public without sharing class FSC_CreditoAprobadoLockService {
 	private static final String PERMISO_ADMINISTRADOR = 'FSC_CP_Administrador';
-	private static final String MENSAJE_BLOQUEO =
-		'No es posible editar esta información del crédito ya que se encuentra Aprobada';
+	private static final String MENSAJE_BLOQUEO = 'No es posible editar esta información del crédito ya que se encuentra Aprobada';
 	private static final Set<String> CAMPOS_TASADOR_EDITABLES = new Set<String>{
 		'FSC_EsTasadorExterno__c',
 		'FSC_NombreTasadorExterno__c',
@@ -46,73 +45,80 @@ public without sharing class FSC_CreditoAprobadoLockService {
 		'FSC_FechaYHoraAprobacionComite__c'
 	};
 	// Datos de redacción del contrato que se capturan al generar pagarés y contratos, después de la aprobación.
-	private static final Set<String> CAMPOS_CONTRATO_GARANTIA = minusculas(new Set<String>{
-		'FSC_Descripcion_de_la_Garantia__c',
-		'FSC_Numero_Titulo__c',
-		'FSC_Registro_de_Titulos__c',
-		'FSC_Fecha_Expedicion_Titulo__c',
-		'FSC_Numero_Certificado_Deposito__c',
-		'FSC_Fecha_Certificado_Deposito__c',
-		'FSC_Titular_Certificado_Deposito__c',
-		'FSC_Moneda_Certificado_Deposito__c',
-		'FSC_Emisor_Certificado_Deposito__c',
-		'FSC_Tipo_Vehiculo__c',
-		'FSC_Marca_Vehiculo__c',
-		'FSC_Codigo_Marca_Vehiculo__c',
-		'FSC_Modelo_Vehiculo__c',
-		'FSC_Codigo_Modelo_Vehiculo__c',
-		'FSC_Ano_Vehiculo__c',
-		'FSC_Color_Vehiculo__c',
-		'FSC_Numero_Chasis_Vehiculo__c',
-		'FSC_Serial_Motor_Vehiculo__c',
-		'FSC_Numero_Placa_Vehiculo__c',
-		'FSC_Numero_Matricula__c',
-		'FSC_Ubicacion__c'
-	});
-	private static final Set<String> MONTOS_CONTRATO_GARANTIA = minusculas(new Set<String>{
-		'FSC_Monto_Certificado_Deposito__c',
-		'FSC_Valor_Vehiculo__c'
-	});
-	private static final Set<String> CAMPOS_CONTRATO_ACTIVO = minusculas(new Set<String>{
-		'FSC_Descripcion_Contrato__c',
-		'FSC_Numero_Titulo_Contrato__c',
-		'FSC_Registro_Titulos_Contrato__c',
-		'FSC_Fecha_Titulo_Contrato__c',
-		'AccountNumber',
-		'FSC_Fecha_CD_Contrato__c',
-		'FSC_Titular_CD_Contrato__c',
-		'FSC_Moneda_CD_Contrato__c',
-		'FinancialInstitutionName',
-		'FSC_Tipo_Vehiculo_Contrato__c',
-		'FSC_Marca_Vehiculo_Contrato__c',
-		'FSC_Modelo_Vehiculo_Contrato__c',
-		'FSC_Ano_Vehiculo_Contrato__c',
-		'FSC_Color_Vehiculo_Contrato__c',
-		'FSC_Chasis_Vehiculo_Contrato__c',
-		'FSC_Motor_Vehiculo_Contrato__c',
-		'FSC_Placa_Vehiculo_Contrato__c',
-		'FSC_Matricula_Vehiculo_Contrato__c',
-		'FSC_Ubicacion_Contrato__c'
-	});
+	private static final Set<String> CAMPOS_CONTRATO_GARANTIA = minusculas(
+		new Set<String>{
+			'FSC_Descripcion_de_la_Garantia__c',
+			'FSC_Numero_Titulo__c',
+			'FSC_Registro_de_Titulos__c',
+			'FSC_Fecha_Expedicion_Titulo__c',
+			'FSC_Numero_Certificado_Deposito__c',
+			'FSC_Fecha_Certificado_Deposito__c',
+			'FSC_Titular_Certificado_Deposito__c',
+			'FSC_Moneda_Certificado_Deposito__c',
+			'FSC_Emisor_Certificado_Deposito__c',
+			'FSC_Tipo_Vehiculo__c',
+			'FSC_Marca_Vehiculo__c',
+			'FSC_Codigo_Marca_Vehiculo__c',
+			'FSC_Modelo_Vehiculo__c',
+			'FSC_Codigo_Modelo_Vehiculo__c',
+			'FSC_Ano_Vehiculo__c',
+			'FSC_Color_Vehiculo__c',
+			'FSC_Numero_Chasis_Vehiculo__c',
+			'FSC_Serial_Motor_Vehiculo__c',
+			'FSC_Numero_Placa_Vehiculo__c',
+			'FSC_Numero_Matricula__c',
+			'FSC_Ubicacion__c'
+		}
+	);
+	private static final Set<String> MONTOS_CONTRATO_GARANTIA = minusculas(
+		new Set<String>{ 'FSC_Monto_Certificado_Deposito__c', 'FSC_Valor_Vehiculo__c' }
+	);
+	private static final Set<String> CAMPOS_CONTRATO_ACTIVO = minusculas(
+		new Set<String>{
+			'FSC_Descripcion_Contrato__c',
+			'FSC_Numero_Titulo_Contrato__c',
+			'FSC_Registro_Titulos_Contrato__c',
+			'FSC_Fecha_Titulo_Contrato__c',
+			'AccountNumber',
+			'FSC_Fecha_CD_Contrato__c',
+			'FSC_Titular_CD_Contrato__c',
+			'FSC_Moneda_CD_Contrato__c',
+			'FinancialInstitutionName',
+			'FSC_Tipo_Vehiculo_Contrato__c',
+			'FSC_Marca_Vehiculo_Contrato__c',
+			'FSC_Modelo_Vehiculo_Contrato__c',
+			'FSC_Ano_Vehiculo_Contrato__c',
+			'FSC_Color_Vehiculo_Contrato__c',
+			'FSC_Chasis_Vehiculo_Contrato__c',
+			'FSC_Motor_Vehiculo_Contrato__c',
+			'FSC_Placa_Vehiculo_Contrato__c',
+			'FSC_Matricula_Vehiculo_Contrato__c',
+			'FSC_Ubicacion_Contrato__c'
+		}
+	);
 	private static final Set<String> MONTOS_CONTRATO_ACTIVO = minusculas(new Set<String>{ 'CashOrMarketValue' });
-	private static final Set<String> CAMPOS_CONTRATO_SEGURO = minusculas(new Set<String>{
-		'FSC_Numero_Poliza_Contrato__c',
-		'FSC_Aseguradora_Contrato__c',
-		'FSC_Direccion_Aseguradora_Contrato__c',
-		'FSC_Fecha_Endoso_Contrato__c',
-		'FSC_Monto_Asegurado_Contrato__c'
-	});
+	private static final Set<String> CAMPOS_CONTRATO_SEGURO = minusculas(
+		new Set<String>{
+			'FSC_Numero_Poliza_Contrato__c',
+			'FSC_Aseguradora_Contrato__c',
+			'FSC_Direccion_Aseguradora_Contrato__c',
+			'FSC_Fecha_Endoso_Contrato__c',
+			'FSC_Monto_Asegurado_Contrato__c'
+		}
+	);
 	private static final Set<String> MONTOS_CONTRATO_SEGURO = minusculas(new Set<String>{ 'FSC_Monto_de_la_Prima__c' });
-	private static final Set<String> CAMPOS_SISTEMA = minusculas(new Set<String>{
-		'Id',
-		'CreatedById',
-		'CreatedDate',
-		'LastModifiedById',
-		'LastModifiedDate',
-		'SystemModstamp',
-		'LastViewedDate',
-		'LastReferencedDate'
-	});
+	private static final Set<String> CAMPOS_SISTEMA = minusculas(
+		new Set<String>{
+			'Id',
+			'CreatedById',
+			'CreatedDate',
+			'LastModifiedById',
+			'LastModifiedDate',
+			'SystemModstamp',
+			'LastViewedDate',
+			'LastReferencedDate'
+		}
+	);
 	private static Boolean permitirDecisionComite = false;
 	private static Boolean permitirPlanillaDesembolso = false;
 	private static Boolean permitirDatosContrato = false;
@@ -195,11 +201,7 @@ public without sharing class FSC_CreditoAprobadoLockService {
 		validarRegistrosBloqueados(registrosGenericos, 'FSC_Residential_Loan_Application__c');
 	}
 
-	public static void validarGarantias(
-		List<FSC_Garantia__c> registros,
-		Map<Id, FSC_Garantia__c> anteriores,
-		Boolean esActualizacion
-	) {
+	public static void validarGarantias(List<FSC_Garantia__c> registros, Map<Id, FSC_Garantia__c> anteriores, Boolean esActualizacion) {
 		if (esAdministrador() || registros == null || registros.isEmpty()) {
 			return;
 		}
@@ -251,17 +253,14 @@ public without sharing class FSC_CreditoAprobadoLockService {
 		}
 	}
 
-	public static void validarCamposCriticosSolicitud(
-		List<ResidentialLoanApplication> registros,
-		Map<Id, ResidentialLoanApplication> anteriores
-	) {
+	public static void validarCamposCriticosSolicitud(List<ResidentialLoanApplication> registros, Map<Id, ResidentialLoanApplication> anteriores) {
 		if (esAdministrador() || permitirDecisionComite || registros == null || anteriores == null) {
 			return;
 		}
 
 		for (ResidentialLoanApplication registro : registros) {
 			ResidentialLoanApplication anterior = anteriores.get(registro.Id);
-			if (anterior?.FSC_SolicitudAprobadaPorComite__c != true) {
+			if (anterior?.FSC_SolicitudAprobadaPorComite__c != true && anterior?.FSC_CreditoAprobado__c != true) {
 				continue;
 			}
 
@@ -307,7 +306,7 @@ public without sharing class FSC_CreditoAprobadoLockService {
 		for (ResidentialLoanApplication solicitud : [
 			SELECT Id
 			FROM ResidentialLoanApplication
-			WHERE Id IN :solicitudesIds AND FSC_SolicitudAprobadaPorComite__c = true
+			WHERE Id IN :solicitudesIds AND (FSC_SolicitudAprobadaPorComite__c = TRUE OR FSC_CreditoAprobado__c = TRUE)
 		]) {
 			solicitudesAprobadas.add(solicitud.Id);
 		}
@@ -315,12 +314,7 @@ public without sharing class FSC_CreditoAprobadoLockService {
 	}
 
 	// Las claves del describe vienen en minúsculas, por eso todos los conjuntos se comparan en minúsculas.
-	private static Boolean tieneCambiosNoPermitidos(
-		SObject registro,
-		SObject anterior,
-		Set<String> permitidos,
-		Set<String> montosPermitidos
-	) {
+	private static Boolean tieneCambiosNoPermitidos(SObject registro, SObject anterior, Set<String> permitidos, Set<String> montosPermitidos) {
 		Set<String> libres = minusculas(permitidos);
 		Map<String, Schema.SObjectField> campos = registro.getSObjectType().getDescribe().fields.getMap();
 		for (String campo : campos.keySet()) {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Direccion_en_Cliente</fullName>
+    <active>true</active>
+    <description>Validación que comprueba que al menos haya una dirección con TIPO = RESIDENCIA para convertir a cliente</description>
+    <errorConditionFormula>AND(
+				$Label.Validaciones == &apos;Si&apos;,
+ACC_Persona_Fisica__c = true,
+				ACC_Validacion_Direccion__c    = 0,
+				 ISPICKVAL(ACC_Estado__c,&apos;CONVERTIR&apos;)
+				)</errorConditionFormula>
+    <errorMessage>Para convertir el prospecto es necesario tener al menos un dirección de tipo Residencia como principal</errorMessage>
+</ValidationRule>

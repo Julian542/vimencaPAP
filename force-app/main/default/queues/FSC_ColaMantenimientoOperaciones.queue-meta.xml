@@ -3,11 +3,6 @@
     <doesIncludeBosses>false</doesIncludeBosses>
     <doesSendEmailToMembers>false</doesSendEmailToMembers>
     <name>FSC - Cola mantenimiento de operaciones</name>
-    <queueMembers>
-        <users>
-            <user>jvalenti@keystoneadvisors.cl.mergeqa2</user>
-        </users>
-    </queueMembers>
     <queueSobject>
         <sobjectType>ResidentialLoanApplication</sobjectType>
     </queueSobject>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VFS_TipoEmpresaFATCA__c</fullName>
+    <label>Tipo de empresa FATCA</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Financiera</fullName>
+                <default>false</default>
+                <label>Financiera</label>
+            </value>
+            <value>
+                <fullName>No Financiera Pasiva</fullName>
+                <default>false</default>
+                <label>No Financiera Pasiva</label>
+            </value>
+            <value>
+                <fullName>No financiera Activa</fullName>
+                <default>false</default>
+                <label>No financiera Activa</label>
+            </value>
+            <value>
+                <fullName>Entidad de Gobierno/Sin Fines de Lucro</fullName>
+                <default>false</default>
+                <label>Entidad de Gobierno/Sin Fines de Lucro</label>
+            </value>
+            <value>
+                <fullName>Fideicomiso Pasivo</fullName>
+                <default>false</default>
+                <label>Fideicomiso Pasivo</label>
+            </value>
+            <value>
+                <fullName>Fideicomiso Activo</fullName>
+                <default>false</default>
+                <label>Fideicomiso Activo</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

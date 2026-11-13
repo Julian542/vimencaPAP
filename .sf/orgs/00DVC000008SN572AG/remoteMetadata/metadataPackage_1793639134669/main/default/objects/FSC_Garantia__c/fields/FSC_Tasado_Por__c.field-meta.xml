@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Tasado_Por__c</fullName>
+    <label>Tasado por</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Onel D. Peña Aristy</fullName>
+                <default>false</default>
+                <label>Onel D. Peña Aristy</label>
+            </value>
+            <value>
+                <fullName>Carlos Joaquin Garcia</fullName>
+                <default>false</default>
+                <label>Carlos Joaquin Garcia</label>
+            </value>
+            <value>
+                <fullName>Nelson Mario Garcia Martinez</fullName>
+                <default>false</default>
+                <label>Nelson Mario Garcia Martinez</label>
+            </value>
+            <value>
+                <fullName>Fernando E. Ramirez Villanueva</fullName>
+                <default>false</default>
+                <label>Fernando E. Ramirez Villanueva</label>
+            </value>
+            <value>
+                <fullName>Juan Pablo Pichardo Cruz</fullName>
+                <default>false</default>
+                <label>Juan Pablo Pichardo Cruz</label>
+            </value>
+            <value>
+                <fullName>Miguel Isidro Antonio Martínez</fullName>
+                <default>false</default>
+                <label>Miguel Isidro Antonio Martínez</label>
+            </value>
+            <value>
+                <fullName>Santiago O. Beras López</fullName>
+                <default>false</default>
+                <label>Santiago O. Beras López</label>
+            </value>
+            <value>
+                <fullName>Angelo Giuseppe Russo Díaz</fullName>
+                <default>false</default>
+                <label>Angelo Giuseppe Russo Díaz</label>
+            </value>
+            <value>
+                <fullName>Ing.  José Ignacio Tejada Tabar</fullName>
+                <default>false</default>
+                <label>Ing.  José Ignacio Tejada Tabar</label>
+            </value>
+            <value>
+                <fullName>Cesarina Guerrero Guerrero</fullName>
+                <default>false</default>
+                <label>Cesarina Guerrero Guerrero</label>
+            </value>
+            <value>
+                <fullName>Ing. Juan Jorge Jerez</fullName>
+                <default>false</default>
+                <label>Ing. Juan Jorge Jerez</label>
+            </value>
+            <value>
+                <fullName>José Abel Hernández Bueno</fullName>
+                <default>false</default>
+                <label>José Abel Hernández Bueno</label>
+            </value>
+            <value>
+                <fullName>José Franco Achécar</fullName>
+                <default>false</default>
+                <label>José Franco Achécar</label>
+            </value>
+            <value>
+                <fullName>Ing. José Báez de La Cruz</fullName>
+                <default>false</default>
+                <label>Ing. José Báez de La Cruz</label>
+            </value>
+            <value>
+                <fullName>Ing. Julio Marcel Vásquez Leonor</fullName>
+                <default>false</default>
+                <label>Ing. Julio Marcel Vásquez Leonor</label>
+            </value>
+            <value>
+                <fullName>Daury Aurelio Henriquez Díaz</fullName>
+                <default>false</default>
+                <label>Daury Aurelio Henriquez Díaz</label>
+            </value>
+            <value>
+                <fullName>Karina Ruiz Tolentina</fullName>
+                <default>false</default>
+                <label>Karina Ruiz Tolentina</label>
+            </value>
+            <value>
+                <fullName>Ing. Raquel Ferreira</fullName>
+                <default>false</default>
+                <label>Ing. Raquel Ferreira</label>
+            </value>
+            <value>
+                <fullName>Carmen Emilia Jerez Díaz</fullName>
+                <default>false</default>
+                <label>Carmen Emilia Jerez Díaz</label>
+            </value>
+            <value>
+                <fullName>Teófilo Tejada Puello</fullName>
+                <default>false</default>
+                <label>Teófilo Tejada Puello</label>
+            </value>
+            <value>
+                <fullName>Ing. Wilfredo E. Nuñez Pichardo</fullName>
+                <default>false</default>
+                <label>Ing. Wilfredo E. Nuñez Pichardo</label>
+            </value>
+            <value>
+                <fullName>Edwin Alexis Sanchez Guzman</fullName>
+                <default>false</default>
+                <label>Edwin Alexis Sanchez Guzman</label>
+            </value>
+            <value>
+                <fullName>Yarisa Tapia Rodríguez</fullName>
+                <default>false</default>
+                <label>Yarisa Tapia Rodríguez</label>
+            </value>
+            <value>
+                <fullName>Felixmar Tiburcio Tavarez Cédula No. 224-0001244-3 TDV Tasaciones de Valores, SRL. RNC. 1-32-67210-2</fullName>
+                <default>false</default>
+                <label>Felixmar Tiburcio Tavarez Cédula No. 224-0001244-3 TDV Tasaciones de Valores, SRL. RNC. 1-32-67210-2</label>
+            </value>
+            <value>
+                <fullName>Julio Vásquez, MVA Tasadores Agrimensores (RNC:130-59038-9)</fullName>
+                <default>false</default>
+                <label>Julio Vásquez, MVA Tasadores Agrimensores (RNC:130-59038-9)</label>
+            </value>
+            <value>
+                <fullName>Evelyn Franchesca Flores Hernandez (223-0050702-1)</fullName>
+                <default>false</default>
+                <label>Evelyn Franchesca Flores Hernandez (223-0050702-1)</label>
+            </value>
+            <value>
+                <fullName>EVELYN FRANCHESCA FLORES HERNANDEZ</fullName>
+                <default>false</default>
+                <label>EVELYN FRANCHESCA FLORES HERNANDEZ</label>
+            </value>
+            <value>
+                <fullName>Raquel Reyes Portoreal (005-0034370-2)</fullName>
+                <default>false</default>
+                <label>Raquel Reyes Portoreal (005-0034370-2)</label>
+            </value>
+            <value>
+                <fullName>Raquel Ferreira (001-1493862-4)</fullName>
+                <default>false</default>
+                <label>Raquel Ferreira (001-1493862-4)</label>
+            </value>
+            <value>
+                <fullName>Pedro Luis Marte Pantaleón (031-0457309-6)</fullName>
+                <default>false</default>
+                <label>Pedro Luis Marte Pantaleón (031-0457309-6)</label>
+            </value>
+            <value>
+                <fullName>Tasador 1</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Tasador 1</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

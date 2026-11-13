@@ -18,6 +18,8 @@ public with sharing class FSC_ConsumoSolicitudPDFController {
 	private SObject garanteLoanApplicant;
 	private SObject datosGeneralesLoanApplicant;
 	private SObject solicitanteEmployment;
+	private Boolean accountEmploymentPositionLoaded = false;
+	private String accountEmploymentPositionCache;
 	private SObject solicitanteAddress;
 	private List<SObject> garantiasPdfSource;
 	private List<GarantiaPdfRow> garantiasPdfCache;
@@ -93,8 +95,8 @@ public with sharing class FSC_ConsumoSolicitudPDFController {
 			'FSC_Tasa__c',
 			'FSC_Tasa_Fija__c',
 			'FSC_Monto_De_La_Cuota__c',
-			'FSC_Tiempo_Tasa_Fija__c',
-			'FSC_Deuda_Actual__c',
+			'FSC_TasaFijaPorMeses__c',
+			'FSC_DeudaConsolidadaBV__c',
 			'FSC_Descripcion_Proposito_Facilidad__c',
 			'FSC_Compromiso_Mensual__c',
 			'FSC_Limite_Autorizado__c',
@@ -143,6 +145,7 @@ public with sharing class FSC_ConsumoSolicitudPDFController {
 			'FirstName',
 			'MiddleName',
 			'LastName',
+			'Suffix',
 			'PersonBirthdate',
 			'PersonEmail',
 			'PersonHomePhone',
@@ -276,7 +279,8 @@ public with sharing class FSC_ConsumoSolicitudPDFController {
 
 	public String sucursal {
 		get {
-			return createdByVal('FSC_Sucursal__c');
+			String branchValue = firstNonBlank(new List<String>{ val('FSC_Sucursal__c'), createdByVal('FSC_Sucursal__c') });
+			return picklistLabel('User', 'FSC_Sucursal__c', branchValue);
 		}
 	}
 	public String numeroSolicitud {
@@ -416,7 +420,10 @@ public with sharing class FSC_ConsumoSolicitudPDFController {
 						'[[!FIRMASOLICITANTE:signer1:signature:size(width=120,height=40)]]',
 						upperSafe(
 							firstNonBlank(
-							new List<String>{ joinNonBlank(new List<String>{ solicitanteNombres, solicitantePrimerApellido, solicitanteSegundoApellido }, ' '), nombreCompleto }
+								new List<String>{
+									joinNonBlank(new List<String>{ solicitanteNombres, solicitantePrimerApellido, solicitanteSegundoApellido }, ' '),
+									nombreCompleto
+								}
 							)
 						),
 						'FIRMA DEL SOLICITANTE'
@@ -876,7 +883,12 @@ public with sharing class FSC_ConsumoSolicitudPDFController {
 			if (solicitanteLoanApplicant == null) {
 				return '';
 			}
-			return firstNonBlank(new List<String>{ applicantVal(solicitanteLoanApplicant, 'FSC_PrimerApellido__c'), splitLastNames(apellidos)[0] });
+			return firstNonBlank(
+				new List<String>{
+					applicantVal(solicitanteLoanApplicant, 'FSC_PrimerApellido__c'),
+					String.isNotBlank(accVal('Suffix')) ? accVal('LastName') : splitLastNames(apellidos)[0]
+				}
+			);
 		}
 	}
 
@@ -885,7 +897,9 @@ public with sharing class FSC_ConsumoSolicitudPDFController {
 			if (solicitanteLoanApplicant == null) {
 				return '';
 			}
-			return firstNonBlank(new List<String>{ applicantVal(solicitanteLoanApplicant, 'FSC_SegundoApellido__c'), splitLastNames(apellidos)[1] });
+			return firstNonBlank(
+				new List<String>{ applicantVal(solicitanteLoanApplicant, 'FSC_SegundoApellido__c'), accVal('Suffix'), splitLastNames(apellidos)[1] }
+			);
 		}
 	}
 
@@ -1159,8 +1173,12 @@ public with sharing class FSC_ConsumoSolicitudPDFController {
 
 	public String laborFuenteIngreso {
 		get {
-			return firstNonBlank(
-				new List<String>{ applicantVal(datosGeneralesLoanApplicant, 'FSC_FuenteIngreso__c'), safe(val('FSC_Actividad_economica__c')) }
+			return picklistLabel(
+				'LoanApplicant',
+				'FSC_FuenteIngreso__c',
+				firstNonBlank(
+					new List<String>{ applicantVal(datosGeneralesLoanApplicant, 'FSC_FuenteIngreso__c'), safe(val('FSC_Actividad_economica__c')) }
+				)
 			);
 		}
 	}
@@ -1187,13 +1205,34 @@ public with sharing class FSC_ConsumoSolicitudPDFController {
 
 	public String laborCargoActual {
 		get {
-			return firstNonBlank(
+			String cargo = firstNonBlank(
 				new List<String>{
 					safe(solicitanteEmployment == null ? null : String.valueOf(solicitanteEmployment.get('JobTitle'))),
 					safe(val('FSC_Cargo__c'))
 				}
 			);
+			return String.isNotBlank(cargo) ? cargo : accountEmploymentPosition();
 		}
+	}
+
+	private String accountEmploymentPosition() {
+		if (!accountEmploymentPositionLoaded) {
+			accountEmploymentPositionLoaded = true;
+			Id accountId = rla == null ? null : (Id) rla.get('AccountId');
+			if (accountId != null) {
+				List<FinServ__Employment__c> employments = [
+					SELECT FinServ__Position__c
+					FROM FinServ__Employment__c
+					WHERE Cliente__c = :accountId AND EMP_Empleo__c = 'Actual'
+					ORDER BY EMP_Principal__c DESC, CreatedDate DESC, Id DESC
+					LIMIT 1
+				];
+				if (!employments.isEmpty()) {
+					accountEmploymentPositionCache = employments[0].FinServ__Position__c;
+				}
+			}
+		}
+		return safe(accountEmploymentPositionCache);
 	}
 
 	public String laborTiempoLaborando {
@@ -1328,13 +1367,13 @@ public with sharing class FSC_ConsumoSolicitudPDFController {
 
 	public String resumenTiempoTasaFija {
 		get {
-			return safe(val('FSC_Tiempo_Tasa_Fija__c'));
+			return safe(val('FSC_TasaFijaPorMeses__c'));
 		}
 	}
 
 	public String resumenDeudaConsolidada {
 		get {
-			return fmtPdfMoney(firstNonNullDecimal(new List<Decimal>{ tryDec(rlaValue('FSC_Deuda_Actual__c')) }));
+			return fmtPdfMoney(tryDec(rlaValue('FSC_DeudaConsolidadaBV__c')));
 		}
 	}
 
@@ -1408,6 +1447,7 @@ public with sharing class FSC_ConsumoSolicitudPDFController {
 		public String parentesco { get; set; }
 		public String nombres { get; set; }
 		public String apellidos { get; set; }
+		public String telefono { get; set; }
 	}
 
 	public class FacilidadRow {
@@ -1433,6 +1473,7 @@ public with sharing class FSC_ConsumoSolicitudPDFController {
 			return referenciasCache;
 		}
 	}
+
 	public Integer referenciasSize {
 		get {
 			return referencias == null ? 0 : referencias.size();
@@ -1664,7 +1705,8 @@ public with sharing class FSC_ConsumoSolicitudPDFController {
 		item.precioVenta = fmtPdfMoney(tryDec(record == null ? null : record.get('FSC_Precio_de_Venta__c')));
 		item.valorInmueble = fmtPdfMoney(tryDec(record == null ? null : record.get('FSC_Valor_Inmueble__c')));
 		item.montoInicialAvance = fmtPdfMoney(tryDec(record == null ? null : record.get('FSC_Monto_Inicial_Avance_Pagado__c')));
-		item.tasador = record != null && (Boolean) record.get('FSC_EsTasadorExterno__c') == true
+		item.tasador = record != null &&
+			(Boolean) record.get('FSC_EsTasadorExterno__c') == true
 			? sobjectVal(record, 'FSC_NombreTasadorExterno__c')
 			: sobjectVal(record, 'FSC_Tasado_Por__c');
 		return item;
@@ -1958,18 +2000,14 @@ public with sharing class FSC_ConsumoSolicitudPDFController {
 			return out;
 		}
 
-		String soql =
-			'SELECT Name, FSC_Parentesco__c ' +
-			'FROM FSC_Referencias__c WHERE FSC_Residential_Loan_Application__c = \'' +
-			String.escapeSingleQuotes(String.valueOf(idVal)) +
-			'\'';
-
-		for (SObject row : Database.query(soql)) {
+		String soql = 'SELECT Name, FSC_Parentesco__c, FSC_Telefono__c FROM FSC_Referencias__c WHERE FSC_Residential_Loan_Application__c = :idVal';
+		for (SObject row : Database.queryWithBinds(soql, new Map<String, Object>{ 'idVal' => idVal }, AccessLevel.SYSTEM_MODE)) {
 			ReferenciaRow item = new ReferenciaRow();
 			List<String> nameParts = splitFullName(safe(String.valueOf(row.get('Name'))));
 			item.parentesco = safe(String.valueOf(row.get('FSC_Parentesco__c')));
 			item.nombres = nameParts[0];
 			item.apellidos = nameParts[1];
+			item.telefono = safe(String.valueOf(row.get('FSC_Telefono__c')));
 			out.add(item);
 		}
 

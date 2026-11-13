@@ -2,6 +2,7 @@
 global without sharing class FSC_RlaApprovalAdminRest {
     global class RequestPayload {
         public Id residentialLoanApplicationId;
+        public Id newActorId;
     }
 
     global class ResponsePayload {
@@ -25,7 +26,12 @@ global without sharing class FSC_RlaApprovalAdminRest {
                 payload.success = false;
                 payload.message = 'Solicitud requerida.';
             } else {
-                FSC_RlaApprovalAdminService.sendToSupervisor(req.residentialLoanApplicationId);
+                // Reutiliza la sesión de administrador para reasignar el aprobador.
+                if (req.newActorId != null) {
+                    FSC_RlaAccionesController.reasignarProcesoActual(req.residentialLoanApplicationId, req.newActorId);
+                } else {
+                    FSC_RlaApprovalAdminService.sendToSupervisor(req.residentialLoanApplicationId);
+                }
                 res.statusCode = 200;
                 payload.success = true;
                 payload.message = 'OK';

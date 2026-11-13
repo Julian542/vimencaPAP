@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_CONVERTIR_PEP_LISTAS_PF</fullName>
+    <active>true</active>
+    <description>Validación de datos para convertir al cliente</description>
+    <errorConditionFormula>AND (
+	$Label.Validaciones =&apos;Si&apos;,
+	ISPICKVAL( ACC_Estado__c, &apos;CONVERTIR&apos;),
+	IsPersonAccount=true,
+	OR(
+		TEXT(ACC_Persona_PEP__c) = null,
+		ISBLANK( ACC_Resultado_Validacion__c )
+	)	
+)</errorConditionFormula>
+    <errorMessage>Para &apos;Convertir&apos; el prospecto debe Validad PEP y Listas de Control.</errorMessage>
+</ValidationRule>

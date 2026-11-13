@@ -1,0 +1,449 @@
+<apex:page controller="FSC_ControladorDocumentosAnalisisCredito"
+	renderAs="pdf"
+	applyBodyTag="false"
+	applyHtmlTag="false"
+	showHeader="false"
+	sidebar="false"
+	standardStylesheets="false">
+	<html>
+		<head>
+			<style type="text/css">
+				@page {
+					size: letter;
+					margin: 0.3in 0.6in;
+				}
+				body {
+					font-family: Arial, Helvetica, sans-serif;
+					font-size: 8pt;
+					color: #000000;
+				}
+				.encabezado {
+					width: 100%;
+					margin-bottom: 6px;
+					border-collapse: collapse;
+				}
+				.encabezado td {
+					border: 0;
+					vertical-align: middle;
+				}
+				.logo {
+					width: 135px;
+				}
+				.titulo {
+					color: #003ca6;
+					font-size: 13pt;
+					font-weight: bold;
+					text-align: right;
+				}
+				table.bloque {
+					width: 100%;
+					border-collapse: collapse;
+					margin-bottom: 8px;
+					table-layout: fixed;
+					page-break-inside: avoid;
+				}
+				table.bloque td {
+					border: 0.75px solid #000000;
+					padding: 3px 4px;
+					vertical-align: top;
+				}
+				.seccion {
+					background: #1f497d;
+					color: #ffffff;
+					font-size: 9pt;
+					font-weight: bold;
+					text-align: center;
+				}
+				.etiqueta {
+					background: #deeaf6;
+					color: #003ca6;
+					font-weight: bold;
+				}
+				.valor {
+					color: #003ca6;
+					font-weight: bold;
+				}
+				.texto-largo {
+					height: 28px;
+					white-space: pre-wrap;
+				}
+			</style>
+		</head>
+		<body>
+			<table class="encabezado">
+				<tr>
+					<td>
+						<apex:image url="{!URLFOR($Resource.VimencaLogo)}"
+							styleClass="logo" />
+					</td>
+					<td class="titulo">
+						<apex:outputText value="{!IF(datos.esHipotecario, 'INFORME DE ANÁLISIS DE CRÉDITOS HIPOTECARIOS', IF(datos.esVehiculo, 'INFORME DE ANÁLISIS DE CRÉDITOS CONSUMO – VEHÍCULO', 'INFORME DE ANÁLISIS DE CRÉDITOS CONSUMO'))}" />
+					</td>
+				</tr>
+			</table>
+
+			<table class="bloque">
+				<tr>
+					<td
+						colspan="4"
+						class="seccion">
+						DATOS GENERALES DEL CLIENTE
+					</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Solicitante:</td>
+					<td class="valor">{!datos.solicitante}</td>
+					<td class="etiqueta">Cédula:</td>
+					<td class="valor">{!datos.cedula}</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Destino:</td>
+					<td
+						colspan="3"
+						class="valor">
+						{!datos.destino}
+					</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Oficial de Negocios:</td>
+					<td class="valor">{!datos.oficialNegocios}</td>
+					<td class="etiqueta">Sucursal:</td>
+					<td class="valor">{!datos.sucursal}</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Analista:</td>
+					<td class="valor">{!datos.analista}</td>
+					<td class="etiqueta">Fecha Evaluación:</td>
+					<td class="valor">{!datos.fechaEvaluacion}</td>
+				</tr>
+				<apex:outputPanel layout="none"
+					rendered="{!datos.esHipotecario}">
+					<tr>
+						<td class="etiqueta">Exposición Total:</td>
+						<td
+							colspan="3"
+							class="valor">
+							{!datos.exposicionTotal}
+						</td>
+					</tr>
+				</apex:outputPanel>
+				<apex:outputPanel layout="none"
+					rendered="{!NOT(datos.esHipotecario)}">
+					<tr>
+						<td class="etiqueta">Exposición Total:</td>
+						<td class="valor">{!datos.exposicionTotal}</td>
+						<td class="etiqueta">Garantía:</td>
+						<td class="valor">{!datos.garantiaResumen}</td>
+					</tr>
+				</apex:outputPanel>
+			</table>
+
+			<table class="bloque">
+				<tr>
+					<td
+						colspan="6"
+						class="seccion">
+						CONDICIONES FINANCIERAS DEL PRÉSTAMO
+					</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Monto Solicitado:</td>
+					<td
+						colspan="5"
+						class="valor">
+						{!datos.montoSolicitado}
+					</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Plazo en Meses:</td>
+					<td class="valor">{!datos.plazoMeses}</td>
+					<td class="etiqueta">Tasa de Interés:</td>
+					<td class="valor">{!datos.tasaInteres} (Fija por {!datos.tiempoTasaFija} meses)</td>
+					<td class="etiqueta">Cuota Estimada:</td>
+					<td class="valor">{!datos.cuotaEstimada}</td>
+				</tr>
+			</table>
+
+			<table class="bloque">
+				<tr>
+					<td
+						colspan="6"
+						class="seccion">
+						PERFIL DEL CLIENTE / DEUDOR
+					</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Edad:</td>
+					<td class="valor">{!datos.edad}</td>
+					<td class="etiqueta">Estado Civil:</td>
+					<td class="valor">{!datos.estadoCivil}</td>
+					<td class="etiqueta">Dependientes:</td>
+					<td class="valor">{!datos.dependientes}</td>
+				</tr>
+				<apex:outputPanel layout="none"
+					rendered="{!datos.esHipotecario}">
+					<tr>
+						<td class="etiqueta">Residencial:</td>
+						<td
+							colspan="3"
+							class="valor">
+							{!datos.residencial}
+						</td>
+						<td class="etiqueta">Nacionalidad:</td>
+						<td class="valor">{!datos.nacionalidad}</td>
+					</tr>
+				</apex:outputPanel>
+				<tr>
+					<td class="etiqueta">Actividad Económica:</td>
+					<td
+						colspan="5"
+						class="valor texto-largo">
+						{!datos.actividadEconomica}
+					</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Antigüedad:</td>
+					<td
+						colspan="5"
+						class="valor">
+						{!datos.antiguedadLaboral}
+					</td>
+				</tr>
+			</table>
+
+			<table class="bloque">
+				<tr>
+					<td
+						colspan="4"
+						class="seccion">
+						INGRESOS Y CAPACIDAD DE PAGO
+					</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Ingresos Mensuales Promedio:</td>
+					<td
+						colspan="3"
+						class="valor">
+						{!datos.ingresosMensualesPromedio}
+					</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Evidencia de Ingresos:</td>
+					<td
+						colspan="3"
+						class="valor">
+						{!datos.evidenciaIngresos}
+					</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Cuotas Financieras:</td>
+					<td class="valor">{!datos.cuotasFinancieras}</td>
+					<td class="etiqueta">Relación Cuota/Ingresos:</td>
+					<td class="valor">{!datos.relacionCuotaIngresos}</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Endeudamiento Total:</td>
+					<td class="valor">{!datos.endeudamientoTotal}</td>
+					<td class="etiqueta">Solvencia Estimada:</td>
+					<td class="valor">{!datos.solvenciaEstimada}</td>
+				</tr>
+			</table>
+
+			<table class="bloque"
+				width="100%"
+				style="{!IF(datos.esVehiculo, '', 'display: none;')}">
+					<tr>
+						<td
+							colspan="6"
+							class="seccion">
+							GARANTÍA
+						</td>
+					</tr>
+					<tr>
+						<td class="etiqueta">Tipo:</td>
+						<td
+							colspan="5"
+							class="valor">
+							{!datos.garantiaTipo}
+						</td>
+					</tr>
+					<tr>
+						<td class="etiqueta">Marca:</td>
+						<td class="valor">{!datos.garantiaMarca}</td>
+						<td class="etiqueta">Modelo:</td>
+						<td class="valor">{!datos.garantiaModelo}</td>
+						<td class="etiqueta">Año:</td>
+						<td class="valor">{!datos.garantiaAno}</td>
+					</tr>
+					<tr>
+						<td class="etiqueta">Tasador:</td>
+						<td
+							colspan="2"
+							class="valor">
+							{!datos.garantiaTasador}
+						</td>
+						<td class="etiqueta">Fecha de Tasador:</td>
+						<td
+							colspan="2"
+							class="valor">
+							{!datos.garantiaFechaTasacion}
+						</td>
+					</tr>
+					<tr>
+						<td class="etiqueta">Valor Tasación:</td>
+						<td
+							colspan="2"
+							class="valor">
+							{!datos.garantiaValorTasacion}
+						</td>
+						<td class="etiqueta">Monto Préstamo sobre Tasación:</td>
+						<td
+							colspan="2"
+							class="valor">
+							{!datos.prestamoSobreTasacion}
+						</td>
+					</tr>
+			</table>
+
+			<table class="bloque"
+				width="100%"
+				style="{!IF(datos.esHipotecario, '', 'display: none;')}">
+					<tr>
+						<td
+							colspan="6"
+							class="seccion">
+							GARANTÍA
+						</td>
+					</tr>
+					<tr>
+						<td class="etiqueta">Tipo:</td>
+						<td
+							colspan="5"
+							class="valor">
+							{!datos.garantiaTipo}
+						</td>
+					</tr>
+					<tr>
+						<td class="etiqueta">Ubicación:</td>
+						<td
+							colspan="5"
+							class="valor">
+							{!datos.garantiaUbicacion}
+						</td>
+					</tr>
+					<tr>
+						<td class="etiqueta">Superficie:</td>
+						<td
+							colspan="5"
+							class="valor">
+							{!datos.garantiaSuperficie}
+						</td>
+					</tr>
+					<tr>
+						<td class="etiqueta">Tasador:</td>
+						<td
+							colspan="2"
+							class="valor">
+							{!datos.garantiaTasador}
+						</td>
+						<td class="etiqueta">Fecha de Tasador:</td>
+						<td
+							colspan="2"
+							class="valor">
+							{!datos.garantiaFechaTasacion}
+						</td>
+					</tr>
+					<tr>
+						<td class="etiqueta">Monto Préstamo sobre Tasación:</td>
+						<td
+							colspan="2"
+							class="valor">
+							{!datos.prestamoSobreTasacion}
+						</td>
+						<td class="etiqueta">Monto sobre Precio Venta:</td>
+						<td
+							colspan="2"
+							class="valor">
+							{!datos.prestamoSobrePrecioVenta}
+						</td>
+					</tr>
+					<tr>
+						<td class="etiqueta">Valor Tasación:</td>
+						<td
+							colspan="2"
+							class="valor">
+							{!datos.garantiaValorTasacion}
+						</td>
+						<td class="etiqueta">Precio Venta:</td>
+						<td
+							colspan="2"
+							class="valor">
+							{!datos.garantiaPrecioVenta}
+						</td>
+					</tr>
+					<tr>
+						<td class="etiqueta">Pago Inicial:</td>
+						<td
+							colspan="5"
+							class="valor">
+							{!datos.garantiaPagoInicial}
+						</td>
+					</tr>
+			</table>
+
+			<table class="bloque">
+				<tr>
+					<td
+						colspan="4"
+						class="seccion">
+						HISTORIAL CREDITICIO
+					</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Score Crediticio:</td>
+					<td class="valor">{!datos.scoreCrediticio}</td>
+					<td class="etiqueta">Clasificación de Riesgo:</td>
+					<td class="valor">{!datos.clasificacionRiesgo}</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Historial de Pago:</td>
+					<td
+						colspan="3"
+						class="valor texto-largo">
+						{!datos.historialPago}
+					</td>
+				</tr>
+			</table>
+
+			<table class="bloque">
+				<tr>
+					<td class="seccion">EXCEPCIONES</td>
+				</tr>
+				<tr>
+					<td class="valor texto-largo">{!datos.excepciones}</td>
+				</tr>
+			</table>
+			<table class="bloque">
+				<tr>
+					<td class="seccion">RECOMENDACIÓN DEL ÁREA DE CRÉDITO</td>
+				</tr>
+				<tr>
+					<td class="valor texto-largo">{!datos.recomendacion}</td>
+				</tr>
+			</table>
+			<table class="bloque">
+				<tr>
+					<td colspan="2" class="seccion">FECHA DE APROBACIÓN</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Fecha de aprobación:</td>
+					<td class="valor">{!datos.fechaAprobacion}</td>
+				</tr>
+				<tr>
+					<td class="etiqueta">Monto aprobado:</td>
+					<td class="valor">{!datos.montoAprobado}</td>
+				</tr>
+			</table>
+		</body>
+	</html>
+</apex:page>

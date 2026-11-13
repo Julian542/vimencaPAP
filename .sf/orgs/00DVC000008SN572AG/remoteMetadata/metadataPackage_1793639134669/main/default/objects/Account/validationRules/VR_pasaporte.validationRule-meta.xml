@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_pasaporte</fullName>
+    <active>true</active>
+    <description>Validación para validar que la fecha de vencimiento está completa cuando se selecciona pasaporte en identificacion</description>
+    <errorConditionFormula>AND (
+				$Label.Validaciones == &apos;Si&apos;,
+				ISPICKVAL( ACC_Estado__c, &apos;CALIFICAR&apos;),
+				ISBLANK(ACC_Fecha_Vencimiento_Pasaporte__c),  
+ 			ISPICKVAL(ACC_TipoIdentificacion__c, &apos;Pasaporte&apos;)
+)</errorConditionFormula>
+    <errorMessage>Rellene la fecha de vencimiento del pasaporte</errorMessage>
+</ValidationRule>

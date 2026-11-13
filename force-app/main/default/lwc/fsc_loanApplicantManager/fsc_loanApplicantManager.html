@@ -518,7 +518,7 @@
 														name="FSC_FirstName__c"
 														label="Nombres"
 														value={referenciaDraft.FSC_FirstName__c}
-														required
+														required={isReferenciaFirstNameRequired}
 														data-referencia-input
 														onchange={handleReferenciaDraftChange}>
 													</lightning-input>
@@ -605,6 +605,7 @@
 														label="Parentesco"
 														value={referenciaDraft.FSC_Parentesco__c}
 														options={referenciaParentescoOptions}
+														placeholder={referenciaParentescoPlaceholder}
 														required
 														data-referencia-input
 														onchange={handleReferenciaDraftChange}>
@@ -638,12 +639,24 @@
 									<div class="slds-grid slds-wrap slds-gutters">
 										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
 											<lightning-combobox
-												label="Ocupacion"
-												value={ocupacion}
-												options={ocupacionOptions}
+												label="Ocupación"
+												value={selectedOccupation}
+												options={occupationChoices}
 												onchange={handleOcupacionChange}
 												data-laboral-input
 												required></lightning-combobox>
+											<template lwc:if={showCustomOccupation}>
+												<lightning-input
+													type="text"
+													label="Especifique la ocupación"
+													value={ocupacion}
+													maxlength="255"
+													pattern=".*\S.*"
+													message-when-pattern-mismatch="Ingrese una ocupación que no contenga solo espacios."
+													onchange={handleCustomOccupationChange}
+													data-laboral-input
+													required></lightning-input>
+											</template>
 										</div>
 										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
 											<lightning-combobox
@@ -656,9 +669,11 @@
 										</div>
 										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
 											<lightning-input
-												label="Lugar donde Labora"
+												label="Lugar donde Labora o Actividad Comercial"
 												value={lugarLabora}
-												onchange={handleLugarLaboraChange}></lightning-input>
+												onchange={handleLugarLaboraChange}
+												data-laboral-input
+												required></lightning-input>
 										</div>
 										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
 											<lightning-input
@@ -673,17 +688,11 @@
 										</div>
 										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
 											<lightning-input
-												label="Tipo de Negocio"
-												value={tipoNegocio}
-												onchange={handleTipoNegocioChange}
-												data-laboral-input
-												required></lightning-input>
-										</div>
-										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
-											<lightning-input
 												label="Empresa Anterior"
 												value={empresaAnterior}
-												onchange={handleEmpresaAnteriorChange}></lightning-input>
+												onchange={handleEmpresaAnteriorChange}
+												data-laboral-input
+												required></lightning-input>
 										</div>
 										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
 											<lightning-input
@@ -705,13 +714,17 @@
 												label="Otros Ingresos"
 												type="number"
 												value={otrosIngresos}
-												onchange={handleOtrosIngresosChange}></lightning-input>
+												onchange={handleOtrosIngresosChange}
+												data-laboral-input
+												required></lightning-input>
 										</div>
 										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
 											<lightning-input
 												label="Descripcion Otros Ingresos"
 												value={descripcionOtrosIngresos}
-												onchange={handleDescripcionOtrosIngresosChange}></lightning-input>
+												onchange={handleDescripcionOtrosIngresosChange}
+												data-laboral-input
+												required></lightning-input>
 										</div>
 										<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
 											<lightning-input
@@ -732,7 +745,8 @@
 												onchange={handleAmountInput}
 												onpaste={handleAmountPaste}
 												onblur={handleAmountBlur}
-												data-laboral-input></lightning-input>
+												data-laboral-input
+												required></lightning-input>
 										</div>
 									</div>
 								</div>
@@ -873,7 +887,7 @@
 								label={actionButtonLabel}
 								variant="brand"
 								onclick={saveApplicant}
-								disabled={isSavingApplicant}></lightning-button>
+								disabled={isApplicantSaveDisabled}></lightning-button>
 						</template>
 					</footer>
 				</div>

@@ -28,7 +28,10 @@ public without sharing class FSC_RlaAccionesController {
 	private static final String RESPUESTA_CLASIFICACION_MIPYMES_VALIDA = 'ClasificacionMIPYMESValida';
 	private static final String PROCESO_ANALISTA = 'FSC_AnalistasDeCredito';
 	private static final Set<String> PROCESOS_REASIGNACION_SUPERVISOR = new Set<String>{
-		PROCESO_ANALISTA, 'FSC_SupervisorDeCredito', 'FSC_ComiteDeCredito'
+		PROCESO_ANALISTA,
+		'FSC_SupervisorDeCredito',
+		'FSC_ComiteDeCredito',
+		'FSC_InstanciasAprobacionCredito'
 	};
 	private static final String PROCESO_BANCA_SEGURO = 'FSC_BancaSeguro';
 	private static final String PROCESO_VALIDACION_ABANKS = 'FSC_ValidacionEnAbanks';
@@ -311,6 +314,14 @@ public without sharing class FSC_RlaAccionesController {
 
 		result.put('hasActiveApproval', !workItems.isEmpty());
 		result.put('workItemCount', workItems.size());
+		for (Integer i = 0; i < workItems.size(); i++) {
+			if (workItems[i].ActorId == UserInfo.getUserId()) {
+				ProcessInstanceWorkitem primero = workItems[0];
+				workItems[0] = workItems[i];
+				workItems[i] = primero;
+				break;
+			}
+		}
 
 		if (!workItems.isEmpty() && workItems[0].ActorId != null) {
 			Id actorId = workItems[0].ActorId;
@@ -322,6 +333,59 @@ public without sharing class FSC_RlaAccionesController {
 			result.put('currentApproverId', actorId);
 			result.put('currentApproverType', actorType);
 			result.put('currentProcessDefinitionDeveloperName', currentProcessDefinitionDeveloperName);
+			if (currentProcessDefinitionDeveloperName == FSC_InstanciasCreditoService.PROCESO) {
+				ResidentialLoanApplication solicitud = [
+					SELECT
+						FSC_InstanciaAprobacion__c,
+						FSC_UsuarioSubgerente__c,
+						FSC_UsuarioGerente__c,
+						FSC_UsuarioVPBancaEmpresarial__c,
+						FSC_UsuarioVPBancaPersonal__c,
+						FSC_DebeRevisarSupervisor__c
+					FROM ResidentialLoanApplication
+					WHERE Id = :residentialLoanApplicationId
+				];
+				String paso = FSC_InstanciasCreditoService.pasoPendiente(workItems[0].ProcessInstanceId);
+				Boolean reemplazoSupervisor = paso == 'Analista' && solicitud.FSC_DebeRevisarSupervisor__c;
+				String rolEtapa = reemplazoSupervisor ? 'Supervisor en reemplazo del analista' : FSC_InstanciasCreditoService.rol(paso);
+				List<String> nombres = new List<String>();
+				for (ProcessInstanceWorkitem pendiente : workItems) {
+					String rol = rolEtapa;
+					if (paso == 'SubgerenteOGerente') {
+						rol = pendiente.ActorId == solicitud.FSC_UsuarioSubgerente__c ? 'Subgerente' : 'Gerente';
+						if (solicitud.FSC_UsuarioSubgerente__c == solicitud.FSC_UsuarioGerente__c)
+							rol = 'Subgerente / Gerente';
+					} else if (paso == 'VPBanca') {
+						rol = pendiente.ActorId == solicitud.FSC_UsuarioVPBancaEmpresarial__c ? 'VP Banca Empresarial' : 'VP Banca Personal';
+						if (solicitud.FSC_UsuarioVPBancaEmpresarial__c == solicitud.FSC_UsuarioVPBancaPersonal__c)
+							rol = 'VP Banca Empresarial / VP Banca Personal';
+					}
+					String nombre = pendiente.Actor.Name + ' (' + rol + ')';
+					if (!nombres.contains(nombre))
+						nombres.add(nombre);
+				}
+				result.put('currentApproverName', String.join(nombres, ' o '));
+				result.put('isCreditInstanceApproval', true);
+				result.put('isAnalystStage', paso == 'Analista');
+				result.put('isSupervisorReplacement', reemplazoSupervisor);
+				result.put('isCommitteeStage', new Set<String>{ 'VPEjecutivo', 'VPBanca', 'ComiteII', 'ComiteSuperior' }.contains(paso));
+				result.put('canApproveWithConditions', new Set<String>{ 'VPBanca', 'ComiteII', 'ComiteSuperior' }.contains(paso));
+				result.put(
+					'approvalActionLabel',
+					paso == 'Analista' && solicitud.FSC_InstanciaAprobacion__c != FSC_InstanciasCreditoService.ANALISTA ? 'Recomendar' : 'Aprobar'
+				);
+				result.put(
+					'approvalStageMessage',
+					'Instancia: ' +
+						solicitud.FSC_InstanciaAprobacion__c +
+						'. Etapa pendiente: ' +
+						rolEtapa +
+						(paso == 'SubgerenteOGerente' ||
+							paso == 'VPBanca'
+							? '. Basta la primera respuesta de los responsables indicados.'
+							: '. Las aprobaciones se realizan en orden secuencial.')
+				);
+			}
 
 			if (String.valueOf(actorId).startsWith('00G')) {
 				result.put('isCurrentUserQueueMember', isUserMemberOfGroupRecursive(actorId, UserInfo.getUserId()));
@@ -329,6 +393,23 @@ public without sharing class FSC_RlaAccionesController {
 		}
 
 		return result;
+	}
+
+	@AuraEnabled(cacheable=true)
+	public static List<Map<String, String>> getAssignableUsersForApproval(Id residentialLoanApplicationId) {
+		validarPermisoSupervisorOAdministrador();
+		List<ProcessInstanceWorkitem> pendientes = getActiveWorkItems(residentialLoanApplicationId);
+		if (pendientes.isEmpty() || pendientes[0].ProcessInstance.ProcessDefinition.DeveloperName != FSC_InstanciasCreditoService.PROCESO)
+			return getAssignableUsers();
+		Set<Id> permitidos = FSC_InstanciasCreditoService.usuariosPermitidos(
+			residentialLoanApplicationId,
+			FSC_InstanciasCreditoService.pasoPendiente(pendientes[0].ProcessInstanceId)
+		);
+		List<Map<String, String>> opciones = new List<Map<String, String>>();
+		for (User usuario : [SELECT Id, Name FROM User WHERE Id IN :permitidos AND IsActive = TRUE ORDER BY Name]) {
+			opciones.add(new Map<String, String>{ 'label' => usuario.Name, 'value' => usuario.Id });
+		}
+		return opciones;
 	}
 
 	@AuraEnabled(cacheable=true)
@@ -531,11 +612,15 @@ public without sharing class FSC_RlaAccionesController {
 		if (comentario.length() > 255) {
 			throw new AuraHandledException('Comentario máximo 255 caracteres.');
 		}
+		List<ProcessInstanceWorkitem> workItems = getActiveWorkItems(residentialLoanApplicationId);
+		validateCurrentUserCanActOnWorkItems(workItems);
+
 		ResidentialLoanApplication rlaAntesAprobacion = [
 			SELECT
 				Id,
 				FSC_Subestado__c,
 				FSC_DebeRevisarComite__c,
+				FSC_DebeRevisarSupervisor__c,
 				FSC_Aprobado_con_Condiciones__c,
 				FSC_Monto__c,
 				FSC_Plazo_meses__c,
@@ -548,6 +633,8 @@ public without sharing class FSC_RlaAccionesController {
 		FSC_GarantiaFormalizacionService.validarAprobacionArchivoCustodia(residentialLoanApplicationId, rlaAntesAprobacion.FSC_Subestado__c);
 
 		Boolean esProcesoAnalista = hasActiveApprovalForProcess(residentialLoanApplicationId, PROCESO_ANALISTA);
+		Boolean esInstanciasCredito =
+			!workItems.isEmpty() && workItems[0].ProcessInstance.ProcessDefinition.DeveloperName == FSC_InstanciasCreditoService.PROCESO;
 		Boolean esProcesoBancaSeguro = hasActiveApprovalForProcess(residentialLoanApplicationId, PROCESO_BANCA_SEGURO);
 		if (esProcesoBancaSeguro) {
 			validarPermisoBancaSeguroOAdministrador();
@@ -566,29 +653,42 @@ public without sharing class FSC_RlaAccionesController {
 		}
 
 		Boolean esAprobacionSimpleComite =
+			!esInstanciasCredito &&
 			rlaAntesAprobacion.FSC_DebeRevisarComite__c == true &&
 			rlaAntesAprobacion.FSC_Aprobado_con_Condiciones__c != true &&
 			normalize(rlaAntesAprobacion.FSC_Subestado__c) == SUBESTADO_ANALISIS_CREDITO_NORM;
 
-		List<ProcessInstanceWorkitem> workItems = getActiveWorkItems(residentialLoanApplicationId);
-		if (workItems.isEmpty()) {
-			System.debug('No hay proceso de aprobación activo.');
+		if (esProcesoAnalista && esInstanciasCredito) {
+			ResidentialLoanApplication actualizacion = new ResidentialLoanApplication(
+				Id = residentialLoanApplicationId,
+				FSC_Recomendaciones__c = comentario.trim()
+			);
+			if (exigirHistorialAnalista)
+				actualizacion.FSC_HistorialPago__c = historialPago.trim();
+			update actualizacion;
 		}
-
+		List<Approval.ProcessWorkitemRequest> requests = new List<Approval.ProcessWorkitemRequest>();
 		for (ProcessInstanceWorkitem wi : workItems) {
 			Approval.ProcessWorkitemRequest req = new Approval.ProcessWorkitemRequest();
 			req.setWorkitemId(wi.Id);
 			req.setAction('Approve');
-			req.setComments(comentario.trim());
+			req.setComments(
+				esInstanciasCredito &&
+					esProcesoAnalista &&
+					rlaAntesAprobacion.FSC_DebeRevisarSupervisor__c
+					? 'Supervisor en reemplazo del analista: ' + comentario.trim()
+					: comentario.trim()
+			);
 
-			Approval.ProcessResult result = Approval.process(req);
-
+			requests.add(req);
+		}
+		for (Approval.ProcessResult result : Approval.process(requests)) {
 			if (!result.isSuccess()) {
 				throw new AuraHandledException('No se pudo aprobar el proceso de aprobación actual.' + getApprovalErrorDetail(result));
 			}
 		}
 
-		if (esProcesoAnalista) {
+		if (esProcesoAnalista && !esInstanciasCredito) {
 			ResidentialLoanApplication actualizacionAnalista = new ResidentialLoanApplication(
 				Id = residentialLoanApplicationId,
 				FSC_Recomendaciones__c = comentario.trim()
@@ -691,18 +791,18 @@ public without sharing class FSC_RlaAccionesController {
 		}
 
 		List<ProcessInstanceWorkitem> workItems = getActiveWorkItems(residentialLoanApplicationId);
-		if (workItems.isEmpty()) {
-			System.debug('No hay proceso de aprobación activo.');
-		}
+		validateCurrentUserCanActOnWorkItems(workItems);
 
+		List<Approval.ProcessWorkitemRequest> requests = new List<Approval.ProcessWorkitemRequest>();
 		for (ProcessInstanceWorkitem wi : workItems) {
 			Approval.ProcessWorkitemRequest req = new Approval.ProcessWorkitemRequest();
 			req.setWorkitemId(wi.Id);
 			req.setAction('Reject');
 			req.setComments(motivo);
 
-			Approval.ProcessResult result = Approval.process(req);
-
+			requests.add(req);
+		}
+		for (Approval.ProcessResult result : Approval.process(requests)) {
 			if (!result.isSuccess()) {
 				throw new AuraHandledException('No se pudo rechazar el proceso de aprobación actual.' + getApprovalErrorDetail(result));
 			}
@@ -728,6 +828,14 @@ public without sharing class FSC_RlaAccionesController {
 
 		List<ProcessInstanceWorkitem> workItems = getActiveWorkItems(residentialLoanApplicationId);
 		// El permiso de supervisor solo habilita estas revisiones de crédito.
+		if (!workItems.isEmpty() && workItems[0].ProcessInstance.ProcessDefinition.DeveloperName == FSC_InstanciasCreditoService.PROCESO) {
+			Set<Id> permitidos = FSC_InstanciasCreditoService.usuariosPermitidos(
+				residentialLoanApplicationId,
+				FSC_InstanciasCreditoService.pasoPendiente(workItems[0].ProcessInstanceId)
+			);
+			if (!permitidos.contains(newActorId))
+				throw new AuraHandledException('El usuario debe pertenecer a la cola de esta función y tipo de crédito.');
+		}
 		if (!testBypassPermissions && !FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR)) {
 			ResidentialLoanApplication solicitud = [
 				SELECT FSC_Subestado__c
@@ -779,6 +887,23 @@ public without sharing class FSC_RlaAccionesController {
 					throw new AuraHandledException('No se pudo reasignar el proceso de aprobación actual. ' + ex2.getMessage());
 				}
 			}
+		}
+		if (
+			!workItems.isEmpty() &&
+			workItems[0].ProcessInstance.ProcessDefinition.DeveloperName == FSC_InstanciasCreditoService.PROCESO &&
+			FSC_InstanciasCreditoService.pasoPendiente(workItems[0].ProcessInstanceId) == 'Analista'
+		) {
+			ResidentialLoanApplication solicitud = [
+				SELECT FSC_DebeRevisarSupervisor__c
+				FROM ResidentialLoanApplication
+				WHERE Id = :residentialLoanApplicationId
+			];
+			ResidentialLoanApplication cambio = new ResidentialLoanApplication(Id = residentialLoanApplicationId);
+			if (solicitud.FSC_DebeRevisarSupervisor__c)
+				cambio.FSC_UsuarioSupervisor__c = newActorId;
+			else
+				cambio.FSC_UsuarioAnalista__c = newActorId;
+			update cambio;
 		}
 	}
 
@@ -993,7 +1118,7 @@ public without sharing class FSC_RlaAccionesController {
 	}
 
 	private static void validarAutomatizacionAbanks(Id solicitudId) {
-		if (!FSC_ProcesamientoAbanks.habilitadas(new Set<Id>{solicitudId}).contains(solicitudId)) {
+		if (!FSC_ProcesamientoAbanks.habilitadas(new Set<Id>{ solicitudId }).contains(solicitudId)) {
 			throw new AuraHandledException('La automatización de Abanks está deshabilitada para esta solicitud. Continúe por Captura y Operaciones.');
 		}
 	}
@@ -1103,6 +1228,18 @@ public without sharing class FSC_RlaAccionesController {
 		if (otrasCondicionesComite != null && otrasCondicionesComite.length() > 2000) {
 			throw new AuraHandledException('Otras condiciones máximo 2000 caracteres.');
 		}
+		validateCurrentUserCanActOnApproval(residentialLoanApplicationId, 'FSC_ComiteDeCredito');
+		List<ProcessInstanceWorkitem> pendientesCondicion = getActiveWorkItems(residentialLoanApplicationId);
+		Boolean esInstancia =
+			!pendientesCondicion.isEmpty() &&
+			pendientesCondicion[0].ProcessInstance.ProcessDefinition.DeveloperName == FSC_InstanciasCreditoService.PROCESO;
+		if (
+			esInstancia &&
+			!new Set<String>{ 'VPBanca', 'ComiteII', 'ComiteSuperior' }
+				.contains(FSC_InstanciasCreditoService.pasoPendiente(pendientesCondicion[0].ProcessInstanceId))
+		) {
+			throw new AuraHandledException('Las condiciones se registran en la última aprobación del comité.');
+		}
 
 		ResidentialLoanApplication upd = new ResidentialLoanApplication(
 			Id = residentialLoanApplicationId,
@@ -1111,11 +1248,13 @@ public without sharing class FSC_RlaAccionesController {
 			FSC_TasaInteresAprobada__c = tasaInteresAprobada,
 			FSC_OtrasCondicionesComite__c = otrasCondicionesComite,
 			FSC_Aprobado_con_Condiciones__c = true,
-			FSC_SolicitudAprobadaPorComite__c = true,
-			FSC_FechaYHoraAprobacionComite__c = System.now()
+			FSC_SolicitudAprobadaPorComite__c = !esInstancia,
+			FSC_FechaYHoraAprobacionComite__c = esInstancia ? null : System.now()
 		);
 
 		update upd;
+		if (esInstancia)
+			aprobarProcesoActualInterno(residentialLoanApplicationId, 'Aprobado con condiciones. Pendiente de aceptación del cliente.', null, false);
 	}
 
 	@AuraEnabled
@@ -1124,8 +1263,8 @@ public without sharing class FSC_RlaAccionesController {
 			throw new AuraHandledException('Solicitud requerida.');
 		if (String.isBlank(motivo))
 			throw new AuraHandledException('Motivo requerido.');
-		if (motivo.length() > 255)
-			throw new AuraHandledException('Motivo excede 255 caracteres.');
+		if (motivo.length() > 2000)
+			throw new AuraHandledException('Motivo excede 2000 caracteres.');
 
 		validateCurrentUserCanActOnApproval(residentialLoanApplicationId, null);
 
@@ -1145,8 +1284,21 @@ public without sharing class FSC_RlaAccionesController {
 			throw new AuraHandledException('Solicitud requerida.');
 		if (String.isBlank(motivo))
 			throw new AuraHandledException('Motivo requerido.');
-		if (motivo.length() > 255)
-			throw new AuraHandledException('Motivo excede 255 caracteres.');
+		if (motivo.length() > 2000)
+			throw new AuraHandledException('Motivo excede 2000 caracteres.');
+		ProcessInstanceWorkitem pendiente = getActiveWorkItemForProcess(residentialLoanApplicationId, PROCESO_ANALISTA);
+		if (pendiente?.ProcessInstance.ProcessDefinition.DeveloperName == FSC_InstanciasCreditoService.PROCESO) {
+			validateCurrentUserCanActOnWorkItems(new List<ProcessInstanceWorkitem>{ pendiente });
+			if (!FeatureManagement.checkPermission(PERMISO_SUPERVISOR) && !FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR)) {
+				throw buildApprovalAuthorizationError();
+			}
+			if (!FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR)) {
+				FSC_RlaApprovalAdminClient.returnToAnalyst(residentialLoanApplicationId, motivo);
+				return;
+			}
+			FSC_RlaApprovalAdminService.returnToAnalyst(residentialLoanApplicationId, motivo);
+			return;
+		}
 
 		if (shouldUsePrivilegedSupervisorFallback(residentialLoanApplicationId)) {
 			FSC_RlaApprovalAdminClient.returnToAnalyst(residentialLoanApplicationId, motivo);
@@ -1163,6 +1315,22 @@ public without sharing class FSC_RlaAccionesController {
 		}
 
 		validateAnalystDecisionReadiness(residentialLoanApplicationId);
+		ProcessInstanceWorkitem pendiente = getActiveWorkItemForProcess(residentialLoanApplicationId, PROCESO_ANALISTA);
+		if (pendiente?.ProcessInstance.ProcessDefinition.DeveloperName == FSC_InstanciasCreditoService.PROCESO) {
+			ResidentialLoanApplication solicitud = [
+				SELECT FSC_DebeRevisarSupervisor__c
+				FROM ResidentialLoanApplication
+				WHERE Id = :residentialLoanApplicationId
+			];
+			if (solicitud.FSC_DebeRevisarSupervisor__c)
+				throw new AuraHandledException('La decisión ya está en revisión de Supervisor.');
+			if (!FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR)) {
+				FSC_RlaApprovalAdminClient.sendToSupervisor(residentialLoanApplicationId);
+				return;
+			}
+			FSC_RlaApprovalAdminService.sendToSupervisor(residentialLoanApplicationId);
+			return;
+		}
 
 		if (shouldUsePrivilegedSupervisorFallback(residentialLoanApplicationId)) {
 			FSC_RlaApprovalAdminClient.sendToSupervisor(residentialLoanApplicationId);
@@ -1633,30 +1801,30 @@ public without sharing class FSC_RlaAccionesController {
 		}
 	}
 
-    @AuraEnabled
-    public static Map<String, Object> getRevisionDocumentosLegales(Id residentialLoanApplicationId) {
-        return FSC_DocumentoLegalService.contexto(residentialLoanApplicationId);
-    }
+	@AuraEnabled
+	public static Map<String, Object> getRevisionDocumentosLegales(Id residentialLoanApplicationId) {
+		return FSC_DocumentoLegalService.contexto(residentialLoanApplicationId);
+	}
 
-    @AuraEnabled
-    public static Map<String, Object> getDocumentoLegalEditable(Id residentialLoanApplicationId, Id contentVersionId) {
-        return FSC_DocumentoLegalService.obtenerDocumento(residentialLoanApplicationId, contentVersionId);
-    }
+	@AuraEnabled
+	public static Map<String, Object> getDocumentoLegalEditable(Id residentialLoanApplicationId, Id contentVersionId) {
+		return FSC_DocumentoLegalService.obtenerDocumento(residentialLoanApplicationId, contentVersionId);
+	}
 
-    @AuraEnabled
-    public static Id guardarDocumentoLegalEditado(Id residentialLoanApplicationId, Id contentVersionId, String cambiosJson) {
-        return FSC_DocumentoLegalService.guardar(residentialLoanApplicationId, contentVersionId, cambiosJson);
-    }
+	@AuraEnabled
+	public static Id guardarDocumentoLegalEditado(Id residentialLoanApplicationId, Id contentVersionId, String cambiosJson) {
+		return FSC_DocumentoLegalService.guardar(residentialLoanApplicationId, contentVersionId, cambiosJson);
+	}
 
-    @AuraEnabled
-    public static void validarDocumentosLegales(Id residentialLoanApplicationId) {
-        FSC_DocumentoLegalService.validar(residentialLoanApplicationId);
-    }
+	@AuraEnabled
+	public static void validarDocumentosLegales(Id residentialLoanApplicationId) {
+		FSC_DocumentoLegalService.validar(residentialLoanApplicationId);
+	}
 
-    @AuraEnabled
-    public static void reintentarDocumentosLegales(Id residentialLoanApplicationId) {
-        FSC_DocumentoLegalService.reintentar(residentialLoanApplicationId);
-    }
+	@AuraEnabled
+	public static void reintentarDocumentosLegales(Id residentialLoanApplicationId) {
+		FSC_DocumentoLegalService.reintentar(residentialLoanApplicationId);
+	}
 
 	@AuraEnabled
 	public static void rechazarPorCliente(Id residentialLoanApplicationId) {
@@ -1727,7 +1895,6 @@ public without sharing class FSC_RlaAccionesController {
 			solicitud.FSC_Doc_Completa_Analisis__c == true &&
 			solicitud.FSC_DocumentacionValidadaAnalista__c == true &&
 			solicitud.FSC_DebeRevisarComite__c == false &&
-			solicitud.FSC_DebeRevisarSupervisor__c == false &&
 			solicitud.FSC_Aprobado_con_Condiciones__c == false;
 		if (!etapaValida) {
 			throw new AuraHandledException('Los documentos solo pueden editarse durante la decisión del analista, antes de enviarlos a Comité.');
@@ -1735,7 +1902,8 @@ public without sharing class FSC_RlaAccionesController {
 
 		if (!(Test.isRunningTest() && testPermitirEdicionDocumentosAnalisis)) {
 			Boolean tienePermiso =
-				FeatureManagement.checkPermission(PERMISO_ANALISTA_CREDITO) || FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR);
+				FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR) ||
+				FeatureManagement.checkPermission(solicitud.FSC_DebeRevisarSupervisor__c ? PERMISO_SUPERVISOR : PERMISO_ANALISTA_CREDITO);
 			if (!tienePermiso) {
 				throw new AuraHandledException('No tiene autorización para editar los documentos de análisis.');
 			}
@@ -2443,12 +2611,21 @@ public without sharing class FSC_RlaAccionesController {
 	}
 
 	private static List<ProcessInstanceWorkitem> getActiveWorkItems(Id residentialLoanApplicationId) {
-		return [
+		List<ProcessInstanceWorkitem> pendientes = [
 			SELECT Id, ActorId, OriginalActorId, ProcessInstanceId, ProcessInstance.ProcessDefinition.DeveloperName
 			FROM ProcessInstanceWorkitem
 			WHERE ProcessInstance.TargetObjectId = :residentialLoanApplicationId
 			ORDER BY CreatedDate DESC
 		];
+		if (!pendientes.isEmpty() && pendientes[0].ProcessInstance.ProcessDefinition.DeveloperName == FSC_InstanciasCreditoService.PROCESO) {
+			for (ProcessInstanceWorkitem pendiente : pendientes) {
+				if (pendiente.ActorId == UserInfo.getUserId())
+					return new List<ProcessInstanceWorkitem>{ pendiente };
+			}
+			if (FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR))
+				return new List<ProcessInstanceWorkitem>{ pendientes[0] };
+		}
+		return pendientes;
 	}
 
 	private static void validateAnalystDecisionReadiness(Id residentialLoanApplicationId) {
@@ -2474,31 +2651,55 @@ public without sharing class FSC_RlaAccionesController {
 
 	private static void validateCurrentUserCanActOnApproval(Id residentialLoanApplicationId, String expectedProcessDeveloperName) {
 		ProcessInstanceWorkitem workItem = getActiveWorkItemForProcess(residentialLoanApplicationId, expectedProcessDeveloperName);
+		validateCurrentUserCanActOnWorkItems(workItem == null ? null : new List<ProcessInstanceWorkitem>{ workItem });
+	}
 
-		if (workItem == null) {
+	@TestVisible
+	private static void validateCurrentUserCanActOnWorkItems(List<ProcessInstanceWorkitem> workItems) {
+		if (workItems == null || workItems.isEmpty()) {
 			throw new AuraHandledException('No hay un proceso de aprobación activo para esta acción.');
+		}
+		if (FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR)) {
+			return;
 		}
 
 		Id currentUserId = UserInfo.getUserId();
-		Boolean canAct =
-			FeatureManagement.checkPermission(PERMISO_ADMINISTRADOR) ||
-			workItem.ActorId == currentUserId ||
-			(workItem.ActorId != null &&
-			String.valueOf(workItem.ActorId).startsWith('00G') &&
-			isUserMemberOfGroupRecursive(workItem.ActorId, currentUserId));
-
-		if (!canAct) {
-			throw new AuraHandledException(
-				'Usted no tiene autorización para realizar esta acción, solo la persona asignada o un administrador tienen permiso.'
-			);
+		Set<Id> queueIds = new Set<Id>();
+		for (ProcessInstanceWorkitem workItem : workItems) {
+			if (workItem.ActorId == currentUserId) {
+				continue;
+			}
+			if (workItem.ActorId != null && workItem.ActorId.getSObjectType() == Group.SObjectType) {
+				queueIds.add(workItem.ActorId);
+				continue;
+			}
+			throw buildApprovalAuthorizationError();
 		}
+		// La pertenencia a una cola solo aplica mientras el paso siga asignado a esa cola.
+		for (Id queueId : queueIds) {
+			if (!isUserMemberOfGroupRecursive(queueId, currentUserId)) {
+				throw buildApprovalAuthorizationError();
+			}
+		}
+	}
+
+	private static AuraHandledException buildApprovalAuthorizationError() {
+		AuraHandledException error = new AuraHandledException(MSG_PAGARES_SIN_AUTORIZACION);
+		error.setMessage(MSG_PAGARES_SIN_AUTORIZACION);
+		return error;
 	}
 
 	private static ProcessInstanceWorkitem getActiveWorkItemForProcess(Id residentialLoanApplicationId, String expectedProcessDeveloperName) {
 		for (ProcessInstanceWorkitem workItem : getActiveWorkItems(residentialLoanApplicationId)) {
 			if (
 				String.isBlank(expectedProcessDeveloperName) ||
-				getProcessDefinitionDeveloperName(workItem.ProcessInstanceId) == expectedProcessDeveloperName
+				workItem.ProcessInstance.ProcessDefinition.DeveloperName == expectedProcessDeveloperName ||
+				(workItem.ProcessInstance.ProcessDefinition.DeveloperName == FSC_InstanciasCreditoService.PROCESO &&
+				((expectedProcessDeveloperName == PROCESO_ANALISTA &&
+				FSC_InstanciasCreditoService.pasoPendiente(workItem.ProcessInstanceId) == 'Analista') ||
+				(expectedProcessDeveloperName == 'FSC_ComiteDeCredito' &&
+				new Set<String>{ 'VPEjecutivo', 'VPBanca', 'ComiteII', 'ComiteSuperior' }
+					.contains(FSC_InstanciasCreditoService.pasoPendiente(workItem.ProcessInstanceId)))))
 			) {
 				return workItem;
 			}

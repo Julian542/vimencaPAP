@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cumplimiento_Datos_Financieros__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(OR(ACC_Datos_financieros__c &gt;= 1, ACC_Persona_Fisica__c = false), IMAGE(&quot;/resource/1577362814000/Green?&quot;, &quot;green&quot;, 35, 35),IMAGE(&quot;/resource/1577363379000/Red?&quot;, &quot;red&quot;, 35, 35))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Datos Financieros</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

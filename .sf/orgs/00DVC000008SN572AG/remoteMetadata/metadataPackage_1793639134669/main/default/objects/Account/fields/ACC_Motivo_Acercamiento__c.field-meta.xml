@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ACC_Motivo_Acercamiento__c</fullName>
+    <label>Motivo de acercamiento al banco</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Publicidad en la radio</fullName>
+                <default>false</default>
+                <label>Publicidad en la radio</label>
+            </value>
+            <value>
+                <fullName>Identificación con la marca: solidez y reputación</fullName>
+                <default>false</default>
+                <label>Identificación con la marca: solidez y reputación</label>
+            </value>
+            <value>
+                <fullName>Buen servicio al cliente y facilidades</fullName>
+                <default>false</default>
+                <label>Buen servicio al cliente y facilidades</label>
+            </value>
+            <value>
+                <fullName>Ubicación de nuestra sucursales, subagente, ATM</fullName>
+                <default>false</default>
+                <label>Ubicación de nuestra sucursales, subagente, ATM</label>
+            </value>
+            <value>
+                <fullName>Referido por empleado</fullName>
+                <default>false</default>
+                <label>Referido por empleado</label>
+            </value>
+            <value>
+                <fullName>Publicidad en la televisión</fullName>
+                <default>false</default>
+                <label>Publicidad en la televisión</label>
+            </value>
+            <value>
+                <fullName>Publicidad física</fullName>
+                <default>false</default>
+                <label>Publicidad física</label>
+            </value>
+            <value>
+                <fullName>Campaña Directa</fullName>
+                <default>false</default>
+                <label>Campaña Directa</label>
+            </value>
+            <value>
+                <fullName>Referido por conocido</fullName>
+                <default>false</default>
+                <label>Referido por conocido</label>
+            </value>
+            <value>
+                <fullName>Descontento con la competencia</fullName>
+                <default>false</default>
+                <label>Descontento con la competencia</label>
+            </value>
+            <value>
+                <fullName>Productos que ofrece</fullName>
+                <default>false</default>
+                <label>Productos que ofrece</label>
+            </value>
+            <value>
+                <fullName>Servicios más baratos que la competencia</fullName>
+                <default>false</default>
+                <label>Servicios más baratos que la competencia</label>
+            </value>
+            <value>
+                <fullName>Mejores tasas que la competencia</fullName>
+                <default>false</default>
+                <label>Mejores tasas que la competencia</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Candidatos_Persona_Fisica</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>ACC_Condicion__c</columns>
+    <columns>ACC_Estado__c</columns>
+    <columns>ACC_SubEstado__c</columns>
+    <columns>ACC_TipoIdentificacion__c</columns>
+    <columns>ACC_NumIdentificacion__c</columns>
+    <columns>ACC_Nacionalidad__c</columns>
+    <columns>ACC_CIF__c</columns>
+    <columns>ACC_Correo_Electronico_Cliente__c</columns>
+    <columns>ACCOUNT.RECORDTYPE</columns>
+    <columns>ACC_Aplica_FATCA__c</columns>
+    <columns>ACCOUNT.CREATED_DATE</columns>
+    <columns>CORE.USERS.FIRST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ACC_Condicion__c</field>
+        <operation>equals</operation>
+        <value>PROSPECTO</value>
+    </filters>
+    <filters>
+        <field>ACC_SubEstado__c</field>
+        <operation>equals</operation>
+        <value>EN REVISIÓN</value>
+    </filters>
+    <label>Candidatos Persona Física</label>
+</ListView>

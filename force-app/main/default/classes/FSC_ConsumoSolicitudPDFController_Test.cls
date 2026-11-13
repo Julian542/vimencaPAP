@@ -10,7 +10,8 @@ private class FSC_ConsumoSolicitudPDFController_Test {
 			account.RecordTypeId = personRtId;
 		}
 		account.FirstName = 'Ana';
-		account.LastName = 'Garcia Perez';
+		account.LastName = 'De la Cruz';
+		account.Suffix = 'Perez';
 
 		Map<String, Schema.SObjectField> accountFieldMap = Schema.SObjectType.Account.fields.getMap();
 		setIfFieldExists(account, accountFieldMap, 'MiddleName', 'Maria');
@@ -30,6 +31,17 @@ private class FSC_ConsumoSolicitudPDFController_Test {
 		setIfFieldExists(account, accountFieldMap, 'BillingCountry', 'Republica Dominicana');
 
 		insert account;
+
+		// La deuda consolidada BV se calcula al insertar la solicitud a partir de los productos del deudor.
+		insert new FinServ__FinancialAccount__c(
+			Name = 'Prestamo deudor',
+			FinServ__FinancialAccountNumber__c = 'PDF-PREST-1',
+			FinServ__PrimaryOwner__c = account.Id,
+			FIN_Linea_de_producto__c = 'Préstamos',
+			FIN_Moneda__c = 'DOP',
+			FinServ__Status__c = 'VIGENTE',
+			FinServ__Balance__c = 50000
+		);
 
 		SObject rla = Schema.getGlobalDescribe().get('ResidentialLoanApplication').newSObject();
 		rla.put('AccountId', account.Id);
@@ -78,8 +90,7 @@ private class FSC_ConsumoSolicitudPDFController_Test {
 		setIfFieldExists(rla, rlaFieldMap, 'FSC_Tasa__c', 16.5);
 		setIfFieldExists(rla, rlaFieldMap, 'FSC_Tasa_Fija__c', true);
 		setIfFieldExists(rla, rlaFieldMap, 'FSC_Monto_De_La_Cuota__c', 13000);
-		setIfFieldExists(rla, rlaFieldMap, 'FSC_Tiempo_Tasa_Fija__c', 12);
-		setIfFieldExists(rla, rlaFieldMap, 'FSC_Deuda_Actual__c', 50000);
+		rla.put('FSC_TasaFijaPorMeses__c', 12);
 		setIfFieldExists(rla, rlaFieldMap, 'FSC_Descripcion_Proposito_Facilidad__c', 'Compra de muebles');
 		setIfFieldExists(rla, rlaFieldMap, 'FSC_Compromiso_Mensual__c', 13000);
 		setIfFieldExists(rla, rlaFieldMap, 'FSC_Limite_Autorizado__c', 250000);
@@ -97,8 +108,8 @@ private class FSC_ConsumoSolicitudPDFController_Test {
 				'FSC_TipoIdentificacion__c' => 'Cédula',
 				'FSC_NumIdentificacion__c' => '00100000000',
 				'FSC_Nombre__c' => 'Ana Maria',
-				'FSC_PrimerApellido__c' => 'Garcia',
-				'FSC_SegundoApellido__c' => 'Perez',
+				'FSC_PrimerApellido__c' => '',
+				'FSC_SegundoApellido__c' => '',
 				'FSC_FechaNacimiento__c' => Date.newInstance(1990, 5, 20),
 				'FSC_Nacionalidad__c' => 'REPUBLICA DOMINICANA',
 				'FSC_EstadoCivil__c' => 'SOLTERO/A',
@@ -177,7 +188,12 @@ private class FSC_ConsumoSolicitudPDFController_Test {
 
 		Id referenciaId = insertIfPossible(
 			'FSC_Referencias__c',
-			new Map<String, Object>{ 'Name' => 'Laura Perez Gomez', 'FSC_Residential_Loan_Application__c' => rlaId, 'FSC_Parentesco__c' => 'Hermana' }
+			new Map<String, Object>{
+				'Name' => 'Laura Perez Gomez',
+				'FSC_Residential_Loan_Application__c' => rlaId,
+				'FSC_Parentesco__c' => 'Hermana',
+				'FSC_Telefono__c' => '8095550100'
+			}
 		);
 
 		Id garantiaId = insertIfPossible(
@@ -326,13 +342,19 @@ private class FSC_ConsumoSolicitudPDFController_Test {
 		sink = controller.textoAutorizacion;
 		Test.stopTest();
 
-		System.assertNotEquals(null, controller.sucursal);
+		Assert.areEqual('Sucursal Central', controller.sucursal, 'El PDF debe conservar la sucursal guardada en la solicitud.');
+		if (applicantId != null) {
+			Assert.areEqual('De la Cruz', controller.solicitantePrimerApellido, 'Debe conservar el apellido compuesto consultado en Account.');
+			Assert.areEqual('Perez', controller.solicitanteSegundoApellido, 'Debe recuperar el segundo apellido desde Account.Suffix.');
+		}
 		System.assertEquals('CONTROL DE PRESTAMOS', controller.resumenTipoFacilidad);
 		System.assertEquals('CONSUMO', controller.resumenFacilidad);
 		System.assertEquals('CLI-0001', controller.solicitanteCodigoCliente);
 		System.assertEquals('Compra de muebles', controller.propositoFacilidad);
 		System.assertEquals('Si', controller.esRefinanciamientoSimple);
 		System.assertEquals('No', controller.esConsolidacionSimple);
+		System.assertEquals('RD$ 50,000.00', controller.resumenDeudaConsolidada);
+		Assert.areEqual('12', controller.resumenTiempoTasaFija, 'El PDF debe mostrar los meses de tasa fija guardados en la solicitud.');
 		System.assertEquals(coApplicantId != null, controller.mostrarCoSolicitante);
 		System.assertEquals(garanteApplicantId != null, controller.mostrarGarante);
 		System.assert(controller.textoAutorizacion.contains('AUTORIZO'));
@@ -343,6 +365,7 @@ private class FSC_ConsumoSolicitudPDFController_Test {
 			System.assertEquals('Hermana', controller.referencias[0].parentesco);
 			System.assertEquals('Laura', controller.referencias[0].nombres);
 			System.assertEquals('Perez Gomez', controller.referencias[0].apellidos);
+			Assert.areEqual('8095550100', controller.referencias[0].telefono, 'El PDF debe incluir el telefono de la referencia.');
 		}
 
 		if (applicantId != null) {
@@ -385,6 +408,7 @@ private class FSC_ConsumoSolicitudPDFController_Test {
 		System.assertNotEquals('', controller.fechaHoyFmt);
 		System.assertEquals('', controller.fechaSolicitudFmt);
 		System.assertEquals('', controller.cuotaMensualFmt);
+		System.assertEquals('', controller.laborCargoActual);
 		System.assertEquals('[ ] Si  [X] No', controller.refinanciamientoTexto);
 		System.assertEquals('[ ] Si  [X] No', controller.consolidacionTexto);
 		System.assertEquals('[ ] Si  [X] No', controller.aplicaGarantiaTexto);
@@ -763,6 +787,238 @@ private class FSC_ConsumoSolicitudPDFController_Test {
 			LIMIT 1
 		];
 		return recordTypes.isEmpty() ? null : recordTypes[0].Id;
+	}
+
+	@IsTest
+	static void testCargoActualUsesLatestPrincipalCurrentAccountEmployment() {
+		Account account = createAccountRecord(null);
+		Account otherAccount = createAccountRecord(new Map<String, Object>{ 'LastName' => 'Otra Cuenta' });
+		Id rlaId = createRlaRecord(account.Id, null);
+		List<FinServ__Employment__c> employments = new List<FinServ__Employment__c>{
+			new FinServ__Employment__c(
+				Cliente__c = account.Id,
+				EMP_Empleo__c = 'Anterior',
+				EMP_Principal__c = true,
+				FinServ__Position__c = 'Cargo anterior'
+			),
+			new FinServ__Employment__c(
+				Cliente__c = account.Id,
+				EMP_Empleo__c = 'Actual',
+				EMP_Principal__c = false,
+				FinServ__Position__c = 'Cargo secundario reciente'
+			),
+			new FinServ__Employment__c(
+				Cliente__c = account.Id,
+				EMP_Empleo__c = 'Actual',
+				EMP_Principal__c = true,
+				FinServ__Position__c = 'Cargo principal antiguo'
+			),
+			new FinServ__Employment__c(
+				Cliente__c = account.Id,
+				EMP_Empleo__c = 'Actual',
+				EMP_Principal__c = true,
+				FinServ__Position__c = 'cajero mcdonalds'
+			),
+			new FinServ__Employment__c(
+				Cliente__c = otherAccount.Id,
+				EMP_Empleo__c = 'Actual',
+				EMP_Principal__c = true,
+				FinServ__Position__c = 'Cargo de otra cuenta'
+			)
+		};
+		insert employments;
+		Test.setCreatedDate(employments[2].Id, DateTime.now().addDays(-3));
+		Test.setCreatedDate(employments[3].Id, DateTime.now().addDays(-2));
+
+		Test.startTest();
+		FSC_ConsumoSolicitudPDFController controller = createController(rlaId);
+		System.assertEquals('cajero mcdonalds', controller.laborCargoActual);
+		Integer queriesAfterFirstRead = Limits.getQueries();
+		System.assertEquals('cajero mcdonalds', controller.laborCargoActual);
+		System.assertEquals(queriesAfterFirstRead, Limits.getQueries(), 'El PDF debe reutilizar el cargo ya consultado.');
+		Test.stopTest();
+	}
+
+	@IsTest
+	static void testCargoActualUsesLatestCurrentEmploymentWithoutPrincipal() {
+		Account account = createAccountRecord(null);
+		Id rlaId = createRlaRecord(account.Id, null);
+		List<FinServ__Employment__c> employments = new List<FinServ__Employment__c>{
+			new FinServ__Employment__c(
+				Cliente__c = account.Id,
+				EMP_Empleo__c = 'Actual',
+				EMP_Principal__c = false,
+				FinServ__Position__c = 'Cargo antiguo'
+			),
+			new FinServ__Employment__c(
+				Cliente__c = account.Id,
+				EMP_Empleo__c = 'Actual',
+				EMP_Principal__c = false,
+				FinServ__Position__c = 'Cargo reciente'
+			)
+		};
+		insert employments;
+		Test.setCreatedDate(employments[0].Id, DateTime.now().addDays(-2));
+		Test.setCreatedDate(employments[1].Id, DateTime.now().addDays(-1));
+
+		Test.startTest();
+		System.assertEquals('Cargo reciente', createController(rlaId).laborCargoActual);
+		Test.stopTest();
+	}
+
+	@IsTest
+	static void testCargoActualPreservesApplicantAndRlaPriority() {
+		Account account = createAccountRecord(null);
+		Id rlaId = createRlaRecord(account.Id, new Map<String, Object>{ 'FSC_Cargo__c' => 'Cargo de la solicitud' });
+		insert new FinServ__Employment__c(
+			Cliente__c = account.Id,
+			EMP_Empleo__c = 'Actual',
+			EMP_Principal__c = true,
+			FinServ__Position__c = 'Cargo de la cuenta'
+		);
+		LoanApplicant applicant = new LoanApplicant(
+			Name = 'Ana Garcia Perez',
+			LoanApplicationId = rlaId,
+			FSC_TipoSolicitante__c = 'Deudor',
+			FSC_TipoIdentificacion__c = 'Pasaporte',
+			FSC_NumIdentificacion__c = 'CARGO-001',
+			FSC_Nombre__c = 'Ana',
+			FSC_PrimerApellido__c = 'Garcia'
+		);
+		insert applicant;
+
+		Test.startTest();
+		FSC_ConsumoSolicitudPDFController controller = createController(rlaId);
+		Integer queriesBeforeRead = Limits.getQueries();
+		System.assertEquals('Cargo de la solicitud', controller.laborCargoActual);
+		System.assertEquals(queriesBeforeRead, Limits.getQueries(), 'La fuente de la RLA evita consultar empleos de la cuenta.');
+		insert new LoanApplicantEmployment(Name = 'Empleo del Deudor', LoanApplicantId = applicant.Id, JobTitle = 'Cargo del solicitante');
+		controller = createController(rlaId);
+		queriesBeforeRead = Limits.getQueries();
+		System.assertEquals('Cargo del solicitante', controller.laborCargoActual);
+		System.assertEquals(queriesBeforeRead, Limits.getQueries(), 'JobTitle conserva la primera prioridad.');
+		Test.stopTest();
+	}
+
+	@IsTest
+	static void testCargoActualStaysEmptyWithoutCurrentPosition() {
+		Account account = createAccountRecord(null);
+		Account otherAccount = createAccountRecord(new Map<String, Object>{ 'LastName' => 'Otra Cuenta' });
+		Id rlaId = createRlaRecord(account.Id, null);
+		insert new List<FinServ__Employment__c>{
+			new FinServ__Employment__c(
+				Cliente__c = account.Id,
+				EMP_Empleo__c = 'Anterior',
+				EMP_Principal__c = true,
+				FinServ__Position__c = 'Cargo anterior'
+			),
+			new FinServ__Employment__c(
+				Cliente__c = otherAccount.Id,
+				EMP_Empleo__c = 'Actual',
+				EMP_Principal__c = true,
+				FinServ__Position__c = 'Cargo de otra cuenta'
+			)
+		};
+
+		Test.startTest();
+		System.assertEquals('', createController(rlaId).laborCargoActual, 'No debe tomar cargos anteriores ni de otra cuenta.');
+		insert new FinServ__Employment__c(Cliente__c = account.Id, EMP_Empleo__c = 'Actual', EMP_Principal__c = true);
+		System.assertEquals('', createController(rlaId).laborCargoActual, 'Un empleo actual sin Position debe mostrar el campo vacio.');
+		Test.stopTest();
+	}
+
+	@IsTest
+	static void testFixedRateDurationWithoutMonthsIsEmpty() {
+		Account account = createAccountRecord(null);
+		Id rlaId = createRlaRecord(account.Id, new Map<String, Object>{ 'FSC_Tasa_Fija__c' => true });
+		update new ResidentialLoanApplication(Id = rlaId, FSC_TasaFijaPorMeses__c = null);
+
+		Test.startTest();
+		String fixedRateDuration = createController(rlaId).resumenTiempoTasaFija;
+		Test.stopTest();
+
+		Assert.areEqual('', fixedRateDuration, 'El PDF debe dejar el plazo vacio cuando la solicitud no tiene meses de tasa fija.');
+	}
+
+	@IsTest
+	static void shouldPairSignaturesAndReuseCachedRows() {
+		Account account = createAccountRecord(new Map<String, Object>{ 'FirstName' => 'Ana', 'LastName' => 'De la Cruz', 'Suffix' => 'Perez' });
+		Id applicationId = createRlaRecord(account.Id, null);
+		insert new LoanApplicant(
+			Name = 'Deudor',
+			LoanApplicationId = applicationId,
+			FSC_TipoSolicitante__c = 'Deudor',
+			FSC_Nombre__c = 'Ana',
+			FSC_PrimerApellido__c = 'De la Cruz',
+			FSC_SegundoApellido__c = 'Perez',
+			FSC_TipoIdentificacion__c = 'Pasaporte',
+			FSC_NumIdentificacion__c = 'SIGN-DEUDOR'
+		);
+		insert new LoanApplicant(
+			Name = 'Luis Lopez Diaz',
+			LoanApplicationId = applicationId,
+			FSC_TipoSolicitante__c = 'Co-Deudor',
+			FSC_Nombre__c = 'Luis',
+			FSC_PrimerApellido__c = 'Lopez',
+			FSC_SegundoApellido__c = 'Diaz',
+			FSC_TipoIdentificacion__c = 'Pasaporte',
+			FSC_NumIdentificacion__c = 'SIGN-001'
+		);
+
+		Test.startTest();
+		FSC_ConsumoSolicitudPDFController controller = createController(applicationId);
+		List<FSC_ConsumoSolicitudPDFController.SignaturePairRow> rows = controller.signatureRows;
+		Integer queriesBeforeRepeat = Limits.getQueries();
+		List<FSC_ConsumoSolicitudPDFController.SignaturePairRow> repeated = controller.signatureRows;
+		Assert.areEqual(queriesBeforeRepeat, Limits.getQueries(), 'La segunda lectura de firmas debe reutilizar la cache.');
+		Test.stopTest();
+
+		Assert.areEqual(1, rows.size(), 'Deudor y codeudor deben compartir una fila de firmas.');
+		Assert.areEqual('ANA DE LA CRUZ PEREZ', rows[0].left.label, 'La firma del deudor debe conservar ambos apellidos.');
+		Assert.isTrue(rows[0].left.hasSecondaryLabel, 'Debe incluir el rotulo de firma del solicitante.');
+		Assert.areEqual('FIRMA DEL SOLICITANTE', rows[0].left.secondaryLabel, 'Debe identificar la firma del deudor.');
+		Assert.isTrue(rows[0].hasRight, 'Debe existir firma derecha para el codeudor.');
+		Assert.areEqual('LUIS LOPEZ DIAZ', rows[0].right.label, 'Debe conservar el nombre completo del codeudor.');
+		Assert.isTrue(rows[0].right.markerToken.contains('FIRMALOANAPPLICANT1'), 'Debe usar el marcador del firmante.');
+		Assert.areEqual(rows, repeated, 'La lectura repetida debe conservar las firmas.');
+	}
+
+	@IsTest
+	static void shouldReadDebtorContactPointsAndLeaveSingleSignatureUnpaired() {
+		Account account = createAccountRecord(null);
+		Id applicationId = createRlaRecord(account.Id, null);
+		LoanApplicant applicant = new LoanApplicant(
+			Name = 'Deudor',
+			LoanApplicationId = applicationId,
+			FSC_TipoSolicitante__c = 'Deudor',
+			FSC_Nombre__c = 'Ana',
+			FSC_TipoIdentificacion__c = 'Pasaporte',
+			FSC_NumIdentificacion__c = 'CONTACTO-DEUDOR'
+		);
+		insert applicant;
+		insert new ContactPointPhone(ParentId = account.Id, FSC_Solicitante__c = applicant.Id, TelephoneNumber = '8095550177');
+		insert new ContactPointEmail(ParentId = account.Id, FSC_Solicitante__c = applicant.Id, EmailAddress = 'deudor@example.com');
+		insert new ContactPointAddress(
+			ParentId = account.Id,
+			FSC_Solicitante__c = applicant.Id,
+			Name = 'Residencia',
+			Street = 'Calle prueba',
+			City = 'Santiago'
+		);
+
+		Test.startTest();
+		FSC_ConsumoSolicitudPDFController controller = createController(applicationId);
+		String phones = controller.telefonosTexto;
+		String emails = controller.correosTexto;
+		String address = controller.direccionTexto;
+		List<FSC_ConsumoSolicitudPDFController.SignaturePairRow> signatures = controller.signatureRows;
+		Test.stopTest();
+
+		Assert.areEqual('8095550177', phones, 'Debe mostrar el telefono del deudor guardado en ContactPointPhone.');
+		Assert.areEqual('deudor@example.com', emails, 'Debe mostrar el correo del deudor guardado en ContactPointEmail.');
+		Assert.areEqual('Calle prueba, Santiago', address, 'Debe componer la direccion del deudor.');
+		Assert.areEqual(1, signatures.size(), 'Un deudor sin otros firmantes debe tener una fila.');
+		Assert.isFalse(signatures[0].hasRight, 'Una sola firma no debe producir una celda derecha vacia.');
 	}
 
 	private static Account createAccountRecord(Map<String, Object> fieldValues) {

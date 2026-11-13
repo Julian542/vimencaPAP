@@ -14,6 +14,29 @@ private class FSC_GenerarPDFTest {
 	private static final String METHOD_GENERAR_PDF_SOLICITUD_CONSUMO = 'generarPDFSolicitudConsumo';
 	private static final String METHOD_REGENERAR_PDF_SOLICITUD_CREDITO = 'regenerarPDFSolicitudCredito';
 
+	@IsTest
+	static void shouldIncludeSecondSurnameInGeneratedDocumentTitle() {
+		ResidentialLoanApplication request = [
+			SELECT Id, AccountId
+			FROM ResidentialLoanApplication
+			WHERE Account.ACC_NumIdentificacion__c = '00123456789'
+			LIMIT 1
+		];
+		update new Account(Id = request.AccountId, Suffix = 'Gomez');
+		Map<String, Object> output = new Map<String, Object>();
+		Test.startTest();
+		Boolean success = new FSC_GenerarPDF()
+			.invokeMethod(METHOD_GENERAR_PDF_SOLICITUD_CONSUMO, new Map<String, Object>{ 'Id' => request.Id }, output, null);
+		Test.stopTest();
+		Assert.isTrue(success, 'Debe generar el documento con ambos apellidos.');
+		ContentDocumentLink document = [SELECT ContentDocument.Title FROM ContentDocumentLink WHERE LinkedEntityId = :request.Id LIMIT 1];
+		Assert.areEqual(
+			TITLE_PREFIX + 'Consumo - Ana Perez Gomez - 00123456789',
+			document.ContentDocument.Title,
+			'El titulo debe conservar el segundo apellido.'
+		);
+	}
+
 	@TestSetup
 	static void setupSolicitudFixture() {
 		createLoanApplication('Ana', 'Perez', '00123456789', 'RLA Unicidad', RT_CREDITO_CONSUMO);
@@ -40,7 +63,11 @@ private class FSC_GenerarPDFTest {
 	}
 
 	private static void verifyUniqueSolicitud(String recordTypeName, String creditLabel, String methodName) {
-		ResidentialLoanApplication application = [SELECT Id, AccountId FROM ResidentialLoanApplication WHERE Name = 'RLA Unicidad'];
+		ResidentialLoanApplication application = [
+			SELECT Id, AccountId
+			FROM ResidentialLoanApplication
+			WHERE Account.ACC_NumIdentificacion__c = '00123456789'
+		];
 		application.RecordTypeId = getResidentialLoanApplicationRecordTypeId(recordTypeName);
 		update application;
 		String expectedTitle = TITLE_PREFIX + creditLabel + ' - Ana Perez - 00123456789';
@@ -87,7 +114,7 @@ private class FSC_GenerarPDFTest {
 
 	@IsTest
 	static void shouldRejectSignature_WhenDuplicatesExist() {
-		ResidentialLoanApplication application = [SELECT Id FROM ResidentialLoanApplication WHERE Name = 'RLA Unicidad'];
+		ResidentialLoanApplication application = [SELECT Id FROM ResidentialLoanApplication WHERE Account.ACC_NumIdentificacion__c = '00123456789'];
 		createLinkedDocument(application.Id, TITLE_PREFIX + 'Consumo - Ana Perez - 00123456789', 'first.pdf');
 		createLinkedDocument(application.Id, TITLE_PREFIX + 'Consumo - Ana Perez - 99999999999', 'second.pdf');
 		Test.startTest();
@@ -102,7 +129,7 @@ private class FSC_GenerarPDFTest {
 
 	@IsTest
 	static void shouldRejectSignature_WhenIdentificationIsWrong() {
-		ResidentialLoanApplication application = [SELECT Id FROM ResidentialLoanApplication WHERE Name = 'RLA Unicidad'];
+		ResidentialLoanApplication application = [SELECT Id FROM ResidentialLoanApplication WHERE Account.ACC_NumIdentificacion__c = '00123456789'];
 		createLinkedDocument(application.Id, TITLE_PREFIX + 'Consumo - Ana Perez - 99999999999', 'wrong.pdf');
 		Test.startTest();
 		try {
@@ -116,7 +143,11 @@ private class FSC_GenerarPDFTest {
 
 	@IsTest
 	static void shouldPreserveFiles_WhenAccountIdentificationIsMissing() {
-		ResidentialLoanApplication application = [SELECT Id, AccountId FROM ResidentialLoanApplication WHERE Name = 'RLA Unicidad'];
+		ResidentialLoanApplication application = [
+			SELECT Id, AccountId
+			FROM ResidentialLoanApplication
+			WHERE Account.ACC_NumIdentificacion__c = '00123456789'
+		];
 		update new Account(Id = application.AccountId, ACC_NumIdentificacion__c = null);
 		Id documentId = createLinkedDocument(application.Id, TITLE_PREFIX + 'Consumo - Ana Perez - 00123456789', 'old.pdf');
 		Map<String, Object> output = new Map<String, Object>();
@@ -147,7 +178,7 @@ private class FSC_GenerarPDFTest {
 
 	@IsTest
 	static void shouldSendOnlyLatestVersion_WhenDocumentHasTwoVersions() {
-		ResidentialLoanApplication application = [SELECT Id FROM ResidentialLoanApplication WHERE Name = 'RLA Unicidad'];
+		ResidentialLoanApplication application = [SELECT Id FROM ResidentialLoanApplication WHERE Account.ACC_NumIdentificacion__c = '00123456789'];
 		String title = TITLE_PREFIX + 'Consumo - Ana Perez - 00123456789';
 		Id documentId = createLinkedDocument(application.Id, title, 'first.pdf');
 		ContentVersion latest = new ContentVersion(
@@ -197,7 +228,7 @@ private class FSC_GenerarPDFTest {
 
 	@IsTest
 	static void shouldGenerateBothApplications_WhenQueueContinues() {
-		ResidentialLoanApplication first = [SELECT Id FROM ResidentialLoanApplication WHERE Name = 'RLA Unicidad'];
+		ResidentialLoanApplication first = [SELECT Id FROM ResidentialLoanApplication WHERE Account.ACC_NumIdentificacion__c = '00123456789'];
 		ResidentialLoanApplication second = createLoanApplication('Juan', 'Lopez', '00198765432', 'RLA Coleccion', RT_CREDITO_PYME);
 		Set<Id> applicationIds = new Set<Id>{ first.Id, second.Id };
 		Test.startTest();
@@ -232,6 +263,55 @@ private class FSC_GenerarPDFTest {
 		);
 		insert rla;
 		return rla.Id;
+	}
+
+	@IsTest
+	static void shouldAllowSignatureWithoutGeneratedApplication() {
+		ResidentialLoanApplication application = [SELECT Id FROM ResidentialLoanApplication WHERE Account.ACC_NumIdentificacion__c = '00123456789'];
+		Test.startTest();
+		FSC_GenerarPDF.validarSolicitudParaFirma(application.Id);
+		Test.stopTest();
+		Assert.areEqual(
+			0,
+			[SELECT COUNT() FROM ContentDocumentLink WHERE LinkedEntityId = :application.Id],
+			'La validacion sin planilla no debe crear archivos.'
+		);
+	}
+
+	@IsTest
+	static void shouldRejectSignatureWithoutApplicationId() {
+		Test.startTest();
+		try {
+			FSC_GenerarPDF.validarSolicitudParaFirma(null);
+			Assert.fail('Debe rechazar una solicitud sin Id.');
+		} catch (AuraHandledException expected) {
+			Assert.isNotNull(expected.getMessage(), 'Debe devolver un error controlado.');
+		}
+		Test.stopTest();
+	}
+
+	@IsTest
+	static void shouldPreserveApplicationSharedWithAnotherLoan() {
+		ResidentialLoanApplication first = [SELECT Id FROM ResidentialLoanApplication WHERE Account.ACC_NumIdentificacion__c = '00123456789'];
+		ResidentialLoanApplication second = createLoanApplication('Luis', 'Diaz', '00987654321', 'Solicitud compartida', RT_CREDITO_CONSUMO);
+		Id sharedDocument = createLinkedDocument(first.Id, TITLE_PREFIX + 'Consumo - Ana Perez - 00123456789', 'shared.pdf');
+		insert new ContentDocumentLink(ContentDocumentId = sharedDocument, LinkedEntityId = second.Id, ShareType = 'V');
+		Map<String, Object> output = new Map<String, Object>();
+
+		Test.startTest();
+		Boolean success = new FSC_GenerarPDF()
+			.invokeMethod(METHOD_REGENERAR_PDF_SOLICITUD_CREDITO, new Map<String, Object>{ 'Id' => first.Id }, output, null);
+		Test.stopTest();
+
+		Assert.isFalse(success, 'Debe impedir eliminar una planilla vinculada a otra solicitud.');
+		Assert.areEqual('System.AuraHandledException', output.get('exceptionType'), 'Debe devolver una validacion controlada.');
+		Assert.areEqual(1, [SELECT COUNT() FROM ContentDocument WHERE Id = :sharedDocument], 'Debe conservar el archivo compartido.');
+		Set<Id> applicationIds = new Set<Id>{ first.Id, second.Id };
+		Assert.areEqual(
+			2,
+			[SELECT COUNT() FROM ContentDocumentLink WHERE ContentDocumentId = :sharedDocument AND LinkedEntityId IN :applicationIds],
+			'Debe conservar ambos vinculos.'
+		);
 	}
 
 	private static Id getResidentialLoanApplicationRecordTypeId(String developerName) {
@@ -350,9 +430,7 @@ private class FSC_GenerarPDFTest {
 	@IsTest
 	static void testInvokeMethod_GenerarPDFPlanillaDesembolso_HydratesTasaFijaPorFromRla() {
 		ResidentialLoanApplication rla = createLoanApplication('Ana', 'Perez', '00199999999', 'RLA Desembolso', RT_CREDITO_CONSUMO);
-		rla.FSC_TasaFijaPorMeses__c = 13;
-		rla.FSC_TasaInteres__c = 12.5;
-		update rla;
+		update new ResidentialLoanApplication(Id = rla.Id, FSC_TasaFijaPorMeses__c = 13, FSC_TasaInteres__c = 12.5);
 
 		Map<String, Object> input = new Map<String, Object>{
 			'Id' => rla.Id,

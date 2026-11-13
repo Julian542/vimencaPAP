@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ACC_Suma_Porcentaje__c</fullName>
+    <label>Suma Porcentaje</label>
+    <summarizedField>Participante__c.PAR_Porcentaje__c</summarizedField>
+    <summaryForeignKey>Participante__c.Participante__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

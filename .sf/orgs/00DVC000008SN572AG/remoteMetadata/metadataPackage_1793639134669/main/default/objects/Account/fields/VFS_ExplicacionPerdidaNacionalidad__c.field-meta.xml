@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VFS_ExplicacionPerdidaNacionalidad__c</fullName>
+    <encryptionScheme>None</encryptionScheme>
+    <inlineHelpText>En caso de haber perdido o renunciado a la nacionalidad norteamericana, favor de proveernos una copia del Certificado de Pérdida de Nacionalidad de Estados Unidos o una explicación razonable de por qué no tiene dicho certificado a pesar de haber renunciado. Del mismo modo, favor de completar el formulario W8BEN</inlineHelpText>
+    <label>Explicación perdida de nacionalidad</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>TextArea</type>
+</CustomField>

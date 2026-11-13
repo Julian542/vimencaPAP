@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ACC_Es_Mayor_de_Edad__c</fullName>
+    <formula>IF(
+     RecordType.Name = &quot;Personas Jurídicas&quot;, true,  
+     IF (
+         ACC_Edad__c &gt;= VALUE($Label.Edad_Legal_RD), true, false))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Es mayor de edad</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

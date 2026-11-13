@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ACC_Cumplimiento_FATCA__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF (
+				NOT(ISPICKVAL(ACC_Nacionalidad__c, &quot;ESTADOS UNIDOS&quot;)), IMAGE(&quot;/resource/1577362814000/Green&quot;, &quot;green&quot;, 35, 35),
+				IF(
+							AND( 
+											ISPICKVAL(ACC_Nacionalidad__c, &quot;ESTADOS UNIDOS&quot;),
+											ISBLANK(ACC_Nombre_FATCA__c),
+											ISBLANK(ACC_Apellido_FATCA__c),
+											ISBLANK(ACC_N_Pasaporte_FATCA__c),
+											ISBLANK(ACC_Fecha_Expiracion_FATCA__c ),
+											ISBLANK(ACC_SSN_FATCA__c),
+											ISBLANK(ACC_TIN_FATCA__c),
+           ISBLANK(TEXT(ACC_Nacionalidad_FATCA__c)),
+											ISBLANK(ACC_Direccion_FATCA__c),
+											ISBLANK(ACC_Estado_FATCA__c),
+										 ISBLANK(ACC_Codigo_Postal_FATCA__c),
+											ISBLANK(ACC_Telefono_FATCA__c)), IMAGE(&quot;/resource/1577363379000/Red?&quot;, &quot;Red&quot;, 35, 35),
+						IMAGE(&quot;/resource/1577363456000/Yellow?&quot;, &quot;Yellow&quot;, 35, 35)))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Cumplimiento FATCA</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

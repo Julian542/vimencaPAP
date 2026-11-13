@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Ejecutivo</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND (
+	NOT(ISNEW()),
+	$Label.Validaciones = &apos;Si&apos;,
+	ISCHANGED( OwnerId ),
+	ISPICKVAL(ACC_Condicion__c,&apos;CLIENTE&apos;),
+	NOT(BEGINS($User.Username,&apos;lrodriguez@bv.com.do&apos;)),
+	NOT(BEGINS($User.Username,&apos;yperez@bv.com.do&apos;)),
+	NOT(BEGINS($User.Username,&apos;sfelix@bv.com.do&apos;)),
+	NOT(BEGINS($User.Username,&apos;masantana@bv.com.do&apos;)),
+	NOT(BEGINS($User.Username,&apos;kramos@bv.com.do&apos;)),
+	NOT(BEGINS($User.Username,&apos;jrosario@bv.com.do&apos;)),
+	NOT(BEGINS($User.Username,&apos;kvolquez@bv.com.do&apos;)),
+	NOT(BEGINS($User.Username,&apos;lleyba@bv.com.do&apos;)),
+	NOT(BEGINS($User.Username,&apos;vimenca.viseo@force.com&apos;))
+)</errorConditionFormula>
+    <errorMessage>No puede editar el ejecutivo de la cuenta.</errorMessage>
+</ValidationRule>

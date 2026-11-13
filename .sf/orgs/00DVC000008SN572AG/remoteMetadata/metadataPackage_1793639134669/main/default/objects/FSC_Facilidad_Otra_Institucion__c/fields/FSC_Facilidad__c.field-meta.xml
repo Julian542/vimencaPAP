@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Facilidad__c</fullName>
+    <label>Facilidad</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>CONSUMO - 401</fullName>
+                <default>false</default>
+                <label>CONSUMO - 401</label>
+            </value>
+            <value>
+                <fullName>CONSUMO VINCULADA - 404</fullName>
+                <default>false</default>
+                <label>CONSUMO VINCULADA - 404</label>
+            </value>
+            <value>
+                <fullName>HIPOTECARIOS PARA LA VIVIENDA - 402</fullName>
+                <default>false</default>
+                <label>HIPOTECARIOS PARA LA VIVIENDA - 402</label>
+            </value>
+            <value>
+                <fullName>VISA CLASICA LOCAL - 47</fullName>
+                <default>false</default>
+                <label>VISA CLASICA LOCAL - 47</label>
+            </value>
+            <value>
+                <fullName>VISA CLASICA INTERNACIONAL - 48</fullName>
+                <default>false</default>
+                <label>VISA CLASICA INTERNACIONAL - 48</label>
+            </value>
+            <value>
+                <fullName>GOLD INTERNACIONAL - 35</fullName>
+                <default>false</default>
+                <label>GOLD INTERNACIONAL - 35</label>
+            </value>
+            <value>
+                <fullName>VISA BLACK GOLD - 39</fullName>
+                <default>false</default>
+                <label>VISA BLACK GOLD - 39</label>
+            </value>
+            <value>
+                <fullName>PLATINUM - 50</fullName>
+                <default>false</default>
+                <label>PLATINUM - 50</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO PERSONAL CON LIBRETA - 200</fullName>
+                <default>false</default>
+                <label>C/AHORRO PERSONAL CON LIBRETA - 200</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO WU EN PESOS - 201</fullName>
+                <default>false</default>
+                <label>C/AHORRO WU EN PESOS - 201</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO EMPRESARIAL - 203</fullName>
+                <default>false</default>
+                <label>C/AHORRO EMPRESARIAL - 203</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO EMPLEADOS BANCO VIMENCA - 204</fullName>
+                <default>false</default>
+                <label>C/AHORRO EMPLEADOS BANCO VIMENCA - 204</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO GRUPO VIMENCA (NOMINA) - 205</fullName>
+                <default>false</default>
+                <label>C/AHORRO GRUPO VIMENCA (NOMINA) - 205</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO ESPECIAL - 206</fullName>
+                <default>false</default>
+                <label>C/AHORRO ESPECIAL - 206</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO ASOC. DE AHORRO Y PRESTA - 207</fullName>
+                <default>false</default>
+                <label>C/AHORRO ASOC. DE AHORRO Y PRESTA - 207</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO AG. DE CAMBIO Y REMESAS - 208</fullName>
+                <default>false</default>
+                <label>C/AHORRO AG. DE CAMBIO Y REMESAS - 208</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO PERSONAL SIN LIBRETA - 209</fullName>
+                <default>false</default>
+                <label>C/AHORRO PERSONAL SIN LIBRETA - 209</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO CTA. SOCIEDAD EN FORMACION - 210</fullName>
+                <default>false</default>
+                <label>C/AHORRO CTA. SOCIEDAD EN FORMACION - 210</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO NOMINA AUTOMATICA - 211</fullName>
+                <default>false</default>
+                <label>C/AHORRO NOMINA AUTOMATICA - 211</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO PROGRAMADO SIN LIBRETA - 219</fullName>
+                <default>false</default>
+                <label>C/AHORRO PROGRAMADO SIN LIBRETA - 219</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO PERSONAL EN EURO - 230</fullName>
+                <default>false</default>
+                <label>C/AHORRO PERSONAL EN EURO - 230</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO EMPRESARIAL EN EUROS - 231</fullName>
+                <default>false</default>
+                <label>C/AHORRO EMPRESARIAL EN EUROS - 231</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO PERSONAL EN DOLARES - 251</fullName>
+                <default>false</default>
+                <label>C/AHORRO PERSONAL EN DOLARES - 251</label>
+            </value>
+            <value>
+                <fullName>C/ AHORRO EN DOLARES WU - 252</fullName>
+                <default>false</default>
+                <label>C/ AHORRO EN DOLARES WU - 252</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO EMPRESARIAL EN DOLARES - 253</fullName>
+                <default>false</default>
+                <label>C/AHORRO EMPRESARIAL EN DOLARES - 253</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO ASOCIACIONES DE AHORRO DOLARES - 255</fullName>
+                <default>false</default>
+                <label>C/AHORRO ASOCIACIONES DE AHORRO DOLARES - 255</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO AGENTES DE CAMBIO Y REMESAS - 256</fullName>
+                <default>false</default>
+                <label>C/AHORRO AGENTES DE CAMBIO Y REMESAS - 256</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE PERSONAL - 100</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE PERSONAL - 100</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE PERSONAL BONIFICABLE - 101</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE PERSONAL BONIFICABLE - 101</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE EMPRESARIAL - 102</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE EMPRESARIAL - 102</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE EMPRESARIAL BONIFICABLE - 103</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE EMPRESARIAL BONIFICABLE - 103</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE BANCOS COMERCIALES Y MULTI P - 105</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE BANCOS COMERCIALES Y MULTI P - 105</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE GRUPO VIMENCA (NOMINA) - 106</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE GRUPO VIMENCA (NOMINA) - 106</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE PERSONAL VINCULADA - 108</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE PERSONAL VINCULADA - 108</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE EMPRESARIAL VINCULADA - 109</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE EMPRESARIAL VINCULADA - 109</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE BANCOS DE DESARROLLO - 111</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE BANCOS DE DESARROLLO - 111</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE COMPAÑIA DE SEGURO - 112</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE COMPAÑIA DE SEGURO - 112</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE ASOCIACIONES DE AHORRO Y PRE - 113</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE ASOCIACIONES DE AHORRO Y PRE - 113</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE BANCO NACIONAL DE LA VIVIEND - 114</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE BANCO NACIONAL DE LA VIVIEND - 114</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE EMBAJADAS/CONSULADOS - 115</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE EMBAJADAS/CONSULADOS - 115</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE EMPRESAS EXTRANJERAS - 116</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE EMPRESAS EXTRANJERAS - 116</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE EMPLEADOS BANCO VIMENCA - 118</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE EMPLEADOS BANCO VIMENCA - 118</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE FINANCIERAS - 119</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE FINANCIERAS - 119</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE ACCIONISTAS - 120</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE ACCIONISTAS - 120</label>
+            </value>
+            <value>
+                <fullName>C/CORRIENTE EMPRESARIAL RECAUDACIONES - 121</fullName>
+                <default>false</default>
+                <label>C/CORRIENTE EMPRESARIAL RECAUDACIONES - 121</label>
+            </value>
+            <value>
+                <fullName>LINEA DE CREDITO - 1</fullName>
+                <default>false</default>
+                <label>LINEA DE CREDITO - 1</label>
+            </value>
+            <value>
+                <fullName>COMERCIAL EN EURO (NO) - 2</fullName>
+                <default>false</default>
+                <label>COMERCIAL EN EURO (NO) - 2</label>
+            </value>
+            <value>
+                <fullName>LINEAS ASIGNADAS A CUENTAS CORRIENTE - 3</fullName>
+                <default>false</default>
+                <label>LINEAS ASIGNADAS A CUENTAS CORRIENTE - 3</label>
+            </value>
+            <value>
+                <fullName>TRANSACCIONES INTERNACIONAL EN PESOS - 4</fullName>
+                <default>false</default>
+                <label>TRANSACCIONES INTERNACIONAL EN PESOS - 4</label>
+            </value>
+            <value>
+                <fullName>TRANSACCIONES INTERNACIONAL EN DOLARES - 5</fullName>
+                <default>false</default>
+                <label>TRANSACCIONES INTERNACIONAL EN DOLARES - 5</label>
+            </value>
+            <value>
+                <fullName>COMERCIAL DOLARES - 31</fullName>
+                <default>false</default>
+                <label>COMERCIAL DOLARES - 31</label>
+            </value>
+            <value>
+                <fullName>CONSUMO DOLARES - 32</fullName>
+                <default>false</default>
+                <label>CONSUMO DOLARES - 32</label>
+            </value>
+            <value>
+                <fullName>GARANTIAS EN PESOS - 51</fullName>
+                <default>false</default>
+                <label>GARANTIAS EN PESOS - 51</label>
+            </value>
+            <value>
+                <fullName>GARANTIAS EN DOLARES - 81</fullName>
+                <default>false</default>
+                <label>GARANTIAS EN DOLARES - 81</label>
+            </value>
+            <value>
+                <fullName>PLAZO FIJO PERSONALES - 300</fullName>
+                <default>false</default>
+                <label>PLAZO FIJO PERSONALES - 300</label>
+            </value>
+            <value>
+                <fullName>COMERCIALES PERSONA NATURAL - 406</fullName>
+                <default>false</default>
+                <label>COMERCIALES PERSONA NATURAL - 406</label>
+            </value>
+            <value>
+                <fullName>Clasica Local - 34</fullName>
+                <default>false</default>
+                <label>Clasica Local - 34</label>
+            </value>
+            <value>
+                <fullName>VISA CLASICA EXTRAFINANC - 43</fullName>
+                <default>false</default>
+                <label>VISA CLASICA EXTRAFINANC - 43</label>
+            </value>
+            <value>
+                <fullName>PLAZO FIJO PERSONALES EN DOLARES - 351</fullName>
+                <default>false</default>
+                <label>PLAZO FIJO PERSONALES EN DOLARES - 351</label>
+            </value>
+            <value>
+                <fullName>Gold Internacional us - 37</fullName>
+                <default>false</default>
+                <label>Gold Internacional us - 37</label>
+            </value>
+            <value>
+                <fullName>VISA GOLD EXTRAFINANCIAM - 41</fullName>
+                <default>false</default>
+                <label>VISA GOLD EXTRAFINANCIAM - 41</label>
+            </value>
+            <value>
+                <fullName>VISA GOLD EXTRAFINANCIAM US - 42</fullName>
+                <default>false</default>
+                <label>VISA GOLD EXTRAFINANCIAM US - 42</label>
+            </value>
+            <value>
+                <fullName>COMERCIALES PERSONA NATURAL DOLARES - 454</fullName>
+                <default>false</default>
+                <label>COMERCIALES PERSONA NATURAL DOLARES - 454</label>
+            </value>
+            <value>
+                <fullName>COMERCIALES PERSONA JURIDICA - 400</fullName>
+                <default>false</default>
+                <label>COMERCIALES PERSONA JURIDICA - 400</label>
+            </value>
+            <value>
+                <fullName>CORPORACION DOM.DE EMPRESAS ELECTRICAS - 451</fullName>
+                <default>false</default>
+                <label>CORPORACION DOM.DE EMPRESAS ELECTRICAS - 451</label>
+            </value>
+            <value>
+                <fullName>HIPOTECARIO PARA LA VIVIENDA DOLARES - 453</fullName>
+                <default>false</default>
+                <label>HIPOTECARIO PARA LA VIVIENDA DOLARES - 453</label>
+            </value>
+            <value>
+                <fullName>FINANCIERA VIMENCA (NO APLICA) - 403</fullName>
+                <default>false</default>
+                <label>FINANCIERA VIMENCA (NO APLICA) - 403</label>
+            </value>
+            <value>
+                <fullName>COMERCIAL VINCULADA - 405</fullName>
+                <default>false</default>
+                <label>COMERCIAL VINCULADA - 405</label>
+            </value>
+            <value>
+                <fullName>HIPOTEC. CON LETRAS HIPOTEC. (ADQUIS) NO - 411</fullName>
+                <default>false</default>
+                <label>HIPOTEC. CON LETRAS HIPOTEC. (ADQUIS) NO - 411</label>
+            </value>
+            <value>
+                <fullName>HIPOTECARIOS CON REC. LIBERADOS E. LEGAL - 410</fullName>
+                <default>false</default>
+                <label>HIPOTECARIOS CON REC. LIBERADOS E. LEGAL - 410</label>
+            </value>
+            <value>
+                <fullName>HIPOTEC. CON LETRAS HIPOTEC. (CONSTR) NO - 412</fullName>
+                <default>false</default>
+                <label>HIPOTEC. CON LETRAS HIPOTEC. (CONSTR) NO - 412</label>
+            </value>
+            <value>
+                <fullName>COMERCIALES PERSONA JURIDICA EN US$ - 455</fullName>
+                <default>false</default>
+                <label>COMERCIALES PERSONA JURIDICA EN US$ - 455</label>
+            </value>
+            <value>
+                <fullName>C/ AGENTES DE CAMBIO Y REMESA - 104</fullName>
+                <default>false</default>
+                <label>C/ AGENTES DE CAMBIO Y REMESA - 104</label>
+            </value>
+            <value>
+                <fullName>AGENTE DE CAMBIOS Y REMESAS - 305</fullName>
+                <default>false</default>
+                <label>AGENTE DE CAMBIOS Y REMESAS - 305</label>
+            </value>
+            <value>
+                <fullName>PLAZO FIJO EMPLEADOS VIMENCA - 302</fullName>
+                <default>false</default>
+                <label>PLAZO FIJO EMPLEADOS VIMENCA - 302</label>
+            </value>
+            <value>
+                <fullName>PLAZO FIJO EMPRESARIAL EN DOLARES - 352</fullName>
+                <default>false</default>
+                <label>PLAZO FIJO EMPRESARIAL EN DOLARES - 352</label>
+            </value>
+            <value>
+                <fullName>PLAZO FIJO BANDEX - 307</fullName>
+                <default>false</default>
+                <label>PLAZO FIJO BANDEX - 307</label>
+            </value>
+            <value>
+                <fullName>PLAZO FIJO ACCIONISTAS - 303</fullName>
+                <default>false</default>
+                <label>PLAZO FIJO ACCIONISTAS - 303</label>
+            </value>
+            <value>
+                <fullName>ADMINISTRADORA FONDOS DE PENSIONES - 304</fullName>
+                <default>false</default>
+                <label>ADMINISTRADORA FONDOS DE PENSIONES - 304</label>
+            </value>
+            <value>
+                <fullName>PLAZO FIJO BANCOS HIPOTECARIOS - 308</fullName>
+                <default>false</default>
+                <label>PLAZO FIJO BANCOS HIPOTECARIOS - 308</label>
+            </value>
+            <value>
+                <fullName>PLAZO FIJO ASOCIACIONES A. Y P. - 309</fullName>
+                <default>false</default>
+                <label>PLAZO FIJO ASOCIACIONES A. Y P. - 309</label>
+            </value>
+            <value>
+                <fullName>COMPANIAS DE SEGUROS - 310</fullName>
+                <default>false</default>
+                <label>COMPANIAS DE SEGUROS - 310</label>
+            </value>
+            <value>
+                <fullName>COOPERATIVAS DE AHORROS Y CREDITOS - 311</fullName>
+                <default>false</default>
+                <label>COOPERATIVAS DE AHORROS Y CREDITOS - 311</label>
+            </value>
+            <value>
+                <fullName>PLAZO FIJO EMBAJADAS Y CONSULADOS - 312</fullName>
+                <default>false</default>
+                <label>PLAZO FIJO EMBAJADAS Y CONSULADOS - 312</label>
+            </value>
+            <value>
+                <fullName>INTERBANCARIOS BANCOS COMERCIALES - 306</fullName>
+                <default>false</default>
+                <label>INTERBANCARIOS BANCOS COMERCIALES - 306</label>
+            </value>
+            <value>
+                <fullName>PLAZO FIJO EMPRESARIALES - 301</fullName>
+                <default>false</default>
+                <label>PLAZO FIJO EMPRESARIALES - 301</label>
+            </value>
+            <value>
+                <fullName>PAPEL COMERCIAL PERSONAL - 313</fullName>
+                <default>false</default>
+                <label>PAPEL COMERCIAL PERSONAL - 313</label>
+            </value>
+            <value>
+                <fullName>PAPEL COMERCIAL EMPRESARIAL - 314</fullName>
+                <default>false</default>
+                <label>PAPEL COMERCIAL EMPRESARIAL - 314</label>
+            </value>
+            <value>
+                <fullName>DEPOSITOS PERSONALES FINANCIERA VIMENCA - 315</fullName>
+                <default>false</default>
+                <label>DEPOSITOS PERSONALES FINANCIERA VIMENCA - 315</label>
+            </value>
+            <value>
+                <fullName>DEPOSITOS COMERCIALES FINANCIERA VIMENCA - 316</fullName>
+                <default>false</default>
+                <label>DEPOSITOS COMERCIALES FINANCIERA VIMENCA - 316</label>
+            </value>
+            <value>
+                <fullName>ORGANIZACIONES GUBERNAMENTALES - 317</fullName>
+                <default>false</default>
+                <label>ORGANIZACIONES GUBERNAMENTALES - 317</label>
+            </value>
+            <value>
+                <fullName>COORPORATIVA - 36</fullName>
+                <default>false</default>
+                <label>COORPORATIVA - 36</label>
+            </value>
+            <value>
+                <fullName>CORPORATIVA - 38</fullName>
+                <default>false</default>
+                <label>CORPORATIVA - 38</label>
+            </value>
+            <value>
+                <fullName>VISA CLASICA TODO PAGO - 44</fullName>
+                <default>false</default>
+                <label>VISA CLASICA TODO PAGO - 44</label>
+            </value>
+            <value>
+                <fullName>VISA GOLD TODO PAGO - 45</fullName>
+                <default>false</default>
+                <label>VISA GOLD TODO PAGO - 45</label>
+            </value>
+            <value>
+                <fullName>VISA MAS - 57</fullName>
+                <default>false</default>
+                <label>VISA MAS - 57</label>
+            </value>
+            <value>
+                <fullName>VISA PLATINUM EXPERIENCE - 60</fullName>
+                <default>false</default>
+                <label>VISA PLATINUM EXPERIENCE - 60</label>
+            </value>
+            <value>
+                <fullName>VISA CLASICA - 61</fullName>
+                <default>false</default>
+                <label>VISA CLASICA - 61</label>
+            </value>
+            <value>
+                <fullName>BENACERH CLASICO - 52</fullName>
+                <default>false</default>
+                <label>BENACERH CLASICO - 52</label>
+            </value>
+            <value>
+                <fullName>BENACERH CLASICO INTERNACIONAL - 53</fullName>
+                <default>false</default>
+                <label>BENACERH CLASICO INTERNACIONAL - 53</label>
+            </value>
+            <value>
+                <fullName>VIMENPAQ - 56</fullName>
+                <default>false</default>
+                <label>VIMENPAQ - 56</label>
+            </value>
+            <value>
+                <fullName>Cuenta de Ahorro Simplificada en Pesos - 212</fullName>
+                <default>false</default>
+                <label>Cuenta de Ahorro Simplificada en Pesos - 212</label>
+            </value>
+            <value>
+                <fullName>Ahorros Simplificado en US$ - 257</fullName>
+                <default>false</default>
+                <label>Ahorros Simplificado en US$ - 257</label>
+            </value>
+            <value>
+                <fullName>DEPOSITO A PLAZO DE EMPLEADO VIMENCA - 318</fullName>
+                <default>false</default>
+                <label>DEPOSITO A PLAZO DE EMPLEADO VIMENCA - 318</label>
+            </value>
+            <value>
+                <fullName>C/AHORRO PRODUCTO BEES - 218</fullName>
+                <default>false</default>
+                <label>C/AHORRO PRODUCTO BEES - 218</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

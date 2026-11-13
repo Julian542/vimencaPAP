@@ -1,6 +1,6 @@
 {
     "fileVersion": 0,
-    "serverMaxRevisionCounter": 73367,
+    "serverMaxRevisionCounter": 73777,
     "sourceMembers": {
         "Profile__Salesforce API Only System Integrations": {
             "memberType": "Profile",
@@ -340,13 +340,13 @@
         },
         "CustomObject__ResidentialLoanApplication": {
             "memberType": "CustomObject",
-            "serverRevisionCounter": 73326,
+            "serverRevisionCounter": 73477,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "RecordType__ResidentialLoanApplication.FSC_Solicitud_Credito_PYME": {
             "memberType": "RecordType",
-            "serverRevisionCounter": 72807,
+            "serverRevisionCounter": 73449,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -682,7 +682,7 @@
         },
         "CustomField__ResidentialLoanApplication.FSC_Monto__c": {
             "memberType": "CustomField",
-            "serverRevisionCounter": 48625,
+            "serverRevisionCounter": 73559,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -916,7 +916,7 @@
         },
         "CustomField__FSC_Referencias__c.FSC_Parentesco__c": {
             "memberType": "CustomField",
-            "serverRevisionCounter": 63754,
+            "serverRevisionCounter": 73713,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -1264,7 +1264,7 @@
         },
         "CustomMetadata__FinServ__FeatureFlagSettings.FinServ__QueryOptimization": {
             "memberType": "CustomMetadata",
-            "serverRevisionCounter": 68460,
+            "serverRevisionCounter": 73368,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -1336,7 +1336,7 @@
         },
         "Flow__FSC_Aprobacion_PLA": {
             "memberType": "Flow",
-            "serverRevisionCounter": 72777,
+            "serverRevisionCounter": 73749,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -1582,7 +1582,7 @@
         },
         "CustomField__ResidentialLoanApplication.FSC_DesembolsoNeto__c": {
             "memberType": "CustomField",
-            "serverRevisionCounter": 39471,
+            "serverRevisionCounter": 73530,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -1606,7 +1606,7 @@
         },
         "Flow__FSC_After_Update_Change_SubStatus": {
             "memberType": "Flow",
-            "serverRevisionCounter": 72165,
+            "serverRevisionCounter": 73396,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -1912,7 +1912,7 @@
         },
         "Flow__FSC_Notificaciones_por_Email_RLA": {
             "memberType": "Flow",
-            "serverRevisionCounter": 71925,
+            "serverRevisionCounter": 73538,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -2086,19 +2086,19 @@
         },
         "RecordType__ResidentialLoanApplication.FSC_Solicitud_Credito_Hipotecario": {
             "memberType": "RecordType",
-            "serverRevisionCounter": 72834,
+            "serverRevisionCounter": 73448,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "RecordType__ResidentialLoanApplication.FSC_Solicitud_Credito_Vehiculo": {
             "memberType": "RecordType",
-            "serverRevisionCounter": 72835,
+            "serverRevisionCounter": 73450,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "RecordType__ResidentialLoanApplication.FSC_Solicitud_Credito_Consumo": {
             "memberType": "RecordType",
-            "serverRevisionCounter": 72805,
+            "serverRevisionCounter": 73447,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -2320,31 +2320,31 @@
         },
         "LightningComponentBundle__fsc_ChecklistDocs": {
             "memberType": "LightningComponentBundle",
-            "serverRevisionCounter": 71875,
+            "serverRevisionCounter": 73645,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_ChecklistDocs/fsc_ChecklistDocs.js": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 71876,
+            "serverRevisionCounter": 73646,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_ChecklistDocs/fsc_ChecklistDocs.html": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 71877,
+            "serverRevisionCounter": 73647,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_ChecklistDocs/fsc_ChecklistDocs.js-meta.xml": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 71878,
+            "serverRevisionCounter": 73648,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_ChecklistDocs/fsc_ChecklistDocs.css": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 71879,
+            "serverRevisionCounter": 73649,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -2506,31 +2506,31 @@
         },
         "LightningComponentBundle__fsc_RlaAcciones": {
             "memberType": "LightningComponentBundle",
-            "serverRevisionCounter": 73348,
+            "serverRevisionCounter": 73771,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_RlaAcciones/fsc_RlaAcciones.js": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 73349,
+            "serverRevisionCounter": 73772,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_RlaAcciones/fsc_RlaAcciones.css": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 73350,
+            "serverRevisionCounter": 73773,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_RlaAcciones/fsc_RlaAcciones.js-meta.xml": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 73351,
+            "serverRevisionCounter": 73774,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_RlaAcciones/fsc_RlaAcciones.html": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 73352,
+            "serverRevisionCounter": 73775,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -2602,7 +2602,7 @@
         },
         "ApexClass__FSC_RlaAccionesController": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73367,
+            "serverRevisionCounter": 73755,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -2710,7 +2710,7 @@
         },
         "Flow__FSC_ProcesoAprobacionComite": {
             "memberType": "Flow",
-            "serverRevisionCounter": 71984,
+            "serverRevisionCounter": 73546,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -2818,7 +2818,7 @@
         },
         "ReportType__FGC_SolicitudDeCredito": {
             "memberType": "ReportType",
-            "serverRevisionCounter": 73338,
+            "serverRevisionCounter": 73451,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -2878,7 +2878,7 @@
         },
         "ApexClass__FSC_RLATriggerHandler": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 72856,
+            "serverRevisionCounter": 73677,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -2914,7 +2914,7 @@
         },
         "ApexClass__FSC_ChecklistDocsController": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73032,
+            "serverRevisionCounter": 73643,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -3142,7 +3142,7 @@
         },
         "CustomMetadata__FSC_IndividuosEnPagareDeCredito.Individuo03": {
             "memberType": "CustomMetadata",
-            "serverRevisionCounter": 60771,
+            "serverRevisionCounter": 73414,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -3202,7 +3202,7 @@
         },
         "ApexClass__FSC_RlaAccionesControllerTest": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73361,
+            "serverRevisionCounter": 73370,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -3214,7 +3214,7 @@
         },
         "ApexClass__FSC_ChecklistDocsControllerTest": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73189,
+            "serverRevisionCounter": 73644,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -3232,7 +3232,7 @@
         },
         "ApexClass__FSC_RLATriggerHandlerTest": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73049,
+            "serverRevisionCounter": 73655,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -3724,7 +3724,7 @@
         },
         "ApexPage__FSC_ContratoPrestamoComercialGarantiaCD": {
             "memberType": "ApexPage",
-            "serverRevisionCounter": 73287,
+            "serverRevisionCounter": 73426,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -3766,7 +3766,7 @@
         },
         "ApexPage__FSC_ContratoPrestamoComercialCH": {
             "memberType": "ApexPage",
-            "serverRevisionCounter": 73284,
+            "serverRevisionCounter": 73423,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -3778,7 +3778,7 @@
         },
         "ApexPage__FSC_ContratoPrestamoComercialGMSP": {
             "memberType": "ApexPage",
-            "serverRevisionCounter": 73285,
+            "serverRevisionCounter": 73424,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -3790,7 +3790,7 @@
         },
         "ApexPage__FSC_ContratoPrestamoComercialGS": {
             "memberType": "ApexPage",
-            "serverRevisionCounter": 73286,
+            "serverRevisionCounter": 73425,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -3928,7 +3928,7 @@
         },
         "ApexClass__FSC_LoanDecisionAPITest": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73196,
+            "serverRevisionCounter": 73663,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -3988,7 +3988,7 @@
         },
         "ApexClass__TestDataFactory_FSC": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 56799,
+            "serverRevisionCounter": 73699,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -6208,7 +6208,7 @@
         },
         "CustomObject__FSC_Garantia__c": {
             "memberType": "CustomObject",
-            "serverRevisionCounter": 63381,
+            "serverRevisionCounter": 73634,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -6334,25 +6334,25 @@
         },
         "LightningComponentBundle__fsc_loanFacilityManager": {
             "memberType": "LightningComponentBundle",
-            "serverRevisionCounter": 73171,
+            "serverRevisionCounter": 73733,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_loanFacilityManager/fsc_loanFacilityManager.js": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 73172,
+            "serverRevisionCounter": 73734,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_loanFacilityManager/fsc_loanFacilityManager.js-meta.xml": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 73173,
+            "serverRevisionCounter": 73735,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_loanFacilityManager/fsc_loanFacilityManager.html": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 73174,
+            "serverRevisionCounter": 73736,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -6370,7 +6370,7 @@
         },
         "ApexClass__FSC_RlaApprovalAdminClient": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73202,
+            "serverRevisionCounter": 73752,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -6382,7 +6382,7 @@
         },
         "ApexClass__FSC_RlaApprovalAdminRest": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 59082,
+            "serverRevisionCounter": 73753,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -6754,7 +6754,7 @@
         },
         "Layout__ResidentialLoanApplication-Solicitud de crédito Consumo": {
             "memberType": "Layout",
-            "serverRevisionCounter": 73185,
+            "serverRevisionCounter": 73688,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -7012,7 +7012,7 @@
         },
         "ApexClass__FSC_MissingCoverageTest": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73366,
+            "serverRevisionCounter": 73698,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -7456,7 +7456,7 @@
         },
         "Report__Reportesdecreditos/FSC_Consumo_MontosSolicitadoVsAprobado": {
             "memberType": "Report",
-            "serverRevisionCounter": 72898,
+            "serverRevisionCounter": 73566,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -7492,7 +7492,7 @@
         },
         "Report__Reportesdecreditos/FSC_Hipotecario_MontosSolicitadoVsAprobado": {
             "memberType": "Report",
-            "serverRevisionCounter": 72902,
+            "serverRevisionCounter": 73567,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -7528,7 +7528,7 @@
         },
         "Report__Reportesdecreditos/FSC_PYME_MontosSolicitadoVsAprobado": {
             "memberType": "Report",
-            "serverRevisionCounter": 72906,
+            "serverRevisionCounter": 73568,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -7564,7 +7564,7 @@
         },
         "Report__Reportesdecreditos/FSC_Vehiculo_MontosSolicitadoVsAprobado": {
             "memberType": "Report",
-            "serverRevisionCounter": 72910,
+            "serverRevisionCounter": 73569,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -7708,7 +7708,7 @@
         },
         "Dashboard__Sales_and_Marketing_Dashboards/FSC_Dash_Consumo_MontoSolVsAprob": {
             "memberType": "Dashboard",
-            "serverRevisionCounter": 72233,
+            "serverRevisionCounter": 73570,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -7768,7 +7768,7 @@
         },
         "Dashboard__Sales_and_Marketing_Dashboards/FSC_Dash_Hipotecario_MontoSolVsAprob": {
             "memberType": "Dashboard",
-            "serverRevisionCounter": 72244,
+            "serverRevisionCounter": 73571,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -7828,7 +7828,7 @@
         },
         "Dashboard__Sales_and_Marketing_Dashboards/FSC_Dash_PYME_MontoSolVsAprob": {
             "memberType": "Dashboard",
-            "serverRevisionCounter": 72255,
+            "serverRevisionCounter": 73572,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -7888,7 +7888,7 @@
         },
         "Dashboard__Sales_and_Marketing_Dashboards/FSC_Dash_Vehiculo_MontoSolVsAprob": {
             "memberType": "Dashboard",
-            "serverRevisionCounter": 72266,
+            "serverRevisionCounter": 73573,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -8212,25 +8212,25 @@
         },
         "LightningComponentBundle__fsc_loanApplicantManager": {
             "memberType": "LightningComponentBundle",
-            "serverRevisionCounter": 71846,
+            "serverRevisionCounter": 73704,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_loanApplicantManager/fsc_loanApplicantManager.js-meta.xml": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 71847,
+            "serverRevisionCounter": 73705,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_loanApplicantManager/fsc_loanApplicantManager.html": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 71848,
+            "serverRevisionCounter": 73706,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_loanApplicantManager/fsc_loanApplicantManager.js": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 71849,
+            "serverRevisionCounter": 73707,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -8248,19 +8248,19 @@
         },
         "Layout__FSC_Garantia__c-Garantia Layout": {
             "memberType": "Layout",
-            "serverRevisionCounter": 72809,
+            "serverRevisionCounter": 73640,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "Layout__ResidentialLoanApplication-Solicitud de crédito Vehículo": {
             "memberType": "Layout",
-            "serverRevisionCounter": 73187,
+            "serverRevisionCounter": 73690,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "Layout__ResidentialLoanApplication-Solicitud de crédito Hipotecario": {
             "memberType": "Layout",
-            "serverRevisionCounter": 73186,
+            "serverRevisionCounter": 73689,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -8272,7 +8272,7 @@
         },
         "ApexClass__FSC_ConsumoSolicitudPDFController": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 68905,
+            "serverRevisionCounter": 73673,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -8332,7 +8332,7 @@
         },
         "ApexClass__FSC_ConsumoSolicitudPDFController_Test": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 72738,
+            "serverRevisionCounter": 73674,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -8452,7 +8452,7 @@
         },
         "CustomField__FSC_Garantia__c.FSC_Proposito_Garantia_Hipotecario__c": {
             "memberType": "CustomField",
-            "serverRevisionCounter": 65054,
+            "serverRevisionCounter": 73577,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -8482,13 +8482,13 @@
         },
         "ApexClass__FSC_LoanApplicantController": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 72747,
+            "serverRevisionCounter": 73697,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_loanApplicantManager/fsc_loanApplicantManager.css": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 71850,
+            "serverRevisionCounter": 73708,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -8608,13 +8608,13 @@
         },
         "ApexClass__FSC_APIPrestamoDesembolsoTest": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73363,
+            "serverRevisionCounter": 73404,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "ApexClass__FSC_APIPrestamoPrestamosTest": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73365,
+            "serverRevisionCounter": 73529,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -9424,7 +9424,7 @@
         },
         "ApexClass__FSC_DocumentosAnalisisCreditoTest": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73194,
+            "serverRevisionCounter": 73727,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -9784,7 +9784,7 @@
         },
         "ApexClass__FSC_DatosContratoController": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73320,
+            "serverRevisionCounter": 73532,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -9808,7 +9808,7 @@
         },
         "ApexClass__FSC_APIPrestamoPrestamos": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73364,
+            "serverRevisionCounter": 73528,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -9820,7 +9820,7 @@
         },
         "ApexClass__FSC_CreacionPrestamoAsync": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73356,
+            "serverRevisionCounter": 73385,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -9832,13 +9832,13 @@
         },
         "ApexClass__FSC_APIPrestamoDesembolso": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73362,
+            "serverRevisionCounter": 73403,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "ApexClass__FSC_CreacionDesembolsoAsync": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 67678,
+            "serverRevisionCounter": 73384,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -9958,13 +9958,13 @@
         },
         "ApexClass__FSC_ConsultaDocumentosAnalisisCredito": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 68904,
+            "serverRevisionCounter": 73693,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "ApexClass__FSC_ControladorDocumentosAnalisisCredito": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 68906,
+            "serverRevisionCounter": 73754,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -10090,13 +10090,13 @@
         },
         "Flow__FSC_ProcesoAprobacionValidacionEnAbanks": {
             "memberType": "Flow",
-            "serverRevisionCounter": 68222,
+            "serverRevisionCounter": 73399,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "ApprovalProcess__ResidentialLoanApplication.FSC_ValidacionEnAbanks": {
             "memberType": "ApprovalProcess",
-            "serverRevisionCounter": 68224,
+            "serverRevisionCounter": 73400,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -10138,7 +10138,7 @@
         },
         "ApexClass__FSC_ColaGeneracionDocumentosAnalisis": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 72955,
+            "serverRevisionCounter": 73664,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -10258,7 +10258,7 @@
         },
         "ApexPage__FSC_ContratoPrestamoComercialSF": {
             "memberType": "ApexPage",
-            "serverRevisionCounter": 73288,
+            "serverRevisionCounter": 73427,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -10390,13 +10390,13 @@
         },
         "ApexPage__FSC_ContratoConsumoHipotecario": {
             "memberType": "ApexPage",
-            "serverRevisionCounter": 73278,
+            "serverRevisionCounter": 73417,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "ApexPage__FSC_ContratoPrestamoConsumoVehiculo": {
             "memberType": "ApexPage",
-            "serverRevisionCounter": 73289,
+            "serverRevisionCounter": 73428,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -10552,25 +10552,25 @@
         },
         "LightningComponentBundle__fsc_NuevaSolicitudCreditoAction": {
             "memberType": "LightningComponentBundle",
-            "serverRevisionCounter": 68603,
+            "serverRevisionCounter": 73714,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_NuevaSolicitudCreditoAction/fsc_NuevaSolicitudCreditoAction.js-meta.xml": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 68604,
+            "serverRevisionCounter": 73715,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_NuevaSolicitudCreditoAction/fsc_NuevaSolicitudCreditoAction.js": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 68605,
+            "serverRevisionCounter": 73716,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_NuevaSolicitudCreditoAction/fsc_NuevaSolicitudCreditoAction.html": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 68606,
+            "serverRevisionCounter": 73717,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -10594,31 +10594,31 @@
         },
         "LightningComponentBundle__fsc_EditarDocumentoAnalisis": {
             "memberType": "LightningComponentBundle",
-            "serverRevisionCounter": 72065,
+            "serverRevisionCounter": 73756,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_EditarDocumentoAnalisis/fsc_EditarDocumentoAnalisis.js": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 72066,
+            "serverRevisionCounter": 73757,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_EditarDocumentoAnalisis/fsc_EditarDocumentoAnalisis.css": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 72067,
+            "serverRevisionCounter": 73758,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_EditarDocumentoAnalisis/fsc_EditarDocumentoAnalisis.html": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 72068,
+            "serverRevisionCounter": 73759,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "LightningComponentResource__fsc_EditarDocumentoAnalisis/fsc_EditarDocumentoAnalisis.js-meta.xml": {
             "memberType": "LightningComponentResource",
-            "serverRevisionCounter": 72069,
+            "serverRevisionCounter": 73760,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -10996,7 +10996,7 @@
         },
         "ApexClass__FSC_CoberturaPendienteTest": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73232,
+            "serverRevisionCounter": 73657,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -11008,7 +11008,7 @@
         },
         "ApexClass__FSC_ActaComitePDFControllerTest": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73188,
+            "serverRevisionCounter": 73656,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -11050,7 +11050,7 @@
         },
         "ApexTrigger__FSC_GarantiaTrigger": {
             "memberType": "ApexTrigger",
-            "serverRevisionCounter": 73053,
+            "serverRevisionCounter": 73629,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -11134,31 +11134,31 @@
         },
         "ApexPage__FSC_ContratoHipFideicomisoBajoCosto": {
             "memberType": "ApexPage",
-            "serverRevisionCounter": 73279,
+            "serverRevisionCounter": 73418,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "ApexPage__FSC_ContratoHipFideicomisoNormal": {
             "memberType": "ApexPage",
-            "serverRevisionCounter": 73280,
+            "serverRevisionCounter": 73419,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "ApexPage__FSC_ContratoHipotecarioEmpresa": {
             "memberType": "ApexPage",
-            "serverRevisionCounter": 73281,
+            "serverRevisionCounter": 73420,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "ApexPage__FSC_ContratoHipotecarioEmpresaLey158": {
             "memberType": "ApexPage",
-            "serverRevisionCounter": 73282,
+            "serverRevisionCounter": 73421,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "ApexPage__FSC_ContratoHipotecarioPersonaFisica": {
             "memberType": "ApexPage",
-            "serverRevisionCounter": 73283,
+            "serverRevisionCounter": 73422,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -11182,7 +11182,7 @@
         },
         "ApexTrigger__FSC_FacilidadesDeCreditoTrigger": {
             "memberType": "ApexTrigger",
-            "serverRevisionCounter": 68911,
+            "serverRevisionCounter": 73628,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -11248,7 +11248,7 @@
         },
         "ApexClass__FSC_CoberturaFacilDocumentosNuevosTest": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73231,
+            "serverRevisionCounter": 73652,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -11446,7 +11446,7 @@
         },
         "CustomMetadata__FSC_ClaseGarantia.BIENES_INMUEBLES_08": {
             "memberType": "CustomMetadata",
-            "serverRevisionCounter": 73005,
+            "serverRevisionCounter": 73478,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -11470,7 +11470,7 @@
         },
         "CustomMetadata__FSC_ClaseGarantia.CERTIFICADOS_DEPOSITOS_O_INVERSIO_19": {
             "memberType": "CustomMetadata",
-            "serverRevisionCounter": 73009,
+            "serverRevisionCounter": 73479,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -11500,7 +11500,7 @@
         },
         "CustomMetadata__FSC_ClaseGarantia.FLUJOS_DE_FIDEICOMISOS_DE_FUENTE_17": {
             "memberType": "CustomMetadata",
-            "serverRevisionCounter": 73014,
+            "serverRevisionCounter": 73480,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -11512,13 +11512,13 @@
         },
         "CustomMetadata__FSC_ClaseGarantia.MAQUINARIAS_INDUSTRIALES_04": {
             "memberType": "CustomMetadata",
-            "serverRevisionCounter": 73016,
+            "serverRevisionCounter": 73481,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "CustomMetadata__FSC_ClaseGarantia.MAQUINARIAS_Y_EQUIPOS_DE_USO_MULT_07": {
             "memberType": "CustomMetadata",
-            "serverRevisionCounter": 73017,
+            "serverRevisionCounter": 73482,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -11536,31 +11536,31 @@
         },
         "CustomMetadata__FSC_ClaseGarantia.SOLARES_O_TERRENOS_I1_09": {
             "memberType": "CustomMetadata",
-            "serverRevisionCounter": 73020,
+            "serverRevisionCounter": 73483,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "CustomMetadata__FSC_ClaseGarantia.SOLARES_O_TERRENOS_PARA_FINES_AGR_10": {
             "memberType": "CustomMetadata",
-            "serverRevisionCounter": 73021,
+            "serverRevisionCounter": 73484,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "CustomMetadata__FSC_ClaseGarantia.VEHICULOS_MAQUINARIAS_18": {
             "memberType": "CustomMetadata",
-            "serverRevisionCounter": 73022,
+            "serverRevisionCounter": 73485,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "CustomMetadata__FSC_ClaseGarantia.VEHICULOS_NUEVOS_P2_22": {
             "memberType": "CustomMetadata",
-            "serverRevisionCounter": 73023,
+            "serverRevisionCounter": 73486,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "CustomMetadata__FSC_ClaseGarantia.VEHICULOS_USADOS_P2_21": {
             "memberType": "CustomMetadata",
-            "serverRevisionCounter": 73024,
+            "serverRevisionCounter": 73487,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -11938,7 +11938,7 @@
         },
         "ApexClass__FSC_CapturaOperacionesService": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 72947,
+            "serverRevisionCounter": 73405,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -11992,7 +11992,7 @@
         },
         "Flow__FSC_Preparar_Notificaciones_RLA": {
             "memberType": "Flow",
-            "serverRevisionCounter": 71922,
+            "serverRevisionCounter": 73413,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -12634,13 +12634,13 @@
         },
         "ApexClass__FSC_GarantiaFormalizacionService": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73042,
+            "serverRevisionCounter": 73493,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "ApexClass__FSC_GarantiaFormalizacionTest": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73328,
+            "serverRevisionCounter": 73662,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -12802,7 +12802,7 @@
         },
         "CustomMetadata__FSC_APIPrestamoConfig.Default": {
             "memberType": "CustomMetadata",
-            "serverRevisionCounter": 72973,
+            "serverRevisionCounter": 73380,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -12916,13 +12916,13 @@
         },
         "ApexClass__FSC_CatalogoGarantiaService": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73027,
+            "serverRevisionCounter": 73488,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
         "ApexClass__FSC_CatalogoGarantiaServiceTest": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73028,
+            "serverRevisionCounter": 73620,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -13036,7 +13036,7 @@
         },
         "CustomField__ResidentialLoanApplication.FSC_PlazoMaximoPermitido__c": {
             "memberType": "CustomField",
-            "serverRevisionCounter": 73166,
+            "serverRevisionCounter": 73637,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -13126,7 +13126,7 @@
         },
         "ApexComponent__FSC_ContratoEstiloBase": {
             "memberType": "ApexComponent",
-            "serverRevisionCounter": 73248,
+            "serverRevisionCounter": 73415,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -13150,7 +13150,7 @@
         },
         "ApexClass__FSC_DocumentoLegalServiceTest": {
             "memberType": "ApexClass",
-            "serverRevisionCounter": 73260,
+            "serverRevisionCounter": 73658,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         },
@@ -13204,7 +13204,733 @@
         },
         "Flow__FSC_ProcesoAsignacionFormalizacion": {
             "memberType": "Flow",
-            "serverRevisionCounter": 73339,
+            "serverRevisionCounter": 73525,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "Report__Reportesdecreditos/FSC_Solicitudes_de_credito_WF02": {
+            "memberType": "Report",
+            "serverRevisionCounter": 73452,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_APIPrestamoConfig__mdt.FSC_AutomatizarCreacionYDesembolso__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73377,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_AbanksAutomatico__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73378,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_ProcesamientoAbanksManual__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73379,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_ProcesamientoAbanks": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73386,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_ProcesamientoAbanksTest": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73543,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ValidationRule__ResidentialLoanApplication.FSC_ConservarProcesamientoManual": {
+            "memberType": "ValidationRule",
+            "serverRevisionCounter": 73394,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "Layout__FSC_APIPrestamoConfig__mdt-Configuracion API Prestamo Layout": {
+            "memberType": "Layout",
+            "serverRevisionCounter": 73395,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_DesembolsoAPIExitoso__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73401,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_EvidenciasDesembolsoCargadas__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73402,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ValidationRule__ResidentialLoanApplication.FSC_ExigirEvidenciasDesembolsoAPI": {
+            "memberType": "ValidationRule",
+            "serverRevisionCounter": 73411,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexComponent__FSC_ContratoPiePagina": {
+            "memberType": "ApexComponent",
+            "serverRevisionCounter": 73416,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_CanalSolicitudMRI__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73441,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_CodigoCanalSolicitudMRI__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73442,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_CodigoTipoProductoMRI__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73443,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_CodigoTipoSolicitudMRI__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73444,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_TipoProductoSolicitudMRI__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73445,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_TipoSolicitudMRI__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73446,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_ClaseGarantia__mdt.FSC_RutaFormalizacion__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73468,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_Garantia__c.FSC_ModalidadFormalizacion__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73469,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_Garantia__c.FSC_NumeroExpedienteDGII__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73470,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_Garantia__c.FSC_NumeroExpedienteRegistroTitulos__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73471,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_DesembolsoFormalizacion__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73472,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_EtapaFormalizacionRetorno__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73473,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_EtapaFormalizacion__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73474,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_ObservacionFormalizacion__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73475,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_ResponsableAreaFormalizacion__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73476,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_FormalizacionDocumentosController": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73489,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_FormalizacionGarantiasController": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73490,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_FormalizacionGarantiasService": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73491,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_FormalizacionGarantiasTest": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73660,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomLabel__FSC_FirmanteAutorizacionMatricula": {
+            "memberType": "CustomLabel",
+            "serverRevisionCounter": 73495,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "LightningComponentBundle__fsc_RlaFormalizacionGarantias": {
+            "memberType": "LightningComponentBundle",
+            "serverRevisionCounter": 73501,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "LightningComponentResource__fsc_RlaFormalizacionGarantias/fsc_RlaFormalizacionGarantias.css": {
+            "memberType": "LightningComponentResource",
+            "serverRevisionCounter": 73502,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "LightningComponentResource__fsc_RlaFormalizacionGarantias/fsc_RlaFormalizacionGarantias.js": {
+            "memberType": "LightningComponentResource",
+            "serverRevisionCounter": 73503,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "LightningComponentResource__fsc_RlaFormalizacionGarantias/fsc_RlaFormalizacionGarantias.js-meta.xml": {
+            "memberType": "LightningComponentResource",
+            "serverRevisionCounter": 73504,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "LightningComponentResource__fsc_RlaFormalizacionGarantias/fsc_RlaFormalizacionGarantias.html": {
+            "memberType": "LightningComponentResource",
+            "serverRevisionCounter": 73505,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexPage__FSC_AutorizacionOposicionMatricula": {
+            "memberType": "ApexPage",
+            "serverRevisionCounter": 73506,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexPage__FSC_InventarioRegistroTitulos": {
+            "memberType": "ApexPage",
+            "serverRevisionCounter": 73507,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "Queue__FSC_ColaCDD": {
+            "memberType": "Queue",
+            "serverRevisionCounter": 73508,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "Queue__FSC_ColaMantenimientoOperaciones": {
+            "memberType": "Queue",
+            "serverRevisionCounter": 73509,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomPermission__FSC_CP_CDD": {
+            "memberType": "CustomPermission",
+            "serverRevisionCounter": 73510,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomPermission__FSC_CP_MantenimientoOperaciones": {
+            "memberType": "CustomPermission",
+            "serverRevisionCounter": 73511,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ListView__ResidentialLoanApplication.FSC_Formalizacion_CDD": {
+            "memberType": "ListView",
+            "serverRevisionCounter": 73512,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ListView__ResidentialLoanApplication.FSC_Formalizacion_Custodia": {
+            "memberType": "ListView",
+            "serverRevisionCounter": 73513,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ListView__ResidentialLoanApplication.FSC_Formalizacion_Disponibles_Entrega": {
+            "memberType": "ListView",
+            "serverRevisionCounter": 73514,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ListView__ResidentialLoanApplication.FSC_Formalizacion_Ejecucion_Operaciones": {
+            "memberType": "ListView",
+            "serverRevisionCounter": 73515,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ListView__ResidentialLoanApplication.FSC_Formalizacion_En_Proceso": {
+            "memberType": "ListView",
+            "serverRevisionCounter": 73516,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ListView__ResidentialLoanApplication.FSC_Formalizacion_Mantenimiento_Ops": {
+            "memberType": "ListView",
+            "serverRevisionCounter": 73517,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ListView__ResidentialLoanApplication.FSC_Formalizacion_Pendientes_Oficial": {
+            "memberType": "ListView",
+            "serverRevisionCounter": 73518,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ReportType__FSC_Formalizacion_Garantias": {
+            "memberType": "ReportType",
+            "serverRevisionCounter": 73519,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "Report__Reportesdecreditos/FSC_Formalizacion_DisponiblesEntrega": {
+            "memberType": "Report",
+            "serverRevisionCounter": 73520,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "PermissionSet__FSC_PS_CDD": {
+            "memberType": "PermissionSet",
+            "serverRevisionCounter": 73526,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "PermissionSet__FSC_PS_MantenimientoOperaciones": {
+            "memberType": "PermissionSet",
+            "serverRevisionCounter": 73527,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_FormalizacionNotificaciones": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73539,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_FormalizacionNotificacionesTest": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73661,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomNotificationType__FSC_FormalizacionGarantias": {
+            "memberType": "CustomNotificationType",
+            "serverRevisionCounter": 73542,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_MontoComiteAction": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73544,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_MontoComiteActionTest": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73654,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_Garantia__c.FSC_SaldoPrimeraHipoteca__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73578,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_Garantia__c.FSC_Valor_Mejoras__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73579,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_ReglaCredito.FSC_Activa__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73580,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_ReglaCredito.FSC_BaseCalculo__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73581,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_ReglaCredito.FSC_Destino__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73582,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_ReglaCredito.FSC_MonedaMinimo__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73583,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_ReglaCredito.FSC_Moneda__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73584,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_ReglaCredito.FSC_MontoMinimo__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73585,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_ReglaCredito.FSC_Perfil__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73586,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_ReglaCredito.FSC_PlazoMaximo__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73587,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_ReglaCredito.FSC_PlazoMinimo__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73588,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_ReglaCredito.FSC_PorcentajeMaximo__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73589,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_ReglaCredito.FSC_Producto__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73590,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_ReglaCredito.FSC_Proposito__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73591,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_TasaCambioCredito.FSC_FechaReferencia__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73592,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_TasaCambioCredito.FSC_FechaVigencia__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73593,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_TasaCambioCredito.FSC_FuenteReferencia__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73594,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_TasaCambioCredito.FSC_Fuente__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73595,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_TasaCambioCredito.FSC_MonedaDestino__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73596,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_TasaCambioCredito.FSC_MonedaOrigen__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73597,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_TasaCambioCredito.FSC_Tasa__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73598,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__FSC_TasaCambioCredito.FSC_TipoCotizacion__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73599,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.ConsConsolidacion": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73600,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.ConsDesinteresar": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73601,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.ConsOtros": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73602,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.ConsRemodelacion": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73603,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.ConsSegundaHipoteca": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73604,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.ConsSolar": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73605,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.ConsTraslado": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73606,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.ExtCompraDOP": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73607,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.ExtCompraUSD": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73608,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.HipCompraDOP": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73609,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.HipCompraUSD": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73610,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.HipConstruccion": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73611,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.HipDesinteresar": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73612,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.HipReconstruccion": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73613,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.HipReestructuracion": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73614,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.HipRemodelacion": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73615,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.HipSegundaRemodelacion": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73616,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.HipTrasladoDOP": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73617,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_ReglaCredito.HipTrasladoUSD": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73618,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_TasaCambioCredito.USD_DOP_20261021": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73619,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_CreditPolicyController": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73621,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_CreditPolicyControllerTest": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73622,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_CreditPolicyGuard": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73653,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_CreditPolicyGuardTest": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73624,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_CreditPolicyService": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73650,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_CreditPolicyServiceTest": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73651,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomObject__FSC_ReglaCredito": {
+            "memberType": "CustomObject",
+            "serverRevisionCounter": 73635,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomObject__FSC_TasaCambioCredito": {
+            "memberType": "CustomObject",
+            "serverRevisionCounter": 73636,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ValidationRule__FSC_Garantia__c.FSC_SaldoHipotecaNoNegativo": {
+            "memberType": "ValidationRule",
+            "serverRevisionCounter": 73638,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ValidationRule__FSC_Garantia__c.FSC_ValorMejorasPositivo": {
+            "memberType": "ValidationRule",
+            "serverRevisionCounter": 73639,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "Layout__FSC_ReglaCredito-Regla de credito Layout": {
+            "memberType": "Layout",
+            "serverRevisionCounter": 73641,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "Layout__FSC_TasaCambioCredito-Tasa de cambio Layout": {
+            "memberType": "Layout",
+            "serverRevisionCounter": 73642,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_DeudaConsolidadaBV__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73672,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_DeudaConsolidadaBVService": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73675,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "ApexClass__FSC_DeudaConsolidadaBVServiceTest": {
+            "memberType": "ApexClass",
+            "serverRevisionCounter": 73676,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomField__ResidentialLoanApplication.FSC_NumeroSolicitud__c": {
+            "memberType": "CustomField",
+            "serverRevisionCounter": 73777,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_Referidor.Detailed_Studies_SRL_1_32_42664_9": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73691,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "CustomMetadata__FSC_Referidor.Lopez_Vanderhost_Perez_Real_Estate_232": {
+            "memberType": "CustomMetadata",
+            "serverRevisionCounter": 73692,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "RecordType__FinServ__ContactContactRelation__c.Referencia": {
+            "memberType": "RecordType",
+            "serverRevisionCounter": 73696,
+            "lastRetrievedFromServer": null,
+            "isNameObsolete": false
+        },
+        "Flow__FSC_Aprobacion_PLA_Creacion": {
+            "memberType": "Flow",
+            "serverRevisionCounter": 73750,
             "lastRetrievedFromServer": null,
             "isNameObsolete": false
         }

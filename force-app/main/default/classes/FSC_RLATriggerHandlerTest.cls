@@ -23,6 +23,90 @@ private class FSC_RLATriggerHandlerTest {
 	private static final String SUBESTADO_PEP = 'En validación PEP/Listas';
 	private static final String TITLE_PREFIX = 'Crédito ';
 
+	@IsTest
+	static void shouldAppendRequestNumber_WhenCreated() {
+		ResidentialLoanApplication application = buildApplicationForName(createAccount().Id, 'Crédito PyMe - Cliente - 00112345678');
+		Test.startTest();
+		insert application;
+		Test.stopTest();
+		ResidentialLoanApplication saved = readApplicationName(application.Id);
+		Assert.isNotNull(saved.FSC_NumeroSolicitud__c, 'Debe generarse el autonumérico.');
+		Assert.areEqual(application.Name + ' - ' + saved.FSC_NumeroSolicitud__c, saved.Name, 'El nombre debe terminar con el número de solicitud.');
+	}
+
+	@IsTest
+	static void shouldKeepRequestNumber_WhenUpdatedAgain() {
+		ResidentialLoanApplication application = buildApplicationForName(createAccount().Id, 'Crédito PyMe - Cliente - 00112345678');
+		insert application;
+		String initialName = readApplicationName(application.Id).Name;
+		Test.startTest();
+		update new ResidentialLoanApplication(Id = application.Id);
+		Test.stopTest();
+		Assert.areEqual(initialName, readApplicationName(application.Id).Name, 'Una actualización posterior no debe duplicar el sufijo.');
+	}
+
+	@IsTest
+	static void shouldRejectManualNameChange_WhenAlreadyCreated() {
+		ResidentialLoanApplication application = buildApplicationForName(createAccount().Id, 'Crédito PyMe - Cliente - 00112345678');
+		insert application;
+		Test.startTest();
+		Database.SaveResult result = Database.update(new ResidentialLoanApplication(Id = application.Id, Name = 'Cambio manual'), false);
+		Test.stopTest();
+		Assert.isFalse(result.isSuccess(), 'El Flow debe seguir bloqueando la edición manual del nombre.');
+		Assert.isTrue(result.getErrors()[0].getMessage().contains('No puede editar el nombre'), 'Debe conservarse el mensaje del Flow.');
+	}
+
+	@IsTest
+	static void shouldPreserveRequestNumber_WhenNameAtMaximumLength() {
+		String originalName = 'Crédito PyMe - Cliente - 00112345678';
+		Integer nameLength = ResidentialLoanApplication.Name.getDescribe().getLength();
+		while (originalName.length() < nameLength) {
+			originalName += 'X';
+		}
+		ResidentialLoanApplication application = buildApplicationForName(createAccount().Id, originalName);
+		Test.startTest();
+		insert application;
+		Test.stopTest();
+		ResidentialLoanApplication saved = readApplicationName(application.Id);
+		String suffix = ' - ' + saved.FSC_NumeroSolicitud__c;
+		Assert.areEqual(originalName.left(nameLength - suffix.length()) + suffix, saved.Name, 'Debe reservar espacio para el número completo.');
+	}
+
+	@IsTest
+	static void shouldAppendRequestNumbers_WhenCreating251Applications() {
+		Id accountId = createAccount().Id;
+		List<ResidentialLoanApplication> applications = new List<ResidentialLoanApplication>();
+		for (Integer index = 0; index < 251; index++) {
+			String originalName = 'Crédito PyMe - Cliente - ' + index;
+			ResidentialLoanApplication application = buildApplicationForName(accountId, originalName);
+			applications.add(application);
+		}
+		Test.startTest();
+		insert applications;
+		Test.stopTest();
+		Map<Id, ResidentialLoanApplication> savedById = new Map<Id, ResidentialLoanApplication>(
+			[SELECT Id, Name, FSC_NumeroSolicitud__c FROM ResidentialLoanApplication WHERE AccountId = :accountId WITH USER_MODE]
+		);
+		Assert.areEqual(applications.size(), savedById.size(), 'Debe procesar ambos lotes del trigger.');
+		for (ResidentialLoanApplication application : applications) {
+			ResidentialLoanApplication saved = savedById.get(application.Id);
+			Assert.areEqual(application.Name + ' - ' + saved.FSC_NumeroSolicitud__c, saved.Name, 'Debe usar el autonumérico de cada solicitud.');
+		}
+	}
+
+	private static ResidentialLoanApplication buildApplicationForName(Id accountId, String name) {
+		return new ResidentialLoanApplication(
+			Name = name,
+			AccountId = accountId,
+			RecordTypeId = getResidentialLoanApplicationRecordTypeId(RT_CREDITO_PYME),
+			Status = STATUS_BORRADOR
+		);
+	}
+
+	private static ResidentialLoanApplication readApplicationName(Id applicationId) {
+		return [SELECT Id, Name, FSC_NumeroSolicitud__c FROM ResidentialLoanApplication WHERE Id = :applicationId WITH USER_MODE];
+	}
+
 	private static Account createAccount() {
 		Account acc = new Account(Name = 'Cuenta Test Trigger ' + System.now().getTime());
 		insert acc;
@@ -237,9 +321,11 @@ private class FSC_RLATriggerHandlerTest {
 	@IsTest
 	static void rejectsFolioAlreadyStoredInAnotherApplication() {
 		ResidentialLoanApplication original = createRla(STATUS_BORRADOR, SUBESTADO_REGENERACION);
-		original.FSC_ActoNumeroPagare__c = 'POL8585';
-		original.FSC_NumeroFolioPagare__c = 8585;
-		update original;
+		update new ResidentialLoanApplication(
+			Id = original.Id,
+			FSC_ActoNumeroPagare__c = 'POL8585',
+			FSC_NumeroFolioPagare__c = 8585
+		);
 		ResidentialLoanApplication duplicate = new ResidentialLoanApplication(Name = 'Policy stored duplicate', FSC_NumeroFolioPagare__c = 8585);
 		Test.startTest();
 		FSC_RLATriggerHandler.beforeInsert(new List<ResidentialLoanApplication>{ duplicate });
@@ -251,8 +337,10 @@ private class FSC_RLATriggerHandlerTest {
 	@IsTest
 	static void rejectsPagareAlreadyStoredInAnotherApplication() {
 		ResidentialLoanApplication original = createRla(STATUS_BORRADOR, SUBESTADO_REGENERACION);
-		original.FSC_ActoNumeroPagare__c = 'POL8587';
-		update original;
+		update new ResidentialLoanApplication(
+			Id = original.Id,
+			FSC_ActoNumeroPagare__c = 'POL8587'
+		);
 		ResidentialLoanApplication duplicate = new ResidentialLoanApplication(Name = 'Policy stored pagare', FSC_ActoNumeroPagare__c = 'POL8587');
 		Test.startTest();
 		FSC_RLATriggerHandler.beforeInsert(new List<ResidentialLoanApplication>{ duplicate });

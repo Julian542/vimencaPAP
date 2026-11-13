@@ -52,7 +52,7 @@ private class FSC_RlaApprovalAdminDecisionRestTest {
 	}
 
 	@IsTest
-	static void registrarDecisionCliente_aceptaPasaAGeneracionDePagares() {
+	static void registrarDecisionCliente_aceptaGeneraSimpleYAvanzaAFirmas() {
 		ResidentialLoanApplication rla = createRla();
 		prepararRequest('{"residentialLoanApplicationId":"' + rla.Id + '","accion":"ACEPTA","comentarioAuditoria":"Ejecutado por: Oficial"}');
 
@@ -66,7 +66,7 @@ private class FSC_RlaApprovalAdminDecisionRestTest {
 			WHERE Id = :rla.Id
 		];
 		System.assertEquals(200, RestContext.response.statusCode, RestContext.response.responseBody.toString());
-		System.assertEquals('Generación de pagarés y plantillas', refreshed.FSC_Subestado__c);
+		Assert.areEqual('Gestionar firmas', refreshed.FSC_Subestado__c, 'El pagaré simple debe generarse sin revisión manual.');
 		System.assertEquals(true, refreshed.FSC_SolicitudAprobadaPorComite__c);
 	}
 

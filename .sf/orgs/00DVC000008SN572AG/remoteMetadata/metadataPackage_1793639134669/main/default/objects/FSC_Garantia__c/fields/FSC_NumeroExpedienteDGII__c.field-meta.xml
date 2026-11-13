@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_NumeroExpedienteDGII__c</fullName>
+    <description>Número de expediente asignado por la DGII a la oposición de la matrícula. Puede repetirse entre solicitudes.</description>
+    <encryptionScheme>None</encryptionScheme>
+    <externalId>false</externalId>
+    <inlineHelpText>Número de expediente asignado por la DGII a la oposición de la matrícula. Puede repetirse entre solicitudes.</inlineHelpText>
+    <label>N.º expediente DGII</label>
+    <length>50</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

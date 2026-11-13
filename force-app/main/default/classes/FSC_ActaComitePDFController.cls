@@ -13,18 +13,27 @@ public with sharing class FSC_ActaComitePDFController {
 	public String confirmacionRemota { get; private set; }
 
 	public class ActaDocumentData {
-		@AuraEnabled public String actaNumero { get; set; }
-		@AuraEnabled public String actaFecha { get; set; }
-		@AuraEnabled public String textoQuorum { get; set; }
-		@AuraEnabled public String textoObjetivo { get; set; }
-		@AuraEnabled public String confirmacionRemota { get; set; }
-		@AuraEnabled public List<ActaSection> seccionesActa { get; set; }
-		@AuraEnabled public List<MiembroComite> miembrosComite { get; set; }
+		@AuraEnabled
+		public String actaNumero { get; set; }
+		@AuraEnabled
+		public String actaFecha { get; set; }
+		@AuraEnabled
+		public String textoQuorum { get; set; }
+		@AuraEnabled
+		public String textoObjetivo { get; set; }
+		@AuraEnabled
+		public String confirmacionRemota { get; set; }
+		@AuraEnabled
+		public List<ActaSection> seccionesActa { get; set; }
+		@AuraEnabled
+		public List<MiembroComite> miembrosComite { get; set; }
 	}
 
 	public class PdfDownload {
-		@AuraEnabled public String fileName { get; set; }
-		@AuraEnabled public String base64Data { get; set; }
+		@AuraEnabled
+		public String fileName { get; set; }
+		@AuraEnabled
+		public String base64Data { get; set; }
 	}
 
 	private class ActaEdits {
@@ -40,8 +49,10 @@ public with sharing class FSC_ActaComitePDFController {
 	}
 
 	public class ActaSection {
-		@AuraEnabled public String titulo { get; set; }
-		@AuraEnabled public List<ActaRow> solicitudes { get; set; }
+		@AuraEnabled
+		public String titulo { get; set; }
+		@AuraEnabled
+		public List<ActaRow> solicitudes { get; set; }
 
 		public ActaSection(String titulo, List<ActaRow> solicitudes) {
 			this.titulo = titulo;
@@ -50,40 +61,66 @@ public with sharing class FSC_ActaComitePDFController {
 	}
 
 	public class ActaRow {
-		@AuraEnabled public Integer numero { get; set; }
-		@AuraEnabled public String sucursal { get; set; }
-		@AuraEnabled public String oficial { get; set; }
-		@AuraEnabled public String nombreCliente { get; set; }
-		@AuraEnabled public String tipoFacilidad { get; set; }
+		@AuraEnabled
+		public Integer numero { get; set; }
+		@AuraEnabled
+		public String sucursal { get; set; }
+		@AuraEnabled
+		public String oficial { get; set; }
+		@AuraEnabled
+		public String nombreCliente { get; set; }
+		@AuraEnabled
+		public String tipoFacilidad { get; set; }
 
-		@AuraEnabled public String montoSolicitado { get; set; }
-		@AuraEnabled public String montoAprobado { get; set; }
+		@AuraEnabled
+		public String montoSolicitado { get; set; }
+		@AuraEnabled
+		public String montoAprobado { get; set; }
 
-		@AuraEnabled public String cuotaSolicitada { get; set; }
-		@AuraEnabled public String plazoSolicitado { get; set; }
-		@AuraEnabled public String tasaRefSolicitada { get; set; }
-		@AuraEnabled public String cuotaAprobada { get; set; }
-		@AuraEnabled public String plazoAprobado { get; set; }
-		@AuraEnabled public String tasaRefAprobada { get; set; }
+		@AuraEnabled
+		public String cuotaSolicitada { get; set; }
+		@AuraEnabled
+		public String plazoSolicitado { get; set; }
+		@AuraEnabled
+		public String tasaRefSolicitada { get; set; }
+		@AuraEnabled
+		public String cuotaAprobada { get; set; }
+		@AuraEnabled
+		public String plazoAprobado { get; set; }
+		@AuraEnabled
+		public String tasaRefAprobada { get; set; }
 
-		@AuraEnabled public String garantiaPrincipal { get; set; }
-		@AuraEnabled public String valorGarantiaPrincipal { get; set; }
-		@AuraEnabled public String descGarantiaPrincipal { get; set; }
+		@AuraEnabled
+		public String garantiaPrincipal { get; set; }
+		@AuraEnabled
+		public String valorGarantiaPrincipal { get; set; }
+		@AuraEnabled
+		public String descGarantiaPrincipal { get; set; }
 
-		@AuraEnabled public String garantiaSecundaria { get; set; }
-		@AuraEnabled public String valorGarantiaSecundaria { get; set; }
-		@AuraEnabled public String descGarantiaSecundaria { get; set; }
+		@AuraEnabled
+		public String garantiaSecundaria { get; set; }
+		@AuraEnabled
+		public String valorGarantiaSecundaria { get; set; }
+		@AuraEnabled
+		public String descGarantiaSecundaria { get; set; }
 
-		@AuraEnabled public String decisionComite { get; set; }
-		@AuraEnabled public String condicion { get; set; }
-		@AuraEnabled public String observaciones { get; set; }
+		@AuraEnabled
+		public String decisionComite { get; set; }
+		@AuraEnabled
+		public String condicion { get; set; }
+		@AuraEnabled
+		public String observaciones { get; set; }
 	}
 
 	public class MiembroComite {
-		@AuraEnabled public String nombre { get; set; }
-		@AuraEnabled public String perfil { get; set; }
-		@AuraEnabled public String funcion { get; set; }
-		@AuraEnabled public String modalidad { get; set; }
+		@AuraEnabled
+		public String nombre { get; set; }
+		@AuraEnabled
+		public String perfil { get; set; }
+		@AuraEnabled
+		public String funcion { get; set; }
+		@AuraEnabled
+		public String modalidad { get; set; }
 	}
 
 	public FSC_ActaComitePDFController() {
@@ -140,13 +177,12 @@ public with sharing class FSC_ActaComitePDFController {
 				FSC_MontoTotalCuotaMensual__c
 			FROM ResidentialLoanApplication
 			WHERE
-				(
-					(
-						FSC_FechaYHoraAprobacionComite__c >= :actaDateInicio
-						AND FSC_FechaYHoraAprobacionComite__c <= :actaDateFin
-					)
-					OR Id IN :rlaIdsDecidedByProcess
-				)
+				(FSC_InstanciaAprobacion__c = NULL
+				OR (FSC_InstanciaAprobacion__c LIKE 'Comité%'
+				AND FSC_RevisionAnalistaCompleta__c = TRUE))
+				AND ((FSC_FechaYHoraAprobacionComite__c >= :actaDateInicio
+				AND FSC_FechaYHoraAprobacionComite__c <= :actaDateFin)
+				OR Id IN :rlaIdsDecidedByProcess)
 			WITH USER_MODE
 			ORDER BY FSC_MontoAprobado__c DESC NULLS LAST, FSC_FechaYHoraAprobacionComite__c ASC, Id ASC
 		];
@@ -193,7 +229,6 @@ public with sharing class FSC_ActaComitePDFController {
 		};
 
 		for (ResidentialLoanApplication a : apps) {
-
 			ActaRow r = new ActaRow();
 			Boolean isPyme = isPymeCredit(a.FSC_TipoCredito__c, a.RecordType?.DeveloperName);
 			r.sucursal = 'Oficina Principal';
@@ -206,9 +241,7 @@ public with sharing class FSC_ActaComitePDFController {
 
 			r.cuotaAprobada = fmtInstallment(a.FSC_MontoAprobado__c, a.FSC_PlazoMesesAprobado__c);
 			// Para PyME, ambas cuotas deben mostrar el valor aprobado.
-			r.cuotaSolicitada = isPyme
-				? r.cuotaAprobada
-				: fmtMoney(a.FSC_Monto_De_La_Cuota__c);
+			r.cuotaSolicitada = isPyme ? r.cuotaAprobada : fmtMoney(a.FSC_Monto_De_La_Cuota__c);
 			r.plazoSolicitado = (a.FSC_PlazoMesesAprobado__c != null) ? String.valueOf(a.FSC_PlazoMesesAprobado__c) : '';
 			r.tasaRefSolicitada = fmtRate(a.FSC_TasaInteres__c);
 
@@ -344,8 +377,14 @@ public with sharing class FSC_ActaComitePDFController {
 		}
 
 		for (ActaRowEdit edit : edits.rows) {
-			if (edit == null || edit.sectionIndex == null || edit.rowIndex == null || edit.values == null ||
-				edit.sectionIndex < 0 || edit.sectionIndex >= seccionesActa.size()) {
+			if (
+				edit == null ||
+				edit.sectionIndex == null ||
+				edit.rowIndex == null ||
+				edit.values == null ||
+				edit.sectionIndex < 0 ||
+				edit.sectionIndex >= seccionesActa.size()
+			) {
 				continue;
 			}
 			List<ActaRow> sectionRows = seccionesActa[edit.sectionIndex].solicitudes;
@@ -363,33 +402,79 @@ public with sharing class FSC_ActaComitePDFController {
 				when 'numero' {
 					row.numero = String.isBlank(value) ? null : Integer.valueOf(value);
 				}
-				when 'sucursal' { row.sucursal = value; }
-				when 'oficial' { row.oficial = value; }
-				when 'nombreCliente' { row.nombreCliente = value; }
-				when 'tipoFacilidad' { row.tipoFacilidad = value; }
-				when 'montoSolicitado' { row.montoSolicitado = value; }
-				when 'montoAprobado' { row.montoAprobado = value; }
-				when 'cuotaSolicitada' { row.cuotaSolicitada = value; }
-				when 'plazoSolicitado' { row.plazoSolicitado = value; }
-				when 'tasaRefSolicitada' { row.tasaRefSolicitada = value; }
-				when 'cuotaAprobada' { row.cuotaAprobada = value; }
-				when 'plazoAprobado' { row.plazoAprobado = value; }
-				when 'tasaRefAprobada' { row.tasaRefAprobada = value; }
-				when 'garantiaPrincipal' { row.garantiaPrincipal = value; }
-				when 'valorGarantiaPrincipal' { row.valorGarantiaPrincipal = value; }
-				when 'descGarantiaPrincipal' { row.descGarantiaPrincipal = value; }
-				when 'garantiaSecundaria' { row.garantiaSecundaria = value; }
-				when 'valorGarantiaSecundaria' { row.valorGarantiaSecundaria = value; }
-				when 'descGarantiaSecundaria' { row.descGarantiaSecundaria = value; }
-				when 'decisionComite' { row.decisionComite = value; }
-				when 'condicion' { row.condicion = value; }
-				when 'observaciones' { row.observaciones = value; }
+				when 'sucursal' {
+					row.sucursal = value;
+				}
+				when 'oficial' {
+					row.oficial = value;
+				}
+				when 'nombreCliente' {
+					row.nombreCliente = value;
+				}
+				when 'tipoFacilidad' {
+					row.tipoFacilidad = value;
+				}
+				when 'montoSolicitado' {
+					row.montoSolicitado = value;
+				}
+				when 'montoAprobado' {
+					row.montoAprobado = value;
+				}
+				when 'cuotaSolicitada' {
+					row.cuotaSolicitada = value;
+				}
+				when 'plazoSolicitado' {
+					row.plazoSolicitado = value;
+				}
+				when 'tasaRefSolicitada' {
+					row.tasaRefSolicitada = value;
+				}
+				when 'cuotaAprobada' {
+					row.cuotaAprobada = value;
+				}
+				when 'plazoAprobado' {
+					row.plazoAprobado = value;
+				}
+				when 'tasaRefAprobada' {
+					row.tasaRefAprobada = value;
+				}
+				when 'garantiaPrincipal' {
+					row.garantiaPrincipal = value;
+				}
+				when 'valorGarantiaPrincipal' {
+					row.valorGarantiaPrincipal = value;
+				}
+				when 'descGarantiaPrincipal' {
+					row.descGarantiaPrincipal = value;
+				}
+				when 'garantiaSecundaria' {
+					row.garantiaSecundaria = value;
+				}
+				when 'valorGarantiaSecundaria' {
+					row.valorGarantiaSecundaria = value;
+				}
+				when 'descGarantiaSecundaria' {
+					row.descGarantiaSecundaria = value;
+				}
+				when 'decisionComite' {
+					row.decisionComite = value;
+				}
+				when 'condicion' {
+					row.condicion = value;
+				}
+				when 'observaciones' {
+					row.observaciones = value;
+				}
 			}
 		}
 	}
 
 	private static String buildFileName(Date actaDate) {
-		String isoDate = actaDate.year() + '-' + String.valueOf(actaDate.month()).leftPad(2, '0') + '-' +
+		String isoDate =
+			actaDate.year() +
+			'-' +
+			String.valueOf(actaDate.month()).leftPad(2, '0') +
+			'-' +
 			String.valueOf(actaDate.day()).leftPad(2, '0');
 		return 'Acta_Comite_Credito_Editada_' + isoDate + '.pdf';
 	}
@@ -434,7 +519,8 @@ public with sharing class FSC_ActaComitePDFController {
 		for (ProcessInstance process : [
 			SELECT TargetObjectId, Status
 			FROM ProcessInstance
-			WHERE ProcessDefinition.DeveloperName = 'FSC_ComiteDeCredito'
+			WHERE
+				ProcessDefinition.DeveloperName IN ('FSC_ComiteDeCredito', 'FSC_InstanciasAprobacionCredito')
 				AND Status IN ('Approved', 'Rejected')
 				AND CompletedDate >= :startDate
 				AND CompletedDate <= :endDate

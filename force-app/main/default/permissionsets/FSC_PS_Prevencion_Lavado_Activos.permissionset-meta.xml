@@ -377,6 +377,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>FSC_DeudaConsolidadaBVService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_DeudaConsolidadaBVServiceTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>FSC_DocumentacionContratosService</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -6614,6 +6622,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_DeudaConsolidadaBV__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_DeudaPrestamoBuroDOP__c</field>
         <readable>true</readable>
@@ -7231,6 +7244,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>ResidentialLoanApplication.FSC_NumeroPrestamoAbanks__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_NumeroSolicitud__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

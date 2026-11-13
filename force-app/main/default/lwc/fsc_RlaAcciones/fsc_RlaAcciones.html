@@ -84,6 +84,7 @@
 							<span class="text">
 								Hay un proceso de verificación activo
 								<template if:true={currentApproverName}> &nbsp;asignado a: <strong>{currentApproverName}</strong> </template>
+								<template if:true={approvalStageMessage}><br />{approvalStageMessage}</template>
 							</span>
 						</div>
 					</template>
@@ -102,8 +103,16 @@
 						<div class="banner warning">
 							<span class="icon">⚠️</span>
 							<span class="text">
-								Debe validar la documentación en pestaña Checklist de Documentos, luego podrá Recomendar o Enviar a Supervisor la
-								solicitud si lo desea.
+								Primero valide la documentación en la pestaña Checklist de Documentos. Después podrá registrar la decisión que
+								corresponda a la instancia indicada o enviar la solicitud a Supervisor.
+							</span>
+						</div>
+						<!-- Aviso previo a la validación de documentos. -->
+						<div class="banner warning">
+							<span class="icon">&#9888;&#65039;</span>
+							<span class="text">
+								Para editar el Informe de Crédito y el documento de Capacidad de pago, primero se deben validar los documentos con el
+								botón Validado que se encuentra debajo de este mensaje.
 							</span>
 						</div>
 					</template>
@@ -125,7 +134,7 @@
 					<template if:true={showReassignButton}>
 						<div class="banner warning">
 							<span class="icon">⚠️</span>
-							<span class="text">Como administrador puede reasignar el proceso de aprobación actual.</span>
+							<span class="text">Puede reasignar el proceso de aprobación actual.</span>
 						</div>
 					</template>
 				</template>
@@ -178,6 +187,12 @@
 
 				<!-- Cliente acepta condición -->
 				<template if:true={showClienteAceptaCondicion}>
+					<template if:true={creatorName}>
+						<div class="banner warning">
+							<span class="icon">&#9888;&#65039;</span>
+							<span class="text">Proceso de verificación activo para oficial <strong>{creatorName}</strong></span>
+						</div>
+					</template>
 					<div class="banner warning">
 						<span class="icon">⚠️</span>
 						<span class="text">¿Cliente acepta condición?</span>
@@ -194,6 +209,12 @@
 
 				<!-- Recepción Documentos -->
 				<template if:true={showRecepcionDocs}>
+					<template if:true={creatorName}>
+						<div class="banner warning">
+							<span class="icon">&#9888;&#65039;</span>
+							<span class="text">Proceso de verificación activo para oficial <strong>{creatorName}</strong></span>
+						</div>
+					</template>
 					<div class="banner warning">
 						<span class="icon">⚠️</span>
 						<span class="text">
@@ -278,11 +299,18 @@
 
 				<template if:true={showMensajeArchivosDesembolso}>
 					<div class="banner success">
-						<span class="text">El desembolso se realizó con éxito en Abanks, debe cargar los archivos de evidencia con el botón que se encuentra bajo este mensaje para continuar.</span>
+						<span class="text"
+							>El desembolso se realizó con éxito en Abanks, debe cargar los archivos de evidencia con el botón que se encuentra bajo
+							este mensaje para continuar.</span
+						>
 					</div>
 					<template if:true={showCargarArchivosDesembolso}>
 						<div class="btnRow center">
-							<lightning-button variant="brand" label="Cargar archivos de desembolso" onclick={handleMarcarDesembolsado} disabled={loading}></lightning-button>
+							<lightning-button
+								variant="brand"
+								label="Cargar archivos de desembolso"
+								onclick={handleMarcarDesembolsado}
+								disabled={loading}></lightning-button>
 						</div>
 					</template>
 				</template>
@@ -317,11 +345,16 @@
 				</template>
 
 				<template if:true={showRevisionDocumentos}>
-                    <div class="banner warning"><span class="text">Debe revisar el pagaré y contrato generado y luego presionar el botón Validado. Si desea modificar los documentos puede hacerlo con los botones que se encuentran debajo de este mensaje.</span></div>
-                    <template if:true={showDocumentosPendientes}>
-                        <div class="banner warning"><span class="text">{mensajeRevisionDocumentosPendiente}</span></div>
-                    </template>
-                </template>
+					<div class="banner warning">
+						<span class="text"
+							>Debe revisar el pagaré y contrato generado y luego presionar el botón Validado. Si desea modificar los documentos puede
+							hacerlo con los botones que se encuentran debajo de este mensaje.</span
+						>
+					</div>
+					<template if:true={showDocumentosPendientes}>
+						<div class="banner warning"><span class="text">{mensajeRevisionDocumentosPendiente}</span></div>
+					</template>
+				</template>
 				<template if:true={showGenerarPagareMessage}>
 					<div class="banner warning">
 						<span class="icon">⚠️</span>
@@ -738,20 +771,36 @@
 						</template>
 
 						<template if:true={showRevisionDocumentosButtons}>
-                            <div class="btnRow center">
-                                <lightning-button variant="brand" label="Validado" onclick={handleValidarDocumentosLegales} disabled={disableValidarDocumentos}></lightning-button>
-                                <template if:true={showEditarDocumentosLegales}>
-                                    <lightning-button label="Editar pagaré" onclick={handleEditarPagare} disabled={loading}></lightning-button>
-                                    <lightning-button label="Editar contrato" onclick={handleEditarContrato} disabled={disableEditarContrato}></lightning-button>
-                                </template>
-                            </div>
-                            <template if:true={showDocumentosPendientes}>
-                                <div class="btnRow center">
-                                    <lightning-button label="Actualizar documentos" onclick={handleActualizarDocumentosLegales} disabled={loading}></lightning-button>
-                                    <lightning-button label="Reintentar generación" onclick={handleReintentarDocumentosLegales} disabled={loading}></lightning-button>
-                                </div>
-                            </template>
-                        </template>
+							<div class="btnRow center">
+								<lightning-button
+									variant="brand"
+									label="Validado"
+									onclick={handleValidarDocumentosLegales}
+									disabled={disableValidarDocumentos}></lightning-button>
+								<template if:true={showEditarDocumentosLegales}>
+									<lightning-button
+										label="Editar pagaré"
+										onclick={handleEditarPagare}
+										disabled={loading}></lightning-button>
+									<lightning-button
+										label="Editar contrato"
+										onclick={handleEditarContrato}
+										disabled={disableEditarContrato}></lightning-button>
+								</template>
+							</div>
+							<template if:true={showDocumentosPendientes}>
+								<div class="btnRow center">
+									<lightning-button
+										label="Actualizar documentos"
+										onclick={handleActualizarDocumentosLegales}
+										disabled={loading}></lightning-button>
+									<lightning-button
+										label="Reintentar generación"
+										onclick={handleReintentarDocumentosLegales}
+										disabled={loading}></lightning-button>
+								</div>
+							</template>
+						</template>
 						<template if:true={showGenerarPagareButton}>
 							<div class="btnRow center">
 								<lightning-button
@@ -820,11 +869,15 @@
 	</lightning-card>
 
 	<template if:true={showModalDocumentoLegal}>
-        <c-fsc_-editar-documento-legal record-id={recordId} content-version-id={versionLegalEnEdicion}
-            tipo-documento={tipoLegalEnEdicion} oncancel={closeModalDocumentoLegal} onsaved={handleDocumentoLegalGuardado}>
-        </c-fsc_-editar-documento-legal>
-    </template>
-	
+		<c-fsc_-editar-documento-legal
+			record-id={recordId}
+			content-version-id={versionLegalEnEdicion}
+			tipo-documento={tipoLegalEnEdicion}
+			oncancel={closeModalDocumentoLegal}
+			onsaved={handleDocumentoLegalGuardado}>
+		</c-fsc_-editar-documento-legal>
+	</template>
+
 	<template if:true={showModalEdicionDocumentoAnalisis}>
 		<c-fsc_-editar-documento-analisis
 			record-id={recordId}
@@ -1716,7 +1769,11 @@
 						required>
 					</lightning-input>
 					<template if:true={approvedLoanTermPolicyMessage}>
-						<div class="slds-text-color_error slds-m-top_x-small" role="alert">{approvedLoanTermPolicyMessage}</div>
+						<div
+							class="slds-text-color_error slds-m-top_x-small"
+							role="alert">
+							{approvedLoanTermPolicyMessage}
+						</div>
 					</template>
 
 					<lightning-input

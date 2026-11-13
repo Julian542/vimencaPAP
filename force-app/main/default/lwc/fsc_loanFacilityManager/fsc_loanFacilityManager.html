@@ -36,6 +36,7 @@
 							if:false={isEstadoDelVehiculoDisabled}>
 							<lightning-combobox
 								name="estadoDelVehiculo"
+								required
 								label="Estado del Vehiculo"
 								value={estadoDelVehiculo}
 								options={estadoDelVehiculoOptions}
@@ -353,6 +354,20 @@
 					<template if:true={showGuaranteeEditor}>
 						<div class="slds-border_top slds-m-top_medium slds-p-top_medium">
 							<div class="slds-text-title_bold slds-m-bottom_small">{guaranteeEditorTitle}</div>
+							<template if:true={guaranteePolicyError}>
+								<div
+									class="slds-text-color_error slds-m-bottom_small"
+									role="alert">
+									{guaranteePolicyError}
+								</div>
+							</template>
+							<template if:true={guaranteePolicyPending}>
+								<div
+									class="slds-m-bottom_small"
+									role="status">
+									Validando capacidad de la garantía...
+								</div>
+							</template>
 							<div class="slds-grid slds-wrap slds-gutters">
 								<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2">
 									<lightning-combobox
@@ -441,7 +456,7 @@
 											type="number"
 											step="0.01"
 											min="0.01"
-											label="Valor del inmueble o solar"
+											label={propertyValueLabel}
 											field-level-help="Indique el valor total en la moneda del crédito. Para solares, identifique el tipo de inmueble como Solar o Solar sin gravamen."
 											value={guaranteeDraft.FSC_Valor_Inmueble__c}
 											required={requiresPropertyValue}
@@ -533,7 +548,8 @@
 											name="FSC_Precio_de_Venta__c"
 											type="number"
 											step="0.01"
-											label="Precio de Venta"
+											label={salePriceLabel}
+											field-level-help="Indique el precio total de venta en la moneda del crédito; no el inicial. Para compra, el máximo se calcula sobre el menor entre este precio y el valor del inmueble."
 											value={guaranteeDraft.FSC_Precio_de_Venta__c}
 											required={requiresSalePrice}
 											data-guarantee-input
@@ -732,6 +748,7 @@
 									class="slds-m-left_small"
 									label="Guardar"
 									variant="brand"
+									disabled={guaranteePolicyPending}
 									onclick={saveGuarantee}></lightning-button>
 							</div>
 						</div>

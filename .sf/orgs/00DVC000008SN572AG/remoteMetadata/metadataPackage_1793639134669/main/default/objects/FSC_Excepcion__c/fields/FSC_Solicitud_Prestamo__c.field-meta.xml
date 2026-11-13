@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Solicitud_Prestamo__c</fullName>
+    <description>Relaciona la excepción con la solicitud de préstamo residencial que la origina.</description>
+    <inlineHelpText>Seleccione la solicitud de préstamo a la que corresponde esta excepción.</inlineHelpText>
+    <label>Solicitud de Préstamo</label>
+    <referenceTo>ResidentialLoanApplication</referenceTo>
+    <relationshipName>FSC_Excepciones</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomNotificationType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customNotifTypeName>FSC Formalización de garantías</customNotifTypeName>
+    <description>Avisa al responsable de la etapa actual del proceso de formalización de garantías.</description>
+    <desktop>true</desktop>
+    <masterLabel>FSC Formalización de garantías</masterLabel>
+    <mobile>true</mobile>
+    <slack>false</slack>
+</CustomNotificationType>

@@ -26,31 +26,60 @@ private class FSC_RlaAccionesControllerTest {
 	private static Integer accountSequence = 0;
 
 	private static ResidentialLoanApplication createRla(String actoNumeroPagare, String subestado) {
+		return createRla(actoNumeroPagare, subestado, 'FSC_Solicitud_Credito_Consumo');
+	}
+
+	private static ResidentialLoanApplication createRla(String actoNumeroPagare, String subestado, String recordTypeName) {
+		Boolean isMortgage = recordTypeName == 'FSC_Solicitud_Credito_Hipotecario';
 		Account acc = new Account(
 			LastName = 'Cuenta Acciones ' + System.now().getTime(),
 			RecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByDeveloperName().get('Candidato_Persona_Fisica').getRecordTypeId(),
 			ACC_NumIdentificacion__c = '001088036' + String.valueOf(10 + accountSequence++),
 			ACC_TipoIdentificacion__c = 'Cédula'
 		);
+		if (isMortgage) {
+			acc.ACC_Nacionalidad__c = 'REPUBLICA DOMINICANA';
+			acc.ACC_Posee_Otra_Nacionalidad__c = false;
+		}
 		insert acc;
 
 		ResidentialLoanApplication rla = new ResidentialLoanApplication(
 			Name = 'RLA Acciones ' + System.now().getTime(),
 			AccountId = acc.Id,
-			RecordTypeId = getRecordTypeId('FSC_Solicitud_Credito_Consumo'),
+			RecordTypeId = getRecordTypeId(recordTypeName),
 			Status = 'En proceso',
 			FSC_Subestado__c = subestado,
 			FSC_ActoNumeroPagare__c = actoNumeroPagare,
 			FSC_Pagares_y_Plantillas_Generados__c = false,
-			FSC_Monto__c = 5000,
-			FSC_Plazo_meses__c = '24',
+			FSC_Monto__c = isMortgage ? null : 5000,
+			FSC_Plazo_meses__c = isMortgage ? null : '24',
 			FSC_TasaInteres__c = 14,
 			FSC_Aprobado_con_Condiciones__c = false,
 			FSC_lineaFinanciera__c = '32',
 			FSC_subAplicacion__c = '401',
 			FSC_FechaVencimiento__c = Date.today().addMonths(24)
 		);
+		if (isMortgage) {
+			rla.FSC_Moneda__c = '1';
+		}
 		insert rla;
+		if (isMortgage) {
+			// La garantía debe existir antes de completar las condiciones sujetas a la política hipotecaria.
+			FSC_ReglaCredito__mdt rule = FSC_ReglaCredito__mdt.getInstance('HipCompraDOP');
+			Assert.isNotNull(rule, 'Debe existir la política de compra de vivienda en pesos.');
+			insert new FSC_Garantia__c(
+				Name = 'Garantía hipotecaria Banca Seguro',
+				FSC_Residential_Loan_Application__c = rla.Id,
+				FSC_Clase_de_Garantia__c = 'BIENES INMUEBLES',
+				FSC_Proposito_Garantia_Hipotecario__c = rule.FSC_Proposito__c,
+				FSC_Tipo_de_Inmueble__c = 'Vivienda',
+				FSC_Valor_Inmueble__c = rule.FSC_MontoMinimo__c * 4,
+				FSC_Precio_de_Venta__c = rule.FSC_MontoMinimo__c * 3
+			);
+			rla.FSC_Monto__c = rule.FSC_MontoMinimo__c;
+			rla.FSC_Plazo_meses__c = '24';
+			update new ResidentialLoanApplication(Id = rla.Id, FSC_Monto__c = rla.FSC_Monto__c, FSC_Plazo_meses__c = rla.FSC_Plazo_meses__c);
+		}
 		return rla;
 	}
 
@@ -83,7 +112,8 @@ private class FSC_RlaAccionesControllerTest {
 	}
 
 	private static Id getRecordTypeId(String developerName) {
-		Map<String, Schema.RecordTypeInfo> rtMap = ResidentialLoanApplication.SObjectType.getDescribe().getRecordTypeInfosByDeveloperName();
+		Map<String, Schema.RecordTypeInfo> rtMap = ResidentialLoanApplication.SObjectType.getDescribe(SObjectDescribeOptions.DEFERRED)
+			.getRecordTypeInfosByDeveloperName();
 		return rtMap != null && rtMap.containsKey(developerName) ? rtMap.get(developerName).getRecordTypeId() : null;
 	}
 
@@ -101,6 +131,204 @@ private class FSC_RlaAccionesControllerTest {
 		request.setSkipEntryCriteria(true);
 		request.setNextApproverIds(new List<Id>{ UserInfo.getUserId() });
 		return Approval.process(request);
+	}
+
+	private static User createApprovalSupervisor() {
+		Profile baseProfile = [
+			SELECT Id
+			FROM Profile
+			WHERE UserType = 'Standard' AND UserLicense.Name = 'Salesforce' AND PermissionsModifyAllData = FALSE
+			ORDER BY Name
+			LIMIT 1
+		];
+		User supervisor = new User(
+			LastName = 'Approval Supervisor',
+			Alias = 'aprsup',
+			Email = 'approval.supervisor@example.com',
+			Username = 'approval.supervisor.' + UserInfo.getOrganizationId() + '.' + System.now().getTime() + '@example.com',
+			ProfileId = baseProfile.Id,
+			TimeZoneSidKey = 'America/Santo_Domingo',
+			LocaleSidKey = 'es_DO',
+			EmailEncodingKey = 'UTF-8',
+			LanguageLocaleKey = 'es',
+			USE_Codigo__c = 'TESTAPPR',
+			USE_Oficina__c = getActivePicklistValue(User.USE_Oficina__c),
+			Canal_Atencion__c = 'TELEASISTENCIA'
+		);
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			insert new Datos_Maestros__c(Name = 'Oficina supervisor test', DM_Codigo_Oficina__c = supervisor.USE_Oficina__c, DM_Tipo__c = 'Oficina');
+		}
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			insert supervisor;
+			PermissionSet supervisorPermission = new PermissionSet(Name = 'TestRlaSupervisor', Label = 'Test RLA Supervisor');
+			insert supervisorPermission;
+			CustomPermission customPermission = [SELECT Id FROM CustomPermission WHERE DeveloperName = 'FSC_CP_Supervisor' LIMIT 1];
+			insert new SetupEntityAccess(ParentId = supervisorPermission.Id, SetupEntityId = customPermission.Id);
+			insert new PermissionSetAssignment(AssigneeId = supervisor.Id, PermissionSetId = supervisorPermission.Id);
+		}
+		return supervisor;
+	}
+
+	private static String getActivePicklistValue(Schema.SObjectField field) {
+		for (Schema.PicklistEntry entry : field.getDescribe().getPicklistValues()) {
+			if (entry.isActive()) {
+				return entry.getValue();
+			}
+		}
+		Assert.fail('El campo ' + field + ' debe tener al menos un valor activo.');
+		return null;
+	}
+
+	private static void assertForeignDecisionDenied(String action) {
+		User supervisor = createApprovalSupervisor();
+		ResidentialLoanApplication rla = createRla(('AUTH' + action).left(10), SUBESTADO_ANALISIS);
+		Approval.ProcessSubmitRequest request = new Approval.ProcessSubmitRequest();
+		request.setObjectId(rla.Id);
+		request.setProcessDefinitionNameOrId(action == 'Conditional' ? 'FSC_ComiteDeCredito' : 'FSC_AnalistasDeCredito');
+		request.setSkipEntryCriteria(true);
+		request.setNextApproverIds(new List<Id>{ UserInfo.getUserId() });
+		Assert.isTrue(Approval.process(request).isSuccess(), 'Debe crearse un paso asignado a otro usuario.');
+		System.runAs(supervisor) {
+			Assert.isTrue(FeatureManagement.checkPermission('FSC_CP_Supervisor'), 'Debe tener permiso de supervisor.');
+			Assert.isFalse(FeatureManagement.checkPermission('FSC_CP_Administrador'), 'No debe tener permiso de administrador.');
+			Test.startTest();
+			try {
+				if (action == 'Approve') {
+					FSC_RlaAccionesController.aprobarProcesoActual(rla.Id, 'Aprobación ajena');
+				} else if (action == 'Reject') {
+					FSC_RlaAccionesController.rechazarProcesoActual(rla.Id, 'Rechazo ajeno', '1');
+				} else {
+					FSC_RlaAccionesController.aprobarConCondicion(rla.Id, 6100, 18, 11, 'Condición ajena');
+				}
+				Assert.fail('Un supervisor no puede decidir sobre el trabajo de otro usuario.');
+			} catch (AuraHandledException expected) {
+				Assert.areEqual(
+					'Usted no tiene autorización para realizar esta acción, solo la persona asignada o un administrador tienen permiso.',
+					expected.getMessage(),
+					'Debe bloquear por asignación ajena, no por una validación incidental.'
+				);
+				Assert.areEqual(0, Limits.getDmlStatements(), 'Debe bloquear antes de modificar la solicitud o el proceso.');
+			}
+			Test.stopTest();
+		}
+		Assert.areEqual(
+			1,
+			[SELECT COUNT() FROM ProcessInstanceWorkitem WHERE ProcessInstance.TargetObjectId = :rla.Id],
+			'El paso debe seguir pendiente.'
+		);
+		Assert.isFalse(
+			[SELECT FSC_Aprobado_con_Condiciones__c FROM ResidentialLoanApplication WHERE Id = :rla.Id].FSC_Aprobado_con_Condiciones__c,
+			'Las condiciones deben conservarse.'
+		);
+	}
+
+	@IsTest
+	static void shouldDenyApproval_WhenAnotherUserIsAssigned() {
+		assertForeignDecisionDenied('Approve');
+	}
+
+	@IsTest
+	static void shouldDenyRejection_WhenAnotherUserIsAssigned() {
+		assertForeignDecisionDenied('Reject');
+	}
+
+	@IsTest
+	static void shouldDenyConditionalApproval_WhenAnotherUserIsAssigned() {
+		assertForeignDecisionDenied('Conditional');
+	}
+
+	@IsTest
+	static void shouldAuthorizeAssignedSupervisor_InBulkWithoutQueries() {
+		User supervisor = createApprovalSupervisor();
+		List<ProcessInstanceWorkitem> workItems = new List<ProcessInstanceWorkitem>();
+		for (Integer index = 0; index < 251; index++) {
+			workItems.add(new ProcessInstanceWorkitem(ActorId = supervisor.Id));
+		}
+		System.runAs(supervisor) {
+			Test.startTest();
+			FSC_RlaAccionesController.validateCurrentUserCanActOnWorkItems(workItems);
+			Assert.areEqual(0, Limits.getQueries(), 'Las asignaciones personales no necesitan consultas adicionales.');
+			Assert.areEqual(0, Limits.getDmlStatements(), 'La autorización no debe ejecutar DML.');
+			Test.stopTest();
+		}
+	}
+
+	@IsTest
+	static void shouldDenyMixedAssignments_BeforeProcessingAnyWorkItem() {
+		User supervisor = createApprovalSupervisor();
+		List<ProcessInstanceWorkitem> workItems = new List<ProcessInstanceWorkitem>{
+			new ProcessInstanceWorkitem(ActorId = supervisor.Id),
+			new ProcessInstanceWorkitem(ActorId = UserInfo.getUserId())
+		};
+		System.runAs(supervisor) {
+			Test.startTest();
+			try {
+				FSC_RlaAccionesController.validateCurrentUserCanActOnWorkItems(workItems);
+				Assert.fail('Tener un paso propio no autoriza a procesar pasos ajenos.');
+			} catch (AuraHandledException expected) {
+				Assert.areEqual(0, Limits.getDmlStatements(), 'Debe validar antes de ejecutar cualquier decisión.');
+			}
+			Test.stopTest();
+		}
+	}
+
+	@IsTest
+	static void shouldAuthorizeAdministrator_WhenAnotherUserIsAssigned() {
+		User supervisor = createApprovalSupervisor();
+		Test.startTest();
+		Assert.isTrue(FeatureManagement.checkPermission('FSC_CP_Administrador'), 'Debe ejercitar la excepción de administrador.');
+		FSC_RlaAccionesController.validateCurrentUserCanActOnWorkItems(
+			new List<ProcessInstanceWorkitem>{ new ProcessInstanceWorkitem(ActorId = supervisor.Id) }
+		);
+		Assert.areEqual(0, Limits.getDmlStatements(), 'La autorización no debe ejecutar DML.');
+		Test.stopTest();
+	}
+
+	@IsTest
+	static void shouldAuthorizeQueueMember_WhileAssignedToQueue() {
+		User supervisor = createApprovalSupervisor();
+		Group approvalQueue = new Group(Name = 'Approval authorization queue', Type = 'Queue');
+		insert approvalQueue;
+		insert new GroupMember(GroupId = approvalQueue.Id, UserOrGroupId = supervisor.Id);
+		System.runAs(supervisor) {
+			Test.startTest();
+			FSC_RlaAccionesController.validateCurrentUserCanActOnWorkItems(
+				new List<ProcessInstanceWorkitem>{ new ProcessInstanceWorkitem(ActorId = approvalQueue.Id) }
+			);
+			Assert.areEqual(0, Limits.getDmlStatements(), 'Validar pertenencia a cola no debe modificar registros.');
+			Test.stopTest();
+		}
+	}
+
+	@IsTest
+	static void shouldDenyFormerQueueMember_AfterAssignmentToAnotherUser() {
+		User supervisor = createApprovalSupervisor();
+		Group approvalQueue = new Group(Name = 'Former approval authorization queue', Type = 'Queue');
+		insert approvalQueue;
+		insert new GroupMember(GroupId = approvalQueue.Id, UserOrGroupId = supervisor.Id);
+		ProcessInstanceWorkitem workItem = new ProcessInstanceWorkitem(ActorId = UserInfo.getUserId(), OriginalActorId = approvalQueue.Id);
+		System.runAs(supervisor) {
+			Test.startTest();
+			try {
+				FSC_RlaAccionesController.validateCurrentUserCanActOnWorkItems(new List<ProcessInstanceWorkitem>{ workItem });
+				Assert.fail('Pertenecer a la cola original no autoriza a decidir después de asignar el paso a otra persona.');
+			} catch (AuraHandledException expected) {
+				Assert.areEqual(0, Limits.getQueries(), 'La cola original no debe consultarse para autorizar una asignación personal.');
+			}
+			Test.stopTest();
+		}
+	}
+
+	@IsTest
+	static void shouldDenyDecision_WhenNoApprovalIsPending() {
+		Test.startTest();
+		try {
+			FSC_RlaAccionesController.validateCurrentUserCanActOnWorkItems(new List<ProcessInstanceWorkitem>());
+			Assert.fail('Incluso un administrador necesita un paso pendiente.');
+		} catch (AuraHandledException expected) {
+			Assert.areEqual(0, Limits.getDmlStatements(), 'No debe ejecutar DML sin aprobación pendiente.');
+		}
+		Test.stopTest();
 	}
 
 	@IsTest
@@ -199,6 +427,192 @@ private class FSC_RlaAccionesControllerTest {
 		];
 	}
 
+	private static ContentVersion createEditableAnalysisDocument(String documentType, Boolean isPyme) {
+		FSC_FabricaDatosDocumentosAnalisisTest.crearDatosBase();
+		ResidentialLoanApplication application = FSC_FabricaDatosDocumentosAnalisisTest.crearSolicitud(
+			FSC_FabricaDatosDocumentosAnalisisTest.obtenerCuentaBase().Id,
+			isPyme ? RT_PYME : 'FSC_Solicitud_Credito_Consumo',
+			'En proceso',
+			SUBESTADO_ANALISIS,
+			250000,
+			true
+		);
+		update new ResidentialLoanApplication(
+			Id = application.Id,
+			FSC_Resultado_Buro__c = 'Referido',
+			FSC_Doc_Completa_Analisis__c = true,
+			FSC_DocumentacionValidadaAnalista__c = true,
+			FSC_DebeRevisarComite__c = false,
+			FSC_DebeRevisarSupervisor__c = false,
+			FSC_Aprobado_con_Condiciones__c = false,
+			FSC_Moneda__c = '1'
+		);
+		String title = documentType == 'CAPACIDAD' ? 'Capacidad de Pago - ' : 'Informe de Crédito - ';
+		ContentVersion document = FSC_FabricaDatosDocumentosAnalisisTest.crearArchivo(application.Id, title + application.Name);
+		FSC_RlaAccionesController.testPermitirEdicionDocumentosAnalisis = true;
+		return [SELECT Id, ContentDocumentId, FirstPublishLocationId FROM ContentVersion WHERE Id = :document.Id];
+	}
+
+	private static Map<String, Object> getSavedAnalysisValues(Id documentId) {
+		ContentVersion version = [
+			SELECT FSC_DatosEditadosAnalisis__c
+			FROM ContentVersion
+			WHERE ContentDocumentId = :documentId AND IsLatest = TRUE
+			LIMIT 1
+		];
+		return (Map<String, Object>) JSON.deserializeUntyped(version.FSC_DatosEditadosAnalisis__c);
+	}
+
+	private static Map<String, Object> analysisEdit(Object value, String format) {
+		return new Map<String, Object>{ 'value' => value, 'format' => format };
+	}
+
+	private static String formatDop(Decimal amount) {
+		return 'RD$ ' + amount.setScale(2).format();
+	}
+
+	@IsTest
+	static void shouldSaveAnalysisReportFormatsWithoutChangingApplication() {
+		ContentVersion document = createEditableAnalysisDocument('INFORME', false);
+		Map<String, Object> edits = new Map<String, Object>{
+			'solicitante' => analysisEdit('Cliente corregido', 'text'),
+			'dependientes' => analysisEdit(3, 'integer'),
+			'garantiaSuperficie' => analysisEdit(125.5, 'number'),
+			'ingresosMensualesPromedio' => analysisEdit(150000, 'money'),
+			'relacionCuotaIngresos' => analysisEdit(25, 'percent'),
+			'fechaEvaluacion' => analysisEdit('2026-10-27', 'date'),
+			'fechaAprobacion' => analysisEdit(null, 'date')
+		};
+		Test.startTest();
+		Map<String, Object> initialValues = FSC_RlaAccionesController.getDatosDocumentoAnalisis(document.FirstPublishLocationId, ' informe ');
+		FSC_RlaAccionesController.guardarYRegenerarDocumentoAnalisis(document.FirstPublishLocationId, 'INFORME', JSON.serialize(edits));
+		Test.stopTest();
+		Map<String, Object> savedValues = getSavedAnalysisValues(document.ContentDocumentId);
+		Assert.isNotNull(initialValues, 'Debe recuperar el modelo editable.');
+		Assert.areEqual('Cliente corregido', savedValues.get('solicitante'), 'Debe guardar el texto editado.');
+		Assert.areEqual('3', savedValues.get('dependientes'), 'Debe normalizar el entero.');
+		Assert.areEqual('125.5', savedValues.get('garantiaSuperficie'), 'Debe conservar el número decimal.');
+		Assert.areEqual(formatDop(150000), savedValues.get('ingresosMensualesPromedio'), 'Debe aplicar el formato monetario.');
+		Assert.areEqual(Decimal.valueOf(25).setScale(2).format() + '%', savedValues.get('relacionCuotaIngresos'), 'Debe aplicar el porcentaje.');
+		Assert.areEqual('27/10/2026', savedValues.get('fechaEvaluacion'), 'Debe normalizar la fecha.');
+		Assert.areEqual('', savedValues.get('fechaAprobacion'), 'Un valor vacío debe mantenerse vacío.');
+		Assert.areEqual(
+			250000,
+			[SELECT FSC_Monto__c FROM ResidentialLoanApplication WHERE Id = :document.FirstPublishLocationId].FSC_Monto__c,
+			'Editar un PDF no debe modificar el monto solicitado.'
+		);
+	}
+
+	@IsTest
+	static void shouldRecalculateCapacityFromEditedInputs() {
+		ContentVersion document = createEditableAnalysisDocument('CAPACIDAD', false);
+		Map<String, Object> edits = new Map<String, Object>{
+			'totalActivos' => analysisEdit(100000.50, 'money'),
+			'totalPasivos' => analysisEdit(30000.25, 'money'),
+			'tasaCambio' => analysisEdit(60, 'number'),
+			'montosPesos.ingresoCartaTrabajo' => analysisEdit(1000, 'moneyDop'),
+			'montosDolares.ingresoDepositos' => analysisEdit(10, 'moneyUsd'),
+			'montosPesos.ingresoAlquiler' => analysisEdit(500, 'moneyDop'),
+			'montosPesos.deudaTarjetas' => analysisEdit(10000, 'moneyDop'),
+			'montosDolares.deudaTarjetas' => analysisEdit(100, 'moneyUsd'),
+			'montosPesos.cuotaPrestamos' => analysisEdit(200, 'moneyDop'),
+			'montosPesos.cuotaNuevoPrestamo' => analysisEdit(300, 'moneyDop'),
+			'montosPesos.cuotasCancelar' => analysisEdit(50, 'moneyDop'),
+			'montosPesos.deudaTarjetasCancelar' => analysisEdit(50, 'moneyDop'),
+			'montosPesos.pagoVivienda' => analysisEdit(400, 'moneyDop')
+		};
+		Test.startTest();
+		FSC_RlaAccionesController.getDatosDocumentoAnalisis(document.FirstPublishLocationId, 'CAPACIDAD');
+		FSC_RlaAccionesController.guardarYRegenerarDocumentoAnalisis(document.FirstPublishLocationId, 'CAPACIDAD', JSON.serialize(edits));
+		Test.stopTest();
+		Map<String, Object> savedValues = getSavedAnalysisValues(document.ContentDocumentId);
+		Map<String, Object> pesos = (Map<String, Object>) savedValues.get('montosPesos');
+		Map<String, Object> dollars = (Map<String, Object>) savedValues.get('montosDolares');
+		Map<String, Object> totals = (Map<String, Object>) savedValues.get('totalesPesos');
+		Assert.areEqual(formatDop(70000.25), savedValues.get('patrimonio'), 'Debe restar activos menos pasivos.');
+		Assert.areEqual(formatDop(800), pesos.get('cuotaTarjetas'), 'La cuota debe ser el 8% de la deuda en pesos.');
+		Assert.areEqual('US$ ' + Decimal.valueOf(8).setScale(2).format(), dollars.get('cuotaTarjetas'), 'Debe calcular el 8% en dólares.');
+		Assert.areEqual(formatDop(1200), pesos.get('totalPagosCreditos'), 'Debe descontar las cancelaciones de los pagos.');
+		Assert.areEqual(formatDop(1600), pesos.get('totalPagos'), 'Debe agregar el pago de vivienda.');
+		Assert.areEqual(formatDop(2100), totals.get('totalIngresos'), 'Debe consolidar los ingresos usando la tasa editada.');
+	}
+
+	@IsTest
+	static void shouldRecalculatePymeTotalsAndCoverage() {
+		ContentVersion document = createEditableAnalysisDocument('INFORME', true);
+		Map<String, Object> edits = new Map<String, Object>{
+			'certificadosBalanceActual' => analysisEdit('RD$ 1,000.00\nRD$ 2.000,50', 'text'),
+			'cuentasBalancePromedio' => analysisEdit('RD$ 1,000\nRD$ 2.000', 'text'),
+			'compromisosCuotas' => analysisEdit('100\n200', 'text'),
+			'disponibilidadBalancePromedio' => analysisEdit(1000, 'money'),
+			'disponibilidadFlujoPromedio' => analysisEdit(2000, 'money'),
+			'montoSolicitado' => analysisEdit(50000, 'money'),
+			'valorGarantia' => analysisEdit(100000, 'money')
+		};
+		Test.startTest();
+		Assert.isNotNull(
+			FSC_RlaAccionesController.getDatosDocumentoAnalisis(document.FirstPublishLocationId, 'INFORME'),
+			'Debe cargar el informe Pyme.'
+		);
+		FSC_RlaAccionesController.guardarYRegenerarDocumentoAnalisis(document.FirstPublishLocationId, 'INFORME', JSON.serialize(edits));
+		Test.stopTest();
+		Map<String, Object> savedValues = getSavedAnalysisValues(document.ContentDocumentId);
+		Assert.areEqual(formatDop(3000.50), savedValues.get('certificadosTotalBalance'), 'Debe sumar importes con ambos separadores regionales.');
+		Assert.areEqual(formatDop(3000), savedValues.get('cuentasTotalBalancePromedio'), 'Debe reconocer separadores de miles sin decimales.');
+		Assert.areEqual(
+			Decimal.valueOf(200).setScale(2).format() + '%',
+			savedValues.get('cobertura'),
+			'Debe calcular garantía sobre monto solicitado.'
+		);
+		Assert.areEqual(
+			Decimal.valueOf(30).setScale(2).format() + '%',
+			savedValues.get('disponibilidadPorcentajeBalance'),
+			'Debe calcular cuotas sobre disponibilidad.'
+		);
+	}
+
+	private static void assertAnalysisEditRejected(Id applicationId, String documentType, String changesJson) {
+		Integer dmlBefore = Limits.getDmlStatements();
+		try {
+			FSC_RlaAccionesController.guardarYRegenerarDocumentoAnalisis(applicationId, documentType, changesJson);
+			Assert.fail('Debe rechazar cambios inválidos sin publicarlos.');
+		} catch (AuraHandledException expected) {
+			Assert.areEqual(dmlBefore, Limits.getDmlStatements(), 'Los cambios inválidos no deben guardarse.');
+		}
+	}
+
+	@IsTest
+	static void shouldRejectInvalidAnalysisChangesBeforeSaving() {
+		ContentVersion document = createEditableAnalysisDocument('INFORME', false);
+		update new ContentVersion(Id = document.Id, FSC_DatosEditadosAnalisis__c = '{');
+		List<String> invalidChanges = new List<String>{
+			' ',
+			'{',
+			'[1]',
+			'{}',
+			JSON.serialize(new Map<String, Object>{ 'rutaInexistente' => analysisEdit('x', 'text') }),
+			JSON.serialize(new Map<String, Object>{ 'solicitante' => 'sin estructura' }),
+			JSON.serialize(new Map<String, Object>{ 'solicitante' => analysisEdit('x', 'date') }),
+			JSON.serialize(new Map<String, Object>{ 'fechaEvaluacion' => analysisEdit('fecha inválida', 'date') }),
+			JSON.serialize(new Map<String, Object>{ 'dependientes' => analysisEdit(1.5, 'integer') }),
+			JSON.serialize(new Map<String, Object>{ 'dependientes' => analysisEdit(-1, 'integer') }),
+			JSON.serialize(new Map<String, Object>{ 'garantiaSuperficie' => analysisEdit('ABC', 'number') }),
+			JSON.serialize(new Map<String, Object>{ 'solicitante' => analysisEdit('x'.repeat(20001), 'text') })
+		};
+		Test.startTest();
+		for (String changesJson : invalidChanges) {
+			assertAnalysisEditRejected(document.FirstPublishLocationId, 'INFORME', changesJson);
+		}
+		assertAnalysisEditRejected(document.FirstPublishLocationId, 'NO_SOPORTADO', '{}');
+		assertAnalysisEditRejected(null, 'INFORME', '{}');
+		Test.stopTest();
+		Assert.areEqual(
+			1,
+			[SELECT COUNT() FROM ContentVersion WHERE ContentDocumentId = :document.ContentDocumentId],
+			'No debe publicar versiones por cambios inválidos.'
+		);
+	}
+
 	@IsTest
 	static void generarPagare_callsActionSuccessfully() {
 		ResidentialLoanApplication rla = createRla('ACT111', SUBESTADO_PAGARES);
@@ -226,6 +640,536 @@ private class FSC_RlaAccionesControllerTest {
 		}
 
 		System.assertEquals(SUBESTADO_PAGARES, refreshed.FSC_Subestado__c);
+	}
+
+	@IsTest
+	static void shouldSavePagareDataAndExposeAssignedUser() {
+		ResidentialLoanApplication application = createRla('PAGARE', SUBESTADO_PAGARES);
+		update new ResidentialLoanApplication(Id = application.Id, FSC_UsuarioPagaresYContratos__c = UserInfo.getUserId());
+		Test.startTest();
+		Map<String, Object> context = FSC_RlaAccionesController.getPagaresContext(application.Id);
+		List<Map<String, String>> options = FSC_RlaAccionesController.getFormaDesembolsoOptions();
+		FSC_RlaAccionesController.guardarDatosPagare(application.Id, ' ACT-123 ', '42');
+		FSC_RlaAccionesController.guardarDatosPagareComplementario(application.Id, ' PRESTAMO-123 ');
+		Test.stopTest();
+		ResidentialLoanApplication saved = [
+			SELECT FSC_ActoNumeroPagare__c, FSC_NumeroFolioPagare__c, FSC_Numero_Prestamo_Pagare__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :application.Id
+		];
+		Assert.areEqual(UserInfo.getUserId(), context.get('assignedUserId'), 'Debe informar el responsable del pagaré.');
+		Assert.areEqual(true, context.get('canGeneratePagare'), 'El administrador debe poder gestionar el pagaré.');
+		Assert.isFalse(options.isEmpty(), 'Debe devolver formas de desembolso activas.');
+		Assert.areEqual('ACT-123', saved.FSC_ActoNumeroPagare__c, 'Debe recortar el número del acto.');
+		Assert.areEqual(42, saved.FSC_NumeroFolioPagare__c, 'Debe guardar el folio numérico.');
+		Assert.areEqual('PRESTAMO-123', saved.FSC_Numero_Prestamo_Pagare__c, 'Debe recortar el número de préstamo.');
+	}
+
+	private static void submitApproval(Id applicationId, String processName) {
+		Approval.ProcessSubmitRequest request = new Approval.ProcessSubmitRequest();
+		request.setObjectId(applicationId);
+		request.setProcessDefinitionNameOrId(processName);
+		request.setSkipEntryCriteria(true);
+		request.setNextApproverIds(new List<Id>{ UserInfo.getUserId() });
+		Assert.isTrue(Approval.process(request).isSuccess(), 'Debe crear la aprobación ' + processName + '.');
+	}
+
+	@IsTest
+	static void shouldSaveConditionsForAssignedCommitteeApprover() {
+		ResidentialLoanApplication application = createRla('CONDCOMITE', SUBESTADO_ANALISIS);
+		submitApproval(application.Id, 'FSC_ComiteDeCredito');
+		Test.startTest();
+		FSC_RlaAccionesController.aprobarConCondicion(application.Id, 6100, 18, 11, 'Aportar garantía');
+		Test.stopTest();
+		ResidentialLoanApplication saved = [
+			SELECT
+				FSC_MontoAprobado__c,
+				FSC_PlazoMesesAprobado__c,
+				FSC_TasaInteresAprobada__c,
+				FSC_OtrasCondicionesComite__c,
+				FSC_Aprobado_con_Condiciones__c,
+				FSC_SolicitudAprobadaPorComite__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :application.Id
+		];
+		Assert.areEqual(6100, saved.FSC_MontoAprobado__c, 'Debe guardar el monto aprobado.');
+		Assert.areEqual(18, saved.FSC_PlazoMesesAprobado__c, 'Debe guardar el plazo aprobado.');
+		Assert.areEqual(11, saved.FSC_TasaInteresAprobada__c, 'Debe guardar la tasa aprobada.');
+		Assert.areEqual('Aportar garantía', saved.FSC_OtrasCondicionesComite__c, 'Debe conservar la condición acordada.');
+		Assert.isTrue(saved.FSC_Aprobado_con_Condiciones__c && saved.FSC_SolicitudAprobadaPorComite__c, 'Debe registrar la decisión condicionada.');
+	}
+
+	@IsTest
+	static void shouldKeepRequestedTermsWhenCommitteeApproves() {
+		ResidentialLoanApplication application = createRla('COMITE', SUBESTADO_ANALISIS);
+		setPymeRecordType(application);
+		update new ResidentialLoanApplication(Id = application.Id, FSC_DebeRevisarComite__c = true);
+		FSC_ChecklistDocumentos__c document = createChecklistDoc(CAT_ANALISIS, 82);
+		createJoin(application.Id, document.Id, true, 'Aprobado');
+		submitApproval(application.Id, 'FSC_ComiteDeCredito');
+		Test.startTest();
+		FSC_RlaAccionesController.aprobarProcesoActual(application.Id, 'Aprobado sin cambios');
+		Test.stopTest();
+		ResidentialLoanApplication saved = [
+			SELECT FSC_MontoAprobado__c, FSC_PlazoMesesAprobado__c, FSC_TasaInteresAprobada__c, FSC_SolicitudAprobadaPorComite__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :application.Id
+		];
+		Assert.areEqual(5000, saved.FSC_MontoAprobado__c, 'Debe conservar el monto solicitado.');
+		Assert.areEqual(24, saved.FSC_PlazoMesesAprobado__c, 'Debe conservar el plazo solicitado.');
+		Assert.areEqual(14, saved.FSC_TasaInteresAprobada__c, 'Debe conservar la tasa solicitada.');
+		Assert.isTrue(saved.FSC_SolicitudAprobadaPorComite__c, 'Debe registrar la aprobación del comité.');
+	}
+
+	@IsTest
+	static void shouldRecordProductLookupFailureBeforeCreatingLoan() {
+		FSC_ProcesamientoAbanks.automatizacionTest = true;
+		ResidentialLoanApplication application = createRla('NOPRODUCTO', SUBESTADO_CREACION_CREDITO);
+		update new ResidentialLoanApplication(Id = application.Id, FSC_FormaDeDesembolso__c = 'Cuenta de ahorro');
+		FSC_APIPrestamoProductos.mockIpResponse = new Map<String, Object>{ 'productos' => new List<Object>() };
+		Test.startTest();
+		FSC_RlaAccionesController.ReintentoPrestamoResult result = FSC_RlaAccionesController.reintentarCreacionPrestamo(application.Id);
+		Test.stopTest();
+		ResidentialLoanApplication saved = [
+			SELECT FSC_FlagErrorAPIPrestamos__c, FSC_LogErrores__c, FSC_NumeroPrestamoAbanks__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :application.Id
+		];
+		Assert.isFalse(result.success, 'Sin producto no debe intentar crear un préstamo.');
+		Assert.isTrue(saved.FSC_FlagErrorAPIPrestamos__c, 'Debe informar el error de creación.');
+		Assert.isTrue(saved.FSC_LogErrores__c.contains('API Productos'), 'Debe registrar el origen del fallo.');
+		Assert.isNull(saved.FSC_NumeroPrestamoAbanks__c, 'No debe inventar un número de préstamo.');
+	}
+
+	private static ResidentialLoanApplication createAbanksApplication(String loanNumber) {
+		Account account = new Account(Name = 'Cliente Abanks de prueba');
+		insert account;
+		ResidentialLoanApplication application = new ResidentialLoanApplication(
+			Name = 'Solicitud Abanks de prueba',
+			AccountId = account.Id,
+			RecordTypeId = getRecordTypeId('FSC_Solicitud_Credito_Consumo'),
+			Status = 'En proceso',
+			FSC_Subestado__c = SUBESTADO_CREACION_CREDITO,
+			FSC_FormaDeDesembolso__c = 'Cuenta de ahorro',
+			FSC_NumeroPrestamoAbanks__c = loanNumber,
+			FSC_TipoSolicitud__c = 'BPR',
+			FSC_lineaFinanciera__c = '32',
+			FSC_subAplicacion__c = '401',
+			FSC_Monto__c = 5000,
+			FSC_Plazo_meses__c = '24',
+			FSC_TasaInteres__c = 14
+		);
+		insert application;
+		return application;
+	}
+
+	@IsTest
+	static void shouldCompleteAssignedAbanksValidation() {
+		FSC_ProcesamientoAbanks.automatizacionTest = true;
+		ResidentialLoanApplication application = createAbanksApplication('12345');
+		submitApproval(application.Id, 'FSC_ValidacionEnAbanks');
+		FSC_ProcesamientoAbanks.automatizacionTest = false;
+		Test.startTest();
+		String message = FSC_RlaAccionesController.validarCreacionEnAbanks(application.Id);
+		Test.stopTest();
+		Assert.areEqual('Credito validado en ABANKS.', message, 'Debe confirmar la validación.');
+		Assert.areEqual(
+			'Desembolso',
+			[SELECT FSC_Subestado__c FROM ResidentialLoanApplication WHERE Id = :application.Id].FSC_Subestado__c,
+			'Debe continuar a desembolso.'
+		);
+	}
+
+	@IsTest
+	static void shouldRequireBancaSeguroReasonBeforeProcessingApproval() {
+		ResidentialLoanApplication application = createRla('BANCASEG', 'Banca Seguro', 'FSC_Solicitud_Credito_Vehiculo');
+		submitApproval(application.Id, 'FSC_BancaSeguro');
+		Test.startTest();
+		try {
+			FSC_RlaAccionesController.rechazarBancaSeguro(application.Id, ' ', 'No cumple los criterios de la póliza');
+			Assert.fail('No debe decidir sin un motivo de rechazo.');
+		} catch (AuraHandledException expected) {
+			Assert.areEqual(0, Limits.getDmlStatements(), 'Debe validar el motivo antes de modificar la aprobación.');
+		}
+		try {
+			FSC_RlaAccionesController.rechazarBancaSeguro(application.Id, 'Riesgo no asegurable', ' ');
+			Assert.fail('No debe decidir sin un comentario.');
+		} catch (AuraHandledException expected) {
+			Assert.areEqual(0, Limits.getDmlStatements(), 'Debe validar el comentario antes de modificar la aprobación.');
+		}
+		Test.stopTest();
+		Assert.areEqual(
+			1,
+			[SELECT COUNT() FROM ProcessInstanceWorkitem WHERE ProcessInstance.TargetObjectId = :application.Id],
+			'La aprobación debe seguir pendiente.'
+		);
+	}
+
+	private static Id submitBancaSeguroApproval(Id applicationId) {
+		Approval.ProcessSubmitRequest request = new Approval.ProcessSubmitRequest();
+		request.setObjectId(applicationId);
+		request.setProcessDefinitionNameOrId('FSC_BancaSeguro');
+		request.setNextApproverIds(new List<Id>{ UserInfo.getUserId() });
+		Approval.ProcessResult result = Approval.process(request);
+		Assert.isTrue(result.isSuccess(), 'El crédito elegible debe cumplir los criterios reales de Banca Seguro.');
+		return result.getInstanceId();
+	}
+
+	private static void assertBancaSeguroApprovalSucceeds(String recordTypeName) {
+		ResidentialLoanApplication application = createRla('BANKAPR', 'Banca Seguro', recordTypeName);
+		Id processId = submitBancaSeguroApproval(application.Id);
+		Test.startTest();
+		FSC_RlaAccionesController.aprobarProcesoActual(application.Id, 'Cobertura de seguro validada');
+		Test.stopTest();
+		ResidentialLoanApplication saved = [
+			SELECT Status, FSC_Subestado__c, FSC_BancaSeguroAprobada__c, RecordType.DeveloperName
+			FROM ResidentialLoanApplication
+			WHERE Id = :application.Id
+		];
+		Assert.areEqual(recordTypeName, saved.RecordType.DeveloperName, 'Debe conservar el tipo de crédito elegible.');
+		Assert.areEqual('En proceso', saved.Status, 'La aprobación del seguro no debe cerrar el crédito.');
+		Assert.areEqual('Documentación para contratos', saved.FSC_Subestado__c, 'Debe continuar al circuito contractual.');
+		Assert.isTrue(saved.FSC_BancaSeguroAprobada__c, 'Debe registrar la aprobación de Banca Seguro.');
+		Assert.areEqual('Approved', [SELECT Status FROM ProcessInstance WHERE Id = :processId].Status, 'La aprobación debe quedar completada.');
+	}
+
+	private static void assertBancaSeguroRejectionSucceeds(String recordTypeName) {
+		ResidentialLoanApplication application = createRla('BANKREJ', 'Banca Seguro', recordTypeName);
+		Id processId = submitBancaSeguroApproval(application.Id);
+		Test.startTest();
+		FSC_RlaAccionesController.rechazarBancaSeguro(application.Id, ' Riesgo no asegurable ', ' No cumple los criterios de la póliza ');
+		Test.stopTest();
+		ResidentialLoanApplication saved = [
+			SELECT
+				Status,
+				FSC_Subestado__c,
+				FSC_BancaSeguroAprobada__c,
+				FSC_MotivoRechazoBancaSeguro__c,
+				FSC_ComentarioBancaSeguro__c,
+				RecordType.DeveloperName
+			FROM ResidentialLoanApplication
+			WHERE Id = :application.Id
+		];
+		Assert.areEqual(recordTypeName, saved.RecordType.DeveloperName, 'Debe probar el rechazo con un tipo de crédito elegible.');
+		Assert.areEqual('Cerrada Perdida', saved.Status, 'El rechazo debe cerrar la solicitud.');
+		Assert.areEqual('Rechazado por banca seguro', saved.FSC_Subestado__c, 'Debe aplicar el subestado de rechazo del tipo de crédito.');
+		Assert.isFalse(saved.FSC_BancaSeguroAprobada__c, 'Un rechazo no debe marcar el seguro como aprobado.');
+		Assert.areEqual('Riesgo no asegurable', saved.FSC_MotivoRechazoBancaSeguro__c, 'Debe recortar y conservar el motivo.');
+		Assert.areEqual('No cumple los criterios de la póliza', saved.FSC_ComentarioBancaSeguro__c, 'Debe recortar y conservar el comentario.');
+		Assert.areEqual('Rejected', [SELECT Status FROM ProcessInstance WHERE Id = :processId].Status, 'La aprobación debe registrar el rechazo.');
+	}
+
+	@IsTest
+	static void shouldApproveBancaSeguroForVehicleCredit() {
+		assertBancaSeguroApprovalSucceeds('FSC_Solicitud_Credito_Vehiculo');
+	}
+
+	@IsTest
+	static void shouldApproveBancaSeguroForMortgageCredit() {
+		assertBancaSeguroApprovalSucceeds('FSC_Solicitud_Credito_Hipotecario');
+	}
+
+	@IsTest
+	static void shouldRejectBancaSeguroForVehicleCredit() {
+		assertBancaSeguroRejectionSucceeds('FSC_Solicitud_Credito_Vehiculo');
+	}
+
+	@IsTest
+	static void shouldRejectBancaSeguroForMortgageCredit() {
+		assertBancaSeguroRejectionSucceeds('FSC_Solicitud_Credito_Hipotecario');
+	}
+
+	private static void assertOtherBancaSeguroApproverCannotDecide(Boolean approve) {
+		User otherApprover = createApprovalSupervisor();
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			PermissionSet permission = [SELECT Id FROM PermissionSet WHERE Name = 'TestRlaSupervisor' LIMIT 1];
+			CustomPermission bancaSeguro = [SELECT Id FROM CustomPermission WHERE DeveloperName = 'FSC_CP_BancaSeguro' LIMIT 1];
+			insert new SetupEntityAccess(ParentId = permission.Id, SetupEntityId = bancaSeguro.Id);
+		}
+		ResidentialLoanApplication application = createRla('BANKOTHER', 'Banca Seguro', 'FSC_Solicitud_Credito_Vehiculo');
+		Id processId = submitBancaSeguroApproval(application.Id);
+		System.runAs(otherApprover) {
+			Assert.isTrue(FeatureManagement.checkPermission('FSC_CP_BancaSeguro'), 'El usuario debe tener el rol de Banca Seguro.');
+			Assert.isFalse(FeatureManagement.checkPermission('FSC_CP_Administrador'), 'El usuario no debe ser administrador.');
+			Test.startTest();
+			try {
+				if (approve) {
+					FSC_RlaAccionesController.aprobarProcesoActual(application.Id, 'Decisión de otro aprobador');
+				} else {
+					FSC_RlaAccionesController.rechazarBancaSeguro(application.Id, 'Motivo de otro aprobador', 'Comentario');
+				}
+				Assert.fail('El rol de Banca Seguro no permite decidir sobre una aprobación asignada a otra persona.');
+			} catch (AuraHandledException expected) {
+				Assert.areEqual(
+					'Usted no tiene autorización para realizar esta acción, solo la persona asignada o un administrador tienen permiso.',
+					expected.getMessage(),
+					'Debe bloquear por asignación ajena.'
+				);
+				Assert.areEqual(0, Limits.getDmlStatements(), 'No debe modificar la solicitud ni la decisión ajena.');
+			}
+			Test.stopTest();
+		}
+		Assert.areEqual('Pending', [SELECT Status FROM ProcessInstance WHERE Id = :processId].Status, 'El proceso debe permanecer pendiente.');
+	}
+
+	@IsTest
+	static void shouldDenyVehicleInsuranceApprovalToAnotherApprover() {
+		assertOtherBancaSeguroApproverCannotDecide(true);
+	}
+
+	@IsTest
+	static void shouldDenyVehicleInsuranceRejectionToAnotherApprover() {
+		assertOtherBancaSeguroApproverCannotDecide(false);
+	}
+
+	@IsTest
+	static void shouldRequireActiveAnalystApprovalForEditing() {
+		ContentVersion document = createEditableAnalysisDocument('INFORME', false);
+		submitApproval(document.FirstPublishLocationId, 'FSC_AnalistasDeCredito');
+		FSC_RlaAccionesController.testPermitirEdicionDocumentosAnalisis = false;
+		Test.startTest();
+		Map<String, Object> values = FSC_RlaAccionesController.getDatosDocumentoAnalisis(document.FirstPublishLocationId, 'INFORME');
+		Test.stopTest();
+		Assert.isNotNull(values, 'El administrador debe poder leer los datos con una aprobación activa, sin omitir la autorización.');
+	}
+
+	@IsTest
+	static void shouldValidateDocumentsBeforeSendingToSupervisor() {
+		ResidentialLoanApplication application = createRla('VALIDADOC', SUBESTADO_ANALISIS);
+		setPymeRecordType(application);
+		FSC_ChecklistDocumentos__c document = createChecklistDoc(CAT_ANALISIS, 83);
+		createJoin(application.Id, document.Id, true, 'Aprobado');
+		submitApproval(application.Id, 'FSC_AnalistasDeCredito');
+		Test.startTest();
+		FSC_RlaAccionesController.validarDocumentacionAnalista(application.Id);
+		FSC_RlaAccionesController.enviarRevisionSupervisor(application.Id);
+		Test.stopTest();
+		ResidentialLoanApplication saved = [
+			SELECT FSC_DocumentacionValidadaAnalista__c, FSC_DebeRevisarSupervisor__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :application.Id
+		];
+		Assert.isTrue(saved.FSC_DocumentacionValidadaAnalista__c, 'Debe registrar la revisión documental.');
+		Assert.isTrue(saved.FSC_DebeRevisarSupervisor__c, 'Debe enviar la solicitud a revisión de supervisor.');
+	}
+
+	@IsTest
+	static void shouldCompleteManualDisbursementWithEvidence() {
+		FSC_ProcesamientoAbanks.automatizacionTest = false;
+		FSC_CapturaOperacionesService.testBypassPermissions = true;
+		ResidentialLoanApplication application = createAbanksApplication('12345');
+		update new ResidentialLoanApplication(
+			Id = application.Id,
+			FSC_NumeroCuentaDesembolso__c = '123456',
+			FSC_UsuarioCaptura__c = UserInfo.getUserId(),
+			FSC_UsuarioOperaciones__c = UserInfo.getUserId()
+		);
+		List<ContentVersion> evidence = new List<ContentVersion>{
+			new ContentVersion(
+				Title = 'Amortización manual',
+				PathOnClient = 'amortizacion.pdf',
+				VersionData = Blob.valueOf('Tabla de amortización'),
+				FirstPublishLocationId = UserInfo.getUserId()
+			),
+			new ContentVersion(
+				Title = 'Recibo manual',
+				PathOnClient = 'recibo.pdf',
+				VersionData = Blob.valueOf('Recibo de desembolso'),
+				FirstPublishLocationId = UserInfo.getUserId()
+			)
+		};
+		insert evidence;
+		Map<Id, ContentVersion> files = new Map<Id, ContentVersion>([SELECT Id, ContentDocumentId FROM ContentVersion WHERE Id IN :evidence]);
+		Test.startTest();
+		FSC_RlaAccionesController.prepararProcesamientoManual(application.Id);
+		Map<String, Object> context = FSC_RlaAccionesController.getCapturaOperacionesContext(application.Id);
+		FSC_RlaAccionesController.guardarCapturaAbanks(application.Id, '12345', true, true, true);
+		FSC_RlaAccionesController.confirmarDesembolsoManual(
+			application.Id,
+			new List<Id>{ files.get(evidence[0].Id).ContentDocumentId },
+			new List<Id>{ files.get(evidence[1].Id).ContentDocumentId }
+		);
+		Test.stopTest();
+		ResidentialLoanApplication saved = [
+			SELECT FSC_Subestado__c, FSC_Desembolso_Realizado__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :application.Id
+		];
+		Assert.areEqual(true, context.get('etapaManual'), 'Debe reconocer el circuito manual.');
+		Assert.isTrue(saved.FSC_Desembolso_Realizado__c, 'Debe confirmar el desembolso respaldado por evidencias.');
+		Assert.areEqual('Archivo y custodia', saved.FSC_Subestado__c, 'Debe avanzar al archivo al completar las evidencias.');
+	}
+
+	@IsTest
+	static void shouldEditLegalTextThroughControllerWithoutChangingDesign() {
+		FSC_DocumentoLegalService.bypassAuthorization = true;
+		ResidentialLoanApplication application = createRla('LEGALDOC', SUBESTADO_PAGARES);
+		update new ResidentialLoanApplication(
+			Id = application.Id,
+			FSC_Pagares_y_Plantillas_Generados__c = true,
+			FSC_UsuarioPagaresYContratos__c = UserInfo.getUserId()
+		);
+		FSC_DocumentoLegalService.Fuente source = new FSC_DocumentoLegalService.Fuente();
+		source.tipo = 'PAGARE';
+		source.plantilla = '/apex/Plantilla';
+		source.html = '<html><body><p>Cláusula original</p></body></html>';
+		ContentVersion document = new ContentVersion(
+			Title = 'Pagare Complementario Test',
+			PathOnClient = 'pagare.pdf',
+			VersionData = Blob.valueOf('Pagaré original'),
+			FirstPublishLocationId = application.Id,
+			FSC_EnviarDocumento__c = true,
+			FSC_ContenidoLegal__c = FSC_DocumentoLegalService.serializar(source)
+		);
+		insert document;
+		Test.startTest();
+		Map<String, Object> contracts = FSC_RlaAccionesController.getDocumentacionContratosContext(application.Id);
+		Map<String, Object> editable = FSC_RlaAccionesController.getDocumentoLegalEditable(application.Id, document.Id);
+		Id replacementId = FSC_RlaAccionesController.guardarDocumentoLegalEditado(application.Id, document.Id, '{"t0":"Cláusula revisada"}');
+		Map<String, Object> review = FSC_RlaAccionesController.getRevisionDocumentosLegales(application.Id);
+		Test.stopTest();
+		ContentVersion saved = [SELECT FSC_ContenidoLegal__c FROM ContentVersion WHERE Id = :replacementId];
+		Assert.isNotNull(contracts, 'Debe exponer el contexto de documentación contractual.');
+		Assert.areEqual(
+			1,
+			((List<FSC_DocumentoLegalService.Bloque>) editable.get('bloques')).size(),
+			'Debe exponer solo el bloque de texto editable.'
+		);
+		Assert.areEqual(replacementId, review.get('pagareId'), 'La revisión debe mostrar el documento reemplazado.');
+		Assert.isTrue(
+			FSC_DocumentoLegalService.leerFuente(saved.FSC_ContenidoLegal__c).html.unescapeHtml4().contains('<p>Cláusula revisada</p>'),
+			'Debe cambiar el texto conservando el párrafo.'
+		);
+	}
+
+	@IsTest
+	static void shouldRejectMissingApplicationForLegalActions() {
+		Test.startTest();
+		try {
+			FSC_RlaAccionesController.validarDocumentosLegales(null);
+			Assert.fail('La validación legal requiere una solicitud.');
+		} catch (AuraHandledException expected) {
+			Assert.areEqual(0, Limits.getDmlStatements(), 'No debe modificar registros sin solicitud.');
+		}
+		try {
+			FSC_RlaAccionesController.reintentarDocumentosLegales(null);
+			Assert.fail('El reintento legal requiere una solicitud.');
+		} catch (AuraHandledException expected) {
+			Assert.areEqual(0, Limits.getQueueableJobs(), 'No debe encolar generación sin solicitud.');
+		}
+		Test.stopTest();
+	}
+
+	@IsTest
+	static void shouldRejectCapacityValuesOutsideAllowedRanges() {
+		ContentVersion document = createEditableAnalysisDocument('CAPACIDAD', false);
+		Test.startTest();
+		assertAnalysisEditRejected(
+			document.FirstPublishLocationId,
+			'CAPACIDAD',
+			JSON.serialize(new Map<String, Object>{ 'plazoMeses' => analysisEdit(100, 'integer') })
+		);
+		assertAnalysisEditRejected(
+			document.FirstPublishLocationId,
+			'CAPACIDAD',
+			JSON.serialize(new Map<String, Object>{ 'tiempoTasaFija' => analysisEdit(100, 'integer') })
+		);
+		Test.stopTest();
+		Assert.areEqual(
+			1,
+			[SELECT COUNT() FROM ContentVersion WHERE ContentDocumentId = :document.ContentDocumentId],
+			'Los valores fuera de rango no deben generar versiones.'
+		);
+	}
+
+	@IsTest
+	static void shouldRejectEditingWhenAnalysisPdfIsMissing() {
+		ContentVersion document = createEditableAnalysisDocument('INFORME', false);
+		delete new ContentDocument(Id = document.ContentDocumentId);
+		Integer linkedFilesBefore = [SELECT COUNT() FROM ContentDocumentLink WHERE LinkedEntityId = :document.FirstPublishLocationId];
+		Test.startTest();
+		assertAnalysisEditRejected(
+			document.FirstPublishLocationId,
+			'INFORME',
+			JSON.serialize(new Map<String, Object>{ 'solicitante' => analysisEdit('Cliente', 'text') })
+		);
+		Assert.areEqual(0, Limits.getQueueableJobs(), 'No debe encolar generación para un documento inexistente.');
+		Assert.areEqual(
+			linkedFilesBefore,
+			[SELECT COUNT() FROM ContentDocumentLink WHERE LinkedEntityId = :document.FirstPublishLocationId],
+			'No debe crear un documento al intentar editar uno inexistente.'
+		);
+		Test.stopTest();
+	}
+
+	@IsTest
+	static void shouldRejectCapacityEditingForPyme() {
+		ContentVersion document = createEditableAnalysisDocument('INFORME', true);
+		Test.startTest();
+		try {
+			FSC_RlaAccionesController.getDatosDocumentoAnalisis(document.FirstPublishLocationId, 'CAPACIDAD');
+			Assert.fail('Pyme solo permite editar el informe de crédito.');
+		} catch (AuraHandledException expected) {
+			Assert.areEqual(0, Limits.getDmlStatements(), 'La restricción del tipo de documento no debe modificar datos.');
+		}
+		Test.stopTest();
+	}
+
+	@IsTest
+	static void shouldValidatePagareNumericInputBeforeSaving() {
+		ResidentialLoanApplication application = createRla('FOLIO', SUBESTADO_PAGARES);
+		Test.startTest();
+		try {
+			FSC_RlaAccionesController.guardarDatosPagare(application.Id, 'ACTO', 'no-numérico');
+			Assert.fail('El folio debe ser numérico.');
+		} catch (AuraHandledException expected) {
+			Assert.areEqual(0, Limits.getDmlStatements(), 'No debe guardar un folio inválido.');
+		}
+		FSC_RlaAccionesController.guardarDatosPagareComplementario(application.Id, ' ');
+		Test.stopTest();
+		Assert.isNull(
+			[SELECT FSC_Numero_Prestamo_Pagare__c FROM ResidentialLoanApplication WHERE Id = :application.Id].FSC_Numero_Prestamo_Pagare__c,
+			'Debe permitir limpiar el préstamo complementario.'
+		);
+	}
+
+	@IsTest
+	static void shouldReturnAssignedApprovalToBusinessWithAudit() {
+		ResidentialLoanApplication application = createRla('DEVNEGOCIO', SUBESTADO_ANALISIS);
+		String reason = 'x'.repeat(2000);
+		submitApproval(application.Id, 'FSC_AnalistasDeCredito');
+		Test.startTest();
+		FSC_RlaAccionesController.devolverAOficial(application.Id, reason);
+		Test.stopTest();
+		ResidentialLoanApplication saved = [
+			SELECT FSC_Subestado__c, FSC_ObservacionAdministrador__c, FSC_DocumentacionValidadaAnalista__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :application.Id
+		];
+		Assert.areEqual(SUBESTADO_RECEPCION, saved.FSC_Subestado__c, 'Debe devolver la solicitud al circuito documental.');
+		Assert.areEqual(reason, saved.FSC_ObservacionAdministrador__c, 'Debe conservar los 2000 caracteres del motivo del administrador.');
+		Assert.isFalse(saved.FSC_DocumentacionValidadaAnalista__c, 'La documentación debe revisarse nuevamente.');
+	}
+
+	@IsTest
+	static void shouldRejectDisbursementRetryWhenRequiredDataIsMissing() {
+		FSC_ProcesamientoAbanks.automatizacionTest = true;
+		ResidentialLoanApplication application = createAbanksApplication('12345');
+		update new ResidentialLoanApplication(Id = application.Id, FSC_Subestado__c = 'Desembolso', FSC_FlagErrorAPIDesembolso__c = true);
+		FSC_APIPrestamoDesembolso.mockIpResponse = new Map<String, Object>{ 'HTTPDesembolso' => new Map<String, Object>{ 'StatusCode' => 500 } };
+		Test.startTest();
+		try {
+			FSC_RlaAccionesController.reintentarDesembolso(application.Id);
+			Assert.fail('No debe informar éxito sin deudor ni cuenta de desembolso.');
+		} catch (AuraHandledException expected) {
+			Assert.isFalse(String.isBlank(expected.getMessage()), 'Debe informar que el reintento falló.');
+		}
+		Test.stopTest();
+		Assert.areEqual(
+			'Desembolso',
+			[SELECT FSC_Subestado__c FROM ResidentialLoanApplication WHERE Id = :application.Id].FSC_Subestado__c,
+			'Un fallo no debe avanzar la solicitud.'
+		);
 	}
 
 	@IsTest
@@ -588,6 +1532,7 @@ private class FSC_RlaAccionesControllerTest {
 	static void rechazarProcesoActual_requiereMotivoRechazoParaNoPyme() {
 		FSC_RlaAccionesController.testBypassPermissions = true;
 		ResidentialLoanApplication rla = createRla('ACT342', SUBESTADO_ANALISIS);
+		Assert.isTrue(submitToAnalystApproval(rla.Id).isSuccess(), 'Debe existir un paso pendiente para rechazar.');
 
 		Test.startTest();
 		Boolean thrown = false;
@@ -612,10 +1557,11 @@ private class FSC_RlaAccionesControllerTest {
 	@IsTest
 	static void devolverAAnalista_updatesSupervisorFlags() {
 		ResidentialLoanApplication rla = createRla('ACT334', SUBESTADO_ANALISIS);
+		String reason = 'x'.repeat(2000);
 		update new ResidentialLoanApplication(Id = rla.Id, FSC_DebeRevisarSupervisor__c = true);
 
 		Test.startTest();
-		FSC_RlaAccionesController.devolverAAnalista(rla.Id, 'volver a analista');
+		FSC_RlaAccionesController.devolverAAnalista(rla.Id, reason);
 		Test.stopTest();
 
 		ResidentialLoanApplication refreshed = [
@@ -625,7 +1571,7 @@ private class FSC_RlaAccionesControllerTest {
 		];
 
 		System.assertEquals(false, refreshed.FSC_DebeRevisarSupervisor__c);
-		System.assertEquals('volver a analista', refreshed.FSC_ObservacionSupervisor__c);
+		Assert.areEqual(reason, refreshed.FSC_ObservacionSupervisor__c, 'Debe conservar los 2000 caracteres del motivo.');
 	}
 
 	@IsTest
@@ -867,7 +1813,7 @@ private class FSC_RlaAccionesControllerTest {
 
 		thrown = false;
 		try {
-			FSC_RlaAccionesController.devolverAOficial(rla.Id, longMotivo);
+			FSC_RlaAccionesController.devolverAOficial(rla.Id, 'x'.repeat(2001));
 		} catch (Exception e) {
 			thrown = true;
 		}
@@ -891,7 +1837,7 @@ private class FSC_RlaAccionesControllerTest {
 
 		thrown = false;
 		try {
-			FSC_RlaAccionesController.devolverAAnalista(rla.Id, longMotivo);
+			FSC_RlaAccionesController.devolverAAnalista(rla.Id, 'x'.repeat(2001));
 		} catch (Exception e) {
 			thrown = true;
 		}
@@ -1344,11 +2290,12 @@ private class FSC_RlaAccionesControllerTest {
 		}
 		ResidentialLoanApplication rla = createRla('ACTFLUFOR', 'Gestionar firmas');
 		// En produccion los flows nuevos se despliegan inactivos hasta activarlos a mano.
-		Boolean flowActivo = [
-			SELECT COUNT()
-			FROM FlowDefinitionView
-			WHERE ApiName = 'FSC_ProcesoAsignacionFormalizacion' AND IsActive = TRUE
-		] > 0;
+		Boolean flowActivo =
+			[
+				SELECT COUNT()
+				FROM FlowDefinitionView
+				WHERE ApiName = 'FSC_ProcesoAsignacionFormalizacion' AND IsActive = TRUE
+			] > 0;
 
 		Test.startTest();
 		update new ResidentialLoanApplication(Id = rla.Id, FSC_Subestado__c = 'Formalización');

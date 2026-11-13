@@ -1,4 +1,7 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, wire } from 'lwc';
+import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
+import USER_ID from '@salesforce/user/Id';
+import USER_BRANCH from '@salesforce/schema/User.FSC_Sucursal__c';
 import { OmniscriptBaseMixin } from 'omnistudio/omniscriptBaseMixin';
 
 const GASTOS_TRAMITACION = 'gastosTramitacion';
@@ -28,10 +31,20 @@ export default class Fsc_ShowDynamicFieldsOmni extends OmniscriptBaseMixin(Light
 	montoCuotaRegularValue = null;
 	sucursalUsuarioValue = '';
 	sucursalUsuarioDisplayValue = '';
+	currentUserBranch = '';
+
+	@wire(getRecord, { recordId: USER_ID, fields: [USER_BRANCH] })
+	wiredCurrentUser({ data }) {
+		if (data) {
+			this.currentUserBranch = this.normalizeStringValue(getFieldValue(data, USER_BRANCH));
+			this.hydrateSucursalUsuarioFromOmni();
+		}
+	}
 
 	@api
 	set fieldToShow(value) {
 		this._fieldToShow = this.normalizeStringValue(value);
+		if (this.showSucursalUsuario) this.hydrateSucursalUsuarioFromOmni();
 	}
 
 	get fieldToShow() {
@@ -104,6 +117,10 @@ export default class Fsc_ShowDynamicFieldsOmni extends OmniscriptBaseMixin(Light
 	set sucursalUsuario(value) {
 		this.sucursalUsuarioValue = this.normalizeStringValue(value);
 		this.sucursalUsuarioDisplayValue = this.sucursalUsuarioValue;
+		if (this.shouldUseOmniSucursalFallback()) {
+			this.hydrateSucursalUsuarioFromOmni();
+			return;
+		}
 		this.updateSucursalUsuarioOmniJson();
 		this.resolveSucursalUsuarioLabel();
 	}
@@ -136,6 +153,7 @@ export default class Fsc_ShowDynamicFieldsOmni extends OmniscriptBaseMixin(Light
 			super.renderedCallback();
 		}
 		this.syncOmniValidity();
+		if (this.showSucursalUsuario) this.hydrateSucursalUsuarioFromOmni();
 	}
 
 	syncOmniValidity() {
@@ -358,7 +376,7 @@ export default class Fsc_ShowDynamicFieldsOmni extends OmniscriptBaseMixin(Light
 	}
 
 	hydrateSucursalUsuarioFromOmni() {
-		if (!this.shouldUseOmniSucursalFallback()) {
+		if (!this.showSucursalUsuario || !this.shouldUseOmniSucursalFallback()) {
 			return;
 		}
 
@@ -385,9 +403,11 @@ export default class Fsc_ShowDynamicFieldsOmni extends OmniscriptBaseMixin(Light
 		const valuesToCheck = [
 			...userArray.map((user) => user?.[SUCURSAL_USUARIO_OMNI_FIELD]),
 			userData['User|1']?.[SUCURSAL_USUARIO_OMNI_FIELD],
+			userData.User?.[SUCURSAL_USUARIO_OMNI_FIELD],
 			this.getOmniFieldValue(SUCURSAL_USUARIO_OMNI_FIELD),
 			omniData[SUCURSAL_USUARIO_OMNI_FIELD],
 			omniData.sucursalUsuario,
+			this.currentUserBranch,
 		];
 
 		const selectedValue = valuesToCheck.find((value) => {

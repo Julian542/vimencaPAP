@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Local_del_negocio__c</fullName>
+    <label>Local del negocio</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Propio</fullName>
+                <default>false</default>
+                <label>Propio</label>
+            </value>
+            <value>
+                <fullName>Alquilado</fullName>
+                <default>false</default>
+                <label>Alquilado</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

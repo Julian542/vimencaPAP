@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_FirmanteInterno__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Usuario interno responsable de firmar el documento como representante de la institución.</description>
+    <label>Firmante Interno</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>ComprobantesFirmados</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

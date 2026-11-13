@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>allInternalUsers</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>FSC_Solicitud_Prestamo__c</field>
+        <field>FSC_Tipo__c</field>
+        <field>FSC_Detalle__c</field>
+        <field>FSC_Motivo__c</field>
+        <field>FSC_Condicion__c</field>
+        <field>FSC_Estado__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>FSC_VPNegociosBancaPersona</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Revisión secuencial de excepción de crédito.</description>
+        <entryCriteria>
+            <formula>AND(
+    FSC_Tipo__c = &quot;Excepciones de Negocios&quot;,
+    FSC_Solicitud_Prestamo__r.RecordType.DeveloperName &lt;&gt; &quot;FSC_Solicitud_Credito_PYME&quot;,
+    ISBLANK(FSC_Condicion__c)
+)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>VP de Negocios Banca Persona</label>
+        <name>FSC_VPNegociosBancaPersona</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>FSC_VPNegociosBancaEmpresarial</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Revisión secuencial de excepción de crédito.</description>
+        <entryCriteria>
+            <formula>AND(
+    FSC_Tipo__c = &quot;Excepciones de Negocios&quot;,
+    FSC_Solicitud_Prestamo__r.RecordType.DeveloperName = &quot;FSC_Solicitud_Credito_PYME&quot;,
+    ISBLANK(FSC_Condicion__c)
+)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>VP de Negocios Banca Empresarial</label>
+        <name>FSC_VPNegociosBancaEmpresarial</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>FSC_GerenteAnalisisCreditosPersonales</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Revisión secuencial de excepción de crédito.</description>
+        <entryCriteria>
+            <formula>AND(
+    FSC_Tipo__c &lt;&gt; &quot;Excepciones de Negocios&quot;,
+    OR(
+        AND(NOT(FSC_Solicitud_Prestamo__r.FSC_Aplica_Garantia__c), FSC_Solicitud_Prestamo__r.FSC_Monto__c &lt;= 2000000),
+        AND(FSC_Solicitud_Prestamo__r.FSC_Aplica_Garantia__c, FSC_Solicitud_Prestamo__r.FSC_Monto__c &lt;= 5000000)
+    ),
+    ISBLANK(FSC_Condicion__c)
+)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Gerente de Análisis de Créditos Personales</label>
+        <name>FSC_GerenteAnalisisCreditosPersonales</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>FSC_GerenteSeniorAnalisisComercial</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Revisión secuencial de excepción de crédito.</description>
+        <entryCriteria>
+            <formula>AND(
+    FSC_Tipo__c &lt;&gt; &quot;Excepciones de Negocios&quot;,
+    OR(
+        AND(NOT(FSC_Solicitud_Prestamo__r.FSC_Aplica_Garantia__c), FSC_Solicitud_Prestamo__r.FSC_Monto__c &lt;= 2000000),
+        AND(FSC_Solicitud_Prestamo__r.FSC_Aplica_Garantia__c, FSC_Solicitud_Prestamo__r.FSC_Monto__c &lt;= 5000000)
+    ),
+    ISBLANK(FSC_Condicion__c)
+)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Gerente Senior de Análisis Comercial</label>
+        <name>FSC_GerenteSeniorAnalisisComercial</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>FSC_GerentesAnalisisCredito</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Revisión secuencial de excepción de crédito.</description>
+        <entryCriteria>
+            <formula>AND(
+    FSC_Tipo__c &lt;&gt; &quot;Excepciones de Negocios&quot;,
+    OR(
+        AND(NOT(FSC_Solicitud_Prestamo__r.FSC_Aplica_Garantia__c), FSC_Solicitud_Prestamo__r.FSC_Monto__c &gt; 2000000, FSC_Solicitud_Prestamo__r.FSC_Monto__c &lt;= 5000000),
+        AND(FSC_Solicitud_Prestamo__r.FSC_Aplica_Garantia__c, FSC_Solicitud_Prestamo__r.FSC_Monto__c &gt; 5000000, FSC_Solicitud_Prestamo__r.FSC_Monto__c &lt;= 15000000)
+    ),
+    ISBLANK(FSC_Condicion__c)
+)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Uno de los Gerentes de Análisis de Créditos</label>
+        <name>FSC_GerentesAnalisisCredito</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>FSC_PresidenciaOVPEjecutiva</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Revisión secuencial de excepción de crédito.</description>
+        <entryCriteria>
+            <formula>AND(
+    FSC_Tipo__c &lt;&gt; &quot;Excepciones de Negocios&quot;,
+    OR(
+        AND(NOT(FSC_Solicitud_Prestamo__r.FSC_Aplica_Garantia__c), FSC_Solicitud_Prestamo__r.FSC_Monto__c &gt; 5000000),
+        AND(FSC_Solicitud_Prestamo__r.FSC_Aplica_Garantia__c, FSC_Solicitud_Prestamo__r.FSC_Monto__c &gt; 15000000)
+    ),
+    ISBLANK(FSC_Condicion__c)
+)</formula>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Presidente Ejecutivo o VP Ejecutivo</label>
+        <name>FSC_PresidenciaOVPEjecutiva</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>FSC_VPCreditoRecuperacion</name>
+                <type>queue</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Revisión secuencial de excepción de crédito.</description>
+        <entryCriteria>
+            <formula>AND(
+    FSC_Tipo__c &lt;&gt; &quot;Excepciones de Negocios&quot;,
+    OR(
+        AND(NOT(FSC_Solicitud_Prestamo__r.FSC_Aplica_Garantia__c), FSC_Solicitud_Prestamo__r.FSC_Monto__c &gt; 2000000),
+        AND(FSC_Solicitud_Prestamo__r.FSC_Aplica_Garantia__c, FSC_Solicitud_Prestamo__r.FSC_Monto__c &gt; 5000000)
+    ),
+    ISBLANK(FSC_Condicion__c)
+)</formula>
+        </entryCriteria>
+        <label>VP de Crédito y Recuperación</label>
+        <name>FSC_VPCreditoRecuperacion</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>Proceso secuencial para excepciones del manual PC-CE-POL-010. Cada instancia opera sobre una Excepción y evalúa monto, garantía y tipo de crédito desde la solicitud padre.</description>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND(
+    ISPICKVAL(FSC_Estado__c, &quot;Pendiente&quot;),
+    ISPICKVAL(FSC_Solicitud_Prestamo__r.Status, &quot;En proceso&quot;),
+    OR(
+        ISPICKVAL(FSC_Solicitud_Prestamo__r.FSC_Subestado__c, &quot;En validación PEP/Listas&quot;),
+        ISPICKVAL(FSC_Solicitud_Prestamo__r.FSC_Subestado__c, &quot;En Motor Buró&quot;),
+        ISPICKVAL(FSC_Solicitud_Prestamo__r.FSC_Subestado__c, &quot;Recepción de documentos – Análisis&quot;)
+    )
+)</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>FSC_EstadoExcepcionAprobada</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>FSC_EstadoExcepcionRechazada</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <label>Excepciones de crédito FSC</label>
+    <processOrder>1</processOrder>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

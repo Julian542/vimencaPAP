@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Total_pasivos_corto_plazo__c</fullName>
+    <formula>FSC_Docs_Por_pagar_Corto_Plazo__c + FSC_Otras_deudas_corto_plazo__c + FSC_Cuentas_por_pagar_suplidores__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total pasivos corto plazo</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Currency</type>
+</CustomField>

@@ -29,6 +29,7 @@ const INVALID_EMAIL_MESSAGE = 'Ingrese una direccion de correo valida, por ejemp
 const INVALID_REFERENCE_EMAIL_MESSAGE = 'Ingrese un correo valido sin espacios ni caracteres especiales no permitidos.';
 const DUPLICATE_REFERENCE_IDENTIFICATION_MESSAGE = 'Ya existe una referencia con el mismo tipo y numero de identificacion.';
 const UNIQUE_REFERENCE_RELATIONSHIPS = new Set(['conyuge', 'esposo (a)', 'nuera', 'yerno', 'madre', 'padre']);
+const CUSTOM_OCCUPATION_OPTION = '__custom_occupation__';
 
 function normalizarLimiteFacilidadesOtrasInstituciones(valor) {
 	const valorNumerico = Number(valor);
@@ -112,9 +113,11 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 	pendingApplicantsSyncSignature = null;
 	pendingApplicantsSyncTimeout = null;
 	primaryAccountApplicantKey = '';
+	provisionalAccountSurnames = null;
 	primaryAccountLoadKey = '';
 	primaryAccountReadonlyFields = {};
 	isLoadingPrimaryAccountApplicant = false;
+	primaryAccountLoadFailed = false;
 	limiteMaximoFacilidadesOtrasInstituciones = 0;
 
 	@wire(obtenerLimiteFacilidadesOtrasInstituciones)
@@ -309,6 +312,19 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 	@track tipoVivienda = '';
 	@track tiempoVivienda = '';
 	@track ocupacion = '';
+	isCustomOccupationSelected = false;
+
+	get occupationChoices() {
+		return [...this.ocupacionOptions, { label: 'Otra ocupación (escribir)', value: CUSTOM_OCCUPATION_OPTION }];
+	}
+
+	get showCustomOccupation() {
+		return this.isCustomOccupationSelected || (!!this.ocupacion && !this.ocupacionOptions.some((option) => option.value === this.ocupacion));
+	}
+
+	get selectedOccupation() {
+		return this.showCustomOccupation ? CUSTOM_OCCUPATION_OPTION : this.ocupacion;
+	}
 	@track empresaLabora = '';
 	@track lugarLabora = '';
 	@track tiempoLaborando = '';
@@ -364,6 +380,15 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 		return this.isEdit ? 'Guardar' : 'Agregar';
 	}
 
+	get isApplicantSaveDisabled() {
+		return (
+			this.isSavingApplicant ||
+			(this.requiresAccountDebtor &&
+				this.normalizeApplicantType(this.tipoSolicitante) === 'deudor' &&
+				(this.isLoadingPrimaryAccountApplicant || this.primaryAccountLoadFailed))
+		);
+	}
+
 	get hasApplicants() {
 		return this.applicants.length > 0;
 	}
@@ -406,6 +431,14 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 
 	get isReferenciaIdentificacionRequired() {
 		return !!this.referenciaDraft?.FSC_TipoIdentificacion__c;
+	}
+
+	get isReferenciaFirstNameRequired() {
+		return !this.isInheritedReference(this.referenciaDraft);
+	}
+
+	get isReferenciaHeredada() {
+		return this.isInheritedReference(this.referenciaDraft);
 	}
 
 	get isReferenciaTipoIdentificacionRequired() {
@@ -487,7 +520,7 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 	}
 
 	get requiredLaborDataMessage() {
-		return 'Todos los solicitantes deben tener completos los Datos Laborales completos: ocupación, fuente de ingreso, tiempo laborando, ingresos mensuales, tipo de negocio y monto prestaciones.';
+		return 'Todos los solicitantes deben completar todos los campos de Datos Laborales. Indique 0 en montos sin ingreso o prestaciones y No aplica en textos que no correspondan.';
 	}
 
 	get tipoSolicitanteOptions() {
@@ -535,7 +568,13 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 	}
 
 	get referenciaParentescoOptions() {
-		return this.allReferenceRelationshipOptions.filter((option) => !this.isReferenceRelationshipInUse(option.value));
+		return this.allReferenceRelationshipOptions.filter(
+			(option) => !this.isInheritedReference({ FSC_Parentesco__c: option.value }) && !this.isReferenceRelationshipInUse(option.value)
+		);
+	}
+
+	get referenciaParentescoPlaceholder() {
+		return this.isReferenciaHeredada ? this.referenciaDraft.FSC_Parentesco__c : 'Seleccione un parentesco';
 	}
 
 	get hasFacilidadesOtrasInstituciones() {
@@ -711,6 +750,7 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 		this.hydrateApplicantsFromOmni();
 		this.ensurePrimaryAccountApplicant();
 		return (
+			(!this.requiresAccountDebtor || (!this.isLoadingPrimaryAccountApplicant && !this.primaryAccountLoadFailed)) &&
 			this.hasRequiredDeudor &&
 			this.hasRequiredDeudorReferences &&
 			this.hasRequiredLaborData &&
@@ -744,7 +784,11 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 			!this.isBlank(applicant?.FSC_FuenteIngreso__c) &&
 			!this.isBlank(applicant?.FSC_TiempoLaborando__c) &&
 			!this.isBlank(applicant?.FSC_IngresosMensuales__c) &&
-			!this.isBlank(applicant?.FSC_TipoNegocio__c)
+			!this.isBlank(applicant?.FSC_LugarFondeLabora__c) &&
+			!this.isBlank(applicant?.FSC_EmpresaAnteriorLaboro__c) &&
+			!this.isBlank(applicant?.FSC_OtrosIngresos__c) &&
+			!this.isBlank(applicant?.FSC_DescripcionOtrosIngresos__c) &&
+			!this.isBlank(applicant?.FSC_MontoPrestacionesLaborales__c)
 		);
 	}
 
@@ -847,6 +891,7 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 		this.tipoVivienda = '';
 		this.tiempoVivienda = '';
 		this.ocupacion = '';
+		this.isCustomOccupationSelected = false;
 		this.empresaLabora = '';
 		this.lugarLabora = '';
 		this.tiempoLaborando = '';
@@ -939,27 +984,51 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 			return;
 		}
 
-		const omniAccountApplicant = this.buildAccountApplicantFromOmni();
-		if (omniAccountApplicant) {
-			this.upsertPrimaryAccountApplicant(omniAccountApplicant);
+		const contextId = this.getAccountApplicantContextId();
+		if (contextId && contextId === this.primaryAccountLoadKey) {
 			return;
 		}
 
-		const contextId = this.getAccountApplicantContextId();
-		if (!contextId || contextId === this.primaryAccountLoadKey) {
+		const omniAccountApplicant = this.buildAccountApplicantFromOmni();
+		if (omniAccountApplicant) {
+			this.upsertPrimaryAccountApplicant(omniAccountApplicant);
+		}
+
+		if (!contextId) {
 			return;
+		}
+		if (!this.provisionalAccountSurnames) {
+			const restoredDebtor = this.applicants.find((applicant) => this.isDeudorApplicant(applicant));
+			if (restoredDebtor) {
+				this.provisionalAccountSurnames = {
+					key: this.getApplicantUniqueKey({ ...restoredDebtor, Id: undefined }),
+					FSC_PrimerApellido__c: restoredDebtor.FSC_PrimerApellido__c,
+					FSC_SegundoApellido__c: restoredDebtor.FSC_SegundoApellido__c,
+				};
+			}
 		}
 
 		this.primaryAccountLoadKey = contextId;
 		this.isLoadingPrimaryAccountApplicant = true;
+		this.primaryAccountLoadFailed = false;
 		getAccountLoanApplicant({ contextId })
 			.then((applicant) => {
 				if (applicant) {
-					this.upsertPrimaryAccountApplicant(applicant);
+					this.upsertPrimaryAccountApplicant(applicant, true);
+				} else {
+					this.primaryAccountLoadFailed = true;
 				}
 			})
 			.catch((error) => {
+				this.primaryAccountLoadFailed = true;
 				console.error('Error loading account applicant:', error);
+				this.dispatchEvent(
+					new ShowToastEvent({
+						title: 'Error al cargar el deudor',
+						message: 'No se pudieron cargar los datos y las referencias de la cuenta. Vuelva a abrir la solicitud.',
+						variant: 'error',
+					})
+				);
 			})
 			.finally(() => {
 				this.isLoadingPrimaryAccountApplicant = false;
@@ -976,9 +1045,9 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 	}
 
 	buildAccountApplicant(account) {
-		const lastNames = this.splitLastNames(account.LastName);
+		const lastNames = this.hasNonBlankValue(account.Suffix) ? [account.LastName || '', account.Suffix] : this.splitLastNames(account.LastName);
 		return {
-			Name: this.joinNonBlank([account.FirstName, account.MiddleName, account.LastName], ' ') || account.Name || '',
+			Name: this.joinNonBlank([account.FirstName, account.MiddleName, ...lastNames], ' ') || account.Name || '',
 			FSC_TipoSolicitante__c: 'Deudor',
 			FSC_TipoIdentificacion__c: account.ACC_TipoIdentificacion__c || '',
 			FSC_NumIdentificacion__c: account.ACC_NumIdentificacion__c || '',
@@ -994,7 +1063,7 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 		};
 	}
 
-	upsertPrimaryAccountApplicant(accountApplicant) {
+	upsertPrimaryAccountApplicant(accountApplicant, authoritative = false) {
 		const primaryApplicant = this.normalizeApplicants([{ ...accountApplicant, FSC_TipoSolicitante__c: 'Deudor' }])[0];
 		this.primaryAccountReadonlyFields = this.getPrimaryAccountReadonlyFields(primaryApplicant);
 		const hasUsableAccountData =
@@ -1016,17 +1085,60 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 			);
 		}
 		const nextApplicants = [...this.applicants];
+		if (!authoritative && this.provisionalAccountSurnames?.key !== this.getApplicantUniqueKey(primaryApplicant)) {
+			const original = existingIndex >= 0 ? nextApplicants[existingIndex] : primaryApplicant;
+			this.provisionalAccountSurnames = {
+				key: this.getApplicantUniqueKey(primaryApplicant),
+				FSC_PrimerApellido__c: original.FSC_PrimerApellido__c,
+				FSC_SegundoApellido__c: original.FSC_SegundoApellido__c,
+			};
+		}
 		if (existingIndex >= 0) {
-			nextApplicants[existingIndex] = this.mergeMissingApplicantFields(nextApplicants[existingIndex], primaryApplicant);
+			const existing = nextApplicants[existingIndex];
+			const merged = this.mergeMissingApplicantFields(existing, primaryApplicant);
+			if (authoritative && this.provisionalAccountSurnames?.key === this.getApplicantUniqueKey(primaryApplicant)) {
+				for (const field of ['FSC_PrimerApellido__c', 'FSC_SegundoApellido__c']) {
+					if (existing[field] === this.provisionalAccountSurnames[field]) merged[field] = primaryApplicant[field] || '';
+				}
+				merged.Name = this.buildApplicantName(merged);
+			}
+			if (authoritative) this.syncPrimaryAccountEditor(existing, merged);
+			nextApplicants[existingIndex] = merged;
 		} else {
 			nextApplicants.unshift(primaryApplicant);
 		}
+		if (authoritative) this.provisionalAccountSurnames = null;
 
-		this.primaryAccountApplicantKey = this.getApplicantUniqueKey(primaryApplicant);
+		this.primaryAccountApplicantKey = this.getApplicantUniqueKey(existingIndex >= 0 ? nextApplicants[existingIndex] : primaryApplicant);
 		if (JSON.stringify(nextApplicants) !== JSON.stringify(this.applicants)) {
 			this.applicants = nextApplicants;
 			this.notifyApplicantsChange();
 		}
+	}
+
+	syncPrimaryAccountEditor(previousApplicant, updatedApplicant) {
+		if (
+			!this.showModal ||
+			!this.isEdit ||
+			!this.isDeudorApplicant(this.existingApplicant) ||
+			(!this.isSameApplicant(this.existingApplicant, previousApplicant) &&
+				!this.isSameDocumentApplicant(this.existingApplicant, previousApplicant))
+		) {
+			return;
+		}
+		for (const [field, property] of [
+			['FSC_PrimerApellido__c', 'primerApellido'],
+			['FSC_SegundoApellido__c', 'segundoApellido'],
+		]) {
+			if (this[property] === (previousApplicant[field] ?? '')) this[property] = updatedApplicant[field] || '';
+		}
+		this.existingApplicant = {
+			...this.existingApplicant,
+			FSC_PrimerApellido__c: updatedApplicant.FSC_PrimerApellido__c,
+			FSC_SegundoApellido__c: updatedApplicant.FSC_SegundoApellido__c,
+			Name: updatedApplicant.Name,
+		};
+		this.isEditingPrimaryAccountApplicant = true;
 	}
 
 	mergeMissingApplicantFields(existingApplicant, primaryApplicant) {
@@ -1036,6 +1148,9 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 				merged[field] = primaryApplicant[field];
 			}
 		});
+		if (this.getApplicantReferences(existingApplicant).length === 0 && this.getApplicantReferences(primaryApplicant).length > 0) {
+			merged.FSC_Referencias__c = this.getApplicantReferences(primaryApplicant);
+		}
 		merged.Name = this.buildApplicantName(merged);
 		return merged;
 	}
@@ -1182,7 +1297,13 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 		this.handleNonFutureDateChange(event, 'tiempoVivienda');
 	}
 	handleOcupacionChange(event) {
-		this.ocupacion = event.target.value;
+		const selectedValue = event.detail.value;
+		this.isCustomOccupationSelected = selectedValue === CUSTOM_OCCUPATION_OPTION;
+		this.ocupacion = this.isCustomOccupationSelected ? '' : selectedValue;
+	}
+
+	handleCustomOccupationChange(event) {
+		this.ocupacion = (event.target.value || '').trim();
 	}
 	handleEmpresaLaboraChange(event) {
 		this.empresaLabora = event.target.value;
@@ -1206,6 +1327,7 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 	handleEmpresaAnteriorChange(event) {
 		this.empresaAnterior = event.target.value;
 	}
+
 	handleFuenteIngresoChange(event) {
 		this.fuenteIngreso = event.target.value;
 	}
@@ -1533,7 +1655,16 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 	}
 
 	isCompleteReference(row) {
-		return !!(row?.FSC_FirstName__c && row?.FSC_LastName__c && row?.FSC_Telefono__c && row?.FSC_Parentesco__c);
+		return !!(
+			(this.isInheritedReference(row) || row?.FSC_FirstName__c) &&
+			row?.FSC_LastName__c &&
+			row?.FSC_Telefono__c &&
+			row?.FSC_Parentesco__c
+		);
+	}
+
+	isInheritedReference(row) {
+		return this.normalizeText(row?.FSC_Parentesco__c) === 'heredado de cliente';
 	}
 
 	handleAddTelefono() {
@@ -1855,6 +1986,9 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 
 	handleReferenciaDraftChange(event) {
 		const fieldName = event.target.name;
+		if (fieldName === 'FSC_Parentesco__c' && this.isInheritedReference({ FSC_Parentesco__c: event.target.value })) {
+			return;
+		}
 		if (fieldName === 'FSC_Parentesco__c') {
 			event.target.setCustomValidity('');
 		} else if (fieldName === 'FSC_Email__c') {
@@ -2128,6 +2262,9 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 	}
 
 	validateReferenciaInputs() {
+		if (this.isReferenciaHeredada && !this.referencias.some((row) => row._key === this.referenciaEditKey && this.isInheritedReference(row))) {
+			return false;
+		}
 		const inputs = [...this.template.querySelectorAll('[data-referencia-input]')];
 		if (inputs.length === 0) {
 			return (
@@ -2347,15 +2484,16 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 			this.tipoVivienda = applicant.FSC_TipoVivienda__c || '';
 			this.tiempoVivienda = this.normalizeDateValue(applicant.FSC_TiempoVivienda__c);
 			this.ocupacion = applicant.FSC_Ocupacion__c || '';
+			this.isCustomOccupationSelected = false;
 			this.empresaLabora = applicant.FSC_EmpresaAnteriorLaboro__c || '';
 			this.lugarLabora = applicant.FSC_LugarFondeLabora__c || '';
 			this.tiempoLaborando = applicant.FSC_TiempoLaborando__c || '';
 			this.empresaAnterior = applicant.FSC_EmpresaAnteriorLaboro__c || '';
 			this.fuenteIngreso = applicant.FSC_FuenteIngreso__c || '';
 			this.ingresosMensuales = this.normalizeDecimalValue(applicant.FSC_IngresosMensuales__c);
-			this.otrosIngresos = applicant.FSC_OtrosIngresos__c || '';
+			this.otrosIngresos = applicant.FSC_OtrosIngresos__c ?? '';
 			this.descripcionOtrosIngresos = applicant.FSC_DescripcionOtrosIngresos__c || '';
-			this.montoPrestaciones = applicant.FSC_MontoPrestacionesLaborales__c || '';
+			this.montoPrestaciones = applicant.FSC_MontoPrestacionesLaborales__c ?? '';
 			this.numeroDependientes = applicant.FSC_NumeroDependientes__c || '';
 			this.tipoNegocio = applicant.FSC_TipoNegocio__c || '';
 			this.clasificacionSIB = applicant.FSC_ClasificacionSIB__c || '';
@@ -2383,6 +2521,23 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 	}
 
 	async saveApplicant() {
+		if (this.isSavingApplicant) return;
+		if (
+			this.requiresAccountDebtor &&
+			(this.isEditingPrimaryAccountApplicant || this.normalizeApplicantType(this.tipoSolicitante) === 'deudor') &&
+			(this.isLoadingPrimaryAccountApplicant || this.primaryAccountLoadFailed)
+		) {
+			this.dispatchEvent(
+				new ShowToastEvent({
+					title: 'Datos del deudor pendientes',
+					message: this.primaryAccountLoadFailed
+						? 'No se pudieron cargar los datos del deudor. Recargue la solicitud antes de guardar.'
+						: 'Espere a que termine de cargar la cuenta antes de guardar el deudor.',
+					variant: 'warning',
+				})
+			);
+			return;
+		}
 		if (
 			this.showTelefonoEditor ||
 			this.showDireccionEditor ||
@@ -2509,6 +2664,13 @@ export default class FscLoanApplicantManager extends OmniscriptBaseMixin(Lightni
 			FSC_Referencias__c: this.serializeReferencias(),
 			FSC_Facilidad_Otra_Institucion__c: this.serializeFacilidadesOtrasInstituciones(),
 		};
+
+		if (!this.hasCompleteLaborData(newApplicant)) {
+			this.dispatchEvent(
+				new ShowToastEvent({ title: 'Datos Laborales incompletos', message: this.requiredLaborDataMessage, variant: 'error' })
+			);
+			return;
+		}
 
 		if (this.normalizeApplicantType(newApplicant.FSC_TipoSolicitante__c) === 'deudor' && this.requiresAccountDebtor) {
 			this.isSavingApplicant = true;

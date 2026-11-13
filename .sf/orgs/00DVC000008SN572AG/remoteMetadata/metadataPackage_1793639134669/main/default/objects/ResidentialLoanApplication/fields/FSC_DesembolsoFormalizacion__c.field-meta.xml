@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_DesembolsoFormalizacion__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Uso interno: indica que la solicitud ya fue desembolsada mientras la formalización de la garantía estaba en curso.</description>
+    <inlineHelpText>Indica que el crédito ya fue desembolsado durante la formalización.</inlineHelpText>
+    <label>Desembolsado en formalización</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

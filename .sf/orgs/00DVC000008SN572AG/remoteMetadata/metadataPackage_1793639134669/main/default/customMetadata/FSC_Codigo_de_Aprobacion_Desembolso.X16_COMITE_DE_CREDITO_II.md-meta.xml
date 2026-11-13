@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>16 - COMITE DE CREDITO II</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_Codigo_de_Aprobacion__c</field>
+        <value xsi:type="xsd:string">16</value>
+    </values>
+    <values>
+        <field>FSC_Descripcion__c</field>
+        <value xsi:type="xsd:string">16 - COMITE DE CREDITO II: CRÉDITOS COMERCIALES: DESDE RD$2,500,001 HASTA RD$25,000,000; PRÉSTAMOS DE CONSUMO, HIPOTECARIOS Y DE VEHÍCULOS DESDE RD$7,000,001 HASTA RD$25,000,000. O SUS RESPECTIVAS EQUIVALENCIAS EN MONEDA EXTRANJERA (TOMANDO COMO REFERENCIA LA TASA DE VENTA DEL BANCO CENTRAL AL DÍA DE LA APROBACIÓN). PRÉSTAMOS COMERCIALES CON GARANTÍA SOBRE CERTIFICADOS DE DEPÓSITO O TÍTULOS Y/O VALORES DEL MINISTERIO DE HACIENDA Y/O DEL BANCO CENTRAL Y OTROS TÍTULOS VALORES APROBADOS EN NUESTRA POLÍTICA, HASTA LA SUMA DE RD$100,000,000 O SU EQUIVALENCIA EN MONEDA EXTRANJERA, PARA UN SOLO DEUDOR O GRUPO DE RIESGO (TOMANDO COMO REFERENCIA LA TASA DE VENTA DEL BANCO CENTRAL AL DÍA DE LA APROBACIÓN).</value>
+    </values>
+</CustomMetadata>

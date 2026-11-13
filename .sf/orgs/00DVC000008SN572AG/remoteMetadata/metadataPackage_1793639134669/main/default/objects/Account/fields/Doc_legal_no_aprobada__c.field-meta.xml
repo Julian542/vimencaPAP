@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Doc_legal_no_aprobada__c</fullName>
+    <label>Doc legal no aprobada</label>
+    <summaryFilterItems>
+        <field>Documentacion_Legal__c.DOC_Estado__c</field>
+        <operation>notEqual</operation>
+        <value>APROBADO</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Documentacion_Legal__c.DOC_Cliente__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

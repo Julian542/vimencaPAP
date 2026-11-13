@@ -7,113 +7,77 @@
     <trackHistory>false</trackHistory>
     <type>Picklist</type>
     <valueSet>
-        <restricted>true</restricted>
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
                 <fullName>1</fullName>
                 <default>false</default>
-                <label>Agencia Principal</label>
+                <label>AGENCIA PRINCIPAL</label>
             </value>
             <value>
                 <fullName>2</fullName>
                 <default>false</default>
-                <label>Agora Mall</label>
+                <label>MEGACENTRO</label>
             </value>
             <value>
                 <fullName>3</fullName>
                 <default>false</default>
-                <label>Bavaro</label>
+                <label>SANTIAGO</label>
             </value>
             <value>
                 <fullName>4</fullName>
                 <default>false</default>
-                <label>Paseo 27</label>
+                <label>BAVARO</label>
             </value>
             <value>
                 <fullName>5</fullName>
                 <default>false</default>
-                <label>Lope Vega</label>
+                <label>PASEO 27</label>
             </value>
             <value>
                 <fullName>6</fullName>
                 <default>false</default>
-                <label>Megacentro</label>
+                <label>LOPE DE VEGA</label>
             </value>
             <value>
                 <fullName>7</fullName>
                 <default>false</default>
-                <label>Patio Colombia</label>
+                <label>AGORA MALL</label>
             </value>
             <value>
                 <fullName>8</fullName>
                 <default>false</default>
-                <label>Santiago</label>
+                <label>PATIO COLOMBIA</label>
             </value>
             <value>
                 <fullName>9</fullName>
                 <default>false</default>
-                <label>Oficina Principal</label>
+                <label>INDEPENDENCIA</label>
             </value>
             <value>
-                <fullName>51</fullName>
+                <fullName>10</fullName>
                 <default>false</default>
-                <label>Independencia</label>
+                <label>VILLA MELLA</label>
             </value>
             <value>
-                <fullName>151</fullName>
+                <fullName>11</fullName>
                 <default>false</default>
-                <label>Negocios Alternos</label>
+                <label>SAN ISIDRO</label>
             </value>
             <value>
-                <fullName>201</fullName>
+                <fullName>12</fullName>
                 <default>false</default>
-                <label>San Isidro</label>
+                <label>COLINAS MALL</label>
             </value>
             <value>
-                <fullName>455</fullName>
+                <fullName>13</fullName>
                 <default>false</default>
-                <label>Banca Productos y Alianzas</label>
+                <label>SAN CRISTOBAL</label>
             </value>
             <value>
-                <fullName>456</fullName>
+                <fullName>14</fullName>
                 <default>false</default>
-                <label>Villa Mella</label>
-            </value>
-            <value>
-                <fullName>457</fullName>
-                <default>false</default>
-                <label>Banco Vimenca</label>
-            </value>
-            <value>
-                <fullName>458</fullName>
-                <default>false</default>
-                <label>Colinas Mall</label>
-            </value>
-            <value>
-                <fullName>459</fullName>
-                <default>false</default>
-                <label>Recursos Humanos</label>
-            </value>
-            <value>
-                <fullName>4801</fullName>
-                <default>false</default>
-                <label>San Cristóbal</label>
-            </value>
-            <value>
-                <fullName>6060</fullName>
-                <default>false</default>
-                <label>Villa Olga</label>
-            </value>
-            <value>
-                <fullName>6061</fullName>
-                <default>false</default>
-                <label>Santiago Center</label>
-            </value>
-            <value>
-                <fullName>6062</fullName>
-                <default>false</default>
-                <label>Punta Cana</label>
+                <label>SANTIAGO CENTER</label>
             </value>
         </valueSetDefinition>
     </valueSet>

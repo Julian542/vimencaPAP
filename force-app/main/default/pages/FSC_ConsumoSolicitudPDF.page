@@ -486,21 +486,13 @@
 						<span class="field-label">Fuente de Ingreso</span>
 						<div class="field-value">{!laborFuenteIngreso}</div>
 					</td>
-					<td>
-						<span class="field-label">Lugar Donde Labora</span>
+					<td colspan="2">
+						<span class="field-label">Lugar donde Labora o Actividad Comercial</span>
 						<div class="field-value">{!laborLugarDondeLabora}</div>
-					</td>
-					<td>
-						<span class="field-label">Tipo de Negocio</span>
-						<div class="field-value">{!laborTipoNegocio}</div>
 					</td>
 				</tr>
 				<tr>
-					<td>
-						<span class="field-label">Cargo Actual</span>
-						<div class="field-value">{!laborCargoActual}</div>
-					</td>
-					<td>
+					<td colspan="2">
 						<span class="field-label">Tiempo Laborando</span>
 						<div class="field-value">{!laborTiempoLaborando}</div>
 					</td>
@@ -515,7 +507,7 @@
 				</tr>
 				<tr>
 					<td>
-						<span class="field-label">Empresa Anterior Laboró (Si ha estado por menos de seis meses)</span>
+						<span class="field-label">Empresa Anterior Laboró</span>
 						<div class="field-value">{!laborEmpresaAnterior}</div>
 					</td>
 					<td>
@@ -535,13 +527,14 @@
 
 			<table>
 				<colgroup>
-					<col style="width: 22%" />
-					<col style="width: 39%" />
-					<col style="width: 39%" />
+					<col style="width: 20%" />
+					<col style="width: 30%" />
+					<col style="width: 30%" />
+					<col style="width: 20%" />
 				</colgroup>
 				<tr>
 					<td
-						colspan="3"
+						colspan="4"
 						class="section">
 						Referencias
 					</td>
@@ -550,6 +543,7 @@
 					<td>Parentesco</td>
 					<td>Nombres</td>
 					<td>Apellidos</td>
+					<td>Teléfono</td>
 				</tr>
 				<apex:repeat value="{!referencias}"
 					var="ref">
@@ -557,11 +551,13 @@
 						<td>{!ref.parentesco}</td>
 						<td>{!ref.nombres}</td>
 						<td>{!ref.apellidos}</td>
+						<td>{!ref.telefono}</td>
 					</tr>
 				</apex:repeat>
 				<apex:repeat value="{!emptyReferenciaRows}"
 					var="emptyRef">
 					<tr class="blank-row">
+						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>

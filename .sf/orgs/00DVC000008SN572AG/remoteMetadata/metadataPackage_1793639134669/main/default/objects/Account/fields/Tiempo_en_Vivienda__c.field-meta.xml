@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tiempo_en_Vivienda__c</fullName>
+    <description>Tiempo viviendo en la vivienda actual</description>
+    <encryptionScheme>None</encryptionScheme>
+    <inlineHelpText>Tiempo viviendo en la vivienda actual</inlineHelpText>
+    <label>Tiempo en Vivienda</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>TextArea</type>
+</CustomField>

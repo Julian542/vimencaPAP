@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ProductoBanco__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Producto banco</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>2 - CONSUMO CON GARANTIA HIPOTECARIA</fullName>
+                <default>true</default>
+                <label>2 - CONSUMO CON GARANTIA HIPOTECARIA</label>
+            </value>
+            <value>
+                <fullName>6 - PERSONA JURIDICA VEHICULOS USADOS</fullName>
+                <default>false</default>
+                <label>6 - PERSONA JURIDICA VEHICULOS USADOS</label>
+            </value>
+            <value>
+                <fullName>12 - CONSUMO EMPLEADOS BANCO VIMENCA</fullName>
+                <default>false</default>
+                <label>12 - CONSUMO EMPLEADOS BANCO VIMENCA</label>
+            </value>
+            <value>
+                <fullName>14 - PERSONA JURIDICA GARANTIA REAL</fullName>
+                <default>false</default>
+                <label>14 - PERSONA JURIDICA GARANTIA REAL</label>
+            </value>
+            <value>
+                <fullName>15 - PERSONA JURIDICA SIN GARANTIA REAL</fullName>
+                <default>false</default>
+                <label>15 - PERSONA JURIDICA SIN GARANTIA REAL</label>
+            </value>
+            <value>
+                <fullName>16 - PERSONA JURIDICA  REC. LIB. ENC. LEG</fullName>
+                <default>false</default>
+                <label>16 - PERSONA JURIDICA  REC. LIB. ENC. LEG</label>
+            </value>
+            <value>
+                <fullName>19 - PERSONA JURIDICA REESTRUCTURADO SIN GAR.  REAL</fullName>
+                <default>false</default>
+                <label>19 - PERSONA JURIDICA REESTRUCTURADO SIN GAR.  REAL</label>
+            </value>
+            <value>
+                <fullName>22 - PERSONA JURIDICA VEHICULOS NUEVOS</fullName>
+                <default>false</default>
+                <label>22 - PERSONA JURIDICA VEHICULOS NUEVOS</label>
+            </value>
+            <value>
+                <fullName>24 - PERSONA NATURAL VEHICULOS USADOS</fullName>
+                <default>false</default>
+                <label>24 - PERSONA NATURAL VEHICULOS USADOS</label>
+            </value>
+            <value>
+                <fullName>26 - PERSONA NATURAL CON GARANTIA REAL</fullName>
+                <default>false</default>
+                <label>26 - PERSONA NATURAL CON GARANTIA REAL</label>
+            </value>
+            <value>
+                <fullName>27 - COMERCIAL PERSONA NATURAL REC. LIB. ENC. LEG</fullName>
+                <default>false</default>
+                <label>27 - COMERCIAL PERSONA NATURAL REC. LIB. ENC. LEG</label>
+            </value>
+            <value>
+                <fullName>29 - COMERCIAL PERSONA NATURAL VEHICULOS NUEVOS</fullName>
+                <default>false</default>
+                <label>29 - COMERCIAL PERSONA NATURAL VEHICULOS NUEVOS</label>
+            </value>
+            <value>
+                <fullName>30 - PERSONA NATURAL SIN GARANTIA REAL</fullName>
+                <default>false</default>
+                <label>30 - PERSONA NATURAL SIN GARANTIA REAL</label>
+            </value>
+            <value>
+                <fullName>31 - HIPOTECARIOS PARA LA VIVIENDA</fullName>
+                <default>false</default>
+                <label>31 - HIPOTECARIOS PARA LA VIVIENDA</label>
+            </value>
+            <value>
+                <fullName>32 - EMPLEADOS BANCO VIMENCA (HIPOTECARIO)</fullName>
+                <default>false</default>
+                <label>32 - EMPLEADOS BANCO VIMENCA (HIPOTECARIO)</label>
+            </value>
+            <value>
+                <fullName>33 - EMPLEADOS REMESAS VIMENCA (HIPOTECARIO)</fullName>
+                <default>false</default>
+                <label>33 - EMPLEADOS REMESAS VIMENCA (HIPOTECARIO)</label>
+            </value>
+            <value>
+                <fullName>37 - HIPOTECARIOS PARA LA VIVIENDA REESTRUCTURADO</fullName>
+                <default>false</default>
+                <label>37 - HIPOTECARIOS PARA LA VIVIENDA REESTRUCTURADO</label>
+            </value>
+            <value>
+                <fullName>38 - HIPOTECARIOS REC. LIB. ENC. LEGAL</fullName>
+                <default>false</default>
+                <label>38 - HIPOTECARIOS REC. LIB. ENC. LEGAL</label>
+            </value>
+            <value>
+                <fullName>39 - CONSUMO SIN GARANTIA REAL</fullName>
+                <default>false</default>
+                <label>39 - CONSUMO SIN GARANTIA REAL</label>
+            </value>
+            <value>
+                <fullName>40 - CONSUMO CON CERTIFICADO DEPOSITO</fullName>
+                <default>false</default>
+                <label>40 - CONSUMO CON CERTIFICADO DEPOSITO</label>
+            </value>
+            <value>
+                <fullName>41 - EMPLEADOS FONT GAMUNDI</fullName>
+                <default>false</default>
+                <label>41 - EMPLEADOS FONT GAMUNDI</label>
+            </value>
+            <value>
+                <fullName>42 - EMPLEADOS PLAZA LAMA</fullName>
+                <default>false</default>
+                <label>42 - EMPLEADOS PLAZA LAMA</label>
+            </value>
+            <value>
+                <fullName>43 - EMPLEADOS AGENTE DE CAMBIO VIMENCA</fullName>
+                <default>false</default>
+                <label>43 - EMPLEADOS AGENTE DE CAMBIO VIMENCA</label>
+            </value>
+            <value>
+                <fullName>44 - EMPLEADOS REMESAS VIMENCA</fullName>
+                <default>false</default>
+                <label>44 - EMPLEADOS REMESAS VIMENCA</label>
+            </value>
+            <value>
+                <fullName>45 - EMPLEADOS DATAVIMENCA</fullName>
+                <default>false</default>
+                <label>45 - EMPLEADOS DATAVIMENCA</label>
+            </value>
+            <value>
+                <fullName>46 - EMPLEADOS VIMENPAQ</fullName>
+                <default>false</default>
+                <label>46 - EMPLEADOS VIMENPAQ</label>
+            </value>
+            <value>
+                <fullName>47 - EMPLEADOS ARSSDS</fullName>
+                <default>false</default>
+                <label>47 - EMPLEADOS ARSSDS</label>
+            </value>
+            <value>
+                <fullName>48 - CONSUMO REC. LIB. ENCAJE LEGAL</fullName>
+                <default>false</default>
+                <label>48 - CONSUMO REC. LIB. ENCAJE LEGAL</label>
+            </value>
+            <value>
+                <fullName>51 - PROGRAMA VEHICULOS MAGNA MOTORS</fullName>
+                <default>false</default>
+                <label>51 - PROGRAMA VEHICULOS MAGNA MOTORS</label>
+            </value>
+            <value>
+                <fullName>52 - EMPLEADOS LABORATORIOS LAM</fullName>
+                <default>false</default>
+                <label>52 - EMPLEADOS LABORATORIOS LAM</label>
+            </value>
+            <value>
+                <fullName>53 - CONSUMO CONSOLIDACION DEUDA</fullName>
+                <default>false</default>
+                <label>53 - CONSUMO CONSOLIDACION DEUDA</label>
+            </value>
+            <value>
+                <fullName>54 - VEHICULOS USADOS</fullName>
+                <default>false</default>
+                <label>54 - VEHICULOS USADOS</label>
+            </value>
+            <value>
+                <fullName>57 - CONSUMO REESTRUCTURADO SIN GARANTIA REAL</fullName>
+                <default>false</default>
+                <label>57 - CONSUMO REESTRUCTURADO SIN GARANTIA REAL</label>
+            </value>
+            <value>
+                <fullName>58 - CONSUMO VEHICULOS NUEVOS</fullName>
+                <default>false</default>
+                <label>58 - CONSUMO VEHICULOS NUEVOS</label>
+            </value>
+            <value>
+                <fullName>60 - EMPLEADOS BCO. VIMENCA (VEHICULOS)</fullName>
+                <default>false</default>
+                <label>60 - EMPLEADOS BCO. VIMENCA (VEHICULOS)</label>
+            </value>
+            <value>
+                <fullName>62 - CONSUMO REESTRUCTURADO CON GARANTIA REAL</fullName>
+                <default>false</default>
+                <label>62 - CONSUMO REESTRUCTURADO CON GARANTIA REAL</label>
+            </value>
+            <value>
+                <fullName>63 - CONSUMO RECURSOS LIB. ENCAJE LEGAL VEHICULO</fullName>
+                <default>false</default>
+                <label>63 - CONSUMO RECURSOS LIB. ENCAJE LEGAL VEHICULO</label>
+            </value>
+            <value>
+                <fullName>64 - CONSUMO REESTRUCTURADO VEHICULOS</fullName>
+                <default>false</default>
+                <label>64 - CONSUMO REESTRUCTURADO VEHICULOS</label>
+            </value>
+            <value>
+                <fullName>67 - PERSONA JURIDICA REESTRUCTURADO CON GARANTIA REAL</fullName>
+                <default>false</default>
+                <label>67 - PERSONA JURIDICA REESTRUCTURADO CON GARANTIA REAL</label>
+            </value>
+            <value>
+                <fullName>68 - PERSONA JURIDICA REESTRUCTURADO VEHICULO</fullName>
+                <default>false</default>
+                <label>68 - PERSONA JURIDICA REESTRUCTURADO VEHICULO</label>
+            </value>
+            <value>
+                <fullName>69 - EMPLEADOS TODO PAGO</fullName>
+                <default>false</default>
+                <label>69 - EMPLEADOS TODO PAGO</label>
+            </value>
+            <value>
+                <fullName>70 - CONSUMO EN DOLARES SIN GARANTIA REAL</fullName>
+                <default>false</default>
+                <label>70 - CONSUMO EN DOLARES SIN GARANTIA REAL</label>
+            </value>
+            <value>
+                <fullName>71 - CONSUMO EN DOLARES CON GARANTIA REAL</fullName>
+                <default>false</default>
+                <label>71 - CONSUMO EN DOLARES CON GARANTIA REAL</label>
+            </value>
+            <value>
+                <fullName>72 - COMERCIAL JURIDICA EN DOLARES SIN GTIA REAL</fullName>
+                <default>false</default>
+                <label>72 - COMERCIAL JURIDICA EN DOLARES SIN GTIA REAL</label>
+            </value>
+            <value>
+                <fullName>74 - COMERCIAL PN EN DOLARES SIN GTIA REAL</fullName>
+                <default>false</default>
+                <label>74 - COMERCIAL PN EN DOLARES SIN GTIA REAL</label>
+            </value>
+            <value>
+                <fullName>75 - COMERCIAL PN EN DOLARES CON GTIA REAL</fullName>
+                <default>false</default>
+                <label>75 - COMERCIAL PN EN DOLARES CON GTIA REAL</label>
+            </value>
+            <value>
+                <fullName>76 - COMERCIAL PERSONA JURIDICA EN US$</fullName>
+                <default>false</default>
+                <label>76 - COMERCIAL PERSONA JURIDICA EN US$</label>
+            </value>
+            <value>
+                <fullName>77 - DESCUENTO NOMINA BV</fullName>
+                <default>false</default>
+                <label>77 - DESCUENTO NOMINA BV</label>
+            </value>
+            <value>
+                <fullName>78 - DESCUENTO NOMINA BANCA ALIANZA</fullName>
+                <default>false</default>
+                <label>78 - DESCUENTO NOMINA BANCA ALIANZA</label>
+            </value>
+            <value>
+                <fullName>79 - DESCUENTO NOMINA GRUPO VIMENCA</fullName>
+                <default>false</default>
+                <label>79 - DESCUENTO NOMINA GRUPO VIMENCA</label>
+            </value>
+            <value>
+                <fullName>91 - HIPOTECARIOS PARA LA VIVIENDA EN DOLARES</fullName>
+                <default>false</default>
+                <label>91 - HIPOTECARIOS PARA LA VIVIENDA EN DOLARES</label>
+            </value>
+            <value>
+                <fullName>92 - HIPOTECARIOS PARA LA VIVIENDA DOLARES SIN GARANTIA</fullName>
+                <default>false</default>
+                <label>92 - HIPOTECARIOS PARA LA VIVIENDA DOLARES SIN GARANTIA</label>
+            </value>
+            <value>
+                <fullName>93 - EMPLEADOS B. VIMENCA CONS HIPOT</fullName>
+                <default>false</default>
+                <label>93 - EMPLEADOS B. VIMENCA CONS HIPOT</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

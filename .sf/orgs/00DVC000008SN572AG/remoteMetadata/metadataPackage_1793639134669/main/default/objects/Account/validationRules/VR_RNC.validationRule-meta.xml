@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_RNC</fullName>
+    <active>true</active>
+    <description>Validación que comprueba que el campo R.N.C. tenga 9 caracteres.</description>
+    <errorConditionFormula>AND(
+	$Label.Validaciones == &apos;Si&apos;,
+	ACC_Persona_Fisica__c = false,	
+	LEN(ACC_RNC__c) &gt; 9,	
+	OR(
+		RecordType.DeveloperName==&quot;Candidato Persona Jurídica&quot;,
+		RecordType.DeveloperName==&quot;Personas Jurídica&quot;
+	)
+	)</errorConditionFormula>
+    <errorMessage>El R.N.C. no es válido.</errorMessage>
+</ValidationRule>

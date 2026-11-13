@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Rol__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Rol</label>
+    <required>true</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>REPRESENTANTE_BANCO_1</fullName>
+                <default>false</default>
+                <label>Representante del Banco 1</label>
+            </value>
+            <value>
+                <fullName>REPRESENTANTE_BANCO_2</fullName>
+                <default>false</default>
+                <label>Representante del Banco 2</label>
+            </value>
+            <value>
+                <fullName>NOTARIO</fullName>
+                <default>false</default>
+                <label>Notario</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

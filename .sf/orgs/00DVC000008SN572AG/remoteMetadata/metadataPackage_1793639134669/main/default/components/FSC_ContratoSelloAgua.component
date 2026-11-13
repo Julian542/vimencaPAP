@@ -1,0 +1,5 @@
+<apex:component layout="none">
+	<div class="sello-agua">
+		<apex:image url="{!$Resource.FSC_SelloAguaContrato}" styleClass="sello-agua-imagen" />
+	</div>
+</apex:component>

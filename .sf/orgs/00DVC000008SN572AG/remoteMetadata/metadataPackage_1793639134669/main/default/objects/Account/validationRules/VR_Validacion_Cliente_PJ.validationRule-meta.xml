@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Validacion_Cliente_PJ</fullName>
+    <active>false</active>
+    <description>Prevención a nivel de registro de que actualicen valores de campos.</description>
+    <errorConditionFormula>AND(
+    $Label.Validaciones == &apos;Si&apos;,
+    ACC_Persona_Fisica__c = false,
+    RecordType.DeveloperName == &apos;Personas_Juridicas&apos;,
+        OR
+        (  ISCHANGED(Name)
+)
+)</errorConditionFormula>
+    <errorMessage>Cuando es un Cliente no se puede actualizar el campo &quot;Nombre del cliente&quot;</errorMessage>
+</ValidationRule>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Configura el plazo máximo de consumo y los plazos de vehículo por antigüedad. Los registros Consumo, VehiculoNuevo, VehiculoUsadoReciente y VehiculoUsadoAntiguo son utilizados por los formularios y las validaciones de solicitudes y garantías.</description>
+    <label>Plazo de crédito</label>
+    <pluralLabel>Plazos de crédito</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

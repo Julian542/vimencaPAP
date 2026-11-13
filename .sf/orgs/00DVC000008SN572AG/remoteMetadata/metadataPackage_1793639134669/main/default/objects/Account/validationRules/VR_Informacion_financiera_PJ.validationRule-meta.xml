@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Informacion_financiera_PJ</fullName>
+    <active>true</active>
+    <description>Validación que comprueba que el cliente ha completado la información financiera requerida y que aplica para el Tipo de Cliente.</description>
+    <errorConditionFormula>AND(
+	$Label.Validaciones == &apos;Si&apos;,
+	ACC_Persona_Fisica__c = false,
+	ISPICKVAL(ACC_Estado__c,&apos;CONVERTIR&apos;),
+		OR
+		(	
+			ISPICKVAL(ACC_Fuente_Informacion__c,&apos;&apos;),
+			ISBLANK(ACC_Total_Activos__c),
+			ISPICKVAL(ACC_Moneda__c,&apos;&apos;),
+			ISBLANK(ACC_Volumen_Ventas_Anual__c),
+			ISBLANK(ACC_Fecha_Informacion__c),
+			ISBLANK(ACC_NumEmpleados__c),
+			ISBLANK(ACC_Ventas_Ingresos_Anuales__c),
+			ISBLANK(ACC_Patrimonio_Num__c),
+			ISBLANK(Gastos_anuales__c),
+			CONTAINS(TEXT(ACC_Tipo_Cliente_PJ__c),&apos;Inst.s/f/lucro&apos;) == true
+		)
+	)</errorConditionFormula>
+    <errorMessage>Revise la inf. financiera, debe estar completo: 
+- Fecha de información
+- Fuente de información
+- Total activos
+- Moneda
+- Ventas o ingresos anuales
+- Nº de empleados
+- Volumen de ventas anual
+- Gastos anuales
+- Patrimonio
+- Tipo de persona</errorMessage>
+</ValidationRule>

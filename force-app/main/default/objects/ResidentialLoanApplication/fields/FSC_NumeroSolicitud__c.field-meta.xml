@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_NumeroSolicitud__c</fullName>
+    <description>Número consecutivo autogenerado de la solicitud de crédito (SOL-CRED-00001, SOL-CRED-00002, ...).</description>
+    <displayFormat>SOL-CRED-{00000}</displayFormat>
+    <externalId>false</externalId>
+    <label>Número de solicitud</label>
+    <trackHistory>false</trackHistory>
+    <type>AutoNumber</type>
+</CustomField>

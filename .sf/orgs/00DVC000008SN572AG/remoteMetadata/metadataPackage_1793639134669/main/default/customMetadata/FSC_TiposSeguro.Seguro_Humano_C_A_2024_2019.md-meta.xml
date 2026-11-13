@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Seguro Humano C-A 2024-2019</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_AplicaHipotecario__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FSC_AplicaVehiculo__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>FSC_Base_Calculo_Prima__c</field>
+        <value xsi:type="xsd:string">VALOR_VEHICULO</value>
+    </values>
+    <values>
+        <field>FSC_Deshabilitado__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FSC_Divisor_Tasa__c</field>
+        <value xsi:type="xsd:double">100.0</value>
+    </values>
+    <values>
+        <field>FSC_Facilidad__c</field>
+        <value xsi:type="xsd:string">- 401</value>
+    </values>
+    <values>
+        <field>FSC_Label__c</field>
+        <value xsi:type="xsd:string">Seguro Humano (CAMIONES- AUTOBUS) 2024-2019</value>
+    </values>
+    <values>
+        <field>FSC_Parametros_Formula__c</field>
+        <value xsi:type="xsd:string">{&quot;sourceSheet&quot;:&quot;Vehículo Incluyendo inmersión&quot;,&quot;minimumBase&quot;:350000,&quot;maximumBase&quot;:7000000,&quot;minimumMonthlyPremium&quot;:2320}</value>
+    </values>
+    <values>
+        <field>FSC_Tasa__c</field>
+        <value xsi:type="xsd:double">0.539</value>
+    </values>
+    <values>
+        <field>FSC_Tipo_Calculo_Prima__c</field>
+        <value xsi:type="xsd:string">VEHICULO</value>
+    </values>
+</CustomMetadata>

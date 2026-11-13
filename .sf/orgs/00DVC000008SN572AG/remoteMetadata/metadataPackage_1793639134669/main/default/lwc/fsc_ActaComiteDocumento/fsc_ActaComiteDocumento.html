@@ -1,0 +1,209 @@
+<template>
+	<div class="successContainer">
+		<p class="successMessage">Documento generado con éxito.</p>
+		<div class="buttonGroup">
+			<lightning-button
+				variant="brand"
+				label="Descargar documento"
+				disabled={disableDownload}
+				onclick={handleDownload}>
+			</lightning-button>
+			<lightning-button
+				label="Editar documento"
+				disabled={disableDownload}
+				onclick={handleEdit}>
+			</lightning-button>
+		</div>
+	</div>
+
+	<template if:true={showModal}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			aria-modal="true"
+			aria-labelledby="acta-editor-heading"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container modalContainer">
+				<header class="slds-modal__header">
+					<button
+						class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+						title="Cerrar"
+						disabled={disableActions}
+						onclick={handleCancel}>
+						<lightning-icon
+							icon-name="utility:close"
+							alternative-text="Cerrar"
+							size="small"
+							variant="inverse">
+						</lightning-icon>
+					</button>
+					<h2 id="acta-editor-heading" class="slds-text-heading_medium">Editar acta de comité</h2>
+					<p class="slds-m-top_x-small">Los campos bloqueados forman parte fija del documento.</p>
+				</header>
+
+				<div class="slds-modal__content modalContent">
+					<template if:true={showSpinner}>
+						<lightning-spinner alternative-text="Procesando documento"></lightning-spinner>
+					</template>
+
+					<template if:true={errorMessage}>
+						<div class="slds-notify slds-notify_alert slds-alert_error slds-m-bottom_medium" role="alert">
+							<span>{errorMessage}</span>
+						</div>
+					</template>
+
+					<template if:true={documentLoaded}>
+						<section class="documentSection">
+							<h3 class="sectionTitle">DATOS DEL ACTA</h3>
+							<div class="fieldsGrid">
+								<lightning-input
+									data-key="actaNumero"
+									label="Acta No."
+									value={actaNumero}
+									disabled={disableActions}
+									maxlength="100"
+									onchange={handleHeaderChange}>
+								</lightning-input>
+								<lightning-input label="Fecha" value={actaFecha} read-only></lightning-input>
+							</div>
+						</section>
+
+						<section class="documentSection">
+							<h3 class="sectionTitle">ASISTENTES</h3>
+							<div class="tableWrapper">
+								<table class="membersTable">
+									<thead>
+										<tr>
+											<th>Nombre</th>
+											<th>Perfil</th>
+											<th>Función</th>
+											<th>Modalidad</th>
+										</tr>
+									</thead>
+									<tbody>
+										<template for:each={miembros} for:item="miembro">
+											<tr key={miembro.id}>
+												<td>{miembro.nombre}</td>
+												<td>{miembro.perfil}</td>
+												<td>{miembro.funcion}</td>
+												<td>{miembro.modalidad}</td>
+											</tr>
+										</template>
+									</tbody>
+								</table>
+							</div>
+						</section>
+
+						<section class="documentSection">
+							<h3 class="sectionTitle">COMPROBACIÓN DEL QUÓRUM</h3>
+							<div class="singleField">
+								<lightning-textarea label="Quórum" value={textoQuorum} read-only></lightning-textarea>
+							</div>
+						</section>
+
+						<section class="documentSection">
+							<h3 class="sectionTitle">OBJETIVO</h3>
+							<div class="singleField">
+								<lightning-textarea label="Objetivo" value={textoObjetivo} read-only></lightning-textarea>
+							</div>
+						</section>
+
+						<template for:each={sections} for:item="section">
+							<section key={section.id} class="documentSection">
+								<h3 class="sectionTitle">{section.title}</h3>
+								<template for:each={section.rows} for:item="row">
+									<article key={row.id} class="requestCard">
+										<h4 class="requestTitle">Solicitud {row.numberLabel}</h4>
+										<div class="fieldsGrid">
+											<template for:each={row.fields} for:item="field">
+												<div key={field.id} class={field.fieldClass}>
+													<template if:true={field.textarea}>
+														<lightning-textarea
+															data-section-index={field.sectionIndex}
+															data-row-index={field.rowIndex}
+															data-key={field.key}
+															label={field.label}
+															value={field.value}
+															disabled={disableActions}
+															maxlength="20000"
+															onchange={handleRowChange}>
+														</lightning-textarea>
+													</template>
+													<template if:false={field.textarea}>
+														<lightning-input
+															data-section-index={field.sectionIndex}
+															data-row-index={field.rowIndex}
+															data-key={field.key}
+															type={field.inputType}
+															label={field.label}
+															value={field.value}
+															disabled={disableActions}
+															maxlength="255"
+															onchange={handleRowChange}>
+														</lightning-input>
+													</template>
+												</div>
+											</template>
+										</div>
+									</article>
+								</template>
+							</section>
+						</template>
+
+						<section class="documentSection">
+							<h3 class="sectionTitle">CONFIRMACIÓN ASISTENCIA EN MODALIDAD REMOTA</h3>
+							<div class="singleField">
+								<lightning-textarea
+									data-key="confirmacionRemota"
+									label="Confirmación remota"
+									value={confirmacionRemota}
+									disabled={disableActions}
+									maxlength="20000"
+									onchange={handleHeaderChange}>
+								</lightning-textarea>
+							</div>
+						</section>
+
+						<section class="documentSection">
+							<h3 class="sectionTitle">CONFIRMACIÓN ASISTENCIA EN MODALIDAD PRESENCIAL</h3>
+							<div class="tableWrapper">
+								<table class="membersTable">
+									<thead>
+										<tr>
+											<th>Nombre</th>
+											<th>Comité</th>
+											<th>Cargo en la entidad</th>
+											<th>Firma</th>
+										</tr>
+									</thead>
+									<tbody>
+										<template for:each={miembros} for:item="miembro">
+											<tr key={miembro.presencialId}>
+												<td>{miembro.nombre}</td>
+												<td>{miembro.funcion}</td>
+												<td>{miembro.perfil}</td>
+												<td></td>
+											</tr>
+										</template>
+									</tbody>
+								</table>
+							</div>
+						</section>
+					</template>
+				</div>
+
+				<footer class="slds-modal__footer">
+					<lightning-button label="Cancelar" disabled={disableActions} onclick={handleCancel}></lightning-button>
+					<lightning-button
+						class="slds-m-left_small"
+						variant="brand"
+						label="Guardar y descargar"
+						disabled={disableSave}
+						onclick={handleSaveAndDownload}>
+					</lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+</template>

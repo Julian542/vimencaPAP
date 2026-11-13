@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ValidarPlazoVehiculo</fullName>
+    <active>true</active>
+    <description>Valida el plazo de la solicitud al guardar la garantía, antes de que se actualice el resumen del año en RLA.</description>
+    <errorConditionFormula>AND(
+    FSC_Residential_Loan_Application__r.RecordType.DeveloperName = &quot;FSC_Solicitud_Credito_Vehiculo&quot;,
+    MAX(
+        IF(ISBLANK(TEXT(FSC_Residential_Loan_Application__r.FSC_Plazo_meses__c)), 0, VALUE(TEXT(FSC_Residential_Loan_Application__r.FSC_Plazo_meses__c))),
+        BLANKVALUE(FSC_Residential_Loan_Application__r.FSC_PlazoMesesAprobado__c, 0)
+    ) &gt; IF(
+        ISBLANK(FSC_Ano_Vehiculo__c),
+        0,
+        IF(
+            YEAR(TODAY()) - FSC_Ano_Vehiculo__c &lt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_AnioHasta__c,
+            $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoNuevo.FSC_PlazoMaximo__c,
+            IF(
+                YEAR(TODAY()) - FSC_Ano_Vehiculo__c &lt;= $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_AnioHasta__c,
+                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoReciente.FSC_PlazoMaximo__c,
+                $CustomMetadata.FSC_PlazoCredito__mdt.VehiculoUsadoAntiguo.FSC_PlazoMaximo__c
+            )
+        )
+    )
+)</errorConditionFormula>
+    <errorDisplayField>FSC_Ano_Vehiculo__c</errorDisplayField>
+    <errorMessage>El plazo solicitado o aprobado supera el máximo permitido para el año de este vehículo. Corrija el plazo de la solicitud antes de guardar la garantía.</errorMessage>
+</ValidationRule>

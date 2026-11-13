@@ -61,7 +61,10 @@ export default class Fsc_ApprovalHistory extends LightningElement {
             'rejected': 'Rechazado',
             'approved': 'Aprobado',
             'pending': 'Pendiente',
-            'submitted': 'Enviado'
+            'submitted': 'Enviado',
+            'devuelto': 'Devuelto',
+            'subsanacion': 'Pendiente Subsanación',
+            'pendiente subsanacion': 'Pendiente Subsanación'
         };
 
         const key = this.normalize(status);

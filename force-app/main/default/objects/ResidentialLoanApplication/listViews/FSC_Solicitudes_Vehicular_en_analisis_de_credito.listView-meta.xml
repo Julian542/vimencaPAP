@@ -3,6 +3,7 @@
     <fullName>FSC_Solicitudes_Vehicular_en_analisis_de_credito</fullName>
     <columns>FSC_Prioridad__c</columns>
     <columns>Name</columns>
+    <columns>FSC_NumeroSolicitud__c</columns>
     <columns>FSC_Subestado__c</columns>
     <columns>Account</columns>
     <columns>FSC_PlazoMesesAprobado__c</columns>

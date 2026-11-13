@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ACC_Validacion_Historial_Laboral__c</fullName>
+    <label>Validación  Historial Laboral</label>
+    <summaryForeignKey>Historial_laboral__c.HIS_Cuenta__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

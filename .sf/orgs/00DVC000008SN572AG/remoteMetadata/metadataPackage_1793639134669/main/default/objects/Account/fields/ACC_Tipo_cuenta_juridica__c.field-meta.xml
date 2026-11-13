@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ACC_Tipo_cuenta_juridica__c</fullName>
+    <label>Tipo cuenta jurídica</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ASOCIACIONES DE AHORROS Y PRES</fullName>
+                <default>false</default>
+                <label>ASOCIACIONES DE AHORROS Y PRES</label>
+            </value>
+            <value>
+                <fullName>CORPORATIVA</fullName>
+                <default>false</default>
+                <label>CORPORATIVA</label>
+            </value>
+            <value>
+                <fullName>EMBAJADA Y CONSULADO</fullName>
+                <default>false</default>
+                <label>EMBAJADA Y CONSULADO</label>
+            </value>
+            <value>
+                <fullName>EMPRESARIAL</fullName>
+                <default>false</default>
+                <label>EMPRESARIAL</label>
+            </value>
+            <value>
+                <fullName>INST. SIN FINES DE LUCRO</fullName>
+                <default>false</default>
+                <label>INST. SIN FINES DE LUCRO</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

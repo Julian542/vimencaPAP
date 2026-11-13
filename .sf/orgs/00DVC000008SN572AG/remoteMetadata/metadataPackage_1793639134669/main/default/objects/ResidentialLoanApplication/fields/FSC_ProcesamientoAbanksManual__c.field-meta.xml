@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ProcesamientoAbanksManual__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Se fija al iniciar una etapa manual a cuenta. Conserva ese circuito aunque se vuelva a habilitar la automatización. Campo administrado por Apex.</description>
+    <label>Procesamiento manual en Abanks</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

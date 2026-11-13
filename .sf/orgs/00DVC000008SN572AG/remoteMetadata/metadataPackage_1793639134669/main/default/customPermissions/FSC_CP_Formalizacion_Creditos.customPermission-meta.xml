@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomPermission xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Identifica a los usuarios responsables de la formalización de créditos.</description>
+    <isLicensed>false</isLicensed>
+    <label>Rol - Formalización Créditos</label>
+</CustomPermission>

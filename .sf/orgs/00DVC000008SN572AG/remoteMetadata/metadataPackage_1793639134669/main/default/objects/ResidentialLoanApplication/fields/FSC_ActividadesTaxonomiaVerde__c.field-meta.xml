@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ActividadesTaxonomiaVerde__c</fullName>
+    <label>Actividad Económica Taxonomía Verde</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>0</fullName>
+                <default>true</default>
+                <label>No Aplica</label>
+            </value>
+            <value>
+                <fullName>100</fullName>
+                <default>false</default>
+                <label>Gestión Integral de Residuos y Captura de Emisiones</label>
+            </value>
+            <value>
+                <fullName>101</fullName>
+                <default>false</default>
+                <label>Digestión anaerobia de lodos</label>
+            </value>
+            <value>
+                <fullName>102</fullName>
+                <default>false</default>
+                <label>Recolección selectiva y transporte de residuos no peligrosos en la fracción segregada en origen</label>
+            </value>
+            <value>
+                <fullName>103</fullName>
+                <default>false</default>
+                <label>Digestión anaerobia de residuos orgánicos</label>
+            </value>
+            <value>
+                <fullName>104</fullName>
+                <default>false</default>
+                <label>Compostaje de residuos orgánicos</label>
+            </value>
+            <value>
+                <fullName>105</fullName>
+                <default>false</default>
+                <label>Recuperación de materiales a partir de residuos no peligrosos</label>
+            </value>
+            <value>
+                <fullName>106</fullName>
+                <default>false</default>
+                <label>Captura y utilización de gas de rellenos sanitarios</label>
+            </value>
+            <value>
+                <fullName>107</fullName>
+                <default>false</default>
+                <label>Proyectos de conversión de residuos a energía</label>
+            </value>
+            <value>
+                <fullName>108</fullName>
+                <default>false</default>
+                <label>Captura de GEI</label>
+            </value>
+            <value>
+                <fullName>109</fullName>
+                <default>false</default>
+                <label>Transporte de GEI</label>
+            </value>
+            <value>
+                <fullName>110</fullName>
+                <default>false</default>
+                <label>Secuestro permanente de GEI capturado</label>
+            </value>
+            <value>
+                <fullName>111</fullName>
+                <default>false</default>
+                <label>111 - Servicios profesionales y medidas individuales</label>
+            </value>
+            <value>
+                <fullName>200</fullName>
+                <default>false</default>
+                <label>Energía</label>
+            </value>
+            <value>
+                <fullName>201</fullName>
+                <default>false</default>
+                <label>Generación de electricidad a partir de energía solar</label>
+            </value>
+            <value>
+                <fullName>202</fullName>
+                <default>false</default>
+                <label>Generación de electricidad a partir de energía solar concentrada</label>
+            </value>
+            <value>
+                <fullName>203</fullName>
+                <default>false</default>
+                <label>Generación de electricidad a partir de energía eólica</label>
+            </value>
+            <value>
+                <fullName>204</fullName>
+                <default>false</default>
+                <label>Generación de electricidad a partir de energía del océano</label>
+            </value>
+            <value>
+                <fullName>205</fullName>
+                <default>false</default>
+                <label>Generación de electricidad a partir de energía hidroeléctrica</label>
+            </value>
+            <value>
+                <fullName>206</fullName>
+                <default>false</default>
+                <label>Generación de energía a partir de energía geotérmica</label>
+            </value>
+            <value>
+                <fullName>207</fullName>
+                <default>false</default>
+                <label>Generación de electricidad a partir de bioenergía (biomasa, biogás y biocombustibles)</label>
+            </value>
+            <value>
+                <fullName>208</fullName>
+                <default>false</default>
+                <label>Transmisión y distribución de electricidad de fuentes renovables</label>
+            </value>
+            <value>
+                <fullName>209</fullName>
+                <default>false</default>
+                <label>Almacenamiento de electricidad de fuentes renovables</label>
+            </value>
+            <value>
+                <fullName>210</fullName>
+                <default>false</default>
+                <label>Almacenamiento de energía térmica</label>
+            </value>
+            <value>
+                <fullName>211</fullName>
+                <default>false</default>
+                <label>Almacenamiento de hidrógeno verde</label>
+            </value>
+            <value>
+                <fullName>212</fullName>
+                <default>false</default>
+                <label>Fabricación de biogás y biocombustibles para uso en transporte y biolíquidos</label>
+            </value>
+            <value>
+                <fullName>213</fullName>
+                <default>false</default>
+                <label>Distritos de calefacción y enfriamiento</label>
+            </value>
+            <value>
+                <fullName>214</fullName>
+                <default>false</default>
+                <label>Redes de transmisión y distribución para gases renovables y bajos en carbono</label>
+            </value>
+            <value>
+                <fullName>215</fullName>
+                <default>false</default>
+                <label>Instalación y funcionamiento de bombas de calor eléctricas</label>
+            </value>
+            <value>
+                <fullName>216</fullName>
+                <default>false</default>
+                <label>Cogeneración de calor / frío y energía a partir de energía solar concentrada</label>
+            </value>
+            <value>
+                <fullName>217</fullName>
+                <default>false</default>
+                <label>Cogeneración de calor / frío y energía a partir de energía geotérmica</label>
+            </value>
+            <value>
+                <fullName>218</fullName>
+                <default>false</default>
+                <label>Cogeneración de calor / frío y energía a partir de bioenergía (biomasa, biogás, biocombustibles)</label>
+            </value>
+            <value>
+                <fullName>219</fullName>
+                <default>false</default>
+                <label>Generación de calor / frío mediante calor residual</label>
+            </value>
+            <value>
+                <fullName>220</fullName>
+                <default>false</default>
+                <label>Fabricación de hidrógeno verde</label>
+            </value>
+            <value>
+                <fullName>221</fullName>
+                <default>false</default>
+                <label>221 - Servicios profesionales y medidas individuales</label>
+            </value>
+            <value>
+                <fullName>300</fullName>
+                <default>false</default>
+                <label>Construcción</label>
+            </value>
+            <value>
+                <fullName>301</fullName>
+                <default>false</default>
+                <label>Construcción de nuevos edificios</label>
+            </value>
+            <value>
+                <fullName>302</fullName>
+                <default>false</default>
+                <label>Renovación de edificios</label>
+            </value>
+            <value>
+                <fullName>303</fullName>
+                <default>false</default>
+                <label>Medidas individuales y servicios profesionales</label>
+            </value>
+            <value>
+                <fullName>304</fullName>
+                <default>false</default>
+                <label>Adquisición y propiedad de edificios</label>
+            </value>
+            <value>
+                <fullName>400</fullName>
+                <default>false</default>
+                <label>Transporte</label>
+            </value>
+            <value>
+                <fullName>401</fullName>
+                <default>false</default>
+                <label>Transporte público urbano</label>
+            </value>
+            <value>
+                <fullName>402</fullName>
+                <default>false</default>
+                <label>Micromovilidad</label>
+            </value>
+            <value>
+                <fullName>403</fullName>
+                <default>false</default>
+                <label>Infraestructura para el transporte</label>
+            </value>
+            <value>
+                <fullName>404</fullName>
+                <default>false</default>
+                <label>Transporte interurbano (carga y pasajeros)</label>
+            </value>
+            <value>
+                <fullName>405</fullName>
+                <default>false</default>
+                <label>Transporte particular</label>
+            </value>
+            <value>
+                <fullName>406</fullName>
+                <default>false</default>
+                <label>406 - Servicios profesionales y medidas individuales</label>
+            </value>
+            <value>
+                <fullName>500</fullName>
+                <default>false</default>
+                <label>Suministro y Tratamiento de Agua</label>
+            </value>
+            <value>
+                <fullName>501</fullName>
+                <default>false</default>
+                <label>Sistemas de acueducto</label>
+            </value>
+            <value>
+                <fullName>502</fullName>
+                <default>false</default>
+                <label>Sistemas de alcantarillado sanitario y combinados</label>
+            </value>
+            <value>
+                <fullName>503</fullName>
+                <default>false</default>
+                <label>Sistemas de tratamiento de aguas residuales</label>
+            </value>
+            <value>
+                <fullName>504</fullName>
+                <default>false</default>
+                <label>Inversiones para el uso eficiente del agua</label>
+            </value>
+            <value>
+                <fullName>505</fullName>
+                <default>false</default>
+                <label>505 - Servicios profesionales y medidas individuales</label>
+            </value>
+            <value>
+                <fullName>600</fullName>
+                <default>false</default>
+                <label>Industria</label>
+            </value>
+            <value>
+                <fullName>601</fullName>
+                <default>false</default>
+                <label>Fabricación de tecnologías bajas en carbono</label>
+            </value>
+            <value>
+                <fullName>602</fullName>
+                <default>false</default>
+                <label>Fabricación de cemento</label>
+            </value>
+            <value>
+                <fullName>603</fullName>
+                <default>false</default>
+                <label>Fabricación de aluminio</label>
+            </value>
+            <value>
+                <fullName>604</fullName>
+                <default>false</default>
+                <label>Fabricación de hierro y acero</label>
+            </value>
+            <value>
+                <fullName>605</fullName>
+                <default>false</default>
+                <label>Fabricación de cloro</label>
+            </value>
+            <value>
+                <fullName>606</fullName>
+                <default>false</default>
+                <label>Fabricación de otros productos químicos básicos orgánicos</label>
+            </value>
+            <value>
+                <fullName>607</fullName>
+                <default>false</default>
+                <label>Fabricación de plásticos en forma primaria</label>
+            </value>
+            <value>
+                <fullName>608</fullName>
+                <default>false</default>
+                <label>608 - Servicios profesionales y medidas individuales</label>
+            </value>
+            <value>
+                <fullName>609</fullName>
+                <default>false</default>
+                <label>Fabricación, instalación y servicios asociados para las tecnologías de control de fugas en sistemas de suministro de aguas</label>
+            </value>
+            <value>
+                <fullName>700</fullName>
+                <default>false</default>
+                <label>Tecnologías de la Información y las Comunicaciones</label>
+            </value>
+            <value>
+                <fullName>701</fullName>
+                <default>false</default>
+                <label>Procesamiento de datos, hosting y actividades relacionadas</label>
+            </value>
+            <value>
+                <fullName>702</fullName>
+                <default>false</default>
+                <label>Soluciones basadas en datos para la mitigación y adaptación al cambio climático</label>
+            </value>
+            <value>
+                <fullName>703</fullName>
+                <default>false</default>
+                <label>703 - Servicios profesionales y medidas individuales</label>
+            </value>
+            <value>
+                <fullName>704</fullName>
+                <default>false</default>
+                <label>Suministro de soluciones basadas en datos de IT/OT para la reducción de fugas</label>
+            </value>
+            <value>
+                <fullName>800</fullName>
+                <default>false</default>
+                <label>Suministro de Agua, Alcantarillado, Gestión de Aguas Residuales y Remediación</label>
+            </value>
+            <value>
+                <fullName>801</fullName>
+                <default>false</default>
+                <label>Suministro de agua</label>
+            </value>
+            <value>
+                <fullName>802</fullName>
+                <default>false</default>
+                <label>Tratamiento de aguas residuales urbanas</label>
+            </value>
+            <value>
+                <fullName>803</fullName>
+                <default>false</default>
+                <label>Sistemas de drenaje urbano sostenible</label>
+            </value>
+            <value>
+                <fullName>900</fullName>
+                <default>false</default>
+                <label>Gestión de Desastres</label>
+            </value>
+            <value>
+                <fullName>901</fullName>
+                <default>false</default>
+                <label>Soluciones basadas en la naturaleza para la prevención y protección de riesgos de inundaciones y sequías</label>
+            </value>
+            <value>
+                <fullName>1000</fullName>
+                <default>false</default>
+                <label>Activos Naturales y Actividades Económicas de Protección y Restauración Ambiental</label>
+            </value>
+            <value>
+                <fullName>1001</fullName>
+                <default>false</default>
+                <label>Conservación, incluida la restauración, de hábitats, ecosistemas y especies.</label>
+            </value>
+            <value>
+                <fullName>9999</fullName>
+                <default>false</default>
+                <label>Actividad o activo económico no identificado</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ColaSubgerentes_Consumo_RLA</fullName>
+    <columns>Name</columns>
+    <columns>FSC_InstanciaAprobacion__c</columns>
+    <columns>FSC_Subestado__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RecordType</field>
+        <operation>equals</operation>
+        <value>ResidentialLoanApplication.FSC_Solicitud_Credito_Consumo</value>
+    </filters>
+    <filters>
+        <field>FSC_Subestado__c</field>
+        <operation>equals</operation>
+        <value>Análisis de crédito</value>
+    </filters>
+    <label>Subgerentes de Análisis - Consumo</label>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

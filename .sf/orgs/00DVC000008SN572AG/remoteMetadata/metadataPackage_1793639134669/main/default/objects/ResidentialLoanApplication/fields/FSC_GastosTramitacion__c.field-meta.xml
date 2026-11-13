@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_GastosTramitacion__c</fullName>
+    <formula>IF(
+    (FSC_MontoDesembolsar__c * 0.0115) &lt; 1000.00, 
+    1000.00, 
+    FSC_MontoDesembolsar__c * 0.0115
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>GASTOS DE TRAMITACION</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Currency</type>
+</CustomField>

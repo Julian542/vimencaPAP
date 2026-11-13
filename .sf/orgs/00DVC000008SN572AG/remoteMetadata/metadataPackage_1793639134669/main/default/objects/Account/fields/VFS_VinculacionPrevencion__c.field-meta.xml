@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VFS_VinculacionPrevencion__c</fullName>
+    <defaultValue>false</defaultValue>
+    <inlineHelpText>¿La documentación e informaciones aportadas por el cliente están completas de acuerdo a lo establecido en las Políticas de Vinculación y Prevención de Lavado de Activos y Financiamiento del Terrorismo?</inlineHelpText>
+    <label>Vinculación y Prevención</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

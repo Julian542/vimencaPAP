@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OmniDataTransform xmlns="http://soap.sforce.com/2006/04/metadata">
-    <active>false</active>
+    <active>true</active>
     <assignmentRulesUsed>false</assignmentRulesUsed>
     <deletedOnSuccess>false</deletedOnSuccess>
     <errorIgnored>false</errorIgnored>
     <expectedInputJson>{
+  &quot;ContextId&quot; : null,
+  &quot;timeStamp&quot; : null,
+  &quot;userId&quot; : null,
+  &quot;userName&quot; : null,
+  &quot;userProfile&quot; : null,
+  &quot;userTimeZone&quot; : null,
+  &quot;vlcPersistentComponent&quot; : { },
   &quot;vlcTimeTracking&quot; : {
     &quot;DRGetAccountDetails&quot; : null
-  },
-  &quot;vlcPersistentComponent&quot; : { },
-  &quot;userTimeZone&quot; : null,
-  &quot;userProfile&quot; : null,
-  &quot;userName&quot; : null,
-  &quot;userId&quot; : null,
-  &quot;timeStamp&quot; : null,
-  &quot;ContextId&quot; : null
+  }
 }</expectedInputJson>
     <expectedOutputJson>{
   &quot;Account&quot; : {
-    &quot;Name&quot; : &quot;&quot;,
-    &quot;LastName&quot; : &quot;&quot;,
-    &quot;IdentificationType&quot; : &quot;&quot;,
-    &quot;IdentificationNumber&quot; : &quot;&quot;,
-    &quot;Nationality&quot; : &quot;&quot;,
-    &quot;Sex&quot; : &quot;&quot;,
-    &quot;MaritalStatus&quot; : &quot;&quot;,
-    &quot;TypeHousing&quot; : &quot;&quot;,
-    &quot;Phone&quot; : &quot;&quot;,
-    &quot;MobilePhone&quot; : &quot;&quot;,
     &quot;Address&quot; : &quot;&quot;,
-    &quot;Email&quot; : &quot;&quot;,
     &quot;CompanyName&quot; : &quot;&quot;,
+    &quot;Email&quot; : &quot;&quot;,
     &quot;FantasyName&quot; : &quot;&quot;,
-    &quot;RNC&quot; : &quot;&quot;
+    &quot;IdentificationNumber&quot; : &quot;&quot;,
+    &quot;IdentificationType&quot; : &quot;&quot;,
+    &quot;LastName&quot; : &quot;&quot;,
+    &quot;MaritalStatus&quot; : &quot;&quot;,
+    &quot;MobilePhone&quot; : &quot;&quot;,
+    &quot;Name&quot; : &quot;&quot;,
+    &quot;Nationality&quot; : &quot;&quot;,
+    &quot;Phone&quot; : &quot;&quot;,
+    &quot;RNC&quot; : &quot;&quot;,
+    &quot;Sex&quot; : &quot;&quot;,
+    &quot;TypeHousing&quot; : &quot;&quot;
   }
 }</expectedOutputJson>
     <fieldLevelSecurityEnabled>false</fieldLevelSecurityEnabled>
@@ -43,16 +43,16 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>FSCGetAccountDetailsCustom1122</globalKey>
-        <inputFieldName>Account:ACC_NumIdentificacion__c</inputFieldName>
+        <globalKey>FSCGetAccountDetailsCustom7389</globalKey>
+        <inputFieldName>Account:ACC_RNC__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hy</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hy</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Ih6t</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6t</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
         <outputFieldFormat>Integer</outputFieldFormat>
-        <outputFieldName>Account:IdentificationNumber</outputFieldName>
+        <outputFieldName>AccountJ:RNC</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <upsertKey>false</upsertKey>
@@ -60,294 +60,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>c7a20f28-72b9-4500-8f9a-10f1293fcd18</globalKey>
-        <inputFieldName>Account:ACC_Actividad_Economica__r.Name</inputFieldName>
+        <globalKey>3a0ef864-6efb-418d-bafd-4a91f30c1835</globalKey>
+        <inputFieldName>Account:Name</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hw</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hw</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Ih6s</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6s</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:ACC_Actividad_Economica__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>FSCGetAccountDetailsCustom7405</globalKey>
-        <inputFieldName>Account:Tipo_de_vivienda__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hx</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hx</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:TypeHousing</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>FSCGetAccountDetailsCustom8104</globalKey>
-        <inputFieldName>Account:ACC_Estado_Civil__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hq</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hq</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:MaritalStatus</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>FSCGetAccountDetailsCustom2047</globalKey>
-        <inputFieldName>Account:Id</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hr</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hr</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:Id</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>8a911cfb-e53d-4e54-86cb-e999f0ee37a9</globalKey>
-        <inputFieldName>Account:ACC_Empresa_Grupo__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Ho</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Ho</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:ACC_Empresa_Grupo__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>59615e49-ab52-4cac-b1ad-f71570b68740</globalKey>
-        <inputFieldName>Account:RecordType.DeveloperName</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hp</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hp</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:RecordType:DeveloperName</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>FSCGetAccountDetailsCustom4865</globalKey>
-        <inputFieldName>Account:ACC_Genero__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hu</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hu</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:Sex</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>d1da2c40-755f-473a-bcc4-4b7c7cad7854</globalKey>
-        <inputFieldName>Account:PersonBirthdate</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hv</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hv</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:PersonBirthdate</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>FSCGetAccountDetailsCustom9782</globalKey>
-        <inputFieldName>Account:ACC_TipoIdentificacion__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hs</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hs</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:IdentificationType</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>FSCGetAccountDetailsCustom8037</globalKey>
-        <inputFieldName>Account:FirstName</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Ht</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Ht</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:Name</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>7ebcc9cc-c412-4c85-a94b-b3286ac0eec8</globalKey>
-        <inputFieldName>Account:Tiempo_en_Vivienda__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hi</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hi</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:Tiempo_en_Vivienda__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>fcc7f005-e3ef-462e-834c-67bd4b735fbc</globalKey>
-        <inputFieldName>Account:ACC_N_Dependientes__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hj</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hj</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:ACC_N_Dependientes__c</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>FSCGetAccountDetailsCustom4560</globalKey>
-        <inputFieldName>Account:ACC_Nombre_Corto_Comercial__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hg</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hg</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>AccountJ:FantasyName</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>3ac8f12e-7b61-4cf2-b4f3-be22690e7d51</globalKey>
-        <inputFieldName>CleanAddress</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hh</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hh</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:Address</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <transformValuesMappings>{ }</transformValuesMappings>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>FSCGetAccountDetailsCustom1508</globalKey>
-        <inputFieldName>Account:Actividad_Economica_Name__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hm</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hm</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>AccountJ:CompanyName</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>FSCGetAccountDetailsCustom2676</globalKey>
-        <inputFieldName>Account:LastName</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hn</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hn</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:LastName</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>FSCGetAccountDetailsCustom2346</globalKey>
-        <inputFieldName>Account:ACC_Telefono_Movil__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hk</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hk</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:Phone</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>d6a185a2-1fe8-49ae-b81e-abe821bad086</globalKey>
-        <inputFieldName>Account:ACC_Categoria_Riesgo_Cliente__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hl</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hl</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:ACC_Categoria_Riesgo_Cliente__c</outputFieldName>
+        <outputFieldName>Account:FullName</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <transformValuesMappings>{ }</transformValuesMappings>
@@ -372,8 +93,8 @@
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Ha</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Ha</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Ih6r</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6r</omniDataTransformationId>
         <outputCreationSequence>0.0</outputCreationSequence>
         <outputFieldName>Formula</outputFieldName>
         <outputObjectName>Formula</outputObjectName>
@@ -383,15 +104,15 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>3a0ef864-6efb-418d-bafd-4a91f30c1835</globalKey>
-        <inputFieldName>Account:Name</inputFieldName>
+        <globalKey>d6a185a2-1fe8-49ae-b81e-abe821bad086</globalKey>
+        <inputFieldName>Account:ACC_Categoria_Riesgo_Cliente__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hb</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hb</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Ih6q</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6q</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:FullName</outputFieldName>
+        <outputFieldName>Account:ACC_Categoria_Riesgo_Cliente__c</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <transformValuesMappings>{ }</transformValuesMappings>
@@ -400,50 +121,18 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>FSCGetAccountDetailsCustom7389</globalKey>
-        <inputFieldName>Account:ACC_RNC__c</inputFieldName>
+        <globalKey>e0e4b6f5-7a44-4969-8a14-b633fd551b1a</globalKey>
+        <inputFieldName>Account:ACC_Tipo_Cliente_PF__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4He</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4He</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Ih6x</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6x</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldFormat>Integer</outputFieldFormat>
-        <outputFieldName>AccountJ:RNC</outputFieldName>
+        <outputFieldName>Account:TipoClientePF</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>FSCGetAccountDetailsCustom2572</globalKey>
-        <inputFieldName>Account:ACC_Nacionalidad__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hf</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hf</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:Nationality</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
-        <upsertKey>false</upsertKey>
-    </omniDataTransformItem>
-    <omniDataTransformItem>
-        <disabled>false</disabled>
-        <filterGroup>0.0</filterGroup>
-        <globalKey>FSCGetAccountDetailsCustom1925</globalKey>
-        <inputFieldName>Account:ACC_Correo_Electronico_Cliente__c</inputFieldName>
-        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
-        <linkedObjectSequence>0.0</linkedObjectSequence>
-        <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hc</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hc</omniDataTransformationId>
-        <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:Email</outputFieldName>
-        <outputObjectName>json</outputObjectName>
-        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
         <upsertKey>false</upsertKey>
     </omniDataTransformItem>
     <omniDataTransformItem>
@@ -457,8 +146,8 @@
         <inputObjectQuerySequence>1.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4Hd</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4Hd</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Ih6w</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6w</omniDataTransformationId>
         <outputCreationSequence>0.0</outputCreationSequence>
         <outputFieldName>Account</outputFieldName>
         <outputObjectName>json</outputObjectName>
@@ -468,15 +157,342 @@
     <omniDataTransformItem>
         <disabled>false</disabled>
         <filterGroup>0.0</filterGroup>
-        <globalKey>e0e4b6f5-7a44-4969-8a14-b633fd551b1a</globalKey>
-        <inputFieldName>Account:ACC_Tipo_Cliente_PF__c</inputFieldName>
+        <globalKey>FSCGetAccountDetailsCustom1925</globalKey>
+        <inputFieldName>Account:ACC_Correo_Electronico_Cliente__c</inputFieldName>
         <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
         <linkedObjectSequence>0.0</linkedObjectSequence>
         <name>FSCGetAccountDetails</name>
-        <omniDataTransformation>0kdVC000000I4HZ</omniDataTransformation>
-        <omniDataTransformationId>0kdVC000000I4HZ</omniDataTransformationId>
+        <omniDataTransformation>0kdVC000000Ih6v</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6v</omniDataTransformationId>
         <outputCreationSequence>1.0</outputCreationSequence>
-        <outputFieldName>Account:TipoClientePF</outputFieldName>
+        <outputFieldName>Account:Email</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>FSCGetAccountDetailsCustom2572</globalKey>
+        <inputFieldName>Account:ACC_Nacionalidad__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6u</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6u</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:Nationality</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>FSCGetAccountDetailsCustom4560</globalKey>
+        <inputFieldName>Account:ACC_Nombre_Corto_Comercial__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6l</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6l</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>AccountJ:FantasyName</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>fcc7f005-e3ef-462e-834c-67bd4b735fbc</globalKey>
+        <inputFieldName>Account:ACC_N_Dependientes__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6k</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6k</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:ACC_N_Dependientes__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>7ebcc9cc-c412-4c85-a94b-b3286ac0eec8</globalKey>
+        <inputFieldName>Account:Tiempo_en_Vivienda__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6j</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6j</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:Tiempo_en_Vivienda__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>FSCGetAccountDetailsCustom8037</globalKey>
+        <inputFieldName>Account:FirstName</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6i</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6i</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:Name</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>FSCGetAccountDetailsCustom2346</globalKey>
+        <inputFieldName>Account:ACC_Telefono_Movil__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6p</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6p</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:Phone</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>FSCGetAccountDetailsCustom2676</globalKey>
+        <inputFieldName>Account:LastName</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6o</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6o</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:LastName</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>FSCGetAccountDetailsCustom1508</globalKey>
+        <inputFieldName>Account:Actividad_Economica_Name__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6n</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6n</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>AccountJ:CompanyName</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>3ac8f12e-7b61-4cf2-b4f3-be22690e7d51</globalKey>
+        <inputFieldName>CleanAddress</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6m</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6m</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:Address</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>59615e49-ab52-4cac-b1ad-f71570b68740</globalKey>
+        <inputFieldName>Account:RecordType.DeveloperName</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6d</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6d</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:RecordType:DeveloperName</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>8a911cfb-e53d-4e54-86cb-e999f0ee37a9</globalKey>
+        <inputFieldName>Account:ACC_Empresa_Grupo__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6c</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6c</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:ACC_Empresa_Grupo__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>FSCGetAccountDetailsCustom2047</globalKey>
+        <inputFieldName>Account:Id</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6b</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6b</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:Id</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>FSCGetAccountDetailsCustom8104</globalKey>
+        <inputFieldName>Account:ACC_Estado_Civil__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6a</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6a</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:MaritalStatus</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>FSCGetAccountDetailsCustom9782</globalKey>
+        <inputFieldName>Account:ACC_TipoIdentificacion__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6h</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6h</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:IdentificationType</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>d1da2c40-755f-473a-bcc4-4b7c7cad7854</globalKey>
+        <inputFieldName>Account:PersonBirthdate</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6g</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6g</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:PersonBirthdate</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>c9868dc7-98dc-4e68-bce5-967436214027</globalKey>
+        <inputFieldName>Account:Suffix</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6f</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6f</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:Suffix</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>FSCGetAccountDetailsCustom4865</globalKey>
+        <inputFieldName>Account:ACC_Genero__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6e</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6e</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:Sex</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>FSCGetAccountDetailsCustom7405</globalKey>
+        <inputFieldName>Account:Tipo_de_vivienda__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6Z</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6Z</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:TypeHousing</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>c7a20f28-72b9-4500-8f9a-10f1293fcd18</globalKey>
+        <inputFieldName>Account:ACC_Actividad_Economica__r.Name</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6Y</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6Y</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:ACC_Actividad_Economica__c</outputFieldName>
+        <outputObjectName>json</outputObjectName>
+        <requiredForUpsert>false</requiredForUpsert>
+        <transformValuesMappings>{ }</transformValuesMappings>
+        <upsertKey>false</upsertKey>
+    </omniDataTransformItem>
+    <omniDataTransformItem>
+        <disabled>false</disabled>
+        <filterGroup>0.0</filterGroup>
+        <globalKey>FSCGetAccountDetailsCustom1122</globalKey>
+        <inputFieldName>Account:ACC_NumIdentificacion__c</inputFieldName>
+        <inputObjectQuerySequence>0.0</inputObjectQuerySequence>
+        <linkedObjectSequence>0.0</linkedObjectSequence>
+        <name>FSCGetAccountDetails</name>
+        <omniDataTransformation>0kdVC000000Ih6X</omniDataTransformation>
+        <omniDataTransformationId>0kdVC000000Ih6X</omniDataTransformationId>
+        <outputCreationSequence>1.0</outputCreationSequence>
+        <outputFieldName>Account:IdentificationNumber</outputFieldName>
         <outputObjectName>json</outputObjectName>
         <requiredForUpsert>false</requiredForUpsert>
         <transformValuesMappings>{ }</transformValuesMappings>

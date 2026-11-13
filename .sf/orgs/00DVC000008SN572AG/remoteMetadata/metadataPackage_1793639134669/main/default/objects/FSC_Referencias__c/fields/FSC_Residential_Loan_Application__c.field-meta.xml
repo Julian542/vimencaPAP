@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Residential_Loan_Application__c</fullName>
+    <label>Residential Loan Application</label>
+    <referenceTo>ResidentialLoanApplication</referenceTo>
+    <relationshipLabel>Referencias</relationshipLabel>
+    <relationshipName>FSC_Referencias</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

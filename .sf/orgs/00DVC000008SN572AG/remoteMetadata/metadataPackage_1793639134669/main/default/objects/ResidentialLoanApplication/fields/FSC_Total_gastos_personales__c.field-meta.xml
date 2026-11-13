@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Total_gastos_personales__c</fullName>
+    <formula>FSC_Alquiler_Personales__c + FSC_Servicios_basicos_Personales__c + FSC_Alimentos__c + FSC_Educacion__c + FSC_Transporte__c + FSC_Seguros_Personales__c + FSC_Otros_Personales__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Total gastos personales</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Currency</type>
+</CustomField>

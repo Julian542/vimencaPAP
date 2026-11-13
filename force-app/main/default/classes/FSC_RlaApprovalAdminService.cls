@@ -18,6 +18,8 @@ public without sharing class FSC_RlaApprovalAdminService {
 			throw new AuraHandledException('Solicitud requerida.');
 		}
 
+		if (FSC_InstanciasCreditoService.reasignarAnalisis(residentialLoanApplicationId, true, null))
+			return;
 		recallApproval(residentialLoanApplicationId);
 		markSupervisorReview(residentialLoanApplicationId);
 	}
@@ -29,12 +31,24 @@ public without sharing class FSC_RlaApprovalAdminService {
 		if (String.isBlank(motivo)) {
 			throw new AuraHandledException('Motivo requerido.');
 		}
-		if (motivo.length() > 255) {
-			throw new AuraHandledException('Motivo excede 255 caracteres.');
+		if (motivo.length() > 2000) {
+			throw new AuraHandledException('Motivo excede 2000 caracteres.');
 		}
 
+		if (FSC_InstanciasCreditoService.reasignarAnalisis(residentialLoanApplicationId, false, motivo))
+			return;
 		recallApproval(residentialLoanApplicationId);
 		markReturnToAnalyst(residentialLoanApplicationId, motivo);
+		ResidentialLoanApplication solicitud = [
+			SELECT FSC_InstanciaAprobacion__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :residentialLoanApplicationId
+		];
+		if (String.isNotBlank(solicitud.FSC_InstanciaAprobacion__c)) {
+			FSC_InstanciasCreditoService.Entrada entrada = new FSC_InstanciasCreditoService.Entrada();
+			entrada.solicitudId = residentialLoanApplicationId;
+			FSC_InstanciasCreditoService.iniciar(new List<FSC_InstanciasCreditoService.Entrada>{ entrada });
+		}
 	}
 
 	public static void returnToBusiness(Id residentialLoanApplicationId, String motivo, String permisoOrigen) {
@@ -44,8 +58,8 @@ public without sharing class FSC_RlaApprovalAdminService {
 		if (String.isBlank(motivo)) {
 			throw new AuraHandledException('Motivo requerido.');
 		}
-		if (motivo.length() > 255) {
-			throw new AuraHandledException('Motivo excede 255 caracteres.');
+		if (motivo.length() > 2000) {
+			throw new AuraHandledException('Motivo excede 2000 caracteres.');
 		}
 
 		recallApproval(residentialLoanApplicationId);
@@ -67,6 +81,15 @@ public without sharing class FSC_RlaApprovalAdminService {
 			throw new AuraHandledException('Solicitud requerida.');
 		}
 
+		ResidentialLoanApplication solicitud = [
+			SELECT FSC_CreditoAprobado__c, FSC_InstanciaAprobacion__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :residentialLoanApplicationId
+		];
+		if (solicitud.FSC_CreditoAprobado__c && String.isNotBlank(solicitud.FSC_InstanciaAprobacion__c)) {
+			update new ResidentialLoanApplication(Id = residentialLoanApplicationId, FSC_Subestado__c = SUBESTADO_GENERACION_PAGARES);
+			return;
+		}
 		recallApproval(residentialLoanApplicationId, comentarioAuditoria);
 		update new ResidentialLoanApplication(
 			Id = residentialLoanApplicationId,
@@ -162,6 +185,7 @@ public without sharing class FSC_RlaApprovalAdminService {
 		update new ResidentialLoanApplication(
 			Id = residentialLoanApplicationId,
 			FSC_DebeRevisarSupervisor__c = false,
+			FSC_DebeRevisarComite__c = false,
 			FSC_ObservacionSupervisor__c = motivo
 		);
 	}
@@ -170,6 +194,8 @@ public without sharing class FSC_RlaApprovalAdminService {
 	private static void markReturnToBusiness(Id residentialLoanApplicationId, String motivo, String permisoOrigen) {
 		ResidentialLoanApplication rlaUpd = new ResidentialLoanApplication(
 			Id = residentialLoanApplicationId,
+			FSC_InstanciaAprobacion__c = null,
+			FSC_RevisionAnalistaCompleta__c = false,
 			FSC_DebeRevisarComite__c = false,
 			FSC_DebeRevisarSupervisor__c = false,
 			FSC_Doc_Completa_Analisis__c = false,

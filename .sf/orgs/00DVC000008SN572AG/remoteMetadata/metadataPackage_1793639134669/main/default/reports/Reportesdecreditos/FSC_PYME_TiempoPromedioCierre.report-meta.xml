@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <chart>
+        <backgroundColor1>#FFFFFF</backgroundColor1>
+        <backgroundColor2>#FFFFFF</backgroundColor2>
+        <backgroundFadeDir>Diagonal</backgroundFadeDir>
+        <chartSummaries>
+            <aggregate>Average</aggregate>
+            <axisBinding>y</axisBinding>
+            <column>ResidentialLoanApplication$FSC_DiasCierreGanado__c</column>
+        </chartSummaries>
+        <chartType>Line</chartType>
+        <enableHoverLabels>true</enableHoverLabels>
+        <expandOthers>true</expandOthers>
+        <groupingColumn>ResidentialLoanApplication$FSC_FechaCierreGanada__c</groupingColumn>
+        <location>CHART_BOTTOM</location>
+        <showAxisLabels>true</showAxisLabels>
+        <showPercentage>false</showPercentage>
+        <showTotal>false</showTotal>
+        <showValues>true</showValues>
+        <size>Medium</size>
+        <summaryAxisRange>Auto</summaryAxisRange>
+        <textColor>#000000</textColor>
+        <textSize>12</textSize>
+        <title>PYME - Tiempo promedio de cierre</title>
+        <titleColor>#000000</titleColor>
+        <titleSize>18</titleSize>
+    </chart>
+    <columns>
+        <field>ResidentialLoanApplication$Name</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Average</aggregateTypes>
+        <field>ResidentialLoanApplication$FSC_DiasCierreGanado__c</field>
+    </columns>
+    <description>Promedio de días desde la creación hasta el cierre ganado para solicitudes PYME cerradas en el trimestre actual.</description>
+    <filter>
+        <criteriaItems>
+            <column>ResidentialLoanApplication$RecordType</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>ResidentialLoanApplication.FSC_Solicitud_Credito_PYME</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ResidentialLoanApplication$Status</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Cerrada Ganada</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Month</dateGranularity>
+        <field>ResidentialLoanApplication$FSC_FechaCierreGanada__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>PYME - Tiempo promedio cierre</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>FGC_SolicitudDeCredito__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>ResidentialLoanApplication$FSC_FechaCierreGanada__c</dateColumn>
+        <interval>INTERVAL_CURRENTQ</interval>
+    </timeFrameFilter>
+</Report>

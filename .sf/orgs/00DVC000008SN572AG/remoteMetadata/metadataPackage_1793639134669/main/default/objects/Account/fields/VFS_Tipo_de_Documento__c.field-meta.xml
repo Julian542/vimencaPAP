@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VFS_Tipo_de_Documento__c</fullName>
+    <label>Tipo de Documento</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Cuenta de Ahorro</fullName>
+                <default>false</default>
+                <label>Cuenta de Ahorro</label>
+            </value>
+            <value>
+                <fullName>Cuenta Corriente</fullName>
+                <default>false</default>
+                <label>Cuenta Corriente</label>
+            </value>
+            <value>
+                <fullName>Tarjeta de Credito</fullName>
+                <default>false</default>
+                <label>Tarjeta de Credito</label>
+            </value>
+            <value>
+                <fullName>Tarjeta de Prepago</fullName>
+                <default>false</default>
+                <label>Tarjeta de Prepago</label>
+            </value>
+            <value>
+                <fullName>IB y Vimencash</fullName>
+                <default>false</default>
+                <label>IB y Vimencash</label>
+            </value>
+            <value>
+                <fullName>CAD</fullName>
+                <default>false</default>
+                <label>CAD</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

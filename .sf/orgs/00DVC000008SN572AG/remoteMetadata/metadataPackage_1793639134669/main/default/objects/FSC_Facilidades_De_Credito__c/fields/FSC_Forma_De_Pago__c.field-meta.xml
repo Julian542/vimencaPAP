@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Forma_De_Pago__c</fullName>
+    <label>Forma de Pago</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Cuotas mensuales, iguales y consecutivas, contentivas de capital e intereses cada una</fullName>
+                <default>true</default>
+                <label>Cuotas mensuales, iguales y consecutivas, contentivas de capital e intereses cada una</label>
+            </value>
+            <value>
+                <fullName>Intereses mensuales sobre saldos insolutos de capital (Capital a vencimiento)</fullName>
+                <default>false</default>
+                <label>Intereses mensuales sobre saldos insolutos de capital (Capital a vencimiento)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

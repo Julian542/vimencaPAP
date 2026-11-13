@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>FSC Financial Accounts Table</masterLabel>
+    <description>Muestra los FinServRecords existentes del OmniScript en una tabla read-only.</description>
+    <runtimeNamespace>omnistudio</runtimeNamespace>
+    <targets>
+        <target>lightning__AppPage</target>
+    </targets>
+</LightningComponentBundle>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Validacion_Empresa_Grupo_PF</fullName>
+    <active>true</active>
+    <description>Prevención a nivel de registro de que actualicen valores de campos.</description>
+    <errorConditionFormula>AND(
+    $Label.Validaciones == &apos;Si&apos;,
+    ACC_Persona_Fisica__c = true,
+    RecordType.DeveloperName == &apos;PersonAccount&apos;,
+    ACC_Es_Empleado_Vimenca__c = false,
+        OR
+        ( ISCHANGED( ACC_Empresa_Grupo__c )
+)
+)</errorConditionFormula>
+    <errorMessage>Marca el campo &quot;Es empleado Vimenca&quot; al rellenar el campo &quot;Empresa Grupo&quot;</errorMessage>
+</ValidationRule>

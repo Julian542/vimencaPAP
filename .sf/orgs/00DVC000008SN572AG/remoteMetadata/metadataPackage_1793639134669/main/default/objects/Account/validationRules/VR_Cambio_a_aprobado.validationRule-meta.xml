@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Cambio_a_aprobado</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND (
+				ISCHANGED( ACC_Estado__c), 
+				IsPersonAccount = False,
+				ISPICKVAL(ACC_Estado__c, &apos;Aprobado&apos;),
+				 Doc_legal_no_aprobada__c &gt; 0)</errorConditionFormula>
+    <errorMessage>Es necesario aprobar toda la documentación legal del cliente para aprobarlo.</errorMessage>
+</ValidationRule>

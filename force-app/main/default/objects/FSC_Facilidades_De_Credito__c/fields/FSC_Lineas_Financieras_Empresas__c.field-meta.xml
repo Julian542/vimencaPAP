@@ -1030,6 +1030,11 @@
                 <label>Antolin, S.A</label>
             </value>
             <value>
+                <fullName>EDESSA</fullName>
+                <default>false</default>
+                <label>EDESSA</label>
+            </value>
+            <value>
                 <fullName>Empresa 1</fullName>
                 <default>false</default>
                 <isActive>false</isActive>

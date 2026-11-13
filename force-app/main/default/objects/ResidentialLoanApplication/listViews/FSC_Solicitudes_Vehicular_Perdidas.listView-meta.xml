@@ -3,11 +3,11 @@
     <fullName>FSC_Solicitudes_Vehicular_Perdidas</fullName>
     <columns>FSC_Prioridad__c</columns>
     <columns>Name</columns>
-    <columns>Opportunity</columns>
-    <columns>MortgageProgramType</columns>
-    <columns>LotOriginalCost</columns>
-    <columns>InterestRate</columns>
-    <columns>AmortizationTerm</columns>
+    <columns>FSC_NumeroSolicitud__c</columns>
+    <columns>FSC_Subestado__c</columns>
+    <columns>Account</columns>
+    <columns>CreatedDate</columns>
+    <columns>CreatedBy</columns>
     <filterScope>Everything</filterScope>
     <filters>
         <field>Status</field>

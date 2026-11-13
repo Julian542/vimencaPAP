@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>10 - COMITE DE CREDITO I</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_Codigo_de_Aprobacion__c</field>
+        <value xsi:type="xsd:string">10</value>
+    </values>
+    <values>
+        <field>FSC_Descripcion__c</field>
+        <value xsi:type="xsd:string">10 - COMITE DE CREDITO I: CRÉDITOS COMERCIALES: DESDE RD$500,000 HASTA RD$2,500,000; O SUS RESPECTIVAS EQUIVALENCIAS EN MONEDA EXTRANJERA (TOMANDO COMO REFERENCIA LA TASA DE VENTA DEL BANCO CENTRAL AL DÍA DE LA APROBACIÓN).</value>
+    </values>
+</CustomMetadata>

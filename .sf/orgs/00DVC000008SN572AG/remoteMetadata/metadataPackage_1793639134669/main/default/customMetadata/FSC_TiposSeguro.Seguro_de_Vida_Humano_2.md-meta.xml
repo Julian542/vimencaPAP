@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Seguro de Vida Humano</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_AplicaHipotecario__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FSC_AplicaVehiculo__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FSC_Base_Calculo_Prima__c</field>
+        <value xsi:type="xsd:string">MONTO_SOLICITADO</value>
+    </values>
+    <values>
+        <field>FSC_Deshabilitado__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>FSC_Divisor_Tasa__c</field>
+        <value xsi:type="xsd:double">1000.0</value>
+    </values>
+    <values>
+        <field>FSC_Facilidad__c</field>
+        <value xsi:type="xsd:string">- 404</value>
+    </values>
+    <values>
+        <field>FSC_Label__c</field>
+        <value xsi:type="xsd:string">Seguro de Vida Humano</value>
+    </values>
+    <values>
+        <field>FSC_Parametros_Formula__c</field>
+        <value xsi:type="xsd:string">{&quot;requiresApplicantAge&quot;:true,&quot;coDebtorMultiplier&quot;:2,&quot;unemployment&quot;:{&quot;privateRate&quot;:1.63,&quot;publicRate&quot;:2.86,&quot;coverageMonths&quot;:6,&quot;taxFactor&quot;:1.16,&quot;markupFactor&quot;:1.3,&quot;financingFactor&quot;:1.025,&quot;maxInstallment&quot;:57000,&quot;privateMinimumMonths&quot;:6,&quot;publicMinimumMonths&quot;:24,&quot;administrationFees&quot;:[[200000,40],[500000,75],[1000000,100],[5000000,150],[999999999999,200]]}}</value>
+    </values>
+    <values>
+        <field>FSC_Tasa__c</field>
+        <value xsi:type="xsd:double">0.59</value>
+    </values>
+    <values>
+        <field>FSC_Tipo_Calculo_Prima__c</field>
+        <value xsi:type="xsd:string">CONSUMO_VIDA</value>
+    </values>
+</CustomMetadata>

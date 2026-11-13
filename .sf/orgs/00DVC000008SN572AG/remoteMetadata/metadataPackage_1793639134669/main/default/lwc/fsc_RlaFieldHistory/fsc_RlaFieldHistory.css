@@ -1,0 +1,194 @@
+.wrapper {
+    padding: 0.75rem;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.toolbarActions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.summary {
+    color: #444;
+    font-size: 0.875rem;
+}
+
+.filters {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(160px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.filterItemSearch {
+    min-width: 220px;
+}
+
+.state {
+    border-radius: 0.5rem;
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+}
+
+.state.empty {
+    background: #f3f3f3;
+    color: #444;
+}
+
+.state.error {
+    background: #fef1ee;
+    color: #8e030f;
+}
+
+.timeline {
+    position: relative;
+    margin-top: 0.5rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.52rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #d8dde6;
+}
+
+.timelineItem {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.timelineMarker {
+    position: absolute;
+    left: 0.14rem;
+    top: 1rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+    background: #0176d3;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px #c9c9c9;
+    z-index: 1;
+}
+
+.timelineCard {
+    border: 1px solid #d8dde6;
+    border-radius: 0.75rem;
+    background: #fff;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.timelineHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 0.75rem;
+    margin-bottom: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.fieldLabel {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #181818;
+}
+
+.fieldApiName {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.15rem;
+}
+
+.badge {
+    display: inline-block;
+    background: #eef4ff;
+    color: #014486;
+    border: 1px solid #cfe0ff;
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: #5c5c5c;
+    font-size: 0.85rem;
+    margin-bottom: 0.9rem;
+    flex-wrap: wrap;
+}
+
+.metaUser {
+    font-weight: 600;
+}
+
+.metaSeparator {
+    color: #999;
+}
+
+.valuesGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 0.75rem;
+}
+
+.valueBox {
+    border-radius: 0.6rem;
+    padding: 0.85rem;
+    min-height: 88px;
+    border: 1px solid #e5e5e5;
+}
+
+.oldValueBox {
+    background: #fafafa;
+}
+
+.newValueBox {
+    background: #f7fbff;
+}
+
+.valueLabel {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+}
+
+.valueText {
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #1f1f1f;
+    font-size: 0.92rem;
+}
+
+@media (max-width: 1024px) {
+    .filters {
+        grid-template-columns: repeat(2, minmax(180px, 1fr));
+    }
+
+    .valuesGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .filters {
+        grid-template-columns: 1fr;
+    }
+}

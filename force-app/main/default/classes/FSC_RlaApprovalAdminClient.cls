@@ -31,6 +31,17 @@ public with sharing class FSC_RlaApprovalAdminClient {
 		);
 	}
 
+	public static void reassignApproval(Id residentialLoanApplicationId, Id newActorId) {
+		if (residentialLoanApplicationId == null || newActorId == null) {
+			throw new AuraHandledException('Solicitud y nuevo aprobador requeridos.');
+		}
+		sendRequest(
+			SUPERVISOR_ENDPOINT,
+			JSON.serialize(new Map<String, Id>{ 'residentialLoanApplicationId' => residentialLoanApplicationId, 'newActorId' => newActorId }),
+			'No se pudo reasignar el proceso de aprobación como administrador.'
+		);
+	}
+
 	public static void returnToAnalyst(Id residentialLoanApplicationId, String motivo) {
 		if (residentialLoanApplicationId == null) {
 			throw new AuraHandledException('Solicitud requerida.');
@@ -38,8 +49,8 @@ public with sharing class FSC_RlaApprovalAdminClient {
 		if (String.isBlank(motivo)) {
 			throw new AuraHandledException('Motivo requerido.');
 		}
-		if (motivo.length() > 255) {
-			throw new AuraHandledException('Motivo excede 255 caracteres.');
+		if (motivo.length() > 2000) {
+			throw new AuraHandledException('Motivo excede 2000 caracteres.');
 		}
 
 		sendRequest(
@@ -56,8 +67,8 @@ public with sharing class FSC_RlaApprovalAdminClient {
 		if (String.isBlank(motivo)) {
 			throw new AuraHandledException('Motivo requerido.');
 		}
-		if (motivo.length() > 255) {
-			throw new AuraHandledException('Motivo excede 255 caracteres.');
+		if (motivo.length() > 2000) {
+			throw new AuraHandledException('Motivo excede 2000 caracteres.');
 		}
 
 		sendRequest(

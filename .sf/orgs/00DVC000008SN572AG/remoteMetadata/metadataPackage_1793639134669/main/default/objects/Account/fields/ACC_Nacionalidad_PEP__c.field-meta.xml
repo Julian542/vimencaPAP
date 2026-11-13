@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ACC_Nacionalidad_PEP__c</fullName>
+    <description>Nacionalidad para PEP</description>
+    <label>Nacionalidad PEP</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>GP_Nacionalidad</valueSetName>
+    </valueSet>
+</CustomField>

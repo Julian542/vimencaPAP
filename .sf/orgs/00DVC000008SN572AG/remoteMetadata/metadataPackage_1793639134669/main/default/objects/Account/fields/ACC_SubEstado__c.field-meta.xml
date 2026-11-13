@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ACC_SubEstado__c</fullName>
+    <label>Sub-estado</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>ACC_Estado__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>DESVINCULADO POR CLIENTE</fullName>
+                <default>false</default>
+                <label>DESVINCULADO POR CLIENTE</label>
+            </value>
+            <value>
+                <fullName>ACEPTADO</fullName>
+                <default>false</default>
+                <label>ACEPTADO</label>
+            </value>
+            <value>
+                <fullName>DESVINCULADO POR VIMENCA</fullName>
+                <default>false</default>
+                <label>DESVINCULADO POR VIMENCA</label>
+            </value>
+            <value>
+                <fullName>EN REVISIÓN</fullName>
+                <default>false</default>
+                <label>EN REVISIÓN</label>
+            </value>
+            <value>
+                <fullName>RECHAZADO</fullName>
+                <default>false</default>
+                <label>RECHAZADO</label>
+            </value>
+            <value>
+                <fullName>FALLECIDO</fullName>
+                <default>false</default>
+                <label>FALLECIDO</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>CANCELADO</controllingFieldValue>
+            <valueName>DESVINCULADO POR CLIENTE</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CANCELADO</controllingFieldValue>
+            <valueName>DESVINCULADO POR VIMENCA</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>CANCELADO</controllingFieldValue>
+            <controllingFieldValue>INACTIVO</controllingFieldValue>
+            <valueName>FALLECIDO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>VALIDADO</controllingFieldValue>
+            <valueName>ACEPTADO</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>VALIDADO</controllingFieldValue>
+            <valueName>EN REVISIÓN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>VALIDADO</controllingFieldValue>
+            <valueName>RECHAZADO</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

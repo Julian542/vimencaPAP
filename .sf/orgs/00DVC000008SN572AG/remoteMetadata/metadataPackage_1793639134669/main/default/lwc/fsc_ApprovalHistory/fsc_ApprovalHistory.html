@@ -1,0 +1,55 @@
+<template>
+    <lightning-card class="approvalHistoryCard">
+        <div class="header">
+            <div class="headerLeft">
+                <div class="iconWrap">
+                    <lightning-icon
+                        icon-name="standard:approval"
+                        size="small"
+                        alternative-text="Procesos de aprobación">
+                    </lightning-icon>
+                </div>
+                <div class="title">{title}</div>
+            </div>
+        </div>
+
+        <div class="container">
+            <template if:true={hasItems}>
+                <template for:each={visibleItems} for:item="item">
+                    <div key={item.id} class="historyItem">
+                        <div class="stepName">{item.stepName}</div>
+                        <div class="detailLine">
+                            <span class="label">Fecha:&nbsp;</span><span>{item.createdDateFormatted}</span>
+                        </div>
+                        <div class="detailLine">
+                            <span class="label">Estado:&nbsp;</span><span>{item.status}</span>
+                        </div>
+                        <div class="detailLine">
+                            <span class="label">Asignado a:&nbsp;</span><span>{item.assignedTo}</span>
+                        </div>
+                        <div class="detailLine">
+                            <span class="label">Aprobador actual:&nbsp;</span><span>{item.actualApprover}</span>
+                        </div>
+                        <div class="detailLine commentsLine">
+                            <span class="label">Comentarios:&nbsp;</span><span>{item.comments}</span>
+                        </div>
+                    </div>
+                </template>
+            </template>
+
+            <template if:true={showEmpty}>
+                <div class="emptyState">No hay un historial de aprobaciones disponible.</div>
+            </template>
+
+            <template if:true={error}>
+                <div class="errorState">{errorMessage}</div>
+            </template>
+        </div>
+
+        <template if:true={showViewMore}>
+            <div class="footer">
+                <button class="viewMoreButton" onclick={handleViewMore}>Ver más</button>
+            </div>
+        </template>
+    </lightning-card>
+</template>

@@ -32,7 +32,7 @@ import enviarRevisionSupervisor from '@salesforce/apex/FSC_RlaAccionesController
 import enviarDocumentosFirmar from '@salesforce/apex/FSC_FirmarDocumentoUtility.enviarDocumentosFirmar';
 
 import getApprovalContext from '@salesforce/apex/FSC_RlaAccionesController.getApprovalContext';
-import getAssignableUsers from '@salesforce/apex/FSC_RlaAccionesController.getAssignableUsers';
+import getAssignableUsers from '@salesforce/apex/FSC_RlaAccionesController.getAssignableUsersForApproval';
 import getPagaresContext from '@salesforce/apex/FSC_RlaAccionesController.getPagaresContext';
 import getDocumentacionContratosContext from '@salesforce/apex/FSC_RlaAccionesController.getDocumentacionContratosContext';
 import enviarDocumentacionContratos from '@salesforce/apex/FSC_RlaAccionesController.enviarDocumentacionContratos';
@@ -100,6 +100,7 @@ import RESULTADO_BURO_FIELD from '@salesforce/schema/ResidentialLoanApplication.
 import STATUS_FIELD from '@salesforce/schema/ResidentialLoanApplication.Status';
 import ACCOUNT_ID_FIELD from '@salesforce/schema/ResidentialLoanApplication.AccountId';
 import OWNER_ID_FIELD from '@salesforce/schema/ResidentialLoanApplication.OwnerId';
+import CREATED_BY_NAME_FIELD from '@salesforce/schema/ResidentialLoanApplication.CreatedBy.Name';
 import RECORD_TYPE_ID_FIELD from '@salesforce/schema/ResidentialLoanApplication.RecordTypeId';
 import RECORD_TYPE_DEVELOPER_NAME_FIELD from '@salesforce/schema/ResidentialLoanApplication.RecordType.DeveloperName';
 
@@ -145,6 +146,12 @@ import VEHICLE_MODEL_FIELD from '@salesforce/schema/FSC_Garantia__c.FSC_Modelo_V
 
 const PROCESS_GESTION_PLANILLAS_DESEMBOLSO = 'FSC_GestionPlanillasDeDesembolso';
 const PROCESS_ANALISTA_CREDITO = 'FSC_AnalistasDeCredito';
+const PROCESOS_REASIGNACION_SUPERVISOR = [
+	PROCESS_ANALISTA_CREDITO,
+	'FSC_SupervisorDeCredito',
+	'FSC_ComiteDeCredito',
+	'FSC_InstanciasAprobacionCredito',
+];
 const PROCESS_EXCEPCIONES_CREDITO = 'FSC_ExcepcionesDeCredito';
 const PROCESS_VALIDACION_ABANKS = 'FSC_ValidacionEnAbanks';
 const PROCESS_BANCA_SEGURO = 'FSC_BancaSeguro';
@@ -192,6 +199,7 @@ const FIELDS = [
 	STATUS_FIELD,
 	ACCOUNT_ID_FIELD,
 	OWNER_ID_FIELD,
+	CREATED_BY_NAME_FIELD,
 	RECORD_TYPE_ID_FIELD,
 	RECORD_TYPE_DEVELOPER_NAME_FIELD,
 	APLICA_EXC_BURO_FIELD,
@@ -241,14 +249,14 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	@track clasificacionMIPYMESError = '';
 
 	revisionDocumentos = {};
-    revisionDocumentosError = '';
-    cargandoRevisionDocumentos = false;
-    showModalDocumentoLegal = false;
-    versionLegalEnEdicion;
-    tipoLegalEnEdicion;
-    revisionTimer;
-    revisionAttempts = 0;
-    revisionRequest = 0;
+	revisionDocumentosError = '';
+	cargandoRevisionDocumentos = false;
+	showModalDocumentoLegal = false;
+	versionLegalEnEdicion;
+	tipoLegalEnEdicion;
+	revisionTimer;
+	revisionAttempts = 0;
+	revisionRequest = 0;
 
 	@track loading = false;
 	wiredRecordResult;
@@ -355,10 +363,10 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	set recordId(value) {
 		this._recordId = value;
 		this.revisionDocumentos = {};
-        this.revisionRequest++;
-        this.revisionAttempts = 0;
-        clearTimeout(this.revisionTimer);
-        this.showModalDocumentoLegal = false;
+		this.revisionRequest++;
+		this.revisionAttempts = 0;
+		clearTimeout(this.revisionTimer);
+		this.showModalDocumentoLegal = false;
 		if (this.componentConnected) {
 			this.validarClasificacionMIPYMESInicial();
 		}
@@ -375,7 +383,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		this.componentConnected = false;
 		clearTimeout(this.desembolsoRefreshTimer);
 		clearTimeout(this.revisionTimer);
-        this.revisionRequest++;
+		this.revisionRequest++;
 		unregisterRefreshHandler(this.refreshHandlerId);
 	}
 
@@ -642,6 +650,11 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	get ownerName() {
 		return getFieldValue(this.wiredOwnerResult?.data, USER_NAME_FIELD) || '';
 	}
+
+	get creatorName() {
+		// El oficial responsable es el creador del RLA.
+		return getFieldValue(this.wiredRecordResult?.data, CREATED_BY_NAME_FIELD) || '';
+	}
 	get recordTypeDeveloperName() {
 		return getFieldValue(this.wiredRecordResult?.data, RECORD_TYPE_DEVELOPER_NAME_FIELD);
 	}
@@ -832,7 +845,23 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	}
 
 	get isAnalystApproval() {
-		return this.currentProcessDefinitionDeveloperName === PROCESS_ANALISTA_CREDITO;
+		return this.currentProcessDefinitionDeveloperName === PROCESS_ANALISTA_CREDITO || this.approvalContext.isAnalystStage === true;
+	}
+
+	get isCreditInstanceApproval() {
+		return this.approvalContext.isCreditInstanceApproval === true;
+	}
+
+	get isSupervisorReplacement() {
+		return this.approvalContext.isSupervisorReplacement === true;
+	}
+
+	get allowInitialCreditApprover() {
+		return this.isSupervisorReplacement ? this.allowSupervisorOrAdmins : this.allowAnalistaOrAdmins;
+	}
+
+	get approvalStageMessage() {
+		return this.approvalContext.approvalStageMessage || '';
 	}
 
 	get isExceptionApproval() {
@@ -972,8 +1001,14 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		return Boolean(TIENE_PERMISO_ARCHIVO_CUSTODIA_VALORES) || this.hasAdminPermission;
 	}
 
-	get allowOnlyAdminsForReassign() {
-		return this.hasAdminPermission;
+	get allowReassignApproval() {
+		// El supervisor puede reasignar las tres revisiones de Análisis de crédito.
+		return (
+			this.hasAdminPermission ||
+			(Boolean(TIENE_PERMISO_SUPERVISOR) &&
+				this.substatus === 'Análisis de crédito' &&
+				PROCESOS_REASIGNACION_SUPERVISOR.includes(this.currentProcessDefinitionDeveloperName))
+		);
 	}
 
 	get hasAdminPermission() {
@@ -1044,11 +1079,11 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	}
 
 	get canActOnCommitteeApproval() {
-		return this.canActOnApproval || this.allowComiteOrAdmins;
+		return this.canActOnApproval;
 	}
 
 	get showEnviarRevisionSupervisor() {
-		return this.showAnalystDecisionStage;
+		return this.showAnalystDecisionStage && !this.isSupervisorReplacement;
 	}
 
 	get isAnalystApprovalBaseState() {
@@ -1056,12 +1091,12 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 			this.hasActiveApproval &&
 			this.isAnalystApproval &&
 			this.canActOnApproval &&
-			this.allowAnalistaOrAdmins &&
+			this.allowInitialCreditApprover &&
 			this.resultadoBuro === 'Referido' &&
 			this.substatus === 'Análisis de crédito' &&
 			this.docCompletaAnalisis === true &&
 			this.debeRevisarComite === false &&
-			this.debeRevisarSupervisor === false &&
+			(this.debeRevisarSupervisor === false || this.isSupervisorReplacement) &&
 			this.aprobadoConCond === false
 		);
 	}
@@ -1135,7 +1170,13 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	}
 
 	get showErrorAPIDesembolso() {
-		return !this.contextoManual.desembolsoApiExitoso && this.contextoManual.automatizacionHabilitada === true && (this.contextoManual.errorAPIDesembolso === true || this.flagErrorAPIDesembolso === true) && this.substatus === 'Desembolso' && this.formaDeDesembolso === FORMA_DESEMBOLSO_CUENTA_AHORRO;
+		return (
+			!this.contextoManual.desembolsoApiExitoso &&
+			this.contextoManual.automatizacionHabilitada === true &&
+			(this.contextoManual.errorAPIDesembolso === true || this.flagErrorAPIDesembolso === true) &&
+			this.substatus === 'Desembolso' &&
+			this.formaDeDesembolso === FORMA_DESEMBOLSO_CUENTA_AHORRO
+		);
 	}
 
 	get showMensajeValidacionAbanks() {
@@ -1157,6 +1198,8 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	}
 
 	get showAccionesComite() {
+		if (this.isCreditInstanceApproval)
+			return this.approvalContext.canApproveWithConditions === true && this.allowComiteOrAdmins && this.canActOnApproval;
 		return (
 			this.allowComiteOrAdmins &&
 			this.aprobadoConCond === false &&
@@ -1169,6 +1212,10 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	}
 
 	get approvalLabels() {
+		if (this.isCreditInstanceApproval) {
+			const label = this.approvalContext.approvalActionLabel || 'Aprobar';
+			return { mensaje: label, boton: label };
+		}
 		if (this.isBancaSeguroApproval) {
 			return { mensaje: 'Aprobar', boton: 'Aprobado' };
 		}
@@ -1339,8 +1386,14 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	programarActualizacionDesembolso() {
 		clearTimeout(this.desembolsoRefreshTimer);
 		const contexto = this.contextoManual;
-		if (!this.componentConnected || contexto.etapa !== 'Desembolso' || !contexto.automatizacionHabilitada ||
-			contexto.desembolsoApiExitoso || contexto.errorAPIDesembolso) return;
+		if (
+			!this.componentConnected ||
+			contexto.etapa !== 'Desembolso' ||
+			!contexto.automatizacionHabilitada ||
+			contexto.desembolsoApiExitoso ||
+			contexto.errorAPIDesembolso
+		)
+			return;
 		this.desembolsoRefreshTimer = setTimeout(async () => {
 			try {
 				await refreshApex(this.wiredCapturaOperacionesResult);
@@ -1478,107 +1531,115 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 		return false;
 	}
 
-    get showRevisionDocumentos() {
-        return this.status === 'En proceso' && this.isSubstatusGeneracionPagares && this.pagaresGenerados === true;
-    }
+	get showRevisionDocumentos() {
+		return this.status === 'En proceso' && this.isSubstatusGeneracionPagares && this.pagaresGenerados === true;
+	}
 
-    get showRevisionDocumentosButtons() {
-        return this.showRevisionDocumentos && this.canCurrentUserGeneratePagare;
-    }
+	get showRevisionDocumentosButtons() {
+		return this.showRevisionDocumentos && this.canCurrentUserGeneratePagare;
+	}
 
-    get showEditarDocumentosLegales() {
-        return this.showRevisionDocumentosButtons && !!this.revisionDocumentos.pagareId;
-    }
+	get showEditarDocumentosLegales() {
+		return this.showRevisionDocumentosButtons && !!this.revisionDocumentos.pagareId;
+	}
 
-    get disableValidarDocumentos() {
-        return this.loading || this.cargandoRevisionDocumentos || this.revisionDocumentos.listo !== true;
-    }
+	get disableValidarDocumentos() {
+		return this.loading || this.cargandoRevisionDocumentos || this.revisionDocumentos.listo !== true;
+	}
 
-    get disableEditarContrato() {
-        return this.loading || !this.revisionDocumentos.contratoId;
-    }
+	get disableEditarContrato() {
+		return this.loading || !this.revisionDocumentos.contratoId;
+	}
 
-    get showDocumentosPendientes() {
-        return this.showRevisionDocumentosButtons && this.revisionDocumentos.listo !== true;
-    }
+	get showDocumentosPendientes() {
+		return this.showRevisionDocumentosButtons && this.revisionDocumentos.listo !== true;
+	}
 
-    get mensajeRevisionDocumentosPendiente() {
-        return this.revisionDocumentosError || this.revisionDocumentos.mensajePendiente || 'Consultando la disponibilidad de los documentos generados.';
-    }
+	get mensajeRevisionDocumentosPendiente() {
+		return (
+			this.revisionDocumentosError || this.revisionDocumentos.mensajePendiente || 'Consultando la disponibilidad de los documentos generados.'
+		);
+	}
 
-    async loadRevisionDocumentos() {
-        clearTimeout(this.revisionTimer);
-        if (!this.componentConnected || !this.showRevisionDocumentosButtons) return;
-        const recordId = this.recordId;
-        const request = ++this.revisionRequest;
-        this.cargandoRevisionDocumentos = true;
-        try {
-            const context = await getRevisionDocumentosLegales({ residentialLoanApplicationId: recordId });
-            if (request !== this.revisionRequest || !this.componentConnected) return;
-            this.revisionDocumentos = context;
-            this.revisionDocumentosError = '';
-            if (!context.listo && this.revisionAttempts++ < 20) {
-                // La generación del segundo documento termina en otra transacción.
-                // eslint-disable-next-line @lwc/lwc/no-async-operation
-                this.revisionTimer = setTimeout(() => this.loadRevisionDocumentos(), 5000);
-            }
-        } catch (error) {
-            if (request !== this.revisionRequest) return;
-            this.revisionDocumentosError = this.getErrorMessage(error, 'No fue posible consultar los documentos.');
-        } finally {
-            if (request === this.revisionRequest) this.cargandoRevisionDocumentos = false;
-        }
-    }
+	async loadRevisionDocumentos() {
+		clearTimeout(this.revisionTimer);
+		if (!this.componentConnected || !this.showRevisionDocumentosButtons) return;
+		const recordId = this.recordId;
+		const request = ++this.revisionRequest;
+		this.cargandoRevisionDocumentos = true;
+		try {
+			const context = await getRevisionDocumentosLegales({ residentialLoanApplicationId: recordId });
+			if (request !== this.revisionRequest || !this.componentConnected) return;
+			this.revisionDocumentos = context;
+			this.revisionDocumentosError = '';
+			if (!context.listo && this.revisionAttempts++ < 20) {
+				// La generación del segundo documento termina en otra transacción.
+				// eslint-disable-next-line @lwc/lwc/no-async-operation
+				this.revisionTimer = setTimeout(() => this.loadRevisionDocumentos(), 5000);
+			}
+		} catch (error) {
+			if (request !== this.revisionRequest) return;
+			this.revisionDocumentosError = this.getErrorMessage(error, 'No fue posible consultar los documentos.');
+		} finally {
+			if (request === this.revisionRequest) this.cargandoRevisionDocumentos = false;
+		}
+	}
 
-    async handleActualizarDocumentosLegales() {
-        this.revisionAttempts = 0;
-        await this.loadRevisionDocumentos();
-    }
+	async handleActualizarDocumentosLegales() {
+		this.revisionAttempts = 0;
+		await this.loadRevisionDocumentos();
+	}
 
-    async handleReintentarDocumentosLegales() {
-        this.loading = true;
-        try {
-            await reintentarDocumentosLegales({ residentialLoanApplicationId: this.recordId });
-            this.revisionAttempts = 0;
-            await this.loadRevisionDocumentos();
-            this.showToast('Generación solicitada', 'Se reintentará la generación del documento pendiente.', 'info');
-        } catch (error) {
-            this.showToast('Error', this.getErrorMessage(error, 'No fue posible reintentar la generación.'), 'error');
-        } finally { this.loading = false; }
-    }
+	async handleReintentarDocumentosLegales() {
+		this.loading = true;
+		try {
+			await reintentarDocumentosLegales({ residentialLoanApplicationId: this.recordId });
+			this.revisionAttempts = 0;
+			await this.loadRevisionDocumentos();
+			this.showToast('Generación solicitada', 'Se reintentará la generación del documento pendiente.', 'info');
+		} catch (error) {
+			this.showToast('Error', this.getErrorMessage(error, 'No fue posible reintentar la generación.'), 'error');
+		} finally {
+			this.loading = false;
+		}
+	}
 
-    async handleValidarDocumentosLegales() {
-        this.loading = true;
-        try {
-            await validarDocumentosLegales({ residentialLoanApplicationId: this.recordId });
-            clearTimeout(this.revisionTimer);
-            this.showToast('Documentos validados', 'La solicitud avanzó a Gestionar firmas.', 'success');
-            await notifyRecordUpdateAvailable([{ recordId: this.recordId }]);
-            await this.refreshAll();
-        } catch (error) {
-            this.showToast('Error', this.getErrorMessage(error, 'No fue posible validar los documentos.'), 'error');
-        } finally { this.loading = false; }
-    }
+	async handleValidarDocumentosLegales() {
+		this.loading = true;
+		try {
+			await validarDocumentosLegales({ residentialLoanApplicationId: this.recordId });
+			clearTimeout(this.revisionTimer);
+			this.showToast('Documentos validados', 'La solicitud avanzó a Gestionar firmas.', 'success');
+			await notifyRecordUpdateAvailable([{ recordId: this.recordId }]);
+			await this.refreshAll();
+		} catch (error) {
+			this.showToast('Error', this.getErrorMessage(error, 'No fue posible validar los documentos.'), 'error');
+		} finally {
+			this.loading = false;
+		}
+	}
 
-    handleEditarPagare() {
-        this.versionLegalEnEdicion = this.revisionDocumentos.pagareId;
-        this.tipoLegalEnEdicion = 'PAGARE';
-        this.showModalDocumentoLegal = true;
-    }
+	handleEditarPagare() {
+		this.versionLegalEnEdicion = this.revisionDocumentos.pagareId;
+		this.tipoLegalEnEdicion = 'PAGARE';
+		this.showModalDocumentoLegal = true;
+	}
 
-    handleEditarContrato() {
-        this.versionLegalEnEdicion = this.revisionDocumentos.contratoId;
-        this.tipoLegalEnEdicion = 'CONTRATO';
-        this.showModalDocumentoLegal = true;
-    }
+	handleEditarContrato() {
+		this.versionLegalEnEdicion = this.revisionDocumentos.contratoId;
+		this.tipoLegalEnEdicion = 'CONTRATO';
+		this.showModalDocumentoLegal = true;
+	}
 
-    closeModalDocumentoLegal() { this.showModalDocumentoLegal = false; }
+	closeModalDocumentoLegal() {
+		this.showModalDocumentoLegal = false;
+	}
 
-    async handleDocumentoLegalGuardado() {
-        this.closeModalDocumentoLegal();
-        await this.loadRevisionDocumentos();
-        this.dispatchEvent(new RefreshEvent());
-    }
+	async handleDocumentoLegalGuardado() {
+		this.closeModalDocumentoLegal();
+		await this.loadRevisionDocumentos();
+		this.dispatchEvent(new RefreshEvent());
+	}
 
 	get canGeneratePagareStep() {
 		return this.status === 'En proceso' && this.isSubstatusGeneracionPagares && this.pagaresGenerados === false;
@@ -1593,6 +1654,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	}
 
 	get showDevolverAOficial() {
+		if (this.isSupervisorReplacement) return this.showAnalystDecisionStage;
 		if (this.isAnalystApproval) return false;
 		if (!this.allowSupervisorAnalistaOrAdmins) return false;
 
@@ -1659,7 +1721,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	}
 
 	get motivoDevolverMaxLength() {
-		return this.devolverContext === 'ARCHIVO_CUSTODIA' ? 2000 : 255;
+		return 2000;
 	}
 
 	get motivoDevolverHelpText() {
@@ -1773,6 +1835,10 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	}
 
 	get showApproveRejectButtons() {
+		if (this.isCreditInstanceApproval) {
+			const permiso = this.approvalContext.isCommitteeStage ? this.allowComiteOrAdmins : this.allowInitialCreditApprover;
+			return this.hasActiveApproval && this.canActOnApproval && permiso && (!this.isAnalystApproval || this.documentacionValidadaAnalista);
+		}
 		return (
 			this.condition1ApproveReject ||
 			this.condition2ApproveReject ||
@@ -1788,11 +1854,11 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	}
 
 	get showReassignButton() {
-		return this.hasActiveApproval && this.allowOnlyAdminsForReassign && !this.showClienteAceptaCondicion && !this.isValidacionAbanksApproval;
+		return this.hasActiveApproval && this.allowReassignApproval && !this.showClienteAceptaCondicion && !this.isValidacionAbanksApproval;
 	}
 
 	get showApprovalSection() {
-		return this.hasActiveApproval;
+		return this.hasActiveApproval || this.showClienteAceptaCondicion;
 	}
 
 	get showActiveApprovalBanner() {
@@ -2053,7 +2119,7 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	async openModalReasignar() {
 		this.loading = true;
 		try {
-			const users = await getAssignableUsers();
+			const users = await getAssignableUsers({ residentialLoanApplicationId: this.recordId });
 			this.usuariosOptions = users || [];
 			this.usuarioReasignadoId = '';
 			this.showModalReasignar = true;
@@ -3315,8 +3381,11 @@ export default class Fsc_RlaAcciones extends NavigationMixin(LightningElement) {
 	}
 
 	get disableGuardarCondicionesButton() {
-		return !!this.approvedLoanTermPolicyMessage || [this.montoAprobado, this.plazoAprobado, this.tasaAprobada].some(
-			(value) => value === null || value === undefined || String(value).trim() === ''
+		return (
+			!!this.approvedLoanTermPolicyMessage ||
+			[this.montoAprobado, this.plazoAprobado, this.tasaAprobada].some(
+				(value) => value === null || value === undefined || String(value).trim() === ''
+			)
 		);
 	}
 

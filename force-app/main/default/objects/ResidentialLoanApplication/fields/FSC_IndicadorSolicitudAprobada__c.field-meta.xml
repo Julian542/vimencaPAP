@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>FSC_IndicadorSolicitudAprobada__c</fullName>
-    <description>Convierte la aprobación por comité en un indicador numérico para comparar solicitudes creadas y aprobadas en reportes.</description>
+    <description>Convierte la aprobación final del crédito en un indicador numérico para comparar solicitudes creadas y aprobadas en reportes.</description>
     <externalId>false</externalId>
-    <formula>IF(FSC_SolicitudAprobadaPorComite__c, 1, 0)</formula>
+    <formula>IF(OR(FSC_SolicitudAprobadaPorComite__c, FSC_CreditoAprobado__c), 1, 0)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-    <inlineHelpText>Valor calculado: 1 cuando la solicitud está aprobada por comité y 0 en caso contrario.</inlineHelpText>
+    <inlineHelpText>Valor calculado: 1 cuando la solicitud está aprobada por su instancia y 0 en caso contrario.</inlineHelpText>
     <label>Indicador solicitud aprobada</label>
     <precision>18</precision>
     <required>false</required>

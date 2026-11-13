@@ -1,0 +1,20 @@
+<template>
+	<div class="wrapper">
+		<template lwc:if={showError}>
+			<div class="error-message">Debes completar los registros requeridos antes de continuar.</div>
+		</template>
+
+		<div class="actions">
+			<lightning-button
+				label="Volver"
+				variant="neutral"
+				onclick={handlePrevious}>
+			</lightning-button>
+			<lightning-button
+				label="Siguiente"
+				variant="brand"
+				onclick={handleNext}>
+			</lightning-button>
+		</div>
+	</div>
+</template>

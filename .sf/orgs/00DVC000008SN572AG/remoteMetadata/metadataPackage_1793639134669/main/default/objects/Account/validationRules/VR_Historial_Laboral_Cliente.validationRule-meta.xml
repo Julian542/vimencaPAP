@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Historial_Laboral_Cliente</fullName>
+    <active>true</active>
+    <description>Validación para comprobar que el cliente tiene al menos 1 Historial laboral</description>
+    <errorConditionFormula>AND (
+				$Label.Validaciones == &apos;Si&apos;,
+    ACC_Validacion_Historial_Laboral__c = 0,
+				ISPICKVAL( ACC_Estado__c, &apos;CONVERTIR&apos;),
+								 ACC_Persona_Fisica__c =true
+														)</errorConditionFormula>
+    <errorMessage>Para convertir el prospecto es necesario tener al menos 1 historial laboral añadido</errorMessage>
+</ValidationRule>

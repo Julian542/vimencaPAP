@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>FSC_Solicitudes_PYME_en_formalizacion_y_dese</fullName>
+    <columns>FSC_Prioridad__c</columns>
     <columns>Name</columns>
-    <columns>Opportunity</columns>
-    <columns>MortgageProgramType</columns>
-    <columns>LotOriginalCost</columns>
-    <columns>InterestRate</columns>
-    <columns>AmortizationTerm</columns>
+    <columns>FSC_NumeroSolicitud__c</columns>
+    <columns>FSC_Subestado__c</columns>
+    <columns>Account</columns>
+    <columns>CreatedDate</columns>
+    <columns>CreatedBy</columns>
     <filterScope>Mine</filterScope>
     <filters>
         <field>Status</field>

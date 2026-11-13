@@ -1,8 +1,8 @@
 {
   "version": 2,
   "orgId": "00DVC000009qkJJ2AY",
-  "writtenAt": "2026-10-27T18:41:10.016Z",
-  "generation": 1072,
+  "writtenAt": "2026-11-13T19:14:47.738Z",
+  "generation": 1419,
   "inventory": [],
   "sobjects": {
     "descriptions": []
@@ -81,12 +81,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "AGENTE_ConsultarEstadoCasos",
-      "signature": "modify\u0000[105810,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[388881,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "AGENTE_ConsultarEstadoCasos_Test",
-      "signature": "modify\u0000[170024,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[388882,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -141,12 +141,27 @@
     {
       "xmlName": "ApexClass",
       "fullName": "AGENTE_RegistrarCargoNoReconocido",
-      "signature": "modify\u0000[151595,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[388938,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "AGENTE_RegistrarCargoNoReconocidoTest",
-      "signature": "modify\u0000[384054,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[388904,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AGENTE_TempRoutingTest",
+      "signature": "delete\u0000[388894,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AGENTE_TempTest",
+      "signature": "delete\u0000[388887,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AGENTE_VerificacionE2ETest",
+      "signature": "delete\u0000[388943,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -156,12 +171,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "AccountApprovalSubmissionService",
-      "signature": "modify\u0000[384770,\"2026-10-27T05:53:24.000+0000\",\"01pVC000004Y46vYAC\",false,true]"
+      "signature": "add\u0000[384770,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "AccountApprovalSubmissionServiceTest",
-      "signature": "add\u0000[382748,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[385102,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -180,6 +195,16 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "AccountContactSyncQueueable",
+      "signature": "modify\u0000[388981,\"2026-11-06T23:55:14.000+0000\",\"01pVC000004f9WTYAY\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "AccountContactSyncQueueableTest",
+      "signature": "modify\u0000[388982,\"2026-11-06T23:55:14.000+0000\",\"01pVC000004f9WUYAY\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "AccountDocumentClassifierBatch",
       "signature": "add\u0000[376248,\"unknown\",\"unknown\",false,false]"
     },
@@ -191,7 +216,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "AccountDocumentsController",
-      "signature": "modify\u0000[384771,\"2026-10-27T05:53:24.000+0000\",\"01pVC000004TuJ3YAK\",false,true]"
+      "signature": "add\u0000[384771,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -366,7 +391,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "CaseRequiredDocumentsValidator",
-      "signature": "add\u0000[384370,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387230,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -386,12 +411,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "CaseTriggerHandler",
-      "signature": "modify\u0000[384391,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[388841,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "CaseTriggerHandlerTest",
-      "signature": "modify\u0000[384502,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[388842,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -456,7 +481,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "ComprobanteReclamoExtension",
-      "signature": "modify\u0000[376517,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[388850,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -491,12 +516,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "ContactPointAccountSyncService",
-      "signature": "modify\u0000[368478,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[388983,\"2026-11-06T23:55:14.000+0000\",\"01pVC000003uyCfYAI\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "ContactPointAccountSyncServiceTest",
-      "signature": "add\u0000[368479,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[388999,\"2026-11-07T00:00:46.000+0000\",\"01pVC000004V0kbYAC\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -701,32 +726,17 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_CaseWrapUpController",
-      "signature": "modify\u0000[384371,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[387229,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
-      "fullName": "FSC_CaseWrapUpController_Test",
-      "signature": "modify\u0000[384051,\"unknown\",\"unknown\",false,false]"
+      "fullName": "FSC_ConsumoDocumentoResolverTest",
+      "signature": "add\u0000[384934,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
-      "fullName": "FSC_ColaGeneracionDocumentosAnalisis",
-      "signature": "modify\u0000[383740,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "ApexClass",
-      "fullName": "FSC_ConsumoSolicitudPDFController",
-      "signature": "modify\u0000[383766,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "ApexClass",
-      "fullName": "FSC_ConsumoSolicitudPDFController_Test",
-      "signature": "modify\u0000[383779,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "ApexClass",
-      "fullName": "FSC_ControladorDocumentosAnalisisCredito",
-      "signature": "modify\u0000[384607,\"unknown\",\"unknown\",false,false]"
+      "fullName": "FSC_ContratoPDFQueueableTest",
+      "signature": "add\u0000[384935,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -775,13 +785,23 @@
     },
     {
       "xmlName": "ApexClass",
-      "fullName": "FSC_DocumentosAnalisisCreditoTest",
-      "signature": "modify\u0000[384608,\"unknown\",\"unknown\",false,false]"
+      "fullName": "FSC_DocumentacionContratosServiceTest",
+      "signature": "add\u0000[384939,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
-      "fullName": "FSC_MissingCoverageTest",
-      "signature": "modify\u0000[383928,\"unknown\",\"unknown\",false,false]"
+      "fullName": "FSC_InstanciasCreditoService",
+      "signature": "add\u0000[388337,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_InstanciasCreditoServiceTest",
+      "signature": "add\u0000[388692,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_LoanApplicantController_Test",
+      "signature": "add\u0000[385230,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -792,26 +812,6 @@
       "xmlName": "ApexClass",
       "fullName": "FSC_NewCaseComponent_Controller_Test",
       "signature": "add\u0000[365490,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "ApexClass",
-      "fullName": "FSC_RLATriggerHandler",
-      "signature": "modify\u0000[383770,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "ApexClass",
-      "fullName": "FSC_RlaAccionesController",
-      "signature": "modify\u0000[384609,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "ApexClass",
-      "fullName": "FSC_RlaApprovalAdminClient",
-      "signature": "modify\u0000[384590,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "ApexClass",
-      "fullName": "FSC_RlaApprovalAdminRest",
-      "signature": "modify\u0000[384591,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -831,12 +831,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FinAccountCoreValidationTest",
-      "signature": "modify\u0000[375733,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389031,\"2026-11-07T03:09:57.000+0000\",\"01pVC0000047TpNYAU\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FinAcctCoreValidationServiceTest",
-      "signature": "add\u0000[378500,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389032,\"2026-11-07T03:09:57.000+0000\",\"01pVC000004WTKlYAO\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -851,17 +851,17 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FinancialAccountCoreValidationService",
-      "signature": "modify\u0000[378501,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389033,\"2026-11-07T03:09:57.000+0000\",\"01pVC000003rO4BYAU\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FinancialAccountCustomCreateController",
-      "signature": "modify\u0000[383979,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[385167,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FinancialAccountCustomCreateCtrlTest",
-      "signature": "modify\u0000[383164,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[385168,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -877,6 +877,16 @@
       "xmlName": "ApexClass",
       "fullName": "FinancialAccountRoleMigrationBatch",
       "signature": "modify\u0000[142865,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FinancialAccountRoleTriggerHandler",
+      "signature": "add\u0000[388805,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FinancialAccountRoleTriggerTest",
+      "signature": "add\u0000[388806,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -901,7 +911,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "INT001VAERFSCTest",
-      "signature": "modify\u0000[190254,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[386515,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -911,12 +921,17 @@
     {
       "xmlName": "ApexClass",
       "fullName": "INT001_LEAD_VAER_Controller_FSC",
-      "signature": "modify\u0000[381240,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[386113,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "INT001_LEAD_VAER_Controller_FSC_Test",
       "signature": "modify\u0000[381241,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "INT001_VAER_Controller_FSC",
+      "signature": "modify\u0000[386517,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -940,6 +955,16 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "INT003_FSC",
+      "signature": "modify\u0000[388104,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "INT003_FSC_Test",
+      "signature": "modify\u0000[388105,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "INT003_LEAD_FSC",
       "signature": "modify\u0000[166653,\"unknown\",\"unknown\",false,false]"
     },
@@ -960,6 +985,11 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "INT003_ValidarContraLista_Controller",
+      "signature": "modify\u0000[387219,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "INT003_validarContraListaFlowController",
       "signature": "modify\u0000[118580,\"unknown\",\"unknown\",false,false]"
     },
@@ -971,22 +1001,22 @@
     {
       "xmlName": "ApexClass",
       "fullName": "INT007_FSC",
-      "signature": "modify\u0000[383116,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[388109,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "INT007_FSC_Test",
-      "signature": "modify\u0000[383117,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[388110,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "INT008_FSC",
-      "signature": "modify\u0000[383118,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389070,\"2026-11-13T05:37:40.000+0000\",\"01pVC000003QzMHYA0\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "INT008_FSC_Test",
-      "signature": "modify\u0000[383119,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389071,\"2026-11-13T05:37:40.000+0000\",\"01pVC000003WgjxYAC\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -1061,17 +1091,22 @@
     {
       "xmlName": "ApexClass",
       "fullName": "INT056_FSC",
-      "signature": "modify\u0000[384829,\"2026-10-27T16:48:08.000+0000\",\"01pVC000003CCtJYAW\",false,true]"
+      "signature": "modify\u0000[388810,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "INT056_FSC_Test",
-      "signature": "modify\u0000[384830,\"2026-10-27T16:48:08.000+0000\",\"01pVC000003CCuvYAG\",false,true]"
+      "signature": "modify\u0000[388811,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "INT057_FSC",
+      "signature": "modify\u0000[384887,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "INT057_FSC_Test",
-      "signature": "modify\u0000[170660,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384888,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1087,6 +1122,11 @@
       "xmlName": "ApexClass",
       "fullName": "INTUtilitiesTest",
       "signature": "modify\u0000[170606,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "INTUtilities_FSC",
+      "signature": "modify\u0000[389009,\"2026-11-07T00:23:24.000+0000\",\"01pVC000003RqnBYAS\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -1135,13 +1175,33 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "KeyHubCaseNightlySyncBatch",
+      "signature": "add\u0000[388829,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "KeyHubCaseNightlySyncBatchTest",
+      "signature": "add\u0000[388830,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "KeyHubIntegrationService",
+      "signature": "add\u0000[388837,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "KeyHubIntegrationServiceTest",
+      "signature": "add\u0000[388838,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "LeadApprovalSubmissionService",
-      "signature": "modify\u0000[384772,\"2026-10-27T05:53:24.000+0000\",\"01pVC000004XsybYAC\",false,true]"
+      "signature": "add\u0000[388685,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadApprovalSubmissionService_Test",
-      "signature": "add\u0000[383724,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[385432,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1181,12 +1241,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "LeadConversionQueue",
-      "signature": "modify\u0000[384420,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389015,\"2026-11-07T00:49:05.000+0000\",\"01pVC000003DoenYAC\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadConversionQueue_Test",
-      "signature": "modify\u0000[383121,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389016,\"2026-11-07T00:49:05.000+0000\",\"01pVC000003Lj0PYAS\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -1201,12 +1261,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "LeadDocumentsController",
-      "signature": "modify\u0000[384773,\"2026-10-27T05:53:24.000+0000\",\"01pVC000003Mmc9YAC\",false,true]"
+      "signature": "modify\u0000[385433,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadDocumentsControllerTest",
-      "signature": "modify\u0000[384422,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[385438,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1226,12 +1286,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "LeadTriggerHandler",
-      "signature": "modify\u0000[381146,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389073,\"2026-11-13T06:09:35.000+0000\",\"01pVC000003FWFZYA4\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LeadTriggerHandlerTest",
-      "signature": "add\u0000[376547,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389067,\"2026-11-13T05:30:40.000+0000\",\"01pVC000004W0YrYAK\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -1251,22 +1311,22 @@
     {
       "xmlName": "ApexClass",
       "fullName": "LegalDocumentsAssignedGridController",
-      "signature": "modify\u0000[384751,\"2026-10-27T03:00:52.000+0000\",\"01pVC0000041bcjYAA\",false,true]"
+      "signature": "modify\u0000[388771,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LegalDocumentsAssignedGridControllerTest",
-      "signature": "modify\u0000[384752,\"2026-10-27T03:00:52.000+0000\",\"01pVC000004Y0ePYAS\",false,true]"
+      "signature": "add\u0000[385407,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LegalWorkloadAssignmentService",
-      "signature": "modify\u0000[384774,\"2026-10-27T05:53:24.000+0000\",\"01pVC000004Z2PdYAK\",false,true]"
+      "signature": "add\u0000[388772,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "LegalWorkloadAssignmentServiceTest",
-      "signature": "add\u0000[384026,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[388773,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1431,12 +1491,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "PLADocumentsAssignedGridController",
-      "signature": "add\u0000[382840,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387110,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "PLADocumentsAssignedGridControllerTest",
-      "signature": "add\u0000[382797,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[386989,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1461,12 +1521,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "PreQualifyLeadFlowController_FSCTest",
-      "signature": "modify\u0000[378970,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384918,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "PreQualifyLeadFlowHandler_FSC",
-      "signature": "modify\u0000[379259,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384919,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1826,12 +1886,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ApCuentasEnvelope",
-      "signature": "modify\u0000[384800,\"2026-10-27T12:48:22.000+0000\",\"01pVT0000035fgpYAA\",false,true]"
+      "signature": "modify\u0000[384800,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ApCuentasEnvelopeTest",
-      "signature": "modify\u0000[384815,\"2026-10-27T14:11:13.000+0000\",\"01pVT0000035fgqYAA\",false,true]"
+      "signature": "modify\u0000[384815,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1841,12 +1901,17 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ComprobanteCasoAction",
-      "signature": "modify\u0000[366311,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[388851,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ComprobanteCasoEnvelope",
-      "signature": "modify\u0000[352930,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[388852,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "VFS_ComprobanteCasoEnvelopeTest",
+      "signature": "add\u0000[388858,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1861,22 +1926,22 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ContratoUnicoController",
-      "signature": "modify\u0000[384574,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[387282,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ContratoUnicoControllerTest",
-      "signature": "modify\u0000[384575,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[387283,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ContratoUnicoEnvelope",
-      "signature": "modify\u0000[384798,\"2026-10-27T12:44:11.000+0000\",\"01pVT0000035fgvYAA\",false,true]"
+      "signature": "modify\u0000[384798,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ContratoUnicoEnvelopeTest",
-      "signature": "modify\u0000[384802,\"2026-10-27T13:11:11.000+0000\",\"01pVT0000035fgwYAA\",false,true]"
+      "signature": "modify\u0000[384802,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1951,7 +2016,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_GerenteVerificadorKYCTest",
-      "signature": "modify\u0000[384814,\"2026-10-27T14:06:59.000+0000\",\"01pVC000004LrwgYAC\",false,true]"
+      "signature": "add\u0000[384814,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1976,12 +2041,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_LeadAreaResponsableService",
-      "signature": "modify\u0000[384775,\"2026-10-27T05:53:24.000+0000\",\"01pVC000004WDuHYAW\",false,true]"
+      "signature": "add\u0000[387190,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_LeadAreaResponsableServiceTest",
-      "signature": "add\u0000[383989,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387191,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -1992,6 +2057,31 @@
       "xmlName": "ApexClass",
       "fullName": "VFS_LeadDuplicateAlertControllerTest",
       "signature": "add\u0000[357365,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "VFS_PLAAuditBatch",
+      "signature": "modify\u0000[389182,\"2026-11-13T18:48:07.000+0000\",\"01pVC000004hZOPYA2\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "VFS_PLABatchTest",
+      "signature": "modify\u0000[389183,\"2026-11-13T18:48:07.000+0000\",\"01pVC000004hZOQYA2\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "VFS_PLADataIntegrityService",
+      "signature": "modify\u0000[389126,\"2026-11-13T06:37:14.000+0000\",\"01pVC000004hZORYA2\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "VFS_PLAPrequalificationBatch",
+      "signature": "modify\u0000[389140,\"2026-11-13T06:38:27.000+0000\",\"01pVC000004hZOSYA2\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "VFS_PLASchedulableOrchestrator",
+      "signature": "modify\u0000[389128,\"2026-11-13T06:37:14.000+0000\",\"01pVC000004hZOTYA2\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -2006,22 +2096,22 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ResumenConvenioEnvelope",
-      "signature": "modify\u0000[384799,\"2026-10-27T12:46:08.000+0000\",\"01pVT0000035fhAYAQ\",false,true]"
+      "signature": "modify\u0000[384799,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ResumenConvenioEnvelopeTest",
-      "signature": "modify\u0000[384804,\"2026-10-27T13:12:51.000+0000\",\"01pVT0000035fhBYAQ\",false,true]"
+      "signature": "modify\u0000[384804,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ResumenConvenioUnicoController",
-      "signature": "modify\u0000[188453,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[387277,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_ResumenConvenioUnicoTest",
-      "signature": "modify\u0000[190226,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[387281,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -2031,22 +2121,27 @@
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_nAperturaCuentasController",
-      "signature": "modify\u0000[378568,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[387315,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_nAperturaCuentasTest",
-      "signature": "add\u0000[361246,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387317,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_nKYCEnvelope",
-      "signature": "modify\u0000[384797,\"2026-10-27T12:39:13.000+0000\",\"01pVC000003H5ftYAC\",false,true]"
+      "signature": "modify\u0000[384797,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "VFS_nKYCFisica_Controller",
       "signature": "modify\u0000[381110,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "VR_Case_Edit_Test",
+      "signature": "add\u0000[387226,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -2061,12 +2156,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "ValidatePreQualifyFlowController_FSC",
-      "signature": "modify\u0000[375912,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384920,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "ValidatePreQualifyFlowController_FSCTest",
-      "signature": "modify\u0000[375913,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[384921,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -2081,12 +2176,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "WF01_ComposicionBatch",
-      "signature": "add\u0000[383892,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[388351,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "WF01_ComposicionBatchTest",
-      "signature": "add\u0000[383898,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[388352,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -2126,12 +2221,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "wsConsultaProdFinPFPJ_FSC",
-      "signature": "modify\u0000[376931,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389021,\"2026-11-07T00:51:45.000+0000\",\"01pVC000003HJSjYAO\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "wsConsultaProdFinPFPJ_FSC_Test",
-      "signature": "modify\u0000[376932,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389022,\"2026-11-07T00:51:45.000+0000\",\"01pVC000003HTzyYAG\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -2141,7 +2236,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "wsCreacionProd_FSC",
-      "signature": "modify\u0000[384833,\"2026-10-27T16:54:39.000+0000\",\"01pVC000003ETA5YAO\",false,true]"
+      "signature": "modify\u0000[384833,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
@@ -2461,7 +2556,7 @@
     {
       "xmlName": "ApexPage",
       "fullName": "VFS_ResumenConvenioUnico",
-      "signature": "add\u0000[188466,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387279,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexPage",
@@ -2540,6 +2635,11 @@
     },
     {
       "xmlName": "ApexTrigger",
+      "fullName": "FinancialAccountRoleTrigger",
+      "signature": "add\u0000[388807,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexTrigger",
       "fullName": "FinancialAccountTrigger",
       "signature": "modify\u0000[127066,\"unknown\",\"unknown\",false,false]"
     },
@@ -2601,7 +2701,7 @@
     {
       "xmlName": "ApprovalProcess",
       "fullName": "Lead.PA_Flujo_Aprobacion_LEAD",
-      "signature": "add\u0000[378684,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[388953,\"2026-11-06T20:37:14.000+0000\",\"04aVC0000013t2bYAA\",false,true]"
     },
     {
       "xmlName": "ApprovalProcess",
@@ -2622,6 +2722,11 @@
       "xmlName": "ApprovalProcess",
       "fullName": "ResidentialLoanApplication.FSC_ExcepcionesDeCredito",
       "signature": "delete\u0000[188362,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "ApprovalProcess",
+      "fullName": "ResidentialLoanApplication.FSC_InstanciasAprobacionCredito",
+      "signature": "add\u0000[388290,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Audience",
@@ -2686,7 +2791,7 @@
     {
       "xmlName": "BotVersion",
       "fullName": "Agente_Vimenca.v1",
-      "signature": "add\u0000[368462,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387234,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "BotVersion",
@@ -2831,17 +2936,17 @@
     {
       "xmlName": "CustomApplication",
       "fullName": "FSC_Service",
-      "signature": "add\u0000[381105,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387370,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomApplication",
       "fullName": "Financial_Services_Lightning_Console",
-      "signature": "add\u0000[382658,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387371,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomApplication",
       "fullName": "TC_Preembosada_console",
-      "signature": "add\u0000[171979,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387483,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomApplication",
@@ -4246,7 +4351,7 @@
     {
       "xmlName": "CustomField",
       "fullName": "Case.CAS_Canal_distribucion__c",
-      "signature": "add\u0000[330129,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[388891,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -4412,6 +4517,11 @@
       "xmlName": "CustomField",
       "fullName": "Case.CAS_MatrizProducto__c",
       "signature": "add\u0000[120293,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Case.CAS_Modelo__c",
+      "signature": "add\u0000[387327,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -4645,6 +4755,36 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "Case.KeyHub_Assigned_To__c",
+      "signature": "add\u0000[387420,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Case.KeyHub_Card_Code__c",
+      "signature": "add\u0000[387421,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Case.KeyHub_Card_Id__c",
+      "signature": "add\u0000[387422,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Case.KeyHub_Card_URL__c",
+      "signature": "add\u0000[387423,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Case.KeyHub_Last_Sync__c",
+      "signature": "add\u0000[387424,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Case.KeyHub_Status__c",
+      "signature": "add\u0000[387425,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "Case.Messaging_Session__c",
       "signature": "add\u0000[105551,\"unknown\",\"unknown\",false,false]"
     },
@@ -4657,6 +4797,31 @@
       "xmlName": "CustomField",
       "fullName": "Case.Plazo_de_Gesti_n_Contracargo__c",
       "signature": "add\u0000[283573,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Case.TI_Apto_Base_Alex__c",
+      "signature": "add\u0000[387297,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Case.TI_Causa_Raiz_Fallo__c",
+      "signature": "add\u0000[387426,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Case.TI_Error_Ocurrido__c",
+      "signature": "add\u0000[387427,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Case.TI_Pasos_Solucion_Usuario__c",
+      "signature": "add\u0000[387428,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Case.TI_Plataforma_Canal__c",
+      "signature": "add\u0000[387301,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -4850,11 +5015,6 @@
     },
     {
       "xmlName": "CustomField",
-      "fullName": "FSC_Referencias__c.FSC_Parentesco__c",
-      "signature": "modify\u0000[383943,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "CustomField",
       "fullName": "FSC_TipoGarantia.FSC_Clase__c",
       "signature": "add\u0000[230063,\"unknown\",\"unknown\",false,false]"
     },
@@ -4915,6 +5075,11 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "FinServ__ContactContactRelation__c.CCR_Empresa__c",
+      "signature": "add\u0000[388756,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "FinServ__ContactContactRelation__c.FinServ__Role__c",
       "signature": "add\u0000[383170,\"unknown\",\"unknown\",false,false]"
     },
@@ -4962,6 +5127,21 @@
       "xmlName": "CustomField",
       "fullName": "FinancialAccount.FIN_Producto__c",
       "signature": "add\u0000[255249,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "KeyHub_Setting__c.API_Token__c",
+      "signature": "add\u0000[387429,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "KeyHub_Setting__c.Default_Project_Id__c",
+      "signature": "add\u0000[387430,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "KeyHub_Setting__c.Endpoint_URL__c",
+      "signature": "add\u0000[387431,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -5017,6 +5197,16 @@
       "xmlName": "CustomField",
       "fullName": "Lead.LEA_EmpresaGrupo__c",
       "signature": "add\u0000[158073,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Lead.LEA_Empresa_Referencia1__c",
+      "signature": "add\u0000[388757,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Lead.LEA_Empresa_Referencia2__c",
+      "signature": "add\u0000[388758,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -5132,6 +5322,11 @@
       "xmlName": "CustomField",
       "fullName": "Lead.LEA_REF_Tipo_de_Cuenta_2__c",
       "signature": "add\u0000[101495,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "Lead.LEA_Rechazo_Documentacion_PLA__c",
+      "signature": "modify\u0000[389061,\"2026-11-13T05:29:50.000+0000\",\"00NVC000007LuuP2AS\",false,true]"
     },
     {
       "xmlName": "CustomField",
@@ -5660,11 +5855,6 @@
     },
     {
       "xmlName": "CustomField",
-      "fullName": "ResidentialLoanApplication.FSC_DeudaConsolidadaBV__c",
-      "signature": "add\u0000[383765,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_EstadoDeLaExcepcion__c",
       "signature": "delete\u0000[188370,\"unknown\",\"unknown\",true,false]"
     },
@@ -5672,11 +5862,6 @@
       "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_ExcepcionSolicitada__c",
       "signature": "delete\u0000[188363,\"unknown\",\"unknown\",true,false]"
-    },
-    {
-      "xmlName": "CustomField",
-      "fullName": "ResidentialLoanApplication.FSC_NumeroSolicitud__c",
-      "signature": "add\u0000[383903,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -5945,6 +6130,26 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Propiedad_Empresas_Num__c",
+      "signature": "add\u0000[387578,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Propiedad_Hombres_Num__c",
+      "signature": "add\u0000[387580,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Propiedad_Mujeres_Num__c",
+      "signature": "add\u0000[387582,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "WF01_Composicion__c.WF01_Propiedad_Principal_Num__c",
+      "signature": "add\u0000[387576,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "WF01_Composicion__c.WF01_Tipo_Cliente__c",
       "signature": "add\u0000[378781,\"unknown\",\"unknown\",false,false]"
     },
@@ -5980,21 +6185,6 @@
     },
     {
       "xmlName": "CustomMetadata",
-      "fullName": "ConfigLoanDecisionAPI.URL",
-      "signature": "modify\u0000[383730,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "CustomMetadata",
-      "fullName": "ConfigLoanDecisionAPI.URLVehicular",
-      "signature": "modify\u0000[383729,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "CustomMetadata",
-      "fullName": "FSC_APIPrestamoConfig.Default",
-      "signature": "modify\u0000[384046,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "CustomMetadata",
       "fullName": "FSC_MatrizClasificacionMIPYMES.Gran_Empresa",
       "signature": "delete\u0000[157567,\"unknown\",\"unknown\",true,false]"
     },
@@ -6007,6 +6197,11 @@
       "xmlName": "CustomMetadata",
       "fullName": "FSC_Referidor.Lopez_Vanderhost_Perez_Real_Estate_232",
       "signature": "add\u0000[383905,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_Referidor.PEREZ_ALMANZAR_REAL_STATE_INVESTMENT_GRO",
+      "signature": "modify\u0000[385388,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
@@ -6955,6 +7150,11 @@
     },
     {
       "xmlName": "CustomObject",
+      "fullName": "KeyHub_Setting__c",
+      "signature": "add\u0000[387311,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomObject",
       "fullName": "Knowledge__kav",
       "signature": "add\u0000[192535,\"unknown\",\"unknown\",false,false]"
     },
@@ -7006,7 +7206,7 @@
     {
       "xmlName": "CustomObjectTranslation",
       "fullName": "Account-es",
-      "signature": "modify\u0000[384718,\"2026-10-27T01:41:47.000+0000\",\"Account-es\",false,true]"
+      "signature": "add\u0000[384718,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomObjectTranslation",
@@ -7046,7 +7246,7 @@
     {
       "xmlName": "CustomObjectTranslation",
       "fullName": "Lead-es",
-      "signature": "modify\u0000[384730,\"2026-10-27T01:41:48.000+0000\",\"Lead-es\",false,true]"
+      "signature": "add\u0000[384730,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "CustomObjectTranslation",
@@ -7961,7 +8161,7 @@
     {
       "xmlName": "FlexiPage",
       "fullName": "Record_Page_Soporte_TI",
-      "signature": "add\u0000[316158,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387438,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
@@ -7981,22 +8181,22 @@
     {
       "xmlName": "FlexiPage",
       "fullName": "candidato_pagina_de_registro_PF",
-      "signature": "add\u0000[382084,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387481,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "candidato_pagina_de_registro_PJ",
-      "signature": "add\u0000[382607,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[388099,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "cliente_pagina_de_registro_BUSINESS",
-      "signature": "add\u0000[384369,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[386559,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "FlexiPage",
       "fullName": "cliente_pagina_de_registro_PERSONA",
-      "signature": "add\u0000[382739,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[388676,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Flow",
@@ -8160,6 +8360,11 @@
     },
     {
       "xmlName": "Flow",
+      "fullName": "Case_Crear_Tarjeta_KeyHub_Soporte_TI",
+      "signature": "add\u0000[387439,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Flow",
       "fullName": "Case_Preparar_Contacto_Correo",
       "signature": "add\u0000[257727,\"unknown\",\"unknown\",false,false]"
     },
@@ -8171,12 +8376,17 @@
     {
       "xmlName": "Flow",
       "fullName": "Correo_Electr_nico_a_Cliente",
-      "signature": "add\u0000[334353,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389035,\"2026-11-09T00:40:19.000+0000\",\"301VC00003gLmYbYAK\",false,true]"
     },
     {
       "xmlName": "Flow",
       "fullName": "Correo_Electronico_a_Cliente",
       "signature": "add\u0000[128372,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Flow",
+      "fullName": "CrearVinculado_FSC",
+      "signature": "add\u0000[388816,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Flow",
@@ -8187,11 +8397,6 @@
       "xmlName": "Flow",
       "fullName": "FL_CAS_Send_Case_Email_Alert",
       "signature": "add\u0000[104656,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "Flow",
-      "fullName": "FSC_Aprobacion_PLA",
-      "signature": "modify\u0000[384584,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Flow",
@@ -8211,7 +8416,12 @@
     {
       "xmlName": "Flow",
       "fullName": "LEA_Precalificacion",
-      "signature": "add\u0000[352369,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[384922,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Flow",
+      "fullName": "Lanzar_Aprobaciones_LEAD",
+      "signature": "add\u0000[387228,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Flow",
@@ -8340,6 +8550,51 @@
     },
     {
       "xmlName": "Group",
+      "fullName": "FSC_AprobGerentes_Consumo",
+      "signature": "add\u0000[388213,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Group",
+      "fullName": "FSC_AprobGerentes_Hipotecario",
+      "signature": "add\u0000[388214,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Group",
+      "fullName": "FSC_AprobGerentes_Vehiculo",
+      "signature": "add\u0000[388215,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Group",
+      "fullName": "FSC_AprobSubgerentes_Consumo",
+      "signature": "add\u0000[388216,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Group",
+      "fullName": "FSC_AprobSubgerentes_Hipotecario",
+      "signature": "add\u0000[388217,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Group",
+      "fullName": "FSC_AprobSubgerentes_Vehiculo",
+      "signature": "add\u0000[388218,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Group",
+      "fullName": "FSC_AprobVPBancaEmpresarial_PYME",
+      "signature": "add\u0000[388219,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Group",
+      "fullName": "FSC_AprobVPBancaPersonal_PYME",
+      "signature": "add\u0000[388220,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Group",
+      "fullName": "FSC_AprobVPEjecutivo_PYME",
+      "signature": "add\u0000[388221,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Group",
       "fullName": "FSC_AprobadoresAnalistasDeCredito_Consum",
       "signature": "add\u0000[273014,\"unknown\",\"unknown\",false,false]"
     },
@@ -8430,6 +8685,11 @@
     },
     {
       "xmlName": "Layout",
+      "fullName": "FinServ__ContactContactRelation__c-Referencia Layout",
+      "signature": "add\u0000[388761,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Layout",
       "fullName": "FinServ__FinancialAccount__c-Cuenta Corriente",
       "signature": "add\u0000[257879,\"unknown\",\"unknown\",false,false]"
     },
@@ -8470,11 +8730,6 @@
     },
     {
       "xmlName": "Layout",
-      "fullName": "LoanApplicant-Formato Solicitante de préstamo",
-      "signature": "modify\u0000[383908,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "Layout",
       "fullName": "OTP_Challenge__c-OTP Challenge Layout",
       "signature": "add\u0000[105215,\"unknown\",\"unknown\",false,false]"
     },
@@ -8497,26 +8752,6 @@
       "xmlName": "Layout",
       "fullName": "Reclamacion_Routing_Config__mdt-Formato Configuración de Ruteo de Reclamación",
       "signature": "add\u0000[104275,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "Layout",
-      "fullName": "ResidentialLoanApplication-Solicitud de crédito Consumo",
-      "signature": "modify\u0000[383830,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "Layout",
-      "fullName": "ResidentialLoanApplication-Solicitud de crédito Hipotecario",
-      "signature": "modify\u0000[383831,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "Layout",
-      "fullName": "ResidentialLoanApplication-Solicitud de crédito PYME",
-      "signature": "modify\u0000[383832,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "Layout",
-      "fullName": "ResidentialLoanApplication-Solicitud de crédito Vehículo",
-      "signature": "modify\u0000[383833,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Layout",
@@ -8566,7 +8801,7 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "accountDocumentsPicker",
-      "signature": "modify\u0000[384780,\"2026-10-27T05:53:24.000+0000\",\"0RdVC0000010SDU0A2\",false,true]"
+      "signature": "add\u0000[387155,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -8621,7 +8856,7 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "financialAccountCustomCreate",
-      "signature": "modify\u0000[384824,\"2026-10-27T16:25:31.000+0000\",\"0RdVC000000sBTA0A2\",false,true]"
+      "signature": "add\u0000[384824,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -8641,7 +8876,7 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "fscNewCaseSolicitud",
-      "signature": "modify\u0000[384819,\"2026-10-27T15:29:29.000+0000\",\"0RdVC000000jKAh0AM\",false,true]"
+      "signature": "add\u0000[384819,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -8655,28 +8890,13 @@
     },
     {
       "xmlName": "LightningComponentBundle",
-      "fullName": "fsc_EditarDocumentoAnalisis",
-      "signature": "modify\u0000[384614,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "LightningComponentBundle",
       "fullName": "fsc_NuevaSolicitudCreditoAction",
       "signature": "add\u0000[383947,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
-      "fullName": "fsc_RlaAcciones",
-      "signature": "modify\u0000[384630,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "LightningComponentBundle",
       "fullName": "fsc_caso_cierre_guiado",
-      "signature": "add\u0000[384500,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "LightningComponentBundle",
-      "fullName": "fsc_loanApplicantManager",
-      "signature": "modify\u0000[383938,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387261,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -8720,13 +8940,18 @@
     },
     {
       "xmlName": "LightningComponentBundle",
+      "fullName": "keyHubCaseAction",
+      "signature": "add\u0000[387490,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "LightningComponentBundle",
       "fullName": "leadConvertControlled",
       "signature": "add\u0000[378535,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "leadDocumentsPicker",
-      "signature": "modify\u0000[384785,\"2026-10-27T05:53:24.000+0000\",\"0RdVC000000irjo0AA\",false,true]"
+      "signature": "add\u0000[387165,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -8741,7 +8966,7 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "legalDocumentsAssignedGrid",
-      "signature": "modify\u0000[384789,\"2026-10-27T05:53:24.000+0000\",\"0RdVC000000tkod0AA\",false,true]"
+      "signature": "add\u0000[388777,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -8766,12 +8991,12 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "plaDocumentsAssignedGrid",
-      "signature": "add\u0000[382789,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387195,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "vFS_GeneraryfirmarDocs",
-      "signature": "add\u0000[380837,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[388735,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -8796,7 +9021,7 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "vfs_LeadAreaResponsableAlert",
-      "signature": "modify\u0000[384794,\"2026-10-27T05:53:24.000+0000\",\"0RdVC0000010s360AA\",false,true]"
+      "signature": "add\u0000[387174,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -9007,6 +9232,11 @@
       "xmlName": "ListView",
       "fullName": "OpportunityTCP__c.UNIDAD_DE_MOTIVACION_A_USO_OpportunityTCP",
       "signature": "add\u0000[104417,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ListView",
+      "fullName": "ResidentialLoanApplication.Mis_Creditos",
+      "signature": "delete\u0000[384851,\"unknown\",\"unknown\",true,false]"
     },
     {
       "xmlName": "ListView",
@@ -9260,86 +9490,6 @@
     },
     {
       "xmlName": "PermissionSet",
-      "fullName": "FSC_PS_Administrador",
-      "signature": "modify\u0000[383834,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "PermissionSet",
-      "fullName": "FSC_PS_Analista_Credito",
-      "signature": "modify\u0000[383835,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "PermissionSet",
-      "fullName": "FSC_PS_Archivo_Custodia_Valores",
-      "signature": "modify\u0000[383836,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "PermissionSet",
-      "fullName": "FSC_PS_BancaSeguro",
-      "signature": "modify\u0000[383837,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "PermissionSet",
-      "fullName": "FSC_PS_CDD",
-      "signature": "modify\u0000[383838,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "PermissionSet",
-      "fullName": "FSC_PS_Captura",
-      "signature": "modify\u0000[383839,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "PermissionSet",
-      "fullName": "FSC_PS_Comite_Credito",
-      "signature": "modify\u0000[383840,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "PermissionSet",
-      "fullName": "FSC_PS_Desembolso_Creditos",
-      "signature": "modify\u0000[383841,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "PermissionSet",
-      "fullName": "FSC_PS_EjecucionOperaciones",
-      "signature": "modify\u0000[383842,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "PermissionSet",
-      "fullName": "FSC_PS_Formalizacion_Creditos",
-      "signature": "modify\u0000[383843,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "PermissionSet",
-      "fullName": "FSC_PS_Generacion_Pagares_Contratos",
-      "signature": "modify\u0000[383844,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "PermissionSet",
-      "fullName": "FSC_PS_MantenimientoOperaciones",
-      "signature": "modify\u0000[383845,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "PermissionSet",
-      "fullName": "FSC_PS_Oficial_Negocio",
-      "signature": "modify\u0000[383846,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "PermissionSet",
-      "fullName": "FSC_PS_Prevencion_Lavado_Activos",
-      "signature": "modify\u0000[383847,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "PermissionSet",
-      "fullName": "FSC_PS_Recepcion_Control_Documentos",
-      "signature": "modify\u0000[383848,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "PermissionSet",
-      "fullName": "FSC_PS_Supervisor",
-      "signature": "modify\u0000[383849,\"unknown\",\"unknown\",false,false]"
-    },
-    {
-      "xmlName": "PermissionSet",
       "fullName": "FSC_SecurityEnforced_Test_Access",
       "signature": "delete\u0000[170828,\"unknown\",\"unknown\",true,false]"
     },
@@ -9386,7 +9536,7 @@
     {
       "xmlName": "PermissionSet",
       "fullName": "FSC_VIMENCA_GESTION_COMERCIAL",
-      "signature": "add\u0000[384504,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[385295,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
@@ -9396,7 +9546,7 @@
     {
       "xmlName": "PermissionSet",
       "fullName": "FSC_VIMENCA_LEGAL_CUMPLIMIENTO",
-      "signature": "add\u0000[157848,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387176,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
@@ -9455,6 +9605,11 @@
     },
     {
       "xmlName": "PermissionSet",
+      "fullName": "Keystone_Reintentos_Core",
+      "signature": "modify\u0000[389037,\"2026-11-10T17:07:21.000+0000\",\"0PSVC0000020wHN4AY\",false,true]"
+    },
+    {
+      "xmlName": "PermissionSet",
       "fullName": "Lightning_Email_Access",
       "signature": "add\u0000[104685,\"unknown\",\"unknown\",false,false]"
     },
@@ -9471,12 +9626,17 @@
     {
       "xmlName": "PermissionSet",
       "fullName": "PS_FSC_Acceso_Legal",
-      "signature": "add\u0000[382924,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[386452,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
       "fullName": "PS_FSC_Oficial_Negocio_Home",
       "signature": "add\u0000[382639,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "PS_KeyHub_Soporte_TI",
+      "signature": "add\u0000[387348,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSet",
@@ -9631,12 +9791,12 @@
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "PSG_VIMENCA_FRONT_OFFICE",
-      "signature": "add\u0000[384509,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[388253,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "PSG_VIMENCA_LEGAL",
-      "signature": "add\u0000[383309,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387178,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "PermissionSetGroup",
@@ -9661,7 +9821,7 @@
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "force__GeneralUsers",
-      "signature": "add\u0000[383717,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389176,\"2026-11-13T08:04:56.000+0000\",\"0PGVC00000078XH4AY\",false,true]"
     },
     {
       "xmlName": "PermissionSetGroup",
@@ -9671,7 +9831,7 @@
     {
       "xmlName": "PermissionSetGroup",
       "fullName": "force__MarketingUsers",
-      "signature": "add\u0000[383712,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389174,\"2026-11-13T08:04:55.000+0000\",\"0PGVC00000078XE4AY\",false,true]"
     },
     {
       "xmlName": "PermissionSetGroup",
@@ -9716,12 +9876,12 @@
     {
       "xmlName": "Profile",
       "fullName": "Admin",
-      "signature": "modify\u0000[384832,\"2026-10-27T16:54:19.000+0000\",\"00e3i000001RR1qAAG\",false,true]"
+      "signature": "modify\u0000[389181,\"2026-11-13T18:48:06.000+0000\",\"00e3i000001RR1qAAG\",false,true]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Advisor",
-      "signature": "add\u0000[379398,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387554,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -9741,12 +9901,12 @@
     {
       "xmlName": "Profile",
       "fullName": "Consultor Keystone",
-      "signature": "add\u0000[384501,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[388762,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Core",
-      "signature": "add\u0000[379400,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387556,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -9756,12 +9916,12 @@
     {
       "xmlName": "Profile",
       "fullName": "Inteligencia de Negocio",
-      "signature": "add\u0000[379515,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387557,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Legal",
-      "signature": "add\u0000[379516,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387558,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -9771,37 +9931,37 @@
     {
       "xmlName": "Profile",
       "fullName": "Perfil Vimenca",
-      "signature": "add\u0000[384526,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[388763,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Perfil Vimenca - Gerencia - TC Preembosada",
-      "signature": "add\u0000[379405,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387561,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Perfil Vimenca - TC Negocio",
-      "signature": "add\u0000[379404,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387562,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Perfil Vimenca - TC Preembosada",
-      "signature": "add\u0000[379403,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387563,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Perfil Vimenca - Teleasistencia",
-      "signature": "add\u0000[384389,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[388764,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Perfíl Vimenca - BO",
-      "signature": "add\u0000[379975,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387560,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Personal Banker",
-      "signature": "add\u0000[379410,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387565,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -9811,7 +9971,7 @@
     {
       "xmlName": "Profile",
       "fullName": "Read Only",
-      "signature": "add\u0000[379408,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387566,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -9821,12 +9981,12 @@
     {
       "xmlName": "Profile",
       "fullName": "Relationship Manager",
-      "signature": "add\u0000[379401,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387567,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
       "fullName": "Salesforce API Only System Integrations",
-      "signature": "add\u0000[379396,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387568,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Profile",
@@ -9836,7 +9996,7 @@
     {
       "xmlName": "Profile",
       "fullName": "Sólo Lectura Agente",
-      "signature": "add\u0000[379514,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[388765,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ProfilePasswordPolicy",
@@ -10092,6 +10252,51 @@
       "xmlName": "Queue",
       "fullName": "Ejecucion_Operaciones",
       "signature": "add\u0000[326273,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Queue",
+      "fullName": "FSC_ColaGerentes_Consumo",
+      "signature": "add\u0000[388277,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Queue",
+      "fullName": "FSC_ColaGerentes_Hipotecario",
+      "signature": "add\u0000[388278,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Queue",
+      "fullName": "FSC_ColaGerentes_Vehiculo",
+      "signature": "add\u0000[388279,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Queue",
+      "fullName": "FSC_ColaSubgerentes_Consumo",
+      "signature": "add\u0000[388280,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Queue",
+      "fullName": "FSC_ColaSubgerentes_Hipotecario",
+      "signature": "add\u0000[388281,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Queue",
+      "fullName": "FSC_ColaSubgerentes_Vehiculo",
+      "signature": "add\u0000[388282,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Queue",
+      "fullName": "FSC_ColaVPBancaEmpresarial_PYME",
+      "signature": "add\u0000[388283,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Queue",
+      "fullName": "FSC_ColaVPBancaPersonal_PYME",
+      "signature": "add\u0000[388284,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Queue",
+      "fullName": "FSC_ColaVPEjecutivo_PYME",
+      "signature": "add\u0000[388285,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
@@ -10466,7 +10671,7 @@
     {
       "xmlName": "RecordType",
       "fullName": "Case.Reclamaciones",
-      "signature": "add\u0000[362680,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387321,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
@@ -10476,7 +10681,7 @@
     {
       "xmlName": "RecordType",
       "fullName": "Case.Reclamo_Contracargo_Investigacion",
-      "signature": "add\u0000[362690,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[388900,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
@@ -10596,7 +10801,7 @@
     {
       "xmlName": "RecordType",
       "fullName": "PersonAccount.PersonAccount",
-      "signature": "add\u0000[169771,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[388844,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RecordType",
@@ -10641,7 +10846,7 @@
     {
       "xmlName": "RelationshipGraphDefinition",
       "fullName": "Referencias",
-      "signature": "add\u0000[380848,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[388766,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RelationshipGraphDefinition",
@@ -10657,6 +10862,11 @@
       "xmlName": "RemoteSiteSetting",
       "fullName": "EndpointTCP",
       "signature": "add\u0000[172001,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "RemoteSiteSetting",
+      "fullName": "KeyHub_Endpoint",
+      "signature": "add\u0000[387314,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "RemoteSiteSetting",
@@ -10756,7 +10966,7 @@
     {
       "xmlName": "Report",
       "fullName": "FinServ__BankingReports/WF01_Composicin_5uy",
-      "signature": "add\u0000[383881,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387572,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Report",
@@ -10996,7 +11206,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Case.VR_Case_Edit_OnlyAssignedUser",
-      "signature": "add\u0000[180912,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[387220,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -11016,7 +11226,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Documentacion_Legal__c.VR_Estado_Legal",
-      "signature": "add\u0000[188192,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[385125,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -11026,7 +11236,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Documentacion_Legal__c.VR_SubEstado_Legal",
-      "signature": "add\u0000[188183,\"unknown\",\"unknown\",false,false]"
+      "signature": "add\u0000[385126,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ValidationRule",
@@ -11276,7 +11486,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Telefono1_Telefonica",
-      "signature": "add\u0000[352935,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389038,\"2026-11-10T17:17:48.000+0000\",\"03dVC000001jcwbYAA\",false,true]"
     },
     {
       "xmlName": "ValidationRule",
@@ -11286,7 +11496,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Telefono2_Telefonica",
-      "signature": "add\u0000[352933,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389039,\"2026-11-10T17:17:48.000+0000\",\"03dVC000001jcwcYAA\",false,true]"
     },
     {
       "xmlName": "ValidationRule",
@@ -11296,7 +11506,7 @@
     {
       "xmlName": "ValidationRule",
       "fullName": "Lead.VR_Telefono3_Telefonica",
-      "signature": "add\u0000[352934,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[389040,\"2026-11-10T17:17:48.000+0000\",\"03dVC000001jcwdYAA\",false,true]"
     },
     {
       "xmlName": "ValidationRule",

@@ -1,7 +1,20 @@
 @IsTest
 private class FSC_RlaApprovalAdminClientTest {
 	private class SuccessMock implements HttpCalloutMock {
+		private String expectedReason;
+
+		SuccessMock() {
+		}
+
+		SuccessMock(String expectedReason) {
+			this.expectedReason = expectedReason;
+		}
+
 		public HttpResponse respond(HttpRequest req) {
+			if (expectedReason != null) {
+				Map<String, Object> payload = (Map<String, Object>) JSON.deserializeUntyped(req.getBody());
+				Assert.areEqual(expectedReason, payload.get('motivo'), 'Debe enviar el motivo completo sin recortarlo.');
+			}
 			System.assertEquals('POST', req.getMethod());
 			System.assert(req.getEndpoint().contains('callout:' + FSC_RlaApprovalAdminClient.NAMED_CREDENTIAL));
 
@@ -49,10 +62,10 @@ private class FSC_RlaApprovalAdminClientTest {
 
 	@IsTest
 	static void returnToAnalyst_callsNamedCredential() {
-		Test.setMock(HttpCalloutMock.class, new SuccessMock());
+		Test.setMock(HttpCalloutMock.class, new SuccessMock(buildLongText(2000)));
 
 		Test.startTest();
-		FSC_RlaApprovalAdminClient.returnToAnalyst(UserInfo.getUserId(), 'motivo test');
+		FSC_RlaApprovalAdminClient.returnToAnalyst(UserInfo.getUserId(), buildLongText(2000));
 		Test.stopTest();
 	}
 
@@ -75,10 +88,10 @@ private class FSC_RlaApprovalAdminClientTest {
 
 	@IsTest
 	static void returnToBusiness_callsNamedCredential() {
-		Test.setMock(HttpCalloutMock.class, new SuccessMock());
+		Test.setMock(HttpCalloutMock.class, new SuccessMock(buildLongText(2000)));
 
 		Test.startTest();
-		FSC_RlaApprovalAdminClient.returnToBusiness(UserInfo.getUserId(), 'motivo test', 'FSC_CP_Supervisor');
+		FSC_RlaApprovalAdminClient.returnToBusiness(UserInfo.getUserId(), buildLongText(2000), 'FSC_CP_Supervisor');
 		Test.stopTest();
 	}
 
@@ -200,7 +213,7 @@ private class FSC_RlaApprovalAdminClientTest {
 	private static void assertThrowsLongBusinessReason() {
 		Boolean thrown = false;
 		try {
-			FSC_RlaApprovalAdminClient.returnToBusiness(UserInfo.getUserId(), buildLongText(256), 'FSC_CP_Supervisor');
+			FSC_RlaApprovalAdminClient.returnToBusiness(UserInfo.getUserId(), buildLongText(2001), 'FSC_CP_Supervisor');
 		} catch (AuraHandledException ex) {
 			thrown = true;
 		}

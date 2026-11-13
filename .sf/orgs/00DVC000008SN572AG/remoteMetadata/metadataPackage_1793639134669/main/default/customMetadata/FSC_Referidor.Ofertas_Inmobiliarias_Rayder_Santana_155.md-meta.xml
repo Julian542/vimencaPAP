@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Ofertas Inmobiliarias Rayder Santana, S.</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_CodigoReferidor__c</field>
+        <value xsi:type="xsd:string">155</value>
+    </values>
+    <values>
+        <field>FSC_NombreReferidor__c</field>
+        <value xsi:type="xsd:string">Ofertas Inmobiliarias Rayder Santana, S.R.L (1-31-61491-4)</value>
+    </values>
+</CustomMetadata>

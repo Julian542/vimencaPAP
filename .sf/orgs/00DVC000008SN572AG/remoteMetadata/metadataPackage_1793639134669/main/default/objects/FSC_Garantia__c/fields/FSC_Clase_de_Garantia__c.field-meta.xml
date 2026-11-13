@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Clase_de_Garantia__c</fullName>
+    <label>Clase de Garantia</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>PAGARE NOTARIAL</fullName>
+                <default>false</default>
+                <label>PAGARE NOTARIAL</label>
+            </value>
+            <value>
+                <fullName>FIRMA SOLIDARIA</fullName>
+                <default>false</default>
+                <label>FIRMA SOLIDARIA</label>
+            </value>
+            <value>
+                <fullName>CARTA DE DESCUENTO NOMINA</fullName>
+                <default>false</default>
+                <label>CARTA DE DESCUENTO NOMINA</label>
+            </value>
+            <value>
+                <fullName>CUENTAS DE AHORROS</fullName>
+                <default>false</default>
+                <label>CUENTAS DE AHORROS</label>
+            </value>
+            <value>
+                <fullName>CUENTAS CORRIENTES</fullName>
+                <default>false</default>
+                <label>CUENTAS CORRIENTES</label>
+            </value>
+            <value>
+                <fullName>MAQUINARIAS INDUSTRIALES</fullName>
+                <default>false</default>
+                <label>MAQUINARIAS INDUSTRIALES</label>
+            </value>
+            <value>
+                <fullName>VEHICULOS USADOS-P2</fullName>
+                <default>false</default>
+                <label>VEHICULOS USADOS-P2</label>
+            </value>
+            <value>
+                <fullName>VEHICULOS NUEVOS -P2</fullName>
+                <default>false</default>
+                <label>VEHICULOS NUEVOS -P2</label>
+            </value>
+            <value>
+                <fullName>CARTA COMPROMISO EMPRESARIAL</fullName>
+                <default>false</default>
+                <label>CARTA COMPROMISO EMPRESARIAL</label>
+            </value>
+            <value>
+                <fullName>FIRMA SOLIDARIA EN DOLARES $US</fullName>
+                <default>false</default>
+                <label>FIRMA SOLIDARIA EN DOLARES $US</label>
+            </value>
+            <value>
+                <fullName>INVENTARIO MERCANCIA Y/O MATERIA PRIMA</fullName>
+                <default>false</default>
+                <label>INVENTARIO MERCANCIA Y/O MATERIA PRIMA</label>
+            </value>
+            <value>
+                <fullName>MAQUINARIAS Y EQUIPOS DE USO ESPECIALIZADO-H6 (US$)</fullName>
+                <default>false</default>
+                <label>MAQUINARIAS Y EQUIPOS DE USO ESPECIALIZADO-H6 (US$)</label>
+            </value>
+            <value>
+                <fullName>DEPOSITO A PLAZO EN MONEDA EXT. DE OTRAS EIF-V13</fullName>
+                <default>false</default>
+                <label>DEPOSITO A PLAZO EN MONEDA EXT. DE OTRAS EIF-V13</label>
+            </value>
+            <value>
+                <fullName>MAQUINARIAS Y EQUIPOS DE USO MULTIPLE-H2</fullName>
+                <default>false</default>
+                <label>MAQUINARIAS Y EQUIPOS DE USO MULTIPLE-H2</label>
+            </value>
+            <value>
+                <fullName>BIENES INMUEBLES</fullName>
+                <default>false</default>
+                <label>BIENES INMUEBLES</label>
+            </value>
+            <value>
+                <fullName>SOLARES O TERRENOS I1</fullName>
+                <default>false</default>
+                <label>SOLARES O TERRENOS I1</label>
+            </value>
+            <value>
+                <fullName>SOLARES O TERRENOS PARA FINES AGROPECUARIOS I2</fullName>
+                <default>false</default>
+                <label>SOLARES O TERRENOS PARA FINES AGROPECUARIOS I2</label>
+            </value>
+            <value>
+                <fullName>AERONAVES-H7</fullName>
+                <default>false</default>
+                <label>AERONAVES-H7</label>
+            </value>
+            <value>
+                <fullName>CERTIFICADOS FINANCIEROS</fullName>
+                <default>false</default>
+                <label>CERTIFICADOS FINANCIEROS</label>
+            </value>
+            <value>
+                <fullName>LETRAS</fullName>
+                <default>false</default>
+                <label>LETRAS</label>
+            </value>
+            <value>
+                <fullName>NOTAS</fullName>
+                <default>false</default>
+                <label>NOTAS</label>
+            </value>
+            <value>
+                <fullName>BONOS SUBORDINADOS</fullName>
+                <default>false</default>
+                <label>BONOS SUBORDINADOS</label>
+            </value>
+            <value>
+                <fullName>CERTIFICADOS DEPOSITOS BANCO VIMENCA</fullName>
+                <default>false</default>
+                <label>CERTIFICADOS DEPOSITOS BANCO VIMENCA</label>
+            </value>
+            <value>
+                <fullName>AVALES O FIANZAS, CARTA DE CR. EXP. E IMP. IRR. Y CC STAND-B</fullName>
+                <default>false</default>
+                <label>AVALES O FIANZAS, CARTA DE CR. EXP. E IMP. IRR. Y CC STAND-B</label>
+            </value>
+            <value>
+                <fullName>CUOTA DE PARTICIPACION DE FONDOS DE INVERSION EN (ME)-V15</fullName>
+                <default>false</default>
+                <label>CUOTA DE PARTICIPACION DE FONDOS DE INVERSION EN (ME)-V15</label>
+            </value>
+            <value>
+                <fullName>CUOTA DE PARTICIPACION DE FONDOS DE INVERSION EN (MN)-V9</fullName>
+                <default>false</default>
+                <label>CUOTA DE PARTICIPACION DE FONDOS DE INVERSION EN (MN)-V9</label>
+            </value>
+            <value>
+                <fullName>CERTIFICADO DE GARANTIA RECIPROCA EN (MN)-V10</fullName>
+                <default>false</default>
+                <label>CERTIFICADO DE GARANTIA RECIPROCA EN (MN)-V10</label>
+            </value>
+            <value>
+                <fullName>GARANTIA PERSONAL-OTROS AVALES-S2</fullName>
+                <default>false</default>
+                <label>GARANTIA PERSONAL-OTROS AVALES-S2</label>
+            </value>
+            <value>
+                <fullName>FLUJOS DE FIDEICOMISOS DE FUENTE DE PAGO</fullName>
+                <default>false</default>
+                <label>FLUJOS DE FIDEICOMISOS DE FUENTE DE PAGO</label>
+            </value>
+            <value>
+                <fullName>VEHICULOS, MAQUINARIAS</fullName>
+                <default>false</default>
+                <label>VEHICULOS, MAQUINARIAS</label>
+            </value>
+            <value>
+                <fullName>CERTIFICADOS DEPOSITOS O INVERSIONES OTRAS ENTIDADES</fullName>
+                <default>false</default>
+                <label>CERTIFICADOS DEPOSITOS O INVERSIONES OTRAS ENTIDADES</label>
+            </value>
+            <value>
+                <fullName>PAGARE SIMPLE</fullName>
+                <default>false</default>
+                <label>PAGARE SIMPLE</label>
+            </value>
+            <value>
+                <fullName>OTROS</fullName>
+                <default>false</default>
+                <label>OTROS</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

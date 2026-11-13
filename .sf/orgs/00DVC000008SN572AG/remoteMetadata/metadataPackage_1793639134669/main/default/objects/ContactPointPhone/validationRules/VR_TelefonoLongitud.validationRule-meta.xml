@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_TelefonoLongitud</fullName>
+    <active>true</active>
+    <description>Validación de número de digitos igual a 10 para teléfonos dominicanos</description>
+    <errorConditionFormula>AND
+(
+$Label.Validaciones = &apos;Si&apos;,
+OR(
+ISPickval(CPP_Tipo__c,&apos;TELÉFONO FIJO&apos;),
+ISPickval(CPP_Tipo__c,&apos;TELÉFONO MÓVIL&apos;),
+ISPickval(CPP_Tipo__c,&apos;TELÉFONO FAX&apos;)
+),
+LEN(TelephoneNumber) &lt;&gt; 10
+)</errorConditionFormula>
+    <errorDisplayField>TelephoneNumber</errorDisplayField>
+    <errorMessage>El número de teléfono debe tener 10 dígitos.</errorMessage>
+</ValidationRule>

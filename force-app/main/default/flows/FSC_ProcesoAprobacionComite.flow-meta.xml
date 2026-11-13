@@ -536,6 +536,7 @@
             <targetReference>Tiene_comite_asignado</targetReference>
         </connector>
         <filterFormula>AND(
+ISBLANK({!$Record.FSC_InstanciaAprobacion__c}),
 ISCHANGED({!$Record.FSC_DebeRevisarComite__c}),
 ISPICKVAL({!$Record.FSC_Resultado_Buro__c}, &apos;Referido&apos;),
 ISPICKVAL({!$Record.FSC_Subestado__c}, &apos;Análisis de crédito&apos;),

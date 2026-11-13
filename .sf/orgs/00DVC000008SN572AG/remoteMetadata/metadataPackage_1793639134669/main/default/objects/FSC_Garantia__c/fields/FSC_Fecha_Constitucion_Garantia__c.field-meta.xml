@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Fecha_Constitucion_Garantia__c</fullName>
+    <description>Registra la fecha en que se constituyó la garantía vehicular.</description>
+    <encryptionScheme>None</encryptionScheme>
+    <inlineHelpText>Seleccione la fecha efectiva de constitución de la garantía vehicular.</inlineHelpText>
+    <label>Fecha constitución de garantía</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

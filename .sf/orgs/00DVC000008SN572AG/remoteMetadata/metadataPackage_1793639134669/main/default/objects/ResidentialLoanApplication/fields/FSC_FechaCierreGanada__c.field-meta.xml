@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_FechaCierreGanada__c</fullName>
+    <description>Fecha y hora en que la solicitud cambia por primera vez al estado Cerrada Ganada.</description>
+    <encryptionScheme>None</encryptionScheme>
+    <inlineHelpText>Se completa automáticamente al cerrar la solicitud como ganada.</inlineHelpText>
+    <label>Fecha cierre ganada</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>DateTime</type>
+</CustomField>

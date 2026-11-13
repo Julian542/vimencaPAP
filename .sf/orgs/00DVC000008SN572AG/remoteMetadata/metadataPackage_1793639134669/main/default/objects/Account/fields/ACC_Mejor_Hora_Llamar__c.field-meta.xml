@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ACC_Mejor_Hora_Llamar__c</fullName>
+    <label>Mejor hora para llamar</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Por la Mañana</fullName>
+                <default>false</default>
+                <label>Por la Mañana</label>
+            </value>
+            <value>
+                <fullName>Por la Tarde</fullName>
+                <default>false</default>
+                <label>Por la Tarde</label>
+            </value>
+            <value>
+                <fullName>Todo el Día</fullName>
+                <default>false</default>
+                <label>Todo el Día</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

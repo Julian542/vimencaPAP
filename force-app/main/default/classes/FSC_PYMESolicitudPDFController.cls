@@ -150,6 +150,7 @@ public with sharing class FSC_PYMESolicitudPDFController {
 			'PersonMailingPostalCode',
 			'FirstName',
 			'LastName',
+			'Suffix',
 			'ACC_NumIdentificacion__c',
 			'ACC_Estado_Civil__c',
 			'Tipo_de_vivienda__c',
@@ -210,7 +211,7 @@ public with sharing class FSC_PYMESolicitudPDFController {
 			if (Schema.SObjectType.Account.fields.getMap().containsKey('LastName')) {
 				String v = safe(String.valueOf(acc.get('LastName')));
 				if (v != '')
-					return v;
+					return joinNonBlank(new List<String>{ v, safe(String.valueOf(acc.get('Suffix'))) }, ' ');
 			}
 			String name = safe(String.valueOf(acc.get('Name')));
 			if (name == '')

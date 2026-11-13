@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_DeudaConsolidadaBV__c</fullName>
+    <description>Deuda del deudor con Banco Vimenca al crear la solicitud de consumo: suma de saldos en pesos de sus préstamos, líneas y tarjetas de crédito (FinServ__FinancialAccount__c sincronizadas desde ABANKS). Se calcula en FSC_DeudaConsolidadaBVService.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Suma de los saldos en pesos (DOP) de los préstamos, líneas y tarjetas de crédito del deudor en Banco Vimenca. No incluye productos en otras monedas ni de codeudores o garantes.</inlineHelpText>
+    <label>Deuda consolidada BV (DOP)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

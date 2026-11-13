@@ -1,8 +1,8 @@
 {
   "version": 2,
   "orgId": "00DVC000008SN572AG",
-  "writtenAt": "2026-10-13T18:49:28.761Z",
-  "generation": 474,
+  "writtenAt": "2026-11-02T17:32:35.000Z",
+  "generation": 488,
   "inventory": [],
   "sobjects": {
     "descriptions": []
@@ -26,7 +26,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_APIPrestamoDesembolso",
-      "signature": "modify\u0000[73362,\"2026-10-13T16:54:11.000+0000\",\"01pVC000003uCPlYAM\",false,true]"
+      "signature": "modify\u0000[73403,\"2026-10-18T06:38:07.000+0000\",\"01pVC000003uCPlYAM\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -36,17 +36,17 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_APIPrestamoDesembolsoTest",
-      "signature": "modify\u0000[73363,\"2026-10-13T16:54:11.000+0000\",\"01pVC000003uCUbYAM\",false,true]"
+      "signature": "modify\u0000[73404,\"2026-10-18T06:38:07.000+0000\",\"01pVC000003uCUbYAM\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_APIPrestamoPrestamos",
-      "signature": "modify\u0000[73364,\"2026-10-13T16:54:11.000+0000\",\"01pVC000003tzU9YAI\",false,true]"
+      "signature": "modify\u0000[73528,\"2026-10-19T15:20:42.000+0000\",\"01pVC000003tzU9YAI\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_APIPrestamoPrestamosTest",
-      "signature": "modify\u0000[73365,\"2026-10-13T16:54:11.000+0000\",\"01pVC000003tzVlYAI\",false,true]"
+      "signature": "modify\u0000[73529,\"2026-10-19T15:20:42.000+0000\",\"01pVC000003tzVlYAI\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -71,7 +71,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_ActaComitePDFControllerTest",
-      "signature": "modify\u0000[73188,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73656,\"2026-10-22T05:23:19.000+0000\",\"01pVC000003KQB7YAO\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -121,7 +121,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_CapturaOperacionesService",
-      "signature": "modify\u0000[72947,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73405,\"2026-10-18T06:38:07.000+0000\",\"01pVC000004LE5hYAG\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -136,12 +136,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_CatalogoGarantiaService",
-      "signature": "modify\u0000[73027,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73488,\"2026-10-19T03:13:23.000+0000\",\"01pVC000004UTFBYA4\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_CatalogoGarantiaServiceTest",
-      "signature": "modify\u0000[73028,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73620,\"2026-10-22T03:54:35.000+0000\",\"01pVC000004UTFCYA4\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -161,12 +161,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_ChecklistDocsController",
-      "signature": "modify\u0000[73032,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73643,\"2026-10-22T04:31:01.000+0000\",\"01pVC000003Lla5YAC\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_ChecklistDocsControllerTest",
-      "signature": "modify\u0000[73189,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73644,\"2026-10-22T04:31:01.000+0000\",\"01pVC000003QNthYAG\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -181,7 +181,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_CoberturaFacilDocumentosNuevosTest",
-      "signature": "modify\u0000[73231,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73652,\"2026-10-22T05:16:47.000+0000\",\"01pVC000004JoLNYA0\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -196,12 +196,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_CoberturaPendienteTest",
-      "signature": "modify\u0000[73232,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73657,\"2026-10-22T05:23:19.000+0000\",\"01pVC000004IMRBYA4\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_ColaGeneracionDocumentosAnalisis",
-      "signature": "modify\u0000[72955,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73664,\"2026-10-22T18:40:50.000+0000\",\"01pVC0000048Fm0YAE\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -211,7 +211,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_ConsultaDocumentosAnalisisCredito",
-      "signature": "modify\u0000[68904,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73693,\"2026-10-23T12:20:13.000+0000\",\"01pVC0000048GyNYAU\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -241,12 +241,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_ConsumoSolicitudPDFController",
-      "signature": "modify\u0000[68905,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73673,\"2026-10-22T19:59:04.000+0000\",\"01pVC000003XhdxYAC\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_ConsumoSolicitudPDFController_Test",
-      "signature": "modify\u0000[72738,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73674,\"2026-10-22T19:59:04.000+0000\",\"01pVC000003XhhBYAS\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -401,7 +401,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_ControladorDocumentosAnalisisCredito",
-      "signature": "modify\u0000[68906,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73754,\"2026-10-26T19:30:13.000+0000\",\"01pVC0000048PTZYA2\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -411,12 +411,42 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_CreacionDesembolsoAsync",
-      "signature": "modify\u0000[67678,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73384,\"2026-10-18T04:38:03.000+0000\",\"01pVC0000048uqjYAA\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_CreacionPrestamoAsync",
-      "signature": "modify\u0000[73356,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73385,\"2026-10-18T04:38:03.000+0000\",\"01pVC0000048pizYAA\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_CreditPolicyController",
+      "signature": "modify\u0000[73621,\"2026-10-22T03:54:35.000+0000\",\"01pVC000004ZLaLYAW\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_CreditPolicyControllerTest",
+      "signature": "modify\u0000[73622,\"2026-10-22T03:54:35.000+0000\",\"01pVC000004ZLaMYAW\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_CreditPolicyGuard",
+      "signature": "modify\u0000[73653,\"2026-10-22T05:16:47.000+0000\",\"01pVC000004ZLaNYAW\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_CreditPolicyGuardTest",
+      "signature": "modify\u0000[73624,\"2026-10-22T03:54:35.000+0000\",\"01pVC000004ZLaOYAW\",false,false]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_CreditPolicyService",
+      "signature": "modify\u0000[73650,\"2026-10-22T05:01:42.000+0000\",\"01pVC000004ZLaPYAW\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_CreditPolicyServiceTest",
+      "signature": "modify\u0000[73651,\"2026-10-22T05:01:42.000+0000\",\"01pVC000004ZLaQYAW\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -431,7 +461,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_DatosContratoController",
-      "signature": "modify\u0000[73320,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73532,\"2026-10-20T02:01:38.000+0000\",\"01pVC0000048Zw0YAE\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -460,6 +490,16 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "FSC_DeudaConsolidadaBVService",
+      "signature": "modify\u0000[73675,\"2026-10-22T19:59:04.000+0000\",\"01pVC000004Zfu1YAC\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_DeudaConsolidadaBVServiceTest",
+      "signature": "modify\u0000[73676,\"2026-10-22T19:59:04.000+0000\",\"01pVC000004Zfu2YAC\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "FSC_DocumentacionContratosService",
       "signature": "modify\u0000[72824,\"unknown\",\"unknown\",false,false]"
     },
@@ -471,12 +511,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_DocumentoLegalServiceTest",
-      "signature": "modify\u0000[73260,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73658,\"2026-10-22T05:23:19.000+0000\",\"01pVC000004VTMoYAO\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_DocumentosAnalisisCreditoTest",
-      "signature": "modify\u0000[73194,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73727,\"2026-10-23T22:23:24.000+0000\",\"01pVC0000048SEXYA2\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -565,18 +605,48 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "FSC_FormalizacionDocumentosController",
+      "signature": "modify\u0000[73489,\"2026-10-19T03:13:23.000+0000\",\"01pVC000004Y1k9YAC\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_FormalizacionGarantiasController",
+      "signature": "modify\u0000[73490,\"2026-10-19T03:13:23.000+0000\",\"01pVC000004Y1kAYAS\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_FormalizacionGarantiasService",
+      "signature": "modify\u0000[73491,\"2026-10-19T03:13:23.000+0000\",\"01pVC000004Y1kBYAS\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_FormalizacionGarantiasTest",
+      "signature": "modify\u0000[73660,\"2026-10-22T05:23:19.000+0000\",\"01pVC000004Y1kCYAS\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_FormalizacionNotificaciones",
+      "signature": "modify\u0000[73539,\"2026-10-20T02:54:15.000+0000\",\"01pVC000004YM8fYAG\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_FormalizacionNotificacionesTest",
+      "signature": "modify\u0000[73661,\"2026-10-22T05:23:19.000+0000\",\"01pVC000004YM8gYAG\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "FSC_GarantiaFormalizacionController",
       "signature": "modify\u0000[73342,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_GarantiaFormalizacionService",
-      "signature": "modify\u0000[73042,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73493,\"2026-10-19T03:13:23.000+0000\",\"01pVC000004RD26YAG\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_GarantiaFormalizacionTest",
-      "signature": "modify\u0000[73328,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73662,\"2026-10-22T05:23:19.000+0000\",\"01pVC000004RD27YAG\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -646,7 +716,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_LoanApplicantController",
-      "signature": "modify\u0000[72747,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73697,\"2026-10-23T16:16:56.000+0000\",\"01pVC000003V2dJYAS\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -666,7 +736,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_LoanDecisionAPITest",
-      "signature": "modify\u0000[73196,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73663,\"2026-10-22T05:23:19.000+0000\",\"01pVC000003SiSbYAK\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -681,7 +751,17 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_MissingCoverageTest",
-      "signature": "modify\u0000[73366,\"2026-10-13T16:54:11.000+0000\",\"01pVC000003dMlJYAU\",false,true]"
+      "signature": "modify\u0000[73698,\"2026-10-23T16:16:56.000+0000\",\"01pVC000003dMlJYAU\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_MontoComiteAction",
+      "signature": "modify\u0000[73544,\"2026-10-21T17:11:02.000+0000\",\"01pVC000004Z27tYAC\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_MontoComiteActionTest",
+      "signature": "modify\u0000[73654,\"2026-10-22T05:16:47.000+0000\",\"01pVC000004Z27uYAC\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -745,6 +825,16 @@
     },
     {
       "xmlName": "ApexClass",
+      "fullName": "FSC_ProcesamientoAbanks",
+      "signature": "modify\u0000[73386,\"2026-10-18T04:38:03.000+0000\",\"01pVC000004XpELYA0\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
+      "fullName": "FSC_ProcesamientoAbanksTest",
+      "signature": "modify\u0000[73543,\"2026-10-20T14:22:16.000+0000\",\"01pVC000004XpEMYA0\",false,true]"
+    },
+    {
+      "xmlName": "ApexClass",
       "fullName": "FSC_RLAContractTemplateResolver",
       "signature": "modify\u0000[68883,\"unknown\",\"unknown\",false,false]"
     },
@@ -756,12 +846,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_RLATriggerHandler",
-      "signature": "modify\u0000[72856,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73677,\"2026-10-22T19:59:04.000+0000\",\"01pVC000003MIUPYA4\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_RLATriggerHandlerTest",
-      "signature": "modify\u0000[73049,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73655,\"2026-10-22T05:16:47.000+0000\",\"01pVC000003QOeTYAW\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -791,7 +881,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_RlaAccionesController",
-      "signature": "modify\u0000[73367,\"2026-10-13T16:54:11.000+0000\",\"01pVC000003Ln7FYAS\",false,true]"
+      "signature": "modify\u0000[73755,\"2026-10-26T19:30:13.000+0000\",\"01pVC000003Ln7FYAS\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -801,12 +891,12 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_RlaAccionesControllerTest",
-      "signature": "modify\u0000[73361,\"2026-10-12T03:28:16.000+0000\",\"01pVC000003QOMjYAO\",false,true]"
+      "signature": "modify\u0000[73370,\"2026-10-16T01:42:53.000+0000\",\"01pVC000003QOMjYAO\",false,true]"
     },
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_RlaApprovalAdminClient",
-      "signature": "modify\u0000[73202,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73752,\"2026-10-26T19:15:11.000+0000\",\"01pVC000003W2t0YAC\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -826,7 +916,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "FSC_RlaApprovalAdminRest",
-      "signature": "modify\u0000[59082,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73753,\"2026-10-26T19:15:11.000+0000\",\"01pVC000003W2t2YAC\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -956,7 +1046,7 @@
     {
       "xmlName": "ApexClass",
       "fullName": "TestDataFactory_FSC",
-      "signature": "modify\u0000[56799,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73699,\"2026-10-23T16:16:56.000+0000\",\"01pVC000003TWfVYAW\",false,true]"
     },
     {
       "xmlName": "ApexClass",
@@ -1006,7 +1096,12 @@
     {
       "xmlName": "ApexComponent",
       "fullName": "FSC_ContratoEstiloBase",
-      "signature": "modify\u0000[73248,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73415,\"2026-10-18T08:15:35.000+0000\",\"099VC0000016rfPYAQ\",false,true]"
+    },
+    {
+      "xmlName": "ApexComponent",
+      "fullName": "FSC_ContratoPiePagina",
+      "signature": "modify\u0000[73416,\"2026-10-18T08:15:35.000+0000\",\"099VC0000017bLdYAI\",false,true]"
     },
     {
       "xmlName": "ApexComponent",
@@ -1025,6 +1120,11 @@
     },
     {
       "xmlName": "ApexPage",
+      "fullName": "FSC_AutorizacionOposicionMatricula",
+      "signature": "modify\u0000[73506,\"2026-10-19T03:13:24.000+0000\",\"066VC0000010gl3YAA\",false,true]"
+    },
+    {
+      "xmlName": "ApexPage",
       "fullName": "FSC_CapacidadPagoPDF",
       "signature": "modify\u0000[68290,\"unknown\",\"unknown\",false,false]"
     },
@@ -1036,62 +1136,62 @@
     {
       "xmlName": "ApexPage",
       "fullName": "FSC_ContratoConsumoHipotecario",
-      "signature": "modify\u0000[73278,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73417,\"2026-10-18T08:15:35.000+0000\",\"066VC000000unE9YAI\",false,true]"
     },
     {
       "xmlName": "ApexPage",
       "fullName": "FSC_ContratoHipFideicomisoBajoCosto",
-      "signature": "modify\u0000[73279,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73418,\"2026-10-18T08:15:35.000+0000\",\"066VC000000w92vYAA\",false,true]"
     },
     {
       "xmlName": "ApexPage",
       "fullName": "FSC_ContratoHipFideicomisoNormal",
-      "signature": "modify\u0000[73280,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73419,\"2026-10-18T08:15:35.000+0000\",\"066VC000000w92wYAA\",false,true]"
     },
     {
       "xmlName": "ApexPage",
       "fullName": "FSC_ContratoHipotecarioEmpresa",
-      "signature": "modify\u0000[73281,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73420,\"2026-10-18T08:15:35.000+0000\",\"066VC000000w92xYAA\",false,true]"
     },
     {
       "xmlName": "ApexPage",
       "fullName": "FSC_ContratoHipotecarioEmpresaLey158",
-      "signature": "modify\u0000[73282,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73421,\"2026-10-18T08:15:35.000+0000\",\"066VC000000w92yYAA\",false,true]"
     },
     {
       "xmlName": "ApexPage",
       "fullName": "FSC_ContratoHipotecarioPersonaFisica",
-      "signature": "modify\u0000[73283,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73422,\"2026-10-18T08:15:35.000+0000\",\"066VC000000w92zYAA\",false,true]"
     },
     {
       "xmlName": "ApexPage",
       "fullName": "FSC_ContratoPrestamoComercialCH",
-      "signature": "modify\u0000[73284,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73423,\"2026-10-18T08:15:35.000+0000\",\"066VC000000jsx7YAA\",false,true]"
     },
     {
       "xmlName": "ApexPage",
       "fullName": "FSC_ContratoPrestamoComercialGMSP",
-      "signature": "modify\u0000[73285,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73424,\"2026-10-18T08:15:36.000+0000\",\"066VC000000jsyjYAA\",false,true]"
     },
     {
       "xmlName": "ApexPage",
       "fullName": "FSC_ContratoPrestamoComercialGS",
-      "signature": "modify\u0000[73286,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73425,\"2026-10-18T08:15:36.000+0000\",\"066VC000000jt0LYAQ\",false,true]"
     },
     {
       "xmlName": "ApexPage",
       "fullName": "FSC_ContratoPrestamoComercialGarantiaCD",
-      "signature": "modify\u0000[73287,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73426,\"2026-10-18T08:15:36.000+0000\",\"066VC000000jrRZYAY\",false,true]"
     },
     {
       "xmlName": "ApexPage",
       "fullName": "FSC_ContratoPrestamoComercialSF",
-      "signature": "modify\u0000[73288,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73427,\"2026-10-18T08:15:36.000+0000\",\"066VC000000uhThYAI\",false,true]"
     },
     {
       "xmlName": "ApexPage",
       "fullName": "FSC_ContratoPrestamoConsumoVehiculo",
-      "signature": "modify\u0000[73289,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73428,\"2026-10-18T08:15:36.000+0000\",\"066VC000000unEAYAY\",false,true]"
     },
     {
       "xmlName": "ApexPage",
@@ -1107,6 +1207,11 @@
       "xmlName": "ApexPage",
       "fullName": "FSC_InformeCreditoPymePDF",
       "signature": "modify\u0000[72075,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ApexPage",
+      "fullName": "FSC_InventarioRegistroTitulos",
+      "signature": "modify\u0000[73507,\"2026-10-19T03:13:24.000+0000\",\"066VC0000010gl4YAA\",false,true]"
     },
     {
       "xmlName": "ApexPage",
@@ -1151,12 +1256,12 @@
     {
       "xmlName": "ApexTrigger",
       "fullName": "FSC_FacilidadesDeCreditoTrigger",
-      "signature": "modify\u0000[68911,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73628,\"2026-10-22T03:54:35.000+0000\",\"01qVC000007K0KnYAK\",false,true]"
     },
     {
       "xmlName": "ApexTrigger",
       "fullName": "FSC_GarantiaTrigger",
-      "signature": "modify\u0000[73053,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73629,\"2026-10-22T03:54:35.000+0000\",\"01qVC000007K0MPYA0\",false,true]"
     },
     {
       "xmlName": "ApexTrigger",
@@ -1271,7 +1376,7 @@
     {
       "xmlName": "ApprovalProcess",
       "fullName": "ResidentialLoanApplication.FSC_ValidacionEnAbanks",
-      "signature": "modify\u0000[68224,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73400,\"2026-10-18T04:38:04.000+0000\",\"04aVC000001DTwTYAW\",false,true]"
     },
     {
       "xmlName": "ApprovalProcess",
@@ -1480,6 +1585,11 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "FSC_APIPrestamoConfig__mdt.FSC_AutomatizarCreacionYDesembolso__c",
+      "signature": "modify\u0000[73377,\"2026-10-18T04:38:03.000+0000\",\"00NVC000007AfXJ2A0\",false,true]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "FSC_Actualizar_Tipo_Garantia__e.FSC_ResidentialLoanApplicationId__c",
       "signature": "add\u0000[68860,\"unknown\",\"unknown\",false,false]"
     },
@@ -1577,6 +1687,11 @@
       "xmlName": "CustomField",
       "fullName": "FSC_ClaseGarantia__mdt.FSC_Codigo__c",
       "signature": "modify\u0000[72995,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_ClaseGarantia__mdt.FSC_RutaFormalizacion__c",
+      "signature": "modify\u0000[73468,\"2026-10-19T03:13:23.000+0000\",\"00NVC000007AlZV2A0\",false,true]"
     },
     {
       "xmlName": "CustomField",
@@ -1960,6 +2075,11 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "FSC_Garantia__c.FSC_ModalidadFormalizacion__c",
+      "signature": "modify\u0000[73469,\"2026-10-19T03:13:23.000+0000\",\"00NVC000007AlZW2A0\",false,true]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "FSC_Garantia__c.FSC_Modelo_Vehiculo__c",
       "signature": "add\u0000[73002,\"unknown\",\"unknown\",false,false]"
     },
@@ -1977,6 +2097,16 @@
       "xmlName": "CustomField",
       "fullName": "FSC_Garantia__c.FSC_NombreTasadorExterno__c",
       "signature": "add\u0000[68903,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_Garantia__c.FSC_NumeroExpedienteDGII__c",
+      "signature": "modify\u0000[73470,\"2026-10-19T03:13:23.000+0000\",\"00NVC000007AlZX2A0\",false,true]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_Garantia__c.FSC_NumeroExpedienteRegistroTitulos__c",
+      "signature": "modify\u0000[73471,\"2026-10-19T03:13:23.000+0000\",\"00NVC000007AlZY2A0\",false,true]"
     },
     {
       "xmlName": "CustomField",
@@ -2006,12 +2136,17 @@
     {
       "xmlName": "CustomField",
       "fullName": "FSC_Garantia__c.FSC_Proposito_Garantia_Hipotecario__c",
-      "signature": "add\u0000[65054,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73577,\"2026-10-22T03:54:35.000+0000\",\"00NVC000005qHTJ2A2\",false,true]"
     },
     {
       "xmlName": "CustomField",
       "fullName": "FSC_Garantia__c.FSC_Registro_de_Titulos__c",
       "signature": "add\u0000[67563,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_Garantia__c.FSC_SaldoPrimeraHipoteca__c",
+      "signature": "add\u0000[73578,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEsn2AG\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2042,6 +2177,11 @@
       "xmlName": "CustomField",
       "fullName": "FSC_Garantia__c.FSC_Titulo_Registrado__c",
       "signature": "add\u0000[72791,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_Garantia__c.FSC_Valor_Mejoras__c",
+      "signature": "add\u0000[73579,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEso2AG\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2256,7 +2396,7 @@
     {
       "xmlName": "CustomField",
       "fullName": "FSC_Referencias__c.FSC_Parentesco__c",
-      "signature": "add\u0000[63754,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73713,\"2026-10-23T17:05:20.000+0000\",\"00NVC000005Gw1x2AC\",false,true]"
     },
     {
       "xmlName": "CustomField",
@@ -2292,6 +2432,66 @@
       "xmlName": "CustomField",
       "fullName": "FSC_Referidor__mdt.FSC_NombreReferidor__c",
       "signature": "add\u0000[57772,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_ReglaCredito.FSC_Activa__c",
+      "signature": "add\u0000[73580,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEsp2AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_ReglaCredito.FSC_BaseCalculo__c",
+      "signature": "add\u0000[73581,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEsq2AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_ReglaCredito.FSC_Destino__c",
+      "signature": "add\u0000[73582,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEsr2AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_ReglaCredito.FSC_MonedaMinimo__c",
+      "signature": "add\u0000[73583,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEss2AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_ReglaCredito.FSC_Moneda__c",
+      "signature": "add\u0000[73584,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEst2AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_ReglaCredito.FSC_MontoMinimo__c",
+      "signature": "add\u0000[73585,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEsu2AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_ReglaCredito.FSC_Perfil__c",
+      "signature": "add\u0000[73586,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEsv2AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_ReglaCredito.FSC_PlazoMaximo__c",
+      "signature": "add\u0000[73587,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEsw2AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_ReglaCredito.FSC_PlazoMinimo__c",
+      "signature": "add\u0000[73588,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEsx2AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_ReglaCredito.FSC_PorcentajeMaximo__c",
+      "signature": "add\u0000[73589,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEsy2AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_ReglaCredito.FSC_Producto__c",
+      "signature": "add\u0000[73590,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEsz2AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_ReglaCredito.FSC_Proposito__c",
+      "signature": "add\u0000[73591,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEt02AG\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -2472,6 +2672,46 @@
       "xmlName": "CustomField",
       "fullName": "FSC_Solicitud_Desembolso_Prestamo__mdt.FSC_ProductoBanco__c",
       "signature": "add\u0000[62382,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_TasaCambioCredito.FSC_FechaReferencia__c",
+      "signature": "add\u0000[73592,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEt12AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_TasaCambioCredito.FSC_FechaVigencia__c",
+      "signature": "add\u0000[73593,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEt22AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_TasaCambioCredito.FSC_FuenteReferencia__c",
+      "signature": "add\u0000[73594,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEt32AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_TasaCambioCredito.FSC_Fuente__c",
+      "signature": "add\u0000[73595,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEt42AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_TasaCambioCredito.FSC_MonedaDestino__c",
+      "signature": "add\u0000[73596,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEt52AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_TasaCambioCredito.FSC_MonedaOrigen__c",
+      "signature": "add\u0000[73597,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEt62AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_TasaCambioCredito.FSC_Tasa__c",
+      "signature": "add\u0000[73598,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEt72AG\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "FSC_TasaCambioCredito.FSC_TipoCotizacion__c",
+      "signature": "add\u0000[73599,\"2026-10-22T03:54:35.000+0000\",\"00NVC000007CEt82AG\",false,false]"
     },
     {
       "xmlName": "CustomField",
@@ -3165,6 +3405,11 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_AbanksAutomatico__c",
+      "signature": "modify\u0000[73378,\"2026-10-18T04:38:03.000+0000\",\"00NVC000007AfXL2A0\",false,true]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_Actividad_economica__c",
       "signature": "add\u0000[4246,\"unknown\",\"unknown\",false,false]"
     },
@@ -3260,6 +3505,11 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_CanalSolicitudMRI__c",
+      "signature": "modify\u0000[73441,\"2026-10-18T21:52:43.000+0000\",\"00NVC000007Akbp2AC\",false,true]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_Cantidad_Excepciones__c",
       "signature": "add\u0000[67801,\"unknown\",\"unknown\",false,false]"
     },
@@ -3315,8 +3565,23 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_CodigoCanalSolicitudMRI__c",
+      "signature": "modify\u0000[73442,\"2026-10-18T21:52:43.000+0000\",\"00NVC000007Akbs2AC\",false,true]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_CodigoTaxonomia__c",
       "signature": "add\u0000[68994,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_CodigoTipoProductoMRI__c",
+      "signature": "modify\u0000[73443,\"2026-10-18T21:52:43.000+0000\",\"00NVC000007Akbt2AC\",false,true]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_CodigoTipoSolicitudMRI__c",
+      "signature": "modify\u0000[73444,\"2026-10-18T21:52:43.000+0000\",\"00NVC000007Akbu2AC\",false,true]"
     },
     {
       "xmlName": "CustomField",
@@ -3490,8 +3755,18 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_DesembolsoAPIExitoso__c",
+      "signature": "modify\u0000[73401,\"2026-10-18T06:38:07.000+0000\",\"00NVC000007AgRl2AK\",false,true]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_DesembolsoFormalizacion__c",
+      "signature": "modify\u0000[73472,\"2026-10-19T03:13:23.000+0000\",\"00NVC000007AlZZ2A0\",false,true]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_DesembolsoNeto__c",
-      "signature": "add\u0000[39471,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73530,\"2026-10-20T01:53:54.000+0000\",\"00NVC000005Rn1l2AC\",false,true]"
     },
     {
       "xmlName": "CustomField",
@@ -3512,6 +3787,11 @@
       "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_DetalleExcepcion__c",
       "signature": "delete\u0000[67864,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_DeudaConsolidadaBV__c",
+      "signature": "modify\u0000[73672,\"2026-10-22T19:59:04.000+0000\",\"00NVC000007CZNl2AO\",false,true]"
     },
     {
       "xmlName": "CustomField",
@@ -3680,8 +3960,23 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_EtapaFormalizacionRetorno__c",
+      "signature": "modify\u0000[73473,\"2026-10-19T03:13:23.000+0000\",\"00NVC000007AlZa2AK\",false,true]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_EtapaFormalizacion__c",
+      "signature": "modify\u0000[73474,\"2026-10-19T03:13:23.000+0000\",\"00NVC000007AlZb2AK\",false,true]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_EventosNotificacion__c",
       "signature": "add\u0000[71921,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_EvidenciasDesembolsoCargadas__c",
+      "signature": "modify\u0000[73402,\"2026-10-18T06:38:07.000+0000\",\"00NVC000007AgRm2AK\",false,true]"
     },
     {
       "xmlName": "CustomField",
@@ -3976,7 +4271,7 @@
     {
       "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_Monto__c",
-      "signature": "add\u0000[48625,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73559,\"2026-10-21T17:17:36.000+0000\",\"00NVC000005GUs52AG\",false,true]"
     },
     {
       "xmlName": "CustomField",
@@ -4105,6 +4400,11 @@
     },
     {
       "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_NumeroSolicitud__c",
+      "signature": "modify\u0000[73777,\"2026-10-30T04:28:11.000+0000\",\"00NVC000007DY7t2AG\",false,true]"
+    },
+    {
+      "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_Numero_Fisico_CD__c",
       "signature": "add\u0000[68524,\"unknown\",\"unknown\",false,false]"
     },
@@ -4132,6 +4432,11 @@
       "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_ObservacionComite__c",
       "signature": "delete\u0000[48492,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_ObservacionFormalizacion__c",
+      "signature": "modify\u0000[73475,\"2026-10-19T03:13:23.000+0000\",\"00NVC000007AlZc2AK\",false,true]"
     },
     {
       "xmlName": "CustomField",
@@ -4251,7 +4556,7 @@
     {
       "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_PlazoMaximoPermitido__c",
-      "signature": "add\u0000[73166,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73637,\"2026-10-22T03:54:35.000+0000\",\"00NVC00000784tg2AA\",false,true]"
     },
     {
       "xmlName": "CustomField",
@@ -4292,6 +4597,11 @@
       "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_ProbabilidadIncumplimientoBuro__c",
       "signature": "add\u0000[68285,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_ProcesamientoAbanksManual__c",
+      "signature": "modify\u0000[73379,\"2026-10-18T04:38:03.000+0000\",\"00NVC000007AfXK2A0\",false,true]"
     },
     {
       "xmlName": "CustomField",
@@ -4347,6 +4657,11 @@
       "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_Resolucion_Autorizacion__c",
       "signature": "add\u0000[67605,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_ResponsableAreaFormalizacion__c",
+      "signature": "modify\u0000[73476,\"2026-10-19T03:13:23.000+0000\",\"00NVC000007AlZd2AK\",false,true]"
     },
     {
       "xmlName": "CustomField",
@@ -4512,6 +4827,16 @@
       "xmlName": "CustomField",
       "fullName": "ResidentialLoanApplication.FSC_TipoGarantia__c",
       "signature": "add\u0000[39432,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_TipoProductoSolicitudMRI__c",
+      "signature": "modify\u0000[73445,\"2026-10-18T21:52:43.000+0000\",\"00NVC000007Akbq2AC\",false,true]"
+    },
+    {
+      "xmlName": "CustomField",
+      "fullName": "ResidentialLoanApplication.FSC_TipoSolicitudMRI__c",
+      "signature": "modify\u0000[73446,\"2026-10-18T21:52:43.000+0000\",\"00NVC000007Akbr2AC\",false,true]"
     },
     {
       "xmlName": "CustomField",
@@ -4839,6 +5164,11 @@
       "signature": "add\u0000[46994,\"unknown\",\"unknown\",false,false]"
     },
     {
+      "xmlName": "CustomLabel",
+      "fullName": "FSC_FirmanteAutorizacionMatricula",
+      "signature": "modify\u0000[73495,\"2026-10-19T03:13:23.000+0000\",\"101VC00003f0WEwYAM\",false,false]"
+    },
+    {
       "xmlName": "CustomMetadata",
       "fullName": "ConfigLoanDecisionAPI.Credentials",
       "signature": "modify\u0000[56766,\"unknown\",\"unknown\",false,false]"
@@ -4866,7 +5196,7 @@
     {
       "xmlName": "CustomMetadata",
       "fullName": "FSC_APIPrestamoConfig.Default",
-      "signature": "modify\u0000[72973,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73380,\"2026-10-18T04:38:03.000+0000\",\"m0lVC00000370UbYAI\",false,true]"
     },
     {
       "xmlName": "CustomMetadata",
@@ -4881,7 +5211,7 @@
     {
       "xmlName": "CustomMetadata",
       "fullName": "FSC_ClaseGarantia.BIENES_INMUEBLES_08",
-      "signature": "modify\u0000[73005,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73478,\"2026-10-19T03:13:23.000+0000\",\"m0jVC00000KACIxYAP\",false,true]"
     },
     {
       "xmlName": "CustomMetadata",
@@ -4901,7 +5231,7 @@
     {
       "xmlName": "CustomMetadata",
       "fullName": "FSC_ClaseGarantia.CERTIFICADOS_DEPOSITOS_O_INVERSIO_19",
-      "signature": "modify\u0000[73009,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73479,\"2026-10-19T03:13:23.000+0000\",\"m0jVC00000KACJ1YAP\",false,true]"
     },
     {
       "xmlName": "CustomMetadata",
@@ -4926,7 +5256,7 @@
     {
       "xmlName": "CustomMetadata",
       "fullName": "FSC_ClaseGarantia.FLUJOS_DE_FIDEICOMISOS_DE_FUENTE_17",
-      "signature": "modify\u0000[73014,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73480,\"2026-10-19T03:13:23.000+0000\",\"m0jVC00000KACJ6YAP\",false,true]"
     },
     {
       "xmlName": "CustomMetadata",
@@ -4936,12 +5266,12 @@
     {
       "xmlName": "CustomMetadata",
       "fullName": "FSC_ClaseGarantia.MAQUINARIAS_INDUSTRIALES_04",
-      "signature": "modify\u0000[73016,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73481,\"2026-10-19T03:13:23.000+0000\",\"m0jVC00000KACJ8YAP\",false,true]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "FSC_ClaseGarantia.MAQUINARIAS_Y_EQUIPOS_DE_USO_MULT_07",
-      "signature": "modify\u0000[73017,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73482,\"2026-10-19T03:13:23.000+0000\",\"m0jVC00000KACJ9YAP\",false,true]"
     },
     {
       "xmlName": "CustomMetadata",
@@ -4956,27 +5286,27 @@
     {
       "xmlName": "CustomMetadata",
       "fullName": "FSC_ClaseGarantia.SOLARES_O_TERRENOS_I1_09",
-      "signature": "modify\u0000[73020,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73483,\"2026-10-19T03:13:23.000+0000\",\"m0jVC00000KACJCYA5\",false,true]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "FSC_ClaseGarantia.SOLARES_O_TERRENOS_PARA_FINES_AGR_10",
-      "signature": "modify\u0000[73021,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73484,\"2026-10-19T03:13:23.000+0000\",\"m0jVC00000KACJDYA5\",false,true]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "FSC_ClaseGarantia.VEHICULOS_MAQUINARIAS_18",
-      "signature": "modify\u0000[73022,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73485,\"2026-10-19T03:13:23.000+0000\",\"m0jVC00000KACJEYA5\",false,true]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "FSC_ClaseGarantia.VEHICULOS_NUEVOS_P2_22",
-      "signature": "modify\u0000[73023,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73486,\"2026-10-19T03:13:23.000+0000\",\"m0jVC00000KACJFYA5\",false,true]"
     },
     {
       "xmlName": "CustomMetadata",
       "fullName": "FSC_ClaseGarantia.VEHICULOS_USADOS_P2_21",
-      "signature": "modify\u0000[73024,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73487,\"2026-10-19T03:13:23.000+0000\",\"m0jVC00000KACJGYA5\",false,true]"
     },
     {
       "xmlName": "CustomMetadata",
@@ -5356,7 +5686,7 @@
     {
       "xmlName": "CustomMetadata",
       "fullName": "FSC_IndividuosEnPagareDeCredito.Individuo03",
-      "signature": "modify\u0000[60771,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73414,\"2026-10-18T07:11:55.000+0000\",\"m0ZVC0000085dp82AA\",false,true]"
     },
     {
       "xmlName": "CustomMetadata",
@@ -5820,6 +6150,11 @@
     },
     {
       "xmlName": "CustomMetadata",
+      "fullName": "FSC_Referidor.Detailed_Studies_SRL_1_32_42664_9",
+      "signature": "add\u0000[73691,\"2026-10-23T12:14:34.000+0000\",\"m0cVC00000AH3OjYAL\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
       "fullName": "FSC_Referidor.Diana_Carolina_Falcon_224_0048801_5",
       "signature": "modify\u0000[57842,\"unknown\",\"unknown\",false,false]"
     },
@@ -6240,6 +6575,11 @@
     },
     {
       "xmlName": "CustomMetadata",
+      "fullName": "FSC_Referidor.Lopez_Vanderhost_Perez_Real_Estate_232",
+      "signature": "add\u0000[73692,\"2026-10-23T12:14:34.000+0000\",\"m0cVC00000AH3OkYAL\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
       "fullName": "FSC_Referidor.Lucas_Alberto_Santos_Menendez_402218_128",
       "signature": "modify\u0000[57926,\"unknown\",\"unknown\",false,false]"
     },
@@ -6637,6 +6977,106 @@
       "xmlName": "CustomMetadata",
       "fullName": "FSC_Referidor.null",
       "signature": "delete\u0000[58006,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.ConsConsolidacion",
+      "signature": "modify\u0000[73600,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0onYAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.ConsDesinteresar",
+      "signature": "modify\u0000[73601,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0ooYAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.ConsOtros",
+      "signature": "modify\u0000[73602,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0opYAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.ConsRemodelacion",
+      "signature": "modify\u0000[73603,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0oqYAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.ConsSegundaHipoteca",
+      "signature": "modify\u0000[73604,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0orYAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.ConsSolar",
+      "signature": "modify\u0000[73605,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0osYAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.ConsTraslado",
+      "signature": "modify\u0000[73606,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0otYAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.ExtCompraDOP",
+      "signature": "modify\u0000[73607,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0ouYAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.ExtCompraUSD",
+      "signature": "modify\u0000[73608,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0ovYAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.HipCompraDOP",
+      "signature": "modify\u0000[73609,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0owYAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.HipCompraUSD",
+      "signature": "modify\u0000[73610,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0oxYAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.HipConstruccion",
+      "signature": "modify\u0000[73611,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0oyYAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.HipDesinteresar",
+      "signature": "modify\u0000[73612,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0ozYAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.HipReconstruccion",
+      "signature": "modify\u0000[73613,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0p0YAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.HipReestructuracion",
+      "signature": "modify\u0000[73614,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0p1YAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.HipRemodelacion",
+      "signature": "modify\u0000[73615,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0p2YAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.HipSegundaRemodelacion",
+      "signature": "modify\u0000[73616,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0p3YAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.HipTrasladoDOP",
+      "signature": "modify\u0000[73617,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0p4YAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_ReglaCredito.HipTrasladoUSD",
+      "signature": "modify\u0000[73618,\"2026-10-22T03:54:35.000+0000\",\"m0nVC000006C0p5YAC\",false,false]"
+    },
+    {
+      "xmlName": "CustomMetadata",
+      "fullName": "FSC_TasaCambioCredito.USD_DOP_20261021",
+      "signature": "modify\u0000[73619,\"2026-10-22T03:54:35.000+0000\",\"m0oVC000006KphFYAS\",false,false]"
     },
     {
       "xmlName": "CustomMetadata",
@@ -7141,7 +7581,12 @@
     {
       "xmlName": "CustomMetadata",
       "fullName": "FinServ__FeatureFlagSettings.FinServ__QueryOptimization",
-      "signature": "add\u0000[68460,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73368,\"2026-10-14T02:22:29.000+0000\",\"m0BVT00000642zY2AQ\",false,true]"
+    },
+    {
+      "xmlName": "CustomNotificationType",
+      "fullName": "FSC_FormalizacionGarantias",
+      "signature": "modify\u0000[73542,\"2026-10-20T02:54:15.000+0000\",\"0MLVC0000008lD34AI\",false,true]"
     },
     {
       "xmlName": "CustomObject",
@@ -7241,7 +7686,7 @@
     {
       "xmlName": "CustomObject",
       "fullName": "FSC_Garantia__c",
-      "signature": "modify\u0000[63381,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73634,\"2026-10-22T03:54:35.000+0000\",\"01IVC000003Rlif2AC\",false,true]"
     },
     {
       "xmlName": "CustomObject",
@@ -7300,6 +7745,11 @@
     },
     {
       "xmlName": "CustomObject",
+      "fullName": "FSC_ReglaCredito",
+      "signature": "add\u0000[73635,\"2026-10-22T03:54:35.000+0000\",\"01IVC000004ZyqD2AS\",false,false]"
+    },
+    {
+      "xmlName": "CustomObject",
       "fullName": "FSC_Relacion_Negocios_Colaterales__c",
       "signature": "modify\u0000[26420,\"unknown\",\"unknown\",false,false]"
     },
@@ -7325,6 +7775,11 @@
     },
     {
       "xmlName": "CustomObject",
+      "fullName": "FSC_TasaCambioCredito",
+      "signature": "add\u0000[73636,\"2026-10-22T03:54:35.000+0000\",\"01IVC000004ZyqE2AS\",false,false]"
+    },
+    {
+      "xmlName": "CustomObject",
       "fullName": "FSC_TiposSeguro__mdt",
       "signature": "modify\u0000[57714,\"unknown\",\"unknown\",false,false]"
     },
@@ -7346,7 +7801,7 @@
     {
       "xmlName": "CustomObject",
       "fullName": "ResidentialLoanApplication",
-      "signature": "modify\u0000[73326,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73477,\"2026-10-19T03:13:23.000+0000\",\"ResidentialLoanApplication\",false,true]"
     },
     {
       "xmlName": "CustomObject",
@@ -7375,6 +7830,11 @@
     },
     {
       "xmlName": "CustomPermission",
+      "fullName": "FSC_CP_CDD",
+      "signature": "modify\u0000[73510,\"2026-10-19T03:13:24.000+0000\",\"0CPVC000000KoGn4AK\",false,true]"
+    },
+    {
+      "xmlName": "CustomPermission",
       "fullName": "FSC_CP_Captura",
       "signature": "modify\u0000[71912,\"unknown\",\"unknown\",false,false]"
     },
@@ -7397,6 +7857,11 @@
       "xmlName": "CustomPermission",
       "fullName": "FSC_CP_Generacion_Pagares_Contratos",
       "signature": "modify\u0000[72091,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "CustomPermission",
+      "fullName": "FSC_CP_MantenimientoOperaciones",
+      "signature": "modify\u0000[73511,\"2026-10-19T03:13:24.000+0000\",\"0CPVC000000KoGo4AK\",false,true]"
     },
     {
       "xmlName": "Dashboard",
@@ -7426,7 +7891,7 @@
     {
       "xmlName": "Dashboard",
       "fullName": "Sales_and_Marketing_Dashboards/FSC_Dash_Consumo_MontoSolVsAprob",
-      "signature": "modify\u0000[72233,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73570,\"2026-10-21T17:17:36.000+0000\",\"01ZVC000002lQHH2A2\",false,true]"
     },
     {
       "xmlName": "Dashboard",
@@ -7496,7 +7961,7 @@
     {
       "xmlName": "Dashboard",
       "fullName": "Sales_and_Marketing_Dashboards/FSC_Dash_Hipotecario_MontoSolVsAprob",
-      "signature": "modify\u0000[72244,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73571,\"2026-10-21T17:17:36.000+0000\",\"01ZVC000002lQHR2A2\",false,true]"
     },
     {
       "xmlName": "Dashboard",
@@ -7566,7 +8031,7 @@
     {
       "xmlName": "Dashboard",
       "fullName": "Sales_and_Marketing_Dashboards/FSC_Dash_PYME_MontoSolVsAprob",
-      "signature": "modify\u0000[72255,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73572,\"2026-10-21T17:17:36.000+0000\",\"01ZVC000002lQHb2AM\",false,true]"
     },
     {
       "xmlName": "Dashboard",
@@ -7636,7 +8101,7 @@
     {
       "xmlName": "Dashboard",
       "fullName": "Sales_and_Marketing_Dashboards/FSC_Dash_Vehiculo_MontoSolVsAprob",
-      "signature": "modify\u0000[72266,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73573,\"2026-10-21T17:17:36.000+0000\",\"01ZVC000002lQHl2AM\",false,true]"
     },
     {
       "xmlName": "Dashboard",
@@ -8011,17 +8476,22 @@
     {
       "xmlName": "Flow",
       "fullName": "FSC_After_Update_Change_SubStatus",
-      "signature": "modify\u0000[72165,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73396,\"2026-10-18T04:38:04.000+0000\",\"301VC00003exsdKYAQ\",false,true]"
     },
     {
       "xmlName": "Flow",
       "fullName": "FSC_Aprobacion_PLA",
-      "signature": "modify\u0000[72777,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73749,\"2026-10-26T18:45:47.000+0000\",\"301VC00003fTLXoYAO\",false,true]"
     },
     {
       "xmlName": "Flow",
       "fullName": "FSC_Aprobacion_PLA_CHV",
       "signature": "delete\u0000[60762,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "Flow",
+      "fullName": "FSC_Aprobacion_PLA_Creacion",
+      "signature": "modify\u0000[73750,\"2026-10-26T18:45:47.000+0000\",\"301VC00003fTLXpYAO\",false,false]"
     },
     {
       "xmlName": "Flow",
@@ -8061,7 +8531,7 @@
     {
       "xmlName": "Flow",
       "fullName": "FSC_Notificaciones_por_Email_RLA",
-      "signature": "add\u0000[71925,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73538,\"2026-10-20T02:37:03.000+0000\",\"301VC00003f4bFxYAI\",false,true]"
     },
     {
       "xmlName": "Flow",
@@ -8071,7 +8541,7 @@
     {
       "xmlName": "Flow",
       "fullName": "FSC_Preparar_Notificaciones_RLA",
-      "signature": "modify\u0000[71922,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73413,\"2026-10-18T06:38:07.000+0000\",\"301VC00003eyHsFYAU\",false,true]"
     },
     {
       "xmlName": "Flow",
@@ -8086,7 +8556,7 @@
     {
       "xmlName": "Flow",
       "fullName": "FSC_ProcesoAprobacionComite",
-      "signature": "modify\u0000[71984,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73546,\"2026-10-21T17:11:02.000+0000\",\"301VC00003fAkV6YAK\",false,true]"
     },
     {
       "xmlName": "Flow",
@@ -8116,12 +8586,12 @@
     {
       "xmlName": "Flow",
       "fullName": "FSC_ProcesoAprobacionValidacionEnAbanks",
-      "signature": "modify\u0000[68222,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73399,\"2026-10-18T04:38:04.000+0000\",\"301VC00003exsdNYAQ\",false,true]"
     },
     {
       "xmlName": "Flow",
       "fullName": "FSC_ProcesoAsignacionFormalizacion",
-      "signature": "add\u0000[73339,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73525,\"2026-10-19T03:13:24.000+0000\",\"301VC00003f0WExYAM\",false,true]"
     },
     {
       "xmlName": "Flow",
@@ -8331,7 +8801,7 @@
     {
       "xmlName": "Group",
       "fullName": "FSC_GestionFormalizacion",
-      "signature": "add\u0000[73337,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73337,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Group",
@@ -8390,6 +8860,11 @@
     },
     {
       "xmlName": "Layout",
+      "fullName": "FSC_APIPrestamoConfig__mdt-Configuracion API Prestamo Layout",
+      "signature": "modify\u0000[73395,\"2026-10-18T04:38:03.000+0000\",\"00hVC000007dUqDYAU\",false,true]"
+    },
+    {
+      "xmlName": "Layout",
       "fullName": "FSC_ChecklistDocumentos__c-Checklist Documentos Layout",
       "signature": "modify\u0000[46843,\"unknown\",\"unknown\",false,false]"
     },
@@ -8441,7 +8916,7 @@
     {
       "xmlName": "Layout",
       "fullName": "FSC_Garantia__c-Garantia Layout",
-      "signature": "modify\u0000[72809,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73640,\"2026-10-22T03:54:36.000+0000\",\"00hVC00000618OHYAY\",false,true]"
     },
     {
       "xmlName": "Layout",
@@ -8490,6 +8965,11 @@
     },
     {
       "xmlName": "Layout",
+      "fullName": "FSC_ReglaCredito-Regla de credito Layout",
+      "signature": "modify\u0000[73641,\"2026-10-22T03:54:36.000+0000\",\"00hVC000007k2VpYAI\",false,true]"
+    },
+    {
+      "xmlName": "Layout",
       "fullName": "FSC_Relacion_Negocios_Colaterales__c-Relación de negocio colateral Layout",
       "signature": "modify\u0000[46439,\"unknown\",\"unknown\",false,false]"
     },
@@ -8512,6 +8992,11 @@
       "xmlName": "Layout",
       "fullName": "FSC_Solicitud_Desembolso_Prestamo__mdt-Solicitud de Desembolso de Prestamo Layout",
       "signature": "modify\u0000[62383,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "Layout",
+      "fullName": "FSC_TasaCambioCredito-Tasa de cambio Layout",
+      "signature": "modify\u0000[73642,\"2026-10-22T03:54:36.000+0000\",\"00hVC000007k2VqYAI\",false,true]"
     },
     {
       "xmlName": "Layout",
@@ -8541,12 +9026,12 @@
     {
       "xmlName": "Layout",
       "fullName": "ResidentialLoanApplication-Solicitud de crédito Consumo",
-      "signature": "modify\u0000[73185,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73688,\"2026-10-23T12:05:38.000+0000\",\"00hVC0000067vCbYAI\",false,true]"
     },
     {
       "xmlName": "Layout",
       "fullName": "ResidentialLoanApplication-Solicitud de crédito Hipotecario",
-      "signature": "modify\u0000[73186,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73689,\"2026-10-23T12:05:38.000+0000\",\"00hVC000006WndFYAS\",false,true]"
     },
     {
       "xmlName": "Layout",
@@ -8556,7 +9041,7 @@
     {
       "xmlName": "Layout",
       "fullName": "ResidentialLoanApplication-Solicitud de crédito Vehículo",
-      "signature": "modify\u0000[73187,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73690,\"2026-10-23T12:05:38.000+0000\",\"00hVC000006WnVBYA0\",false,true]"
     },
     {
       "xmlName": "Layout",
@@ -8596,12 +9081,12 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "fsc_ChecklistDocs",
-      "signature": "modify\u0000[71879,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73649,\"2026-10-22T04:31:01.000+0000\",\"0RdVC000000ichV0AQ\",false,true]"
     },
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "fsc_EditarDocumentoAnalisis",
-      "signature": "modify\u0000[72069,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73760,\"2026-10-26T19:30:14.000+0000\",\"0RdVC000000x9H20AI\",false,true]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -8621,7 +9106,7 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "fsc_NuevaSolicitudCreditoAction",
-      "signature": "add\u0000[68606,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73717,\"2026-10-23T17:05:20.000+0000\",\"0RdVC000000x08t0AA\",false,true]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -8631,12 +9116,17 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "fsc_RlaAcciones",
-      "signature": "modify\u0000[73352,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73775,\"2026-10-26T20:34:01.000+0000\",\"0RdVC000000idaO0AQ\",false,true]"
     },
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "fsc_RlaFieldHistory",
       "signature": "modify\u0000[55006,\"unknown\",\"unknown\",true,false]"
+    },
+    {
+      "xmlName": "LightningComponentBundle",
+      "fullName": "fsc_RlaFormalizacionGarantias",
+      "signature": "modify\u0000[73505,\"2026-10-19T03:13:24.000+0000\",\"0RdVC0000011NGa0AM\",false,false]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -8656,7 +9146,7 @@
     {
       "xmlName": "LightningComponentBundle",
       "fullName": "fsc_loanApplicantManager",
-      "signature": "modify\u0000[71850,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73708,\"2026-10-23T16:16:57.000+0000\",\"0RdVC000000rZAv0AM\",false,true]"
     },
     {
       "xmlName": "LightningComponentBundle",
@@ -8747,6 +9237,41 @@
       "xmlName": "ListView",
       "fullName": "FinancialAccount.All_FinancialAccounts",
       "signature": "add\u0000[53520,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ListView",
+      "fullName": "ResidentialLoanApplication.FSC_Formalizacion_CDD",
+      "signature": "modify\u0000[73512,\"2026-10-19T03:13:24.000+0000\",\"00BVC00000Bm92l2AB\",false,true]"
+    },
+    {
+      "xmlName": "ListView",
+      "fullName": "ResidentialLoanApplication.FSC_Formalizacion_Custodia",
+      "signature": "modify\u0000[73513,\"2026-10-19T03:13:24.000+0000\",\"00BVC00000Bm92m2AB\",false,true]"
+    },
+    {
+      "xmlName": "ListView",
+      "fullName": "ResidentialLoanApplication.FSC_Formalizacion_Disponibles_Entrega",
+      "signature": "modify\u0000[73514,\"2026-10-19T03:13:24.000+0000\",\"00BVC00000Bm92n2AB\",false,true]"
+    },
+    {
+      "xmlName": "ListView",
+      "fullName": "ResidentialLoanApplication.FSC_Formalizacion_Ejecucion_Operaciones",
+      "signature": "modify\u0000[73515,\"2026-10-19T03:13:24.000+0000\",\"00BVC00000Bm92o2AB\",false,true]"
+    },
+    {
+      "xmlName": "ListView",
+      "fullName": "ResidentialLoanApplication.FSC_Formalizacion_En_Proceso",
+      "signature": "modify\u0000[73516,\"2026-10-19T03:13:24.000+0000\",\"00BVC00000Bm92p2AB\",false,true]"
+    },
+    {
+      "xmlName": "ListView",
+      "fullName": "ResidentialLoanApplication.FSC_Formalizacion_Mantenimiento_Ops",
+      "signature": "modify\u0000[73517,\"2026-10-19T03:13:24.000+0000\",\"00BVC00000Bm92q2AB\",false,true]"
+    },
+    {
+      "xmlName": "ListView",
+      "fullName": "ResidentialLoanApplication.FSC_Formalizacion_Pendientes_Oficial",
+      "signature": "modify\u0000[73518,\"2026-10-19T03:13:24.000+0000\",\"00BVC00000Bm92r2AB\",false,true]"
     },
     {
       "xmlName": "ListView",
@@ -9075,6 +9600,11 @@
     },
     {
       "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_CDD",
+      "signature": "modify\u0000[73526,\"2026-10-19T03:13:24.000+0000\",\"0PSVC000001vtf74AA\",false,true]"
+    },
+    {
+      "xmlName": "PermissionSet",
       "fullName": "FSC_PS_Captura",
       "signature": "modify\u0000[72921,\"unknown\",\"unknown\",false,false]"
     },
@@ -9102,6 +9632,11 @@
       "xmlName": "PermissionSet",
       "fullName": "FSC_PS_Generacion_Pagares_Contratos",
       "signature": "modify\u0000[72772,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "PermissionSet",
+      "fullName": "FSC_PS_MantenimientoOperaciones",
+      "signature": "modify\u0000[73527,\"2026-10-19T03:13:24.000+0000\",\"0PSVC000001vtf84AA\",false,true]"
     },
     {
       "xmlName": "PermissionSet",
@@ -9470,6 +10005,11 @@
     },
     {
       "xmlName": "Queue",
+      "fullName": "FSC_ColaCDD",
+      "signature": "modify\u0000[73508,\"2026-10-19T03:13:24.000+0000\",\"00GVC00000Bp5FT2AZ\",false,true]"
+    },
+    {
+      "xmlName": "Queue",
       "fullName": "FSC_ColaCaptura",
       "signature": "modify\u0000[71910,\"unknown\",\"unknown\",false,false]"
     },
@@ -9550,6 +10090,11 @@
     },
     {
       "xmlName": "Queue",
+      "fullName": "FSC_ColaMantenimientoOperaciones",
+      "signature": "modify\u0000[73509,\"2026-10-19T03:13:24.000+0000\",\"00GVC00000Bp5FU2AZ\",false,true]"
+    },
+    {
+      "xmlName": "Queue",
       "fullName": "FSC_ColaOperaciones",
       "signature": "modify\u0000[71911,\"unknown\",\"unknown\",false,false]"
     },
@@ -9626,7 +10171,7 @@
     {
       "xmlName": "Queue",
       "fullName": "FSC_GestionFormalizacion",
-      "signature": "add\u0000[73336,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73336,\"unknown\",\"unknown\",false,false]"
     },
     {
       "xmlName": "Queue",
@@ -9700,6 +10245,11 @@
     },
     {
       "xmlName": "RecordType",
+      "fullName": "FinServ__ContactContactRelation__c.Referencia",
+      "signature": "modify\u0000[73696,\"2026-10-23T16:15:41.000+0000\",\"012VC000003Vy7pYAC\",false,true]"
+    },
+    {
+      "xmlName": "RecordType",
       "fullName": "FinServ__FinancialAccountRole__c.FinServ__AccountRole",
       "signature": "add\u0000[56786,\"unknown\",\"unknown\",false,false]"
     },
@@ -9731,22 +10281,22 @@
     {
       "xmlName": "RecordType",
       "fullName": "ResidentialLoanApplication.FSC_Solicitud_Credito_Consumo",
-      "signature": "add\u0000[72805,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73447,\"2026-10-18T21:52:43.000+0000\",\"012U7000004BmobIAC\",false,true]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "ResidentialLoanApplication.FSC_Solicitud_Credito_Hipotecario",
-      "signature": "add\u0000[72834,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73448,\"2026-10-18T21:52:43.000+0000\",\"012U7000004BmqDIAS\",false,true]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "ResidentialLoanApplication.FSC_Solicitud_Credito_PYME",
-      "signature": "add\u0000[72807,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73449,\"2026-10-18T21:52:43.000+0000\",\"012U7000004BmmzIAC\",false,true]"
     },
     {
       "xmlName": "RecordType",
       "fullName": "ResidentialLoanApplication.FSC_Solicitud_Credito_Vehiculo",
-      "signature": "add\u0000[72835,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73450,\"2026-10-18T21:52:43.000+0000\",\"012U7000004BmrpIAC\",false,true]"
     },
     {
       "xmlName": "RecordType",
@@ -9931,7 +10481,7 @@
     {
       "xmlName": "Report",
       "fullName": "Reportesdecreditos/FSC_Consumo_MontosSolicitadoVsAprobado",
-      "signature": "modify\u0000[72898,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73566,\"2026-10-21T17:17:36.000+0000\",\"00OVC000003uOEQ2A2\",false,true]"
     },
     {
       "xmlName": "Report",
@@ -9990,6 +10540,11 @@
     },
     {
       "xmlName": "Report",
+      "fullName": "Reportesdecreditos/FSC_Formalizacion_DisponiblesEntrega",
+      "signature": "modify\u0000[73520,\"2026-10-19T03:13:24.000+0000\",\"00OVC000004x1c52AA\",false,true]"
+    },
+    {
+      "xmlName": "Report",
       "fullName": "Reportesdecreditos/FSC_Hipotecario_ConversionPersonal",
       "signature": "delete\u0000[62681,\"unknown\",\"unknown\",true,false]"
     },
@@ -10006,7 +10561,7 @@
     {
       "xmlName": "Report",
       "fullName": "Reportesdecreditos/FSC_Hipotecario_MontosSolicitadoVsAprobado",
-      "signature": "modify\u0000[72902,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73567,\"2026-10-21T17:17:36.000+0000\",\"00OVC000003uOEW2A2\",false,true]"
     },
     {
       "xmlName": "Report",
@@ -10086,7 +10641,7 @@
     {
       "xmlName": "Report",
       "fullName": "Reportesdecreditos/FSC_PYME_MontosSolicitadoVsAprobado",
-      "signature": "modify\u0000[72906,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73568,\"2026-10-21T17:17:36.000+0000\",\"00OVC000003uOEc2AM\",false,true]"
     },
     {
       "xmlName": "Report",
@@ -10145,6 +10700,11 @@
     },
     {
       "xmlName": "Report",
+      "fullName": "Reportesdecreditos/FSC_Solicitudes_de_credito_WF02",
+      "signature": "modify\u0000[73452,\"2026-10-18T21:52:43.000+0000\",\"00OVC000004vqu12AA\",false,true]"
+    },
+    {
+      "xmlName": "Report",
       "fullName": "Reportesdecreditos/FSC_Vehiculo_ConversionPersonal",
       "signature": "delete\u0000[62679,\"unknown\",\"unknown\",true,false]"
     },
@@ -10161,7 +10721,7 @@
     {
       "xmlName": "Report",
       "fullName": "Reportesdecreditos/FSC_Vehiculo_MontosSolicitadoVsAprobado",
-      "signature": "modify\u0000[72910,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73569,\"2026-10-21T17:17:36.000+0000\",\"00OVC000003uOEi2AM\",false,true]"
     },
     {
       "xmlName": "Report",
@@ -10261,7 +10821,12 @@
     {
       "xmlName": "ReportType",
       "fullName": "FGC_SolicitudDeCredito",
-      "signature": "modify\u0000[73338,\"unknown\",\"unknown\",false,false]"
+      "signature": "modify\u0000[73451,\"2026-10-18T21:52:43.000+0000\",\"070VC000009xQ7uYAE\",false,true]"
+    },
+    {
+      "xmlName": "ReportType",
+      "fullName": "FSC_Formalizacion_Garantias",
+      "signature": "modify\u0000[73519,\"2026-10-19T03:13:24.000+0000\",\"070VC00000DH4sXYAT\",false,true]"
     },
     {
       "xmlName": "Settings",
@@ -10345,6 +10910,11 @@
     },
     {
       "xmlName": "ValidationRule",
+      "fullName": "FSC_Garantia__c.FSC_SaldoHipotecaNoNegativo",
+      "signature": "add\u0000[73638,\"2026-10-22T03:54:35.000+0000\",\"03dVC000001lzDxYAI\",false,false]"
+    },
+    {
+      "xmlName": "ValidationRule",
       "fullName": "FSC_Garantia__c.FSC_ValidarAntiguedadVehiculo",
       "signature": "add\u0000[73175,\"unknown\",\"unknown\",false,false]"
     },
@@ -10352,6 +10922,21 @@
       "xmlName": "ValidationRule",
       "fullName": "FSC_Garantia__c.FSC_ValidarPlazoVehiculo",
       "signature": "add\u0000[73176,\"unknown\",\"unknown\",false,false]"
+    },
+    {
+      "xmlName": "ValidationRule",
+      "fullName": "FSC_Garantia__c.FSC_ValorMejorasPositivo",
+      "signature": "add\u0000[73639,\"2026-10-22T03:54:35.000+0000\",\"03dVC000001lzDyYAI\",false,false]"
+    },
+    {
+      "xmlName": "ValidationRule",
+      "fullName": "ResidentialLoanApplication.FSC_ConservarProcesamientoManual",
+      "signature": "modify\u0000[73394,\"2026-10-18T04:38:03.000+0000\",\"03dVC000001lRgvYAE\",false,true]"
+    },
+    {
+      "xmlName": "ValidationRule",
+      "fullName": "ResidentialLoanApplication.FSC_ExigirEvidenciasDesembolsoAPI",
+      "signature": "modify\u0000[73411,\"2026-10-18T06:38:07.000+0000\",\"03dVC000001lSGPYA2\",false,true]"
     },
     {
       "xmlName": "ValidationRule",

@@ -263,6 +263,7 @@ global with sharing class FSC_GenerarPDF implements omnistudio.VlocityOpenInterf
 				Account.Name,
 				Account.FirstName,
 				Account.LastName,
+				Account.Suffix,
 				Account.ACC_NumIdentificacion__c
 			FROM ResidentialLoanApplication
 			WHERE Id = :rlaId
@@ -319,6 +320,8 @@ global with sharing class FSC_GenerarPDF implements omnistudio.VlocityOpenInterf
 			if (!String.isBlank(rla.Account.LastName)) {
 				accountNameParts.add(rla.Account.LastName);
 			}
+			if (!String.isBlank(rla.Account.Suffix))
+				accountNameParts.add(rla.Account.Suffix);
 		}
 		String accountFullName = String.join(accountNameParts, ' ');
 		if (String.isBlank(accountFullName) && rla.Account != null) {

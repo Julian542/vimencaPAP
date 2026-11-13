@@ -1,0 +1,98 @@
+<template>
+  <template if:true={ready}>
+    <template if:true={hasSteps}>
+      <div class="slds-path" role="application">
+        <div class="slds-grid slds-path__track">
+          <!-- Flecha izquierda -->
+          <div class="nav-btn">
+            <lightning-button-icon
+              icon-name="utility:chevronleft"
+              variant="bare"
+              alternative-text="Anterior"
+              onclick={handlePrev}
+              disabled={disablePrev}
+            >
+            </lightning-button-icon>
+          </div>
+
+          <div class="slds-grid slds-path__scroller-container">
+            <div class="slds-path__scroller" role="listbox" aria-orientation="horizontal">
+              <ul class="slds-path__nav" role="presentation">
+                <template for:each={stepsVisible} for:item="s">
+                  <li key={s.value} class={s.className} role="presentation">
+                    <a
+                      role="option"
+                      aria-selected={s.isCurrent}
+                      class="slds-path__link"
+                      data-value={s.value}
+                      onclick={handleStepClick}
+                    >
+                      <span class="slds-path__stage">
+                        <lightning-icon icon-name="utility:check" size="x-small"></lightning-icon>
+                        <span class="slds-assistive-text">Stage Complete</span>
+                      </span>
+                      <span class="slds-path__title">{s.label}</span>
+                    </a>
+                  </li>
+                </template>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Flecha derecha -->
+          <div class="nav-btn">
+            <lightning-button-icon
+              icon-name="utility:chevronright"
+              variant="bare"
+              alternative-text="Siguiente"
+              onclick={handleNext}
+              disabled={disableNext}
+            >
+            </lightning-button-icon>
+          </div>
+
+          <!-- Indicador de página -->
+          <div class="page-indicator slds-text-body_small slds-text-color_weak">
+            {pageLabel}
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <template if:false={hasSteps}>
+      <div class="slds-box slds-theme_alert-texture slds-theme_warning">
+        <strong>No hay subestados para mostrar.</strong>
+        <div class="slds-m-top_x-small">
+          Status actual: <strong>{currentStatus}</strong>
+        </div>
+      </div>
+    </template>
+
+    <template if:true={uiMessage}>
+      <div class="slds-m-top_small slds-text-body_small">
+        {uiMessage}
+      </div>
+    </template>
+
+    <!-- DEBUG EN PANTALLA -->
+    <!-- <div class="slds-m-top_small slds-text-body_small">
+      <div><strong>DEBUG</strong></div>
+      <div>Status: <strong>{currentStatus}</strong></div>
+      <div>ControllerIndex: <strong>{dbg_controllerIndex}</strong></div>
+      <div>Matched controller key: <strong>{dbg_matchedControllerKey}</strong></div>
+      <div>Total values: <strong>{dbg_totalValues}</strong></div>
+      <div>Filtered values: <strong>{dbg_filteredValues}</strong></div>
+      <div>validFor type (sample): <strong>{dbg_validForType}</strong></div>
+      <div>validFor sample: <span>{dbg_validForSample}</span></div>
+      <div>Current substatus passes validFor?: <strong>{dbg_validForHit}</strong></div>
+      <div>controllerValues preview: <span>{dbg_controllerKeysPreview}</span></div>
+    </div> -->
+
+    <!-- <div class="slds-m-top_small slds-text-body_small">
+      Subestado actual: <strong>{currentSubStatus}</strong>
+      <template if:true={pendingSubStatus}>
+        · Seleccionado: <strong>{pendingSubStatus}</strong>
+      </template>
+    </div> -->
+  </template>
+</template>

@@ -1,0 +1,6 @@
+<apex:component layout="none">
+	<div class="contrato-pie-pagina">
+		<div>Contrato aprobado por la Superintendencia de Bancos mediante Oficio No.000243 de fecha veinticuatro (24) de enero de dos mil diecinueve (2019). El Articulo 16 de este contrato fue aprobado por la Superintendencia de Bancos mediante Oficio No. OFC-PRO-202422223 de fecha catorce (14) de junio de dos mil veinticuatro (2024).</div>
+		<div class="contrato-numero-pagina"></div>
+	</div>
+</apex:component>

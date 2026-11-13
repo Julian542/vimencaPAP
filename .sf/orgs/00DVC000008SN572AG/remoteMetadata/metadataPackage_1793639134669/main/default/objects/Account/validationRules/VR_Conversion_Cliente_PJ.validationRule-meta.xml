@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Conversion_Cliente_PJ</fullName>
+    <active>true</active>
+    <description>Regla de validacion para la conversion de prospect a cliente PJ. 
+1.4	MAS INFORMACION: CAMPOS OBLIGATORIOS</description>
+    <errorConditionFormula>AND(
+    $Label.Validaciones == &apos;Si&apos;,
+    ACC_Persona_Fisica__c = false,
+    ISPICKVAL(ACC_Estado__c,&apos;CONVERTIR&apos;),
+        OR
+        (   ISBLANK(ACC_Nombre_Corto_Comercial__c),
+		    ISBLANK(ACC_RNC__c),
+			ISBLANK(ACC_Fecha_Cierre_Fiscal__c),
+            ISPICKVAL(ACC_Tipo_Cliente_PJ__c,&apos;&apos;),
+			ISBLANK(ACC_Actividad_Economica__c),
+			ISPICKVAL(ACC_Tipo_Actividad__c,&apos;&apos;),
+		    ISPICKVAL(ACC_Tipo_Sector__c,&apos;&apos;),
+			ISPICKVAL(ACC_Clasificacion_Empresa__c,&apos;&apos;),
+			ISPICKVAL(ACC_Nacionalidad__c,&apos;&apos;),
+		    ISBLANK(ACC_Fecha_Fundacion__c),
+			ISPICKVAL(ACC_Tipo_Persona_PJ__c,&apos;&apos;)
+        )
+    )</errorConditionFormula>
+    <errorMessage>Se validan que los siguientes campos este informados:
+Nombre Comercial
+RNC
+Fecha de Cierre Fiscal
+Tipo de Cliente
+Actividad Economica SIB
+Tipo de Actividad
+Tipo de Sector
+Clasificacion de Empresa
+Nacionalidad
+Fecha de Fundacion
+Tipo de Persona</errorMessage>
+</ValidationRule>

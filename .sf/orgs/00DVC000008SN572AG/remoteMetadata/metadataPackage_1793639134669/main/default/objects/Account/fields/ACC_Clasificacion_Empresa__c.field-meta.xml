@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ACC_Clasificacion_Empresa__c</fullName>
+    <label>Clasificación de la empresa</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>ACC_Tipo_Organizacion__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Corporativa</fullName>
+                <default>false</default>
+                <label>Corporativa</label>
+            </value>
+            <value>
+                <fullName>Mediana</fullName>
+                <default>false</default>
+                <label>Mediana</label>
+            </value>
+            <value>
+                <fullName>Pequeña</fullName>
+                <default>false</default>
+                <label>Pequeña</label>
+            </value>
+            <value>
+                <fullName>Micro</fullName>
+                <default>false</default>
+                <label>Micro</label>
+            </value>
+            <value>
+                <fullName>Instituciones del Sector Público No Financiero</fullName>
+                <default>false</default>
+                <label>Instituciones del Sector Público No Financiero</label>
+            </value>
+            <value>
+                <fullName>Instituciones del Sector Público Financiero</fullName>
+                <default>false</default>
+                <label>Instituciones del Sector Público Financiero</label>
+            </value>
+            <value>
+                <fullName>Instituciones sin fines de lucro</fullName>
+                <default>false</default>
+                <label>Instituciones sin fines de lucro</label>
+            </value>
+            <value>
+                <fullName>Fideicomisos</fullName>
+                <default>false</default>
+                <label>Fideicomisos</label>
+            </value>
+            <value>
+                <fullName>No informado en SIEBEL</fullName>
+                <default>false</default>
+                <label>No informado en SIEBEL</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>CONDOMINIOS</controllingFieldValue>
+            <controllingFieldValue>ONG EXTRANJERA PÚBLICA</controllingFieldValue>
+            <controllingFieldValue>PARTIDOS POLITICOS</controllingFieldValue>
+            <controllingFieldValue>EMBAJADAS Y/O DELEGACIONES DIPLOMÁTICAS</controllingFieldValue>
+            <controllingFieldValue>ASOCIACIONES RELIGIOSAS DE LA IGLESIA CATÓLICA</controllingFieldValue>
+            <controllingFieldValue>INSTITUCIONES SIN FINES DE LUCRO EXTRANJERAS</controllingFieldValue>
+            <controllingFieldValue>ASOCIACIONES SIN FINES DE LUCRO</controllingFieldValue>
+            <controllingFieldValue>SINDICATOS EMPRESARIALES</controllingFieldValue>
+            <controllingFieldValue>ONG EXTRANJERA PRIVADA</controllingFieldValue>
+            <valueName>Instituciones sin fines de lucro</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>MUNICIPIOS Y DISTRITOS MUNICIPALES</controllingFieldValue>
+            <controllingFieldValue>INSTITUCIONES DEL SECTOR PÚBLICO NO FINANCIERO</controllingFieldValue>
+            <valueName>Instituciones del Sector Público No Financiero</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>INSTITUCIONES DEL SECTOR PÚBLICO FINANCIERO: BNV Y BANCO AGRICOLA</controllingFieldValue>
+            <valueName>Instituciones del Sector Público Financiero</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SOCIEDADES ANÓNIMAS (S.A.)</controllingFieldValue>
+            <controllingFieldValue>EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA (E.I.R.L.)</controllingFieldValue>
+            <controllingFieldValue>SOCIEDAD DE RESPONSABILIDAD LIMITADA (S.R.L.)</controllingFieldValue>
+            <controllingFieldValue>SOCIEDADES ANÓNIMAS SIMPLIFICADAS (S.A.S.)</controllingFieldValue>
+            <controllingFieldValue>SOCIEDADES EXTRANJERAS</controllingFieldValue>
+            <controllingFieldValue>CONSORCIOS</controllingFieldValue>
+            <controllingFieldValue>SOCIEDADES ACCIDENTALES O EN PARTICIPACIÓN</controllingFieldValue>
+            <controllingFieldValue>COOPERATIVAS</controllingFieldValue>
+            <controllingFieldValue>FONDOS DE INVERSION</controllingFieldValue>
+            <valueName>Corporativa</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SOCIEDADES ANÓNIMAS (S.A.)</controllingFieldValue>
+            <controllingFieldValue>EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA (E.I.R.L.)</controllingFieldValue>
+            <controllingFieldValue>SOCIEDAD DE RESPONSABILIDAD LIMITADA (S.R.L.)</controllingFieldValue>
+            <controllingFieldValue>SOCIEDADES ANÓNIMAS SIMPLIFICADAS (S.A.S.)</controllingFieldValue>
+            <controllingFieldValue>SOCIEDADES EXTRANJERAS</controllingFieldValue>
+            <controllingFieldValue>CONSORCIOS</controllingFieldValue>
+            <controllingFieldValue>SOCIEDADES ACCIDENTALES O EN PARTICIPACIÓN</controllingFieldValue>
+            <controllingFieldValue>COOPERATIVAS</controllingFieldValue>
+            <controllingFieldValue>FONDOS DE INVERSION</controllingFieldValue>
+            <valueName>Mediana</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SOCIEDADES ANÓNIMAS (S.A.)</controllingFieldValue>
+            <controllingFieldValue>EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA (E.I.R.L.)</controllingFieldValue>
+            <controllingFieldValue>SOCIEDAD DE RESPONSABILIDAD LIMITADA (S.R.L.)</controllingFieldValue>
+            <controllingFieldValue>SOCIEDADES ANÓNIMAS SIMPLIFICADAS (S.A.S.)</controllingFieldValue>
+            <controllingFieldValue>SOCIEDADES EXTRANJERAS</controllingFieldValue>
+            <controllingFieldValue>CONSORCIOS</controllingFieldValue>
+            <controllingFieldValue>SOCIEDADES ACCIDENTALES O EN PARTICIPACIÓN</controllingFieldValue>
+            <controllingFieldValue>COOPERATIVAS</controllingFieldValue>
+            <controllingFieldValue>FONDOS DE INVERSION</controllingFieldValue>
+            <valueName>Pequeña</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>SOCIEDADES ANÓNIMAS (S.A.)</controllingFieldValue>
+            <controllingFieldValue>EMPRESA INDIVIDUAL DE RESPONSABILIDAD LIMITADA (E.I.R.L.)</controllingFieldValue>
+            <controllingFieldValue>SOCIEDAD DE RESPONSABILIDAD LIMITADA (S.R.L.)</controllingFieldValue>
+            <controllingFieldValue>SOCIEDADES ANÓNIMAS SIMPLIFICADAS (S.A.S.)</controllingFieldValue>
+            <controllingFieldValue>SOCIEDADES EXTRANJERAS</controllingFieldValue>
+            <controllingFieldValue>CONSORCIOS</controllingFieldValue>
+            <controllingFieldValue>SOCIEDADES ACCIDENTALES O EN PARTICIPACIÓN</controllingFieldValue>
+            <controllingFieldValue>COOPERATIVAS</controllingFieldValue>
+            <controllingFieldValue>FONDOS DE INVERSION</controllingFieldValue>
+            <valueName>Micro</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>FIDEICOMISOS</controllingFieldValue>
+            <valueName>Fideicomisos</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

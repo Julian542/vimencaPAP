@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ResultadoGananciasPerdida__c</fullName>
+    <formula>FSC_GananciasBrutas__c +  FSC_OtrosIngresos__c - ( FSC_Total_Gastos_Grales_y_Adm__c +  FSC_Total_gastos_personales__c +  FSC_Total_gastos_financieros__c )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Resultado</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Currency</type>
+</CustomField>

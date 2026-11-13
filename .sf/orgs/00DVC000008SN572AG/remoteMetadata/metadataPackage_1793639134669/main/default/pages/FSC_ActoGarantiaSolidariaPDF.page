@@ -1,0 +1,136 @@
+<apex:page standardController="ResidentialLoanApplication"
+    extensions="FSC_ActoGarantiaSolidariaCtrl"
+    applyBodyTag="false" applyHtmlTag="false" showHeader="false" sidebar="false"
+    standardStylesheets="false" cache="false" language="es" renderAs="pdf">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <style type="text/css">
+                @page {
+                    size: legal;
+                    margin: 18.5mm 17.5mm 23.5mm 16mm;
+                    @bottom-center { content: counter(page); font-family: Calibri, Arial, sans-serif; font-size: 9pt; }
+                }
+                body { margin: 0; padding: 0; color: #000; font-family: Calibri, Arial, sans-serif; font-size: 12pt; line-height: 1.15; }
+                .title { margin: 0 0 12pt; text-align: center; font-weight: 700; }
+                .paragraph { margin: 0 0 10pt; text-align: justify; }
+                .signature-section { margin-top: 18pt; page-break-inside: avoid; }
+                .signature-heading { margin: 0 0 28pt; }
+                .signature-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+                .signature-cell { width: 50%; padding: 0 12pt 18pt; text-align: center; vertical-align: top; }
+                .signature-line { border-top: 1px solid #000; margin-bottom: 3pt; }
+                .notary-block { margin-top: 14pt; page-break-inside: avoid; }
+                .notary-signature { width: 48%; margin: 34pt auto 0; text-align: center; }
+                .reference { margin-top: 16pt; font-size: 8pt; }
+            </style>
+        </head>
+        <body>
+            <div class="title">CONTRATO DE SOLIDARIDAD:</div>
+
+            <p class="paragraph">
+                En consideración de que en fecha {!fechaContrato}, fue suscrito un {!documentoBase} por el monto de
+                {!montoLetras} ({!simboloMoneda}{!montoNumero}), entre: BANCO MÚLTIPLE VIMENCA, S. A., entidad de
+                intermediación financiera organizada de conformidad con las leyes de la República Dominicana, RNC No.
+                1-01-02141-1, Registro Mercantil No. 10019SD, con domicilio social en la Avenida Abraham Lincoln No. 306,
+                Sector La Julia, Santo Domingo, Distrito Nacional, debidamente representada por su
+                {!representanteBanco1.cargo}, {!representanteBanco1.tratamiento} {!representanteBanco1.nombreCompleto},
+                {!representanteBanco1.nacionalidad}, mayor de edad, {!representanteBanco1.estadoCivil}, portador(a) de la
+                cédula de identidad y electoral No. {!representanteBanco1.identificacion}, y por su
+                {!representanteBanco2.cargo}, {!representanteBanco2.tratamiento} {!representanteBanco2.nombreCompleto},
+                {!representanteBanco2.nacionalidad}, mayor de edad, {!representanteBanco2.estadoCivil}, portador(a) de la
+                cédula de identidad y electoral No. {!representanteBanco2.identificacion}, entidad que en lo adelante se
+                denominará LA ENTIDAD ACREEDORA; y {!generalesDeudor}, quien en lo adelante se denominará LA DEUDORA.
+                {!generalesFiadores}, quienes por medio del presente documento se constituyen como FIADORES SOLIDARIOS y
+                GARANTIZAN SOLIDARIAMENTE el pago a LA ENTIDAD ACREEDORA hasta la suma de {!montoLetras}
+                ({!simboloMoneda}{!montoNumero}), correspondiente al documento antes indicado, incluyendo capital,
+                intereses, comisiones, gastos, costas y honorarios en que incurra LA ENTIDAD ACREEDORA para hacer efectivo
+                o reclamar el pago, quedando limitada la garantía al monto antes establecido y sus accesorios. La obligación
+                garantizada devengará intereses mensuales sobre saldos insolutos de capital a razón de {!tasaLetras} por
+                ciento ({!tasaNumero}%) anual, calculados sobre la base de un año de trescientos sesenta (360) días.
+                {!formaPago}
+            </p>
+
+            <p class="paragraph">
+                Para seguridad y garantía del pago de las sumas prestadas, así como de los intereses y demás obligaciones a
+                cargo de LA DEUDORA, los FIADORES SOLIDARIOS se constituyen en fiadores y se comprometen al pago de la deuda
+                en las mismas condiciones que LA DEUDORA. Las obligaciones que se contraen en el presente contrato son
+                indivisibles entre LA DEUDORA y los FIADORES SOLIDARIOS, por lo que estos expresamente renuncian a los
+                beneficios de excusión y división que pudieran oponer a LA ENTIDAD ACREEDORA.
+            </p>
+
+            <p class="paragraph">
+                Todo el dinero o efectos de comercio recibidos por LA ENTIDAD ACREEDORA de manos de LA DEUDORA, o de
+                cualquier persona que los entregue por o para LA DEUDORA, se aplicará por LA ENTIDAD ACREEDORA a la cuenta
+                de LA DEUDORA; y los FIADORES SOLIDARIOS no tendrán derecho a reclamar por lo que hayan pagado a LA ENTIDAD
+                ACREEDORA en ejecución de este contrato, no obstante cualquier crédito que tengan a su vez contra LA
+                DEUDORA, ni el beneficio de suma, dividendo o garantía alguna que tenga LA ENTIDAD ACREEDORA, recibida de LA
+                DEUDORA, salvo el exceso del saldo final adeudado por LA DEUDORA.
+            </p>
+
+            <p class="paragraph">
+                Esta garantía es continua y cubrirá todas las responsabilidades y deudas en que LA DEUDORA incurra respecto
+                a LA ENTIDAD ACREEDORA, hasta que quienes suscriben, mediante pago del saldo que LA DEUDORA adeude a LA
+                ENTIDAD ACREEDORA, comuniquen por escrito que no se realicen más negocios con LA DEUDORA bajo la garantía de
+                esta fianza.
+            </p>
+
+            <p class="paragraph">
+                Cualquier cuenta liquidada o fijada entre LA ENTIDAD ACREEDORA y LA DEUDORA, o admitida por LA DEUDORA,
+                podrá ser alegada por LA ENTIDAD ACREEDORA y se admitirá como prueba evidente contra quienes suscriben,
+                respecto del saldo o cantidad que allí aparezca deber LA DEUDORA a LA ENTIDAD ACREEDORA, sin que pueda ser
+                disputada o puesta en duda por los FIADORES SOLIDARIOS.
+            </p>
+
+            <p class="paragraph">
+                LA ENTIDAD ACREEDORA podrá reclamar el pago enviando un aviso por correo a los FIADORES SOLIDARIOS que
+                suscriben, o a sus representantes, sin necesidad de notificación de alguacil, dirigido a la última
+                residencia, domicilio o dirección postal de cualquiera de ellos.
+            </p>
+
+            <p class="paragraph">
+                Las partes contratantes acuerdan por el presente contrato que en caso de que se ejecutare el mismo, se regirá
+                dicha ejecución por las leyes de la República Dominicana.
+            </p>
+
+            <p class="paragraph">
+                HECHO, REDACTADO Y FIRMADO en tres (3) originales de un mismo tenor y efecto, uno para cada una de las partes
+                contratantes, en {!lugarFirma}, a los {!fechaActoDiaLetras} ({!fechaActoDiaNumero}) días del mes de
+                {!fechaActoMes} del año {!fechaActoAnoLetras} ({!fechaActoAnoNumero}).
+            </p>
+
+            <div class="signature-section">
+                <div class="signature-heading">Por LA ENTIDAD ACREEDORA:</div>
+                <table class="signature-table"><tr>
+                    <td class="signature-cell"><div class="signature-line"></div><div>{!representanteBanco1.nombreCompleto}</div></td>
+                    <td class="signature-cell"><div class="signature-line"></div><div>{!representanteBanco2.nombreCompleto}</div></td>
+                </tr></table>
+
+                <div class="signature-heading">Por los FIADORES SOLIDARIOS:</div>
+                <table class="signature-table"><tr>
+                    <apex:repeat value="{!fiadores}" var="fiador">
+                        <td class="signature-cell"><div class="signature-line"></div><div>{!fiador.nombre}</div></td>
+                    </apex:repeat>
+                </tr></table>
+            </div>
+
+            <div class="notary-block">
+                <p class="paragraph">
+                    YO, {!notario.tratamiento} {!notario.nombreCompleto}, Notario Público de los del Número para
+                    {!notario.jurisdiccionNotario}, matrícula No. {!notario.matriculaNotario}, del Colegio Dominicano de
+                    Notarios, CERTIFICO Y DOY FE de que por ante mí fueron puestas las firmas de {!nombresComparecientes},
+                    cuyas generales constan y quienes me han manifestado que esas son las firmas que acostumbran a usar en
+                    todos los actos de sus vidas públicas y privadas. En {!lugarFirma}, a los {!fechaActoDiaLetras}
+                    ({!fechaActoDiaNumero}) días del mes de {!fechaActoMes} del año {!fechaActoAnoLetras}
+                    ({!fechaActoAnoNumero}).
+                </p>
+                <div class="notary-signature">
+                    <div class="signature-line"></div>
+                    <div>{!notario.nombreCompleto}</div>
+                    <div>Notario Público</div>
+                </div>
+            </div>
+
+            <div class="reference">{!referenciaLegal}</div>
+        </body>
+    </html>
+</apex:page>

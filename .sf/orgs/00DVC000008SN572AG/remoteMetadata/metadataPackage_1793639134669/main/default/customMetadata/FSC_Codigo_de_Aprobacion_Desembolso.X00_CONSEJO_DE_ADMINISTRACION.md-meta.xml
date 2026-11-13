@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>00 - CONSEJO DE ADMINISTRACION</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_Codigo_de_Aprobacion__c</field>
+        <value xsi:type="xsd:string">00</value>
+    </values>
+    <values>
+        <field>FSC_Descripcion__c</field>
+        <value xsi:type="xsd:string">00 - CONSEJO DE ADMINISTRACION: CRÉDITOS NUEVOS POR MONTOS SUPERIORES A LOS RD$100,000,000.00 O SU EQUIVALENCIA EN MONEDA EXTRANJERA (TOMANDO COMO REFERENCIA LA TASA DE VENTA DEL BANCO CENTRAL AL DÍA DE LA APROBACIÓN), PARA UN CLIENTE O GRUPO DE RIESGO, O CUYA NUEVA SOLICITUD SEA POR UN MONTO SUPERIOR AL 10% DE DICHA DEUDA CONSOLIDADA (EXCLUYENDO CRÉDITOS COMERCIALES CON GARANTÍA SOBRE CERTIFICADOS DE DEPÓSITO O TÍTULOS Y/O VALORES DEL MINISTERIO DE HACIENDA Y/O DEL BANCO CENTRAL Y OTROS TÍTULOS VALORES APROBADOS EN NUESTRA POLÍTICA).</value>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,132 @@
+<template>
+    <lightning-card title="">
+        <div class="wrapper">
+
+            <div class="toolbar">
+                <div class="toolbarActions">
+                    <lightning-button
+                        label="Refrescar"
+                        onclick={handleRefresh}
+                        variant="neutral">
+                    </lightning-button>
+
+                    <lightning-button
+                        label="Limpiar filtros"
+                        onclick={handleClearFilters}
+                        variant="neutral">
+                    </lightning-button>
+                </div>
+
+                <div class="summary">
+                    {summaryText}
+                </div>
+            </div>
+
+            <div class="filters">
+                <div class="filterItem">
+                    <lightning-combobox
+                        name="fieldFilter"
+                        label="Campo"
+                        value={selectedField}
+                        options={fieldOptions}
+                        onchange={handleFieldChange}>
+                    </lightning-combobox>
+                </div>
+
+                <div class="filterItem">
+                    <lightning-input
+                        type="date"
+                        label="Desde"
+                        value={dateFrom}
+                        onchange={handleDateFromChange}>
+                    </lightning-input>
+                </div>
+
+                <div class="filterItem">
+                    <lightning-input
+                        type="date"
+                        label="Hasta"
+                        value={dateTo}
+                        onchange={handleDateToChange}>
+                    </lightning-input>
+                </div>
+
+                <div class="filterItem filterItemSearch">
+                    <lightning-input
+                        type="search"
+                        label="Buscar"
+                        value={searchText}
+                        onchange={handleSearchChange}
+                        placeholder="Campo, usuario, valor anterior o nuevo">
+                    </lightning-input>
+                </div>
+            </div>
+
+            <template lwc:if={errorMessage}>
+                <div class="state error">
+                    {errorMessage}
+                </div>
+            </template>
+
+            <template lwc:elseif={showEmpty}>
+                <div class="state empty">
+                    No hay historial disponible para este registro o no hubo cambios en campos con tracking activado.
+                </div>
+            </template>
+
+            <template lwc:elseif={showNoFilteredResults}>
+                <div class="state empty">
+                    No hay resultados para los filtros seleccionados.
+                </div>
+            </template>
+
+            <template lwc:else>
+                <div class="timeline">
+                    <template for:each={filteredRows} for:item="row">
+                        <article key={row.rowKey} class="timelineItem">
+                            <div class="timelineMarker"></div>
+
+                            <div class="timelineCard">
+                                <div class="timelineHeader">
+                                    <div class="timelineHeaderLeft">
+                                        <div class="fieldLabel">{row.fieldLabel}</div>
+                                        <div class="fieldApiName">{row.fieldApiName}</div>
+                                    </div>
+
+                                    <div class="timelineHeaderRight">
+                                        <span class="badge">{row.badgeLabel}</span>
+                                    </div>
+                                </div>
+
+                                <div class="meta">
+                                    <span class="metaUser">{row.createdByName}</span>
+                                    <span class="metaSeparator">•</span>
+                                    <lightning-formatted-date-time
+                                        value={row.createdDate}
+                                        year="numeric"
+                                        month="2-digit"
+                                        day="2-digit"
+                                        hour="2-digit"
+                                        minute="2-digit">
+                                    </lightning-formatted-date-time>
+                                </div>
+
+                                <div class="valuesGrid">
+                                    <div class="valueBox oldValueBox">
+                                        <div class="valueLabel">Valor anterior</div>
+                                        <div class="valueText">{row.oldValueDisplay}</div>
+                                    </div>
+
+                                    <div class="valueBox newValueBox">
+                                        <div class="valueLabel">Valor nuevo</div>
+                                        <div class="valueText">{row.newValueDisplay}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

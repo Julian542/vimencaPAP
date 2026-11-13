@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Otros consumos</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_Activa__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>FSC_BaseCalculo__c</field>
+        <value xsi:type="xsd:string">INMUEBLE</value>
+    </values>
+    <values>
+        <field>FSC_Destino__c</field>
+        <value xsi:type="xsd:string">OTROS_CONSUMOS</value>
+    </values>
+    <values>
+        <field>FSC_MonedaMinimo__c</field>
+        <value xsi:type="xsd:string">DOP</value>
+    </values>
+    <values>
+        <field>FSC_Moneda__c</field>
+        <value xsi:type="xsd:string">DOP</value>
+    </values>
+    <values>
+        <field>FSC_MontoMinimo__c</field>
+        <value xsi:type="xsd:double">500000.0</value>
+    </values>
+    <values>
+        <field>FSC_Perfil__c</field>
+        <value xsi:type="xsd:string">LOCAL</value>
+    </values>
+    <values>
+        <field>FSC_PlazoMaximo__c</field>
+        <value xsi:type="xsd:double">84.0</value>
+    </values>
+    <values>
+        <field>FSC_PlazoMinimo__c</field>
+        <value xsi:type="xsd:double">6.0</value>
+    </values>
+    <values>
+        <field>FSC_PorcentajeMaximo__c</field>
+        <value xsi:type="xsd:double">80.0</value>
+    </values>
+    <values>
+        <field>FSC_Producto__c</field>
+        <value xsi:type="xsd:string">CONSUMO_GARANTIA_INMOBILIARIA</value>
+    </values>
+    <values>
+        <field>FSC_Proposito__c</field>
+        <value xsi:type="xsd:string">Otros consumos u otros fines a solicitud del cliente</value>
+    </values>
+</CustomMetadata>

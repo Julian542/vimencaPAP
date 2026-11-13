@@ -23,16 +23,38 @@ public inherited sharing class FSC_DocumentacionContratosService {
 			if (
 				solicitud.Status == 'En proceso' &&
 				solicitud.FSC_Subestado__c == SUBESTADO_GENERACION &&
-				(anterior == null || (anterior.FSC_Subestado__c != SUBESTADO_GENERACION && anterior.FSC_Subestado__c != SUBESTADO_CARGA))
+				(anterior == null ||
+				anterior.FSC_Subestado__c != SUBESTADO_GENERACION)
 			) {
 				Boolean vieneDeBancaSeguro = anterior != null && anterior.FSC_Subestado__c == SUBESTADO_BANCA_SEGURO;
-				if (requiereRevisionBancaSeguro(solicitud) && solicitud.FSC_BancaSeguroAprobada__c != true && !vieneDeBancaSeguro) {
+				if (
+					requiereRevisionBancaSeguro(solicitud) &&
+					solicitud.FSC_BancaSeguroAprobada__c != true &&
+					!vieneDeBancaSeguro &&
+					(anterior == null ||
+					anterior.FSC_Subestado__c != SUBESTADO_CARGA)
+				) {
 					solicitud.FSC_Subestado__c = SUBESTADO_BANCA_SEGURO;
 					continue;
 				}
 				candidatas.add(solicitud);
 			}
 		}
+		if (candidatas.isEmpty())
+			return;
+		Map<Id, FSC_ConsumoDocumentoResolver.ResolucionDocumento> documentos = FSC_ConsumoDocumentoResolver.resolveAll(candidatas);
+		List<ResidentialLoanApplication> revisionManual = new List<ResidentialLoanApplication>();
+		for (ResidentialLoanApplication solicitud : candidatas) {
+			if (FSC_ConsumoDocumentoResolver.isSimpleWithoutContract(documentos.get(solicitud.Id))) {
+				// El Queueable genera el pagaré antes de avanzar a firmas, sin asignación ni aprobación manual.
+				solicitud.FSC_Subestado__c = 'Generación de contrato';
+			} else {
+				ResidentialLoanApplication anterior = anteriores == null ? null : anteriores.get(solicitud.Id);
+				if (anterior == null || anterior.FSC_Subestado__c != SUBESTADO_CARGA)
+					revisionManual.add(solicitud);
+			}
+		}
+		candidatas = revisionManual;
 		if (candidatas.isEmpty())
 			return;
 		Map<Id, String> tipos = FSC_ChecklistDocsController.resolveTiposSolicitud(candidatas);

@@ -47,10 +47,11 @@ private class FSC_RlaApprovalAdminServiceTest {
 	@IsTest
 	static void returnToAnalyst_updatesFieldsWhenNoWorkitems() {
 		ResidentialLoanApplication rla = createRla();
+		String reason = 'x'.repeat(2000);
 		update new ResidentialLoanApplication(Id = rla.Id, FSC_DebeRevisarSupervisor__c = true);
 
 		Test.startTest();
-		FSC_RlaApprovalAdminService.returnToAnalyst(rla.Id, 'devolver a analista');
+		FSC_RlaApprovalAdminService.returnToAnalyst(rla.Id, reason);
 		Test.stopTest();
 
 		ResidentialLoanApplication refreshed = [
@@ -60,7 +61,7 @@ private class FSC_RlaApprovalAdminServiceTest {
 		];
 
 		System.assertEquals(false, refreshed.FSC_DebeRevisarSupervisor__c);
-		System.assertEquals('devolver a analista', refreshed.FSC_ObservacionSupervisor__c);
+		Assert.areEqual(reason, refreshed.FSC_ObservacionSupervisor__c, 'Debe conservar los 2000 caracteres del motivo.');
 	}
 
 	@IsTest
@@ -93,6 +94,23 @@ private class FSC_RlaApprovalAdminServiceTest {
 		System.assertEquals(false, refreshed.FSC_Doc_Completa_Analisis__c);
 		System.assertEquals('Recepción de documentos – Análisis', refreshed.FSC_Subestado__c);
 		System.assertEquals('devolver a oficial', refreshed.FSC_ObservacionSupervisor__c);
+	}
+
+	@IsTest
+	static void returnToBusiness_preservesAnalystReasonAtLimit() {
+		ResidentialLoanApplication application = createRla();
+		String reason = 'x'.repeat(2000);
+
+		Test.startTest();
+		FSC_RlaApprovalAdminService.returnToBusiness(application.Id, reason, 'FSC_CP_Analista_Credito');
+		Test.stopTest();
+
+		ResidentialLoanApplication saved = [
+			SELECT FSC_ObservacionAnalistaDeCredito__c
+			FROM ResidentialLoanApplication
+			WHERE Id = :application.Id
+		];
+		Assert.areEqual(reason, saved.FSC_ObservacionAnalistaDeCredito__c, 'Debe conservar los 2000 caracteres escritos por el analista.');
 	}
 
 	@IsTest
@@ -155,7 +173,7 @@ private class FSC_RlaApprovalAdminServiceTest {
 	static void returnToAnalyst_validatesInputs() {
 		Boolean thrown = false;
 		String longMotivo = '';
-		for (Integer i = 0; i < 256; i++) {
+		for (Integer i = 0; i < 2001; i++) {
 			longMotivo += 'x';
 		}
 
@@ -189,7 +207,7 @@ private class FSC_RlaApprovalAdminServiceTest {
 	static void returnToBusiness_validatesInputs() {
 		Boolean thrown = false;
 		String longMotivo = '';
-		for (Integer i = 0; i < 256; i++) {
+		for (Integer i = 0; i < 2001; i++) {
 			longMotivo += 'x';
 		}
 
@@ -220,7 +238,7 @@ private class FSC_RlaApprovalAdminServiceTest {
 	}
 
 	@IsTest
-	static void clienteAceptaCondicion_pasaAGeneracionDePagares() {
+	static void clienteAceptaCondicion_consumoSimpleAvanzaAFirmas() {
 		ResidentialLoanApplication rla = createRla();
 
 		Test.startTest();
@@ -232,9 +250,13 @@ private class FSC_RlaApprovalAdminServiceTest {
 			FROM ResidentialLoanApplication
 			WHERE Id = :rla.Id
 		];
-		System.assertEquals('Generación de pagarés y plantillas', refreshed.FSC_Subestado__c);
-		System.assertEquals(true, refreshed.FSC_SolicitudAprobadaPorComite__c);
-		System.assertNotEquals(null, refreshed.FSC_FechaYHoraAprobacionComite__c);
+		Assert.areEqual(
+			'Gestionar firmas',
+			refreshed.FSC_Subestado__c,
+			'El consumo simple debe generar el pagaré y avanzar automáticamente a firmas.'
+		);
+		Assert.isTrue(refreshed.FSC_SolicitudAprobadaPorComite__c, 'Debe conservar la aprobación del comité después de aceptar.');
+		Assert.isNotNull(refreshed.FSC_FechaYHoraAprobacionComite__c, 'Debe registrar la fecha de aprobación.');
 	}
 
 	@IsTest

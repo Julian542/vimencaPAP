@@ -77,6 +77,7 @@ private class FSC_PYMESolicitudPDFController_Test {
 			a.RecordTypeId = personRtId;
 		a.FirstName = 'Juan';
 		a.LastName = 'Perez';
+		a.Suffix = 'Gomez';
 
 		Map<String, Schema.SObjectField> aMap = Schema.SObjectType.Account.fields.getMap();
 		if (aMap.containsKey('Phone'))
@@ -375,6 +376,7 @@ private class FSC_PYMESolicitudPDFController_Test {
 
 		System.assertEquals(rlaId, c.rlaId);
 		System.assertEquals('Sucursal Central', c.sucursal);
+		Assert.areEqual('Perez Gomez', c.pfApellidos, 'El PDF PYME debe incluir ambos apellidos de la persona fisica.');
 		System.assertNotEquals('', c.fechaHoyFmt);
 		System.assertNotEquals(null, sink);
 
@@ -498,6 +500,100 @@ private class FSC_PYMESolicitudPDFController_Test {
 		System.assertEquals('RD$ 1,234,567.89', FSC_PYMESolicitudPDFController.fmtMoney(1234567.891));
 
 		Test.stopTest();
+	}
+
+	@IsTest
+	static void shouldReadSignerContactAndPreferLatestApplicantEmail() {
+		Account account = new Account(Name = 'Empresa contacto PYME');
+		insert account;
+		ResidentialLoanApplication application = new ResidentialLoanApplication(Name = 'Contacto PYME', AccountId = account.Id);
+		insert application;
+		Contact contact = new Contact(
+			FirstName = 'Luis',
+			LastName = 'Lopez',
+			AccountId = account.Id,
+			Phone = '8095550100',
+			MobilePhone = '8295550100',
+			Email = 'contacto@example.com',
+			MailingStreet = 'Calle uno',
+			MailingCity = 'Santiago'
+		);
+		insert contact;
+		LoanApplicant applicant = new LoanApplicant(
+			Name = 'Firmante alternativo',
+			LoanApplicationId = application.Id,
+			ContactId = contact.Id,
+			FSC_TipoSolicitante__c = 'Garante',
+			FSC_Nombre__c = 'Luis',
+			FSC_PrimerApellido__c = 'Lopez',
+			FSC_TipoIdentificacion__c = 'Pasaporte',
+			FSC_NumIdentificacion__c = 'PYME-CONTACTO'
+		);
+		insert applicant;
+		ContactPointEmail oldEmail = new ContactPointEmail(
+			ParentId = account.Id,
+			FSC_Solicitante__c = applicant.Id,
+			EmailAddress = 'anterior@example.com'
+		);
+		insert oldEmail;
+		Test.setCreatedDate(oldEmail.Id, Datetime.now().addDays(-1));
+		insert new ContactPointEmail(ParentId = account.Id, FSC_Solicitante__c = applicant.Id, EmailAddress = 'actual@example.com');
+
+		Test.startTest();
+		Test.setCurrentPage(Page.FSC_PYMESolicitudPDF);
+		ApexPages.currentPage().getParameters().put('id', application.Id);
+		FSC_PYMESolicitudPDFController controller = new FSC_PYMESolicitudPDFController();
+		List<FSC_PYMESolicitudPDFController.LoanApplicantRow> rows = controller.loanApplicants;
+		String officer = controller.oficialNegocios;
+		String officerSignature = controller.oficialNegociosFirma;
+		Integer signerCount = controller.loanApplicantFirmantesSize;
+		Test.stopTest();
+
+		Assert.areEqual(1, rows.size(), 'Debe incluir al garante en la tabla PYME.');
+		Assert.areEqual('Luis Lopez', rows[0].name, 'Debe usar los nombres y apellidos guardados en el solicitante.');
+		Assert.areEqual('Calle uno, Santiago', rows[0].direccion, 'Debe componer la direccion del contacto.');
+		Assert.areEqual('8295550100', rows[0].telefono, 'Debe preferir el telefono movil del contacto.');
+		Assert.areEqual('actual@example.com', rows[0].correoElectronico, 'Debe preferir el ultimo correo del solicitante.');
+		Assert.areEqual(UserInfo.getName(), officer, 'Debe usar al creador como oficial cuando no hay nombre guardado.');
+		Assert.areEqual(officer.toUpperCase(), officerSignature, 'La firma del oficial debe imprimirse en mayusculas.');
+		Assert.areEqual(1, signerCount, 'Debe incluir al garante como firmante.');
+	}
+
+	@IsTest
+	static void shouldRenderFacilityAmountsAndDates() {
+		Account account = new Account(Name = 'Empresa facilidad PYME');
+		insert account;
+		ResidentialLoanApplication application = new ResidentialLoanApplication(Name = 'Facilidad PYME', AccountId = account.Id);
+		insert application;
+		insert new FSC_Facilidades_De_Credito__c(
+			FSC_Residential_Loan_Application__c = application.Id,
+			FSC_Numero__c = 1,
+			FSC_Fecha_Apertura__c = Date.newInstance(2026, 1, 15),
+			FSC_Tipo_de_Facilidad__c = 'Consumo',
+			FSC_Plazo_meses__c = 12,
+			FSC_Moneda__c = '1',
+			FSC_Deuda_Actual__c = 10000,
+			FSC_Limite_Autorizado__c = 20000,
+			FSC_Aumento_Solicitado__c = 5000,
+			FSC_Posible_Compromiso__c = 0,
+			FSC_Compromiso_Mensual__c = 1500,
+			FSC_Tasa__c = 10
+		);
+
+		Test.startTest();
+		Test.setCurrentPage(Page.FSC_PYMESolicitudPDF);
+		ApexPages.currentPage().getParameters().put('id', application.Id);
+		List<FSC_PYMESolicitudPDFController.FacilidadRow> rows = new FSC_PYMESolicitudPDFController().facilidades;
+		Test.stopTest();
+
+		Assert.areEqual(1, rows.size(), 'Debe mostrar la facilidad persistida.');
+		Assert.areEqual('15/01/2026', rows[0].fechaAperturaFmt, 'Debe formatear la fecha de apertura.');
+		Assert.areEqual('Consumo', rows[0].tipoFacilidad, 'Debe conservar el tipo de facilidad.');
+		Assert.areEqual('1', rows[0].moneda, 'Debe conservar el valor de moneda guardado.');
+		Assert.areEqual(FSC_PYMESolicitudPDFController.fmtMoney(10000), rows[0].deudaActualFmt, 'Debe formatear la deuda actual.');
+		Assert.areEqual(FSC_PYMESolicitudPDFController.fmtMoney(20000), rows[0].limiteAutorizadoFmt, 'Debe formatear el limite autorizado.');
+		Assert.areEqual(FSC_PYMESolicitudPDFController.fmtMoney(0), rows[0].posibleCompromisoFmt, 'Debe conservar el compromiso cero.');
+		Assert.areEqual(Decimal.valueOf('10'), rows[0].tasa, 'Debe conservar la tasa de la facilidad.');
 	}
 
 	private static void insertIfPossible(String objectApi, Map<String, Object> fields) {

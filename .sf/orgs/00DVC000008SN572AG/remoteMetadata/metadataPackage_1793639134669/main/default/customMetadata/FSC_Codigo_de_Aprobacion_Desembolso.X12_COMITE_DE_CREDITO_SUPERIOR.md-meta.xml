@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>12 - COMITE DE CREDITO SUPERIOR</label>
+    <protected>false</protected>
+    <values>
+        <field>FSC_Codigo_de_Aprobacion__c</field>
+        <value xsi:type="xsd:string">12</value>
+    </values>
+    <values>
+        <field>FSC_Descripcion__c</field>
+        <value xsi:type="xsd:string">12 - COMITE DE CREDITO SUPERIOR: CRÉDITOS NUEVOS, REVISIONES ANUALES Y/O RENOVACIONES DE LÍNEAS DE CRÉDITOS COMERCIALES DESDE RD$25,000,001 HASTA RD$100,000,000 O SU EQUIVALENCIA EN MONEDA EXTRANJERA. REVISIÓN ANUAL Y/O RENOVACIÓN DE LÍNEAS DE CRÉDITOS COMERCIALES CON MONTOS SUPERIORES A LOS RD$100,000,000.00, O SU EQUIVALENCIA EN MONEDA EXTRANJERA (TOMANDO COMO REFERENCIA LA TASA DE VENTA DEL BANCO CENTRAL AL DÍA DE LA APROBACIÓN), PARA UN SOLO DEUDOR O GRUPO DE RIESGO.</value>
+    </values>
+</CustomMetadata>

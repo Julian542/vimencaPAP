@@ -25,6 +25,9 @@ public with sharing class FSC_LoanApplicantController {
 		} catch (AuraHandledException e) {
 			Database.rollback(savepoint);
 			throw e;
+		} catch (DmlException e) {
+			Database.rollback(savepoint);
+			throw new AuraHandledException('No se pudieron guardar los datos del deudor. Revise las validaciones de Account y empleo.');
 		} catch (Exception e) {
 			Database.rollback(savepoint);
 			throw new AuraHandledException('No se pudo actualizar la informacion del Deudor: ' + e.getMessage());
@@ -47,19 +50,28 @@ public with sharing class FSC_LoanApplicantController {
 			Tiempo_en_Vivienda__c = stringValue(applicant.get('FSC_TiempoVivienda__c')),
 			ACC_N_Dependientes__c = decimalValue(applicant.get('FSC_NumeroDependientes__c')),
 			ACC_Categoria_Riesgo_Cliente__c = stringValue(applicant.get('FSC_ClasificacionSIB__c')),
-			ACC_Ventas_Ingresos_Anuales__c = annualIncome(decimalValue(applicant.get('FSC_IngresosMensuales__c'))),
-			Industry = stringValue(applicant.get('FSC_TipoNegocio__c'))
+			ACC_Ventas_Ingresos_Anuales__c = annualIncome(decimalValue(applicant.get('FSC_IngresosMensuales__c')))
 		);
 
 		if (account.IsPersonAccount) {
 			accountUpdate.FirstName = firstName;
-			accountUpdate.LastName = lastName;
+			accountUpdate.LastName = stringValue(applicant.get('FSC_PrimerApellido__c'));
+			accountUpdate.Suffix = stringValue(applicant.get('FSC_SegundoApellido__c'));
 			accountUpdate.PersonBirthdate = dateValue(applicant.get('FSC_FechaNacimiento__c'));
 		} else {
 			accountUpdate.Name = joinNonBlank(new List<String>{ firstName, lastName });
 		}
 
-		update accountUpdate;
+		List<Account> currentAccounts = selectAccounts(account.Id, null, null);
+		if (currentAccounts.isEmpty())
+			throw new AuraHandledException('No se encontro la cuenta del deudor.');
+		Account changes = new Account(Id = account.Id);
+		for (String field : accountUpdate.getPopulatedFieldsAsMap().keySet()) {
+			if (field != 'Id' && accountUpdate.get(field) != currentAccounts[0].get(field))
+				changes.put(field, accountUpdate.get(field));
+		}
+		if (changes.getPopulatedFieldsAsMap().size() > 1)
+			update changes;
 	}
 
 	private static void updateEmploymentData(Account account, Map<String, Object> applicant) {
@@ -286,97 +298,67 @@ public with sharing class FSC_LoanApplicantController {
 	@AuraEnabled
 	public static Map<String, Object> getAccountLoanApplicant(Id contextId) {
 		Id accountId = getAccountIdFromContext(contextId);
-		if (accountId == null) {
+		if (accountId == null)
 			return null;
-		}
-
-		List<Account> accounts = [
-			SELECT
-				Name,
-				FirstName,
-				LastName,
-				PersonBirthdate,
-				PersonEmail,
-				PersonMobilePhone,
-				PersonHomePhone,
-				Phone,
-				BillingStreet,
-				BillingCity,
-				BillingState,
-				BillingPostalCode,
-				BillingCountry,
-				PersonMailingStreet,
-				PersonMailingCity,
-				PersonMailingState,
-				PersonMailingPostalCode,
-				PersonMailingCountry,
-				ACC_TipoIdentificacion__c,
-				ACC_NumIdentificacion__c,
-				ACC_Nacionalidad__c,
-				ACC_Estado_Civil__c,
-				Tipo_de_vivienda__c,
-				Tiempo_en_Vivienda__c,
-				ACC_N_Dependientes__c,
-				ACC_Categoria_Riesgo_Cliente__c,
-				ACC_Ventas_Ingresos_Anuales__c,
-				ACC_Correo_Electronico_Cliente__c,
-				ACC_Tipo_Actividad__c,
-				Industry
-			FROM Account
-			WHERE Id = :accountId
-			LIMIT 1
-		];
+		List<Account> accounts = selectAccounts(accountId, null, null);
 		return accounts.isEmpty() ? null : accountToApplicantMap(accounts[0]);
 	}
 
 	private static Map<String, Object> getLoanApplicantFromAccount(String tipoId, String numId) {
-		List<Account> accounts = [
-			SELECT
-				Name,
-				FirstName,
-				LastName,
-				PersonBirthdate,
-				PersonEmail,
-				PersonMobilePhone,
-				PersonHomePhone,
-				Phone,
-				BillingStreet,
-				BillingCity,
-				BillingState,
-				BillingPostalCode,
-				BillingCountry,
-				PersonMailingStreet,
-				PersonMailingCity,
-				PersonMailingState,
-				PersonMailingPostalCode,
-				PersonMailingCountry,
-				ACC_TipoIdentificacion__c,
-				ACC_NumIdentificacion__c,
-				ACC_Nacionalidad__c,
-				ACC_Estado_Civil__c,
-				Tipo_de_vivienda__c,
-				Tiempo_en_Vivienda__c,
-				ACC_N_Dependientes__c,
-				ACC_Categoria_Riesgo_Cliente__c,
-				ACC_Ventas_Ingresos_Anuales__c,
-				ACC_Correo_Electronico_Cliente__c,
-				ACC_Tipo_Actividad__c,
-				Industry
-			FROM Account
-			WHERE ACC_TipoIdentificacion__c = :tipoId AND ACC_NumIdentificacion__c = :numId
-			ORDER BY LastModifiedDate DESC
-			LIMIT 1
-		];
+		List<Account> accounts = selectAccounts(null, tipoId, numId);
+		return accounts.isEmpty() ? null : accountToApplicantMap(accounts[0]);
+	}
 
-		if (accounts.isEmpty()) {
-			return null;
-		}
-
-		return accountToApplicantMap(accounts[0]);
+	private static List<Account> selectAccounts(Id accountId, String tipoId, String numId) {
+		List<String> requestedFields = new List<String>{
+			'Id',
+			'Name',
+			'FirstName',
+			'LastName',
+			'Suffix',
+			'PersonBirthdate',
+			'PersonEmail',
+			'PersonMobilePhone',
+			'PersonHomePhone',
+			'Phone',
+			'BillingStreet',
+			'BillingCity',
+			'BillingState',
+			'BillingPostalCode',
+			'BillingCountry',
+			'PersonMailingStreet',
+			'PersonMailingCity',
+			'PersonMailingState',
+			'PersonMailingPostalCode',
+			'PersonMailingCountry',
+			'ACC_TipoIdentificacion__c',
+			'ACC_NumIdentificacion__c',
+			'ACC_Nacionalidad__c',
+			'ACC_Estado_Civil__c',
+			'Tipo_de_vivienda__c',
+			'Tiempo_en_Vivienda__c',
+			'ACC_N_Dependientes__c',
+			'ACC_Categoria_Riesgo_Cliente__c',
+			'ACC_Ventas_Ingresos_Anuales__c',
+			'ACC_Correo_Electronico_Cliente__c',
+			'ACC_Tipo_Actividad__c',
+			'Industry'
+		};
+		String filter = accountId == null ? 'ACC_TipoIdentificacion__c = :tipoId AND ACC_NumIdentificacion__c = :numId' : 'Id = :accountId';
+		String ordering = ' ORDER BY LastModifiedDate DESC, Id';
+		List<Account> accounts = Database.queryWithBinds(
+			'SELECT ' + String.join(requestedFields, ',') + ' FROM Account WHERE ' + filter + ordering + ' LIMIT 1',
+			new Map<String, Object>{ 'accountId' => accountId, 'tipoId' => tipoId, 'numId' => numId },
+			AccessLevel.SYSTEM_MODE
+		);
+		return accounts;
 	}
 
 	private static Map<String, Object> accountToApplicantMap(Account account) {
 		List<String> lastNames = splitLastNames(account.LastName);
+		if (String.isNotBlank(account.Suffix)) {
+			lastNames = new List<String>{ account.LastName, account.Suffix };
+		}
 		Map<String, Object> applicant = new Map<String, Object>{
 			'Name' => account.Name,
 			'FSC_TipoSolicitante__c' => 'Deudor',
@@ -397,11 +379,71 @@ public with sharing class FSC_LoanApplicantController {
 			'FSC_ClasificacionSIB__c' => account.ACC_Categoria_Riesgo_Cliente__c,
 			'Contact_Point_Phones__r' => phoneRowsToMaps(accountPhones(account)),
 			'Contact_Point_Addresses__r' => addressRowsToMaps(accountAddresses(account)),
-			'Contact_Point_Emails__r' => emailRowsToMaps(accountEmails(account))
+			'Contact_Point_Emails__r' => emailRowsToMaps(accountEmails(account)),
+			'Referencias__r' => accountReferenceRows(account.Id)
 		};
 
 		addEmploymentData(applicant, account.Id);
 		return applicant;
+	}
+
+	@TestVisible
+	private static List<Map<String, Object>> accountReferenceRows(Id accountId) {
+		List<Map<String, Object>> references = new List<Map<String, Object>>();
+		if (accountId == null) {
+			return references;
+		}
+		List<FinServ__ContactContactRelation__c> relations = [
+			SELECT
+				FinServ__RelatedContact__c,
+				FinServ__RelatedContact__r.FirstName,
+				FinServ__RelatedContact__r.LastName,
+				FinServ__RelatedContact__r.Phone,
+				FinServ__RelatedContact__r.MobilePhone,
+				FinServ__RelatedContact__r.Email,
+				FinServ__RelatedContact__r.MailingStreet,
+				FinServ__RelatedContact__r.MailingCity,
+				FinServ__RelatedContact__r.MailingState,
+				FinServ__RelatedContact__r.MailingPostalCode,
+				FinServ__RelatedContact__r.MailingCountry,
+				FinServ__Role__r.Name
+			FROM FinServ__ContactContactRelation__c
+			WHERE
+				FinServ__Contact__r.AccountId = :accountId
+				AND RecordType.DeveloperName = 'Referencia'
+				AND FinServ__Active__c = TRUE
+				AND FinServ__RelatedContact__c != NULL
+				AND FinServ__RelatedContact__r.LastName != NULL
+			WITH USER_MODE
+			ORDER BY LastModifiedDate DESC, Id
+		];
+		Set<Id> includedContacts = new Set<Id>();
+		for (FinServ__ContactContactRelation__c relation : relations) {
+			Contact referenceContact = relation.FinServ__RelatedContact__r;
+			if (String.isBlank(referenceContact.LastName) || !includedContacts.add(relation.FinServ__RelatedContact__c)) {
+				continue;
+			}
+			references.add(
+				new Map<String, Object>{
+					'Name' => joinNonBlank(new List<String>{ referenceContact.FirstName, referenceContact.LastName }),
+					'FSC_FirstName__c' => referenceContact.FirstName,
+					'FSC_LastName__c' => referenceContact.LastName,
+					'FSC_Telefono__c' => firstNonBlank(new List<String>{ referenceContact.Phone, referenceContact.MobilePhone }),
+					'FSC_Email__c' => referenceContact.Email,
+					'FSC_Direccion__c' => joinNonBlank(
+						new List<String>{
+							referenceContact.MailingStreet,
+							referenceContact.MailingCity,
+							referenceContact.MailingState,
+							referenceContact.MailingPostalCode,
+							referenceContact.MailingCountry
+						}
+					),
+					'FSC_Parentesco__c' => normalizeText(relation.FinServ__Role__r?.Name) == 'referencia' ? 'Heredado de Cliente' : null
+				}
+			);
+		}
+		return references;
 	}
 
 	private static void addEmploymentData(Map<String, Object> applicant, Id accountId) {

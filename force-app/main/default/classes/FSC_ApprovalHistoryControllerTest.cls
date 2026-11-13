@@ -85,6 +85,67 @@ private class FSC_ApprovalHistoryControllerTest {
     }
 
     @IsTest
+    static void testGetApprovalHistory_AccountCustomHistory() {
+        Account acc = new Account(
+            Name = 'Comercializadora Caribe SRL',
+            ACC_Estado__c = 'VALIDADO',
+            ACC_SubEstado__c = 'EN REVISIÓN',
+            ACC_Resultado_Validacion__c = 'En Revisión Legal'
+        );
+        insert acc;
+
+        // Tarea de solicitud de revisión
+        Task t1 = new Task(
+            WhatId = acc.Id,
+            Subject = 'PLA / Legal: Solicitud de Revisión de Cliente (Modificación en Estructura y Composición Accionaria)',
+            Description = 'Motivo / Comentarios:\nCambio de socios mayoritarios.',
+            Status = 'Completed',
+            ActivityDate = Date.today()
+        );
+        insert t1;
+
+        // Tarea de requerimiento de información
+        Task t2 = new Task(
+            WhatId = acc.Id,
+            Subject = 'Legal: Requerimiento de Información y Recaudos (Comercializadora Caribe SRL)',
+            Description = 'Comentarios adicionales:\nFavor adjuntar nómina de accionistas actualizada.',
+            Status = 'Open',
+            ActivityDate = Date.today().addDays(1)
+        );
+        insert t2;
+
+        // Tarea de devolución
+        Task t3 = new Task(
+            WhatId = acc.Id,
+            Subject = 'Legal: Cliente Devuelto - Comercializadora Caribe SRL',
+            Description = 'El área Legal ha dictaminado DEVOLUCIÓN para el cliente.\n\nMotivo / Comentarios:\nFalta firma en asamblea.',
+            Status = 'Open',
+            ActivityDate = Date.today().addDays(1)
+        );
+        insert t3;
+
+        Test.startTest();
+        List<FSC_ApprovalHistoryController.ApprovalHistoryItem> items =
+            FSC_ApprovalHistoryController.getApprovalHistory(acc.Id);
+        Test.stopTest();
+
+        System.assert(items.size() >= 3, 'Debe contener el estado pendiente y las tareas de auditoría de la cuenta.');
+        
+        Boolean foundDevuelto = false;
+        Boolean foundPending = false;
+        for (FSC_ApprovalHistoryController.ApprovalHistoryItem item : items) {
+            if (item.status == 'Devuelto') {
+                foundDevuelto = true;
+            }
+            if (item.status == 'Pending') {
+                foundPending = true;
+            }
+        }
+        System.assertEquals(true, foundDevuelto, 'Debe reconocer el dictamen de devolución.');
+        System.assertEquals(true, foundPending, 'Debe reconocer el estado activo en revisión legal.');
+    }
+
+    @IsTest
     static void testApprovalHistoryItemSorter_CubreComparaciones() {
         Datetime nowDt = System.now();
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Creacion_Cedula</fullName>
+    <active>false</active>
+    <description>Validación para comprobar que se completaa: Nombre, apellidos, tipo identificación y nº identificación cuando es cliente con cédula</description>
+    <errorConditionFormula>AND (
+			 $Label.Validaciones == &apos;Si&apos;,
+				ACC_Persona_Fisica__c = true,
+				ISPICKVAL(ACC_TipoIdentificacion__c , &apos;Cédula&apos;),
+				OR(
+								ISPICKVAL( ACC_Estado__c, &apos;INICIADO&apos;),
+				    ISBLANK( FirstName ),
+				    ISBLANK(LastName),
+								ISPICKVAL(ACC_TipoIdentificacion__c , &apos;&apos;),  
+								ISBLANK( ACC_NumIdentificacion__c )
+								)	
+			
+)</errorConditionFormula>
+    <errorMessage>Para crear el prospecto es necesario informar:
+
+- Nombre
+- Apellidos
+- Tipo identificación
+- Nº Identificación</errorMessage>
+</ValidationRule>

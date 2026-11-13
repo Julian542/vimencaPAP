@@ -10,6 +10,11 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
+                <fullName>Heredado de Cliente</fullName>
+                <default>false</default>
+                <label>Heredado de Cliente</label>
+            </value>
+            <value>
                 <fullName>AMIGO (A)</fullName>
                 <default>false</default>
                 <label>AMIGO (A)</label>

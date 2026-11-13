@@ -377,6 +377,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>FSC_DeudaConsolidadaBVService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>FSC_DeudaConsolidadaBVServiceTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>FSC_DocumentacionContratosService</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -6474,6 +6482,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_AprobadorFinal__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_AyuntamientoRegistroCivil__c</field>
         <readable>true</readable>
@@ -6639,6 +6652,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_CreditoAprobado__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_Cuentas_por_cobrar_clientes__c</field>
         <readable>true</readable>
@@ -6751,6 +6769,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_Destino_del_Prestamo__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ResidentialLoanApplication.FSC_DeudaConsolidadaBV__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -6959,6 +6982,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_FechaAprobacionCredito__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_FechaAprobacion__c</field>
         <readable>true</readable>
@@ -6986,6 +7014,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>ResidentialLoanApplication.FSC_FechaRevisionInteres__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_FechaTasaInstancia__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -7159,6 +7192,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_InstanciaAprobacion__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_Inventario__c</field>
         <readable>true</readable>
@@ -7226,6 +7264,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_MontoDesembolso__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_MontoInstanciaDOP__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -7371,6 +7414,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>ResidentialLoanApplication.FSC_NumeroPrestamoAbanks__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_NumeroSolicitud__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -7649,6 +7697,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_RevisionAnalistaCompleta__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_Se_encuentra_en_la_misma_residencia__c</field>
         <readable>true</readable>
@@ -7721,6 +7774,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ResidentialLoanApplication.FSC_TasaFijaPorMeses__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_TasaInstancia__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -7950,6 +8008,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_UsuarioGerente__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ResidentialLoanApplication.FSC_UsuarioGestionPlanilla__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -7965,7 +8028,27 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_UsuarioSubgerente__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ResidentialLoanApplication.FSC_UsuarioSupervisor__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_UsuarioVPBancaEmpresarial__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_UsuarioVPBancaPersonal__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ResidentialLoanApplication.FSC_UsuarioVPEjecutivo__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

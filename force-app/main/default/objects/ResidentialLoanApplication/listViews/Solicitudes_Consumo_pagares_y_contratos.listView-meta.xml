@@ -3,6 +3,7 @@
     <fullName>Solicitudes_Consumo_pagares_y_contratos</fullName>
     <columns>FSC_Prioridad__c</columns>
     <columns>Name</columns>
+    <columns>FSC_NumeroSolicitud__c</columns>
     <columns>FSC_Subestado__c</columns>
     <columns>Account</columns>
     <columns>FSC_PlazoMesesAprobado__c</columns>

@@ -1,15 +1,15 @@
 @IsTest
 private class FSC_CoberturaPendienteTest {
-    @TestSetup
-    static void asignarPermisosAdministrador() {
-        System.runAs(new User(Id = UserInfo.getUserId())) {
-            PermissionSet permiso = [SELECT Id FROM PermissionSet WHERE Name = 'FSC_PS_Administrador' LIMIT 1];
-            // El usuario que ejecuta los tests puede tener ya el permission set asignado.
-            if ([SELECT COUNT() FROM PermissionSetAssignment WHERE AssigneeId = :UserInfo.getUserId() AND PermissionSetId = :permiso.Id] == 0) {
-                insert new PermissionSetAssignment(AssigneeId = UserInfo.getUserId(), PermissionSetId = permiso.Id);
-            }
-        }
-    }
+	@TestSetup
+	static void asignarPermisosAdministrador() {
+		System.runAs(new User(Id = UserInfo.getUserId())) {
+			PermissionSet permiso = [SELECT Id FROM PermissionSet WHERE Name = 'FSC_PS_Administrador' LIMIT 1];
+			// El usuario que ejecuta los tests puede tener ya el permission set asignado.
+			if ([SELECT COUNT() FROM PermissionSetAssignment WHERE AssigneeId = :UserInfo.getUserId() AND PermissionSetId = :permiso.Id] == 0) {
+				insert new PermissionSetAssignment(AssigneeId = UserInfo.getUserId(), PermissionSetId = permiso.Id);
+			}
+		}
+	}
 
 	private static Integer sequence = 0;
 
@@ -594,7 +594,12 @@ private class FSC_CoberturaPendienteTest {
 	static void rlaAccionesCubreActualizacionesYGuardasSimples() {
 		ResidentialLoanApplication pagare = createPyme('acciones-pagare');
 		FSC_RlaAccionesController.guardarDatosPagareComplementario(pagare.Id, ' PRESTAMO-001 ');
-		FSC_RlaAccionesController.aprobarProcesoActual(pagare.Id, 'Aprobación sin proceso activo');
+		try {
+			FSC_RlaAccionesController.aprobarProcesoActual(pagare.Id, 'Aprobación sin proceso activo');
+			Assert.fail('No se puede aprobar una solicitud sin un paso pendiente, incluso como administrador.');
+		} catch (AuraHandledException expected) {
+			Assert.isNotNull(expected, 'Debe impedir la aprobación sin un proceso activo.');
+		}
 
 		ResidentialLoanApplication estados = createPyme('acciones-estados');
 		try {

@@ -1,0 +1,530 @@
+<template>
+	<template lwc:if={mostrar}>
+		<div class="panel">
+			<template lwc:if={cargando}>
+				<lightning-spinner alternative-text="Procesando" size="small"></lightning-spinner>
+			</template>
+
+			<div class="encabezado">
+				<span class="titulo">Formalización de garantía</span>
+				<template lwc:if={contexto.rutaEtiqueta}>
+					<span class="ruta">{contexto.rutaEtiqueta}</span>
+				</template>
+			</div>
+
+			<div class="resumen">
+				<div>
+					<span class="etiqueta">Etapa:</span>
+					<strong>{contexto.etapa}</strong>
+				</div>
+				<template lwc:if={contexto.responsable}>
+					<div>
+						<span class="etiqueta">Responsable:</span>
+						{contexto.responsable}
+					</div>
+				</template>
+				<template lwc:if={contexto.desembolsado}>
+					<div class="desembolsado">Crédito desembolsado</div>
+				</template>
+				<template
+					for:each={resumenGarantia}
+					for:item="dato">
+					<div key={dato.etiqueta}>
+						<span class="etiqueta">{dato.etiqueta}:</span>
+						{dato.valor}
+					</div>
+				</template>
+			</div>
+
+			<template lwc:if={contexto.mensaje}>
+				<div class="banner warning">
+					<span class="text">{contexto.mensaje}</span>
+				</div>
+			</template>
+
+			<template lwc:if={contexto.observacion}>
+				<div class="banner info">
+					<span class="text">
+						<strong>Observación: </strong>
+						<lightning-formatted-text value={contexto.observacion}></lightning-formatted-text>
+					</span>
+				</div>
+			</template>
+
+			<template lwc:if={tieneDatosGarantia}>
+				<div class="btnRow center">
+					<lightning-button
+						variant="base"
+						label={etiquetaDatosGarantia}
+						onclick={toggleDatosGarantia}></lightning-button>
+				</div>
+				<template lwc:if={mostrarDatosGarantia}>
+					<dl class="datosGarantia">
+						<template
+							for:each={contexto.datosGarantia}
+							for:item="dato">
+							<div
+								key={dato.etiqueta}
+								class="datoGarantia">
+								<dt>{dato.etiqueta}</dt>
+								<dd>{dato.valor}</dd>
+							</div>
+						</template>
+					</dl>
+				</template>
+			</template>
+
+			<template lwc:if={tieneEnlaces}>
+				<div class="btnRow center">
+					<template
+						for:each={contexto.enlaces}
+						for:item="enlace">
+						<lightning-button
+							key={enlace.url}
+							variant="base"
+							icon-name="utility:new_window"
+							icon-position="right"
+							label={enlace.etiqueta}
+							data-url={enlace.url}
+							onclick={abrirEnlace}></lightning-button>
+					</template>
+				</div>
+			</template>
+
+			<template lwc:if={tieneAcciones}>
+				<div class="btnRow center">
+					<template lwc:if={contexto.puedeGenerarInventario}>
+						<lightning-button
+							label="Generar inventario para Registro de Títulos"
+							icon-name="utility:file"
+							onclick={abrirInventario}
+							disabled={cargando}></lightning-button>
+					</template>
+					<template lwc:if={contexto.puedeGenerarAutorizacion}>
+						<lightning-button
+							label="Generar autorización de oposición DGII"
+							icon-name="utility:file"
+							onclick={abrirAutorizacion}
+							disabled={cargando}></lightning-button>
+					</template>
+					<template
+						for:each={acciones}
+						for:item="accion">
+						<lightning-button
+							key={accion.codigo}
+							variant={accion.variante}
+							label={accion.etiqueta}
+							data-codigo={accion.codigo}
+							onclick={abrirAccion}
+							disabled={cargando}></lightning-button>
+					</template>
+				</div>
+			</template>
+		</div>
+	</template>
+
+	<!-- Modal de acción -->
+	<template lwc:if={mostrarModalAccion}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			aria-modal="true"
+			aria-labelledby="formalizacion-accion-titulo"
+			class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2
+						id="formalizacion-accion-titulo"
+						class="slds-text-heading_medium">
+						{accionActual.etiqueta}
+					</h2>
+				</header>
+				<div class="slds-modal__content slds-p-around_medium">
+					<template lwc:if={cargando}>
+						<lightning-spinner alternative-text="Procesando" size="small"></lightning-spinner>
+					</template>
+					<template
+						for:each={camposAccion}
+						for:item="campo">
+						<div
+							key={campo.nombre}
+							class="slds-m-bottom_small">
+							<template lwc:if={campo.esCombobox}>
+								<lightning-combobox
+									label={campo.etiqueta}
+									options={campo.opciones}
+									value={campo.valorActual}
+									required={campo.requerido}
+									field-level-help={campo.ayuda}
+									data-campo={campo.nombre}
+									onchange={handleCampoAccion}></lightning-combobox>
+							</template>
+							<template lwc:if={campo.esTexto}>
+								<lightning-input
+									label={campo.etiqueta}
+									value={campo.valorActual}
+									required={campo.requerido}
+									max-length="50"
+									data-campo={campo.nombre}
+									onchange={handleCampoAccion}></lightning-input>
+							</template>
+							<template lwc:if={campo.esFecha}>
+								<lightning-input
+									type="date"
+									label={campo.etiqueta}
+									value={campo.valorActual}
+									required={campo.requerido}
+									max={hoy}
+									data-campo={campo.nombre}
+									onchange={handleCampoAccion}></lightning-input>
+							</template>
+							<template lwc:if={campo.esAreaTexto}>
+								<lightning-textarea
+									label={campo.etiqueta}
+									value={campo.valorActual}
+									required={campo.requerido}
+									max-length="1000"
+									data-campo={campo.nombre}
+									onchange={handleCampoAccion}></lightning-textarea>
+							</template>
+							<template lwc:if={campo.esArchivos}>
+								<lightning-file-upload
+									label={campo.etiqueta}
+									accept={formatosArchivo}
+									multiple
+									onuploadfinished={handleArchivosCargados}
+									disabled={cargando}></lightning-file-upload>
+								<template
+									for:each={archivos}
+									for:item="archivo">
+									<div
+										key={archivo.id}
+										class="slds-grid slds-grid_align-spread slds-m-top_x-small">
+										<span>{archivo.nombre}</span>
+										<lightning-button-icon
+											icon-name="utility:delete"
+											alternative-text="Quitar archivo"
+											variant="bare"
+											data-id={archivo.id}
+											onclick={quitarArchivo}></lightning-button-icon>
+									</div>
+								</template>
+							</template>
+						</div>
+					</template>
+				</div>
+				<footer class="slds-modal__footer">
+					<lightning-button
+						label="Cancelar"
+						onclick={cerrarModalAccion}
+						disabled={cargando}></lightning-button>
+					<lightning-button
+						class="slds-m-left_x-small"
+						variant="brand"
+						label="Confirmar"
+						onclick={enviarAccion}
+						disabled={cargando}></lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+
+	<!-- Modal de documentos -->
+	<template lwc:if={mostrarModalDocumento}>
+		<section
+			role="dialog"
+			tabindex="-1"
+			aria-modal="true"
+			aria-labelledby="formalizacion-documento-titulo"
+			class="slds-modal slds-fade-in-open slds-modal_medium">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<h2
+						id="formalizacion-documento-titulo"
+						class="slds-text-heading_medium">
+						{tituloDocumento}
+					</h2>
+				</header>
+				<div class="slds-modal__content slds-p-around_medium">
+					<template lwc:if={cargando}>
+						<lightning-spinner alternative-text="Procesando" size="small"></lightning-spinner>
+					</template>
+
+					<template lwc:if={esInventario}>
+						<h3 class="slds-text-heading_small slds-m-bottom_x-small">Datos personales</h3>
+						<div class="slds-grid slds-wrap slds-gutters_x-small">
+							<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+								<lightning-input
+									label="Nombre del cliente"
+									value={documento.nombreCliente}
+									required
+									data-documento
+									data-campo="nombreCliente"
+									onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+								<lightning-input
+									type="date"
+									label="Fecha"
+									value={documento.fecha}
+									required
+									data-documento
+									data-campo="fecha"
+									onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+								<lightning-input
+									label="Teléfono"
+									value={documento.telefono}
+									data-documento
+									data-campo="telefono"
+									onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+								<lightning-input
+									type="email"
+									label="Correo electrónico"
+									value={documento.correo}
+									data-documento
+									data-campo="correo"
+									onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+								<lightning-input
+									type="number"
+									step="0.01"
+									min="0"
+									label="Monto del contrato"
+									value={documento.montoContrato}
+									data-documento
+									data-campo="montoContrato"
+									onchange={handleCampoDocumento}></lightning-input>
+							</div>
+						</div>
+						<lightning-textarea
+							class="slds-m-top_small"
+							label="Descripción del inmueble"
+							value={documento.descripcionInmueble}
+							required
+							max-length="2000"
+							data-documento
+							data-campo="descripcionInmueble"
+							onchange={handleCampoDocumento}></lightning-textarea>
+
+						<h3 class="slds-text-heading_small slds-m-top_medium slds-m-bottom_x-small">Descripción de garantía</h3>
+						<table class="slds-table slds-table_bordered slds-table_cell-buffer">
+							<thead>
+								<tr>
+									<th class="columnaCantidad">Cant.</th>
+									<th>Documento</th>
+								</tr>
+							</thead>
+							<tbody>
+								<template
+									for:each={documentosInventario}
+									for:item="fila">
+									<tr key={fila.clave}>
+										<td>
+											<lightning-input
+												type="number"
+												min="0"
+												step="1"
+												variant="label-hidden"
+												label="Cantidad"
+												value={fila.cantidad}
+												data-documento
+												data-lista="documentos"
+												data-indice={fila.indice}
+												data-propiedad="cantidad"
+												onchange={handleFilaDocumento}></lightning-input>
+										</td>
+										<td class="slds-cell-wrap">{fila.concepto}</td>
+									</tr>
+								</template>
+							</tbody>
+						</table>
+
+						<h3 class="slds-text-heading_small slds-m-top_medium slds-m-bottom_x-small">Tasas por servicio</h3>
+						<table class="slds-table slds-table_bordered slds-table_cell-buffer">
+							<thead>
+								<tr>
+									<th class="columnaCantidad">Cant.</th>
+									<th>Tasa por servicio</th>
+									<th class="columnaMonto">Valor</th>
+									<th class="columnaMonto">Precio</th>
+								</tr>
+							</thead>
+							<tbody>
+								<template
+									for:each={tasasInventario}
+									for:item="fila">
+									<tr key={fila.clave}>
+										<td>
+											<lightning-input
+												type="number"
+												min="0"
+												step="1"
+												variant="label-hidden"
+												label="Cantidad"
+												value={fila.cantidad}
+												data-documento
+												data-lista="tasas"
+												data-indice={fila.indice}
+												data-propiedad="cantidad"
+												onchange={handleFilaDocumento}></lightning-input>
+										</td>
+										<td class="slds-cell-wrap">{fila.concepto}</td>
+										<td>
+											<lightning-input
+												type="number"
+												min="0"
+												step="0.01"
+												variant="label-hidden"
+												label="Valor"
+												value={fila.valor}
+												data-documento
+												data-lista="tasas"
+												data-indice={fila.indice}
+												data-propiedad="valor"
+												onchange={handleFilaDocumento}></lightning-input>
+										</td>
+										<td class="monto">{fila.precio}</td>
+									</tr>
+								</template>
+								<tr>
+									<td
+										colspan="3"
+										class="total">
+										Total
+									</td>
+									<td class="monto total">{totalInventario}</td>
+								</tr>
+							</tbody>
+						</table>
+					</template>
+
+					<template lwc:if={esAutorizacion}>
+						<div class="slds-grid slds-wrap slds-gutters_x-small">
+							<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+								<lightning-input
+									type="date"
+									label="Fecha de la carta"
+									value={documento.fechaDocumento}
+									required
+									data-documento
+									data-campo="fechaDocumento"
+									onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+								<lightning-input
+									type="date"
+									label="Fecha del contrato"
+									value={documento.fechaContrato}
+									required
+									data-documento
+									data-campo="fechaContrato"
+									onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-1">
+								<lightning-input
+									label="Contrato de"
+									value={documento.tipoContrato}
+									required
+									data-documento
+									data-campo="tipoContrato"
+									onchange={handleCampoDocumento}></lightning-input>
+							</div>
+						</div>
+
+						<h3 class="slds-text-heading_small slds-m-top_medium slds-m-bottom_x-small">Vehículo</h3>
+						<div class="slds-grid slds-wrap slds-gutters_x-small">
+							<div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-3">
+								<lightning-input label="Tipo de vehículo" value={documento.tipoVehiculo} required data-documento data-campo="tipoVehiculo" onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-3">
+								<lightning-input label="Marca" value={documento.marca} required data-documento data-campo="marca" onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-3">
+								<lightning-input label="Modelo" value={documento.modelo} required data-documento data-campo="modelo" onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-3">
+								<lightning-input label="Año" value={documento.anio} required data-documento data-campo="anio" onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-3">
+								<lightning-input label="Color" value={documento.color} required data-documento data-campo="color" onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-3">
+								<lightning-input label="Chasis" value={documento.chasis} required data-documento data-campo="chasis" onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-3">
+								<lightning-input label="Registro y placa" value={documento.placa} required data-documento data-campo="placa" onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-3">
+								<lightning-input label="Motor o número de serie" value={documento.motor} data-documento data-campo="motor" onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-3">
+								<lightning-input label="Matrícula" value={documento.matricula} required data-documento data-campo="matricula" onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+								<lightning-combobox
+									label="A nombre"
+									options={opcionesTratamientoPropietario}
+									value={documento.tratamientoPropietario}
+									required
+									data-documento
+									data-campo="tratamientoPropietario"
+									onchange={handleCampoDocumento}></lightning-combobox>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-3">
+								<lightning-input label="Nombre del propietario" value={documento.nombrePropietario} required data-documento data-campo="nombrePropietario" onchange={handleCampoDocumento}></lightning-input>
+							</div>
+						</div>
+
+						<h3 class="slds-text-heading_small slds-m-top_medium slds-m-bottom_x-small">Persona autorizada a retirar la matrícula</h3>
+						<div class="slds-grid slds-wrap slds-gutters_x-small">
+							<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+								<lightning-combobox
+									label="Sexo"
+									options={opcionesSexo}
+									value={documento.sexoAutorizado}
+									required
+									data-documento
+									data-campo="sexoAutorizado"
+									onchange={handleCampoDocumento}></lightning-combobox>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-3">
+								<lightning-input label="Nombre completo" value={documento.nombreAutorizado} required data-documento data-campo="nombreAutorizado" onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-3">
+								<lightning-input label="Nacionalidad" value={documento.nacionalidadAutorizado} required data-documento data-campo="nacionalidadAutorizado" onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-2 slds-medium-size_1-of-3">
+								<lightning-input label="Estado civil" value={documento.estadoCivilAutorizado} required data-documento data-campo="estadoCivilAutorizado" onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+								<lightning-input label="Cédula" value={documento.cedulaAutorizado} required data-documento data-campo="cedulaAutorizado" onchange={handleCampoDocumento}></lightning-input>
+							</div>
+							<div class="slds-col slds-size_1-of-1">
+								<lightning-input label="Domiciliado y residente en" value={documento.domicilioAutorizado} required data-documento data-campo="domicilioAutorizado" onchange={handleCampoDocumento}></lightning-input>
+							</div>
+						</div>
+					</template>
+				</div>
+				<footer class="slds-modal__footer">
+					<lightning-button
+						label="Cancelar"
+						onclick={cerrarModalDocumento}
+						disabled={cargando}></lightning-button>
+					<lightning-button
+						class="slds-m-left_x-small"
+						variant="brand"
+						label="Generar PDF"
+						onclick={generar}
+						disabled={cargando}></lightning-button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+</template>

@@ -4,6 +4,7 @@
     <booleanFilter>2 AND ((1 AND 4) OR (3 AND 5))</booleanFilter>
     <columns>FSC_Prioridad__c</columns>
     <columns>Name</columns>
+    <columns>FSC_NumeroSolicitud__c</columns>
     <columns>FSC_Subestado__c</columns>
     <columns>Account</columns>
     <columns>FSC_PlazoMesesAprobado__c</columns>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomPermission xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Permite registrar en el sistema la fecha de formalización de garantías asignada al usuario.</description>
+    <isLicensed>false</isLicensed>
+    <label>FSC - Mantenimiento de operaciones</label>
+</CustomPermission>

@@ -1,0 +1,115 @@
+<template>
+	<section
+		role="dialog"
+		tabindex="-1"
+		aria-modal="true"
+		aria-labelledby="document-editor-heading"
+		class="slds-modal slds-fade-in-open">
+		<div class="slds-modal__container modalContainer">
+			<header class="slds-modal__header">
+				<button
+					class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+					title="Cerrar"
+					disabled={disableActions}
+					onclick={handleCancel}>
+					<lightning-icon
+						icon-name="utility:close"
+						alternative-text="Cerrar"
+						size="small"
+						variant="inverse">
+					</lightning-icon>
+				</button>
+				<h2
+					id="document-editor-heading"
+					class="slds-text-heading_medium">
+					{modalTitle}
+				</h2>
+				<p class="slds-m-top_x-small">Edite únicamente los datos que deban cambiar en el PDF.</p>
+			</header>
+
+			<div class="slds-modal__content modalContent">
+				<template if:true={showSpinner}>
+					<lightning-spinner alternative-text="Procesando documento"></lightning-spinner>
+				</template>
+
+				<template if:true={errorMessage}>
+					<div
+						class="slds-notify slds-notify_alert slds-alert_error slds-m-bottom_medium"
+						role="alert">
+						<span>{errorMessage}</span>
+					</div>
+				</template>
+
+				<template for:each={sections} for:item="section">
+					<section
+						key={section.id}
+						class="documentSection">
+						<h3 class="sectionTitle">{section.title}</h3>
+						<div class={section.gridClass}>
+							<template for:each={section.fields} for:item="field">
+								<div
+									key={field.id}
+									class={field.fieldClass}>
+									<template if:true={field.picklist}>
+										<lightning-combobox
+											data-key={field.key}
+											label={field.label}
+											value={field.value}
+											options={field.options}
+											disabled={field.disabled}
+											onchange={handleChange}>
+										</lightning-combobox>
+									</template>
+									<template if:false={field.picklist}>
+										<template if:true={field.textarea}>
+											<lightning-textarea
+												data-key={field.key}
+												label={field.label}
+												value={field.value}
+												maxlength={field.maxlength}
+												read-only={field.readOnly}
+												disabled={field.disabled}
+												onchange={handleChange}>
+											</lightning-textarea>
+										</template>
+										<template if:false={field.textarea}>
+											<lightning-input
+												data-key={field.key}
+												type={field.inputType}
+												label={field.label}
+												value={field.value}
+												step={field.step}
+												min={field.min}
+												max={field.max}
+												maxlength={field.maxlength}
+												read-only={field.readOnly}
+												disabled={field.disabled}
+												onchange={handleChange}>
+											</lightning-input>
+										</template>
+									</template>
+								</div>
+							</template>
+						</div>
+					</section>
+				</template>
+			</div>
+
+			<footer class="slds-modal__footer">
+				<lightning-button
+					label="Cancelar"
+					disabled={disableActions}
+					onclick={handleCancel}>
+				</lightning-button>
+				<lightning-button
+					class="slds-m-left_small"
+					variant="brand"
+					label="Guardar"
+					disabled={disableActions}
+					onclick={handleSave}>
+				</lightning-button>
+			</footer>
+		</div>
+	</section>
+	<div class="slds-backdrop slds-backdrop_open"></div>
+</template>

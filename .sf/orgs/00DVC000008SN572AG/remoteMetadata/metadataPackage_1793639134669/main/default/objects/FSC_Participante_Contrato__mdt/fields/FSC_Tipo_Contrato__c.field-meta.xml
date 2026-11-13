@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Tipo_Contrato__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Tipo de contrato</label>
+    <required>true</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>TODOS</fullName>
+                <default>false</default>
+                <label>Todos</label>
+            </value>
+            <value>
+                <fullName>SOLA_FIRMA</fullName>
+                <default>false</default>
+                <label>Sola firma</label>
+            </value>
+            <value>
+                <fullName>HIPOTECARIO</fullName>
+                <default>false</default>
+                <label>Hipotecario</label>
+            </value>
+            <value>
+                <fullName>SOLIDARIO</fullName>
+                <default>false</default>
+                <label>Solidario</label>
+            </value>
+            <value>
+                <fullName>MOBILIARIO_CON_POSESION</fullName>
+                <default>false</default>
+                <label>Mobiliario con posesión</label>
+            </value>
+            <value>
+                <fullName>MOBILIARIO_SIN_POSESION</fullName>
+                <default>false</default>
+                <label>Mobiliario sin posesión</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -10,6 +10,9 @@ declare module "@salesforce/apex/FSC_RlaAccionesController.validarClasificacionM
 declare module "@salesforce/apex/FSC_RlaAccionesController.getApprovalContext" {
   export default function getApprovalContext(param: {residentialLoanApplicationId: any}): Promise<any>;
 }
+declare module "@salesforce/apex/FSC_RlaAccionesController.getAssignableUsersForApproval" {
+  export default function getAssignableUsersForApproval(param: {residentialLoanApplicationId: any}): Promise<any>;
+}
 declare module "@salesforce/apex/FSC_RlaAccionesController.getAssignableUsers" {
   export default function getAssignableUsers(): Promise<any>;
 }

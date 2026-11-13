@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Sub_Aplicacion__c</fullName>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Sub - Aplicacion</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>400 - COMERCIALES PERSONA JURIDICA</fullName>
+                <default>true</default>
+                <label>400 - COMERCIALES PERSONA JURIDICA</label>
+            </value>
+            <value>
+                <fullName>401 - CONSUMO</fullName>
+                <default>false</default>
+                <label>401 - CONSUMO</label>
+            </value>
+            <value>
+                <fullName>402 - HIPOTECARIOS PARA LA VIVIENDA</fullName>
+                <default>false</default>
+                <label>402 - HIPOTECARIOS PARA LA VIVIENDA</label>
+            </value>
+            <value>
+                <fullName>404 - CONSUMO VINCULADA</fullName>
+                <default>false</default>
+                <label>404 - CONSUMO VINCULADA</label>
+            </value>
+            <value>
+                <fullName>405 - COMERCIAL VINCULADA</fullName>
+                <default>false</default>
+                <label>405 - COMERCIAL VINCULADA</label>
+            </value>
+            <value>
+                <fullName>406 - COMERCIALES PERSONA  NATURAL</fullName>
+                <default>false</default>
+                <label>406 - COMERCIALES PERSONA  NATURAL</label>
+            </value>
+            <value>
+                <fullName>407 - PUESTO DE BOLSA DE VALORES RD$</fullName>
+                <default>false</default>
+                <label>407 - PUESTO DE BOLSA DE VALORES RD$</label>
+            </value>
+            <value>
+                <fullName>410 - HIPOTECARIOS CON REC. LIBERADOS E. LEGAL</fullName>
+                <default>false</default>
+                <label>410 - HIPOTECARIOS CON REC. LIBERADOS E. LEGAL</label>
+            </value>
+            <value>
+                <fullName>452 - CONSUMO DOLARES</fullName>
+                <default>false</default>
+                <label>452 - CONSUMO DOLARES</label>
+            </value>
+            <value>
+                <fullName>453 - HIPOTECARIO PARA LA VIVIENDA DOLARES</fullName>
+                <default>false</default>
+                <label>453 - HIPOTECARIO PARA LA VIVIENDA DOLARES</label>
+            </value>
+            <value>
+                <fullName>454 - COMERCIALES PERSONA NATURAL DOLARES</fullName>
+                <default>false</default>
+                <label>454 - COMERCIALES PERSONA NATURAL DOLARES</label>
+            </value>
+            <value>
+                <fullName>455 - COMERCIALES PERSONA JURIDICA EN US$</fullName>
+                <default>false</default>
+                <label>455 - COMERCIALES PERSONA JURIDICA EN US$</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

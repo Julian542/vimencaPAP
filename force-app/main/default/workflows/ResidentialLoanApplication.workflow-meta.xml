@@ -261,6 +261,56 @@
         <reevaluateOnChange>false</reevaluateOnChange>
     </fieldUpdates>
     <fieldUpdates>
+        <fullName>FSC_InstanciaAnalistaCompleto</fullName>
+        <field>FSC_RevisionAnalistaCompleta__c</field>
+        <literalValue>1</literalValue>
+        <name>Decisión del analista registrada</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_InstanciaContinuar</fullName>
+        <field>FSC_Subestado__c</field>
+        <formula>IF(FSC_Aprobado_con_Condiciones__c, &quot;Análisis de crédito&quot;, &quot;Generación de pagarés y plantillas&quot;)</formula>
+        <name>Continuar luego de aprobación</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_InstanciaCreditoAprobado</fullName>
+        <field>FSC_CreditoAprobado__c</field>
+        <literalValue>1</literalValue>
+        <name>Crédito aprobado por instancia</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_InstanciaCreditoRechazado</fullName>
+        <field>FSC_Subestado__c</field>
+        <formula>IF(FSC_DebeRevisarSupervisor__c, &quot;Rechazado por supervisor&quot;, IF(AND(BEGINS(FSC_InstanciaAprobacion__c, &quot;Comité&quot;), FSC_RevisionAnalistaCompleta__c), &quot;Rechazado por comité&quot;, &quot;Rechazado por análisis&quot;))</formula>
+        <name>Rechazado por instancia de crédito</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>FSC_InstanciaRequiereComite</fullName>
+        <field>FSC_DebeRevisarComite__c</field>
+        <formula>BEGINS(FSC_InstanciaAprobacion__c, &quot;Comité&quot;)</formula>
+        <name>Instancia requiere comité</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>FSC_ResultadoBuroReferido</fullName>
         <field>FSC_Resultado_Buro__c</field>
         <literalValue>Referido</literalValue>

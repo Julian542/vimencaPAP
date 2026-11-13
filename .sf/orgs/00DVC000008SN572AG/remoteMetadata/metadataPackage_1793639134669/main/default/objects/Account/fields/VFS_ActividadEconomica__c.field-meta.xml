@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VFS_ActividadEconomica__c</fullName>
+    <label>Actividad económica</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sector Agrícola</fullName>
+                <default>false</default>
+                <label>Sector Agrícola</label>
+            </value>
+            <value>
+                <fullName>Sector Minería</fullName>
+                <default>false</default>
+                <label>Sector Minería</label>
+            </value>
+            <value>
+                <fullName>Sector Industrial</fullName>
+                <default>false</default>
+                <label>Sector Industrial</label>
+            </value>
+            <value>
+                <fullName>Sector Información y Comunicación</fullName>
+                <default>false</default>
+                <label>Sector Información y Comunicación</label>
+            </value>
+            <value>
+                <fullName>Sector Salud</fullName>
+                <default>false</default>
+                <label>Sector Salud</label>
+            </value>
+            <value>
+                <fullName>Sector Seguros</fullName>
+                <default>false</default>
+                <label>Sector Seguros</label>
+            </value>
+            <value>
+                <fullName>Sector Casinos, Banca de Apuestas</fullName>
+                <default>false</default>
+                <label>Sector Casinos, Banca de Apuestas</label>
+            </value>
+            <value>
+                <fullName>Sector Ganadero</fullName>
+                <default>false</default>
+                <label>Sector Ganadero</label>
+            </value>
+            <value>
+                <fullName>Sector Energético</fullName>
+                <default>false</default>
+                <label>Sector Energético</label>
+            </value>
+            <value>
+                <fullName>Sector Textil</fullName>
+                <default>false</default>
+                <label>Sector Textil</label>
+            </value>
+            <value>
+                <fullName>Sector Telecomunicaciones</fullName>
+                <default>false</default>
+                <label>Sector Telecomunicaciones</label>
+            </value>
+            <value>
+                <fullName>Sector Automotriz (Dealers, Repuestos)</fullName>
+                <default>false</default>
+                <label>Sector Automotriz (Dealers, Repuestos)</label>
+            </value>
+            <value>
+                <fullName>Sector Bursátil</fullName>
+                <default>false</default>
+                <label>Sector Bursátil</label>
+            </value>
+            <value>
+                <fullName>Sector Administración Pública</fullName>
+                <default>false</default>
+                <label>Sector Administración Pública</label>
+            </value>
+            <value>
+                <fullName>Sector Avícola</fullName>
+                <default>false</default>
+                <label>Sector Avícola</label>
+            </value>
+            <value>
+                <fullName>Sector Construcción</fullName>
+                <default>false</default>
+                <label>Sector Construcción</label>
+            </value>
+            <value>
+                <fullName>Sector Manufactura</fullName>
+                <default>false</default>
+                <label>Sector Manufactura</label>
+            </value>
+            <value>
+                <fullName>Sector Servicios de Comida</fullName>
+                <default>false</default>
+                <label>Sector Servicios de Comida</label>
+            </value>
+            <value>
+                <fullName>Sector Educación</fullName>
+                <default>false</default>
+                <label>Sector Educación</label>
+            </value>
+            <value>
+                <fullName>Sector Fideicomiso</fullName>
+                <default>false</default>
+                <label>Sector Fideicomiso</label>
+            </value>
+            <value>
+                <fullName>Zona Franca</fullName>
+                <default>false</default>
+                <label>Zona Franca</label>
+            </value>
+            <value>
+                <fullName>Sector Forestal</fullName>
+                <default>false</default>
+                <label>Sector Forestal</label>
+            </value>
+            <value>
+                <fullName>Sector Inmobiliario</fullName>
+                <default>false</default>
+                <label>Sector Inmobiliario</label>
+            </value>
+            <value>
+                <fullName>Sector Transporte</fullName>
+                <default>false</default>
+                <label>Sector Transporte</label>
+            </value>
+            <value>
+                <fullName>Sector Hotelero</fullName>
+                <default>false</default>
+                <label>Sector Hotelero</label>
+            </value>
+            <value>
+                <fullName>Sector Financiero y Cambiario</fullName>
+                <default>false</default>
+                <label>Sector Financiero y Cambiario</label>
+            </value>
+            <value>
+                <fullName>Sector Administración de Fondo de Pensiones</fullName>
+                <default>false</default>
+                <label>Sector Administración de Fondo de Pensiones</label>
+            </value>
+            <value>
+                <fullName>Sector Administradora de Fondo de Inversión</fullName>
+                <default>false</default>
+                <label>Sector Administradora de Fondo de Inversión</label>
+            </value>
+            <value>
+                <fullName>Otros</fullName>
+                <default>false</default>
+                <label>Otros</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

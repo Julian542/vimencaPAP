@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Informacion_PEP</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND (
+				$Label.Validaciones == &apos;No&apos;,
+				 ACC_Persona_Fisica__c = true,
+				ISPICKVAL( ACC_Persona_PEP__c ,&apos;SI&apos;),
+				OR (
+								ISPICKVAL( ACC_Estado__c, &apos;CONVERTIR&apos;),
+								ISPICKVAL( ACC_Estado__c, &apos;CALIFICADO&apos;)
+								),
+				OR(
+								ISBLANK(ACC_Direccion_Trabajo_PEP__c ),
+								ISBLANK(ACC_Fecha_Decreto_PEP__c),
+								ISPICKVAL(ACC_Institucion_Trabajo_PEP__c,&apos;&apos;),
+								ISPICKVAL(ACC_Nacionalidad_PEP__c,&apos;&apos;),
+								ISBLANK(ACC_N_Decreto_PEP__c),
+								ISBLANK(	ACC_N_Identificacion_PEP__c),
+								ISPICKVAL(ACC_Ocupacion_PEP__c,&apos;&apos;),
+								ISPICKVAL(ACC_Persona_PEP__c,&apos;SI&apos;),
+								ISBLANK(	ACC_Primer_Apellido_PEP__c),
+								ISBLANK(	ACC_Primer_Nombre_PEP__c),
+								ISBLANK(ACC_Puesto_Cargo_PEP__c),
+								ISBLANK(ACC_Segundo_Apellido_PEP__c),
+								ISBLANK(ACC_Segundo_Nombre_PEP__c),
+								ISPICKVAL(ACC_Tipo_Identif_PEP__c,&apos;&apos;),
+				    ISPICKVAL(ACC_Tipo_Relacion_PEP__c,&apos;&apos;)
+								)
+				)</errorConditionFormula>
+    <errorMessage>Revise la información de la sección PEP para ver la información que falta rellenar para convertir el prospecto</errorMessage>
+</ValidationRule>

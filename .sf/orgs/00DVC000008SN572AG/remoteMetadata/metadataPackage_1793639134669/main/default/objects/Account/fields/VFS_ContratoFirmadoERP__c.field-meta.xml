@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VFS_ContratoFirmadoERP__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Campo de sistema que indica por medio de una integración si el contrato único ya fue firmado</description>
+    <label>Contrato Único Firmado ERP</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

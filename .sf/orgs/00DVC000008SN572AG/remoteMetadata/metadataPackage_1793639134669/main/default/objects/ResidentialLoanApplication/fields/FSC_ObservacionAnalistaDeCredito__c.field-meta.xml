@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ObservacionAnalistaDeCredito__c</fullName>
+    <encryptionScheme>None</encryptionScheme>
+    <inlineHelpText>Este campo se completa solo cuando el perfil Analista de Crédito rechaza la solicitud de crédito.</inlineHelpText>
+    <label>Observación analista de crédito</label>
+    <length>2000</length>
+    <trackHistory>true</trackHistory>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

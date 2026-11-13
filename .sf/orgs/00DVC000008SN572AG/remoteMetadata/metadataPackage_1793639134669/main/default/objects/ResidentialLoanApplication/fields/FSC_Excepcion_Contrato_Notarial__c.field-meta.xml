@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_Excepcion_Contrato_Notarial__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Permite generar el contrato junto con un pagaré notarial para PYME.</description>
+    <label>Generar contrato con pagaré notarial</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

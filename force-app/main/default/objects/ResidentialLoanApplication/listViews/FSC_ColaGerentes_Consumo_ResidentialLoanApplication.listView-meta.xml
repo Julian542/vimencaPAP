@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FSC_ColaGerentes_Consumo_ResidentialLoanApplication</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Gerentes de Análisis - Consumo</label>
+    <queue>FSC_ColaGerentes_Consumo</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

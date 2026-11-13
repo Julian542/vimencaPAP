@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ACC_Es_Institucion_Financiera__c</fullName>
+    <formula>IF( ISNULL(TEXT(ACC_Tipo_Persona_PJ__c)) || ISBLANK(TEXT(ACC_Tipo_Persona_PJ__c)), FALSE, IF(TEXT(ACC_Tipo_Persona_PJ__c) = &apos;E1F&apos; || TEXT(ACC_Tipo_Persona_PJ__c) = &apos;E3&apos;, TRUE, FALSE))</formula>
+    <label>Es institución financiera</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>
